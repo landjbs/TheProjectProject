@@ -31,8 +31,6 @@ p {
   height: 30%;
   text-align: center;
   padding: 3%;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
 }
 
 .box:hover {
@@ -45,12 +43,7 @@ p {
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
-  padding: 0 18px;
-  background-color: white;
-  border-color: white;
-  max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
 }
 
 /*
