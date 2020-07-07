@@ -1,6 +1,5 @@
 body {
   background-color: black;
-  color: white !important;
   font-family: 'Varela Round';
 }
 
@@ -11,7 +10,6 @@ mark {
 }
 
 nav {
-  background-color: red;
   vertical-align: text-top;
 }
 
@@ -21,7 +19,6 @@ p {
 
 .big-box {
   text-align: center;
-  background-color: red;
   position: absolute;
   padding: 1.5%;
   top: 40%;
@@ -33,6 +30,10 @@ p {
 
 .box {
   color: black;
+  background-color: white;
+  height: 30%;
+  text-align: center;
+  padding: 3%;
 }
 
 /*
