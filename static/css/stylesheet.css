@@ -1,13 +1,27 @@
 body {
   background-color: black;
+  color: white;
   font-family: 'Varela Round';
 }
 
+mark {
+  background-color: white;
+  padding: 0 0.1em;
+}
 
+.container {
+  background: red;
+  color: white;
+  width: 100%;
+}
+
+
+
+
+/*
 .container {
   text-align: center;
   background-color: red;
-  /* color: #008CFF; */
   color: #FFF300;
   position: absolute;
   padding: 1.5%;
@@ -33,4 +47,4 @@ body {
 
 h1 {
   font-size: 100px;
-}
+} */
