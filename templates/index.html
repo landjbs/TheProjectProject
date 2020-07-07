@@ -43,8 +43,11 @@
     </nav>
 
     <div class='big-box container justify-content-center'>
-      <div class='box apply' onclick='apply()' id='apply'>
+      <div class='box apply collapsible' onclick='apply()' id='apply'>
         apply.
+      </div>
+      <div class="content">
+        <p>Lorem ipsum...</p>
       </div>
       <br>
       <div class='box login' onclick='login()' id='login'>
@@ -60,21 +63,12 @@
     var appId = document.getElementById("apply");
     var i;
     if (logId.style.display === "none") {
-      // turn on if off
+      // turn login if off
       logId.style.display = "block";
     } else {
-      // turn on if off
+      // turn off login
       logId.style.display = "none";
-      for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var content = this.nextElementSibling;
-          if (content.style.maxHeight){
-            content.style.maxHeight = null;
-          } else {
-            content.style.maxHeight = content.scrollHeight + "px";
-          }
-        });
+    }
     }
   }
 
@@ -85,6 +79,22 @@
     } else {
       x.style.display = "none";
     }
+  }
+  </script>
+
+  <script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      }
+    });
   }
   </script>
 
