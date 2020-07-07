@@ -4,16 +4,17 @@ body {
 }
 
 
-.box {
+.container {
   background-color: red;
-  vertical-align: middle;
-  text-align: center;
-  height: 50%;
-  width: 60%;
   /* color: #008CFF; */
   color: #FFF300;
+  position: absolute;
+  padding: 1.5%;
+  top: 40%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
-
 
 h1 {
   font-size: 100px;
