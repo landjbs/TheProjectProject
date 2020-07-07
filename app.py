@@ -9,12 +9,20 @@ from werkzeug.urls import url_parse
 
 
 app = Flask(__name__, static_url_path='', static_folder='static')
+# configure
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+app.debug = True
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 
 @app.route('/index')
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template("index.html")
+
+
+if __name__ == "__main__":
+    app.run()
 
 
 # def create_app():
