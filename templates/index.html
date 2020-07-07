@@ -56,13 +56,28 @@
 
   <script>
   function apply() {
-    var x = document.getElementById("login");
-    if (x.style.display === "none") {
-      x.style.display = "block";
+    var logId = document.getElementById("login");
+    var appId = document.getElementById("apply");
+    var i;
+    if (logId.style.display === "none") {
+      // turn on if off
+      logId.style.display = "block";
     } else {
-      x.style.display = "none";
+      // turn on if off
+      logId.style.display = "none";
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        });
     }
   }
+
   function login() {
     var x = document.getElementById("apply");
     if (x.style.display === "none") {
