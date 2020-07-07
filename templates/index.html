@@ -43,14 +43,14 @@
     </nav>
 
     <div class='big-box container justify-content-center'>
-      <div class='box apply collapsible' onclick='apply()' id='apply'>
+      <div class='box apply' onclick='apply()' id='apply'>
         apply.
       </div>
       <div class="content">
         <p>Lorem ipsum...</p>
       </div>
       <br>
-      <div class='box login' onclick='login()' id='login'>
+      <div class='box login' onclick='hide_boxes()' id='login'>
         login.
       </div>
     </div>
@@ -64,13 +64,20 @@
   </body>
 
   <script>
-  function login() {
-    var logId = document.getElementById("login");
-    if (logId.style.display === "none") {
-      logId.style.display = "block";
-    } else {
-      logId.style.display = "none";
+  function hide_boxes() {
+    var coll = document.getElementsByClassName("box");
+    for (i = 0; i < coll.length; i++) {
+      coll[i].style.display = 'none';}
     }
+
+  function show_boxes() {
+    var coll = document.getElementsByClassName("box");
+    for (i = 0; i < coll.length; i++) {
+      coll[i].style.display = 'block';}
+    }
+
+  function apply() {
+    hide_boxes();
   }
 
   function login() {
@@ -83,7 +90,7 @@
   }
   </script>
 
-  <script>
+  <!-- <script>
   var coll = document.getElementsByClassName("collapsible");
   var i;
   for (i = 0; i < coll.length; i++) {
@@ -97,6 +104,6 @@
       }
     });
   }
-  </script>
+  </script> -->
 
 </html>
