@@ -5,6 +5,7 @@ body {
 
 
 .container {
+  text-align: center;
   background-color: red;
   /* color: #008CFF; */
   color: #FFF300;
@@ -14,6 +15,15 @@ body {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+}
+
+.row {
+  padding-left: 10px;
+}
+
+.col {
+  background-color: blue;
+  width: 40px;
 }
 
 h1 {
