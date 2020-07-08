@@ -18,7 +18,7 @@ BaseTable = declarative_base()
 # define tables
 class User(Base, UserMixin):
     ''' Table for Users '''
-    __tablename__ = "user"
+    __tablename__ = 'user'
     # primary key id
     id = Column(Integer, Sequence('poi_id_seq'), primary_key=True)
     # name
@@ -29,6 +29,30 @@ class User(Base, UserMixin):
                    info={'label':'Email Address'})
     # password
     password = Column(String(254), nullable=False, info={'label':'Password'})
+    # interests
+    projects = relationship('Project', backref='user', lazy=True,
+                            cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return '<User %r>' % self.name
+
+        def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def is_active(self):
+        return True
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
 
 
 
