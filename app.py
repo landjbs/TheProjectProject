@@ -7,6 +7,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 from flask_user import roles_required
 from werkzeug.urls import url_parse
 
+from forms import Application
+
 
 app = Flask(__name__, static_url_path='', static_folder='static')
 # configure
