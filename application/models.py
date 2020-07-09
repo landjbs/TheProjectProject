@@ -31,6 +31,12 @@ class User(db.Model, UserMixin):
     # password
     password = db.Column(db.String(254), nullable=False,
                          info={'label':'Password'})
+    # github # TODO: figure out how to validate github
+    github = db.Column(db.String(254), nullable=False,
+                         info={'label':'Github'})
+    # about
+    about = db.Column(db.String(500), nullable=False,
+                      info={'label':'About'})
 
     def __init__(self, name, email, password):
         self.name = name

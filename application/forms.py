@@ -23,7 +23,7 @@ class Apply(BaseForm):
         model = User
         validators = {'name': [DataRequired()],
                      'email': [DataRequired(), Email(), Length(min=1, max=254)],
-                    'password': [DataRequired(), Length(min=1, max=254)]}
+                     'password': [DataRequired(), Length(min=1, max=254)]}
 
 # class EnterDBInfo(Form):
 #     dbNotes = TextField(label='Items to add to DB', description="db_enter", validators=[validators.required(), validators.Length(min=0, max=128, message=u'Enter 128 characters or less')])
