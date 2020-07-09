@@ -37,6 +37,8 @@ class User(db.Model, UserMixin):
     # about
     about = db.Column(db.String(500), nullable=False,
                       info={'label':'About'})
+    # status {0:applied, 1:member, 2:admin}
+    status = db.Column(db.Integer, nullable=False)
 
     def __init__(self, name, email, password):
         self.name = name
