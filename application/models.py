@@ -11,5 +11,4 @@ class Data(db.Model):
         self.password = password
 
     def __repr__(self):
-        return '<Data %r>' % self.notes
-    
+        return '<User %r>' % self.name

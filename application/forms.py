@@ -1,5 +1,6 @@
 from flask_wtf import Form
 from wtforms import TextField, validators
+from .models import Data
 
 class EnterDBInfo(Form):
     dbNotes = TextField(label='Items to add to DB', description="db_enter", validators=[validators.required(), validators.Length(min=0, max=128, message=u'Enter 128 characters or less')])
