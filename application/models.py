@@ -23,12 +23,14 @@ class User(db.Model, UserMixin):
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
     # name
-    name = db.Column(db.String(128), index=True, unique=False, info={'label':'Name'})
+    name = db.Column(db.String(128), index=True, unique=False,
+                     info={'label':'Name'})
     # email
     email = db.Column(db.String(254), unique=False, nullable=False,
                       info={'label':'Email Address'})
     # password
-    password = db.Column(db.String(254), nullable=False, info={'label':'Password'})
+    password = db.Column(db.String(254), nullable=False,
+                         info={'label':'Password'})
 
     def __init__(self, name, email, password):
         self.name = name
