@@ -28,3 +28,11 @@ class User(db.Model, UserMixin):
                       info={'label':'Email Address'})
     # password
     password = db.Column(db.String(254), nullable=False, info={'label':'Password'})
+
+    def __init__(self, name, email, password):
+        self.name = name
+        self.email = email
+        self.password = password
+
+    def __repr__(self):
+        return '<User %r>' % self.name
