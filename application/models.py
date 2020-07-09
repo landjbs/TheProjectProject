@@ -11,8 +11,8 @@ class Data(db.Model):
     # password
     password = db.Column(db.String(254), nullable=False, info={'label':'Password'})
 
-    def __init__(self, name, password): # name, password
-        self.name = name
+    def __init__(self, name, password):
+        self.name = 'freddy'
         self.password = password
 
     def __repr__(self):

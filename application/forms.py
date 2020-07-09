@@ -22,7 +22,7 @@ class Apply(BaseForm):
     class Meta:
         model = User
         validators = {'name': [DataRequired()],
-                     'email': [DataRequired(), Email(), Length(min=1, max=254)],
+                     # 'email': [DataRequired(), Email(), Length(min=1, max=254)],
                      'password': [DataRequired(), Length(min=1, max=254)]}
 
 # class EnterDBInfo(Form):
