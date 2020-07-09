@@ -1,7 +1,11 @@
 from flask_wtf import FlaskForm, Form
 from wtforms import TextField, validators
 from wtforms_alchemy import model_form_factory
+from wtforms.validators import (DataRequired, Length, Email, EqualTo,
+                                InputRequired, ValidationError, NumberRange)
+
 from .models import Data
+
 
 BaseForm = model_form_factory(FlaskForm)
 
