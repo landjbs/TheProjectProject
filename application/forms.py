@@ -10,11 +10,27 @@ from .models import Data, User
 BaseForm = model_form_factory(FlaskForm)
 
 
+class Email_Validator(object):
+    def __init__(self, allowed=['@college.harvard.edu']):
+        self.allowed = set(allowed)
+
+    def __call__(self, form, field):
+        email = str(field.data)
+        try:
+            ending = email.split('@')[-1]
+            if not ending in self.allowed:
+                raise ValidationError('Currently only Harvard College emails '
+                                      'are allowed.')
+        except:
+            raise ValidationError('Invalid email address.')
+
+
 class EnterDBInfo(BaseForm):
     class Meta:
         model = Data
+        exclude = ['status']
         validators = {'name': [DataRequired()],
-                      # 'email': [DataRequired(), Length(min=1, max=254)], #Email(),
+                      'email': [DataRequired(), Email(), Length(min=1, max=254)],
                       'password': [DataRequired(), Length(min=1, max=254)]}
 
 

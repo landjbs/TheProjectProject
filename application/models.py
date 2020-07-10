@@ -27,7 +27,7 @@ class User(db.Model, UserMixin):
                      info={'label':'Name'})
     # email
     email = db.Column(db.String(254), unique=False, nullable=False,
-                      info={'label':'Havard Email'})
+                      info={'label':'Havard Email '})
     # password
     password = db.Column(db.String(254), nullable=False,
                          info={'label':'Password'})
@@ -40,7 +40,7 @@ class User(db.Model, UserMixin):
     # status {0:applied, 1:member, 2:admin}
     status = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, name, email, password):
+    def __init__(self, name, email, password, github, about):
         self.name = name
         self.email = email
         self.password = password
