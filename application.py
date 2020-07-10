@@ -60,6 +60,7 @@ def index():
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = Apply(request.form)
+    print(request.method)
     if request.method == 'POST' and form1.validate_on_submit():
         user = User(name        =       form.data['name'],
                     email       =      form.data['email'],
