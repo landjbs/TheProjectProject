@@ -45,6 +45,9 @@ form {
   overflow: hidden;
 }
 
+.content {
+  display: none;
+}
 
 
 /*

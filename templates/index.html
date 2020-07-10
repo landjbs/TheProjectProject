@@ -45,7 +45,7 @@
       <div class='box apply' onclick='apply()' id='apply'>
         apply.
       </div>
-      <form class="content apply-content" method="post" action="/index" id="db_post" name="db_post">
+      <form class="content apply-form" method="post" action="/index" id="apply_form">
           {{ form1.hidden_tag() }}
           {% for elt in form1 %}
             {{ elt() }}
@@ -57,19 +57,12 @@
       <div class='box login' onclick='hide_boxes()' id='login'>
         login.
       </div>
-        <form class="content login-content" method="post" action="/index" id="db_post" name="db_post">
+        <form class="content login-form" method="post" action="/index" id="login_form">
           {{ form2.hidden_tag() }}
           {{ form2.numRetrieve()}}
           <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div>
       </form>
     </div>
-
-    <section id='about'>
-      <div class='container'>
-        <p>asdfja;lsdkjf</p>
-      </div>
-    </section>
-
   </body>
 
   <script>
@@ -87,17 +80,24 @@
 
   function apply() {
     hide_boxes();
-
+    var apply_form = document.getElementById('apply_form')
+    apply_form.style.display = 'block';
   }
 
   function login() {
-    var x = document.getElementById("apply");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
+    hide_boxes():
+    var login_form = document.getElementById('login_form')
+    login_form.style.display = 'block';
   }
+
+  // function login() {
+  //   var apply_btn = document.getElementById("apply");
+  //   if (apply_btn.style.display === "none") {
+  //     apply_btn.style.display = "block";
+  //   } else {
+  //     apply_btn.style.display = "none";
+  //   }
+  // }
   </script>
 
   <!-- <script>
