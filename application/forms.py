@@ -30,6 +30,7 @@ class Email_Ext_Validator(object):
 class Site_URL_Validator(object):
     ''' Validator for http or https URLs from site '''
     def __init__(self, site):
+        self.site = site
         matcher = (r'(www\.|http://|https://|http://www\.|https://\.)'
                    f'{site}.com/'
                    r'.*')
@@ -37,8 +38,7 @@ class Site_URL_Validator(object):
 
     def __call__(self, form, field):
         if not re.match(self.matcher, field.data):
-            raise ValidationError(f"Invalid URL for {site}.")
-
+            raise ValidationError(f"Invalid URL for {self.site}.")
 
 
 class Apply(BaseForm):

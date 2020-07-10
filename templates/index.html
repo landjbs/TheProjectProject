@@ -56,7 +56,7 @@
       <form class="content apply-form" method="post" action="/index" id="apply_form">
           {{ form1.hidden_tag() }}
           {% for elt in form1 %}
-            {% if not elt.name in ["csrf_token", "submit"] and not loop.index>1 %}
+            {% if not elt.name in ["csrf_token", "submit"] %} <!-- and not loop.index>1 -->
             <div class="tab" id='{{ elt.name }}'>
               {% if elt.errors in [[], ()] %}
               <h1 style='color:white;'>{{elt.label}}</h1>
