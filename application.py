@@ -8,6 +8,9 @@ from application.models import User
 from application.forms import Apply, Login
 
 
+ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
+ADMIN_PASSWORD = 'asdadsflkj;2kl4j51@$L%jldfka;skf,3m,.rmbnmdnbfd;.'
+
 # login
 login_manager = LoginManager()
 
@@ -70,6 +73,8 @@ def login():
         if current_user.accepted:
             return render_template('results.html')
     form = Login(request.form)
+    if form.email.data==ADMIN_EMAIL and form.password.data==ADMIN_PASSWORD:
+        return redirect(url_for('admin'))
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
         if user is None:
@@ -84,6 +89,11 @@ def login():
             login_user(user)
             return render_template('homepage.html')
     return render_template('login.html', form=form)
+
+
+@application.route('/admin', methods=['POST'])
+def admin():
+    return render_template('admin.html')
 
 
 @application.route('/test', methods=['GET', 'POST'])
