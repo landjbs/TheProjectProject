@@ -42,7 +42,7 @@ class Site_URL_Validator(object):
 class Apply(BaseForm):
     class Meta:
         model = User
-        exclude = ['status']
+        exclude = ['accepted']
         validators = {'name': [],
                       'email': [Email(), Email_Ext_Validator(),
                                 Length(min=1, max=254)],

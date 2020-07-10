@@ -46,7 +46,7 @@ class User(db.Model, UserMixin):
         self.password = password
         self.github = github
         self.about = about
-        self.status = True # status set to "applied"
+        self.accepted = True # status set to "applied"
 
     def __repr__(self):
         return '<User %r>' % self.name
