@@ -36,7 +36,7 @@ class Site_URL_Validator(object):
         self.matcher = re.compile(matcher)
 
     def __call__(self, form, field):
-        if not re.match(matcher, form.data):
+        if not re.match(self.matcher, field.data):
             raise ValidationError(f"Invalid URL for {site}.")
 
 
@@ -45,10 +45,14 @@ class Apply(BaseForm):
     class Meta:
         model = User
         exclude = ['status']
-        validators = {'name': [DataRequired()],
-                      'email': [DataRequired(), Email(), Email_Ext_Validator(),
+        validators = {'name': [],
+                      'email': [Email(), Email_Ext_Validator(),
                                 Length(min=1, max=254)],
-                      'password': [DataRequired(), Length(min=1, max=254)]}
+                      'password': [Length(min=1, max=254)],
+                      'github': [Site_URL_Validator('github')],
+                      'about': []}
+        for k, v in validators.items():
+            v.append(DataRequired())
 
 
 class EnterDBInfo(BaseForm):
