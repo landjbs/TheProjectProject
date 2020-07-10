@@ -18,13 +18,11 @@ class Email_Ext_Validator(object):
 
     def __call__(self, form, field):
         email = str(field.data)
-        try:
-            ending = email.split('@')[-1]
-            if not ending in self.allowed:
-                raise ValidationError('Currently only Harvard College emails '
-                                      'are allowed.')
-        except:
-            raise ValidationError('Invalid email address.')
+        ending = email.split('@')[-1]
+        print(ending)
+        if not ending in self.allowed:
+            raise ValidationError('Currently only Harvard College emails '
+                                  'are allowed.')
 
 
 class Site_URL_Validator(object):
@@ -46,7 +44,7 @@ class Apply(BaseForm):
         model = User
         exclude = ['status']
         validators = {'name': [],
-                      'email': [Email(), Email_Ext_Validator(),
+                      'email': [Email_Ext_Validator(),
                                 Length(min=1, max=254)],
                       'password': [Length(min=1, max=254)],
                       'confirm': [],
