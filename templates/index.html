@@ -49,8 +49,8 @@
           {{ form1.hidden_tag() }}
           {% for elt in form1 %}
             {% if not elt.name in ["csrf_token", "submit"] %}
-            <div class="tab">
-              <h5>{{ elt.label }}:</h5>
+            <div class="tab" id='{{ elt.name }}'>
+              <!-- <h5>{{ elt.label }}:</h5> -->
               {% if elt.errors in [[], ()] %}
                 {{ elt(class='input valid') }}
               {% else %}

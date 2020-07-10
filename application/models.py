@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class Data(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), index=True, unique=False, info={'label':'Password'})
+    name = db.Column(db.String(128), index=True, unique=False, info={'label':'Name'})
     # email = db.Column(db.String(254), unique=False, nullable=False,
                       # info={'label':'Email Address'})
     # password
