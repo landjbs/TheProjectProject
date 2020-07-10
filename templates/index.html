@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- APPLY -->
+
 <div class='big-box container justify-content-center'>
   <a href='/apply'>
     <div class='box apply' id='apply'>
@@ -14,42 +14,5 @@
     </div>
   </a>
 </div>
-
-<!-- <script>
-function hide_boxes() {
-  var coll = document.getElementsByClassName("box");
-  for (i = 0; i < coll.length; i++) {
-    coll[i].style.display = 'none';}
-  }
-
-function hide_forms() {
-  var forms = document.getElementsByClassName("content");
-  for (i = 0; i < forms.length; i++) {
-    forms[i].style.display = 'none';}
-  }
-
-function show_boxes() {
-  var coll = document.getElementsByClassName("box");
-  for (i = 0; i < coll.length; i++) {
-    coll[i].style.display = 'block';}
-  }
-
-function apply() {
-  hide_boxes();
-  var apply_form = document.getElementById('apply_form');
-  apply_form.style.display = 'block';
-}
-
-function login() {
-  hide_boxes();
-  var login_form = document.getElementById('login_form');
-  login_form.style.display = 'block';
-}
-
-function back() {
-  show_boxes();
-  hide_forms();
-}
-</script> -->
 
 {% endblock %}

@@ -23,6 +23,15 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 login_manager.init_app(application)
 
 
+# querying
+def query_user_by_id(id):
+    return db.query(User).get(int(id))
+
+@login_manager.user_loader
+def load_user(id):
+    return query_user_by_id(id)
+
+
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
@@ -68,7 +77,7 @@ def login():
                                          'check back soon!')
         login_user(user)
         return render_template('results.html')
-    return render_template('login.html')
+    return render_template('login.html', form=form)
 
 
 @application.route('/test', methods=['GET', 'POST'])

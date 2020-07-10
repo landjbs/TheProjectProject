@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form class='big-box container justify-content-center' method='post'>
+  {{ form.csrf_token }}
+  {% for elt in form %}
+    {% if not elt.name in ["csrf_token"] %}
+      <div class="input-segment">
+        <h5>{{ elt.label }}:</h5>
+        {% if elt.errors in [[], ()] %}
+          {{ elt(class='input valid') }}
+        {% else %}
+          {{ elt(class='input invalid') }}
+          <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+  <button class="panel-button" action="submit">Submit<button>
+</form>
+
+{% endblock %}
