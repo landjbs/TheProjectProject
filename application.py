@@ -59,6 +59,8 @@ def index():
 
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
+    form = Apply(request.form)
+    if request.method == 'POST' and form1.validate_on_submit():
 
     return render_template('apply.html')
 
