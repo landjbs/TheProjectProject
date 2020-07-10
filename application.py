@@ -61,6 +61,11 @@ def index():
 def apply():
     form = Apply(request.form)
     if request.method == 'POST' and form1.validate_on_submit():
+        user = User(name        =       form.data['name'],
+                    email       =      form.data['email'],
+                    password    =   form.data['password'],
+                    github      =     form.data['github'],
+                    about       =      form.data['about']
 
     return render_template('apply.html')
 
