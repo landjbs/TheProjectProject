@@ -25,7 +25,12 @@ login_manager.init_app(application)
 
 # querying
 def query_user_by_id(id):
-    return db.query(User).get(int(id))
+    return db.session.query(User).get(int(id))
+
+
+def query_user_by_email(email):
+    return db.session.query(User).filter_by(email=email).first()
+
 
 @login_manager.user_loader
 def load_user(id):
@@ -66,7 +71,7 @@ def login():
         return render_template('results.html')
     form = Login(request.form)
     if request.method=='POST' and form.validate():
-        user = None # TODO: QUERY USER FROM EMAIL
+        user = query_user_by_email(form.email.data)
         if user is None:
             form.email.errors.append('Email not found.')
         elif not user.check_password(form.password.data):
