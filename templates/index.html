@@ -54,13 +54,13 @@
       </form>
       </form>
       <br>
-      <div class='box login' onclick='hide_boxes()' id='login'>
+      <div class='box login' onclick='login()' id='login'>
         login.
       </div>
-        <form class="content login-form" method="post" action="/index" id="login_form">
-          {{ form2.hidden_tag() }}
-          {{ form2.numRetrieve()}}
-          <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div>
+      <form class="content login-form" method="post" action="/index" id="login_form">
+        {{ form2.hidden_tag() }}
+        {{ form2.numRetrieve()}}
+        <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div>
       </form>
     </div>
   </body>
@@ -85,7 +85,7 @@
   }
 
   function login() {
-    hide_boxes():
+    hide_boxes();
     var login_form = document.getElementById('login_form');
     login_form.style.display = 'block';
   }

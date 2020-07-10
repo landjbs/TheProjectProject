@@ -12,6 +12,7 @@ from application.forms import EnterDBInfo, RetrieveDBInfo
 
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
+application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
