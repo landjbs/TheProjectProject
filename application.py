@@ -23,7 +23,7 @@ def index():
     form1 = Apply(request.form)
     form2 = RetrieveDBInfo(request.form)
 
-    if request.method == 'POST' and form1.validate():
+    if request.method == 'POST' and form1.validate_on_submit():
         data_entered = Data(name=form1.data['name'],
                             email=form1.data['email'],
                             password=form1.data['password'],
