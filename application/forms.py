@@ -1,6 +1,6 @@
 import re
 from flask_wtf import FlaskForm
-from wtforms import TextField, validators
+from wtforms import TextField, validators, PasswordField
 from wtforms_alchemy import model_form_factory
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
@@ -49,6 +49,7 @@ class Apply(BaseForm):
                       'email': [Email(), Email_Ext_Validator(),
                                 Length(min=1, max=254)],
                       'password': [Length(min=1, max=254)],
+                      'confirm': [],
                       'github': [Site_URL_Validator('github')],
                       'about': []}
         # all fields are required
