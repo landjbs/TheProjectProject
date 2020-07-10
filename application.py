@@ -60,15 +60,15 @@ def apply():
         except Exception as e:
             print(f'EASDF: {e}')
             db.session.rollback()
-        return render_template('thanks.html')
+        return render_template('index.html')
     return render_template('apply.html', form=form)
 
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        # return redirect(url_for(''))
-        return render_template('results.html')
+        if current_user.accepted:
+            return render_template('results.html')
     form = Login(request.form)
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
@@ -80,8 +80,9 @@ def login():
         elif user.accepted==False:
                 form.email.errors.append('Your application is under review—'
                                          'check back soon!')
-        login_user(user)
-        return render_template('results.html')
+        else:
+            login_user(user)
+            return render_template('homepage.html')
     return render_template('login.html', form=form)
 
 

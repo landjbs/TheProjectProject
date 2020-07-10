@@ -5,7 +5,7 @@ from wtforms_alchemy import model_form_factory
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
-from .models import Data, User
+from .models import User
 
 
 BaseForm = model_form_factory(FlaskForm)
