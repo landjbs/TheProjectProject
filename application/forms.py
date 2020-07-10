@@ -13,7 +13,7 @@ BaseForm = model_form_factory(FlaskForm)
 
 class Email_Ext_Validator(object):
     ''' Validator for allowed email extensions '''
-    def __init__(self, allowed=['@college.harvard.edu']):
+    def __init__(self, allowed=['college.harvard.edu']):
         self.allowed = set(allowed)
 
     def __call__(self, form, field):
@@ -44,7 +44,7 @@ class Apply(BaseForm):
         model = User
         exclude = ['status']
         validators = {'name': [],
-                      'email': [Email_Ext_Validator(),
+                      'email': [Email(), Email_Ext_Validator(),
                                 Length(min=1, max=254)],
                       'password': [Length(min=1, max=254)],
                       'confirm': [],
@@ -55,15 +55,7 @@ class Apply(BaseForm):
             v.append(DataRequired())
 
 
-class EnterDBInfo(BaseForm):
+class Login(BaseForm):
     class Meta:
-        model = Data
-        validators = {'name': [DataRequired()],
-                     'password': [DataRequired(), Length(min=1, max=254)]}
-
-# class EnterDBInfo(Form):
-#     dbNotes = TextField(label='Items to add to DB', description="db_enter", validators=[validators.required(), validators.Length(min=0, max=128, message=u'Enter 128 characters or less')])
-#     password = TextField(label='Items to add to DB', description="db_enter", validators=[validators.required(), validators.Length(min=0, max=128, message=u'Enter 128 characters or less')])
-
-class RetrieveDBInfo(BaseForm):
-    numRetrieve = TextField(label='Number of DB Items to Get', description="db_get", validators=[validators.required(), validators.Regexp('^\d{1}$',message=u'Enter a number between 1 and 10')])
+        model = User
+        only = ['email', 'password']

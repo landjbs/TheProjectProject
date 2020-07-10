@@ -7,8 +7,8 @@ Step-by-step tutorial: https://medium.com/@rodkey/deploying-a-flask-application-
 
 from flask import Flask, render_template, request
 from application import db
-from application.models import Data
-from application.forms import Apply, EnterDBInfo, RetrieveDBInfo
+from application.models import User
+from application.forms import Apply, Login
 
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
@@ -60,8 +60,7 @@ def index():
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = Apply(request.form)
-    print(request.method)
-    if request.method=='POST' and form.validate_on_submit():
+    if request.method=='POST' and form.validate():
         user = User(name        =       form.data['name'],
                     email       =       form.data['email'],
                     password    =       form.data['password'],
@@ -72,7 +71,8 @@ def apply():
             db.session.add(user)
             db.session.commit()
             db.session.close()
-        except:
+        except Exception as e:
+            print(f'EASDF: {e}')
             db.session.rollback()
         return render_template('thanks.html')
     return render_template('apply.html', form=form)
@@ -80,6 +80,7 @@ def apply():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
+    form =
     return render_template('login.html')
 
 
