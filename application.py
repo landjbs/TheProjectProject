@@ -92,7 +92,8 @@ def login():
 # TODO: MAKE SECURE
 @application.route('/admin', methods=['GET', 'POST'])
 def admin():
-    return render_template('admin.html')
+    to_accept = db.session.query(User).filter_by(accepted=False)
+    return render_template('admin.html', to_accept=to_accept)
 
 
 @application.route('/test', methods=['GET', 'POST'])

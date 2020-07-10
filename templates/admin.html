@@ -1,10 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for user in Users %}
-  {% if not user.accepted %}
-    {{ user }}
-  {% endif %}
+{% for user in to_accept %}
+  {{ user }}
 {% endfor %}
 
 {% endblock %}
