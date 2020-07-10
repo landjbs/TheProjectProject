@@ -66,6 +66,11 @@ def apply():
                     password    =   form.data['password'],
                     github      =     form.data['github'],
                     about       =      form.data['about']
+                    )
+        try:
+            db.session.add(user)
+            db.session.commit()
+            db.session.close()
 
     return render_template('apply.html')
 
