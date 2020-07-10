@@ -2,10 +2,14 @@ from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
-                         
+
 from application import db
 from application.models import User
 from application.forms import Apply, Login
+
+
+# login
+login_manager = LoginManager()
 
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
@@ -13,6 +17,10 @@ application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
+
+
+# initalization
+login_manager.init_app(application)
 
 
 @application.route('/', methods=['GET', 'POST'])
