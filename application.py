@@ -53,6 +53,11 @@ def index():
     return render_template('index.html', form1=form1, form2=form2)
 
 
+@application.route('/apply', methods=['GET', 'POST'])
+def apply():
+    return render_template('apply.html')
+
+
 @application.route('/test', methods=['GET', 'POST'])
 def test():
     return render_template('test.html')
