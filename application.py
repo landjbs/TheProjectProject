@@ -8,7 +8,7 @@ Step-by-step tutorial: https://medium.com/@rodkey/deploying-a-flask-application-
 from flask import Flask, render_template, request
 from application import db
 from application.models import Data
-from application.forms import EnterDBInfo, RetrieveDBInfo
+from application.forms import Apply, EnterDBInfo, RetrieveDBInfo
 
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')

@@ -44,6 +44,10 @@ class User(db.Model, UserMixin):
         self.name = name
         self.email = email
         self.password = password
+        self.github = github
+        self.about = about
+        self.status = 0
+
 
     def __repr__(self):
         return '<User %r>' % self.name

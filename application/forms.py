@@ -51,6 +51,7 @@ class Apply(BaseForm):
                       'password': [Length(min=1, max=254)],
                       'github': [Site_URL_Validator('github')],
                       'about': []}
+        # all fields are required
         for k, v in validators.items():
             v.append(DataRequired())
 
