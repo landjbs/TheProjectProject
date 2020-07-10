@@ -71,8 +71,11 @@ def apply():
             db.session.add(user)
             db.session.commit()
             db.session.close()
+        except:
+            db.session.rollback()
+        return render_template('thanks.html')
+    return render_template('apply.html', form=form)
 
-    return render_template('apply.html')
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
