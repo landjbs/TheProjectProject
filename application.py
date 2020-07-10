@@ -37,6 +37,8 @@ def index():
             print(f'ERROR: {e}')
             db.session.rollback()
         return render_template('thanks.html', notes=form1.data['name'])
+    else:
+        return render_template('index.html', notes=form1.data['name'])
 
     if request.method == 'POST' and form2.validate():
         try:
