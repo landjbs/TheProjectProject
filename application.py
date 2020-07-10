@@ -57,6 +57,10 @@ def index():
 def apply():
     return render_template('apply.html')
 
+@application.route('/login', methods=['GET', 'POST'])
+def login():
+    return render_template('login.html')
+
 
 @application.route('/test', methods=['GET', 'POST'])
 def test():
