@@ -20,19 +20,22 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
-    form1 = EnterDBInfo(request.form)
+    form1 = Apply(request.form)
     form2 = RetrieveDBInfo(request.form)
 
     if request.method == 'POST' and form1.validate():
-        print(form1.data)
         data_entered = Data(name=form1.data['name'],
-                            password=form1.data['password'])
-        # try:
-        db.session.add(data_entered)
-        db.session.commit()
-        db.session.close()
-        # except:
-            # db.session.rollback()
+                            email=form1.data['email'],
+                            password=form1.data['password'],
+                            github=form1.data['github'],
+                            about=form1.data['about'])
+        try:
+            db.session.add(data_entered)
+            db.session.commit()
+            db.session.close()
+        except Exception as e:
+            print(f'ERROR: {e}')
+            db.session.rollback()
         return render_template('thanks.html', notes=form1.data['name'])
 
     if request.method == 'POST' and form2.validate():
