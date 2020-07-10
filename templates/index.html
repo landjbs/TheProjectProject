@@ -2,41 +2,20 @@
 {% block content %}
 <!-- APPLY -->
 <div class='big-box container justify-content-center'>
-  <div class='box apply' action='/apply' id='apply'>
-    apply.
-  </div>
-  <form class="content apply-form" method="post" action="/index" id="apply_form">
-      {{ form1.hidden_tag() }}
-      {% for elt in form1 %}
-        {% if not elt.name in ["csrf_token", "submit"] %} <!-- and not loop.index>1 -->
-        <div class="tab" id='{{ elt.name }}'>
-          {% if elt.errors in [[], ()] %}
-          <h1 style='color:white;'>{{elt.label}}</h1>
-            {{ elt(class='input valid') }}
-          {% else %}
-            {{ elt(class='input invalid') }}
-            <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
-          {% endif %}
-        </div>
-        {% endif %}
-      {% endfor %}
-      <div class='row'>
-        <button type="submit" onclick='back()' class="col btn btn-primary">Back</button>
-        <button type="submit" class="col btn btn-primary">Submit</button>
-      </div>
-  </form>
+  <a href='/apply'>
+    <div class='box apply' id='apply'>
+      apply.
+    </div>
+  </a>
   <br>
-  <div class='box login' onclick='login()' id='login'>
-    login.
-  </div>
-  <form class="content login-form" method="post" action="/index" id="login_form">
-    {{ form2.hidden_tag() }}
-    {{ form2.numRetrieve()}}
-    <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div>
-  </form>
+  <a href='/login'>
+    <div class='box login' onclick='login()' id='login'>
+      login.
+    </div>
+  </a>
 </div>
 
-<script>
+<!-- <script>
 function hide_boxes() {
   var coll = document.getElementsByClassName("box");
   for (i = 0; i < coll.length; i++) {
@@ -71,6 +50,6 @@ function back() {
   show_boxes();
   hide_forms();
 }
-</script>
+</script> -->
 
 {% endblock %}
