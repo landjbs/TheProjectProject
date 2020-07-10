@@ -48,7 +48,17 @@
       <form class="content apply-form" method="post" action="/index" id="apply_form">
           {{ form1.hidden_tag() }}
           {% for elt in form1 %}
-            {{ elt() }}
+            {% if not elt.name in ["csrf_token", "submit"] %}
+            <div class="input-segment">
+              <h5>{{ elt.label }}:</h5>
+              {% if elt.errors in [[], ()] %}
+                {{ elt(class='input valid') }}
+              {% else %}
+                {{ elt(class='input invalid') }}
+                <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
+              {% endif %}
+            </div>
+            {% endif %}
           {% endfor %}
           <div class='row'>
             <button type="submit" onclick='back()' class="col btn btn-primary">Back</button>
