@@ -46,13 +46,25 @@
       <div class='box apply' onclick='apply()' id='apply'>
         apply.
       </div>
-      <form class="content login-content">
-        <p>Lorem ipsum...</p>
+      <form class="content apply-content" method="post" action="/index" id="db_post" name="db_post">
+          {{ form1.hidden_tag() }}
+          {% for elt in form1 %}
+            {{ elt() }}
+          {% endfor %}
+          <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div>
+      </form>
       </form>
       <br>
       <div class='box login' onclick='hide_boxes()' id='login'>
         login.
       </div>
+        <form class="content login-content" method="post" action="/index" id="db_post" name="db_post">
+          {{ form1.hidden_tag() }}
+          {% for elt in form1 %}
+            {{ elt() }}
+          {% endfor %}
+          <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div>
+      </form>
     </div>
 
     <section id='about'>
