@@ -19,7 +19,8 @@
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="/#page-top">
-          <h2><mark>Co</mark>llab<br><mark>Co</mark>mmons</h2>
+          <!-- <h2><mark>Co</mark>llab<br><mark>Co</mark>mmons</h2> -->
+          <p>The</p><h2><mark>Pro</mark>ject<br>Pro<mark>ject</mark></h2>
           <p>
             a venue for harvard<br>
             connection and innovation
@@ -41,17 +42,68 @@
       </div>
     </nav>
 
+    <!-- APPLY -->
     <div class='big-box container justify-content-center'>
       <div class='box apply' onclick='apply()' id='apply'>
         apply.
       </div>
-      <form class="content apply-form" method="post" action="/index" id="apply_form">
+    <div class='upform content apply-form' method="post" action="/index" id="apply_form">
+      <form>
+      <div class="upform-header"></div>
+      <div class="upform-main">
+        <div class="input-block">
+          <div class="label">Q1. If we give you a proven system to make at least $7,500 per month online, would you follow it to a tee?</div>
+          <div class="input-control">
+            <input id="toggle-on-q1" class="toggle toggle-left" name="q1" value="yes" type="radio">
+            <label for="toggle-on-q1" class="btn"><span>A</span> Yes</label>
+            <input id="toggle-off-q1" class="toggle toggle-right" name="q1" value="no" type="radio">
+            <label for="toggle-off-q1" class="btn"><span>B</span> No</label>
+          </div>
+        </div>
+
+        <div class="input-block">
+          <div class="label">Q2. Would you be willing to invest at least 30 minutes per day to make it work?</div>
+          <div class="input-control">
+            <input id="toggle-on-q2" class="toggle toggle-left" name="q2" value="yes" type="radio">
+            <label for="toggle-on-q2" class="btn"><span>A</span> Yes</label>
+            <input id="toggle-off-q2" class="toggle toggle-right" name="q2" value="no" type="radio">
+            <label for="toggle-off-q2" class="btn"><span>B</span> No</label>
+          </div>
+        </div>
+
+        <div class="input-block">
+          <div class="label">Q3. Would you like to get started NOW?</div>
+          <div class="input-control">
+            <input id="toggle-on-q3" class="toggle toggle-left" name="q3" value="yes" type="radio">
+            <label for="toggle-on-q3" class="btn"><span>A</span> Yes</label>
+            <input id="toggle-off-q3" class="toggle toggle-right" name="q3" value="no" type="radio">
+            <label for="toggle-off-q3" class="btn"><span>B</span> No</label>
+          </div>
+        </div>
+
+        <div class="input-block">
+          <div class="label">What is your name?</div>
+          <div class="input-control">
+            <input type="text" class="required" autocomplete="off">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="upform-footer">
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+
+    </form>
+  </div>
+
+      <!-- <form class="content apply-form" method="post" action="/index" id="apply_form">
           {{ form1.hidden_tag() }}
           {% for elt in form1 %}
-            {% if not elt.name in ["csrf_token", "submit"] %}
+            {% if not elt.name in ["csrf_token", "submit"] and not loop.index>1 %}
             <div class="tab" id='{{ elt.name }}'>
-              <!-- <h5>{{ elt.label }}:</h5> -->
               {% if elt.errors in [[], ()] %}
+              <h1 style='color:white;'>{{elt.label}}</h1>
                 {{ elt(class='input valid') }}
               {% else %}
                 {{ elt(class='input invalid') }}
@@ -64,10 +116,7 @@
             <button type="submit" onclick='back()' class="col btn btn-primary">Back</button>
             <button type="submit" class="col btn btn-primary">Submit</button>
           </div>
-          <!-- <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div> -->
-
-      </form>
-      </form>
+      </form> -->
       <br>
       <div class='box login' onclick='login()' id='login'>
         login.
@@ -116,30 +165,153 @@
     hide_forms();
   }
 
-  // function login() {
-  //   var apply_btn = document.getElementById("apply");
-  //   if (apply_btn.style.display === "none") {
-  //     apply_btn.style.display = "block";
-  //   } else {
-  //     apply_btn.style.display = "none";
-  //   }
-  // }
-  </script>
+  // NEW STUFF
+  $.fn.upform = function() {
+  var $this = $(this);
+  var container = $this.find(".upform-main");
 
-  <!-- <script>
-  var coll = document.getElementsByClassName("collapsible");
-  var i;
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-      this.classList.toggle("active");
-      var content = this.nextElementSibling;
-      if (content.style.maxHeight){
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + "px";
+  $(document).ready(function() {
+    $(container).find(".input-block").first().click();
+  });
+
+  $($this).find("form").submit(function() {
+    return false;
+  });
+
+  $(container)
+    .find(".input-block")
+    .not(".input-block input")
+    .on("click", function() {
+    rescroll(this);
+  });
+
+  $(container).find(".input-block input").keypress(function(e) {
+    if (e.which == 13) {
+      if ($(this).hasClass("required") && $(this).val() == "") {
+      } else moveNext(this);
+    }
+  });
+
+  $(container).find('.input-block input[type="radio"]').change(function(e) {
+    moveNext(this);
+  });
+
+  $(window).on("scroll", function() {
+    $(container).find(".input-block").each(function() {
+      var etop = $(this).offset().top;
+      var diff = etop - $(window).scrollTop();
+
+      if (diff > 100 && diff < 300) {
+        reinitState(this);
       }
     });
+  });
+
+  function reinitState(e) {
+    $(container).find(".input-block").removeClass("active");
+
+    $(container).find(".input-block input").each(function() {
+      $(this).blur();
+    });
+    $(e).addClass("active");
+    /*$(e).find('input').focus();*/
   }
-  </script> -->
+
+  function rescroll(e) {
+    $(window).scrollTo($(e), 200, {
+      offset: { left: 100, top: -200 },
+      queue: false
+    });
+  }
+
+  function reinit(e) {
+    reinitState(e);
+    rescroll(e);
+  }
+
+  function moveNext(e) {
+    $(e).parent().parent().next().click();
+  }
+
+  function movePrev(e) {
+    $(e).parent().parent().prev().click();
+  }
+};
+
+$(".upform").upform();
+$.fn.upform = function() {
+  var $this = $(this);
+  var container = $this.find(".upform-main");
+
+  $(document).ready(function() {
+    $(container).find(".input-block").first().click();
+  });
+
+  $($this).find("form").submit(function() {
+    return false;
+  });
+
+  $(container)
+    .find(".input-block")
+    .not(".input-block input")
+    .on("click", function() {
+      rescroll(this);
+    });
+
+  $(container).find(".input-block input").keypress(function(e) {
+    if (e.which == 13) {
+      if ($(this).hasClass("required") && $(this).val() == "") {
+      } else moveNext(this);
+    }
+  });
+
+  $(container).find('.input-block input[type="radio"]').change(function(e) {
+    moveNext(this);
+  });
+
+  $(window).on("scroll", function() {
+    $(container).find(".input-block").each(function() {
+      var etop = $(this).offset().top;
+      var diff = etop - $(window).scrollTop();
+
+      if (diff > 100 && diff < 300) {
+        reinitState(this);
+      }
+    });
+  });
+
+  function reinitState(e) {
+    $(container).find(".input-block").removeClass("active");
+
+    $(container).find(".input-block input").each(function() {
+      $(this).blur();
+    });
+    $(e).addClass("active");
+    /*$(e).find('input').focus();*/
+  }
+
+  function rescroll(e) {
+    $(window).scrollTo($(e), 200, {
+      offset: { left: 100, top: -200 },
+      queue: false
+    });
+  }
+
+  function reinit(e) {
+    reinitState(e);
+    rescroll(e);
+  }
+
+  function moveNext(e) {
+    $(e).parent().parent().next().click();
+  }
+
+  function movePrev(e) {
+    $(e).parent().parent().prev().click();
+  }
+};
+
+$(".upform").upform();
+  </script>
 
 </html>
