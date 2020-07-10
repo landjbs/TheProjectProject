@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm, Form
 from wtforms import TextField, validators
 from wtforms_alchemy import model_form_factory
-from wtforms.validators import (DataRequired, Length, Email, EqualTo,
+from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
 from .models import Data, User
@@ -10,7 +10,8 @@ from .models import Data, User
 BaseForm = model_form_factory(FlaskForm)
 
 
-class Email_Validator(object):
+class Email_Ext_Validator(object):
+    ''' Validator for allowed email extensions '''
     def __init__(self, allowed=['@college.harvard.edu']):
         self.allowed = set(allowed)
 
@@ -25,20 +26,25 @@ class Email_Validator(object):
             raise ValidationError('Invalid email address.')
 
 
-class EnterDBInfo(BaseForm):
-    class Meta:
-        model = Data
-        exclude = ['status']
-        validators = {'name': [DataRequired()],
-                      'email': [DataRequired(), Email(), Length(min=1, max=254)],
-                      'password': [DataRequired(), Length(min=1, max=254)]}
+class Github_Validator(object):
+    ''' Validator for github urls '''
+    
 
 
 class Apply(BaseForm):
     class Meta:
         model = User
+        exclude = ['status']
         validators = {'name': [DataRequired()],
-                     'email': [DataRequired(), Email(), Length(min=1, max=254)],
+                      'email': [DataRequired(), Email(), Email_Ext_Validator(),
+                                Length(min=1, max=254)],
+                      'password': [DataRequired(), Length(min=1, max=254)]}
+
+
+class EnterDBInfo(BaseForm):
+    class Meta:
+        model = Data
+        validators = {'name': [DataRequired()],
                      'password': [DataRequired(), Length(min=1, max=254)]}
 
 # class EnterDBInfo(Form):
