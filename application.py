@@ -73,8 +73,6 @@ def login():
         if current_user.accepted:
             return render_template('results.html')
     form = Login(request.form)
-    if form.email.data==ADMIN_EMAIL and form.password.data==ADMIN_PASSWORD:
-        return redirect(url_for('admin'))
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
         if user is None:
@@ -91,7 +89,8 @@ def login():
     return render_template('login.html', form=form)
 
 
-@application.route('/admin', methods=['POST'])
+# TODO: MAKE SECURE
+@application.route('/admin', methods=['GET', 'POST'])
 def admin():
     return render_template('admin.html')
 
