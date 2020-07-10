@@ -38,7 +38,7 @@ class User(db.Model, UserMixin):
     about = db.Column(db.String(500), nullable=False,
                       info={'label':'About'})
     # status {0:applied, 1:member, 2:admin}
-    status = db.Column(db.Integer, nullable=False)
+    accepted = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name, email, password, github, about):
         self.name = name
@@ -46,7 +46,7 @@ class User(db.Model, UserMixin):
         self.password = password
         self.github = github
         self.about = about
-        self.status = 0 # status set to "applied"
+        self.status = True # status set to "applied"
 
     def __repr__(self):
         return '<User %r>' % self.name

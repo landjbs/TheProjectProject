@@ -47,19 +47,18 @@ def login():
         # return redirect(url_for(''))
         return render_template('results.html')
     form = Login(request.form)
-    if form.validate():
+    if request.method=='POST' and form.validate():
         user = None # TODO: QUERY USER FROM EMAIL
         if user is None:
             form.email.errors.append('Email not found.')
         elif not user.check_password(form.password.data):
             form.password.errors.append('Invalid password.')
-        elif user.status==0:
-            
-
-
-    form = Login(request.form)
-    if request.method=='POST' and form.validate():
-
+            # application pending
+        elif user.accepted==False:
+                form.email.errors.append('Your application is under review—'
+                                         'check back soon!')
+        login_user(user)
+        return render_template('results.html')
     return render_template('login.html')
 
 
