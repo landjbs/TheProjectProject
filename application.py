@@ -48,7 +48,13 @@ def login():
         return render_template('results.html')
     form = Login(request.form)
     if form.validate():
-        
+        user = None # TODO: QUERY USER FROM EMAIL
+        if user is None:
+            form.email.errors.append('Email not found.')
+        elif not user.check_password(form.password.data):
+            form.password.errors.append('Invalid password.')
+        elif user.status==0:
+            
 
 
     form = Login(request.form)
