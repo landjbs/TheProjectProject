@@ -12,47 +12,47 @@ class Data(db.Model):
     password = db.Column(db.String(254), nullable=False, info={'label':'Password'})
 
     def __init__(self, name, password):
-        self.name = 'freddy'
-        self.password = password
-
-    def __repr__(self):
-        return '<User %r>' % self.name
-
-
-class User(db.Model, UserMixin):
-    # id primary key
-    id = db.Column(db.Integer, primary_key=True)
-    # name
-    name = db.Column(db.String(128), index=True, unique=False,
-                     info={'label':'Name'})
-    # email
-    email = db.Column(db.String(254), unique=False, nullable=False,
-                      info={'label':'Email Address'})
-    # password
-    password = db.Column(db.String(254), nullable=False,
-                         info={'label':'Password'})
-    # github # TODO: figure out how to validate github
-    github = db.Column(db.String(254), nullable=False,
-                         info={'label':'Github'})
-    # about
-    about = db.Column(db.String(500), nullable=False,
-                      info={'label':'About'})
-    # status {0:applied, 1:member, 2:admin}
-    status = db.Column(db.Integer, nullable=False)
-
-    def __init__(self, name, email, password):
         self.name = name
-        self.email = email
         self.password = password
 
     def __repr__(self):
         return '<User %r>' % self.name
 
-    def set_password(self, password):
-        self.password = generate_password_hash(password)
 
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
-
-    def get_id(self):
-        return str(self.id)
+# class User(db.Model, UserMixin):
+#     # id primary key
+#     id = db.Column(db.Integer, primary_key=True)
+#     # name
+#     name = db.Column(db.String(128), index=True, unique=False,
+#                      info={'label':'Name'})
+#     # email
+#     email = db.Column(db.String(254), unique=False, nullable=False,
+#                       info={'label':'Email Address'})
+#     # password
+#     password = db.Column(db.String(254), nullable=False,
+#                          info={'label':'Password'})
+#     # github # TODO: figure out how to validate github
+#     github = db.Column(db.String(254), nullable=False,
+#                          info={'label':'Github'})
+#     # about
+#     about = db.Column(db.String(500), nullable=False,
+#                       info={'label':'About'})
+#     # status {0:applied, 1:member, 2:admin}
+#     status = db.Column(db.Integer, nullable=False)
+#
+#     def __init__(self, name, email, password):
+#         self.name = name
+#         self.email = email
+#         self.password = password
+#
+#     def __repr__(self):
+#         return '<User %r>' % self.name
+#
+#     def set_password(self, password):
+#         self.password = generate_password_hash(password)
+#
+#     def check_password(self, password):
+#         return check_password_hash(self.password, password)
+#
+#     def get_id(self):
+#         return str(self.id)
