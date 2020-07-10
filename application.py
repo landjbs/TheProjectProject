@@ -31,7 +31,6 @@ def index():
         db.session.commit()
         db.session.close()
         # except:
-            # print('WXasdfasdf')
             # db.session.rollback()
         return render_template('thanks.html', notes=form1.data['name'])
 
