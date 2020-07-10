@@ -26,9 +26,10 @@ class Email_Ext_Validator(object):
             raise ValidationError('Invalid email address.')
 
 
-class Github_Validator(object):
-    ''' Validator for github urls '''
-    
+class Site_URL_Validator(object):
+    ''' Validator for http or https URLs from site '''
+    def __init__(self, site):
+    r'(www\.|http:|https:)+[^\s]+[\w]' + f'{site}'
 
 
 class Apply(BaseForm):
