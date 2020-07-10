@@ -1,3 +1,4 @@
+import re
 from flask_wtf import FlaskForm, Form
 from wtforms import TextField, validators
 from wtforms_alchemy import model_form_factory
@@ -29,7 +30,15 @@ class Email_Ext_Validator(object):
 class Site_URL_Validator(object):
     ''' Validator for http or https URLs from site '''
     def __init__(self, site):
-    r'(www\.|http:|https:)+[^\s]+[\w]' + f'{site}'
+        matcher = (r'(www\.|http://|https://|http://www\.|https://\.)'
+                   f'{site}.com/'
+                   r'.*')
+        self.matcher = re.compile(matcher)
+
+    def __call__(self, form, field):
+        if not re.match(matcher, form.data):
+            raise ValidationError(f"Invalid URL for {site}.")
+
 
 
 class Apply(BaseForm):
