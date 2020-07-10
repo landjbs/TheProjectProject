@@ -50,7 +50,12 @@
           {% for elt in form1 %}
             {{ elt() }}
           {% endfor %}
-          <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div>
+          <div class='row'>
+            <button type="submit" onclick='back()' class="col btn btn-primary">Back</button>
+            <button type="submit" class="col btn btn-primary">Submit</button>
+          </div>
+          <!-- <div align="center"><button type="submit" class="btn btn-primary">Submit</button></p></div> -->
+
       </form>
       </form>
       <br>
@@ -72,6 +77,12 @@
       coll[i].style.display = 'none';}
     }
 
+  function hide_forms() {
+    var forms = document.getElementsByClassName("content");
+    for (i = 0; i < forms.length; i++) {
+      forms[i].style.display = 'none';}
+    }
+
   function show_boxes() {
     var coll = document.getElementsByClassName("box");
     for (i = 0; i < coll.length; i++) {
@@ -88,6 +99,11 @@
     hide_boxes();
     var login_form = document.getElementById('login_form');
     login_form.style.display = 'block';
+  }
+
+  function back() {
+    show_boxes();
+    hide_forms();
   }
 
   // function login() {
