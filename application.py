@@ -49,5 +49,11 @@ def index():
 
     return render_template('index.html', form1=form1, form2=form2)
 
+
+@application.route('/test', methods=['GET', 'POST'])
+def test():
+    return render_template('test.html')
+
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
