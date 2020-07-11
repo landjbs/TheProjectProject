@@ -21,4 +21,82 @@
   {% endfor %}
 </div>
 
+
+<table id="user_table" class="table table-hover bix-box" style="width:100%">
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Github</th>
+    <th>About</th>
+    <th>Actions</th>
+  </tr>
+</thead>
+<tbody>
+  {% for user in current_user.posted_trucks %}
+  <tr>
+    <th>
+        {{ user.name }}
+        <!-- <br> -->
+        <!-- <p class="status_box status_{{ truck.status }}">
+          {% if truck.status == 0 %}
+            Unrouted
+          {% elif truck.status == 1 %}
+            Routes Suggested
+          {% elif truck.status == 2 %}
+            Job Accepted
+          {% elif truck.status == 3 %}
+            In Progress
+          {% elif truck.status == 4 %}
+            Complete
+          {% endif %}
+        </div> -->
+    </th>
+    <th>
+      {{ user.email }}
+    </th>
+    <th>
+      {{ user.github }}
+    </th>
+    <th>
+      {{ user.about }}
+    </th>
+    <th>
+      {% if user.accepted %}
+        <form class='user-data' method="post" action="/reject">
+          <button type="submit" name='reject' value="{{ user.id }}">
+            Reject
+          </button>
+        </form>
+      {% else %}
+        <form class='user-data' method="post" action="/accept">
+          <button type="submit" name='accept' value="{{ user.id }}">
+            Accept
+          </button>
+        </form>
+      {% endif %}
+    </th>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+
+
+<script>
+$(document).ready( function () {
+  $('#user_table').DataTable({
+    language: {
+      search: "_INPUT_",
+      searchPlaceholder: "Search trucks..."
+    },
+    "scrollX": true,
+    "bPaginate": false,
+    "paging":   false,
+    'info': false,
+  });
+
+  $('.dataTables_length').addClass('bs-select');
+} );
+</script>
+
 {% endblock %}

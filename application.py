@@ -53,7 +53,7 @@ def about():
 
 @application.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('about.html')
+    return render_template('contact.html')
 
 
 @application.route('/apply', methods=['GET', 'POST'])
