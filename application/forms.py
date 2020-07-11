@@ -20,7 +20,6 @@ class Email_Ext_Validator(object):
     def __call__(self, form, field):
         email = str(field.data)
         ending = email.split('@')[-1]
-        print(ending)
         if not ending in self.allowed:
             raise ValidationError('Currently only Harvard College emails '
                                   'are allowed.')
@@ -41,8 +40,16 @@ class Site_URL_Validator(object):
 
 
 class Apply(BaseForm):
-    name =
-
+    name = StringField('Name', [Length(1, 254)], description='')
+    email = EmailField('Harvard Email', [Email(), Email_Ext_Validator()],
+                       description=('Currently only Harvard College emails '
+                                   'are allowed. Please reach out if you would '
+                                   'like your school to be added.'))
+    about = TextField('About', [Length(1, 500)],
+                      description=('Describe yourself! This could include past '
+                                   'projects you have worked on, passions you '
+                                   'have, or reasons you want to join the '
+                                   'community.'))
 
 class Apply(BaseForm):
     class Meta:
