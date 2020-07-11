@@ -1,6 +1,7 @@
 import re
 from flask_wtf import FlaskForm
-from wtforms import TextField, validators, PasswordField
+from wtforms import (TextField, StringField, PasswordField, BooleanField,
+                     validators)
 from wtforms_alchemy import model_form_factory
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
@@ -39,7 +40,8 @@ class Site_URL_Validator(object):
             raise ValidationError(f"Invalid URL for {self.site}.")
 
 
-class 
+class Apply(BaseForm):
+    name =
 
 
 class Apply(BaseForm):
