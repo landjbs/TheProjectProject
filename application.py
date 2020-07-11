@@ -64,7 +64,7 @@ def apply():
             print(f'EASDF: {e}')
             db.session.rollback()
         return render_template('index.html')
-    return render_template('apply.html', form=form)
+    return render_template('test.html', form=form)
 
 
 @application.route('/login', methods=['GET', 'POST'])

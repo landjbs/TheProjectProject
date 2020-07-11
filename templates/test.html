@@ -173,41 +173,16 @@ input[type="radio"].toggle:checked + label:after {
     <div class="upform-header"></div>
 
     <div class="upform-main">
-      <div class="input-block active">
-        <!-- <div class="label">Q1. If we give you a proven system to make at least $7,500 per month online, would you follow it to a tee?</div>
-        <div class="input-control">
-          <input id="toggle-on-q1" class="toggle toggle-left" name="q1" value="yes" type="radio">
-          <label for="toggle-on-q1" class="btn"><span>A</span> Yes</label>
-          <input id="toggle-off-q1" class="toggle toggle-right" name="q1" value="no" type="radio">
-          <label for="toggle-off-q1" class="btn"><span>B</span> No</label>
-        </div> -->
-        <div class="label">What is your name?</div>
-        <div class="input-control">
-          <input type="text" class="required" autocomplete="off">
-        </div>
-      </div>
-
-      <div class="input-block">
-        <!-- <div class="label">Q2. Would you be willing to invest at least 30 minutes per day to make it work?</div>
-        <div class="input-control">
-          <input id="toggle-on-q2" class="toggle toggle-left" name="q2" value="yes" type="radio">
-          <label for="toggle-on-q2" class="btn"><span>A</span> Yes</label>
-          <input id="toggle-off-q2" class="toggle toggle-right" name="q2" value="no" type="radio">
-          <label for="toggle-off-q2" class="btn"><span>B</span> No</label>
-        </div> -->
-        <div class="label">Harvard Email</div>
-        <div class="input-control">
-          <input type="text" class="required" autocomplete="off">
-        </div>
-      </div>
-
-      <div class="input-block">
-        <div class="label">What is your name?</div>
-        <div class="input-control">
-          <input type="text" class="required" autocomplete="off">
-        </div>
-      </div>
-
+      {% for elt in form %}
+        {% if not elt.name in ["csrf_token"] %}
+          <div class="input-block active">
+            <div class="label">{{ elt.label }}</div>
+            <div class="input-control">
+              {{ elt(autocomplete="off") }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
 
     <div class="upform-footer">
@@ -236,11 +211,11 @@ $.fn.upform = function() {
     .find(".input-block")
     .not(".input-block input")
     .on("click", function() {
-    // rescroll(this);
+    rescroll(this);
   });
 
   $(container).find(".input-block input").keypress(function(e) {
-    if (e.which == 13) {
+    if (e.which == 13) or (e.which == 9) {
       if ($(this).hasClass("required") && $(this).val() == "") {
       } else moveNext(this);
     }
@@ -263,25 +238,32 @@ $.fn.upform = function() {
 
   function reinitState(e) {
     $(container).find(".input-block").removeClass("active");
-    // $(container).find(".input-block input").each(function() {
-      // $(this).blur();
-    // });
+
+    $(container).find(".input-block input").each(function() {
+      $(this).blur();
+    });
     $(e).addClass("active");
-    $(e).find('input').focus();
+    /*$(e).find('input').focus();*/
+  }
+
+  function rescroll(e) {
+    // alert('rescroll');
+    // $('.upform').scrollTo($(e), 200, {
+    //   offset: { left: 100, top: -200 },
+    //   queue: false
+    // });
   }
 
   function reinit(e) {
     reinitState(e);
-    // rescroll(e);
+    rescroll(e);
   }
 
   function moveNext(e) {
-    alert('next');
-    // $(e).parent().parent().next().click();
+    $(e).parent().parent().next().click();
   }
 
   function movePrev(e) {
-    alert('prev');
     $(e).parent().parent().prev().click();
   }
 };
@@ -303,11 +285,11 @@ $.fn.upform = function() {
     .find(".input-block")
     .not(".input-block input")
     .on("click", function() {
-      reinitState(this);
+      rescroll(this);
     });
 
   $(container).find(".input-block input").keypress(function(e) {
-    if (e.which == 13) {
+    if (e.which == 13) or (e.which == 9) {
       if ($(this).hasClass("required") && $(this).val() == "") {
       } else moveNext(this);
     }
@@ -330,28 +312,28 @@ $.fn.upform = function() {
 
   function reinitState(e) {
     $(container).find(".input-block").removeClass("active");
-    // $(container).find(".input-block input").each(function() {
-      // $(this).blur();
-    // });
+
+    $(container).find(".input-block input").each(function() {
+      $(this).blur();
+    });
     $(e).addClass("active");
-    // $('.upform').scrollTo(e);
+    /*$(e).find('input').focus();*/
   }
 
   function rescroll(e) {
-    $('.upform').scrollTo($(e), 200, {
-      offset: { left: 100, top: -200 },
-      queue: false
-    });
-    $('.upform').scrollTo($(e))
+    // alert('rescroll');
+    // $('.upform').scrollTo($(e), 200, {
+    //   offset: { left: 100, top: -200 },
+    //   queue: false
+    // });
   }
 
   function reinit(e) {
     reinitState(e);
-    // rescroll(e);
+    rescroll(e);
   }
 
   function moveNext(e) {
-    // alert('next2')
     $(e).parent().parent().next().click();
   }
 
