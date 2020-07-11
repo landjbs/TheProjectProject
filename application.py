@@ -79,13 +79,13 @@ def apply():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        print(current_user)
-        print(current_user.accepted)
-        if current_user.accepted:
-            return redirect(url_for('home'))
-        else:
-            print('Not accepted')
+    # if current_user.is_authenticated:
+    #     print(current_user)
+    #     print(current_user.accepted)
+    #     if current_user.accepted:
+    #         return redirect(url_for('home'))
+    #     else:
+    #         print('Not accepted')
     form = Login(request.form)
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
@@ -99,7 +99,7 @@ def login():
                                          'check back soon!')
         else:
             login_user(user)
-            return render_template('homepage.html')
+            return home()
     return render_template('login.html', form=form)
 
 
