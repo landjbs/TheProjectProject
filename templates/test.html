@@ -173,17 +173,23 @@ form {
   <div class="upform">
 
 
-  <form>
+  <form method='post'>
 
-    <div class="upform-header"></div>
+    <div class="upform-header">Test</div>
 
     <div class="upform-main">
+      {{ form.csrf_token }}
       {% for elt in form %}
         {% if not elt.name in ["csrf_token"] %}
           <div class="input-block active">
             <div class="label">{{ elt.label }}</div>
             <div class="input-control">
-              {{ elt(autocomplete="off") }}
+              {% if elt.errors in [[], ()] %}
+                {{ elt(class='input valid') }}
+              {% else %}
+                {{ elt(class='input invalid') }}
+                <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
+              {% endif %}
             </div>
           </div>
         {% endif %}
@@ -191,7 +197,7 @@ form {
     </div>
 
     <div class="upform-footer">
-      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+      <button type="submit" action="submit" class="btn btn-primary btn-lg">Submit</button>
     </div>
 
   </form>

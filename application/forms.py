@@ -1,9 +1,9 @@
 import re
 from flask_wtf import FlaskForm
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
-                    URLField, validators)
+                     validators)
 from wtforms_alchemy import model_form_factory
-from wtforms.validators import (DataRequired, Length, EqualTo, Email, URLValidator,
+from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
 from .models import User
@@ -42,7 +42,7 @@ class Site_URL_Validator(object):
 class Apply(BaseForm):
     name = StringField('Name',
                        validators=[DataRequired(), Length(1, 254)])
-    email = EmailField('Harvard Email',
+    email = StringField('Harvard Email',
                        validators=[DataRequired(), Length(1, 254),
                                    Email(), Email_Ext_Validator()],
                        description=('Currently only Harvard College emails '
@@ -50,7 +50,7 @@ class Apply(BaseForm):
                                    'like your school to be added.'))
     github = StringField('Github',
                       validators=[DataRequired(), Length(1, 254),
-                                  URLValidator(), Site_URL_Validator('github')],
+                                  Site_URL_Validator('github')],
                       description=("Show off past projects on your github if "
                                    "you'd like!"))
     about = TextField('About',

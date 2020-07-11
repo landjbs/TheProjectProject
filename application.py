@@ -45,6 +45,11 @@ def load_user(id):
 def index():
     return render_template('index.html')
 
+@application.route('/about', methods=['GET', 'POST'])
+def about():
+    return render_template('about.html')
+
+
 
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
