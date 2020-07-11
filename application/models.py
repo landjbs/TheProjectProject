@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(254), nullable=False,
                          info={'label':'Password'})
     # github # TODO: figure out how to validate github
-    github = db.Column(db.String(254), nullable=False,
+    github = db.Column(db.String(254), nullable=True,
                          info={'label':'Github'})
     # about
     about = db.Column(db.String(500), nullable=False,

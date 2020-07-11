@@ -1,9 +1,9 @@
 import re
 from flask_wtf import FlaskForm
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
-                     validators)
+                    URLField, validators)
 from wtforms_alchemy import model_form_factory
-from wtforms.validators import (DataRequired, Length, EqualTo, Email,
+from wtforms.validators import (DataRequired, Length, EqualTo, Email, URLValidator,
                                 InputRequired, ValidationError, NumberRange)
 
 from .models import User
@@ -31,7 +31,7 @@ class Site_URL_Validator(object):
         self.site = site
         matcher = (r'(www\.|http://|https://|http://www\.|https://\.)'
                    f'{site}.com/'
-                   r'.*')
+                   r'.+')
         self.matcher = re.compile(matcher)
 
     def __call__(self, form, field):
@@ -40,31 +40,50 @@ class Site_URL_Validator(object):
 
 
 class Apply(BaseForm):
-    name = StringField('Name', [Length(1, 254)], description='')
-    email = EmailField('Harvard Email', [Email(), Email_Ext_Validator()],
+    name = StringField('Name',
+                       validators=[DataRequired(), Length(1, 254)])
+    email = EmailField('Harvard Email',
+                       validators=[DataRequired(), Length(1, 254),
+                                   Email(), Email_Ext_Validator()],
                        description=('Currently only Harvard College emails '
                                    'are allowed. Please reach out if you would '
                                    'like your school to be added.'))
-    about = TextField('About', [Length(1, 500)],
-                      description=('Describe yourself! This could include past '
+    about = TextField('About',
+                      validators=[DataRequired(), Length(1, 500)],
+                      description=('Describe yourself! This might include '
                                    'projects you have worked on, passions you '
                                    'have, or reasons you want to join the '
                                    'community.'))
+    github = URLField('Github',
+                      validators=[DataRequired(), Length(1, 254),
+                                  URLValidator(), Site_URL_Validator('github')],
+                      description=("Show off past projects on your github if "
+                                   "you'd like!"))
+    password = PasswordField('Create Password',
+                             validators=[DataRequired(), Length(1, 254),
+                                         EqualTo('confirm')],
+                             description=('Create a password to use if you are '
+                                          'accepted.'))
+    confirm = PasswordField('Confirm Password',
+                            validators=[DataRequired()])
+    accept_terms = BooleanField('I accept the terms.',
+                                validators=[DataRequired()])
 
-class Apply(BaseForm):
-    class Meta:
-        model = User
-        exclude = ['accepted']
-        validators = {'name': [],
-                      'email': [Email(), Email_Ext_Validator(),
-                                Length(min=1, max=254)],
-                      'password': [Length(min=1, max=254)],
-                      'confirm': [],
-                      'github': [Site_URL_Validator('github')],
-                      'about': []}
-        # all fields are required
-        for k, v in validators.items():
-            v.append(DataRequired())
+
+# class Apply(BaseForm):
+#     class Meta:
+#         model = User
+#         exclude = ['accepted']
+#         validators = {'name': [],
+#                       'email': [Email(), Email_Ext_Validator(),
+#                                 Length(min=1, max=254)],
+#                       'password': [Length(min=1, max=254)],
+#                       'confirm': [],
+#                       'github': [Site_URL_Validator('github')],
+#                       'about': []}
+#         # all fields are required
+#         for k, v in validators.items():
+#             v.append(DataRequired())
 
 
 class Login(BaseForm):
