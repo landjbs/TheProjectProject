@@ -39,6 +39,9 @@ class Site_URL_Validator(object):
             raise ValidationError(f"Invalid URL for {self.site}.")
 
 
+class 
+
+
 class Apply(BaseForm):
     class Meta:
         model = User
