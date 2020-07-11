@@ -1,4 +1,31 @@
 {% extends "base.html" %}
+
+{% block head %}
+<script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+
+<style>
+  .wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 1px;
+    height: 100vh;
+  }
+
+  .el {
+    position: absolute;
+    opacity: 1;
+    width: 2px;
+    height: 24vh;
+    margin-top: -12vh;
+    transform-origin: 50% 100%;
+    background: white;
+  }
+</style>
+
+{% endblock %}
+
 {% block content %}
 
 <div class='big-box container justify-content-center'>
