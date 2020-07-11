@@ -51,6 +51,11 @@ def about():
     return render_template('about.html')
 
 
+@application.route('/contact', methods=['GET', 'POST'])
+def contact():
+    return render_template('about.html')
+
+
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = Apply(request.form)
