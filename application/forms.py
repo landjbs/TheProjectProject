@@ -48,17 +48,17 @@ class Apply(BaseForm):
                        description=('Currently only Harvard College emails '
                                    'are allowed. Please reach out if you would '
                                    'like your school to be added.'))
+    github = StringField('Github',
+                      validators=[DataRequired(), Length(1, 254),
+                                  URLValidator(), Site_URL_Validator('github')],
+                      description=("Show off past projects on your github if "
+                                   "you'd like!"))
     about = TextField('About',
                       validators=[DataRequired(), Length(1, 500)],
                       description=('Describe yourself! This might include '
                                    'projects you have worked on, passions you '
                                    'have, or reasons you want to join the '
                                    'community.'))
-    github = URLField('Github',
-                      validators=[DataRequired(), Length(1, 254),
-                                  URLValidator(), Site_URL_Validator('github')],
-                      description=("Show off past projects on your github if "
-                                   "you'd like!"))
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')],
