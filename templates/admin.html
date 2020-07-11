@@ -1,8 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for user in to_accept %}
-  {{ user }}
-{% endfor %}
+
+<div class='big-box'>
+  {% for user in users %}
+    {{ user }}
+      {% if user.accepted %}
+        <form class='user-data' method="post" action="/reject">
+          <button type="submit" name='reject' value="{{ user.id }}">
+            Reject
+          </button>
+        </form>
+      {% else %}
+        <form class='user-data' method="post" action="/accept">
+          <button type="submit" name='accept' value="{{ user.id }}">
+            Accept
+          </button>
+        </form>
+      {% endif %}
+  {% endfor %}
+</div>
 
 {% endblock %}

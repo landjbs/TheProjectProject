@@ -70,8 +70,12 @@ def apply():
 @application.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
+        print(current_user)
+        print(current_user.accepted)
         if current_user.accepted:
-            return render_template('results.html')
+            return redirect(url_for('home'))
+        else:
+            print('Not accepted')
     form = Login(request.form)
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
@@ -89,11 +93,33 @@ def login():
     return render_template('login.html', form=form)
 
 
+@login_required
+@application.route('/home', methods=['GET', 'POST'])
+def home():
+    return render_template('home.html')
+
+
 # TODO: MAKE SECURE
 @application.route('/admin', methods=['GET', 'POST'])
 def admin():
-    to_accept = db.session.query(User).filter_by(accepted=False)
-    return render_template('admin.html', to_accept=to_accept)
+    users = db.session.query(User)
+    return render_template('admin.html', users=users)
+
+
+@application.route('/accept', methods=['POST'])
+def accept():
+    user = query_user_by_id(request.form['accept'])
+    setattr(user, 'accepted', True)
+    db.session.commit()
+    return admin()
+
+
+@application.route('/reject', methods=['POST'])
+def reject():
+    user = query_user_by_id(request.form['reject'])
+    setattr(user, 'accepted', False)
+    db.session.commit()
+    return admin()
 
 
 @application.route('/test', methods=['GET', 'POST'])
