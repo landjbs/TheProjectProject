@@ -1,6 +1,7 @@
 body {
   font-family: 'Varela Round';
   background-color: black;
+  color: white;
 }
 
 mark {
@@ -22,6 +23,7 @@ p {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   vertical-align: middle;
+  width: 100%;
 }
 
 .box {
