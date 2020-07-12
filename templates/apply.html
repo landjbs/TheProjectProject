@@ -5,15 +5,19 @@
   {{ form.csrf_token }}
   {% for elt in form %}
     {% if not elt.name in ["csrf_token"] %}
-      <div class="row input-segment">
-        <h5>{{ elt.label }}:</h5>
-        {% if elt.errors in [[], ()] %}
-          {{ elt(class='input valid') }}
-        {% else %}
-          {{ elt(class='input invalid') }}
-          <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
-        {% endif %}
-      </div>
+      {% if loop.index==1 %}
+        <div class="row input-segment" style='display:block;'>
+      {% else %}
+        <div class="row input-segment" style='display:none;'>
+      {% endif %}
+          <h5>{{ elt.label }}:</h5>
+          {% if elt.errors in [[], ()] %}
+            {{ elt(class='input valid') }}
+          {% else %}
+            {{ elt(class='input invalid') }}
+            <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
+          {% endif %}
+        </div>
     {% endif %}
   {% endfor %}
   <button class="panel-button" action="submit">Submit<button>
