@@ -41,24 +41,28 @@ class Site_URL_Validator(object):
 
 class Apply(BaseForm):
     name = StringField('Name',
-                       validators=[DataRequired(), Length(1, 254)])
+                    validators=[DataRequired(), Length(1, 254)],
+                    render_kw={'placeholder': 'John Harvard'})
     email = StringField('Harvard Email',
-                       validators=[DataRequired(), Length(1, 254),
+                    validators=[DataRequired(), Length(1, 254),
                                    Email(), Email_Ext_Validator()],
-                       description=('Currently only Harvard College emails '
+                    description=('Currently only Harvard College emails '
                                    'are allowed. Please reach out if you would '
-                                   'like your school to be added.'))
+                                   'like your school to be added.'),
+                    render_kw={'placeholder': 'example@college.harvard.edu'})
     github = StringField('Github',
-                      validators=[DataRequired(), Length(1, 254),
+                    validators=[DataRequired(), Length(1, 254),
                                   Site_URL_Validator('github')],
-                      description=("Show off past projects on your github if "
-                                   "you'd like!"))
+                    description=("Show off past projects on your github if "
+                                   "you'd like!"),
+                    render_kw={'placeholder': 'https://www.github.com/example'})
     about = TextField('About',
-                      validators=[DataRequired(), Length(1, 500)],
-                      description=('Describe yourself! This might include '
-                                   'projects you have worked on, passions you '
-                                   'have, or reasons you want to join the '
-                                   'community.'))
+                    validators=[DataRequired(), Length(1, 500)],
+                    description=('Describe yourself! This might include '
+                               'projects you have worked on, passions you '
+                               'have, or reasons you want to join the '
+                               'community.'),
+                    render_kw={'placeholder': 'I '})
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')],
@@ -66,7 +70,7 @@ class Apply(BaseForm):
                                           'accepted.'))
     confirm = PasswordField('Confirm Password',
                             validators=[DataRequired()])
-    accept_terms = BooleanField('I accept the terms.',
+    accept_terms = BooleanField('I have read and accept the terms.',
                                 validators=[DataRequired()])
 
 

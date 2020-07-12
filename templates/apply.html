@@ -22,7 +22,7 @@
         {% endif %}
         <br>
         {% if elt.errors in [[], ()] %}
-          {{ elt(class='input valid') }}
+          {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
         {% else %}
           {{ elt(class='input invalid') }}
           <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
