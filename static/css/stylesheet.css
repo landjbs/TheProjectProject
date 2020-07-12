@@ -92,14 +92,12 @@ button:focus {
 
 /* Mark input boxes that gets an error on validation: */
 input.invalid {
-  background-color: rgba(255, 236, 0, 1);
-  /* border-color: rgba(255, 236, 0, 1); */
-  color: black;
+  border-color: red;
 }
 
-input.invalid::placeholder {
+/* input.invalid::placeholder {
   color: black;
-}
+} */
 
 button {
   background-color: transparent;
@@ -131,6 +129,5 @@ button {
 
 /* Mark the steps that are finished and valid: */
 .step.finish {
-  background-color: #FFEC00;
-  border-color: red;
+  background-color: white;
 }

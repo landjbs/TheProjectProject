@@ -7,6 +7,7 @@
     {% if not elt.name in ["csrf_token"] %}
       <div class="row input-segment tab">
         <h4>{{ elt.label }}:</h4>
+        <!-- <p>{{ elt.description }}</p> -->
         {% if elt.errors in [[], ()] %}
           {{ elt(class='input valid') }}
         {% else %}
@@ -33,7 +34,6 @@
 </form>
 
 <script>
-  alert('currentTab');
   var currentTab = 0; // Current tab is set to be the first tab (0)
   showTab(currentTab); // Display the current tab
 
@@ -74,6 +74,23 @@
     // Otherwise, display the correct tab:
     showTab(currentTab);
   }
+
+  $(document).keydown(function(e) {
+    if (e.keyCode==9) {
+      e.preventDefault();
+      nextPrev(1);
+    }
+  });
+
+  $('input').keypress(function(e){
+    // alert(e.which);
+    if (e.which == 9) {
+      nextPrev(1);
+    }
+    else if (e.which == 13) {
+      nextPrev(1);
+    };
+  });
 
   function validateForm() {
     // This function deals with validation of the form fields
