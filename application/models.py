@@ -1,6 +1,7 @@
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 from application import db
 
@@ -26,8 +27,8 @@ class User(db.Model, UserMixin):
                       info={'label':'About'})
     # accepted
     accepted = db.Column(db.Boolean, nullable=False)
-    # specialty
-    specialty = relationship('Specialty', backref='user', lazy=True,
+    # subject
+    subjects = relationship('Subject', backref='user', lazy=True,
                             cascade="all, delete-orphan")
     # projects
     projects = relationship('Project', backref='user', lazy=True,
@@ -76,6 +77,8 @@ class Project(db.Model):
     # summary
     summary = db.Column(db.String(500), unique=False, nullable=False,
                         info={'label':'Summary'})
+    # specialty
+    specialty = db.Integer()
     # url
     url = db.Column(db.String(128), unique=False, nullable=True,
                     info={'label':'URL'})
@@ -89,3 +92,10 @@ class Project(db.Model):
                              info={'label':'Completed On'})
 
     def __init__(self, creator, name, summary, url):
+
+
+class Subject(db.Model):
+    __tablename__ = 'subject'
+    # id primary key
+    id = db.Column(db.Integer, primary_key=True)
+    # 
