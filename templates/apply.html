@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+
 {% block content %}
 
 <form class='big-box container justify-content-center' id='regForm' method='post'>
@@ -6,8 +13,13 @@
   {% for elt in form %}
     {% if not elt.name in ["csrf_token"] %}
       <div class="row input-segment tab">
-        <h4>{{ elt.label }}:</h4>
-        <!-- <p>{{ elt.description }}</p> -->
+        <h4 style="display: inline;">{{ elt.label }}    </h4>
+        {% if elt.description %}
+        <div class='tooltip'>
+          <i style="font-size:24px" class="fa">&#xf059;></i>
+          <span class="tooltiptext">Tooltip text</span>
+        </div>
+        {% endif %}
         {% if elt.errors in [[], ()] %}
           {{ elt(class='input valid') }}
         {% else %}
@@ -89,10 +101,7 @@
         nextPrev(1);
       }
     }
-  });
-
-  $('input').keypress(function(e){
-    if (e.which == 9) {
+    else if (e.keyCode==13) {
       nextPrev(1);
     }
   });
@@ -126,7 +135,7 @@
     // This function removes the "active" class of all steps...
     var i, x = document.getElementsByClassName("step");
     //... and adds the "active" class to the current step:
-    x[n].className += " active";
+    x[n].className = "step active";
   }
 </script>
 
