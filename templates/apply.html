@@ -23,7 +23,8 @@
           I have read and accept the <a href=''>terms</a>.
         </h4>
         <div class="input-control">
-          <input id="toggle-off-q1" class="toggle toggle-left" name="q1" value="true" type="radio">
+          <input id="toggle-off-q1" class="toggle toggle-left"
+                name='{{ elt.name }}' value="true" type="radio">
           <label for="toggle-off-q1" class="btn"><span>Y</span> Yes</label>
         </div>
         {% if elt.errors %}
@@ -72,7 +73,7 @@
 </form>
 
 <script>
-  var currentTab = 0; // Current tab is set to be the first tab (0)
+  var currentTab = {{ start_on }}; // Current tab is set to be the first tab (0)
   showTab(currentTab); // Display the current tab
 
   function showTab(n) {

@@ -74,23 +74,8 @@ class Apply(BaseForm):
                             render_kw={'placeholder': 'Yes'})
 
 
-# class Apply(BaseForm):
-#     class Meta:
-#         model = User
-#         exclude = ['accepted']
-#         validators = {'name': [],
-#                       'email': [Email(), Email_Ext_Validator(),
-#                                 Length(min=1, max=254)],
-#                       'password': [Length(min=1, max=254)],
-#                       'confirm': [],
-#                       'github': [Site_URL_Validator('github')],
-#                       'about': []}
-#         # all fields are required
-#         for k, v in validators.items():
-#             v.append(DataRequired())
-
-
 class Login(BaseForm):
-    class Meta:
-        model = User
-        only = ['email', 'password']
+    email = StringField('Email', validators=[DataRequired(), Length(1, 254),
+                                             Email(), Email_Ext_Validator()])
+    password = PasswordField('Password',
+                             validators=[DataRequired(), Length(1, 254)])
