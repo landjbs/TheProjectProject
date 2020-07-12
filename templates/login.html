@@ -26,7 +26,7 @@
           </div>
         {% endif %}
         <br>
-        {% if elt.errors %}
+        {% if not elt.errors %}
           {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
         {% else %}
           {{ elt(class='input invalid') }}
@@ -35,7 +35,7 @@
       </div>
     {% endif %}
   {% endfor %}
-  <div style="overflow:auto;">
+  <div style="overflow:auto; width:95%;">
       <div style="float:right;">
         <button type="button" id="prevBtn"
                 onclick="nextPrev(-1)">Back</button>
