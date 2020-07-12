@@ -9,9 +9,21 @@
 {% block content %}
 
 <form class='big-box container justify-content-center' id='regForm' method='post'>
-  {{ form.csrf_token }}
   {% for elt in form %}
-    {% if not elt.name in ["csrf_token"] %}
+    <!-- csrf token -->
+    {% if elt.type == 'CSRFTokenField' %}
+      {{ elt }}
+      {% if elt.errors %}
+        <div class="warning">You have submitted an invalid CSRF token</div>
+      {% endif %}
+    <!-- boolean field -->
+    {% elif elt.type=='BooleanField' %}
+      <div class="row input-segment tab">
+        <h4 style="display: inline;">
+          I have read and accept the <a href=''>terms</a>.
+        </h4>
+      </div>
+    {% else %}
       <div class="row input-segment tab">
         <h4 style="display: inline;">{{ elt.label }}</h4>
         {% if elt.description %}
@@ -25,7 +37,7 @@
           {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
         {% else %}
           {{ elt(class='input invalid') }}
-          <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
+          <p class='warning'>{{ elt.errors[0] }}</p>
         {% endif %}
       </div>
     {% endif %}

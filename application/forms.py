@@ -61,8 +61,7 @@ class Apply(BaseForm):
                     description=('Describe yourself! This might include '
                                'projects you have worked on, passions you '
                                'have, or reasons you want to join the '
-                               'community.'),
-                    render_kw={'placeholder': 'I '})
+                               'community.'))
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')],
@@ -71,7 +70,8 @@ class Apply(BaseForm):
     confirm = PasswordField('Confirm Password',
                             validators=[DataRequired()])
     accept_terms = BooleanField('I have read and accept the terms.',
-                                validators=[DataRequired()])
+                                validators=[DataRequired()],
+                            render_kw={'placeholder': 'Yes'})
 
 
 # class Apply(BaseForm):
