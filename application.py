@@ -56,11 +56,6 @@ def contact():
     return render_template('contact.html')
 
 
-@application.route('/boop', methods=['GET', 'POST'])
-def boop():
-    return render_template('boop.html')
-
-
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = Apply(request.form)
@@ -79,7 +74,7 @@ def apply():
             print(f'EASDF: {e}')
             db.session.rollback()
         return render_template('index.html')
-    return render_template('test.html', form=form)
+    return render_template('apply.html', form=form)
 
 
 @application.route('/login', methods=['GET', 'POST'])
