@@ -10,17 +10,29 @@
       {% else %}
         <div class="row input-segment" style='display:none;'>
       {% endif %}
-          <h5>{{ elt.label }}:</h5>
-          {% if elt.errors in [[], ()] %}
-            {{ elt(class='input valid') }}
-          {% else %}
-            {{ elt(class='input invalid') }}
-            <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
-          {% endif %}
-        </div>
+        <h5>{{ elt.label }}:</h5>
+        {% if elt.errors in [[], ()] %}
+          {{ elt(class='input valid') }}
+        {% else %}
+          {{ elt(class='input invalid') }}
+          <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
+        {% endif %}
+      </div>
     {% endif %}
   {% endfor %}
-  <button class="panel-button" action="submit">Submit<button>
+  <div style="overflow:auto;">
+      <div style="float:right;">
+        <button type="button" id="prevBtn"
+                onclick="nextPrev(-1)">Back</button>
+        <button type="button" id="nextBtn"
+                onclick="nextPrev(1)">Next</button>
+      </div>
+  </div>
+  <!-- <button class="panel-button" action="submit">Submit<button> -->
 </form>
 
 {% endblock %}
+
+
+<script>
+</script>
