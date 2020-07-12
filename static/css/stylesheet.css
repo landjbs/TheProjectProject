@@ -132,8 +132,9 @@ a:focus, a:hover {
 }
 
 .about {
-  margin-top: 5%;
+  margin-top: 4%;
   max-height: 80%;
+  margin-bottom: 4%;
 }
 
 .list-bullet {
