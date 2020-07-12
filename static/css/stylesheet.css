@@ -127,6 +127,10 @@ button {
   opacity: 1;
 }
 
+.step.invalid {
+  background-color: red;
+}
+
 /* Mark the steps that are finished and valid: */
 .step.finish {
   background-color: white;
