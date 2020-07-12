@@ -1,6 +1,8 @@
-from application import db
 from flask_login import UserMixin
+from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
+
+from application import db
 
 
 class User(db.Model, UserMixin):
@@ -15,14 +17,20 @@ class User(db.Model, UserMixin):
     # password
     password = db.Column(db.String(254), nullable=False,
                          info={'label':'Password'})
-    # github # TODO: figure out how to validate github
+    # github
     github = db.Column(db.String(254), nullable=True,
                          info={'label':'Github'})
     # about
     about = db.Column(db.String(500), nullable=False,
                       info={'label':'About'})
-    # status {0:applied, 1:member, 2:admin}
+    # accepted
     accepted = db.Column(db.Boolean, nullable=False)
+    # specialty
+    specialty = relationship('Specialty', backref='user', lazy=True,
+                            cascade="all, delete-orphan")
+    # projects
+    projects = relationship('Project', backref='user', lazy=True,
+                            cascade="all, delete-orphan")
 
     def __init__(self, name, email, password, github, about):
         self.name = name
