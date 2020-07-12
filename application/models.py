@@ -67,13 +67,25 @@ class Project(db.Model):
     __tablename__ = 'project'
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
+    # creator
+    creator = Column(Integer, ForeignKey('user.id'),
+                     nullable=False)
     # name
-    name = db.Column(db.String(128), index=True, unique=False, nullable=False,
+    name = db.Column(db.String(128), unique=False, nullable=False,
                      info={'label':'Name'})
     # summary
-    summary = db.Column(db.String(500), index=True, unique=False,
-                        nullable=False, info={'label':'Summary'})
+    summary = db.Column(db.String(500), unique=False, nullable=False,
+                        info={'label':'Summary'})
     # url
-    url = db.Column(db.String(128), index=True, unique=False, nullable=True,
-                     info={'label':'URL'})
-    #
+    url = db.Column(db.String(128), unique=False, nullable=True,
+                    info={'label':'URL'})
+    # complete
+    complete = db.Column(db.Boolean, nullable=False, info={'label':'Complete'})
+    # posted_on
+    posted_on = db.Column(db.DateTime, nullable=False,
+                          info={'label':'Posted On'})
+    # complete_on
+    completed_on = db.Column(db.DateTime, nullable=True,
+                             info={'label':'Completed On'})
+
+    def __init__(self, creator, name, summary, url):
