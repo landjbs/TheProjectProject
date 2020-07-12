@@ -53,3 +53,89 @@ form {
 .tab {
   display: block;
 }
+
+
+/* new temp */
+.title-card {
+  margin: auto;
+  width: 90%;
+  align-items: center;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+h5 {
+  padding-bottom: 10px;
+}
+
+/* Style the input fields */
+input {
+  width: 100%;
+  background-color: transparent;
+  border: 0px solid;
+  border-bottom: 2px solid;
+  border-color: white;
+  border-radius: 0%;
+  color: white;
+}
+
+input:focus {
+  background-color: transparent;
+  color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+::placeholder {
+  color: white;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: rgba(255, 236, 0, 1);
+  /* border-color: rgba(255, 236, 0, 1); */
+  color: black;
+}
+
+input.invalid::placeholder {
+  color: black;
+}
+
+button {
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #FFEC00;
+  border-color: red;
+}
