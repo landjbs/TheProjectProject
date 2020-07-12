@@ -1,21 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section class="big-box contact-section bg-black" id='contact'>
-  <div class="container">
-    <div class="col-md-4 mb-3 mb-md-0">
-        <div class="card py-4 h-100">
-          <div class="card-body text-center">
-            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-            <hr class="my-4">
-            <a href=http://maps.apple.com/?daddr=125+Western+Ave,+Allston,+MA>Strada<br>
-                                            Harvard Innovation Labs,<br>
-                                            125 Western Ave<br>
-                                            Allston, MA 02163</a>
-          </div>
-        </div>
-      </div>
-  </div>
-</section>
+<div class='big-box container justify-content-center'>
+  <a href='mailto:landonsmith@college.harvard.edu'>
+    <div class='box apply' id='apply'>
+      email us.
+    </div>
+  </a>
+  <br>
+  <a href='https://www.instagram.com/the.projectproject/'>
+    <div class='box login' onclick='login()' id='login'>
+      social.
+    </div>
+  </a>
+  <br>
+  <a href='https://www.instagram.com/the.projectproject/'>
+    <div class='box login' onclick='login()' id='login'>
+      linkedin.
+    </div>
+  </a>
+</div>
 
 {% endblock %}
