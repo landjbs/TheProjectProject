@@ -76,9 +76,17 @@
   }
 
   $(document).keydown(function(e) {
+    // tab is clicked
     if (e.keyCode==9) {
-      e.preventDefault();
-      nextPrev(1);
+      // shift is also down
+      if (e.shiftKey) {
+        e.preventDefault();
+        nextPrev(-1);
+      }
+      else {
+        e.preventDefault();
+        nextPrev(1);
+      }
     }
   });
 
