@@ -13,13 +13,14 @@
   {% for elt in form %}
     {% if not elt.name in ["csrf_token"] %}
       <div class="row input-segment tab">
-        <h4 style="display: inline;">{{ elt.label }}    </h4>
+        <h4 style="display: inline;">{{ elt.label }}</h4>
         {% if elt.description %}
-        <div class='tooltip'>
-          <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-          <span class="tooltiptext">Tooltip text</span>
-        </div>
+          <div class='boop'>
+            <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+            <span class="tooltiptext">{{ elt.description}}</span>
+          </div>
         {% endif %}
+        <br>
         {% if elt.errors in [[], ()] %}
           {{ elt(class='input valid') }}
         {% else %}
@@ -38,8 +39,14 @@
       </div>
   </div>
   <div style="text-align:center;margin-top:40px;">
-    {% for _ in form %}
-      <span class="step"></span>
+    {% for elt in form %}
+      {% if not elt.name in ["csrf_token"] %}
+        {% if elt.errors in [[], ()] %}
+          <span class="step"></span>
+        {% else %}
+          <span class="step invalid"></span>
+        {% endif %}
+      {% endif %}
     {% endfor %}
   </div>
   <!-- <button class="panel-button" action="submit">Submit<button> -->
