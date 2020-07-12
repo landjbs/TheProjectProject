@@ -1,0 +1,56 @@
+body {
+  background-color: black;
+  color: white;
+}
+
+#mainNav {
+  background-color: black;
+}
+
+@media (max-width: 991px) {
+  .big-head {
+    display: none;
+    color: black;
+  }
+  .small-head {
+    display: block;
+  }
+}
+
+@media (min-width: 992px) {
+  .big-head {
+    display: block;
+  }
+  .small-head {
+    display: none;
+  }
+}
+
+
+.about {
+  margin-top: 3%;
+  max-height: 80%;
+  margin-bottom: 4%;
+}
+
+.list-bullet {
+  text-decoration: underline;
+  text-align:left;
+  margin:10px 0 0 0;
+}
+
+.box {
+  color: black;
+  background-color: white;
+  height: 30%;
+  text-align: center;
+  padding: 3%;
+}
+
+.box:hover {
+  background-color: rgba(255, 255, 255, 0.9)
+}
+
+.box:active{
+  background-color: rgba(255, 255, 255, 0.7)
+}
