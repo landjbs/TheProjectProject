@@ -6,6 +6,7 @@ from application import db
 
 
 class User(db.Model, UserMixin):
+    __tablename__ = 'user'
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
     # name
@@ -60,3 +61,19 @@ class User(db.Model, UserMixin):
 
     def get_id(self):
         return str(self.id)
+
+
+class Project(db.Model):
+    __tablename__ = 'project'
+    # id primary key
+    id = db.Column(db.Integer, primary_key=True)
+    # name
+    name = db.Column(db.String(128), index=True, unique=False, nullable=False,
+                     info={'label':'Name'})
+    # summary
+    summary = db.Column(db.String(500), index=True, unique=False,
+                        nullable=False, info={'label':'Summary'})
+    # url
+    url = db.Column(db.String(128), index=True, unique=False, nullable=True,
+                     info={'label':'URL'})
+    #
