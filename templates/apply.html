@@ -14,7 +14,7 @@
     {% if elt.type == 'CSRFTokenField' %}
       {{ elt }}
       {% if elt.errors %}
-        <div class="warning">You have submitted an invalid CSRF token</div>
+        <div class="warning">You have submitted an invalid CSRF token.</div>
       {% endif %}
     <!-- boolean field -->
     {% elif elt.type=='BooleanField' %}
@@ -22,6 +22,13 @@
         <h4 style="display: inline;">
           I have read and accept the <a href=''>terms</a>.
         </h4>
+        <div class="input-control">
+          <input id="toggle-off-q1" class="toggle toggle-left" name="q1" value="true" type="radio">
+          <label for="toggle-off-q1" class="btn"><span>Y</span> Yes</label>
+        </div>
+        {% if elt.errors %}
+          <div class="warning">You must accept the terms to apply.</div>
+        {% endif %}
       </div>
     {% else %}
       <div class="row input-segment tab">
