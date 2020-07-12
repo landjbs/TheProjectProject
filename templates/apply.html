@@ -6,13 +6,13 @@
   {% for elt in form %}
     {% if not elt.name in ["csrf_token"] %}
       <div class="row input-segment tab">
-        <input>{{ elt.label }}:</input>
-        <!-- {% if elt.errors in [[], ()] %}
+        <h4>{{ elt.label }}:</h4>
+        {% if elt.errors in [[], ()] %}
           {{ elt(class='input valid') }}
         {% else %}
           {{ elt(class='input invalid') }}
           <p style="color: red; padding: 0px;">{{ elt.errors[0] }}</p>
-        {% endif %} -->
+        {% endif %}
       </div>
     {% endif %}
   {% endfor %}
@@ -25,23 +25,19 @@
       </div>
   </div>
   <div style="text-align:center;margin-top:40px;">
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
-    <span class="step"></span>
+    {% for _ in form %}
+      <span class="step"></span>
+    {% endfor %}
   </div>
   <!-- <button class="panel-button" action="submit">Submit<button> -->
 </form>
 
-{% endblock %}
-
-
 <script>
+  alert('currentTab');
   var currentTab = 0; // Current tab is set to be the first tab (0)
   showTab(currentTab); // Display the current tab
 
   function showTab(n) {
-    alert('here');
     // This function will display the specified tab of the form ...
     var x = document.getElementsByClassName("tab");
     x[n].style.display = "block";
@@ -61,22 +57,22 @@
   }
 
   function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form... :
-  if (currentTab >= x.length) {
-    //...the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-  }
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form... :
+    if (currentTab >= x.length) {
+      //...the form gets submitted:
+      document.getElementById("regForm").submit();
+      return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
   }
 
   function validateForm() {
@@ -108,3 +104,6 @@
     x[n].className += " active";
   }
 </script>
+
+
+{% endblock %}
