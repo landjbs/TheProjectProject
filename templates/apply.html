@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<form class='big-box container justify-content-center' method='post'>
+<form class='big-box container justify-content-center' id='regForm' method='post'>
   {{ form.csrf_token }}
   {% for elt in form %}
     {% if not elt.name in ["csrf_token"] %}
@@ -24,6 +24,12 @@
                 onclick="nextPrev(1)">Next</button>
       </div>
   </div>
+  <div style="text-align:center;margin-top:40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
   <!-- <button class="panel-button" action="submit">Submit<button> -->
 </form>
 
@@ -35,22 +41,22 @@
   showTab(currentTab); // Display the current tab
 
   function showTab(n) {
-  // This function will display the specified tab of the form ...
-  var x = document.getElementsByClassName("tab");
-  x[n].style.display = "block";
-  // ... and fix the Previous/Next buttons:
-  if (n == 0) {
-    document.getElementById("prevBtn").style.display = "none";
-  } else {
-    document.getElementById("prevBtn").style.display = "inline";
-  }
-  if (n == (x.length - 1)) {
-    document.getElementById("nextBtn").innerHTML = "Submit";
-  } else {
-    document.getElementById("nextBtn").innerHTML = "Next";
-  }
-  // ... and run a function that displays the correct step indicator:
-  fixStepIndicator(n)
+    // This function will display the specified tab of the form ...
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+    // ... and fix the Previous/Next buttons:
+    if (n == 0) {
+      document.getElementById("prevBtn").style.display = "none";
+    } else {
+      document.getElementById("prevBtn").style.display = "inline";
+    }
+    if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").innerHTML = "Submit";
+    } else {
+      document.getElementById("nextBtn").innerHTML = "Next";
+    }
+    // ... and run a function that displays the correct step indicator:
+    fixStepIndicator(n)
   }
 
   function nextPrev(n) {
