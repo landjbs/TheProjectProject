@@ -99,12 +99,7 @@ a:focus, a:hover {
     outline: none;
     border-bottom: 0.25rem solid #6376FF;
   }
-  .big-head {
-    display: block;
-  }
-  .small-head {
-    display: none;
-  }
+
 }
 
 .big-box {
