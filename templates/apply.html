@@ -41,7 +41,7 @@
           </div>
         {% endif %}
         <br>
-        {% if elt.errors in [[], ()] %}
+        {% if elt.errors %}
           {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
         {% else %}
           {{ elt(class='input invalid') }}
@@ -69,7 +69,6 @@
       {% endif %}
     {% endfor %}
   </div>
-  <!-- <button class="panel-button" action="submit">Submit<button> -->
 </form>
 
 <script>
