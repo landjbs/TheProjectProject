@@ -75,7 +75,7 @@
       <div class='col'>
         <h3>management</h3>
         {% for elt in [form.estimated_time, form.team_size] %}
-          <div class="row input-segment">
+          <div class="row input-segment" id='{{ elt.name }}_segment'>
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
               {% if elt.description %}
@@ -151,6 +151,7 @@
     document.getElementById("project_form").submit();
   };
 
+  // toggles
   function is_complete() {
     // change timing
     document.getElementById("time_slider").disabled = true;
@@ -164,7 +165,7 @@
 
   function not_complete() {
     document.getElementById("time_slider").disabled = false;
-    document.getElementById("time_slider").style.opacity = 1;
+    document.getElementById("estimated_time_segment").style.opacity = 1;
     document.getElementById('on-open').checked = true;
     toggle_open();
   };
@@ -181,6 +182,7 @@
   };
 
   function not_open() {
+    // turn off team slider
     document.getElementById("team_slider").disabled = true;
     document.getElementById("team_slider").value = "1";
     team_out.innerHTML = '1 person';
