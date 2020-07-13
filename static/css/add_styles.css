@@ -7,7 +7,15 @@ h3 {
   text-decoration: underline;
 }
 
-
 .input-segment {
   padding-bottom: 5%;
+}
+
+.input-box {
+  padding: 1%;
+}
+
+input[type='text'] {
+  border-radius: 4%;
+  border-color: transparent;
 }
