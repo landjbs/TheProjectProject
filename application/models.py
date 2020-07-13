@@ -137,23 +137,23 @@ class Project(db.Model):
 
     def __init__(self, name, summary, url, creator, open, requires_application,
                  application_question, estimated_time, complete):
-        self.name = name
-        self.summary = summary
-        self.url = url
-        # application
-        self.open = open
-        self.requires_application = requires_application
-        self.application_question = application_question
+        self.name = str(name)
+        self.summary = str(summary)
+        self.url = str(url)
         # members
         self.creator = creator
         self.pending = []
         self.members = []
+        # application
+        self.open = bool(open)
+        self.requires_application = bool(requires_application)
+        self.application_question = str(application_question)
         # timing and completion
-        self.complete = complete
         cur_time = datetime.now()
         self.posted_on = cur_time
         self.completed_on = cur_time if complete else None
         self.estimated_time = estimated_time if not complete else None
+        self.complete = bool(complete)
 
     def __repr__(self):
         return f'<Project {self.name}>'
