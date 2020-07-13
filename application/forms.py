@@ -3,7 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
                     SelectMultipleField, FloatField, validators)
-from wtforms.fields.html5.IntegerRangeField import IntegerRangeField
+from wtforms_html5 import IntegerRangeField
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
@@ -118,7 +118,7 @@ class Add_Project(BaseForm):
                                 description=('How long you '
                                 'think the project might take.'))
     team_size = IntegerRangeField('Team Size',
-                                description=('How big do you want your '
+                                description=('How big you want your '
                                              'team to be.'))
     complete = BooleanField('Completed',
                             validators=[DataRequired()],
