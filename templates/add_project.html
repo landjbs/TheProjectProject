@@ -151,14 +151,6 @@
     document.getElementById("project_form").submit();
   };
 
-  function not_open() {
-    document.getElementById("team_slider").disabled = true;
-    document.getElementById("team_slider").value = "1";
-    team_out.innerHTML = '1 person';
-    document.getElementById("team_slider").style.opacity = 0.4;
-  }
-
-
   function is_complete() {
     // change timing
     document.getElementById("time_slider").disabled = true;
@@ -167,9 +159,21 @@
     document.getElementById("time_slider").style.opacity = 0.4;
     // project isn't open
     document.getElementById('off-open').checked = true;
-    // is_closed();
-    document.getElementById('off-requires_application').checked = true;
-    // no_application();
+    toggle_open();
+  };
+
+  function not_complete() {
+    document.getElementById("time_slider").disabled = false;
+    document.getElementById("time_slider").style.opacity = 1;
+    document.getElementById('on-open').checked = true;
+    toggle_open();
+  };
+
+  function not_open() {
+    document.getElementById("team_slider").disabled = true;
+    document.getElementById("team_slider").value = "1";
+    team_out.innerHTML = '1 person';
+    document.getElementById("team_slider").style.opacity = 0.4;
   }
 
   function is_open() {
@@ -177,23 +181,17 @@
     document.getElementById("team_slider").style.opacity = 1;
     document.getElementById("team_slider").value = "2";
     team_out.innerHTML = '2 people';
-  }
-
-  function not_complete() {
-    document.getElementById("time_slider").disabled = false;
-    document.getElementById("time_slider").style.opacity = 1;
-    not_closed();
-  }
+  };
 
   function no_application() {
     document.getElementById("application_question").disabled = true;
     document.getElementById("application_question_segment").style.opacity = 0.4;
-  }
+  };
 
   function yes_application() {
     document.getElementById("application_question").disabled = false;
     document.getElementById("application_question_segment").style.opacity = 1;
-  }
+  };
 
   function toggle_complete() {
     // alert(document.getElementById('on-open').checked);
