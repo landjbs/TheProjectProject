@@ -1,4 +1,6 @@
+from application import db
 from application.models import Subject
+
 
 subjects = [Subject('AI/ML', '#FF5733'),
             Subject('Algorithms', '#FFA533'),
@@ -19,3 +21,7 @@ subjects = [Subject('AI/ML', '#FF5733'),
             Subject('Social Issues', '#33DAFF'),
             Subject('Startup', '#33C1FF'),
             Subject('Theory', '#3352FF')]
+
+for subject in subjects:
+    db.session.add(subject)
+db.session.commit()
