@@ -8,13 +8,13 @@ from application import db
 
 
 ## ASSOCIATION TABLES ##
-# user_to_subject = Table('user_to_subject', db.Model.metadata,
-#                       Column('user_id', Integer, ForeignKey('user.id')),
-#                       Column('subject_id', Integer, ForeignKey('subject.id')))
+user_to_subject = Table('user_to_subject', db.Model.metadata,
+                      Column('user_id', Integer, ForeignKey('user.id')),
+                      Column('subject_id', Integer, ForeignKey('subject.id')))
 
-# project_to_subject = Table('project_to_subject', db.Model.metadata,
-#                         Column('user_id', Integer, ForeignKey('user.id')),
-#                         Column('project_id', Integer, ForeignKey('project.id')))
+project_to_subject = Table('project_to_subject', db.Model.metadata,
+                        Column('user_id', Integer, ForeignKey('user.id')),
+                        Column('project_id', Integer, ForeignKey('project.id')))
 
 user_to_project = Table('user_to_project', db.Model.metadata,
                     Column('user_id', Integer, ForeignKey('user.id')),
