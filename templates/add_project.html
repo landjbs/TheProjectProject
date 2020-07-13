@@ -155,9 +155,9 @@
   function is_complete() {
     // change timing
     document.getElementById("time_slider").disabled = true;
-    document.getElementById("time_slider").value = "1";
     time_out.innerHTML = 'n.a.';
-    document.getElementById("time_slider").style.opacity = 0.4;
+    document.getElementById("time_slider").value = "1";
+    document.getElementById("estimated_time_segment").style.opacity = 0.4;
     // project isn't open
     document.getElementById('off-open').checked = true;
     toggle_open();
@@ -187,6 +187,9 @@
     document.getElementById("team_slider").value = "1";
     team_out.innerHTML = '1 person';
     document.getElementById("team_slider").style.opacity = 0.4;
+    // turn off application
+    document.getElementById('off-requires_application').checked = true;
+    toggle_requires_application();
   }
 
   function no_application() {
