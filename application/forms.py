@@ -1,7 +1,7 @@
 import re
 from flask_wtf import FlaskForm
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
-                     validators)
+                    SelectMultipleField, FloatField, validators)
 from wtforms_alchemy import model_form_factory
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
@@ -112,3 +112,8 @@ class Add_Project(BaseForm):
                                     'You will be able to see the answer of '
                                     'anyone who works with you.'),
                                 render_kw={'placeholder':''})
+    estimated_time = FloatField('Estimated Time',
+                                description=('Suggest how long you '
+                                'think the project might take. This is neither '
+                                'binding nor required.'))
+    
