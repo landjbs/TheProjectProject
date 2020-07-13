@@ -84,18 +84,31 @@ class Project(db.Model):
                     info={'label':'URL'})
     # complete
     complete = db.Column(db.Boolean, nullable=False, info={'label':'Complete'})
+    ## timing ##
     # posted_on
     posted_on = db.Column(db.DateTime, nullable=False,
                           info={'label':'Posted On'})
     # complete_on
     completed_on = db.Column(db.DateTime, nullable=True,
                              info={'label':'Completed On'})
+    # estimated time
+    estimated_time = db.Column(db.Float, nullable=True,
+                               info={'label':'Estimated time'})
 
     def __init__(self, creator, name, summary, url):
+
 
 
 class Subject(db.Model):
     __tablename__ = 'subject'
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
-    # 
+    # name
+    name = db.Column(db.String(128), unique=False, nullable=False,
+                     info={'label':'Name'})
+    # users
+    users = relationship('User')
+    # projects
+    projects = relationship('Project')
+
+    # def __init__(self, )
