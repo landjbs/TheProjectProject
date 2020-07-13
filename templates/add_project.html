@@ -6,7 +6,7 @@
   {{ super() }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link type="text/css" href="css/add_styles.css" rel="stylesheet">
-  <script src="bundle.min.js"></script>
+  <script src="select-pure/dist/bundle.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -234,31 +234,16 @@
   document.getElementById("off-complete").checked = true;
   toggle_complete();
 
+
   // multiselect
-  const myOptions = [
-    {
-      label: "New York",
-      value: "NY",
-    },
-    {
-      label: "Washington",
-      value: "WA",
-    },
-    {
-      label: "California",
-      value: "CA",
-    },
-    {
-      label: "New Jersey",
-      value: "NJ",
-    },
-    {
-      label: "North Carolina",
-      value: "NC",
-    },
-  ]
+  const subjects = [];
+  {% for elt in form.subjects.choices %}
+    subjects.push({label: '{{ elt.name }}',
+                   value: '{{ elt.name }}'},)
+  {% endfor %}
+
   var instance = new SelectPure(".example", {
-      options: myOptions,
+      options: subjects,
       multiple: true,
       autocomplete: true,
       icon: "fa fa-times",
@@ -279,8 +264,6 @@
         optionHidden: "select-pure__option--hidden",
       }
   });
-
-
 </script>
 
 {% endblock %}
