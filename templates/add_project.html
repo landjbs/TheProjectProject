@@ -194,11 +194,27 @@
     document.getElementById("application_question").style.opacity = 1;
   }
 
+  function toggle_complete() {
+    if (document.getElementById('on-complete').checked) {
+        is_complete();
+      } else {
+        not_complete();
+      }
+  }
+
   function toggle_open() {
     if (document.getElementById('on-open').checked) {
           is_open();
       } else {
           not_open();
+      }
+  }
+
+  function toggle_requires_application() {
+    if (document.getElementById('on-requires_application').checked) {
+          yes_application();
+      } else {
+          no_application();
       }
   }
 
