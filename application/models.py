@@ -118,7 +118,7 @@ class Project(db.Model):
     # applicaiton question
     application_question = Column(String(250), nullable=True)
     # max team size
-    max_team_size = Column(Integer, nullable=False)
+    team_size = Column(Integer, nullable=False)
     ## timing ##
     # posted_on
     posted_on = Column(db.DateTime, nullable=False)

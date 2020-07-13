@@ -143,7 +143,7 @@ def reject():
 @login_required
 @application.route('/home', methods=['GET', 'POST'])
 def home():
-    projects = []
+    projects = db.session.query(Project).limit(10)
     return render_template('home.html', projects=projects, current_user=current_user)
 
 
@@ -163,17 +163,16 @@ def add_project():
                           creator = current_user,
                           open = form.open.data,
                           requires_application = form.requires_application.data,
-                          application_question = form.requires_application.data,
+                          application_question = form.application_question.data,
                           estimated_time = form.estimated_time.data,
                           team_size = form.team_size.data,
                           complete = form.complete.data)
-            print(project)
             try:
                 db.session.add(project)
                 db.session.commit()
                 db.session.close()
             except Exception as e:
-                print(f'EASDF: {e}')
+                print(f'ERROR: {e}')
                 db.session.rollback()
             return redirect(url_for('home'))
     return render_template('add_project.html', form=form)
