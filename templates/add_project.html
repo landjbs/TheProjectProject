@@ -43,7 +43,7 @@
         <h3>team</h3>
         {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
           <div class="row input-segment">
-            <div class='input-title'>
+            <div class='input-title' id='{{ elt.name }}_label'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
               {% if elt.description %}
                 <div class='boop'>
@@ -188,8 +188,21 @@
     not_closed();
   }
 
-  is_complete();
-  not_complete();
+  function no_application() {
+    document.getElementById("application_question").disabled = true;
+    document.getElementById("application_question").style.opacity = 0.4;
+    document.getElementById('application_question_label').style.opacity = 0.4;
+  }
+
+
+  function yes_application() {
+    document.getElementById('application_question_label').style.opacity = 1;
+    document.getElementById("application_question").disabled = false;
+    document.getElementById("application_question").style.opacity = 1;
+  }
+
+  no_application();
+  // no_application();
 
 </script>
 
