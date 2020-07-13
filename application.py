@@ -118,12 +118,6 @@ def login():
     return render_template('login.html', form=form, start_on=start_on)
 
 
-@login_required
-@application.route('/home', methods=['GET', 'POST'])
-def home():
-    return render_template('home.html')
-
-
 # TODO: MAKE SECURE
 @application.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -146,10 +140,20 @@ def reject():
     db.session.commit()
     return admin()
 
+## HOME ##
+@login_required
+@application.route('/home', methods=['GET', 'POST'])
+def home():
+    return render_template('home.html')
 
-@application.route('/test', methods=['GET', 'POST'])
-def test():
-    return render_template('test.html')
+
+@login_required
+@application.route('/add_project', methods=['GET', 'POST'])
+def add_project():
+    form = AddProjectForm(request.form)
+    if request.method=='POST' and form.validate():
+        
+
 
 
 if __name__ == '__main__':
