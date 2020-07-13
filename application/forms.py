@@ -104,10 +104,10 @@ class Add_Project(BaseForm):
                                                 'project involve?'),
                                    choices=list(subjects))
     open = BooleanField('Open',
-                        validators=[DataRequired()],
+                        validators=[],
                         description=('Open projects can have team members.'))
     requires_application = BooleanField('Requires Application',
-                            validators=[DataRequired()],
+                            validators=[],
                             description=('Allows you to choose '
                                          'who joins the project.'))
     application_question = TextField('Application Question',
@@ -122,6 +122,6 @@ class Add_Project(BaseForm):
                             description=('The biggest you want your '
                                          'team to be.'))
     complete = BooleanField('Completed',
-                            validators=[DataRequired()],
+                            validators=[],
                             description=('Whether the project has been '
                             'completed.'))

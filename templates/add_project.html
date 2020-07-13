@@ -229,6 +229,11 @@
       }
   }
 
+  // start with not completed and default subsequents
+  document.getElementById("off-complete").checked = true;
+  toggle_complete();
+
+
   // multiselect
   const subjects = [];
   {% for elt in form.subjects.choices %}
