@@ -4,6 +4,7 @@
 
 {% block head %}
   {{ super() }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link type="text/css" href="css/add_styles.css" rel="stylesheet">
 {% endblock %}
 
@@ -14,7 +15,7 @@
     <div class='row'>
       <div class='col'>
         <h3>description</h3>
-        {% for elt in [form.name, form.url, form.summary ]%}
+        {% for elt in [form.name, form.summary, form.url]%}
           <div class="row input-segment" style='text-align:left;'>
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -70,8 +71,8 @@
         {% endfor %}
       </div>
       <div class='col'>
-        <h3>timing</h3>
-        {% for elt in [form.open, form.requires_application, form.application_question] %}
+        <h3>management</h3>
+        {% for elt in [form.complete, form.estimated_time] %}
           <div class="row input-segment">
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -84,10 +85,14 @@
             </div>
             {% if elt.type=='BooleanField' %}
               <div class="input-control">
-                <input id="toggle-on-q{{ loop.index }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
-                <label for="toggle-on-q{{ loop.index }}" class="btn"><span>A</span> Yes</label>
-                <input id="toggle-off-q{{ loop.index }}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
-                <label for="toggle-off-q{{ loop.index }}" class="btn"><span>B</span> No</label>
+                <input id="toggle-on-q{{ loop.index + 2 }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
+                <label for="toggle-on-q{{ loop.index + 2}}" class="btn"><span>A</span> Yes</label>
+                <input id="toggle-off-q{{ loop.index + 2}}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
+                <label for="toggle-off-q{{ loop.index + 2}}" class="btn"><span>B</span> No</label>
+              </div>
+            {% elif elt.type=='FloatField' %}
+              <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
               </div>
             {% else %}
               <div class='input-box'>
@@ -109,5 +114,16 @@
     </div>
   </center>
 </form>
+
+<script>
+  var slider = document.getElementById("myRange");
+  var output = document.getElementById("demo");
+  output.innerHTML = slider.value; // Display the default slider value
+  // Update the current slider value (each time you drag the slider handle)
+  slider.oninput = function() {
+    // output.innerHTML = this.value;
+    alert(this.value);
+  }
+</script>
 
 {% endblock %}

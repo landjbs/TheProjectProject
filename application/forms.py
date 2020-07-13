@@ -93,7 +93,7 @@ class Add_Project(BaseForm):
                     render_kw={'placeholder':''})
     summary = TextField(label='Summary',
                         validators=[DataRequired(), Length(1, 500)],
-                        description='Give a brief rundown of your idea.',
+                        description='Give a rundown of your idea.',
                         render_kw={'placeholder':''})
     subjects = SelectMultipleField('Subjects',
                                    validators=[DataRequired()],
@@ -113,9 +113,8 @@ class Add_Project(BaseForm):
                                             'applicants.'),
                                 render_kw={'placeholder':''})
     estimated_time = FloatField('Estimated Time',
-                                description=('Suggest how long you '
-                                'think the project might take. This is neither '
-                                'binding nor required.'))
+                                description=('How long you '
+                                'think the project might take.'))
     complete = BooleanField('Completed',
                             validators=[DataRequired()],
                             description=('Whether the project has been '
