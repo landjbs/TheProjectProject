@@ -164,7 +164,7 @@ class Subject(db.Model):
     name = Column(String(128), unique=False, nullable=False,
                      info={'label':'Name'})
     # users
-    users = relationship('User', secondary='user_to_project',
+    users = relationship('User', secondary='user_to_subject',
                         back_populates='subjects')
     # projects
     projects = relationship('Project', secondary='project_to_subject',
