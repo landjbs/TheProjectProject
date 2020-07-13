@@ -48,11 +48,11 @@ class User(db.Model, UserMixin):
                             cascade="all, delete-orphan")
     ## projects ##
     # projects user created
-    # created_projects = relationship('Project', backref='user', lazy=True,
-    #                                 cascade="all, delete-orphan")
+    created_projects = relationship('Project', backref='user', lazy=True,
+                                    cascade="all, delete-orphan")
     # # projects user applied to
-    # pending_projects = relationship('Project', backref='user', lazy=True,
-    #                                 cascade="all, delete-orphan")
+    pending_projects = relationship('Project', secondary=user_to_project,
+                                    back_populates='parents')
     # # projects user is member in
     # member_projects = relationship('Project', backref='user', lazy=True,
     #                                cascade="all, delete-orphan"))
@@ -106,12 +106,13 @@ class Project(db.Model):
     # subjects = Column(db.)
     ## people ##
     # creator
-    creator = Column(Integer, ForeignKey('user.id'),
-                        nullable=False)
+    creator = Column(Integer, ForeignKey('user.id'))
     # pending members
-    pending = Column(Integer, ForeignKey('user.id'), nullable=True)
+    pending = relationship('User', secondary=user_to_project,
+                           back_populates='children')
     # approved members
-    members = Column(Integer, ForeignKey('user.id'), nullable=True)
+    members = relationship('User', secondary=user_to_project,
+                           back_populates='children')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
@@ -132,8 +133,7 @@ class Project(db.Model):
     # complete
     complete = Column(Boolean, nullable=False, info={'label':'Complete'})
 
-    def __init__(self, creator, name, summary, url):
-
+    # def __init__(self, creator, name, summary, url):
 
 
 class Subject(db.Model):
