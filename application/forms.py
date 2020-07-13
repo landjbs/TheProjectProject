@@ -94,7 +94,10 @@ class Add_Project(BaseForm):
                     description=('You can link media like a Github or website.'
                                  'to showcase your progress.'),
                     render_kw={'placeholder':''})
-    # subjects = # TODO:
+    subjects = SelectMultipleField('Subjects',
+                                   validators=[DataRequired()],
+                                   description=('What subjects might this '
+                                                'project involve?'))
     open = BooleanField('Open',
                         validators=[DataRequired()],
                         description=('All projects are visible to the '

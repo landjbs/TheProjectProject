@@ -5,7 +5,7 @@ from flask_login import (current_user, login_user, logout_user,
 
 from application import db
 from application.models import User, Project
-from application.forms import Apply, Login
+from application.forms import Apply, Login, Add_Project
 
 
 ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
