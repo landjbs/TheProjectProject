@@ -91,14 +91,11 @@ class Project(db.Model):
     id = Column(Integer, primary_key=True)
     ## base info ##
     # name
-    name = Column(String(128), unique=True, nullable=False,
-                     info={'label':'Name'})
+    name = Column(String(128), unique=True, nullable=False)
     # summary
-    summary = Column(String(500), nullable=False,
-                        info={'label':'Summary'})
+    summary = Column(String(500), nullable=False)
     # url
-    url = Column(String(128), unique=True, nullable=True,
-                    info={'label':'URL'})
+    url = Column(String(128), unique=True, nullable=True)
     # subject
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects')
@@ -121,16 +118,13 @@ class Project(db.Model):
     application_question = Column(String(250), nullable=True)
     ## timing ##
     # posted_on
-    posted_on = Column(db.DateTime, nullable=False,
-                        info={'label':'Posted On'})
+    posted_on = Column(db.DateTime, nullable=False)
     # complete_on
-    completed_on = Column(db.DateTime, nullable=True,
-                        info={'label':'Completed On'})
+    completed_on = Column(db.DateTime, nullable=True)
     # estimated time
-    estimated_time = Column(db.Float, nullable=True,
-                            info={'label':'Estimated time'})
+    estimated_time = Column(db.Float, nullable=True)
     # complete
-    complete = Column(Boolean, nullable=False, info={'label':'Complete'})
+    complete = Column(Boolean, nullable=False)
 
     def __init__(self, name, summary, url, creator, open, requires_application,
                  application_question, estimated_time, complete):
@@ -161,8 +155,7 @@ class Subject(db.Model):
     # id primary key
     id = Column(Integer, primary_key=True)
     # name
-    name = Column(String(128), unique=False, nullable=False,
-                     info={'label':'Name'})
+    name = Column(String(128), unique=True, nullable=False)
     # users
     users = relationship('User', secondary='user_to_subject',
                         back_populates='subjects')
