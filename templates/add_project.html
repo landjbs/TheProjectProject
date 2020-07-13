@@ -165,7 +165,11 @@
     document.getElementById("time_slider").value = "1";
     time_out.innerHTML = 'n.a.';
     document.getElementById("time_slider").style.opacity = 0.4;
-    is_closed();
+    // project isn't open
+    document.getElementById('off-open').checked = true;
+    // is_closed();
+    document.getElementById('off-requires_application').checked = true;
+    // no_application();
   }
 
   function is_open() {
@@ -192,10 +196,9 @@
   }
 
   function toggle_complete() {
+    // alert(document.getElementById('on-open').checked);
     if (document.getElementById('on-complete').checked) {
         is_complete();
-        document.getElementById('on-open').checked = true;
-        toggle_open();
       } else {
         not_complete();
       }
