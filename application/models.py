@@ -140,16 +140,19 @@ class Project(db.Model):
         self.name = name
         self.summary = summary
         self.url = url
-        self.creator = creator
+        # application
         self.open = open
         self.requires_application = requires_application
         self.application_question = application_question
+        # members
+        self.creator = creator
+        self.pending = None
+        self.members = None
+        # timing and completion
         self.complete = complete
-        # timing
         cur_time = datetime.datetime.now()
         self.posted_on = cur_time
         self.completed_on = cur_time if complete else None
-
 
 
 # class Subject(db.Model):
