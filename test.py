@@ -2,13 +2,17 @@ from application import db
 from application.models import User, Project, Subject
 
 
-ai = Suject()
+ai = Subject(name='ai')
 
 u = User(name='landon',
         email='land@',
-        )
+        password='boop',
+        subjects=[ai],
+        github='github',
+        about='Hi')
 
-
+db.session.add(ai)
+db.session.add(u)
 
 # u2 = User('l', 'e', 'p', 'g', 'a')
 #
@@ -28,7 +32,8 @@ u = User(name='landon',
 #             complete=False)
 #
 # db.session.add(u)
-# db.session.add(u2)
-# db.session.commit()
+
+
+db.session.commit()
 
 # print(db.session.query(Project).first().posted_on)
