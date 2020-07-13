@@ -84,10 +84,12 @@ class Project(db.Model):
     # creator
     creator = db.Column(db.Integer, ForeignKey('user.id'),
                         nullable=False)
+    # open (allows others to join)
+    open = db.Column(db.Boolean, nullable=False)
+    # pending members
     pending = db.Column(db.Integer, ForeignKey('user.id'), nullable=True)
+    # approved members
     members = db.Column(db.Integer, ForeignKey('user.id'), nullable=True)
-    # complete
-    complete = db.Column(db.Boolean, nullable=False, info={'label':'Complete'})
     ## timing ##
     # posted_on
     posted_on = db.Column(db.DateTime, nullable=False,
@@ -98,6 +100,8 @@ class Project(db.Model):
     # estimated time
     estimated_time = db.Column(db.Float, nullable=True,
                                info={'label':'Estimated time'})
+    # complete
+    complete = db.Column(db.Boolean, nullable=False, info={'label':'Complete'})
 
     def __init__(self, creator, name, summary, url):
 
