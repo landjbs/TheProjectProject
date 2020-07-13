@@ -7,10 +7,13 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
 
-from .models import User
+from . import db
+from .models import User, Subject
 
 
 BaseForm = model_form_factory(FlaskForm)
+# query all subjects
+subjects = db.session.query(Subject)
 
 
 class Email_Ext_Validator(object):
