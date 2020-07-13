@@ -9,13 +9,21 @@ h3 {
 
 .input-segment {
   padding-bottom: 5%;
+  display: block;
+  text-align: left;
 }
 
 .input-box {
   padding: 1%;
+  display: block;
 }
 
 input[type='text'] {
   border-radius: 4%;
   border-color: transparent;
+  width: 100%;
+}
+
+.input-control {
+  text-align: center;
 }
