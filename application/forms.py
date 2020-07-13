@@ -85,10 +85,10 @@ class Add_Project(BaseForm):
     name = StringField(label='Name',
                        validators=[DataRequired(), Length(1, 128)],
                        render_kw={'placeholder':''})
-    summary = StringField(label='Summary',
-                       validators=[DataRequired(), Length(1, 500)],
-                       description='Give a brief rundown of your idea.',
-                       render_kw={'placeholder':''})
+    summary = TextField(label='Summary',
+                        validators=[DataRequired(), Length(1, 500)],
+                        description='Give a brief rundown of your idea.',
+                        render_kw={'placeholder':''})
     url = StringField(label='Summary',
                     validators=[DataRequired(), Length(1, 128)],
                     description=('You can link media like a Github or website.'
@@ -101,5 +101,14 @@ class Add_Project(BaseForm):
                             'community, but only open projects can '
                             'be joined by other members.'))
     requires_application = BooleanField('Requires Application',
-                                        validators=[DataRequired()],
-                                        description=(''))
+                            validators=[DataRequired()],
+                            description=('If you want to be able to choose '
+                            'who can join your project, select this field. '
+                            'If not, anyone will be able to join.'))
+    application_question = TextField('Application Question',
+                                validators=[DataRequired(), Length(1, 250)],
+                                description=('To help screen project '
+                                    'applicants, you can ask a question. '
+                                    'You will be able to see the answer of '
+                                    'anyone who works with you.'),
+                                render_kw={'placeholder':''})
