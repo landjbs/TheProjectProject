@@ -130,7 +130,7 @@ class Project(db.Model):
     complete = Column(Boolean, nullable=False)
 
     def __init__(self, name, summary, url, creator, open, requires_application,
-                 application_question, estimated_time, complete):
+                 application_question, estimated_time, team_size, complete):
         self.name = str(name)
         self.summary = str(summary)
         self.url = str(url)
@@ -138,6 +138,7 @@ class Project(db.Model):
         self.creator_id = int(creator.id)
         self.pending = []
         self.members = []
+        self.team_size = team_size
         # application
         self.open = bool(open)
         self.requires_application = bool(requires_application)

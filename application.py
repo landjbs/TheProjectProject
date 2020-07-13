@@ -157,16 +157,24 @@ def add_project():
             form.application_question.errors = ['Question cannot be blank.']
         # add the project
         else:
+            project = Project(name = form.name.data,
+                          summary = form.summary.data,
+                          url = form.url.data,
+                          creator = current_user,
+                          open = form.open.data,
+                          requires_application = form.requires_application.data,
+                          application_question = form.requires_application.data,
+                          estimated_time = form.estimated_time.data,
+                          team_size = form.team_size.data,
+                          complete = form.complete.data)
+            print(project)
             try:
-                db.session.add(user)
+                db.session.add(project)
                 db.session.commit()
                 db.session.close()
             except Exception as e:
                 print(f'EASDF: {e}')
                 db.session.rollback()
-            return render_template('index.html')
-
-
             return redirect(url_for('home'))
     return render_template('add_project.html', form=form)
 
