@@ -8,13 +8,13 @@ from application import db
 
 
 ## ASSOCIATION TABLES ##
-user_to_subject = Table('user_to_subject', db.Model.metadata,
-                      Column('user_id', Integer, ForeignKey('user.id')),
-                      Column('subject_id', Integer, ForeignKey('subject.id')))
+# user_to_subject = Table('user_to_subject', db.Model.metadata,
+#                       Column('user_id', Integer, ForeignKey('user.id')),
+#                       Column('subject_id', Integer, ForeignKey('subject.id')))
 
-project_to_subject = Table('project_to_subject', db.Model.metadata,
-                        Column('user_id', Integer, ForeignKey('user.id')),
-                        Column('project_id', Integer, ForeignKey('project.id')))
+# project_to_subject = Table('project_to_subject', db.Model.metadata,
+#                         Column('user_id', Integer, ForeignKey('user.id')),
+#                         Column('project_id', Integer, ForeignKey('project.id')))
 
 user_to_project = Table('user_to_project', db.Model.metadata,
                     Column('user_id', Integer, ForeignKey('user.id')),
@@ -44,8 +44,8 @@ class User(db.Model, UserMixin):
     # accepted
     accepted = Column(Boolean, nullable=False)
     # subject
-    subjects = relationship('Subject', backref='user', lazy=True,
-                            cascade="all, delete-orphan")
+    # subjects = relationship('Subject', backref='user', lazy=True,
+    #                         cascade="all, delete-orphan")
     ## projects ##
     # projects user created
     created_projects = relationship('Project', backref='user', lazy=True,
@@ -136,16 +136,14 @@ class Project(db.Model):
     # def __init__(self, creator, name, summary, url):
 
 
-class Subject(db.Model):
-    __tablename__ = 'subject'
-    # id primary key
-    id = Column(Integer, primary_key=True)
-    # name
-    name = Column(String(128), unique=False, nullable=False,
-                     info={'label':'Name'})
-    # users
-    users = relationship('User')
-    # projects
-    projects = relationship('Project')
-
-    # def __init__(self, )
+# class Subject(db.Model):
+#     __tablename__ = 'subject'
+#     # id primary key
+#     id = Column(Integer, primary_key=True)
+#     # name
+#     name = Column(String(128), unique=False, nullable=False,
+#                      info={'label':'Name'})
+#     # users
+#     users = relationship('User')
+#     # projects
+#     projects = relationship('Project')
