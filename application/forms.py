@@ -79,3 +79,8 @@ class Login(BaseForm):
                                              Email(), Email_Ext_Validator()])
     password = PasswordField('Password',
                              validators=[DataRequired(), Length(1, 254)])
+
+
+class Add_Project(BaseForm):
+    name = StringField('Name',
+                       validators=[DataRequired(), Length(1, 128)],)
