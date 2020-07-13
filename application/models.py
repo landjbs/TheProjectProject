@@ -32,19 +32,17 @@ class User(db.Model, UserMixin):
     email = Column(String(254), unique=True, nullable=False)
     # password
     password = Column(String(254), nullable=False)
+    # subject
+    subjects = relationship('Subject', backref='user', lazy=True,
+                            cascade="all, delete-orphan")
     # github
     github = Column(String(254), unique=True, nullable=True)
     # about
     about = Column(String(500), nullable=False)
     # accepted
     accepted = Column(Boolean, nullable=False)
-    # subject
-    # subjects = relationship('Subject', backref='user', lazy=True,
-    #                         cascade="all, delete-orphan")
     ## projects ##
     # projects user created
-    # created_projects = relationship('Project', backref='user', lazy=True,
-                                    # cascade="all, delete-orphan")
     created_projects = relationship('Project', back_populates='creator')
     # # projects user applied to
     pending_projects = relationship('Project', secondary='user_to_project',
@@ -53,12 +51,13 @@ class User(db.Model, UserMixin):
     member_projects = relationship('Project', secondary='user_to_project',
                                     back_populates='members')
 
-    def __init__(self, name, email, password, github, about):
-        self.name = name
-        self.email = email
-        self.password = self.set_password(password)
-        self.github = github
-        self.about = about
+    def __init__(self, name, email, password, subjects, github, about):
+        self.name = str(name)
+        self.email = str(email)
+        self.password = str(self.set_password(password))
+        self.subjects = subjects if subjects else []
+        self.github = str(github)
+        self.about = str(about)
         self.accepted = False
         self.created_projects = []
         self.pending_projects = []
