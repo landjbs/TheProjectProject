@@ -84,6 +84,7 @@ class Login(BaseForm):
 class Add_Project(BaseForm):
     name = StringField(label='Name',
                        validators=[DataRequired(), Length(1, 128)],
+                       description='Give your project a name!',
                        render_kw={'placeholder':''})
     url = StringField(label='URL',
                     validators=[DataRequired(), Length(1, 128)],
@@ -101,20 +102,15 @@ class Add_Project(BaseForm):
                                    choices=['beep', 'boop'])
     open = BooleanField('Open',
                         validators=[DataRequired()],
-                        description=('All projects are visible to the '
-                            'community, but only open projects can '
-                            'be joined by other members.'))
+                        description=('Open projects can have team members.'))
     requires_application = BooleanField('Requires Application',
                             validators=[DataRequired()],
-                            description=('If you want to be able to choose '
-                            'who can join your project, select this field. '
-                            'If not, anyone will be able to join.'))
+                            description=('Allows you to choose '
+                                         'who joins the project.'))
     application_question = TextField('Application Question',
                                 validators=[DataRequired(), Length(1, 250)],
-                                description=('To help screen project '
-                                    'applicants, you can ask a question. '
-                                    'You will be able to see the answer of '
-                                    'anyone who works with you.'),
+                                description=('Add a question to screen '
+                                            'applicants.'),
                                 render_kw={'placeholder':''})
     estimated_time = FloatField('Estimated Time',
                                 description=('Suggest how long you '

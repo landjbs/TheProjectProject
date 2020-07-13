@@ -146,6 +146,7 @@ form {
 .boop:hover .tooltiptext {
   display: inline;
   opacity: 1;
+  background: black;
 }
 
 .btn {

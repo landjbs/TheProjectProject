@@ -15,7 +15,7 @@
       <div class='col'>
         <h3>description</h3>
         {% for elt in [form.name, form.url, form.summary ]%}
-          <div class="row input-segment">
+          <div class="row input-segment" style='text-align:left;'>
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
               {% if elt.description %}
@@ -37,8 +37,8 @@
         {% endfor %}
       </div>
       <div class='col'>
-        <h3>membership</h3>
-        {% for elt in [form.open, form.requires_application, form.application_question] %}
+        <h3>team</h3>
+        {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
           <div class="row input-segment">
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -49,22 +49,28 @@
                 </div>
               {% endif %}
             </div>
-            <div class="input-control">
-              <input id="toggle-on-q{{ loop.index }}" class="toggle toggle-left" name="q{{ loop.index }}" value="yes" type="radio">
-              <label for="toggle-on-q{{ loop.index }}" class="btn"><span>A</span> Yes</label>
-              <input id="toggle-off-q{{ loop.index }}" class="toggle toggle-right" name="q{{ loop.index }}" value="no" type="radio">
-              <label for="toggle-off-q{{ loop.index }}" class="btn"><span>B</span> No</label>
-            </div>
-            {% if elt.errors %}
-              <div class="warning">You must accept the terms to apply.</div>
+            {% if elt.type=='BooleanField' %}
+              <div class="input-control">
+                <input id="toggle-on-q{{ loop.index }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
+                <label for="toggle-on-q{{ loop.index }}" class="btn"><span>A</span> Yes</label>
+                <input id="toggle-off-q{{ loop.index }}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
+                <label for="toggle-off-q{{ loop.index }}" class="btn"><span>B</span> No</label>
+              </div>
+            {% else %}
+              <div class='input-box'>
+                {% if not elt.errors %}
+                  {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
+                {% else %}
+                  {{ elt(class='input invalid') }}
+                  <p class='warning'>{{ elt.errors[0] }}</p>
+                {% endif %}
+              </div>
             {% endif %}
           </div>
         {% endfor %}
       </div>
-      <div class='col' style='background:green'>
-        {% for _ in range(10) %}
-          sdf;laksdjflkajsd
-        {% endfor %}
+      <div class='col' style='text-align: left;'>
+
       </div>
     </div>
   <center>
