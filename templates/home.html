@@ -1,7 +1,16 @@
-<html>
-{% for tab in projects %}
-  {% for project in tab %}
-    <h1>{{ project }}</h1>
-  {% endfor %}
-{% endfor %}
-</html>
+{% extends "home_base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <div class='big-box'>
+    {% for tab in projects %}
+      {% for project in tab %}
+        <h1>{{ project }}</h1>
+      {% endfor %}
+    {% endfor %}
+  </div>
+{% endblock %}
