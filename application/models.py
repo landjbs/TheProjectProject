@@ -121,10 +121,10 @@ class Project(db.Model):
     ## timing ##
     # posted_on
     posted_on = Column(db.DateTime, nullable=False,
-                          info={'label':'Posted On'})
+                        info={'label':'Posted On'})
     # complete_on
     completed_on = Column(db.DateTime, nullable=True,
-                             info={'label':'Completed On'})
+                        info={'label':'Completed On'})
     # estimated time
     estimated_time = Column(db.Float, nullable=True,
                             info={'label':'Estimated time'})
@@ -154,14 +154,14 @@ class Project(db.Model):
     def __repr__(self):
         return f'<Project {self.name}>'
 
-# class Subject(db.Model):
-#     __tablename__ = 'subject'
-#     # id primary key
-#     id = Column(Integer, primary_key=True)
-#     # name
-#     name = Column(String(128), unique=False, nullable=False,
-#                      info={'label':'Name'})
-#     # users
-#     users = relationship('User')
-#     # projects
-#     projects = relationship('Project')
+class Subject(db.Model):
+    __tablename__ = 'subject'
+    # id primary key
+    id = Column(Integer, primary_key=True)
+    # name
+    name = Column(String(128), unique=False, nullable=False,
+                     info={'label':'Name'})
+    # users
+    users = relationship('User')
+    # projects
+    projects = relationship('Project')
