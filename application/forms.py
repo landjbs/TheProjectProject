@@ -103,7 +103,7 @@ class Add_Project(BaseForm):
                                    validators=[DataRequired()],
                                    description=('What subjects might this '
                                                 'project involve?'),
-                                   choices=['beep', 'boop'])
+                                   choices=list(subjects))
     open = BooleanField('Open',
                         validators=[DataRequired()],
                         description=('Open projects can have team members.'))

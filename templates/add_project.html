@@ -6,6 +6,7 @@
   {{ super() }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link type="text/css" href="css/add_styles.css" rel="stylesheet">
+  <script src="bundle.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -72,7 +73,7 @@
       </div>
       <div class='col'>
         <h3>management</h3>
-        {% for elt in [form.estimated_time, form.team_size] %}
+        {% for elt in [form.estimated_time, form.team_size, form.subjects] %}
           <div class="row input-segment" id='{{ elt.name }}_segment'>
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -89,6 +90,11 @@
                       name='{{ elt.name }}' id="time_slider">
               </div>
               <p id='time-out' style='display: inline;'></p>
+            {% elif elt.type=='SelectMultipleField' %}
+              <span class="example"></span>
+              <!-- {% for subject in elt.choices %}
+                <h1 style='color: {{ subject.color }}'>{{ subject.name }}</h1>
+              {% endfor %} -->
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="30" value="10" class="slider"
