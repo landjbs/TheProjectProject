@@ -111,3 +111,7 @@ section.range-slider input:last-of-type::-moz-range-track {
  section.range-slider input[type=range]::-moz-focus-outer {
  border: 0;
 }
+
+.disabled {
+  opacity: 0.4;
+}
