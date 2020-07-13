@@ -151,12 +151,12 @@ def home():
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
     form = Add_Project(request.form)
-    print(form.data)
-    if request.method=='POST':
-        if form.requires_application.data and form.application_question.data=='':
-            form.application_question.errors = ['Question cannot be blank.']
-        elif form.validate():
-            return redirect(url_for('home'))
+    if request.method=='POST' and form.validate():
+        # if form.requires_application.data and form.application_question.data=='':
+            # form.application_question.errors = ['Question cannot be blank.']
+        # else:
+        return redirect(url_for('home'))
+    print(form.errors)
     return render_template('add_project.html', form=form)
 
 
