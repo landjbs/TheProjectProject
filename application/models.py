@@ -2,8 +2,8 @@ from flask_login import UserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from sqlalchemy import (Table, Column, ForeignKey, Integer, String,
-                        Boolean, IntRangeType)
+from sqlalchemy import (Table, Column, ForeignKey, Integer, String, Boolean)
+from sqlalchemy_utils import IntRangeType
 
 from application import db
 
@@ -118,7 +118,7 @@ class Project(db.Model):
     # applicaiton question
     application_question = Column(String(250), nullable=True)
     # desired team size
-    team_size = Column(R)
+    team_size = Column(IntRangeType, nullable=False)
     ## timing ##
     # posted_on
     posted_on = Column(db.DateTime, nullable=False)

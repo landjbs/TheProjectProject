@@ -72,7 +72,7 @@
       </div>
       <div class='col'>
         <h3>management</h3>
-        {% for elt in [form.complete, form.estimated_time] %}
+        {% for elt in [form.complete, form.estimated_time, form.team_size] %}
           <div class="row input-segment">
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -92,9 +92,17 @@
               </div>
             {% elif elt.type=='FloatField' %}
               <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                <input type="range" min="1" max="100" value="50" class="slider"
+                      name='{{ elt.name }}' id="float_slider">
               </div>
               <p id='day-out' style='display: inline;'></p>
+            {% elif elt.type=='IntegerRangeField' %}
+            <p>
+              <label for="amount">Price range:</label>
+              <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+              </p>
+
+              <div id="slider-range"></div>
             {% else %}
               <div class='input-box'>
                 {% if not elt.errors %}
@@ -117,7 +125,7 @@
 </form>
 
 <script>
-  var slider = document.getElementById("myRange");
+  var slider = document.getElementById("float_slider");
   var output = document.getElementById("day-out");
   output.innerHTML = slider.value; // Display the default slider value
   slider.oninput = function() {
