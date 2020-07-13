@@ -4,18 +4,18 @@
 
 {% block head %}
   {{ super() }}
+  <style>
+    a {
+      color: black;
+    }
+  </style>
 {% endblock %}
 
+{% block content %}
 
 <div class='big-box'>
 <div class="container my-4">
-
-  <p class="font-weight-bold">Bootstrap carousel multiple items is an improved version of the standard bootstrap
-    carousel which allows you to put inside more than one element.</p>
-
-  <p><strong>Detailed documentation and more examples of Bootstrap grid you can find in our <a href="https://mdbootstrap.com/docs/jquery/javascript/carousel/"
-        target="_blank">Bootstrap Carousel Docs</a>.</p>
-
+  <h4>Recommended Projects</h4>
   <hr class="my-4">
 
   <!--Carousel Wrapper-->
@@ -41,48 +41,21 @@
 
       <!--First slide-->
       <div class="carousel-item active">
-
         <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
+          {% for project in projects[:3] %}
+            <div class="col-md-4">
+              <div class="card mb-2">
+                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                  alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">{{ project.name }}</h4>
+                  <p class="card-text">{{ project.summary }}</p>
+                  <a class="btn btn-primary" style='color:white;'>Join</a>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-4 clearfix d-none d-md-block">
-            <div class="card mb-2">
-              <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg"
-                alt="Card image cap">
-              <div class="card-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                  card's content.</p>
-                <a class="btn btn-primary">Button</a>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
-
       </div>
       <!--/.First slide-->
 
@@ -189,5 +162,4 @@
 </div>
 </div>
 
-
-</html>
+{% endblock %}
