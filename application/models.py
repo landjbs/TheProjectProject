@@ -54,8 +54,8 @@ class User(db.Model, UserMixin):
     pending_projects = relationship('Project', secondary=user_to_project,
                                     back_populates='parents')
     # # projects user is member in
-    # member_projects = relationship('Project', backref='user', lazy=True,
-    #                                cascade="all, delete-orphan"))
+    member_projects = relationship('Project', secondary=user_to_project,
+                                    back_populates='parents')
 
 
     def __init__(self, name, email, password, github, about):
