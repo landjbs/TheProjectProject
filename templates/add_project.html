@@ -169,19 +169,23 @@
     toggle_open();
   };
 
+  function is_open() {
+    // change team to 2
+    document.getElementById("team_slider").disabled = false;
+    document.getElementById("team_slider").style.opacity = 1;
+    document.getElementById("team_slider").value = "2";
+    team_out.innerHTML = '2 people';
+    // requires application set to true
+    document.getElementById('on-requires_application').checked = true;
+    toggle_requires_application();
+  };
+
   function not_open() {
     document.getElementById("team_slider").disabled = true;
     document.getElementById("team_slider").value = "1";
     team_out.innerHTML = '1 person';
     document.getElementById("team_slider").style.opacity = 0.4;
   }
-
-  function is_open() {
-    document.getElementById("team_slider").disabled = false;
-    document.getElementById("team_slider").style.opacity = 1;
-    document.getElementById("team_slider").value = "2";
-    team_out.innerHTML = '2 people';
-  };
 
   function no_application() {
     document.getElementById("application_question").disabled = true;
