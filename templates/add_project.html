@@ -91,10 +91,7 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              <span class="example"></span>
-              <!-- {% for subject in elt.choices %}
-                <h1 style='color: {{ subject.color }}'>{{ subject.name }}</h1>
-              {% endfor %} -->
+              <span class="select_subject" name='{{ elt.name }}'></span>
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="30" value="10" class="slider"
@@ -239,10 +236,10 @@
   const subjects = [];
   {% for elt in form.subjects.choices %}
     subjects.push({label: '{{ elt.name }}',
-                   value: '{{ elt.name }}'},)
+                   value: '{{ elt.id }}'},)
   {% endfor %}
 
-  var instance = new SelectPure(".example", {
+  var instance = new SelectPure(".select_subject", {
       options: subjects,
       multiple: true,
       autocomplete: true,
