@@ -1,67 +1,7 @@
-{% extends "home_base.html" %}
-
-{% block title %}Home{% endblock %}
-
-{% block head %}
-  {{ super() }}
-  <style>
-    a {
-      color: black;
-    }
-  </style>
-{% endblock %}
-
-{% block content %}
-
-<div class='big-box'>
-<div class="container my-4">
-  <h4>Recommended Projects</h4>
-  <hr class="my-4">
-
-  <!--Carousel Wrapper-->
-  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-    <!--Controls-->
-    <div class="controls-top">
-      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-    </div>
-    <!--/.Controls-->
-
-    <!--Indicators-->
-    <ol class="carousel-indicators">
-      <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-      <li data-target="#multi-item-example" data-slide-to="1"></li>
-      <li data-target="#multi-item-example" data-slide-to="2"></li>
-    </ol>
-    <!--/.Indicators-->
-
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-      {% for project_tab in project_tabs %}
-        {% if loop.index==0 %}
-          <div class="carousel-item active">
-        {% else %}
-          <div class="carousel-item">
-        {% endif %}
-        {% for project in project_tab %}
-          <div class="row">
-              <div class="col-md-4">
-                <div class="card mb-2">
-                  <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                    alt="Card image cap">
-                  <div class="card-body">
-                    <h4 class="card-title">{{ project.name }}</h4>
-                    <p class="card-text">{{ project.summary }}</p>
-                    <a class="btn btn-primary" style='color:white;'>Join</a>
-                  </div>
-                </div>
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
-{% endblock %}
+<html>
+{% for tab in projects %}
+  {% for project in tab %}
+    <h1>{{ project }}</h1>
+  {% endfor %}
+{% endfor %}
+</html>

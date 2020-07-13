@@ -143,8 +143,10 @@ def reject():
 @login_required
 @application.route('/home', methods=['GET', 'POST'])
 def home():
-    projects = db.session.query(Project).limit(10)
-    return render_template('home.html', projects=projects, current_user=current_user)
+    projects = db.session.query(Project).limit(9)
+    project_tabs = [projects[:3], projects[3:6], projects[6:9]]
+    return render_template('home.html', projects=project_tabs,
+                           current_user=current_user)
 
 
 @login_required
