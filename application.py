@@ -151,8 +151,9 @@ def home():
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
     form = Add_Project(request.form)
+    print(form.subjects.data)
     if request.method=='POST' and form.validate():
-        print('here')
+        return redirect(url_for('home'))
     return render_template('add_project.html', form=form)
 
 

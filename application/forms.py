@@ -91,7 +91,7 @@ class Add_Project(BaseForm):
                        description='Give your project a name!',
                        render_kw={'placeholder':''})
     url = StringField(label='URL',
-                    validators=[DataRequired(), Length(1, 128)],
+                    validators=[Length(0, 128)],
                     description=('You can link media (eg. a Github, website, '
                                  'doc, etc.) to showcase your progress.'),
                     render_kw={'placeholder':''})
@@ -100,7 +100,6 @@ class Add_Project(BaseForm):
                         description='Give a rundown of your idea.',
                         render_kw={'placeholder':''})
     subjects = SelectMultipleField('Subjects',
-                                   validators=[DataRequired()],
                                    description=('What subjects might this '
                                                 'project involve?'),
                                    choices=list(subjects))
@@ -112,7 +111,7 @@ class Add_Project(BaseForm):
                             description=('Allows you to choose '
                                          'who joins the project.'))
     application_question = TextField('Application Question',
-                                validators=[DataRequired(), Length(1, 250)],
+                                validators=[Length(0, 250)],
                                 description=('Add a question to screen '
                                             'applicants.'),
                                 render_kw={'placeholder':''})

@@ -91,7 +91,7 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              <span class="select_subject" name='{{ elt.name }}'></span>
+              <span class="select_subject" name='{{ elt.name }}' id='{{ elt.name}}'></span>
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="30" value="10" class="slider"
@@ -157,7 +157,7 @@
     // change timing
     document.getElementById("time_slider").disabled = true;
     time_out.innerHTML = 'n.a.';
-    document.getElementById("time_slider").value = "1";
+    document.getElementById("time_slider").value = 1;
     document.getElementById("estimated_time_segment").style.opacity = 0.4;
     // project isn't open
     document.getElementById('off-open').checked = true;
@@ -166,6 +166,8 @@
 
   function not_complete() {
     document.getElementById("time_slider").disabled = false;
+    time_out.innerHTML = '40 days';
+    document.getElementById("time_slider").value = 40;
     document.getElementById("estimated_time_segment").style.opacity = 1;
     document.getElementById('on-open').checked = true;
     toggle_open();
