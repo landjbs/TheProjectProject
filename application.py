@@ -152,11 +152,22 @@ def home():
 def add_project():
     form = Add_Project(request.form)
     if request.method=='POST' and form.validate():
+        # dependent errors
         if form.requires_application.data and form.application_question.data=='':
             form.application_question.errors = ['Question cannot be blank.']
+        # add the project
         else:
+            try:
+                db.session.add(user)
+                db.session.commit()
+                db.session.close()
+            except Exception as e:
+                print(f'EASDF: {e}')
+                db.session.rollback()
+            return render_template('index.html')
+
+
             return redirect(url_for('home'))
-    print(form.errors)
     return render_template('add_project.html', form=form)
 
 
