@@ -68,20 +68,24 @@ class Project(db.Model):
     __tablename__ = 'project'
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
-    # creator
-    creator = Column(Integer, ForeignKey('user.id'),
-                     nullable=False)
+    ## base info ##
     # name
     name = db.Column(db.String(128), unique=False, nullable=False,
                      info={'label':'Name'})
     # summary
     summary = db.Column(db.String(500), unique=False, nullable=False,
                         info={'label':'Summary'})
-    # specialty
-    specialty = db.Integer()
     # url
     url = db.Column(db.String(128), unique=False, nullable=True,
                     info={'label':'URL'})
+    # specialty
+    specialty = db.Integer()
+    ## people ##
+    # creator
+    creator = db.Column(db.Integer, ForeignKey('user.id'),
+                        nullable=False)
+    pending = db.Column(db.Integer, ForeignKey('user.id'), nullable=True)
+    members = db.Column(db.Integer, ForeignKey('user.id'), nullable=True)
     # complete
     complete = db.Column(db.Boolean, nullable=False, info={'label':'Complete'})
     ## timing ##
