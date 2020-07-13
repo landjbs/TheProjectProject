@@ -131,7 +131,7 @@ class Project(db.Model):
                              info={'label':'Completed On'})
     # estimated time
     estimated_time = Column(db.Float, nullable=True,
-                               info={'label':'Estimated time'})
+                            info={'label':'Estimated time'})
     # complete
     complete = Column(Boolean, nullable=False, info={'label':'Complete'})
 
@@ -153,7 +153,7 @@ class Project(db.Model):
         cur_time = datetime.datetime.now()
         self.posted_on = cur_time
         self.completed_on = cur_time if complete else None
-
+        self.estimated_time = estimated_time if not complete else None
 
 # class Subject(db.Model):
 #     __tablename__ = 'subject'
