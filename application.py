@@ -4,7 +4,7 @@ from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
 
 from application import db
-from application.models import User
+from application.models import User, Project
 from application.forms import Apply, Login
 
 

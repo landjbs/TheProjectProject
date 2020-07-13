@@ -51,11 +51,11 @@ class User(db.Model, UserMixin):
     created_projects = relationship('Project', backref='user', lazy=True,
                                     cascade="all, delete-orphan")
     # # projects user applied to
-    pending_projects = relationship('Project', secondary=user_to_project,
-                                    back_populates='parents')
-    # # projects user is member in
-    member_projects = relationship('Project', secondary=user_to_project,
-                                    back_populates='parents')
+    pending_projects = relationship('Project', secondary='user_to_project',
+                                    back_populates='pending_users')
+    # # # projects user is member in
+    member_projects = relationship('Project', secondary='user_to_project',
+                                    back_populates='members')
 
     def __init__(self, name, email, password, github, about):
         self.name = name
@@ -64,12 +64,12 @@ class User(db.Model, UserMixin):
         self.github = github
         self.about = about
         self.accepted = False
-        self.created_projects = None
-        self.pending_projects = None
-        self.member_projects = None
+        self.created_projects = []
+        self.pending_projects = []
+        self.member_projects = []
 
     def __repr__(self):
-        return '<User %r>' % self.name
+        return f'<User {self.name}>'
 
     def set_password(self, password):
         return generate_password_hash(password)
@@ -110,11 +110,11 @@ class Project(db.Model):
     # creator
     creator = Column(Integer, ForeignKey('user.id'))
     # pending members
-    pending = relationship('User', secondary=user_to_project,
-                           back_populates='children')
+    pending_users = relationship('User', secondary='user_to_project',
+                                 back_populates='pending_projects')
     # approved members
-    members = relationship('User', secondary=user_to_project,
-                           back_populates='children')
+    members = relationship('User', secondary='user_to_project',
+                           back_populates='member_projects')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
@@ -146,14 +146,17 @@ class Project(db.Model):
         self.application_question = application_question
         # members
         self.creator = creator
-        self.pending = None
-        self.members = None
+        self.pending = []
+        self.members = []
         # timing and completion
         self.complete = complete
-        cur_time = datetime.datetime.now()
+        cur_time = datetime.now()
         self.posted_on = cur_time
         self.completed_on = cur_time if complete else None
         self.estimated_time = estimated_time if not complete else None
+
+    def __repr__(self):
+        return f'<Project {self.name}>'
 
 # class Subject(db.Model):
 #     __tablename__ = 'subject'
