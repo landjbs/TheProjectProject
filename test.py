@@ -2,8 +2,8 @@ from application import db
 from application.models import User, Project
 
 
-# u = User('l', 'e', 'p', 'g', 'a')
-# # u2 = User('l', 'e', 'p', 'g', 'a')
+u = User('l', 'e', 'p', 'g', 'a')
+u2 = User('l', 'e', 'p', 'g', 'a')
 #
 # db.session.add(u)
 #
@@ -20,7 +20,10 @@ from application.models import User, Project
 #             estimated_time=3.,
 #             complete=False)
 #
-# db.session.add(p)
-# db.session.commit()
+db.session.add(u)
+db.session.add(u2)
+db.session.commit()
 
-print(db.session.query(Project).first().posted_on)
+print(db.session.count())
+
+# print(db.session.query(Project).first().posted_on)

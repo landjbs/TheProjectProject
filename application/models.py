@@ -27,20 +27,15 @@ class User(db.Model, UserMixin):
     # id primary key
     id = Column(Integer, primary_key=True)
     # name
-    name = Column(String(128), index=True, unique=False,
-                     info={'label':'Name'})
+    name = Column(String(128), unique=False)
     # email
-    email = Column(String(254), unique=False, nullable=False,
-                      info={'label':'Havard Email '})
+    email = Column(String(254), unique=True, nullable=False)
     # password
-    password = Column(String(254), nullable=False,
-                         info={'label':'Password'})
+    password = Column(String(254), nullable=False)
     # github
-    github = Column(String(254), nullable=True,
-                         info={'label':'Github'})
+    github = Column(String(254), unique=True, nullable=True)
     # about
-    about = Column(String(500), nullable=False,
-                      info={'label':'About'})
+    about = Column(String(500), nullable=False)
     # accepted
     accepted = Column(Boolean, nullable=False)
     # subject
@@ -143,7 +138,7 @@ class Project(db.Model):
         self.summary = str(summary)
         self.url = str(url)
         # members
-        self.creator_id = creator.id
+        self.creator_id = int(creator.id)
         self.pending = []
         self.members = []
         # application
