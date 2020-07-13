@@ -38,7 +38,7 @@
       </div>
       <div class='col'>
         <h3>team</h3>
-        {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
+        {% for elt in [form.open, form.requires_application, form.application_question] %}
           <div class="row input-segment">
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -69,8 +69,38 @@
           </div>
         {% endfor %}
       </div>
-      <div class='col' style='text-align: left;'>
-
+      <div class='col'>
+        <h3>timing</h3>
+        {% for elt in [form.open, form.requires_application, form.application_question] %}
+          <div class="row input-segment">
+            <div class='input-title'>
+              <h6 style="display: inline;">{{ elt.label }}</h6>
+              {% if elt.description %}
+                <div class='boop'>
+                  <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+                  <span class="tooltiptext">{{ elt.description }}</span>
+                </div>
+              {% endif %}
+            </div>
+            {% if elt.type=='BooleanField' %}
+              <div class="input-control">
+                <input id="toggle-on-q{{ loop.index }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
+                <label for="toggle-on-q{{ loop.index }}" class="btn"><span>A</span> Yes</label>
+                <input id="toggle-off-q{{ loop.index }}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
+                <label for="toggle-off-q{{ loop.index }}" class="btn"><span>B</span> No</label>
+              </div>
+            {% else %}
+              <div class='input-box'>
+                {% if not elt.errors %}
+                  {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
+                {% else %}
+                  {{ elt(class='input invalid') }}
+                  <p class='warning'>{{ elt.errors[0] }}</p>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
       </div>
     </div>
   <center>
