@@ -6,13 +6,11 @@
   {{ super() }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link type="text/css" href="css/add_styles.css" rel="stylesheet">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
 {% endblock %}
 
 {% block content %}
 
-<form class='container big-box' id='project_form'>
+<form class='container big-box' id='project_form' method='post'>
     {{ form.csrf_token }}
     <div class='row'>
       <div class='col'>
@@ -173,8 +171,8 @@
   function is_open() {
     // change team to 2
     document.getElementById("team_slider").disabled = false;
-    document.getElementById("team_slider").value = "2";
-    team_out.innerHTML = '2 people';
+    document.getElementById("team_slider").value = "10";
+    team_out.innerHTML = '10 people';
     document.getElementById("team_size_segment").style.opacity = 1;
     // requires application set to true
     document.getElementById('on-requires_application').checked = true;
@@ -203,7 +201,6 @@
   };
 
   function toggle_complete() {
-    // alert(document.getElementById('on-open').checked);
     if (document.getElementById('on-complete').checked) {
         is_complete();
       } else {
@@ -226,6 +223,10 @@
           no_application();
       }
   }
+
+  // start with not completed and default subsequents
+  document.getElementById("off-complete").checked = true;
+  toggle_complete();
 
 </script>
 

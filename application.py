@@ -153,7 +153,8 @@ def add_project():
     form = Add_Project(request.form)
     if request.method=='POST' and form.validate():
         print('here')
-    return render_template('add_project.html', form=form, start_on=0)
+    for error in form.errors: print(error)
+    return render_template('add_project.html', form=form)
 
 
 
