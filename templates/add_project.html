@@ -12,7 +12,7 @@
 
 {% block content %}
 
-<form class='container big-box'>
+<form class='container big-box' id='project_form'>
     {{ form.csrf_token }}
     <div class='row'>
       <div class='col'>
@@ -118,11 +118,9 @@
         {% endfor %}
       </div>
     </div>
-  <center>
-    <div class='row' style='background:red; text-align:center;'>
-      Submit
+    <div class='row box' onclick='submit()' style='padding:1px;'>
+      <p>share</p>
     </div>
-  </center>
 </form>
 
 <script>
@@ -154,6 +152,10 @@
     else {
       team_out.innerHTML = (this.value) + ' people';
     }
+  };
+
+  function submit() {
+    document.getElementById("project_form").submit();
   };
 
 </script>
