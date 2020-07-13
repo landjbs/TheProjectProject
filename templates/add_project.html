@@ -52,10 +52,10 @@
               {% endif %}
             </div>
             {% if elt.type=='BooleanField' %}
-              <div class="input-control" onclick='toggle_{{ elt.name }}()'>
-                <input id="on-{{ elt.name }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
+              <div class="input-control" onclick='toggle_{{ elt.name }}()' id='{{ elt.name }}'>
+                <input id="on-{{ elt.name }}" class="toggle toggle-left" name="{{ elt.name }}" value="true" type="radio">
                 <label for="on-{{ elt.name }}" class="btn"><span>A</span> Yes</label>
-                <input id="off-{{ elt.name }}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
+                <input id="off-{{ elt.name }}" class="toggle toggle-right" name="{{ elt.name }}" value="false" type="radio">
                 <label for="off-{{ elt.name }}" class="btn"><span>B</span> No</label>
               </div>
             {% else %}
@@ -91,7 +91,7 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              <span class="select_subject" name='{{ elt.name }}' id='{{ elt.name}}'></span>
+              <span class="select_subject" id='{{ elt.name }}' name='{{ elt.name }}'></span>
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="30" value="10" class="slider"
@@ -240,6 +240,7 @@
     subjects.push({label: '{{ elt.name }}',
                    value: '{{ elt.id }}'},)
   {% endfor %}
+  var selected_subjects = new Set();
 
   var instance = new SelectPure(".select_subject", {
       options: subjects,
@@ -248,6 +249,7 @@
       icon: "fa fa-times",
       inlineIcon: false,
       placeholder: false,
+      onChange: value => { selected_subjects.add(value); },
       classNames: {
         select: "select-pure__select",
         dropdownShown: "select-pure__select--opened",
