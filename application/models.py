@@ -154,6 +154,7 @@ class Project(db.Model):
     def __repr__(self):
         return f'<Project {self.name}>'
 
+
 class Subject(db.Model):
     __tablename__ = 'subject'
     # id primary key
@@ -165,3 +166,6 @@ class Subject(db.Model):
     users = relationship('User')
     # projects
     projects = relationship('Project')
+
+    def __repr__(self):
+        return f'<Subject {self.name}>'
