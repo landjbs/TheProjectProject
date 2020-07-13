@@ -150,9 +150,10 @@ def home():
 @login_required
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
-    form = AddProjectForm(request.form)
+    form = Add_Project(request.form)
     if request.method=='POST' and form.validate():
-        
+        print('here')
+    return render_template('add_project.html', form=form, start_on=0)
 
 
 

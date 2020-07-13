@@ -85,19 +85,20 @@ class Add_Project(BaseForm):
     name = StringField(label='Name',
                        validators=[DataRequired(), Length(1, 128)],
                        render_kw={'placeholder':''})
+    url = StringField(label='URL',
+                    validators=[DataRequired(), Length(1, 128)],
+                    description=('You can link media (eg. a Github, website, '
+                                 'doc, etc.) to showcase your progress.'),
+                    render_kw={'placeholder':''})
     summary = TextField(label='Summary',
                         validators=[DataRequired(), Length(1, 500)],
                         description='Give a brief rundown of your idea.',
                         render_kw={'placeholder':''})
-    url = StringField(label='Summary',
-                    validators=[DataRequired(), Length(1, 128)],
-                    description=('You can link media like a Github or website.'
-                                 'to showcase your progress.'),
-                    render_kw={'placeholder':''})
     subjects = SelectMultipleField('Subjects',
                                    validators=[DataRequired()],
                                    description=('What subjects might this '
-                                                'project involve?'))
+                                                'project involve?'),
+                                   choices=['beep', 'boop'])
     open = BooleanField('Open',
                         validators=[DataRequired()],
                         description=('All projects are visible to the '
