@@ -2,32 +2,39 @@ from flask_login import UserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from sqlalchemy import Table, Column, ForeignKey
+from sqlalchemy import Table, Column, ForeignKey, Integer, String, Boolean
 
 from application import db
 
 
+## ASSOCIATION TABLES ##
+user_to_subject_assoc = Table('user_to_subject', db.Model.metadata,
+                  Column('user_id', Integer, ForeignKey('user.id')),
+                  Column('subject_id', Integer, ForeignKey('subject.id')))
+
+
+## BASE CLASSES ##
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     # id primary key
-    id = Column(db.Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     # name
-    name = Column(db.String(128), index=True, unique=False,
+    name = Column(String(128), index=True, unique=False,
                      info={'label':'Name'})
     # email
-    email = Column(db.String(254), unique=False, nullable=False,
+    email = Column(String(254), unique=False, nullable=False,
                       info={'label':'Havard Email '})
     # password
-    password = Column(db.String(254), nullable=False,
+    password = Column(String(254), nullable=False,
                          info={'label':'Password'})
     # github
-    github = Column(db.String(254), nullable=True,
+    github = Column(String(254), nullable=True,
                          info={'label':'Github'})
     # about
-    about = Column(db.String(500), nullable=False,
+    about = Column(String(500), nullable=False,
                       info={'label':'About'})
     # accepted
-    accepted = Column(db.Boolean, nullable=False)
+    accepted = Column(Boolean, nullable=False)
     # subject
     subjects = relationship('Subject', backref='user', lazy=True,
                             cascade="all, delete-orphan")
@@ -76,34 +83,34 @@ class User(db.Model, UserMixin):
 class Project(db.Model):
     __tablename__ = 'project'
     # id primary key
-    id = Column(db.Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     ## base info ##
     # name
-    name = Column(db.String(128), unique=True, nullable=False,
+    name = Column(String(128), unique=True, nullable=False,
                      info={'label':'Name'})
     # summary
-    summary = Column(db.String(500), nullable=False,
+    summary = Column(String(500), nullable=False,
                         info={'label':'Summary'})
     # url
-    url = Column(db.String(128), unique=True, nullable=True,
+    url = Column(String(128), unique=True, nullable=True,
                     info={'label':'URL'})
     # subject
     # subjects = Column(db.)
     ## people ##
     # creator
-    creator = Column(db.Integer, ForeignKey('user.id'),
+    creator = Column(Integer, ForeignKey('user.id'),
                         nullable=False)
     # pending members
-    pending = Column(db.Integer, ForeignKey('user.id'), nullable=True)
+    pending = Column(Integer, ForeignKey('user.id'), nullable=True)
     # approved members
-    members = Column(db.Integer, ForeignKey('user.id'), nullable=True)
+    members = Column(Integer, ForeignKey('user.id'), nullable=True)
     ## join process ##
     # open (allows others to join)
-    open = Column(db.Boolean, nullable=False)
+    open = Column(Boolean, nullable=False)
     # requires application
-    requires_application = Column(db.Boolean, nullable=False)
+    requires_application = Column(Boolean, nullable=False)
     # applicaiton question
-    application_question = Column(db.String(250), nullable=True)
+    application_question = Column(String(250), nullable=True)
     ## timing ##
     # posted_on
     posted_on = Column(db.DateTime, nullable=False,
@@ -115,7 +122,7 @@ class Project(db.Model):
     estimated_time = Column(db.Float, nullable=True,
                                info={'label':'Estimated time'})
     # complete
-    complete = Column(db.Boolean, nullable=False, info={'label':'Complete'})
+    complete = Column(Boolean, nullable=False, info={'label':'Complete'})
 
     def __init__(self, creator, name, summary, url):
 
@@ -124,9 +131,9 @@ class Project(db.Model):
 class Subject(db.Model):
     __tablename__ = 'subject'
     # id primary key
-    id = Column(db.Integer, primary_key=True)
+    id = Column(Integer, primary_key=True)
     # name
-    name = Column(db.String(128), unique=False, nullable=False,
+    name = Column(String(128), unique=False, nullable=False,
                      info={'label':'Name'})
     # users
     users = relationship('User')
