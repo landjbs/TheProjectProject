@@ -33,8 +33,8 @@ class User(db.Model, UserMixin):
     # password
     password = Column(String(254), nullable=False)
     # subject
-    subjects = relationship('Subject', backref='user', lazy=True,
-                            cascade="all, delete-orphan")
+    subjects = relationship('Subject', secondary='user_to_subject',
+                            back_populates='users')
     # github
     github = Column(String(254), unique=True, nullable=True)
     # about
@@ -100,7 +100,8 @@ class Project(db.Model):
     url = Column(String(128), unique=True, nullable=True,
                     info={'label':'URL'})
     # subject
-    # subjects = Column(db.)
+    subjects = relationship('Subject', secondary='project_to_subject',
+                            back_populates='projects')
     ## people ##
     # creator
     creator_id = Column(Integer, ForeignKey('user.id'))
@@ -163,9 +164,11 @@ class Subject(db.Model):
     name = Column(String(128), unique=False, nullable=False,
                      info={'label':'Name'})
     # users
-    users = relationship('User')
+    users = relationship('User', secondary='user_to_project',
+                        back_populates='subjects')
     # projects
-    projects = relationship('Project')
+    projects = relationship('Project', secondary='project_to_subject',
+                            back_populates='subjects')
 
     def __repr__(self):
         return f'<Subject {self.name}>'
