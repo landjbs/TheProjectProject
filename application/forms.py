@@ -116,4 +116,7 @@ class Add_Project(BaseForm):
                                 description=('Suggest how long you '
                                 'think the project might take. This is neither '
                                 'binding nor required.'))
-    
+    complete = BooleanField('Completed',
+                            validators=[DataRequired()],
+                            description=('Whether the project has been '
+                            'completed.'))
