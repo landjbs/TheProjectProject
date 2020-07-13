@@ -48,8 +48,9 @@ class User(db.Model, UserMixin):
     #                         cascade="all, delete-orphan")
     ## projects ##
     # projects user created
-    created_projects = relationship('Project', backref='user', lazy=True,
-                                    cascade="all, delete-orphan")
+    # created_projects = relationship('Project', backref='user', lazy=True,
+                                    # cascade="all, delete-orphan")
+    created_projects = relationship('Project', back_populates='creator')
     # # projects user applied to
     pending_projects = relationship('Project', secondary='user_to_project',
                                     back_populates='pending_users')
@@ -108,7 +109,8 @@ class Project(db.Model):
     # subjects = Column(db.)
     ## people ##
     # creator
-    creator = Column(Integer, ForeignKey('user.id'))
+    creator_id = Column(Integer, ForeignKey('user.id'))
+    creator = relationship('User', back_populates='created_projects')
     # pending members
     pending_users = relationship('User', secondary='user_to_project',
                                  back_populates='pending_projects')
@@ -141,7 +143,7 @@ class Project(db.Model):
         self.summary = str(summary)
         self.url = str(url)
         # members
-        self.creator = creator
+        self.creator_id = creator.id
         self.pending = []
         self.members = []
         # application
