@@ -39,22 +39,6 @@ body {
   margin:10px 0 0 0;
 }
 
-.box {
-  color: black;
-  background-color: white;
-  height: 30%;
-  text-align: center;
-  padding: 3%;
-}
-
-.box:hover {
-  background-color: rgba(255, 255, 255, 0.9)
-}
-
-.box:active{
-  background-color: rgba(255, 255, 255, 0.7)
-}
-
 /* Style the input fields */
 input {
   width: 90%;
