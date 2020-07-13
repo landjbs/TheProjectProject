@@ -117,8 +117,8 @@ class Project(db.Model):
     requires_application = Column(Boolean, nullable=False)
     # applicaiton question
     application_question = Column(String(250), nullable=True)
-    # desired team size
-    team_size = Column(IntRangeType, nullable=False)
+    # max team size
+    max_team_size = Column(Integer, nullable=False)
     ## timing ##
     # posted_on
     posted_on = Column(db.DateTime, nullable=False)
