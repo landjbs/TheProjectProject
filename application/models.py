@@ -57,7 +57,6 @@ class User(db.Model, UserMixin):
     member_projects = relationship('Project', secondary=user_to_project,
                                     back_populates='parents')
 
-
     def __init__(self, name, email, password, github, about):
         self.name = name
         self.email = email
@@ -68,7 +67,6 @@ class User(db.Model, UserMixin):
         self.created_projects = None
         self.pending_projects = None
         self.member_projects = None
-
 
     def __repr__(self):
         return '<User %r>' % self.name
@@ -137,7 +135,21 @@ class Project(db.Model):
     # complete
     complete = Column(Boolean, nullable=False, info={'label':'Complete'})
 
-    # def __init__(self, creator, name, summary, url):
+    def __init__(self, name, summary, url, creator, open, requires_application,
+                 application_question, estimated_time, complete):
+        self.name = name
+        self.summary = summary
+        self.url = url
+        self.creator = creator
+        self.open = open
+        self.requires_application = requires_application
+        self.application_question = application_question
+        self.complete = complete
+        # timing
+        cur_time = datetime.datetime.now()
+        self.posted_on = cur_time
+        self.completed_on = cur_time if complete else None
+
 
 
 # class Subject(db.Model):
