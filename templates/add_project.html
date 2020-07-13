@@ -85,7 +85,7 @@
                 </div>
               {% endif %}
             </div>
-            {% elif elt.type=='FloatField' %}
+            {% if elt.type=='FloatField' %}
               <div class="slidecontainer">
                 <input type="range" min="1" max="100" value="40" class="slider"
                       name='{{ elt.name }}' id="time_slider">
@@ -195,11 +195,11 @@
   }
 
   function toggle_open() {
-    f (document.getElementById('').checked) {
-        document.getElementById('ifYes').style.visibility = 'visible';
-    } else {
-        document.getElementById('ifYes').style.visibility = 'hidden';
-    }
+    if (document.getElementById('on-open').checked) {
+          is_open();
+      } else {
+          not_open();
+      }
   }
 
 </script>
