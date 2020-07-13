@@ -4,8 +4,8 @@
 
 {% block head %}
   {{ super() }}
-  <link type="text/css" href="css/add.css" rel="stylesheet">
-  <link type="text/css" href="css/index_style.css" rel="stylesheet">
+  <link type="text/css" href="css/add_styles.css" rel="stylesheet">
+  <!-- <link type="text/css" href="css/index_style.css" rel="stylesheet"> -->
 {% endblock %}
 
 {% block content %}
@@ -14,28 +14,31 @@
     {{ form.csrf_token }}
     <div class='row'>
       <div class='col'>
-        <h3>Description</h3>
+        <h3>description</h3>
         {% for elt in [form.name, form.url, form.summary ]%}
           <div class="row input-segment">
-            <h4 style="display: inline;">{{ elt.label }}</h4>
-            {% if elt.description %}
-              <div class='boop'>
-                <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-                <span class="tooltiptext">{{ elt.description}}</span>
-              </div>
-            {% endif %}
-            <br>
-            {% if not elt.errors %}
-              {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
-            {% else %}
-              {{ elt(class='input invalid') }}
-              <p class='warning'>{{ elt.errors[0] }}</p>
-            {% endif %}
+            <div class='input-title'>
+              <h4 style="display: inline;">{{ elt.label }}</h4>
+              {% if elt.description %}
+                <div class='boop'>
+                  <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+                  <span class="tooltiptext">{{ elt.description}}</span>
+                </div>
+              {% endif %}
+            </div>
+            <div class='input-box'>
+              {% if not elt.errors %}
+                {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
+              {% else %}
+                {{ elt(class='input invalid') }}
+                <p class='warning'>{{ elt.errors[0] }}</p>
+              {% endif %}
+            </div>
           </div>
         {% endfor %}
       </div>
       <div class='col'>
-        <h3>Membership</h3>
+        <h3>membership</h3>
         {% for elt in [form.open, form.requires_application, form.application_question] %}
           <h4 style="display: inline;">{{ elt.label }}</h4>
           {% if elt.description %}
@@ -45,10 +48,10 @@
             </div>
           {% endif %}
           <div class="input-control">
-            <input id="toggle-on-q1" class="toggle toggle-left" name="q1" value="yes" type="radio">
-            <label for="toggle-on-q1" class="btn"><span>A</span> Yes</label>
-            <input id="toggle-off-q1" class="toggle toggle-right" name="q1" value="no" type="radio">
-            <label for="toggle-off-q1" class="btn"><span>B</span> No</label>
+            <input id="toggle-on-q{{ loop.index }}" class="toggle toggle-left" name="q{{ loop.index }}" value="yes" type="radio">
+            <label for="toggle-on-q{{ loop.index }}" class="btn"><span>A</span> Yes</label>
+            <input id="toggle-off-q{{ loop.index }}" class="toggle toggle-right" name="q{{ loop.index }}" value="no" type="radio">
+            <label for="toggle-off-q{{ loop.index }}" class="btn"><span>B</span> No</label>
           </div>
           {% if elt.errors %}
             <div class="warning">You must accept the terms to apply.</div>
@@ -61,6 +64,11 @@
         {% endfor %}
       </div>
     </div>
+  <center>
+    <div class='row'>
+      <button>Submit</button>
+    </div>
+  </center>
 </form>
 
 {% endblock %}

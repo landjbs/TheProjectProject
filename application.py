@@ -68,6 +68,7 @@ def apply():
         user = User(name        =       form.data['name'],
                     email       =       form.data['email'],
                     password    =       form.data['password'],
+                    subjects    =       None,
                     github      =       form.data['github'],
                     about       =       form.data['about']
                 )
