@@ -94,3 +94,12 @@ class Add_Project(BaseForm):
                     description=('You can link media like a Github or website.'
                                  'to showcase your progress.'),
                     render_kw={'placeholder':''})
+    # subjects = # TODO:
+    open = BooleanField('Open',
+                        validators=[DataRequired()],
+                        description=('All projects are visible to the '
+                            'community, but only open projects can '
+                            'be joined by other members.'))
+    requires_application = BooleanField('Requires Application',
+                                        validators=[DataRequired()],
+                                        description=(''))
