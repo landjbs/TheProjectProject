@@ -82,5 +82,15 @@ class Login(BaseForm):
 
 
 class Add_Project(BaseForm):
-    name = StringField('Name',
-                       validators=[DataRequired(), Length(1, 128)],)
+    name = StringField(label='Name',
+                       validators=[DataRequired(), Length(1, 128)],
+                       render_kw={'placeholder':''})
+    summary = StringField(label='Summary',
+                       validators=[DataRequired(), Length(1, 500)],
+                       description='Give a brief rundown of your idea.',
+                       render_kw={'placeholder':''})
+    url = StringField(label='Summary',
+                    validators=[DataRequired(), Length(1, 128)],
+                    description=('You can link media like a Github or website.'
+                                 'to showcase your progress.'),
+                    render_kw={'placeholder':''})
