@@ -170,5 +170,10 @@ class Subject(db.Model):
     projects = relationship('Project', secondary='project_to_subject',
                             back_populates='subjects')
 
+    def __init__(self, name, users, projects):
+        self.name = str(name)
+        self.users = []
+        self.projects = []
+
     def __repr__(self):
         return f'<Subject {self.name}>'

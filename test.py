@@ -1,8 +1,15 @@
 from application import db
-from application.models import User, Project
+from application.models import User, Project, Subject
 
 
-# u = User('l', 'e', 'p', 'g', 'a')
+ai = Suject()
+
+u = User(name='landon',
+        email='land@',
+        )
+
+
+
 # u2 = User('l', 'e', 'p', 'g', 'a')
 #
 # db.session.add(u)
@@ -24,6 +31,4 @@ from application.models import User, Project
 # db.session.add(u2)
 # db.session.commit()
 
-u = db.session.query(User).get(1)
-print(u.created_projects)
 # print(db.session.query(Project).first().posted_on)
