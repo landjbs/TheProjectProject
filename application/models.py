@@ -159,6 +159,8 @@ class Subject(db.Model):
     id = Column(Integer, primary_key=True)
     # name
     name = Column(String(128), unique=True, nullable=False)
+    # color
+    color = Column(String(6), unique=True, nullable=False)
     # users
     users = relationship('User', secondary='user_to_subject',
                         back_populates='subjects')
@@ -166,10 +168,11 @@ class Subject(db.Model):
     projects = relationship('Project', secondary='project_to_subject',
                             back_populates='subjects')
 
-    def __init__(self, name):
+    def __init__(self, name, color):
         self.name = str(name)
         self.users = []
         self.projects = []
+        self.color = color
 
     def __repr__(self):
         return f'<Subject {self.name}>'
