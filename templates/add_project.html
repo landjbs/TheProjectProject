@@ -53,11 +53,11 @@
               {% endif %}
             </div>
             {% if elt.type=='BooleanField' %}
-              <div class="input-control">
-                <input id="toggle-on-q{{ loop.index }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
-                <label for="toggle-on-q{{ loop.index }}" class="btn"><span>A</span> Yes</label>
-                <input id="toggle-off-q{{ loop.index }}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
-                <label for="toggle-off-q{{ loop.index }}" class="btn"><span>B</span> No</label>
+              <div class="input-control" onclick='toggle_{{ elt.name }}()'>
+                <input id="on-{{ elt.name }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
+                <label for="on-{{ elt.name }}" class="btn"><span>A</span> Yes</label>
+                <input id="off-{{ elt.name }}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
+                <label for="off-{{ elt.name }}" class="btn"><span>B</span> No</label>
               </div>
             {% else %}
               <div class='input-box'>
@@ -85,13 +85,6 @@
                 </div>
               {% endif %}
             </div>
-            {% if elt.type=='BooleanField' %}
-              <div class="input-control">
-                <input id="toggle-on-q{{ loop.index + 2 }}" class="toggle toggle-left" name="{{ elt.name }}" value="yes" type="radio">
-                <label for="toggle-on-q{{ loop.index + 2}}" class="btn"><span>A</span> Yes</label>
-                <input id="toggle-off-q{{ loop.index + 2}}" class="toggle toggle-right" name="{{ elt.name }}" value="no" type="radio">
-                <label for="toggle-off-q{{ loop.index + 2}}" class="btn"><span>B</span> No</label>
-              </div>
             {% elif elt.type=='FloatField' %}
               <div class="slidecontainer">
                 <input type="range" min="1" max="100" value="40" class="slider"
@@ -158,7 +151,7 @@
     document.getElementById("project_form").submit();
   };
 
-  function is_closed() {
+  function not_open() {
     // disabble requires_application and application_question
     // cap team size
     document.getElementById("team_slider").disabled = true;
@@ -177,7 +170,7 @@
     is_closed();
   }
 
-  function not_closed() {
+  function is_open() {
     document.getElementById("team_slider").disabled = false;
     document.getElementById("team_slider").style.opacity = 1;
   }
@@ -201,8 +194,13 @@
     document.getElementById("application_question").style.opacity = 1;
   }
 
-  no_application();
-  // no_application();
+  function toggle_open() {
+    f (document.getElementById('').checked) {
+        document.getElementById('ifYes').style.visibility = 'visible';
+    } else {
+        document.getElementById('ifYes').style.visibility = 'hidden';
+    }
+  }
 
 </script>
 
