@@ -1,0 +1,11 @@
+{% extends "home_base.html" %}
+{% block title %}{{ project }}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+
+{% block content %}
+<h1>{{ project.name }} </h1>
+{% endblock %}
