@@ -86,8 +86,8 @@ class Login(BaseForm):
 
 
 class Add_Project(BaseForm):
-    name = StringField(label='Name',
-                       validators=[DataRequired(), Length(1, 40)],
+    name = StringField(label='Project Name',
+                       validators=[DataRequired(), Length(1, 25)],
                        description='Give your project a name!',
                        render_kw={'placeholder':'',
                                   'max': 40})

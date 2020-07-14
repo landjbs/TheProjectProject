@@ -7,15 +7,20 @@
 
 .card-head {
   text-align: left;
-  white-space: normal;
+  white-space: nowrap;
   text-overflow: clip;
   min-height: 50px;
   max-height: 50px;
 }
 
 .little {
-  min-height: 40px;
-  max-height: 40px;
+  min-height: 45px;
+  max-height: 45px;
+}
+
+.tiny {
+  min-height: 30px;
+  max-height: 30px;
 }
 
 a {

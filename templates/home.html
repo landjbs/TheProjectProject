@@ -88,7 +88,7 @@
   <h4 style='text-align:left;'>Top Projects</h4>
   <hr class="my-4">
   <div class="carousel-inner" role="listbox">
-    {% for tab in recommended_tabs %}
+    {% for tab in top_tabs %}
       {% if loop.index==1 %}
       <div class="carousel-item active">
       {% else %}
@@ -148,7 +148,7 @@
                       <i class='far fa-user-circle'></i>
                       {{ project.members|length + 1 }}
                     </p>
-                    <div class='card-head'>
+                    <div class='card-head tiny'>
                       <a href='project={{ project.name }}'>
                         <h5>{{ project.name }}</h5>
                       </a>

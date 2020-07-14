@@ -93,7 +93,7 @@ class Project(db.Model):
     id = Column(Integer, primary_key=True)
     ## base info ##
     # name
-    name = Column(String(40), unique=True, nullable=False)
+    name = Column(String(25), unique=True, nullable=False)
     # oneliner
     oneliner = Column(String(40))
     # summary
