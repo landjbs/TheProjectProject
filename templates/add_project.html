@@ -73,7 +73,7 @@
       </div>
       <div class='col'>
         <h3>management</h3>
-        {% for elt in [form.estimated_time, form.team_size] %}
+        {% for elt in [form.estimated_time, form.team_size, form.subjects] %}
           <div class="row input-segment" id='{{ elt.name }}_segment'>
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>

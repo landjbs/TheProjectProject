@@ -180,6 +180,20 @@ def add_project():
     return render_template('add_project.html', form=form)
 
 
+@application.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(name=username).first_or_404()
+    return render_template('index.html', user=user)
+
+
+@application.route('/project/<project_name>')
+@login_required
+def project(project_name):
+    project = Project.query.filter_by(name=project_name).first_or_404()
+    return render_template('index.html', project=project)
+
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')

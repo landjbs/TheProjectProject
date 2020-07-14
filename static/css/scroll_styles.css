@@ -2,6 +2,14 @@
   text-align: left;
 }
 
+a {
+  color: black;
+}
+
+a:hover {
+  color: blue;
+}
+
 .card-head a {
   color: blue;
 }
@@ -14,14 +22,17 @@
 .card-head p {
   padding: 0px;
   margin: 0px;
-  color: rgba(0,0,0,0.5)
+  color: rgba(0,0,0,0.5);
 }
 
 .card-text {
+  text-align: left;
   overflow: scroll;
 }
 
-/* .action-bar i {
-  color: white;
-  border: 1px solid black;
-} */
+.card-foot {
+  color: rgba(0,0,0,0.5);
+}
+
+/* .action-bar { */
+/* } */
