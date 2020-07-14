@@ -7,6 +7,8 @@
 
 .card-head {
   text-align: left;
+  white-space: normal;
+  text-overflow: scroll;
 }
 
 a {
@@ -42,6 +44,10 @@ a:hover {
 
 .fa-star-o:hover {
   color: gold;
+}
+
+.fa-share-alt:hover {
+  color: blue;
 }
 
 /* .action-bar { */
