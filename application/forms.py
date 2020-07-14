@@ -92,10 +92,11 @@ class Add_Project(BaseForm):
                        render_kw={'placeholder':''})
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1,40)],
-                           description='')
-    summary = TextField(label='Description',
+                           description='One line description of your project.',
+                           render_kw={'placeholder':''})
+    summary = TextField(label='Summary',
                         validators=[DataRequired(), Length(1, 500)],
-                        description='Describe your project.',
+                        description='Describe your project in more detail.',
                         render_kw={'placeholder':''})
     url = StringField(label='URL',
                     validators=[Length(0, 128)],
