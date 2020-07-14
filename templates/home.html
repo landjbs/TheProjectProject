@@ -3,6 +3,7 @@
 
 {% block head %}
   {{ super() }}
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <link type="text/css" href="css/scroll_styles.css" rel="stylesheet">
 {% endblock %}
 
@@ -41,12 +42,27 @@
                   <!-- <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" -->
                   <!-- alt="Card image cap"> -->
                   <div class="card-body">
+                    <p class="float-right">
+                      <i class='far fa-user-circle'></i>
+                      {{ project.members|length + 1 }}
+                    </p>
                     <div class='card-head'>
-                      <h5>{{ project.name }}</h5>
+                      {% if project.url %}
+                        <a href='{{ project.url }}'>
+                          <h5>{{ project.name }}</h5>
+                        </a>
+                      {% else %}
+                        <h5>{{ project.name }}</h5>
+                      {% endif %}
                       <p>{{ project.creator.email }}</p>
                     </div>
                     <p class="card-text">{{ project.summary }}</p>
-                    <a class="btn btn-primary">Join</a>
+                    <hr class="my-4">
+                    <div class='action-bar'>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <a class="btn">Join</a>
+                      <i class="fa fa-share-alt" aria-hidden="false"></i>
+                    </div>
                   </div>
                 </div>
               </div>
