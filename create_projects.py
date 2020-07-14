@@ -101,6 +101,20 @@ projects = [Project(name='Boogle',
                     estimated_time=3,
                     team_size=2,
                     requires_application=False),
+            Project(name='Fortnite',
+                    oneliner='An awesome online game.',
+                    summary=('People can build and fight in cartoon style game '
+                            'where you drop out of a bus onto an island '
+                            'and gather weapons from chests. Need some talented '
+                            'AWS people and graphics enthusiasts.'),
+                    url=None,
+                    application_question='',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(2)),
+                    estimated_time=3,
+                    team_size=2,
+                    requires_application=False),
             ]
 
 for project in projects:
