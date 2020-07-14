@@ -41,8 +41,6 @@
             {% for project in tab %}
               <div class="col-md-4">
                 <div class="card mb-2">
-                  <!-- <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" -->
-                  <!-- alt="Card image cap"> -->
                   <div class="card-body">
                     <p class="float-right">
                       <i class='far fa-user-circle'></i>
@@ -61,7 +59,9 @@
                     </div>
                     <hr class="my-4">
                     <!-- summary -->
-                    <p class="card-text" style='margin:0px;padding:0px;text-decoration:bold;color:green;'>An app to combine music and videos.</p>
+                    <p class="card-text" style='margin:0px;padding:0px;text-decoration:bold;color:green;'>
+                      {{ project.oneliner }}
+                    </p>
                     <p class="card-text" style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
                     <div class='card-foot'>
                       <p class='float-left' style='display:inline;'>

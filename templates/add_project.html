@@ -16,7 +16,7 @@
     <div class='row'>
       <div class='col'>
         <h3>description</h3>
-        {% for elt in [form.name, form.summary, form.url]%}
+        {% for elt in [form.name, form.oneliner, form.summary, form.url]%}
           <div class="row input-segment" style='text-align:left;'>
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -118,6 +118,17 @@
 </form>
 
 <script>
+  // text counter
+  function textCounter(field,field2,maxlimit) {
+    var countfield = document.getElementById(field2);
+    if ( field.value.length > maxlimit ) {
+      field.value = field.value.substring( 0, maxlimit );
+      return false;
+    } else {
+      countfield.value = maxlimit - field.value.length;
+    }
+  };
+
   // query sliders
   var time_slider = document.getElementById("time_slider");
   var team_slider = document.getElementById("team_slider");
