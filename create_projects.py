@@ -6,8 +6,14 @@ users = [User(name='Landon Smith',
               password='boop',
               subjects=None,
               github='www.github.com/landjbs',
-              about='I love ML and NLP. CEO of Strada Routing.')
-        ]
+              about='I love ML and NLP. CEO of Strada Routing.'),
+        User(name='Harrison Oatman',
+             email='hroatman@college.harvard.edu',
+             password='boop',
+             subjects=None,
+             github='www.github.com/hroatman',
+             about='I study Math.'),]
+
 
 for user in users:
     db.session.add(user)
@@ -26,7 +32,20 @@ projects = [Project(name='Boogle',
                     creator=db.session.query(User).get(int(1)),
                     estimated_time=10,
                     team_size=4,
-                    requires_application=True)
+                    requires_application=True),
+            Project(name='Strada Routing',
+                    oneliner='AI trucking logistics.',
+                    summary=('Uses Machine Learning to optimize real-world '
+                            'vehicle routing problems with respect to '
+                            'many trucks, loads and constraints. '),
+                    url='stradarouting.com',
+                    application_question='What is your ML experience?',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(1)),
+                    estimated_time=10,
+                    team_size=4,
+                    requires_application=True),
             ]
 
 for project in projects:
