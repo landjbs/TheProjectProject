@@ -112,9 +112,37 @@ projects = [Project(name='Boogle',
                     open=True,
                     complete=False,
                     creator=db.session.query(User).get(int(2)),
-                    estimated_time=3,
-                    team_size=2,
+                    estimated_time=90,
+                    team_size=20,
                     requires_application=False),
+            Project(name='TheProjectProject',
+                    oneliner='A venue for virtual collaboration.',
+                    summary=('People apply to join the community by '
+                            'submitting past projects. The accepted members '
+                            'can post and view project ideas, and easily '
+                            'join together to complete them.'),
+                    url=None,
+                    application_question='',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(1)),
+                    estimated_time=90,
+                    team_size=20,
+                    requires_application=False),
+            Project(name='Protein Design',
+                    oneliner='AI to design binding proteins.',
+                    summary=('Use graph attention networks to generate '
+                            'protein sequences that can bind to target '
+                            'receptors. We can train in simulated env and add '
+                            'complexity over time.'),
+                    url=None,
+                    application_question='',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(1)),
+                    estimated_time=90,
+                    team_size=20,
+                    requires_application=False)
             ]
 
 for project in projects:
