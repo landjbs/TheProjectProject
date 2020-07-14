@@ -28,20 +28,11 @@
               {% endif %}
             </div>
             <div class='input-box'>
-              {% if elt.render_kw.get('max')!=None %}
-                {% set max = 40 %}
-              {% else %}
-                {% set max = 20 %}
-              {% endif %}
-              {% if not elt.errors %}
-                <input class='input valid' placeholder='{{ elt.render_kw['placeholder'] }}'
-                onkeyup="textCounter(this, counter_{{ elt.name }}, {{ max }});"
-                id={{ elt.render_kw['message_id'] }} required/>
-              {% else %}
-                {{ elt(class='input invalid') }}
-                <p class='warning'>{{ elt.errors[0] }}</p>
-              {% endif %}
-              <input disabled  maxlength="3" size="3" value="{{ max }}" id="counter_{{ elt.name }}">
+              {% set c = 'input valid' if not elt.errors else 'input invalid'%}
+              {% set max = elt.render_kw.get('max') %}
+              {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
+                     maxlength=max) }}
+              <p class='warning'>{{ elt.errors[0] }}</p>
             </div>
           </div>
         {% endfor %}
