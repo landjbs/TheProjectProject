@@ -114,7 +114,7 @@
                       <p>{{ project.creator.email }}</p>
                     </a>
                   </div>
-                  <p style='margin:0px;padding:0px;text-decoration:bold;color:green;text-align:left''>
+                  <p style='margin:0px;padding:0px;text-decoration:bold;color:green;text-align:left'>
                     {{ project.oneliner }}
                   </p>
                 </div>
@@ -131,22 +131,6 @@
   <h4 style='text-align:left;'>My Projects</h4>
   <hr class="my-4">
   <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-    <!--Controls-->
-    <div class="controls-top">
-      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    </div>
-    <!--/.Controls-->
-
-    <!--Indicators-->
-    <ol class="carousel-indicators">
-      <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
-      <li data-target="#multi-item-example" data-slide-to="1"></li>
-      <li data-target="#multi-item-example" data-slide-to="2"></li>
-    </ol>
-    <!--/.Indicators-->
-
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
       {% for tab in users_tabs %}
