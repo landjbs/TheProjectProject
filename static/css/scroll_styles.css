@@ -1,3 +1,7 @@
+.card {
+  background: rgba(0, 0, 255, 0.01);
+}
+
 .card-text {
     min-height: 200px;
     max-height: 200px;
