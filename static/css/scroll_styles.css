@@ -8,7 +8,9 @@
 .card-head {
   text-align: left;
   white-space: normal;
-  text-overflow: scroll;
+  text-overflow: clip;
+  min-height: 50px;
+  max-height: 50px;
 }
 
 a {
