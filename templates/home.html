@@ -3,6 +3,7 @@
 
 {% block head %}
   {{ super() }}
+  <link type="text/css" href="css/scroll_styles.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
@@ -37,10 +38,13 @@
             {% for project in tab %}
               <div class="col-md-4">
                 <div class="card mb-2">
-                  <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                  alt="Card image cap">
+                  <!-- <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" -->
+                  <!-- alt="Card image cap"> -->
                   <div class="card-body">
-                    <h4 class="card-title">{{ project.name }}</h4>
+                    <div class='card-head'>
+                      <h5>{{ project.name }}</h5>
+                      <p>{{ project.creator.email }}</p>
+                    </div>
                     <p class="card-text">{{ project.summary }}</p>
                     <a class="btn btn-primary">Join</a>
                   </div>

@@ -1,0 +1,14 @@
+.card-head {
+  text-align: left;
+}
+
+.card-head h5 {
+  text-decoration: underline;
+  margin-bottom: 0px;
+}
+
+.card-head p {
+  padding: 0px;
+  margin: 0px;
+  color: rgba(0,0,0,0.5)
+}
