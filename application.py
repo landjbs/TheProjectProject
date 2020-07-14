@@ -157,6 +157,11 @@ def add_project():
         # dependent errors
         if form.requires_application.data and form.application_question.data=='':
             form.application_question.errors = ['Question cannot be blank.']
+        # unique errors
+        if not (db.session.query(Project).filter_by(name=form.name.data).first() is None):
+            form.name.errors = ['A project with this name already exists.']
+        if not (db.session.query(Project).filter_by(url=form.url.data).first() is None):
+            form.url.errors = ['A project with this url already exists.']
         # add the project
         else:
             project = Project(name = form.name.data,
