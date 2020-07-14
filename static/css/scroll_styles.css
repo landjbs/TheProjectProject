@@ -34,5 +34,13 @@ a:hover {
   color: rgba(0,0,0,0.5);
 }
 
+.fa-star {
+  color: gold;
+}
+
+.fa-star-o:hover {
+  color: gold;
+}
+
 /* .action-bar { */
 /* } */

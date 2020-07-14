@@ -52,7 +52,7 @@ projects = [Project(name='Boogle',
                     summary=('We use ML and VNNs to generate synths that can '
                             'replicate input sounds. I need someone to design '
                             'the synth and someone to help me with the ML.'),
-                    url='stradarouting.com',
+                    url=None,
                     application_question='What is your ML experience?',
                     open=True,
                     complete=False,

@@ -99,7 +99,7 @@ class Project(db.Model):
     # summary
     summary = Column(String(400), nullable=False)
     # url
-    url = Column(String(128), unique=True, nullable=True)
+    url = Column(String(128), nullable=True)
     # subject
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects')

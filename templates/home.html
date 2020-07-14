@@ -45,6 +45,9 @@
                     <p class="float-right">
                       <i class='far fa-user-circle'></i>
                       {{ project.members|length + 1 }}
+                      <br>
+                      <i class="fa fa-star"></i>
+                      {{ project.stars }}
                     </p>
                     <div class='card-head'>
                       <a href='project={{ project.name }}'>
@@ -72,7 +75,7 @@
                     <br>
                     <hr class="my-4">
                     <div class='action-bar'>
-                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
                       &nbsp;
                       <a class="btn">Join</a>
                       &nbsp;
