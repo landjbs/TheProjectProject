@@ -12,12 +12,13 @@ users = [User(name='Landon Smith',
              password='boop',
              subjects=None,
              github='www.github.com/hroatman',
-             about='I study Math.'),]
+             about='I study Math.')]
 
 
 for user in users:
     db.session.add(user)
 db.session.commit()
+
 
 projects = [Project(name='Boogle',
                     oneliner='A raw Python search engine.',
@@ -43,8 +44,49 @@ projects = [Project(name='Boogle',
                     open=True,
                     complete=False,
                     creator=db.session.query(User).get(int(1)),
-                    estimated_time=10,
-                    team_size=4,
+                    estimated_time=60,
+                    team_size=10,
+                    requires_application=True),
+            Project(name='Music AI',
+                    oneliner='ML for synth design.',
+                    summary=('We use ML and VNNs to generate synths that can '
+                            'replicate input sounds. I need someone to design '
+                            'the synth and someone to help me with the ML.'),
+                    url='stradarouting.com',
+                    application_question='What is your ML experience?',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(1)),
+                    estimated_time=5,
+                    team_size=3,
+                    requires_application=True),
+            Project(name='NonLinear Gradient Optimization',
+                    oneliner='A new type of batch optimizer.',
+                    summary=('We take advantage of batch redundancy to '
+                            'run batch gradient through nonlinearity with '
+                            'learnable parameters that can help scale learning '
+                            'speeds and accelerate convergence of easy params.'),
+                    url=None,
+                    application_question='Do you like math?',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(1)),
+                    estimated_time=3,
+                    team_size=2,
+                    requires_application=True),
+            Project(name='Finance Bots',
+                    oneliner='Use .',
+                    summary=('We take advantage of batch redundancy to '
+                            'run batch gradient through nonlinearity with '
+                            'learnable parameters that can help scale learning '
+                            'speeds and accelerate convergence of easy params.'),
+                    url=None,
+                    application_question='Do you like math?',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(1)),
+                    estimated_time=3,
+                    team_size=2,
                     requires_application=True),
             ]
 
