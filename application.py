@@ -1,3 +1,4 @@
+from sqlalchemy import asc
 from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
@@ -147,10 +148,14 @@ def home():
     recs = db.session.query(Project).limit(9)
     recommended_tabs = [recs[:3], recs[3:6], recs[6:9]]
     # top projects
-    tops = db.session.query(Project).order_by(project.stars).limit(9)
+    tops = db.session.query(Project).order_by(asc(Project.stars)).limit(9)
     top_tabs = [tops[:3], tops[3:6], tops[6:9]]
+    # user projects
+    users_projs = db.session.query(Project).filter_by(creator=current_user).limit(9)
+    users_tabs = [users_projs[:3], users_projs[3:6], users_projs[6:9]]
     return render_template('home.html', recommended_tabs=recommended_tabs,
-                            top_tabs=top_tabs, current_user=current_user)
+                            top_tabs=top_tabs, users_tabs=users_tabs,
+                            current_user=current_user)
 
 
 @login_required
