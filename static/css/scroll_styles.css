@@ -1,3 +1,10 @@
+.card-text {
+    min-height: 200px;
+    max-height: 200px;
+    overflow: scroll;
+    text-align: left;
+}
+
 .card-head {
   text-align: left;
 }
@@ -23,11 +30,6 @@ a:hover {
   padding: 0px;
   margin: 0px;
   color: rgba(0,0,0,0.5);
-}
-
-.card-text {
-  text-align: left;
-  overflow: scroll;
 }
 
 .card-foot {
