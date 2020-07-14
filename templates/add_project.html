@@ -59,12 +59,11 @@
               </div>
             {% else %}
               <div class='input-box'>
-                {% if not elt.errors %}
-                  {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
-                {% else %}
-                  {{ elt(class='input invalid') }}
-                  <p class='warning'>{{ elt.errors[0] }}</p>
-                {% endif %}
+                {% set c = 'input valid' if not elt.errors else 'input invalid'%}
+                {% set max = elt.render_kw.get('max') %}
+                {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
+                       maxlength=max) }}
+                <p class='warning'>{{ elt.errors[0] }}</p>
               </div>
             {% endif %}
           </div>

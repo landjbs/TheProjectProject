@@ -119,7 +119,7 @@ class Project(db.Model):
     # requires application
     requires_application = Column(Boolean, nullable=False)
     # applicaiton question
-    application_question = Column(String(250), nullable=True)
+    application_question = Column(String(128), nullable=True)
     # max team size
     team_size = Column(Integer, nullable=False)
     ## timing ##

@@ -90,25 +90,21 @@ class Add_Project(BaseForm):
                        validators=[DataRequired(), Length(1, 40)],
                        description='Give your project a name!',
                        render_kw={'placeholder':'',
-                                  'max': 40,
-                                  'counter_id': 'counter_name',
-                                  'message_id': 'message_name'})
+                                  'max': 40})
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
                            description='One line description of your project.',
                            render_kw={'placeholder':'',
-                                      'max': 40,
-                                      'counter_id': 'counter_oneliner',
-                                      'message_id': 'message_oneliner'})
+                                      'max': 40})
     summary = TextField(label='Summary',
-                        validators=[DataRequired(), Length(1, 500)],
+                        validators=[DataRequired(), Length(1, 400)],
                         description='Describe your project in more detail.',
-                        render_kw={'placeholder':''})
+                        render_kw={'placeholder':'', 'max':400})
     url = StringField(label='URL',
                     validators=[Length(0, 128)],
                     description=('You can link media (eg. a Github, website, '
                                  'doc, etc.) to showcase your progress.'),
-                    render_kw={'placeholder':''})
+                    render_kw={'placeholder':'', 'max':128})
     subjects = SelectMultipleField('Subjects',
                                    description=('What subjects might this '
                                                 'project involve?'),
@@ -121,10 +117,10 @@ class Add_Project(BaseForm):
                             description=('Applications allow you to choose '
                                          'who joins the project.'))
     application_question = TextField('Application Question',
-                                validators=[Length(0, 250)],
+                                validators=[Length(0, 128)],
                                 description=('Add a question to screen '
                                             'applicants.'),
-                                render_kw={'placeholder':''})
+                                render_kw={'placeholder':'', 'max':128})
     estimated_time = FloatField('Estimated Time',
                                 description=('How long you '
                                 'think the project might take.'))
