@@ -89,11 +89,17 @@ class Add_Project(BaseForm):
     name = StringField(label='Name',
                        validators=[DataRequired(), Length(1, 40)],
                        description='Give your project a name!',
-                       render_kw={'placeholder':''})
+                       render_kw={'placeholder':'',
+                                  'max': 40,
+                                  'counter_id': 'counter_name',
+                                  'message_id': 'message_name'})
     oneliner = StringField(label='One-Liner',
-                           validators=[DataRequired(), Length(1,40)],
+                           validators=[DataRequired(), Length(1, 40)],
                            description='One line description of your project.',
-                           render_kw={'placeholder':''})
+                           render_kw={'placeholder':'',
+                                      'max': 40,
+                                      'counter_id': 'counter_oneliner',
+                                      'message_id': 'message_oneliner'})
     summary = TextField(label='Summary',
                         validators=[DataRequired(), Length(1, 500)],
                         description='Describe your project in more detail.',

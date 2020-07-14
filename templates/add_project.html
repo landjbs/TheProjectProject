@@ -28,12 +28,20 @@
               {% endif %}
             </div>
             <div class='input-box'>
+              {% if elt.render_kw.get('max')!=None %}
+                {% set max = 40 %}
+              {% else %}
+                {% set max = 20 %}
+              {% endif %}
               {% if not elt.errors %}
-                {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
+                <input class='input valid' placeholder='{{ elt.render_kw['placeholder'] }}'
+                onkeyup="textCounter(this, counter_{{ elt.name }}, {{ max }});"
+                id={{ elt.render_kw['message_id'] }} required/>
               {% else %}
                 {{ elt(class='input invalid') }}
                 <p class='warning'>{{ elt.errors[0] }}</p>
               {% endif %}
+              <input disabled  maxlength="3" size="3" value="{{ max }}" id="counter_{{ elt.name }}">
             </div>
           </div>
         {% endfor %}
@@ -119,13 +127,12 @@
 
 <script>
   // text counter
-  function textCounter(field,field2,maxlimit) {
-    var countfield = document.getElementById(field2);
+  function textCounter(field, field2, maxlimit) {
     if ( field.value.length > maxlimit ) {
       field.value = field.value.substring( 0, maxlimit );
       return false;
     } else {
-      countfield.value = maxlimit - field.value.length;
+      field2.value = maxlimit - field.value.length;
     }
   };
 
