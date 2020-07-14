@@ -53,3 +53,18 @@ body {
   display: block;
   /* color: grey; */
 }
+
+.search-bar {
+  color: white;
+  border-color: transparent;
+  border-bottom: 1px solid white;
+  background-color: black;
+  border-radius: 0%;
+  padding: 0px;
+}
+
+.search-bar:focus {
+  background-color: black;
+  color: white;
+  border-color: transparent;
+}

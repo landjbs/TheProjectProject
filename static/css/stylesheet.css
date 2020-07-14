@@ -9,6 +9,13 @@ mark {
   color: black;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 a {
   color: #FFFC43;
 }
