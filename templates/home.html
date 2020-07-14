@@ -28,14 +28,26 @@
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
       {% for tab in projects %}
-        {% if loop.index==0 %}
+        {% if loop.index==1 %}
         <div class="carousel-item active">
         {% else %}
-        <div class="carousel-item active">
+        <div class="carousel-item">
         {% endif %}
-        {% for project in tab %}
-          <h1>{{ project }}</h1>
-        {% endfor %}
+          <div class='row'>
+            {% for project in tab %}
+              <div class="col-md-4">
+                <div class="card mb-2">
+                  <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+                  alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">{{ project.name }}</h4>
+                    <p class="card-text">{{ project.summary }}</p>
+                    <a class="btn btn-primary">Join</a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
         </div>
       {% endfor %}
     </div>
