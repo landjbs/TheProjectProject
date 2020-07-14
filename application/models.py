@@ -93,9 +93,11 @@ class Project(db.Model):
     id = Column(Integer, primary_key=True)
     ## base info ##
     # name
-    name = Column(String(128), unique=True, nullable=False)
+    name = Column(String(40), unique=True, nullable=False)
+    # oneliner
+    oneliner = Column(String(40))
     # summary
-    summary = Column(String(500), nullable=False)
+    summary = Column(String(400), nullable=False)
     # url
     url = Column(String(128), unique=True, nullable=True)
     # subject
