@@ -218,5 +218,12 @@ def project(project_name):
     return render_template('project.html', project=project)
 
 
+@application.route('/search', methods=['POST'])
+def search():
+    print(request.form)
+    return render_template('project.html', project=project)
+
+
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
