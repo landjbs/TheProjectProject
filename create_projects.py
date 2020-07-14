@@ -75,19 +75,32 @@ projects = [Project(name='Boogle',
                     team_size=2,
                     requires_application=True),
             Project(name='Finance Bots',
-                    oneliner='Use .',
-                    summary=('We take advantage of batch redundancy to '
-                            'run batch gradient through nonlinearity with '
-                            'learnable parameters that can help scale learning '
-                            'speeds and accelerate convergence of easy params.'),
+                    oneliner='Use RNNs for trading.',
+                    summary=('A series of RNN bots trained in tandem to '
+                            'evolve real-world strategies in simulated '
+                            'environment. With properly-caliberated env, they '
+                            'could ship this behavior to the real-world.'),
                     url=None,
-                    application_question='Do you like math?',
+                    application_question='',
                     open=True,
                     complete=False,
                     creator=db.session.query(User).get(int(1)),
                     estimated_time=3,
                     team_size=2,
-                    requires_application=True),
+                    requires_application=False),
+            Project(name='Bio Evolution',
+                    oneliner='Modeling yeast evolution.',
+                    summary=('Uses numpy to build exp models '
+                            'for predicting gene evolution in yeast cultures. '
+                            'We can then confirm this in vitrio.'),
+                    url=None,
+                    application_question='',
+                    open=True,
+                    complete=False,
+                    creator=db.session.query(User).get(int(2)),
+                    estimated_time=3,
+                    team_size=2,
+                    requires_application=False),
             ]
 
 for project in projects:
