@@ -141,6 +141,11 @@ def reject():
     return admin()
 
 ## HOME ##
+def partition_list(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i+n]
+
+
 @login_required
 @application.route('/home', methods=['GET', 'POST'])
 def home():
