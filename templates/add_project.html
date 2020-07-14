@@ -116,16 +116,6 @@
 </form>
 
 <script>
-  // text counter
-  function textCounter(field, field2, maxlimit) {
-    if ( field.value.length > maxlimit ) {
-      field.value = field.value.substring( 0, maxlimit );
-      return false;
-    } else {
-      field2.value = maxlimit - field.value.length;
-    }
-  };
-
   // query sliders
   var time_slider = document.getElementById("time_slider");
   var team_slider = document.getElementById("team_slider");

@@ -132,9 +132,11 @@ class Project(db.Model):
     # complete
     complete = Column(Boolean, nullable=False)
 
-    def __init__(self, name, summary, url, creator, open, requires_application,
-                 application_question, estimated_time, team_size, complete):
+    def __init__(self, name, oneliner, summary, url, creator, open,
+                requires_application, application_question, estimated_time,
+                team_size, complete):
         self.name = str(name)
+        self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url)
         # members

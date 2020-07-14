@@ -160,6 +160,7 @@ def add_project():
         # add the project
         else:
             project = Project(name = form.name.data,
+                          oneliner=form.oneliner.data,
                           summary = form.summary.data,
                           url = form.url.data,
                           creator = current_user,
