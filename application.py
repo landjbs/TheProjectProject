@@ -143,10 +143,14 @@ def reject():
 @login_required
 @application.route('/home', methods=['GET', 'POST'])
 def home():
-    projects = db.session.query(Project).limit(9)
-    project_tabs = [projects[:3], projects[3:6], projects[6:9]]
-    return render_template('home.html', projects=project_tabs,
-                           current_user=current_user)
+    # recommended projects
+    recs = db.session.query(Project).limit(9)
+    recommended_tabs = [recs[:3], recs[3:6], recs[6:9]]
+    # top projects
+    tops = db.session.query(Project).order_by(project.stars).limit(9)
+    top_tabs = [tops[:3], tops[3:6], tops[6:9]]
+    return render_template('home.html', recommended_tabs=recommended_tabs,
+                            top_tabs=top_tabs, current_user=current_user)
 
 
 @login_required
@@ -154,16 +158,20 @@ def home():
 def add_project():
     form = Add_Project(request.form)
     if request.method=='POST' and form.validate():
+        error_flag = False
         # dependent errors
         if form.requires_application.data and form.application_question.data=='':
             form.application_question.errors = ['Question cannot be blank.']
+            error_flag = True
         # unique errors
         if not (db.session.query(Project).filter_by(name=form.name.data).first() is None):
             form.name.errors = ['A project with this name already exists.']
+            error_flag = True
         if not (db.session.query(Project).filter_by(url=form.url.data).first() is None):
             form.url.errors = ['A project with this url already exists.']
+            error_flag = True
         # add the project
-        else:
+        if not error_flag:
             project = Project(name = form.name.data,
                           oneliner=form.oneliner.data,
                           summary = form.summary.data,

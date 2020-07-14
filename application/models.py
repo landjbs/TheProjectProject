@@ -131,6 +131,8 @@ class Project(db.Model):
     estimated_time = Column(Integer, nullable=True)
     # complete
     complete = Column(Boolean, nullable=False)
+    ## buzz ##
+    stars = Column(Integer, nullable=False)
 
     def __init__(self, name, oneliner, summary, url, creator, open,
                 requires_application, application_question, estimated_time,
@@ -154,6 +156,8 @@ class Project(db.Model):
         self.completed_on = cur_time if complete else None
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
+        # buzz
+        self.stars = 0
 
     def __repr__(self):
         return f'<Project {self.name}>'
