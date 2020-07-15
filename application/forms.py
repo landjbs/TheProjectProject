@@ -121,7 +121,7 @@ class Add_Project(BaseForm):
                                 description=('Add a question to screen '
                                             'applicants.'),
                                 render_kw={'placeholder':'', 'max':128})
-    estimated_time = IntegerField('Estimated Time',
+    estimated_time = FloatField('Estimated Time',
                                   description=('How long you '
                                   'think the project might take.'),
                                   render_kw={'min':0, 'max':30, 'start':7})

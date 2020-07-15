@@ -12,7 +12,7 @@
 {% block content %}
 
 <form class='container' style='border:1px solid white;background:black;' id='project_form' method='post'>
-    <div class='row row-button' style='margin:0px;'>
+    <div class='row row-button'>
       <div class='col'>
         <u><h3 style='text-align:left; margin:0px;'>describe your idea.</h3></u>
       </div>
@@ -100,7 +100,7 @@
             </div>
             {% if elt.type=='FloatField' %}
               <div class="slidecontainer">
-                <input type="range" min="1" max="20" value="5" class="slider"
+                <input type="range" min="1" max="30" value="7" class="slider"
                       name='{{ elt.name }}' id="time_slider">
               </div>
               <p id='time-out' style='display: inline;'></p>
@@ -108,9 +108,7 @@
               <span class="select_subject" id='{{ elt.name }}' name='{{ elt.name }}'></span>
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
-                <input type="range" min='{{ elt.render_kw["min"] }}'
-                      max='{{ elt.render_kw["min"] }}'
-                      value='{{ elt.render_kw["start"] }}' class="slider"
+                <input type="range" min="2" max="20" value="10" class="slider"
                       name='{{ elt.name }}' id="team_slider">
               </div>
               <p id='team-out' style='display: inline;'></p>
@@ -143,10 +141,10 @@
   team_out.innerHTML = team_slider.value + ' people';
   // time sliding
   time_slider.oninput = function() {
-    if (this.value==0) {
+    if (this.value==1) {
       time_out.innerHTML = 'n.a.';
     }
-    else if (this.value=='{{ form.estimated_time.render_kw["max"] }}') {
+    else if (this.value==30) {
       time_out.innerHTML = 'long term';
     }
     else {
@@ -154,7 +152,7 @@
     }
   };
   team_slider.oninput = function() {
-    if (this.value=='{{ form.team_size.render_kw["max"] }}') {
+    if (this.value==20) {
       team_out.innerHTML = 'comunity-wide';
     }
     else {
@@ -180,18 +178,18 @@
 
   function not_complete() {
     document.getElementById("time_slider").disabled = false;
-    time_out.innerHTML = '{{ form.estimated_time.render_kw["start"] }} days';
-    document.getElementById("time_slider").value = '{{ form.estimated_time.start }}';
+    time_out.innerHTML = '7 days';
+    document.getElementById("time_slider").value = 7;
     document.getElementById("estimated_time_segment").style.opacity = 1;
     document.getElementById('on-open').checked = true;
     toggle_open();
   };
 
   function is_open() {
-    // change team to 2
+    // change team to 10
     document.getElementById("team_slider").disabled = false;
-    document.getElementById("team_slider").value = '{{ form.team_size.start }}';
-    team_out.innerHTML = '{{ form.team_size.render_kw["start"] }} people';
+    document.getElementById("team_slider").value = "10";
+    team_out.innerHTML = '10 people';
     document.getElementById("team_size_segment").style.opacity = 1;
     // requires application set to true
     document.getElementById('on-requires_application').checked = true;
