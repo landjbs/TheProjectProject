@@ -29,9 +29,21 @@ body {
 }
 
 .row-button {
-  margin: 0px;
-  padding: 0px;
+  margin: 0px !important;
+  padding: 0px !important;
+  background: black;
+  border-color: transparent;
+}
+
+.add-button {
   background: white;
+  border-color: white;
+  color: black;
+}
+
+.add-button:hover {
+  background: black;
+  color: white;
 }
 
 .container {
