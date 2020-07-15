@@ -3,9 +3,12 @@ body {
   color: white;
 }
 
-h3 {
-  text-decoration: underline;
-  padding-bottom: 5%;
+.head-row {
+  border-bottom: 1px solid white;
+}
+
+.left {
+  border-right: 1px solid white;
 }
 
 .input-segment {
