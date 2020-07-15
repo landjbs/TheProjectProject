@@ -17,14 +17,13 @@
       <div class='col left'>
         <h3>description</h3>
       </div>
-      <div class='col'>
+      <div class='col left right'>
         <h3>team</h3>
       </div>
-      <div class='col'>
+      <div class='col right'>
         <h3>management</h3>
       </div>
     </div>
-    <br>
     <div class='row'>
       <div class='col left'>
         {% for elt in [form.name, form.oneliner, form.summary, form.url]%}
@@ -48,7 +47,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class='col'>
+      <div class='col left right'>
         {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
           <div class="row input-segment" id='{{ elt.name }}_segment'>
             <div class='input-title' id='{{ elt.name }}_label'>
@@ -79,7 +78,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class='col'>
+      <div class='col right'>
         {% for elt in [form.estimated_time, form.team_size, form.subjects] %}
           <div class="row input-segment" id='{{ elt.name }}_segment'>
             <div class='input-title'>

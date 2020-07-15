@@ -9,6 +9,12 @@ body {
 
 .left {
   border-right: 1px solid white;
+  padding-right: 5%;
+}
+
+.right {
+  border-left: 1px solid white;
+  padding-left: 5%;
 }
 
 .input-segment {
