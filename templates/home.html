@@ -34,7 +34,7 @@
                       {{ project.stars }}
                     </p>
                     <div class='card-head'>
-                      <a href='project={{ project.name }}'>
+                      <a class='project-name' href='project={{ project.name }}'>
                         <h5>{{ project.name }}</h5>
                       </a>
                       <a href='user={{ project.creator.email }}'>
@@ -107,7 +107,7 @@
                     {{ project.stars }}
                   </p>
                   <div class='card-head little'>
-                    <a href='project={{ project.name }}'>
+                    <a class='project-name' href='project={{ project.name }}'>
                       <h5>{{ project.name }}</h5>
                     </a>
                     <a href='user={{ project.creator.email }}'>
@@ -149,7 +149,7 @@
                       {{ project.members|length + 1 }}
                     </p>
                     <div class='card-head tiny'>
-                      <a href='project={{ project.name }}'>
+                      <a class='project-name' href='project={{ project.name }}'>
                         <h5>{{ project.name }}</h5>
                       </a>
                     </div>
