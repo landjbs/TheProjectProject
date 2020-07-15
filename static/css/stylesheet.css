@@ -3,6 +3,13 @@ body {
   font-family: 'Varela Round';
 }
 
+/* @media only screen and (max-width: 1026px) {
+    body {
+        display: none;
+        background: black;
+    }
+} */
+
 mark {
   background-color: white;
   padding: 0 0.1em;
@@ -24,7 +31,6 @@ a:focus, a:hover {
   text-decoration: none;
   color: #43B5FF;
 }
-
 
 #mainNav {
   min-height: 56px;

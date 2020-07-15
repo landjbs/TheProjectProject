@@ -4,7 +4,7 @@ body {
 }
 
 #mainNav {
-  background-color: black;
+  background-color: transparent;
 }
 
 @media (max-width: 991px) {

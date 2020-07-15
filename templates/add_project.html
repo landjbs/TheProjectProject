@@ -12,12 +12,12 @@
 {% block content %}
 
 <form class='container' style='border:1px solid white;background:black;' id='project_form' method='post'>
-    <div class='row row-button'>
+    <div class='row row-button' style='margin:0px;'>
       <div class='col'>
-        <!-- <h1 style='text-align:left;'>create your project.</h1> -->
+        <u><h3 style='text-align:left; margin:0px;'>describe your idea.</h3></u>
       </div>
       <div class='col col-lg-2 add-button' onclick='submit()'>
-        Add your project
+        add project.
       </div>
     </div>
     {{ form.csrf_token }}
@@ -100,7 +100,7 @@
             </div>
             {% if elt.type=='FloatField' %}
               <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="40" class="slider"
+                <input type="range" min="1" max="20" value="5" class="slider"
                       name='{{ elt.name }}' id="time_slider">
               </div>
               <p id='time-out' style='display: inline;'></p>
@@ -126,6 +126,7 @@
         {% endfor %}
       </div>
     </div>
+    <br>
 </form>
 
 <script>
