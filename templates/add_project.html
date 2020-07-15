@@ -11,7 +11,12 @@
 
 {% block content %}
 
-<form class='container big-box' style='border:1px solid white;background:black;' id='project_form' method='post'>
+<form class='container' style='border:1px solid white;background:black;' id='project_form' method='post'>
+    <div class='row row-button' onclick='submit()' style='padding:1px;'>
+      <div class='col'>
+        asdf
+      </div>
+    </div>
     {{ form.csrf_token }}
     <div class='row head-row'>
       <div class='col left'>
@@ -24,8 +29,8 @@
         <h3>management</h3>
       </div>
     </div>
-    <div class='row'>
-      <div class='col left'>
+    <div class='row top'>
+      <div class='col left top'>
         {% for elt in [form.name, form.oneliner, form.summary, form.url]%}
           <div class="row input-segment" style='text-align:left;'>
             <div class='input-title'>
@@ -117,9 +122,6 @@
           </div>
         {% endfor %}
       </div>
-    </div>
-    <div class='row box' onclick='submit()' style='padding:1px;'>
-      <p>share</p>
     </div>
 </form>
 
