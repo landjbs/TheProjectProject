@@ -12,9 +12,12 @@
 {% block content %}
 
 <form class='container' style='border:1px solid white;background:black;' id='project_form' method='post'>
-    <div class='row row-button' onclick='submit()' style='padding:1px;'>
+    <div class='row row-button'>
       <div class='col'>
-        asdf
+        Add your project
+      </div>
+      <div class='col col-lg-2 add-button' onclick='submit()' style='background:black;'>
+        Add your project
       </div>
     </div>
     {{ form.csrf_token }}

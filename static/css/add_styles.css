@@ -4,6 +4,7 @@ body {
 }
 
 .head-row {
+  padding-top: 2%;
   border-bottom: 1px solid white;
 }
 
@@ -22,11 +23,15 @@ body {
   padding-bottom: 2%;
 }
 
+.row {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 .row-button {
-  background: white;
   margin: 0px;
   padding: 0px;
-  color: black;
+  background: white;
 }
 
 .container {
