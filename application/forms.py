@@ -121,12 +121,14 @@ class Add_Project(BaseForm):
                                 description=('Add a question to screen '
                                             'applicants.'),
                                 render_kw={'placeholder':'', 'max':128})
-    estimated_time = FloatField('Estimated Time',
-                                description=('How long you '
-                                'think the project might take.'))
+    estimated_time = IntegerField('Estimated Time',
+                                  description=('How long you '
+                                  'think the project might take.'),
+                                  render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Max Team Size',
                             description=('The biggest you want your '
-                                         'team to be.'))
+                                         'team to be.'),
+                            render_kw={'min':1, 'max':30, 'start':7})
     complete = BooleanField('Completed',
                             validators=[],
                             description=('Whether the project has been '
