@@ -109,14 +109,16 @@ class Project(db.Model):
                             back_populates='projects')
     ## people ##
     # creator
-    creator_id = Column(Integer, ForeignKey('user.id'))
-    creator = relationship('User', back_populates='created_projects')
-    # pending members
-    pending_users = relationship('User', secondary='user_to_project',
-                                 back_populates='pending_projects')
-    # approved members
     members = relationship('User', secondary='user_to_project',
-                           back_populates='member_projects')
+                            back_populates='pending_projects')
+    # creator_id = Column(Integer, ForeignKey('user.id'))
+    # creator = relationship('User', back_populates='created_projects')
+    # pending members
+    # pending_users = relationship('User', secondary='user_to_project',
+    #                              back_populates='pending_projects')
+    # # approved members
+    # members = relationship('User', secondary='user_to_project',
+    #                        back_populates='member_projects')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
