@@ -29,7 +29,7 @@ class Member_Role(db.Model):
     __tablename__ = 'role'
     user_id = Column('user_id', ForeignKey(user.id), primary_key=True)
     project_id = Column('project_id', ForeignKey(project.id), primary_key=True)
-    role_id = Column('role_id', ForeignKey(role.id))
+    role_id = Column('role_id', Integer)
 
 
 ## BASE CLASSES ##
@@ -54,8 +54,7 @@ class User(db.Model, UserMixin):
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     # projects user created
-    projects = relationship('Project', secondary='user_to_project',
-                            back_populates='pending_users')
+    projects = relationship('Member_Role', back_populates='members')
     # created_projects = relationship('Project', back_populates='creator')
     # # # projects user applied to
     # pending_projects = relationship('Project', secondary='user_to_project',
@@ -116,8 +115,9 @@ class Project(db.Model):
                             back_populates='projects')
     ## people ##
     # creator
-    members = relationship('User', secondary='user_to_project',
-                            back_populates='pending_projects')
+    members = relationship('Member_Role', back_populates='projects')
+    # members = relationship('User', secondary='user_to_project',
+    #                         back_populates='pending_projects')
     # creator_id = Column(Integer, ForeignKey('user.id'))
     # creator = relationship('User', back_populates='created_projects')
     # pending members
