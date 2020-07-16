@@ -17,15 +17,22 @@ users = [User(name='Landon Smith',
              github='www.github.com/hroatman',
              about='I study Math.')]
 
+roles = [Role('Creator', 'red'),
+         Role('Pending', 'grey'),
+         Role('ML Expert', 'blue')]
 
-for user in users:
+
+for user in (users+roles):
     db.session.add(user)
 db.session.commit()
+
 
 
 user1 = db.session.query(User).get(int(1))
 user2 = db.session.query(User).get(int(2))
 
+role1 = db.session.query(Role).get(int(1))
+role2 = db.session.query(Role).get(int(2))
 
 project = Project(name='TEST', oneliner='boop', summary='boop',
                   url='boop', open=True, requires_application=False,
@@ -33,20 +40,18 @@ project = Project(name='TEST', oneliner='boop', summary='boop',
                 team_size=10, complete=False)
 
 # create parent, append a child via association
-a1 = Member_Role(role_id=0)
-a2 = Member_Role(role_id=1)
-a3 = Member_Role(role_id=2)
+a1 = Member_Role(role=role1)
+a2 = Member_Role(role=role2)
 a1.project = project
 a2.project = project
-a3.project = project
 user1.projects.append(a1)
-user2.projects.append(a2)
+# user2.projects.append(a2)
 
 db.session.add(project)
 db.session.commit()
 
-projects = db.session.query(Member_Role.project_id).filter(Member_Role.user_id==None, Member_Role.role_id==2)
-p = db.session.query(Project).filter(Project.id.in_(projects))
+projects = db.session.query(Member_Role.project_id).filter(Member_Role.user_id==None, Member_Role.role==role2)
+p = db.session.query(Project).filter(Project.id.in_(projects), Project.estimated_time>=11)
 for x in p:
     print(x.name)
 

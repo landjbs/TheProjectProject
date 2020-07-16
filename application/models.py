@@ -25,18 +25,18 @@ user_to_project = Table('user_to_project', db.Model.metadata,
 
 
 class Member_Role(db.Model):
-    __tablename__ = 'role'
+    __tablename__ = 'member_role'
     # primary key
     id = Column(Integer, primary_key=True)
     # members
     user_id = Column('user_id', ForeignKey('user.id'), nullable=True)
     user = relationship('User', back_populates='projects')
     # projects
-    project_id = Column('project_id', ForeignKey('project.id'))
+    project_id = Column('project_id', ForeignKey('project.id'), nullable=False)
     project = relationship('Project', back_populates='members')
     # roles
     # role_id = Column('role_id', Integer)
-    role_id = Column('role_id', ForeignKey('role.id'))
+    role_id = Column('role_id', ForeignKey('role.id'), nullable=False)
     role = relationship('Role', back_populates='projects')
 
 
@@ -216,6 +216,8 @@ class Role(db.Model):
     name = Column(String(40), unique=True, nullable=False)
     # color
     color = Column(String(6), unique=True, nullable=False)
+    # projects
+    projects = relationship('Member_Role', back_populates='role')
 
     def __init__(self, name, color):
         self.name = str(name)
