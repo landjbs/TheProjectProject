@@ -27,8 +27,13 @@ user_to_project = Table('user_to_project', db.Model.metadata,
 
 class Member_Role(db.Model):
     __tablename__ = 'role'
-    user_id = Column('user_id', ForeignKey(user.id), primary_key=True)
-    project_id = Column('project_id', ForeignKey(project.id), primary_key=True)
+    # members
+    user_id = Column('user_id', ForeignKey('user.id'), primary_key=True)
+    user = relationship('User', back_populates='projects')
+    # projects
+    project_id = Column('project_id', ForeignKey('project.id'), primary_key=True)
+    project = relationship('Project', back_populates='members')
+    # roles
     role_id = Column('role_id', Integer)
 
 
@@ -47,14 +52,14 @@ class User(db.Model, UserMixin):
     subjects = relationship('Subject', secondary='user_to_subject',
                             back_populates='users')
     # github
-    github = Column(String(254), unique=True, nullable=True)
+    github = Column(String(254), nullable=True)
     # about
     about = Column(String(500), nullable=False)
     # accepted
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     # projects user created
-    projects = relationship('Member_Role', back_populates='members')
+    projects = relationship('Member_Role', back_populates='user')
     # created_projects = relationship('Project', back_populates='creator')
     # # # projects user applied to
     # pending_projects = relationship('Project', secondary='user_to_project',
@@ -70,10 +75,8 @@ class User(db.Model, UserMixin):
         self.subjects = subjects if subjects else []
         self.github = str(github) if github!='' else None
         self.about = str(about)
+        # self.projects = []
         self.accepted = False
-        self.created_projects = []
-        self.pending_projects = []
-        self.member_projects = []
 
     def __repr__(self):
         return f'<User {self.name}>'
@@ -115,7 +118,7 @@ class Project(db.Model):
                             back_populates='projects')
     ## people ##
     # creator
-    members = relationship('Member_Role', back_populates='projects')
+    members = relationship('Member_Role', back_populates='project')
     # members = relationship('User', secondary='user_to_project',
     #                         back_populates='pending_projects')
     # creator_id = Column(Integer, ForeignKey('user.id'))
@@ -147,7 +150,7 @@ class Project(db.Model):
     ## buzz ##
     stars = Column(Integer, nullable=False)
 
-    def __init__(self, name, oneliner, summary, url, creator, open,
+    def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
                 team_size, complete):
         self.name = str(name)
@@ -155,10 +158,10 @@ class Project(db.Model):
         self.summary = str(summary)
         self.url = str(url)
         # members
+        self.members = []
         # self.creator_id = int(creator.id)
         # self.pending = []
         # self.members = []
-        self.members =
         self.team_size = team_size
         # application
         self.open = bool(open)
