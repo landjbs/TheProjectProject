@@ -186,3 +186,13 @@ class Subject(db.Model):
 
     def __repr__(self):
         return f'<Subject {self.name}>'
+
+
+class Role(db.Model):
+    __tablename__ = 'role'
+    # id
+    id = Column(Integer, primary_key=True)
+    # name
+    name = Column(String(40), unique=True, nullable=False)
+    # color
+    color = Column(String(6), unique=True, nullable=False)
