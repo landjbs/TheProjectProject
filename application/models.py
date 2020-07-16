@@ -25,6 +25,13 @@ user_to_project = Table('user_to_project', db.Model.metadata,
         # Column('user_roles', relationship('Role')))
 
 
+class Member_Role(db.Model):
+    __tablename__ = 'role'
+    user_id = Column('user_id', ForeignKey(user.id), primary_key=True)
+    project_id = Column('project_id', ForeignKey(project.id), primary_key=True)
+    role_id = Column('role_id', ForeignKey(role.id))
+
+
 ## BASE CLASSES ##
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
@@ -148,9 +155,10 @@ class Project(db.Model):
         self.summary = str(summary)
         self.url = str(url)
         # members
-        self.creator_id = int(creator.id)
-        self.pending = []
-        self.members = []
+        # self.creator_id = int(creator.id)
+        # self.pending = []
+        # self.members = []
+        self.members =
         self.team_size = team_size
         # application
         self.open = bool(open)
@@ -194,18 +202,18 @@ class Subject(db.Model):
         return f'<Subject {self.name}>'
 
 
-class Role(db.Model):
-    __tablename__ = 'role'
-    # id
-    id = Column(Integer, primary_key=True)
-    # name
-    name = Column(String(40), unique=True, nullable=False)
-    # color
-    color = Column(String(6), unique=True, nullable=False)
-
-    def __init__(self, name, color):
-        self.name = str(name)
-        self.color = str(name)
-
-    def __repr__(self):
-        return f'<Role {self.name}>'
+# class Role(db.Model):
+#     __tablename__ = 'role'
+#     # id
+#     id = Column(Integer, primary_key=True)
+#     # name
+#     name = Column(String(40), unique=True, nullable=False)
+#     # color
+#     color = Column(String(6), unique=True, nullable=False)
+#
+#     def __init__(self, name, color):
+#         self.name = str(name)
+#         self.color = str(name)
+#
+#     def __repr__(self):
+#         return f'<Role {self.name}>'
