@@ -182,7 +182,7 @@ class Subject(db.Model):
         self.name = str(name)
         self.users = []
         self.projects = []
-        self.color = color
+        self.color = str(color)
 
     def __repr__(self):
         return f'<Subject {self.name}>'
@@ -196,3 +196,10 @@ class Role(db.Model):
     name = Column(String(40), unique=True, nullable=False)
     # color
     color = Column(String(6), unique=True, nullable=False)
+
+    def __init__(self, name, color):
+        self.name = str(name)
+        self.color = str(name)
+
+    def __repr__(self):
+        return f'<Role {self.name}>'
