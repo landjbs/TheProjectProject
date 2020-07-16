@@ -31,16 +31,24 @@ project = Project(name='TEST', oneliner='boop', summary='boop',
                 team_size=10, complete=False)
 
 # create parent, append a child via association
-p = user1
-a = Member_Role(role_id=0)
-a.project = project
-p.projects.append(a)
+a1 = Member_Role(role_id=0)
+a2 = Member_Role(role_id=1)
+a1.project = project
+a2.project = project
+user1.projects.append(a1)
+user2.projects.append(a2)
+
+db.session.add(project)
+db.session.commit()
+
+p = db.session.query(Project).get(1)
+for mem in p.members:
 
 # iterate through child objects via association, including association
-# attributes
-for assoc in p.projects:
-    print(assoc.role_id)
-    print(assoc.project)
+# # attributes
+# for assoc in db.session.query(Project).filter(user1 in db.session.project.members.users):
+#     print(project.name)
+
 
 # projects = [Project(name='Boogle',
 #                     oneliner='A raw Python search engine.',

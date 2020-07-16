@@ -22,16 +22,17 @@ user_to_project = Table('user_to_project', db.Model.metadata,
         Column('user_id', Integer, ForeignKey('user.id')),
         Column('project_id', Integer, ForeignKey('project.id')),
         Column('role_id', Integer))
-        # Column('user_roles', relationship('Role')))
 
 
 class Member_Role(db.Model):
     __tablename__ = 'role'
+    # primary key
+    id = Column(Integer, primary_key=True)
     # members
-    user_id = Column('user_id', ForeignKey('user.id'), primary_key=True)
+    user_id = Column('user_id', ForeignKey('user.id'), nullable=True)
     user = relationship('User', back_populates='projects')
     # projects
-    project_id = Column('project_id', ForeignKey('project.id'), primary_key=True)
+    project_id = Column('project_id', ForeignKey('project.id'))
     project = relationship('Project', back_populates='members')
     # roles
     role_id = Column('role_id', Integer)
@@ -52,7 +53,7 @@ class User(db.Model, UserMixin):
     subjects = relationship('Subject', secondary='user_to_subject',
                             back_populates='users')
     # github
-    github = Column(String(254), nullable=True)
+    github = Column(String(254), unique=True, nullable=True)
     # about
     about = Column(String(500), nullable=False)
     # accepted
