@@ -19,8 +19,10 @@ project_to_subject = Table('project_to_subject', db.Model.metadata,
                         Column('subject_id', Integer, ForeignKey('subject.id')))
 
 user_to_project = Table('user_to_project', db.Model.metadata,
-                    Column('user_id', Integer, ForeignKey('user.id')),
-                    Column('project_id', Integer, ForeignKey('project.id')))
+        Column('user_id', Integer, ForeignKey('user.id')),
+        Column('project_id', Integer, ForeignKey('project.id')),
+        Column('role_id', Integer))
+        # Column('user_roles', relationship('Role')))
 
 
 ## BASE CLASSES ##
@@ -45,20 +47,22 @@ class User(db.Model, UserMixin):
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     # projects user created
-    created_projects = relationship('Project', back_populates='creator')
-    # # projects user applied to
-    pending_projects = relationship('Project', secondary='user_to_project',
-                                    back_populates='pending_users')
-    # # # projects user is member in
-    member_projects = relationship('Project', secondary='user_to_project',
-                                    back_populates='members')
+    projects = relationship('Project', secondary='user_to_project',
+                            back_populates='pending_users')
+    # created_projects = relationship('Project', back_populates='creator')
+    # # # projects user applied to
+    # pending_projects = relationship('Project', secondary='user_to_project',
+    #                                 back_populates='pending_users')
+    # # # # projects user is member in
+    # member_projects = relationship('Project', secondary='user_to_project',
+    #                                 back_populates='members')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
         self.email = str(email)
         self.password = str(self.set_password(password))
         self.subjects = subjects if subjects else []
-        self.github = str(github)
+        self.github = str(github) if github!='' else None
         self.about = str(about)
         self.accepted = False
         self.created_projects = []
