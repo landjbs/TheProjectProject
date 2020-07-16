@@ -1,5 +1,7 @@
+from sqlalchemy.sql import exists
+
 from application import db
-from application.models import Project, User, Member_Role
+from application.models import Project, User, Member_Role, Role
 
 
 users = [User(name='Landon Smith',
@@ -33,16 +35,20 @@ project = Project(name='TEST', oneliner='boop', summary='boop',
 # create parent, append a child via association
 a1 = Member_Role(role_id=0)
 a2 = Member_Role(role_id=1)
+a3 = Member_Role(role_id=2)
 a1.project = project
 a2.project = project
+a3.project = project
 user1.projects.append(a1)
 user2.projects.append(a2)
 
 db.session.add(project)
 db.session.commit()
 
-p = db.session.query(Project).get(1)
-for mem in p.members:
+projects = db.session.query(Member_Role.project_id).filter(Member_Role.user_id==None, Member_Role.role_id==2)
+p = db.session.query(Project).filter(Project.id.in_(projects))
+for x in p:
+    print(x.name)
 
 # iterate through child objects via association, including association
 # # attributes

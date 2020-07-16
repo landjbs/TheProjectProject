@@ -35,7 +35,8 @@ class Member_Role(db.Model):
     project_id = Column('project_id', ForeignKey('project.id'))
     project = relationship('Project', back_populates='members')
     # roles
-    role_id = Column('role_id', Integer)
+    # role_id = Column('role_id', Integer)
+    role_id = Column('project_id', ForeignKey('project.id'))
 
 
 ## BASE CLASSES ##
