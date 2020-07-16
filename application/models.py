@@ -36,7 +36,8 @@ class Member_Role(db.Model):
     project = relationship('Project', back_populates='members')
     # roles
     # role_id = Column('role_id', Integer)
-    role_id = Column('project_id', ForeignKey('project.id'))
+    role_id = Column('role_id', ForeignKey('role.id'))
+    role = relationship('Role', back_populates='projects')
 
 
 ## BASE CLASSES ##
@@ -207,18 +208,18 @@ class Subject(db.Model):
         return f'<Subject {self.name}>'
 
 
-# class Role(db.Model):
-#     __tablename__ = 'role'
-#     # id
-#     id = Column(Integer, primary_key=True)
-#     # name
-#     name = Column(String(40), unique=True, nullable=False)
-#     # color
-#     color = Column(String(6), unique=True, nullable=False)
-#
-#     def __init__(self, name, color):
-#         self.name = str(name)
-#         self.color = str(name)
-#
-#     def __repr__(self):
-#         return f'<Role {self.name}>'
+class Role(db.Model):
+    __tablename__ = 'role'
+    # id
+    id = Column(Integer, primary_key=True)
+    # name
+    name = Column(String(40), unique=True, nullable=False)
+    # color
+    color = Column(String(6), unique=True, nullable=False)
+
+    def __init__(self, name, color):
+        self.name = str(name)
+        self.color = str(name)
+
+    def __repr__(self):
+        return f'<Role {self.name}>'
