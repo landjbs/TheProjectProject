@@ -227,7 +227,7 @@ def like_action(project_id, action):
     if action == 'unlike':
         current_user.unstar_project(project)
         db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(request.referrer)
 
 
 @application.route('/search', methods=['POST'])

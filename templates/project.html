@@ -4,7 +4,7 @@
 
 {% block head %}
   {{ super() }}
-  <!-- Custom styles for this template -->
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <link href="css/scroll_styles.css" rel="stylesheet">
   <link href="css/sidebar.css" rel="stylesheet">
 {% endblock %}
@@ -26,6 +26,7 @@
               <a href='user={{ project.owner.email }}'>
                 by {{ project.owner.name }}
               </a>
+              <hr class='my-4'>
               <div class='action-bar'>
                 {% if current_user.has_starred(project) %}
                   <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
@@ -44,34 +45,37 @@
           </div>
 
           <ul class="list-unstyled components">
-              <p>Dummy Heading</p>
+              <p class='oneliner'>
+                {{ project.oneliner }}
+              </p>
+              <p>{{ project.summary }}</p>
               <li class="active">
-                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-                  <ul class="collapse list-unstyled" id="homeSubmenu">
+                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Members
+                  </a>
+                  <!-- <ul class="collapse list-unstyled" id="pageSubmenu">
+                    {% for member in project.members %}
                       <li>
-                          <a href="#">Home 1</a>
+                          <a href="#">
+                            {{ member.user.name }}
+                            {% for role in [member.role] %}
+                              {{ role.name }}
+                            {% endfor %}
+                          </a>
                       </li>
-                      <li>
-                          <a href="#">Home 2</a>
-                      </li>
-                      <li>
-                          <a href="#">Home 3</a>
-                      </li>
-                  </ul>
+                    {% endfor %}
+                  </ul> -->
               </li>
               <li>
-                  <a href="#">About</a>
-                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                  <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Media
+                  </a>
+                  <ul class="collapse list-unstyled" id="homeSubmenu">
+                    {% for link in [project.url] %}
                       <li>
-                          <a href="#">Page 1</a>
+                          <a href="#">{{ link }}</a>
                       </li>
-                      <li>
-                          <a href="#">Page 2</a>
-                      </li>
-                      <li>
-                          <a href="#">Page 3</a>
-                      </li>
+                    {% endfor %}
                   </ul>
               </li>
               <li>

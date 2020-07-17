@@ -97,18 +97,6 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return str(self.id)
 
-    def star_project(self, project):
-        self.starred.append(project)
-
-    def unstar_project(self, project):
-        try:
-            self.starred.remove(project)
-        except Exception as e:
-            print(e)
-
-    def has_starred(self, project):
-        return (project in self.starred)
-
 
 class Project(db.Model):
     __tablename__ = 'project'
@@ -151,6 +139,7 @@ class Project(db.Model):
     ## buzz ##
     stars = relationship('User', secondary='user_to_project',
                          back_populates='starred')
+
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
