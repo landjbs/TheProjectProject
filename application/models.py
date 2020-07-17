@@ -112,6 +112,8 @@ class Project(db.Model):
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects')
     ## people ##
+    creator_id = Column(Integer, ForeignKey('user.id'))
+    owner = relationship('Project', back_populates='owned')
     members = relationship('Member_Role', back_populates='project')
     ## join process ##
     # open (allows others to join)
