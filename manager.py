@@ -24,3 +24,9 @@ def create_project(project, user):
     a.project = project
     user.projects.append(a)
     db.session.add(project)
+
+
+def add_user_to_project(user, project, role):
+    a = Member_Role(role)
+    a.project = project
+    user.projects.append(a)
