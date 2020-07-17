@@ -152,12 +152,15 @@ def home():
     # recommended projects
     recs = db.session.query(Project).limit(30)
     recommended_tabs = partition_query(recs)
+    print('rec')
     # top projects
     tops = db.session.query(Project).order_by(asc(Project.stars)).limit(9)
     top_tabs = partition_query(tops)
+    print('tops')
     # user projects
-    users_projs = db.session.query(Project).filter_by(creator=current_user).limit(9)
-    users_tabs = partition_query(users_projs)
+    users_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
+    users_tabs = partition_query(tops)
+    print('here')
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, users_tabs=users_tabs,
                             current_user=current_user)
@@ -186,7 +189,7 @@ def add_project():
                           oneliner=form.oneliner.data,
                           summary = form.summary.data,
                           url = form.url.data,
-                          creator = current_user,
+                          owner = current_user,
                           open = form.open.data,
                           requires_application = form.requires_application.data,
                           application_question = form.application_question.data,
@@ -226,7 +229,9 @@ def search():
 
 @application.route('/test', methods=['GET', 'POST'])
 def test():
-    return render_template('test.html')
+    recs = db.session.query(Project).limit(30)
+    recommended_tabs = partition_query(recs)
+    return render_template('test.html', recommended_tabs=recommended_tabs)
 
 
 

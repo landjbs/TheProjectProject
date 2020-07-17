@@ -145,7 +145,7 @@ class Project(db.Model):
         self.summary = str(summary)
         self.url = str(url)
         # members
-        self.owener = owner
+        self.owner = owner
         self.team_size = team_size
         # application
         self.open = bool(open)

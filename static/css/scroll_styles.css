@@ -54,6 +54,31 @@ a:hover {
   color: red;
 }
 
+.member-hoverable {
+  display: inline;
+}
+
+/* Tooltip text */
+.member-hoverable .tooltiptext {
+  display: none;
+  text-align: left;
+  padding: 5px 5px;
+  color: white;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  border: 1px solid white;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.member-hoverable:hover .tooltiptext {
+  display: inline;
+  opacity: 1;
+  background: rgba(0,0,0,0.7);
+}
+
+
+
 .oneliner {
   margin: 0px;
   padding: 0px;
@@ -78,5 +103,6 @@ a:hover {
   color: blue;
 }
 
-/* .action-bar { */
-/* } */
+.action-bar {
+  text-align: center;
+}

@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<div class='big-box'>
 <div class='container my-4'>
   <h4 style='text-align:left;'>Recommended Projects</h4>
   <hr class="my-4">
@@ -26,19 +25,24 @@
               <div class="col-md-4">
                 <div class="card mb-2">
                   <div class="card-body">
-                    <p class="float-right">
-                      <i class='far fa-user-circle'></i>
-                      {{ project.members|length + 1 }}
+                      <div class='member-hoverable float-right'>
+                        <i class='far fa-user-circle'></i>
+                        {{ project.members|length  }}
+                        <span class="tooltiptext">
+                          {% for member in project.members %}
+                            <p>{{ member.user.name }}</p>
+                          {% endfor %}
+                        </span>
                       <br>
                       <i class="fa fa-star"></i>
                       {{ project.stars }}
-                    </p>
+                    </div>
                     <div class='card-head'>
                       <a class='project-name' href='project={{ project.name }}'>
                         <h5>{{ project.name }}</h5>
                       </a>
-                      <a href='user={{ project.creator.email }}'>
-                        <p>{{ project.creator.email }}</p>
+                      <a href='user={{ project.owner.email }}'>
+                        <p>{{ project.owner.name }}</p>
                       </a>
                       <!-- {% if project.url %}
                         <a href='{{ project.url }}'>{{ project.url }}</a>
@@ -101,7 +105,7 @@
                 <div class="card-body">
                   <p class="float-right">
                     <i class='far fa-user-circle'></i>
-                    {{ project.members|length + 1 }}
+                    {{ project.members|length  }}
                     <br>
                     <i class="fa fa-star"></i>
                     {{ project.stars }}
@@ -110,8 +114,8 @@
                     <a class='project-name' href='project={{ project.name }}'>
                       <h5>{{ project.name }}</h5>
                     </a>
-                    <a href='user={{ project.creator.email }}'>
-                      <p>{{ project.creator.email }}</p>
+                    <a href='user={{ project.owner.email }}'>
+                      <p>{{ project.owner.name }}</p>
                     </a>
                   </div>
                   <p class='oneliner'>
@@ -146,7 +150,7 @@
                   <div class="card-body">
                     <p class="float-right">
                       <i class='far fa-user-circle'></i>
-                      {{ project.members|length + 1 }}
+                      {{ project.members|length  }}
                     </p>
                     <div class='card-head tiny'>
                       <a class='project-name' href='project={{ project.name }}'>
@@ -166,7 +170,5 @@
       {% endfor %}
     </div>
   </div>
-</div>
-
 </div>
 {% endblock %}
