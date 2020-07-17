@@ -1,10 +1,24 @@
-from manager import add_user_to_project, create_project, create_role
-from application.models import Project, User
+from manager import add_user_to_project, create_project, create_role, db
+from application.models import Project, User, Role
 
-user = User('', '', '', '', '', '')
-project = Project('', '', '', '', '', False, '', 19, 10, False, user)
+user = User('Landon', 'b', '', '', '', '')
+user2 = User('2', 'l', '', '', '', '')
+project = Project('b', '', '', '', '', False, '', 19, 10, False, user)
+role = db.session.query(Role).filter_by(name='Data Scientist').first()
+
 
 create_project(project, user)
+
+for x in db.session.query(Project):
+    for m in x.members:
+        print(m.user, m.role)
+
+
+add_user_to_project(project, user2, role)
+
+for x in db.session.query(Project):
+    for m in x.members:
+        print(m.user, m.role)
 
 # from application import db
 # from application.models import User, Project, Subject
@@ -43,5 +57,3 @@ create_project(project, user)
 
 
 # db.session.commit()
-
-print(db.session.query(User).first().subjects)
