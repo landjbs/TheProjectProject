@@ -63,11 +63,11 @@
                     <hr class="my-4">
                     <div class='action-bar'>
                       {% if current_user.has_liked_post(post) %}
-                        <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}">
+                        <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
                           <i class="fa fa-star-o"></i>
                         </a>
                       {% else %}
-                        <a href="{{ url_for('like_action', post_id=post.id, action='like') }}">
+                        <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
                           <i class="fa fa-star"></i>
                         </a>
                       {% endif %}

@@ -246,6 +246,18 @@ def test():
     return render_template('test.html', recommended_tabs=recommended_tabs)
 
 
+@app.route('/like/<int:project_id>/<action>')
+@login_required
+def like_action(project_id, action):
+    project = Post.query.filter_by(id=project_id).first_or_404()
+    if action == 'like':
+        current_user.star_project(project)
+        db.session.commit()
+    if action == 'unlike':
+        current_user.unstar_project(project)
+        db.session.commit()
+    return redirect(request.referrer)
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
