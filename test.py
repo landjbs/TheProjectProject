@@ -1,7 +1,10 @@
 from manager import add_user_to_project, create_project, create_role
 from application.models import Project, User
 
-Project('', '', '', '', '', False, '', )
+user = User('', '', '', '', '', '')
+project = Project('', '', '', '', '', False, '', 19, 10, False, user)
+
+create_project(project, user)
 
 # from application import db
 # from application.models import User, Project, Subject

@@ -23,6 +23,7 @@ def create_user(user):
 
 def create_project(project, user):
     add_user_to_project(user, project, creator_role)
+    return project
 
 
 def add_user_to_project(user, project, role):
