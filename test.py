@@ -20,6 +20,7 @@ for x in db.session.query(Project):
     for m in x.members:
         print(m.user, m.role)
 
+
 # from application import db
 # from application.models import User, Project, Subject
 

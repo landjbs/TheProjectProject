@@ -6,12 +6,12 @@ except:
 
 from application import db
 from application.models import User
-from application.create_roles import create_roles
-from application.create_subjects import create_subjects
-
 
 db.create_all()
-create_roles()
-create_subjects()
+
+from application.create_fillers import create_fillers
+
+create_fillers()
+
 
 print("DB created.")
