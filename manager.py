@@ -3,6 +3,8 @@ from application.models import Project, User, Member_Role, Role
 
 ## CACHE ROLES ##
 creator_role = db.session.query(Role).filter_by(name='Creator').first()
+member_role = db.session.query(Role).filter_by(name='Member').first()
+
 
 def create_role(title, color):
     role = Role(title, color)
@@ -21,12 +23,18 @@ def create_user(user):
     db.session.commit()
 
 
-def add_user_to_project(project, user, role):
+def add_role_to_project(project, role):
     a = Member_Role(role=role)
     a.project = project
-    user.projects.append(a)
     db.session.add(project)
 
 
+def add_user_to_project(project, role, user):
+
+
+
 def create_project(project, user):
-    add_user_to_project(project, user, creator_role)
+    a = Member_Role(creator_role=role)
+    a.project = project
+    user.projects.append(a)
+    db.session.add(project)
