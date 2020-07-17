@@ -61,7 +61,7 @@ class User(db.Model, UserMixin):
     # accepted
     accepted = Column(Boolean, nullable=False)
     ## projects ##
-    # projects user created
+    owned = relationship('Project', back_populates='owner')
     projects = relationship('Member_Role', back_populates='user')
 
     def __init__(self, name, email, password, subjects, github, about):
@@ -112,7 +112,7 @@ class Project(db.Model):
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects')
     ## people ##
-    creator_id = Column(Integer, ForeignKey('user.id'))
+    owner_id = Column(Integer, ForeignKey('user.id'))
     owner = relationship('Project', back_populates='owned')
     members = relationship('Member_Role', back_populates='project')
     ## join process ##
@@ -144,6 +144,7 @@ class Project(db.Model):
         self.summary = str(summary)
         self.url = str(url)
         # members
+        self.owener = creator
         self.team_size = team_size
         # application
         self.open = bool(open)
@@ -156,7 +157,6 @@ class Project(db.Model):
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
         # buzz
-        self.creator = creator
         self.stars = 0
 
     def __repr__(self):
