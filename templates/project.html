@@ -18,9 +18,6 @@
               <p class='float-right'>
                 <i class="fa fa-star"></i>
                 {{ project.stars|length }}
-                &nbsp;
-                <i class='far fa-user-circle'></i>
-                {{ project.members|length }}
               </p>
               <h3>{{ project.name }}</h3>
               <p>
@@ -36,6 +33,9 @@
               <li class="active">
                   <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
                     Members
+                    &nbsp;
+                    <i class='far fa-user-circle'></i>
+                    {{ project.members|length }}
                   </a>
                   <ul class="collapse in list-unstyled" id="memberSubmenu">
                     {% for member in project.members %}
@@ -80,35 +80,9 @@
               </li>
           </ul>
       </nav>
+
+    <!-- Dark Overlay element -->
+    <div class="overlay" style='position:relative;'>TEST</div>
   </div>
 </body>
 {% endblock %}
-
-<script type="text/javascript">
-  // $(document).ready(function () {
-    // $('#memberSubmenu').collapse('in')
-  // });
-    // $(document).ready(function () {
-    //     $("#sidebar").mCustomScrollbar({
-    //         theme: "minimal"
-    //     });
-    //
-    //     $('#dismiss, .overlay').on('click', function () {
-    //         // hide sidebar
-    //         $('#sidebar').removeClass('active');
-    //         // hide overlay
-    //         $('.overlay').removeClass('active');
-    //     });
-    //
-    //     $('#sidebarCollapse').on('click', function () {
-    //         // open sidebar
-    //         $('#sidebar').addClass('active');
-    //         // fade in the overlay
-    //         $('.overlay').addClass('active');
-    //         $('.collapse.in').toggleClass('in');
-    //         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-    //     });
-    // });
-</script>
-
-</html>
