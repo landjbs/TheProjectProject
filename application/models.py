@@ -63,13 +63,6 @@ class User(db.Model, UserMixin):
     ## projects ##
     # projects user created
     projects = relationship('Member_Role', back_populates='user')
-    # created_projects = relationship('Project', back_populates='creator')
-    # # # projects user applied to
-    # pending_projects = relationship('Project', secondary='user_to_project',
-    #                                 back_populates='pending_users')
-    # # # # projects user is member in
-    # member_projects = relationship('Project', secondary='user_to_project',
-    #                                 back_populates='members')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
@@ -78,7 +71,6 @@ class User(db.Model, UserMixin):
         self.subjects = subjects if subjects else []
         self.github = str(github) if github!='' else None
         self.about = str(about)
-        # self.projects = []
         self.accepted = False
 
     def __repr__(self):
@@ -120,18 +112,7 @@ class Project(db.Model):
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects')
     ## people ##
-    # creator
     members = relationship('Member_Role', back_populates='project')
-    # members = relationship('User', secondary='user_to_project',
-    #                         back_populates='pending_projects')
-    # creator_id = Column(Integer, ForeignKey('user.id'))
-    # creator = relationship('User', back_populates='created_projects')
-    # pending members
-    # pending_users = relationship('User', secondary='user_to_project',
-    #                              back_populates='pending_projects')
-    # # approved members
-    # members = relationship('User', secondary='user_to_project',
-    #                        back_populates='member_projects')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
@@ -155,16 +136,12 @@ class Project(db.Model):
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
-                team_size, complete):
+                team_size, complete, creator):
         self.name = str(name)
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url)
         # members
-        self.members = []
-        # self.creator_id = int(creator.id)
-        # self.pending = []
-        # self.members = []
         self.team_size = team_size
         # application
         self.open = bool(open)
@@ -177,6 +154,7 @@ class Project(db.Model):
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
         # buzz
+        self.creator = creator
         self.stars = 0
 
     def __repr__(self):
