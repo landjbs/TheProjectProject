@@ -1,20 +1,40 @@
 from application import db
-from application.models import Role, Language
+from application.models import Role
 
-roles = [Role('Creator',            ''),
-         Role('Pending',            ''),
-         Role('Full-Stack',         ''),
-         Role('Front-End',          ''),
-         Role('Back-End',           ''),
-         Role('Data Scientist',     ''),
-         Role('Software Engineer',  ''),
-         Role('Database Engineer',  ''),
-         Role('UX/UI',              ''),
-         Role('Mobile Developer',   ''),
-         Role('Cloud Architect',    ''),
-         Role('ML/AI Engineer',     ''),
-         Role('Game Developer',     ''),
-         Role('Graphic Designer',   ''),
-         Role('Security Designer',  ''),
-         Role('Other',              '')
-        ]
+import random
+def colors(n):
+  ret = []
+  r = int(random.random() * 256)
+  g = int(random.random() * 256)
+  b = int(random.random() * 256)
+  step = 256 / n
+  for i in range(n):
+    r += step
+    g += step
+    b += step
+    r = int(r) % 256
+    g = int(g) % 256
+    b = int(b) % 256
+    ret.append((r,g,b))
+  return ret
+
+
+titles = ['Creator',
+          'Pending',
+          'Full-Stack',
+          'Front-End',
+          'Back-End',
+          'Data Scientist',
+          'Software Engineer',
+          'Database Engineer',
+          'UX/UI',
+          'Mobile Developer',
+          'Cloud Architect',
+          'ML/AI Engineer',
+          'Game Developer',
+          'Graphic Designer',
+          'Security Designer',
+          'Other']
+
+
+roles = [Role(t, c) for t, c in zip(titles, colors(len(titles)))]
