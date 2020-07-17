@@ -51,6 +51,10 @@ a:hover {
 }
 
 .project-name h5 {
+  color: purple;
+}
+
+.project-name h5:hover {
   color: red;
 }
 
