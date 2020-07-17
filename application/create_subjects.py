@@ -1,8 +1,9 @@
-import sys.path
+import sys
 sys.path.append('.')
 
 from application import db
-from applcation.models import Subject
+from application.models import Role
+
 
 
 subjects = [Subject('AI/ML', '#FF5733'),
