@@ -147,6 +147,9 @@ ul ul a {
     right: 10px;
 }
 
+.user-name:hover {
+  text-decoration: underline;
+}
 
 .oneliner {
   color: orange;

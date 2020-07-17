@@ -23,9 +23,9 @@
                 {{ project.members|length }}
               </p>
               <h3>{{ project.name }}</h3>
-              <a href='user={{ project.owner.email }}'>
-                by {{ project.owner.name }}
-              </a>
+              <p>
+                by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
+              </p>
           </div>
 
           <ul class="list-unstyled components">
@@ -34,13 +34,13 @@
               </p>
               <p>{{ project.summary }}</p>
               <li class="active">
-                  <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
+                  <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
                     Members
                   </a>
-                  <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <ul class="collapse in list-unstyled" id="memberSubmenu">
                     {% for member in project.members %}
                       <li>
-                          <a href="#">
+                          <a href="user={{ member.user.email }}">
                             {{ member.user.name }}
                             &nbsp;
                             {% for role in [member.role] %}
@@ -55,22 +55,28 @@
                   </ul>
               </li>
               <li>
-                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                  <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
                     Media
                   </a>
-                  <ul class="collapse list-unstyled" id="homeSubmenu">
+                  <ul class="collapse list-unstyled" id="mediaSubmenu">
                     {% for link in [project.url] %}
                       <li>
-                          <a href="#">{{ link }}</a>
+                          <a href="{{ link }}">{{ link }}</a>
                       </li>
                     {% endfor %}
                   </ul>
               </li>
               <li>
-                  <a href="#">Portfolio</a>
-              </li>
-              <li>
-                  <a href="#">Contact</a>
+                  <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Subjects
+                  </a>
+                  <ul class="collapse list-unstyled" id="subjectSubmenu">
+                    {% for subject in project.subjects %}
+                      <li>
+                          <a href="#">{{ subject }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
               </li>
           </ul>
       </nav>
@@ -79,27 +85,30 @@
 {% endblock %}
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#sidebar").mCustomScrollbar({
-            theme: "minimal"
-        });
-
-        $('#dismiss, .overlay').on('click', function () {
-            // hide sidebar
-            $('#sidebar').removeClass('active');
-            // hide overlay
-            $('.overlay').removeClass('active');
-        });
-
-        $('#sidebarCollapse').on('click', function () {
-            // open sidebar
-            $('#sidebar').addClass('active');
-            // fade in the overlay
-            $('.overlay').addClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-    });
+  // $(document).ready(function () {
+    // $('#memberSubmenu').collapse('in')
+  // });
+    // $(document).ready(function () {
+    //     $("#sidebar").mCustomScrollbar({
+    //         theme: "minimal"
+    //     });
+    //
+    //     $('#dismiss, .overlay').on('click', function () {
+    //         // hide sidebar
+    //         $('#sidebar').removeClass('active');
+    //         // hide overlay
+    //         $('.overlay').removeClass('active');
+    //     });
+    //
+    //     $('#sidebarCollapse').on('click', function () {
+    //         // open sidebar
+    //         $('#sidebar').addClass('active');
+    //         // fade in the overlay
+    //         $('.overlay').addClass('active');
+    //         $('.collapse.in').toggleClass('in');
+    //         $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+    //     });
+    // });
 </script>
 
 </html>
