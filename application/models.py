@@ -114,7 +114,7 @@ class Project(db.Model):
                             back_populates='projects')
     ## people ##
     owner_id = Column(Integer, ForeignKey('user.id'))
-    owner = relationship('Project', back_populates='owned')
+    owner = relationship('User', back_populates='owned')
     members = relationship('Member_Role', back_populates='project')
     ## join process ##
     # open (allows others to join)
