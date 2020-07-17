@@ -10,79 +10,91 @@
 {% endblock %}
 
 {% block content %}
-<body>
-  <div class="wrapper">
-      <!-- Sidebar -->
-      <nav id="sidebar">
-          <div class="sidebar-header">
-              <p class='float-right'>
-                <i class="fa fa-star"></i>
-                {{ project.stars|length }}
-              </p>
-              <h3>{{ project.name }}</h3>
-              <p>
-                by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
-              </p>
-          </div>
+<div class="wrapper">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <p class='float-right'>
+              <i class="fa fa-star"></i>
+              {{ project.stars|length }}
+            </p>
+            <h3>{{ project.name }}</h3>
+            <p>
+              by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
+            </p>
+        </div>
 
-          <ul class="list-unstyled components">
-              <p class='oneliner'>
-                {{ project.oneliner }}
-              </p>
-              <p>{{ project.summary }}</p>
-              <li class="active">
-                  <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
-                    Members
-                    &nbsp;
-                    <i class='far fa-user-circle'></i>
-                    {{ project.members|length }}
-                  </a>
-                  <ul class="collapse in list-unstyled" id="memberSubmenu">
-                    {% for member in project.members %}
-                      <li>
-                          <a href="user={{ member.user.email }}">
-                            {{ member.user.name }}
-                            &nbsp;
-                            {% for role in [member.role] %}
-                              {% if loop.index!=1 %}
-                              ,
-                              {% endif %}
-                              {{ role.name }}
-                            {% endfor %}
-                          </a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-              </li>
-              <li>
-                  <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
-                    Media
-                  </a>
-                  <ul class="collapse list-unstyled" id="mediaSubmenu">
-                    {% for link in [project.url] %}
-                      <li>
-                          <a href="{{ link }}">{{ link }}</a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-              </li>
-              <li>
-                  <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
-                    Subjects
-                  </a>
-                  <ul class="collapse list-unstyled" id="subjectSubmenu">
-                    {% for subject in project.subjects %}
-                      <li>
-                          <a href="#">{{ subject }}</a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-              </li>
-          </ul>
-      </nav>
+        <ul class="list-unstyled components">
+            <p class='oneliner'>
+              {{ project.oneliner }}
+            </p>
+            <p>{{ project.summary }}</p>
+            <li class="active">
+                <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
+                  Members
+                  &nbsp;
+                  <i class='far fa-user-circle'></i>
+                  {{ project.members|length }}
+                </a>
+                <ul class="collapse in list-unstyled" id="memberSubmenu">
+                  {% for member in project.members %}
+                    <li>
+                        <a href="user={{ member.user.email }}">
+                          {{ member.user.name }}
+                          &nbsp;
+                          {% for role in [member.role] %}
+                            {% if loop.index==1 %}
+                            - &nbsp;
+                            {% else %}
+                            ,
+                            {% endif %}
+                            {{ role.name }}
+                          {% endfor %}
+                        </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+            </li>
+            <li>
+                <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
+                  Media
+                </a>
+                <ul class="collapse list-unstyled" id="mediaSubmenu">
+                  {% for link in [project.url] %}
+                    <li>
+                        <a href="{{ link }}">{{ link }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+            </li>
+            <li>
+                <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                  Subjects
+                </a>
+                <ul class="collapse list-unstyled" id="subjectSubmenu">
+                  {% for subject in project.subjects %}
+                    <li>
+                        <a href="#">{{ subject }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!-- Page Content -->
+    <div id="content">
 
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+            </div>
+        </nav>
+    </div>
     <!-- Dark Overlay element -->
-    <div class="overlay" style='position:relative;'>TEST</div>
-  </div>
-</body>
+    <div class="overlay">Hsdafi</div>
 {% endblock %}
