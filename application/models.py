@@ -41,8 +41,7 @@ class Member_Role(db.Model):
     project_id = Column('project_id', ForeignKey('project.id'), nullable=False)
     project = relationship('Project', back_populates='members')
     # roles
-    role_id = Column('role_id', ForeignKey('role.id'), nullable=False)
-    role = relationship('Role', back_populates='projects')
+    roles = relationship('Role', secondary=role_to_member_role)
 
 
 ## BASE CLASSES ##
@@ -58,7 +57,7 @@ class User(db.Model, UserMixin):
     password = Column(String(254), nullable=False)
     # subject
     subjects = relationship('Subject', secondary='user_to_subject',
-                            back_populates='users')
+                            back_populates='users', lazy='dynamic')
     # github
     github = Column(String(254), unique=True, nullable=True)
     # about
@@ -67,9 +66,9 @@ class User(db.Model, UserMixin):
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
-    projects = relationship('Member_Role', back_populates='user')
+    projects = relationship('Member_Role', back_populates='user', lazy='dynamic')
     starred = relationship('Project', secondary='user_to_project',
-                           back_populates='stars')
+                           back_populates='stars', lazy='dynamic')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
@@ -117,11 +116,11 @@ class Project(db.Model):
     url = Column(String(128), nullable=True)
     # subject
     subjects = relationship('Subject', secondary='project_to_subject',
-                            back_populates='projects')
+                            back_populates='projects', lazy='dynamic')
     ## people ##
     owner_id = Column(Integer, ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
-    members = relationship('Member_Role', back_populates='project')
+    members = relationship('Member_Role', back_populates='project', lazy='dynamic')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
@@ -180,10 +179,10 @@ class Subject(db.Model):
     color = Column(String(6), unique=True, nullable=False)
     # users
     users = relationship('User', secondary='user_to_subject',
-                        back_populates='subjects')
+                        back_populates='subjects', lazy='dynamic')
     # projects
     projects = relationship('Project', secondary='project_to_subject',
-                            back_populates='subjects')
+                            back_populates='subjects', lazy='dynamic')
 
     def __init__(self, name, color):
         self.name = str(name)
@@ -204,7 +203,8 @@ class Role(db.Model):
     # color
     color = Column(String(6), unique=True, nullable=False)
     # projects
-    projects = relationship('Member_Role', back_populates='role')
+    projects = relationship('Member_Role', secondary=role_to_member_role,
+                            back_populates='roles', lazy='dynamic')
 
     def __init__(self, name, color):
         self.name = str(name)

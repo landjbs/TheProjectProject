@@ -11,7 +11,7 @@ from application.create_subjects import create_subjects
 
 create_roles()
 create_subjects()
-from manager import create_project
+from manager import create_project, add_role_to_user
 
 
 users = [User(name='Landon Smith',
@@ -35,7 +35,7 @@ db.session.commit()
 
 
 user1 = db.session.query(User).get(int(1))
-user1 = db.session.query(User).get(int(2))
+user2 = db.session.query(User).get(int(2))
 
 
 projects = [Project(name='Boogle',

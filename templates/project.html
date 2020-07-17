@@ -34,7 +34,7 @@
                   Members
                   &nbsp;
                   <i class='far fa-user-circle'></i>
-                  {{ project.members|length }}
+                  {{ project.members.count() }}
                 </a>
                 <ul class="collapse in list-unstyled" id="memberSubmenu">
                   {% for member in project.members %}
@@ -42,7 +42,7 @@
                         <a href="user={{ member.user.email }}">
                           {{ member.user.name }}
                           &nbsp;
-                          {% for role in [member.role] %}
+                          {% for role in member.roles %}
                             {% if loop.index==1 %}
                             - &nbsp;
                             {% else %}

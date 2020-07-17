@@ -24,21 +24,31 @@ def create_user(user):
 
 
 def add_role_to_project(project, role):
-    a = Member_Role(role=role)
+    a = Member_Role(roles=[role])
     a.project = project
     db.session.add(project)
 
 
 def add_user_to_project(project, user, role):
-    a = Member_Role(role=member_role)
+    a = Member_Role(roles=[member_role])
     a.project = project
     user.projects.append(a)
     db.session.add(project)
+    db.session.commit()
+
+
+def add_role_to_user(project, user, role):
+    member_role = user.projects.filter_by(id=project.id).first()
+    if not role in member_role.roles:
+        member_role.roles.append(role)
+    db.session.add(member_role)
+    db.session.commit()
 
 
 def create_project(project, user):
-    a = Member_Role(role=creator_role)
+    a = Member_Role(roles=[creator_role])
     a.project = project
+    print(user)
     user.projects.append(a)
     db.session.add(project)
 
