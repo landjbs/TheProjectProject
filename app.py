@@ -154,12 +154,12 @@ def home():
     recommended_tabs = partition_query(recs)
     print('rec')
     # top projects
-    tops = db.session.query(Project).order_by(asc(Project.stars)).limit(9)
-    top_tabs = partition_query(tops)
+    # tops = db.session.query(Project).order_by(asc(Project.stars.count)).limit(9)
+    top_tabs = partition_query(recs)
     print('tops')
     # user projects
     users_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
-    users_tabs = partition_query(tops)
+    users_tabs = partition_query(recs)
     print('here')
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, users_tabs=users_tabs,
@@ -220,6 +220,18 @@ def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
     return render_template('project.html', project=project)
 
+
+@app.route('/like/<int:post_id>/<action>')
+@login_required
+def like_action(post_id, action):
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    if action == 'like':
+        current_user.like_post(post)
+        db.session.commit()
+    if action == 'unlike':
+        current_user.unlike_post(post)
+        db.session.commit()
+    return redirect(request.referrer)
 
 @application.route('/search', methods=['POST'])
 def search():

@@ -64,6 +64,8 @@ class User(db.Model, UserMixin):
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Member_Role', back_populates='user')
+    starred = relationship('Project', secondary='user_to_project',
+                           back_populates='stars')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
@@ -135,7 +137,8 @@ class Project(db.Model):
     # complete
     complete = Column(Boolean, nullable=False)
     ## buzz ##
-    stars = Column(Integer, nullable=False)
+    stars = relationship('User', secondary='user_to_project',
+                         back_populates='starred')
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
@@ -157,8 +160,6 @@ class Project(db.Model):
         self.completed_on = cur_time if complete else None
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
-        # buzz
-        self.stars = 0
 
     def __repr__(self):
         return f'<Project {self.name}>'
