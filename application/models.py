@@ -97,6 +97,15 @@ class User(db.Model, UserMixin):
     def get_id(self):
         return str(self.id)
 
+    def star_project(self, project):
+        self.starred.append(project)
+
+    def unstar_project(self, project):
+        self.starred.remove(project)
+
+    def has_starred(self, project):
+        return (project in self.starred)
+
 
 class Project(db.Model):
     __tablename__ = 'project'

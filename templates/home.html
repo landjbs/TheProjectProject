@@ -62,13 +62,14 @@
                     <br>
                     <hr class="my-4">
                     <div class='action-bar'>
-                      <a href='/like'>
-                        <i class="fa fa-star-o"></i>
-                      </a>
                       {% if current_user.has_liked_post(post) %}
-                        <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}">Unlike</a>
+                        <a href="{{ url_for('like_action', post_id=post.id, action='unlike') }}">
+                          <i class="fa fa-star-o"></i>
+                        </a>
                       {% else %}
-                        <a href="{{ url_for('like_action', post_id=post.id, action='like') }}">Like</a>
+                        <a href="{{ url_for('like_action', post_id=post.id, action='like') }}">
+                          <i class="fa fa-star"></i>
+                        </a>
                       {% endif %}
                       &nbsp;
                       <a class="btn">Join</a>
