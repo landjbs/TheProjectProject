@@ -22,8 +22,12 @@ project_to_subject = Table('project_to_subject', db.Model.metadata,
 
 user_to_project = Table('user_to_project', db.Model.metadata,
         Column('user_id', Integer, ForeignKey('user.id')),
-        Column('project_id', Integer, ForeignKey('project.id')),
-        Column('role_id', Integer))
+        Column('project_id', Integer, ForeignKey('project.id')))
+
+
+role_to_member_role = Table('role_to_member_role', db.Model.metadata,
+                Column('role_id', Integer, ForeignKey('role.id')),
+                Column('member_role_id', Integer, ForeignKey('member_role.id')))
 
 
 class Member_Role(db.Model):
