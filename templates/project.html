@@ -26,22 +26,6 @@
               <a href='user={{ project.owner.email }}'>
                 by {{ project.owner.name }}
               </a>
-              <hr class='my-4'>
-              <div class='action-bar'>
-                {% if current_user.has_starred(project) %}
-                  <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
-                    <i class="fa fa-star"></i>
-                  </a>
-                {% else %}
-                  <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
-                    <i class="fa fa-star-o"></i>
-                  </a>
-                {% endif %}
-                &nbsp;
-                <a class="btn">Join</a>
-                &nbsp;
-                <i class="fa fa-share-alt" aria-hidden="false"></i>
-              </div>
           </div>
 
           <ul class="list-unstyled components">
@@ -53,18 +37,22 @@
                   <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">
                     Members
                   </a>
-                  <!-- <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <ul class="collapse list-unstyled" id="pageSubmenu">
                     {% for member in project.members %}
                       <li>
                           <a href="#">
                             {{ member.user.name }}
+                            &nbsp;
                             {% for role in [member.role] %}
+                              {% if loop.index!=1 %}
+                              ,
+                              {% endif %}
                               {{ role.name }}
                             {% endfor %}
                           </a>
                       </li>
                     {% endfor %}
-                  </ul> -->
+                  </ul>
               </li>
               <li>
                   <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
@@ -86,22 +74,6 @@
               </li>
           </ul>
       </nav>
-
-      <!-- Page Content -->
-      <div id="content">
-
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-              <div class="container-fluid">
-
-                  <button type="button" id="sidebarCollapse" class="btn btn-info">
-                      <i class="fas fa-align-left"></i>
-                      <span>Toggle Sidebar</span>
-                  </button>
-              </div>
-          </nav>
-      </div>
-      <!-- Dark Overlay element -->
-      <div class="overlay"></div>
   </div>
 </body>
 {% endblock %}
