@@ -10,3 +10,8 @@ def create_role(title, color):
 def create_subject(name, color):
     db.session.add(Subject(name, color))
     db.session.commit()
+
+
+def create_user(user):
+    db.session.add(user)
+    db.session.commit()
