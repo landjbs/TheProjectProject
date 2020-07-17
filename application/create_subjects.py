@@ -2,8 +2,7 @@ import sys
 sys.path.append('.')
 
 from application import db
-from application.models import Role
-
+from application.models import Subject
 
 
 subjects = [Subject('AI/ML', '#FF5733'),

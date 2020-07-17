@@ -139,13 +139,13 @@ class Project(db.Model):
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
-                team_size, complete, creator):
+                team_size, complete, owner):
         self.name = str(name)
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url)
         # members
-        self.owener = creator
+        self.owener = owner
         self.team_size = team_size
         # application
         self.open = bool(open)
