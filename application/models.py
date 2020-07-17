@@ -150,7 +150,7 @@ class Project(db.Model):
         # application
         self.open = bool(open)
         self.requires_application = bool(requires_application)
-        self.application_question = str(application_question)
+        self.application_question = str(application_question) if requires_application else None
         # timing and completion
         cur_time = datetime.now()
         self.posted_on = cur_time

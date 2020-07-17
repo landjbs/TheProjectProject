@@ -1,8 +1,7 @@
 from manager import add_user_to_project, create_project, create_role
 from application.models import Project, User
 
-
-
+Project('', '', '', '', '', False, '', )
 
 # from application import db
 # from application.models import User, Project, Subject
