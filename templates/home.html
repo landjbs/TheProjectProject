@@ -62,13 +62,13 @@
                     <br>
                     <hr class="my-4">
                     <div class='action-bar'>
-                      {% if current_user.has_liked_post(post) %}
+                      {% if current_user.has_starred(project) %}
                         <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
-                          <i class="fa fa-star-o"></i>
+                          <i class="fa fa-star"></i>
                         </a>
                       {% else %}
                         <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
-                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star-o"></i>
                         </a>
                       {% endif %}
                       &nbsp;
@@ -176,4 +176,14 @@
     </div>
   </div>
 </div>
+
+<script>
+$('#multi-item-example').on('slid.bs.carousel', function () {
+var currentSlide = $('#multi-item-example div.active').index();
+sessionStorage.setItem('lastSlide', currentSlide);
+});
+if(sessionStorage.lastSlide){
+  $("#multi-item-example").carousel((sessionStorage.lastSlide+1)*1);
+}
+</script>
 {% endblock %}

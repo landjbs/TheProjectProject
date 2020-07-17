@@ -101,7 +101,10 @@ class User(db.Model, UserMixin):
         self.starred.append(project)
 
     def unstar_project(self, project):
-        self.starred.remove(project)
+        try:
+            self.starred.remove(project)
+        except Exception as e:
+            print(e)
 
     def has_starred(self, project):
         return (project in self.starred)

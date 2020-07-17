@@ -221,17 +221,18 @@ def project(project_name):
     return render_template('project.html', project=project)
 
 
-@app.route('/like/<int:post_id>/<action>')
+@application.route('/like/<int:project_id>/<action>')
 @login_required
-def like_action(post_id, action):
-    post = Post.query.filter_by(id=post_id).first_or_404()
+def like_action(project_id, action):
+    project = Project.query.filter_by(id=project_id).first_or_404()
     if action == 'like':
-        current_user.like_post(post)
+        current_user.star_project(project)
         db.session.commit()
     if action == 'unlike':
-        current_user.unlike_post(post)
+        current_user.unstar_project(project)
         db.session.commit()
-    return redirect(request.referrer)
+    return redirect(url_for('home'))
+
 
 @application.route('/search', methods=['POST'])
 def search():
@@ -245,18 +246,6 @@ def test():
     recommended_tabs = partition_query(recs)
     return render_template('test.html', recommended_tabs=recommended_tabs)
 
-
-@app.route('/like/<int:project_id>/<action>')
-@login_required
-def like_action(project_id, action):
-    project = Post.query.filter_by(id=project_id).first_or_404()
-    if action == 'like':
-        current_user.star_project(project)
-        db.session.commit()
-    if action == 'unlike':
-        current_user.unstar_project(project)
-        db.session.commit()
-    return redirect(request.referrer)
 
 
 if __name__ == '__main__':
