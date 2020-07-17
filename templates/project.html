@@ -18,11 +18,29 @@
               <p class='float-right'>
                 <i class="fa fa-star"></i>
                 {{ project.stars|length }}
+                &nbsp;
+                <i class='far fa-user-circle'></i>
+                {{ project.members|length }}
               </p>
               <h3>{{ project.name }}</h3>
               <a href='user={{ project.owner.email }}'>
                 by {{ project.owner.name }}
               </a>
+              <div class='action-bar'>
+                {% if current_user.has_starred(project) %}
+                  <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
+                    <i class="fa fa-star"></i>
+                  </a>
+                {% else %}
+                  <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
+                    <i class="fa fa-star-o"></i>
+                  </a>
+                {% endif %}
+                &nbsp;
+                <a class="btn">Join</a>
+                &nbsp;
+                <i class="fa fa-share-alt" aria-hidden="false"></i>
+              </div>
           </div>
 
           <ul class="list-unstyled components">
