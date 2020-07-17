@@ -1,3 +1,6 @@
+import sys
+sys.path.append('.')
+
 from application import db
 from application.models import Role
 
@@ -37,4 +40,7 @@ titles = ['Creator',
           'Other']
 
 
-roles = [Role(t, c) for t, c in zip(titles, colors(len(titles)))]
+def create_roles():
+    for t, c in zip(titles, colors(len(titles))):
+        db.session.add(Role(t, c))
+    db.session.commit()

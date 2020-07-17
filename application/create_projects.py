@@ -1,3 +1,6 @@
+import sys
+sys.path.append('.')
+
 from sqlalchemy.sql import exists
 
 from application import db
@@ -51,7 +54,6 @@ db.session.add(project)
 db.session.commit()
 
 p = db.session.query(Project).get(1)
-print(p.members)
 
 # projects = db.session.query(Member_Role.project_id).filter(Member_Role.user_id==None, Member_Role.role==role2)
 # p = db.session.query(Project).filter(Project.id.in_(projects), Project.estimated_time>=11)

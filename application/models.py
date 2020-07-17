@@ -1,3 +1,4 @@
+import sys
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,6 +7,7 @@ from sqlalchemy import (Table, Column, ForeignKey, Integer, String, Boolean,
                         DateTime)
 from sqlalchemy_utils import IntRangeType
 
+sys.path.append('.')
 from application import db
 
 
@@ -35,7 +37,6 @@ class Member_Role(db.Model):
     project_id = Column('project_id', ForeignKey('project.id'), nullable=False)
     project = relationship('Project', back_populates='members')
     # roles
-    # role_id = Column('role_id', Integer)
     role_id = Column('role_id', ForeignKey('role.id'), nullable=False)
     role = relationship('Role', back_populates='projects')
 

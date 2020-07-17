@@ -1,4 +1,5 @@
 import re
+import sys
 from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
@@ -7,8 +8,10 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
 
-from . import db
-from .models import User, Subject
+sys.path.append('.')
+
+from application import db
+from application.models import User, Subject
 
 
 BaseForm = model_form_factory(FlaskForm)
