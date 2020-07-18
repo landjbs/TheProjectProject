@@ -153,10 +153,7 @@ def home():
     recs = db.session.query(Project).limit(30)
     recommended_tabs = partition_query(recs)
     # top projects
-    tops = db.session.query(Project).order_by(asc(Project.buzz)).limit(9)
-    # tops = db.session.query(Project).order_by(/(func.length(Project.stars))).limit(9)
-    tops = db.session.query(Project, func.count())
-    print([x for x in tops.all()])
+    tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
     top_tabs = partition_query(tops)
     # user projects
     users_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)

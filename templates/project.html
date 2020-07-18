@@ -16,7 +16,7 @@
         <div class="sidebar-header">
             <p class='float-right'>
               <i class="fa fa-star"></i>
-              {{ project.stars|length }}
+              {{ project.stars.all()|length }}
             </p>
             <h3>{{ project.name }}</h3>
             <p>
@@ -34,7 +34,7 @@
                   Members
                   &nbsp;
                   <i class='far fa-user-circle'></i>
-                  {{ project.members.count() }}
+                  {{ project.members.all()|length }}
                 </a>
                 <ul class="collapse in list-unstyled" id="memberSubmenu">
                   {% for member in project.members %}

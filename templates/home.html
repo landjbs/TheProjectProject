@@ -35,7 +35,7 @@
                         </span>
                       <br>
                       <i class="fa fa-star"></i>
-                      {{ project.stars|length }}
+                      {{ project.stars.all()|length }}
                     </div>
                     <div class='card-head'>
                       <a class='project-name' href='project={{ project.name }}'>
@@ -113,7 +113,7 @@
                     {{ project.members.all()|length  }}
                     <br>
                     <i class="fa fa-star"></i>
-                    {{ project.stars|length }}
+                    {{ project.stars.all()|length }}
                   </p>
                   <div class='card-head little'>
                     <a class='project-name' href='project={{ project.name }}'>

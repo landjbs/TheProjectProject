@@ -159,7 +159,6 @@ class Project(db.Model):
     # buzz
     buzz = Column(Integer, nullable=False)
 
-
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
                 team_size, complete, owner):
