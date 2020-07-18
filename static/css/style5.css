@@ -44,6 +44,9 @@ a, a:hover, a:focus {
   z-index: -1;
 }
 
+.bio {
+  border-bottom: 1px solid white;
+}
 
 #sidebar {
   min-width: 250px;
@@ -66,7 +69,8 @@ a, a:hover, a:focus {
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
 }
 
 #sidebar ul p {

@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/scroll_styles.css">
     <link rel="stylesheet" href="css/style5.css">
 
     <!-- Font Awesome JS -->
@@ -32,12 +33,14 @@
                   by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
                 </p>
             </div>
-
+            <hr class='my-4'>
             <ul class="list-unstyled components">
-                <p class='oneliner'>
-                  {{ project.oneliner }}
-                </p>
-                <p>{{ project.summary }}</p>
+                <div class='bio'>
+                  <p class='oneliner'>
+                    {{ project.oneliner }}
+                  </p>
+                  <p>{{ project.summary }}</p>
+                </div>
                 <li class="active">
                     <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
                       Members
