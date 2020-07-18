@@ -171,4 +171,8 @@ def create_fillers():
     for i in range(10):
         c = Comment(text=f'Hi x {i}!', author=user2, project=p)
         db.session.add(c)
+    p = db.session.query(Project).get(2)
+    for i in range(10):
+        c = Comment(text=f'Hi2 x {i}!', author=user2, project=p)
+        db.session.add(c)
     db.session.commit()
