@@ -51,15 +51,20 @@ a:hover {
 }
 
 .project-name h5 {
-  color: purple;
+  color: #5D00FF;
 }
 
 .project-name h5:hover {
-  color: red;
+  color: #DD00FF;
 }
 
 .member-hoverable {
   display: inline;
+}
+
+.owner:hover {
+  display: inline;
+  color: black;
 }
 
 /* Tooltip text */
@@ -87,7 +92,7 @@ a:hover {
   margin: 0px;
   padding: 0px;
   text-decoration:bold;
-  color: purple;
+  color: #FF5D00;
   text-align: left;
 }
 

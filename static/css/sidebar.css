@@ -63,7 +63,8 @@ a, a:hover, a:focus {
 
 #sidebar {
     /* don't forget to add all the previously mentioned styles here too */
-    background: #7386D5;
+    /* background: #7386D5; */
+    background: #5D00FF;
     color: #fff;
 }
 
