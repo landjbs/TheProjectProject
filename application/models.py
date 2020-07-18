@@ -264,4 +264,4 @@ class Comment(db.Model):
     timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
 
     def __init__(self):
-        return f'<Comment {self.author.name}, {self.timestamp}>'
+        return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}>'
