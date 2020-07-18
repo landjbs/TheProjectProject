@@ -121,10 +121,10 @@
                 <canvas id="best_solutions"></canvas>
               </div>
               <div class="col">
-                <h6>Comments</h6>
+                <h5>Comments</h5>
                 <div class="list-group">
                   {% for comment in project.comments %}
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
                       <div class="d-flex w-100 justify-content-between">
                         <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
                           {{ comment.author.name }}
@@ -132,7 +132,7 @@
                         <small>{{ comment.timestamp }}</small>
                       </div>
                       <p class="mb-1">{{ comment.text }}</p>
-                    </a>
+                    </div>
                   {% endfor %}
                 </div>
               </div>

@@ -224,3 +224,11 @@ a.article, a.article:hover {
 .oneliner {
   color: orange;
 }
+
+/* comment and text boxes */
+.list-group {
+  min-height: 35vh;
+  max-height: 35vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}

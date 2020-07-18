@@ -168,6 +168,7 @@ def create_fillers():
     for project in projects:
         create_project(project, user1)
     p = db.session.query(Project).get(1)
-    c = Comment(text='Hi!', author=user2, project=p)
-    db.session.add(c)
+    for i in range(10):
+        c = Comment(text=f'Hi x {i}!', author=user2, project=p)
+        db.session.add(c)
     db.session.commit()
