@@ -43,10 +43,10 @@ class Member_Role(db.Model):
     # roles
     roles = relationship('Role', secondary=role_to_member_role)
     # commits
-    commits = Column(Integer, nullable=False)
+    commits = Column(Integer, nullable=False, default=0)
     # tasks completed
-    tasks = relationship('Task', secondary=task_to_member_role,
-                         back_populates='members')
+    # tasks = relationship('Task', secondary=task_to_member_role,
+                         # back_populates='members')
 
 
 ## BASE CLASSES ##
@@ -163,6 +163,8 @@ class Project(db.Model):
                          back_populates='starred', lazy='dynamic')
     # buzz
     buzz = Column(Integer, nullable=False)
+    # comments
+    comments =
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
@@ -252,9 +254,12 @@ class Comment(db.Model):
     id = Column(Integer, primary_key=True)
     # text
     text = Column(String(160), nullable=False)
-    # poster
+    # author
     author_id = Column(Integer, ForeignKey('user.id'))
     author = relationship('User', back_populates='comments')
+    # project
+    project_id = Column(Integer, ForeignKey('project.id'))
+    project = relationship('Project', back_populates='comments')
     # time
     timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
 
