@@ -30,6 +30,11 @@ role_to_member_role = Table('role_to_member_role', db.Model.metadata,
                 Column('member_role_id', Integer, ForeignKey('member_role.id')))
 
 
+project_to_comment = Table('project_to_comment', db.Model.metadata,
+                Column('project_id', Integer, ForeignKey('project.id')),
+                Column('comment_id', Integer, ForeignKey('comment.id')))
+
+
 class Member_Role(db.Model):
     __tablename__ = 'member_role'
     # primary key
@@ -72,8 +77,10 @@ class User(db.Model, UserMixin):
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Member_Role', back_populates='user', lazy='dynamic')
+    # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
+    comments = relationship('Comment', back_populates='author')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
@@ -164,7 +171,7 @@ class Project(db.Model):
     # buzz
     buzz = Column(Integer, nullable=False)
     # comments
-    comments =
+    comments = relationship()
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
