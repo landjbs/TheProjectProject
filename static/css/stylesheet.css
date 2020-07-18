@@ -112,7 +112,14 @@ a:focus, a:hover {
     outline: none;
     border-bottom: 0.25rem solid #6376FF;
   }
+}
 
+.small-head {
+  color: white;
+}
+
+.navbar-toggler .navbar-toggler-right {
+  color: white;
 }
 
 .big-box {

@@ -10,7 +10,6 @@ body {
 @media (max-width: 991px) {
   .big-head {
     display: none;
-    color: black;
   }
   .small-head {
     display: block;
