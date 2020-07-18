@@ -116,13 +116,25 @@
             <div class="line"></div>
 
             <div class="row">
-              <div class="col-sm-4">
+              <div class="col">
                 <h6>Tasks</h6>
                 <canvas id="best_solutions"></canvas>
               </div>
-              <div class="col-sm-4">
+              <div class="col">
                 <h6>Comments</h6>
-                <canvas id="distance_traveled"></canvas>
+                <div class="list-group">
+                  {% for comment in project.comments %}
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                      <div class="d-flex w-100 justify-content-between">
+                        <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                          {{ comment.author.name }}
+                        </a>
+                        <small>{{ comment.timestamp }}</small>
+                      </div>
+                      <p class="mb-1">{{ comment.text }}</p>
+                    </a>
+                  {% endfor %}
+                </div>
               </div>
             </div>
 

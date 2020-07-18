@@ -4,14 +4,14 @@ sys.path.append('.')
 from sqlalchemy.sql import exists
 
 from application import db
-from application.models import Project, User, Member_Role, Role
+from application.models import Project, User, Member_Role, Role, Comment
 
 from application.create_roles import create_roles
 from application.create_subjects import create_subjects
 
 create_roles()
 create_subjects()
-from manager import create_project, add_role_to_user
+from manager import create_project, add_role_to_user, add_comment
 
 
 users = [User(name='Landon Smith',
@@ -167,4 +167,7 @@ projects = [Project(name='Boogle',
 def create_fillers():
     for project in projects:
         create_project(project, user1)
+    p = db.session.query(Project).get(1)
+    c = Comment(text='Hi!', author=user2, project=p)
+    db.session.add(c)
     db.session.commit()

@@ -31,7 +31,7 @@ role_to_member_role = Table('role_to_member_role', db.Model.metadata,
                 Column('role_id', Integer, ForeignKey('role.id')),
                 Column('member_role_id', Integer, ForeignKey('member_role.id')))
 
-# 
+#
 # project_to_comment = Table('project_to_comment', db.Model.metadata,
 #                 Column('project_id', Integer, ForeignKey('project.id')),
 #                 Column('comment_id', Integer, ForeignKey('comment.id')))
@@ -173,7 +173,7 @@ class Project(db.Model):
     # buzz
     buzz = Column(Integer, nullable=False)
     # comments
-    comments = relationship()
+    comments = relationship('Comment', back_populates='project')
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
@@ -272,5 +272,5 @@ class Comment(db.Model):
     # time
     timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
 
-    def __init__(self):
+    def __repr__(self):
         return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}>'
