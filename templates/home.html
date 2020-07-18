@@ -27,7 +27,7 @@
                   <div class="card-body">
                     <div class='member-hoverable float-right'>
                         <i class='far fa-user-circle'></i>
-                        {{ project.members.count()  }}
+                        {{ project.members.all()|length }}
                         <span class="tooltiptext">
                           {% for member in project.members %}
                             <p>{{ member.user.name }}</p>
@@ -110,7 +110,7 @@
                 <div class="card-body">
                   <p class="float-right">
                     <i class='far fa-user-circle'></i>
-                    {{ project.members|length  }}
+                    {{ project.members.all()|length  }}
                     <br>
                     <i class="fa fa-star"></i>
                     {{ project.stars|length }}
@@ -155,7 +155,7 @@
                   <div class="card-body">
                     <p class="float-right">
                       <i class='far fa-user-circle'></i>
-                      {{ project.members|length  }}
+                      {{ project.members.all()|length  }}
                     </p>
                     <div class='card-head tiny'>
                       <a class='project-name' href='project={{ project.name }}'>
@@ -185,5 +185,9 @@ sessionStorage.setItem('lastSlide', currentSlide);
 if(sessionStorage.lastSlide){
   $("#multi-item-example").carousel((sessionStorage.lastSlide+1)*1);
 }
+
+$('#multi-item-example').bind('mousewheel', function() {
+    $(this).carousel('next');
+});
 </script>
 {% endblock %}

@@ -68,7 +68,7 @@ class User(db.Model, UserMixin):
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Member_Role', back_populates='user', lazy='dynamic')
     starred = relationship('Project', secondary='user_to_project',
-                           back_populates='stars', lazy='dynamic')
+                           back_populates='stars')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
@@ -103,10 +103,12 @@ class User(db.Model, UserMixin):
     def star_project(self, project):
         if not self.has_starred(project):
             self.starred.append(project)
+            project.buzz += 1
 
     def unstar_project(self, project):
         if self.has_starred(project):
             self.starred.remove(project)
+            project.buzz -= 1
 
     def has_starred(self, project):
         return (project in self.starred)
@@ -150,9 +152,12 @@ class Project(db.Model):
     estimated_time = Column(Integer, nullable=True)
     # complete
     complete = Column(Boolean, nullable=False)
-    ## buzz ##
+    ## popularity ##
+    # stars
     stars = relationship('User', secondary='user_to_project',
-                         back_populates='starred')
+                         back_populates='starred', lazy='dynamic')
+    # buzz
+    buzz = Column(Integer, nullable=False)
 
 
     def __init__(self, name, oneliner, summary, url, open,
@@ -175,6 +180,7 @@ class Project(db.Model):
         self.completed_on = cur_time if complete else None
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
+        self.buzz = 0
 
     def __repr__(self):
         return f'<Project {self.name}>'

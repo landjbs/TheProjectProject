@@ -1,4 +1,5 @@
-from sqlalchemy import asc
+from sqlalchemy import asc, desc
+from sqlalchemy.sql.expression import func
 from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
@@ -152,12 +153,14 @@ def home():
     recs = db.session.query(Project).limit(30)
     recommended_tabs = partition_query(recs)
     # top projects
-    # tops = db.session.query(Project).order_by(asc(Project.stars.count)).limit(9)
-    top_tabs = partition_query(recs)
+    tops = db.session.query(Project).order_by(asc(Project.buzz)).limit(9)
+    # tops = db.session.query(Project).order_by(/(func.length(Project.stars))).limit(9)
+    tops = db.session.query(Project, func.count())
+    print([x for x in tops.all()])
+    top_tabs = partition_query(tops)
     # user projects
     users_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
     users_tabs = partition_query(recs)
-    print(current_user.has_starred)
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, users_tabs=users_tabs,
                             current_user=current_user)
