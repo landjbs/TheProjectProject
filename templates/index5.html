@@ -1,6 +1,7 @@
 {% extends "home_base.html" %}
 
 {% block head %}
+  {{ super() }}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,54 +23,69 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
+                <p class='float-right'>
+                  <i class="fa fa-star"></i>
+                  {{ project.stars.all()|length }}
+                </p>
+                <h3>{{ project.name }}</h3>
+                <p>
+                  by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
+                </p>
             </div>
 
             <ul class="list-unstyled components">
-                <p>Dummy Heading</p>
+                <p class='oneliner'>
+                  {{ project.oneliner }}
+                </p>
+                <p>{{ project.summary }}</p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
+                      Members
+                      &nbsp;
+                      <i class='far fa-user-circle'></i>
+                      {{ project.members.all()|length }}
+                    </a>
+                    <ul class="collapse in list-unstyled" id="memberSubmenu">
+                      {% for member in project.members %}
                         <li>
-                            <a href="#">Home 1</a>
+                            <a href="user={{ member.user.email }}">
+                              {{ member.user.name }}
+                              {% for role in member.roles %}
+                                {% if loop.index==1 %}
+                                &nbsp;-&nbsp;
+                                {% else %}
+                                ,&nbsp;
+                                {% endif %}
+                                {{ role.name }}
+                              {% endfor %}
+                            </a>
                         </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
+                      {% endfor %}
                     </ul>
                 </li>
                 <li>
-                    <a href="#">About</a>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
+                      Media
+                    </a>
+                    <ul class="collapse list-unstyled" id="mediaSubmenu">
+                      {% for link in [project.url] %}
                         <li>
-                            <a href="#">Page 1</a>
+                            <a href="{{ link }}">{{ link }}</a>
                         </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
+                      {% endfor %}
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Portfolio</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled CTAs">
-                <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
-                    <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                    <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                      Subjects
+                    </a>
+                    <ul class="collapse list-unstyled" id="subjectSubmenu">
+                      {% for subject in project.subjects %}
+                        <li>
+                            <a href="#">{{ subject }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
                 </li>
             </ul>
         </nav>
@@ -108,9 +124,8 @@
                 </div>
             </nav>
 
-            <h2>Collapsible Sidebar Using Bootstrap 4</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h2>About {{ project.name }}</h2>
+            <p>{{ project.summary }}</p>
 
             <div class="line"></div>
 
@@ -144,4 +159,4 @@
             });
         });
     </script>
-{% block content %}
+<!-- {% endblock %} -->
