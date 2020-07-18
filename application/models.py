@@ -257,3 +257,6 @@ class Comment(db.Model):
     author = relationship('User', back_populates='comments')
     # time
     timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
+
+    def __init__(self):
+        return f'<Comment {self.author.name}, {self.timestamp}>'
