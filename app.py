@@ -234,7 +234,7 @@ def like_action(project_id, action):
 @application.route('/search', methods=['POST'])
 def search():
     print(request.form)
-    return render_template('project.html', project=project)
+    return render_template('_project.html', project=project)
 
 
 @application.route('/test', methods=['GET', 'POST'])
