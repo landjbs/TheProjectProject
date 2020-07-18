@@ -27,7 +27,7 @@
                   <div class="card-body">
                     <div class='member-hoverable float-right'>
                         <i class='far fa-user-circle'></i>
-                        {{ project.members|length  }}
+                        {{ project.members.count()  }}
                         <span class="tooltiptext">
                           {% for member in project.members %}
                             <p>{{ member.user.name }}</p>

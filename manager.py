@@ -30,7 +30,7 @@ def add_role_to_project(project, role):
 
 
 def add_user_to_project(project, user, role):
-    a = Member_Role(roles=[member_role])
+    a = Member_Role(roles=[role])
     a.project = project
     user.projects.append(a)
     db.session.add(project)

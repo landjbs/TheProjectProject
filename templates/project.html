@@ -41,12 +41,11 @@
                     <li>
                         <a href="user={{ member.user.email }}">
                           {{ member.user.name }}
-                          &nbsp;
                           {% for role in member.roles %}
                             {% if loop.index==1 %}
-                            - &nbsp;
+                            &nbsp;-&nbsp;
                             {% else %}
-                            ,
+                            ,&nbsp;
                             {% endif %}
                             {{ role.name }}
                           {% endfor %}

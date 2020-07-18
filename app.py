@@ -157,6 +157,7 @@ def home():
     # user projects
     users_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
     users_tabs = partition_query(recs)
+    print(current_user.has_starred)
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, users_tabs=users_tabs,
                             current_user=current_user)

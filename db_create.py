@@ -22,7 +22,7 @@ for role in range(1,5):
                      db.session.query(Role).get(role))
 
 add_user_to_project(db.session.query(Project).get(1), db.session.query(User).get(2),
-                 db.session.query(Role).get(role))
+                    db.session.query(Role).get(3))
 
 
 # print(db.session.query(User).get(1).projects.get(1).roles)
