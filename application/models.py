@@ -16,9 +16,11 @@ user_to_subject = Table('user_to_subject', db.Model.metadata,
                       Column('user_id', Integer, ForeignKey('user.id')),
                       Column('subject_id', Integer, ForeignKey('subject.id')))
 
+
 project_to_subject = Table('project_to_subject', db.Model.metadata,
                         Column('project_id', Integer, ForeignKey('project.id')),
                         Column('subject_id', Integer, ForeignKey('subject.id')))
+
 
 user_to_project = Table('user_to_project', db.Model.metadata,
         Column('user_id', Integer, ForeignKey('user.id')),
@@ -29,10 +31,10 @@ role_to_member_role = Table('role_to_member_role', db.Model.metadata,
                 Column('role_id', Integer, ForeignKey('role.id')),
                 Column('member_role_id', Integer, ForeignKey('member_role.id')))
 
-
-project_to_comment = Table('project_to_comment', db.Model.metadata,
-                Column('project_id', Integer, ForeignKey('project.id')),
-                Column('comment_id', Integer, ForeignKey('comment.id')))
+# 
+# project_to_comment = Table('project_to_comment', db.Model.metadata,
+#                 Column('project_id', Integer, ForeignKey('project.id')),
+#                 Column('comment_id', Integer, ForeignKey('comment.id')))
 
 
 class Member_Role(db.Model):
