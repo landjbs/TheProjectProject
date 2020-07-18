@@ -252,9 +252,14 @@ class Role(db.Model):
 #     id = Column(Integer, primary_key=True)
 #     # text
 #     text = Column(String(250), nullable=False)
-#     # poster
-#     poster_id = Column(Integer, )
+#     # author
+#     author_id = Column(Integer, ForeignKey('user.id'))
+#     author = relationship('User', back_populates='comments')
+#     # project
+#     project_id = Column(Integer, ForeignKey('project.id'))
+#     project = relationship('Project', back_populates='comments')
 #     # completed by
+# 
 
 
 class Comment(db.Model):
