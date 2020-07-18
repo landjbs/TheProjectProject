@@ -42,6 +42,11 @@ class Member_Role(db.Model):
     project = relationship('Project', back_populates='members')
     # roles
     roles = relationship('Role', secondary=role_to_member_role)
+    # commits
+    commits = Column(Integer, nullable=False)
+    # tasks completed
+    tasks = relationship('Task', secondary=task_to_member_role,
+                         back_populates='members')
 
 
 ## BASE CLASSES ##
@@ -228,3 +233,22 @@ class Role(db.Model):
 
     def __repr__(self):
         return f'<Role {self.name}>'
+
+
+# class Task(db.Model):
+#     __tablename__ = 'task'
+#     # id
+#     id = Column(Integer, primary_key=True)
+#     # text
+#     text = Column(String(250), nullable=False)
+#     # poster
+#     poster_id = Column(Integer, )
+#     # completed by
+
+
+class Comment(db.Model):
+    __tablename__ = 'comment'
+    # id
+    id = Column(Integer, primary_key=True)
+    # text
+    text = Column(String(160), nullable=False)
