@@ -252,3 +252,8 @@ class Comment(db.Model):
     id = Column(Integer, primary_key=True)
     # text
     text = Column(String(160), nullable=False)
+    # poster
+    author_id = Column(Integer, ForeignKey('user.id'))
+    author = relationship('User', back_populates='comments')
+    # time
+    timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
