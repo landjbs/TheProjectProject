@@ -227,15 +227,12 @@ a.article, a.article:hover {
   max-height: 35vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  background: rgba(0,0,0,0.02);
 }
 
 
 .progress-bar {
   background: #FF5D00;
-}
-
-.list-box {
-  background: rgba(0,0,0,0.02);
 }
 
 form {
