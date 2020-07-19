@@ -36,7 +36,11 @@
                   <p class='oneliner'>
                     {{ project.oneliner }}
                   </p>
-                  <p>{{ project.summary }}</p>
+                  <p class='time'>
+                    {{ project.estimated_time }} days completed
+                    <br>
+                    {{ project.estimated_time }} days remaining
+                  </p>
                 </div>
                 <li class="active">
                     <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
@@ -97,7 +101,6 @@
 
             <div class="line"></div>
 
-            <h2>Progress</h2>
             <div class="row">
               <div class="col-sm-4">
                 <h6>Contributions</h6>
