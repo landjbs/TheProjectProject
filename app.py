@@ -8,7 +8,7 @@ from datetime import datetime
 from dateutil import tz
 
 from application import db
-from application.models import User, Project, Comment
+from application.models import User, Project, Comment, Task
 from application.forms import Apply, Login, Add_Project, Comment_Form, Task_Form
 
 
@@ -276,12 +276,12 @@ def add_comment(project_id):
 
 
 @login_required
-@application.route('/project/<int:project_id>/comment', methods=['POST'])
+@application.route('/project/<int:project_id>/task', methods=['POST'])
 def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     form = Comment_Form(request.form)
     if form.validate_on_submit():
-        comment = Comment(text=form.text.data, author=current_user, project=project)
+        comment = Task(text=form.text.data, author=current_user, project=project)
         db.session.add(comment)
         db.session.commit()
     return redirect(request.referrer)
