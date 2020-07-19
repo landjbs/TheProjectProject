@@ -271,13 +271,13 @@ class Task(db.Model):
     complete_stamp = Column(DateTime, nullable=True)
     complete = Column(Boolean, default=False)
 
-    def mark_complete(worker):
-        workers.append(worker)
-        complete = True
-        complete_stamp = datetime.utcnow()
+    def mark_complete(self, worker):
+        self.add_worker(worker)
+        self.complete = True
+        self.complete_stamp = datetime.utcnow()
 
-    def add_worker(worker):
-        workers.append(worker)
+    def add_worker(self, worker):
+        self.workers.append(worker)
 
 
 class Comment(db.Model):

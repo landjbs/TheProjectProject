@@ -156,13 +156,17 @@
                             <small>Completed: {{ time_to_str(task.post_stamp) }}</small>
                           </div>
                           <p class="mb-1">{{ task.text }}</p>
-                          <p class="mb-1"> by
-                          {% for worker in task.workers %}
-                            <a href='user={{ task.author.email }}'>
-                              {{ worker.name }}
-                            </a>
-                          {% endfor %}
-                          </p>
+                          <small>completed by
+                            {% for worker in task.workers %}
+                              <a href='user={{ worker.email }}' class='user-name'>
+                                {% if loop.index>1 %}
+                                  {{ worker.name }},
+                                {% else %}
+                                  {{ worker.name }}
+                                {% endif %}
+                              </a>
+                            {% endfor %}
+                          </small>
                         </div>
                       {% endfor %}
                     </div>
