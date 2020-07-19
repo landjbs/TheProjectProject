@@ -259,7 +259,7 @@ class Role(db.Model):
 #     project_id = Column(Integer, ForeignKey('project.id'))
 #     project = relationship('Project', back_populates='comments')
 #     # completed by
-# 
+#
 
 
 class Comment(db.Model):

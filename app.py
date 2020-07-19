@@ -4,6 +4,7 @@ from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
+import datetime
 
 from application import db
 from application.models import User, Project
@@ -26,6 +27,14 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 
 # initalization
 login_manager.init_app(application)
+
+
+# functions
+@app.context_processor
+def utility_processor():
+    def calc_days_since(now, start):
+        return (now - start).days
+    return dict(calc_days_since=calc_days_since)
 
 
 # querying
@@ -215,7 +224,8 @@ def user(email):
 @login_required
 def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
-    return render_template('index5.html', project=project)
+    return render_template('index5.html', project=project,
+                            time=datetime.datetime.utcnow())
 
 
 @application.route('/like/<int:project_id>/<action>')

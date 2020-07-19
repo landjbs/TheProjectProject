@@ -33,13 +33,11 @@
             </div>
             <ul class="list-unstyled components">
                 <div class='bio'>
-                  <p class='oneliner'>
-                    {{ project.oneliner }}
-                  </p>
                   <p class='time'>
-                    {{ project.estimated_time }} days completed
-                    <br>
-                    {{ project.estimated_time }} days remaining
+                    {{ project.estimated_time }} / {{ project.estimated_time }} days
+                    <center><div class="progress" style='width:80%;'>
+                      <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="{{ time - project.posted_on }}" aria-valuemin="0" aria-valuemax="100">25%</div>
+                    </div></center>
                   </p>
                 </div>
                 <li class="active">
@@ -97,8 +95,10 @@
         <!-- Page Content Holder -->
         <div id="content">
             <h3 style='text-decoration:underline;'>About {{ project.name }}</h3>
+            <p class='oneliner'>
+              {{ project.oneliner }}
+            </p>
             <p>{{ project.summary }}</p>
-
             <div class="line"></div>
 
             <div class="row">
@@ -188,7 +188,8 @@
       type: 'line',
       data: {
         labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
-        datasets: [{
+        datasets: [
+          {
             data: [86,114,106,106,107,111,133,221,783,2478],
             label: "Africa",
             borderColor: "#3e95cd",
