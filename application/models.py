@@ -83,7 +83,8 @@ class User(db.Model, UserMixin):
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
     comments = relationship('Comment', back_populates='author')
-    tasks = relationship('Task', secondary=user_to_task,
+    tasks_authored = relationship('Task', back_populates='author')
+    tasks_worked = relationship('Task', secondary=user_to_task,
                          back_populates='workers')
 
     def __init__(self, name, email, password, subjects, github, about):
@@ -260,13 +261,13 @@ class Task(db.Model):
     text = Column(String(250), nullable=True)
     # author
     author_id = Column(Integer, ForeignKey('user.id'))
-    author = relationship('User', back_populates='tasks')
+    author = relationship('User', back_populates='tasks_authored')
     # project
     project_id = Column(Integer, ForeignKey('project.id'))
     project = relationship('Project', back_populates='tasks')
     # workers
     workers = relationship('User', secondary=user_to_task,
-                           back_populates='tasks')
+                           back_populates='tasks_worked')
     # timing
     post_stamp = Column(DateTime, default=datetime.utcnow(), index=True)
     complete_stamp = Column(DateTime, nullable=True)
