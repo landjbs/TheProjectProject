@@ -253,7 +253,7 @@ def project(project_name):
 @application.route('/like/<int:project_id>/<action>')
 @login_required
 def like_action(project_id, action):
-    project = Project.query.filter_by(id=project_id).first_or_404()
+    project = Project.query.get_or_404(project_id)
     if action == 'like':
         current_user.star_project(project)
         db.session.commit()
@@ -283,6 +283,20 @@ def add_comment(project_id):
     if form.validate_on_submit():
         comment = Comment(text=form.text.data, author=current_user, project=project)
         db.session.add(comment)
+        db.session.commit()
+    return redirect(request.referrer)
+
+
+@application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
+@login_required
+def mark_complete(project_id, task_id, action):
+    project = Project.query.get_or_404(project_id)
+    task = Task.query.get_or_404(task_id)
+    if (action=='complete'):
+        current_user.star_project(project)
+        db.session.commit()
+    if action == 'unlike':
+        current_user.unstar_project(project)
         db.session.commit()
     return redirect(request.referrer)
 

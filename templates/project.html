@@ -143,6 +143,9 @@
                             </a>
                             on {{ time_to_str(task.post_stamp) }}</small>
                           </div>
+                          <a class='float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                            Completed
+                          </a>
                         </div>
                       {% endfor %}
                     </div>
