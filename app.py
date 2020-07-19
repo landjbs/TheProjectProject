@@ -252,7 +252,7 @@ def project(project_name):
         for worker in task.workers:
             completers.append(worker)
     # select top 5 to plot
-    task_data = Counter(completers).most_common(n=5)
+    task_data = Counter(completers)
     print(task_data)
     return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,

@@ -109,8 +109,8 @@
                 <canvas id="contribution_chart"></canvas>
               </div>
               <div class="col-sm-4">
-                <h6>Avg. Search Time (sec)</h6>
-                <canvas id="search_time"></canvas>
+                <h6>Task Completed</h6>
+                <canvas id="tasks_complete"></canvas>
               </div>
               <div class="col-sm-4">
                 <h6>Avg. Distance Traveled</h6>
@@ -336,7 +336,7 @@
         }
     });
     // search time chart
-    var ctx = document.getElementById('search_time');
+    var ctx = document.getElementById('tasks_complete');
     Chart.defaults.global.legend.display = false;
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',
