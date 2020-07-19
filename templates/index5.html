@@ -131,12 +131,13 @@
                   <div class='col'>
                     <h5>To Do</h5>
                     <div class="list-group">
-                      {% for comment in project.comments %}
+                      {% for task in project.tasks %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <div class="d-flex w-100 justify-content-between">
-                            <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
-                              {{ comment.author.name }}
-                            </a>
+                            <h4 href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                              {{ task.title }}
+                              <small>{{ task.author.name }}</small>
+                            </h4>
                             <small>{{ comment.timestamp }}</small>
                           </div>
                           <p class="mb-1">{{ comment.text }}</p>
@@ -147,7 +148,7 @@
                   <div class='col'>
                     <h5>Completed Tasks</h5>
                     <div class="list-group">
-                      {% for comment in project.comments %}
+                      {% for task in project.comments %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <div class="d-flex w-100 justify-content-between">
                             <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
