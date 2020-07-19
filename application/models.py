@@ -176,6 +176,8 @@ class Project(db.Model):
     buzz = Column(Integer, nullable=False)
     # comments
     comments = relationship('Comment', back_populates='project')
+    # tasks
+    tasks = relationship('Task', back_populates='project')
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
@@ -261,7 +263,7 @@ class Task(db.Model):
     author = relationship('User', back_populates='comments')
     # project
     project_id = Column(Integer, ForeignKey('project.id'))
-    project = relationship('Project', back_populates='comments')
+    project = relationship('Project', back_populates='tasks')
     # workers
     workers = relationship('User', secondary=user_to_task,
                            back_populates='tasks')

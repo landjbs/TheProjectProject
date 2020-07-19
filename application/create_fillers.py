@@ -4,7 +4,7 @@ sys.path.append('.')
 from sqlalchemy.sql import exists
 
 from application import db
-from application.models import Project, User, Member_Role, Role, Comment
+from application.models import Project, User, Member_Role, Role, Comment, Task
 
 from application.create_roles import create_roles
 from application.create_subjects import create_subjects
