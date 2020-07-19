@@ -131,7 +131,7 @@
                   <div class='col'>
                     <h5>To Do</h5>
                     <div class="list-group">
-                      {% for task in get_complete(project.tasks) %}
+                      {% for task in not_complete(project.tasks) %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <div class="d-flex w-100 justify-content-between">
                             <a href='user={{ task.author.email }}' class="mb-1" style='text-decoration:underline;'>
@@ -147,15 +147,15 @@
                   <div class='col'>
                     <h5>Completed Tasks</h5>
                     <div class="list-group">
-                      {% for comment in project.comments %}
+                      {% for task in complete(project.tasks) %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <div class="d-flex w-100 justify-content-between">
-                            <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
-                              {{ comment.author.name }}
+                            <a href='user={{ task.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                              {{ task.author.name }}
                             </a>
-                            <small>{{ time_to_str(comment.timestamp) }}</small>
+                            <small>Completed: {{ time_to_str(task.post_stamp) }}</small>
                           </div>
-                          <p class="mb-1">{{ comment.text }}</p>
+                          <p class="mb-1">{{ task.text }}</p>
                         </div>
                       {% endfor %}
                     </div>
