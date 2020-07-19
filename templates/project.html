@@ -1,93 +1,358 @@
-{% extends 'home_base.html' %}
+{% extends "home_base.html" %}
 
 {% block title %}{{ project.name }}{% endblock %}
 
 {% block head %}
   {{ super() }}
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-  <link href="css/scroll_styles.css" rel="stylesheet">
-  <link href="css/sidebar.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/scroll_styles.css">
+    <link rel="stylesheet" href="css/style5.css">
 {% endblock %}
 
 {% block content %}
-<div class="wrapper">
-    <!-- Sidebar -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <p class='float-right'>
-              <i class="fa fa-star"></i>
-              {{ project.stars.all()|length }}
-            </p>
-            <h3>{{ project.name }}</h3>
-            <p>
-              by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
-            </p>
-        </div>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <p class='float-right'>
+                  <i class="fa fa-star"></i>
+                  {{ project.stars.all()|length }}
+                </p>
+                <a href='#'>
+                  <h3>{{ project.name }}</h3>
+                </a>
+                <p>
+                  by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
+                </p>
+            </div>
+            <ul class="list-unstyled components">
+                <div class='bio'>
+                  <p class='oneliner'>
+                    {{ project.oneliner }}
+                  </p>
+                  <p>{{ project.summary }}</p>
+                  {% set elapsed = calc_days_since(now, project.posted_on) %}
+                  {% set est = project.estimated_time %}
+                  {% set elapsed_style = elapsed_style(elapsed, est) %}
+                  <center>
+                    <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+                    <div class="progress" style='width:80%;'>
+                      <div class="progress-bar" role="progressbar"
+                          style='{{ elapsed_style }}'
+                          aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                          aria-valuemax="{{ est }}"></div>
+                    </div>
+                  </center>
+                  <br>
+                </div>
+                <li class="active">
+                    <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
+                      Members
+                      &nbsp;
+                      <i class='far fa-user-circle'></i>
+                      {{ project.members.all()|length }}
+                    </a>
+                    <ul class="collapse in list-unstyled" id="memberSubmenu">
+                      {% for member in project.members %}
+                        <li>
+                            <a href="user={{ member.user.email }}" style='padding-bottom:5px;'>
+                              {% for role in member.roles %}
+                                {% if loop.index==1 %}
+                                  {{ member.user.name }}&nbsp;-&nbsp;
+                                {% else %}
+                                  {{ member.user.name }},&nbsp;
+                                {% endif %}
+                                {{ role.name }}
+                              {% endfor %}
+                            </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                </li>
+                <li>
+                    <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
+                      Media
+                    </a>
+                    <ul class="collapse list-unstyled" id="mediaSubmenu">
+                      {% for link in [project.url] %}
+                        <li>
+                            <a href="{{ link }}">{{ link }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                </li>
+                <li>
+                    <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                      Subjects
+                    </a>
+                    <ul class="collapse list-unstyled" id="subjectSubmenu">
+                      {% for subject in project.subjects %}
+                        <li>
+                            <a href="#">{{ subject }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
-        <ul class="list-unstyled components">
+        <!-- Page Content Holder -->
+        <div id="content">
+            <h3 style='text-decoration:underline;'>About {{ project.name }}</h3>
             <p class='oneliner'>
               {{ project.oneliner }}
             </p>
             <p>{{ project.summary }}</p>
-            <li class="active">
-                <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
-                  Members
-                  &nbsp;
-                  <i class='far fa-user-circle'></i>
-                  {{ project.members.all()|length }}
-                </a>
-                <ul class="collapse in list-unstyled" id="memberSubmenu">
-                  {% for member in project.members %}
-                    <li>
-                        <a href="user={{ member.user.email }}">
-                          {{ member.user.name }}
-                          {% for role in member.roles %}
-                            {% if loop.index==1 %}
-                            &nbsp;-&nbsp;
-                            {% else %}
-                            ,&nbsp;
-                            {% endif %}
-                            {{ role.name }}
-                          {% endfor %}
+            <div class="line"></div>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <h6>Contributions</h6>
+                <canvas id="contribution_chart"></canvas>
+              </div>
+              <div class="col-sm-4">
+                <h6>Avg. Search Time (sec)</h6>
+                <canvas id="search_time"></canvas>
+              </div>
+              <div class="col-sm-4">
+                <h6>Avg. Distance Traveled</h6>
+                <canvas id="distance_traveled"></canvas>
+              </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="row">
+              <div class="col">
+                <div class='row'>
+                  <div class='col'>
+                    <h5>To Do</h5>
+                    <div class="list-group">
+                      {% for task in not_complete(project.tasks) %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <small>Requested by
+                            <a href='user={{ task.author.email }}' class="mb-1">
+                              <u>{{ task.author.name }}</u>
+                            </a>
+                            on {{ time_to_str(task.post_stamp) }}</small>
+                          </div>
+                          <p class="mb-1">{{ task.text }}</p>
+                        </div>
+                      {% endfor %}
+                    </div>
+                    <form class='post_form' id='task_form' method='post'
+                      action="{{url_for('add_task', project_id=project.id)}}">
+                      {{ task_form.hidden_tag() }}
+                      {{ task_form.text(placeholder='Task') }}
+                      <button>Add</button>
+                    </form>
+                  </div>
+
+
+                  <div class='col'>
+                    <h5>Completed Tasks</h5>
+                    <div class="list-group">
+                      {% for task in complete(project.tasks)|reverse %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <a href='user={{ task.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                              {{ task.author.name }}
+                            </a>
+                            <small>Completed: {{ time_to_str(task.post_stamp) }}</small>
+                          </div>
+                          <p class="mb-1">{{ task.text }}</p>
+                          <small>completed by
+                            {% for worker in task.workers %}
+                              <a href='user={{ worker.email }}' class='user-name'>
+                                {% if loop.index>1 %}
+                                  , {{ worker.name }}
+                                {% else %}
+                                  {{ worker.name }}
+                                {% endif %}
+                              </a>
+                            {% endfor %}
+                          </small>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col">
+                <h5>Comments</h5>
+                <div class="list-group">
+                  {% for comment in project.comments|reverse %}
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-between">
+                        <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                          {{ comment.author.name }}
                         </a>
-                    </li>
+                        <small>{{ time_to_str(comment.timestamp) }}</small>
+                      </div>
+                      <p class="mb-1">{{ comment.text }}</p>
+                    </div>
                   {% endfor %}
-                </ul>
-            </li>
-            <li>
-                <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
-                  Media
-                </a>
-                <ul class="collapse list-unstyled" id="mediaSubmenu">
-                  {% for link in [project.url] %}
-                    <li>
-                        <a href="{{ link }}">{{ link }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-            </li>
-            <li>
-                <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
-                  Subjects
-                </a>
-                <ul class="collapse list-unstyled" id="subjectSubmenu">
-                  {% for subject in project.subjects %}
-                    <li>
-                        <a href="#">{{ subject }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-            </li>
-        </ul>
-    </nav>
-<!-- Page Content -->
-    <div id="content" style='position:relative;'>
-        <h1>asdf</h1>
+                </div>
+                <form class='post_form' id='comment_form' method='post'
+                  action="{{url_for('add_comment', project_id=project.id)}}">
+                  {{ comment_form.hidden_tag() }}
+                  {{ comment_form.text(placeholder='Comment') }}
+                  <button>Add</button>
+                </form>
+              </div>
+            </div>
+
+        </div>
+
+
     </div>
 
-    <script src=''></script>
-    <script src=''></script>
-    <script src=''></script>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
-  <div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+
+
+    <script>
+    // best solutions chart
+    var ctx = document.getElementById('contribution_chart');
+    Chart.defaults.global.legend.display = false;
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+        datasets: [
+          {
+            data: [86,114,106,106,107,111,133,221,783,2478],
+            label: "Africa",
+            borderColor: "#3e95cd",
+            fill: false
+          }, {
+            data: [282,350,411,502,635,809,947,1402,3700,5267],
+            label: "Asia",
+            borderColor: "#8e5ea2",
+            fill: false
+          }, {
+            data: [168,170,178,190,203,276,408,547,675,734],
+            label: "Europe",
+            borderColor: "#3cba9f",
+            fill: false
+          }, {
+            data: [40,20,10,16,24,38,74,167,508,784],
+            label: "Latin America",
+            borderColor: "#e8c3b9",
+            fill: false
+          }, {
+            data: [6,3,2,2,7,26,82,172,312,433],
+            label: "North America",
+            borderColor: "#c45850",
+            fill: false
+          }
+        ]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+    });
+
+
+    // distance traveled chart
+    var ctx = document.getElementById('distance_traveled');
+    Chart.defaults.global.legend.display = false;
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: ['Strada', 'CW-Savings', 'Cheapest-Arc',
+                    'Automatic'],
+            datasets: [{
+                data: [2.88160187, 3.23577137, 3.23577137, 3.23577137],
+                backgroundColor: [
+                  '#FF9E63',
+                  'rgba(255, 99, 118, 0.2)',
+                  'rgba(255, 99, 118, 0.2)',
+                  'rgba(255, 99, 118, 0.2)'
+                ],
+                borderColor: [
+                  '#FF9E63',
+                  '#FF6376',
+                  '#FF6376',
+                  '#FF6376'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    // search time chart
+    var ctx = document.getElementById('search_time');
+    Chart.defaults.global.legend.display = false;
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: ['Strada', 'CW-Savings', 'Cheapest-Arc',
+                    'Automatic'],
+            datasets: [{
+                data: [0.05237595, 0.41438383, 0.41267689, 0.40961812],
+                backgroundColor: [
+                  '#FF9E63',
+                  'rgba(255, 99, 118, 0.2)',
+                  'rgba(255, 99, 118, 0.2)',
+                  'rgba(255, 99, 118, 0.2)'
+                ],
+                borderColor: [
+                  '#FF9E63',
+                  '#FF6376',
+                  '#FF6376',
+                  '#FF6376'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+
   {% endblock %}
