@@ -246,6 +246,7 @@ def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
     comment_form = Comment_Form(request.form)
     task_form = Task_Form(request.form)
+    ## task data visualization ##
     # compile counts of tasks completed by each worker
     completers = []
     for task in project.tasks.filter_by(complete=True):
@@ -253,7 +254,11 @@ def project(project_name):
             completers.append(worker)
     # select top 5 to plot
     task_data = Counter(completers)
-    print(task_data)
+    ## role data visualization ##
+    roles = []
+    for member_role in project.members:
+        for role in member_role:
+            roles.append(role)
     return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,
                             task_form=task_form, task_data=task_data)
