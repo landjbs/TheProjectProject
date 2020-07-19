@@ -9,7 +9,7 @@ from dateutil import tz
 
 from application import db
 from application.models import User, Project
-from application.forms import Apply, Login, Add_Project
+from application.forms import Apply, Login, Add_Project, Comment_Form
 
 
 ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
@@ -261,9 +261,9 @@ def like_action(project_id, action):
 
 
 @login_required
-@application.route('/comment', methods=['POST'])
-def comment():
-    
+@application.route('/comment/<int:project_id>/comment', methods=['POST'])
+def comment(project_id):
+
 
 
 @application.route('/search', methods=['POST'])
