@@ -38,9 +38,11 @@ def utility_processor():
         return int((estimated_time - elapsed))
     def elapsed_style(elapsed, estimated_time):
         return f'width: {100*float(elapsed/estimated_time)}%;'
+    def time_to_str(time):
+        return time.strftime('%B %d, %Y')
     # def calc_days_remaining(since):
     return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
-                elapsed_style=elapsed_style)
+                elapsed_style=elapsed_style, time_to_str=time_to_str)
 
 
 # querying
