@@ -293,11 +293,13 @@ def mark_complete(project_id, task_id, action):
     project = Project.query.get_or_404(project_id)
     task = Task.query.get_or_404(task_id)
     if (action=='complete'):
-        current_user.star_project(project)
+        if not task.complete:
+            task.mark_complete(current_user)
+        else:
+            task.add_worker(current_user)
         db.session.commit()
-    if action == 'unlike':
-        current_user.unstar_project(project)
-        db.session.commit()
+    elif (action=='uncomplete'):
+        raise RuntimeError('uncomplete functionality not yet built.')
     return redirect(request.referrer)
 
 
