@@ -48,8 +48,8 @@ a, a:hover, a:focus {
 }
 
 #sidebar {
-  min-width: 30vh;
-  max-width: 30vh;
+  min-width: 50vh;
+  max-width: 50vh;
   background: #5D00FF;
   color: #fff;
   transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
@@ -214,15 +214,11 @@ a.article, a.article:hover {
 }
 
 .oneliner {
-  color: #FF5D00 !important;
+  color: #FF5D00;
 }
 
 .user-name:hover {
   text-decoration: underline;
-}
-
-.oneliner {
-  color: orange;
 }
 
 /* comment and text boxes */
@@ -231,4 +227,9 @@ a.article, a.article:hover {
   max-height: 35vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+
+.progress-bar {
+  background: #FF5D00;
 }
