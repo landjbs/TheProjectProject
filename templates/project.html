@@ -341,21 +341,14 @@
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',
         data: {
-            labels: ['Strada', 'CW-Savings', 'Cheapest-Arc',
-                    'Automatic'],
+            labels: [{% for k in task_data.keys() %}'{{ k.name }}'{% endfor %}],
             datasets: [{
-                data: [0.05237595, 0.41438383, 0.41267689, 0.40961812],
+                data: [{% for v in task_data.values() %}'{{ v }}'{% endfor %}],
                 backgroundColor: [
-                  '#FF9E63',
-                  'rgba(255, 99, 118, 0.2)',
-                  'rgba(255, 99, 118, 0.2)',
-                  'rgba(255, 99, 118, 0.2)'
+                  '#FF9E63'
                 ],
                 borderColor: [
-                  '#FF9E63',
-                  '#FF6376',
-                  '#FF6376',
-                  '#FF6376'
+                  '#FF9E63'
                 ],
                 borderWidth: 1
             }]

@@ -247,11 +247,13 @@ def project(project_name):
     comment_form = Comment_Form(request.form)
     task_form = Task_Form(request.form)
     # compile counts of tasks completed by each worker
+    completers = []
     for task in project.tasks.filter_by(complete=True):
-        for worker in task:
+        for worker in task.workers:
             completers.append(worker)
     # select top 5 to plot
     task_data = Counter(completers).most_common(n=5)
+    print(task_data)
     return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,
                             task_form=task_form, task_data=task_data)
