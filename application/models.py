@@ -83,6 +83,8 @@ class User(db.Model, UserMixin):
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
     comments = relationship('Comment', back_populates='author')
+    tasks = relationship('Taks', secondary=user_to_task,
+                         back_populates='workers')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
