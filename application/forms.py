@@ -139,5 +139,5 @@ class Add_Project(BaseForm):
 
 
 class Comment_Form(BaseForm):
-    text = TextField('Comment', validators=[DataRequired(), Length(1,160),
-                     render_kw={'max':160}])
+    text = TextField('Comment', validators=[DataRequired(), Length(1,160)],
+                     render_kw={'max':160})

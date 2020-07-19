@@ -8,7 +8,7 @@ from datetime import datetime
 from dateutil import tz
 
 from application import db
-from application.models import User, Project
+from application.models import User, Project, Comment
 from application.forms import Apply, Login, Add_Project, Comment_Form
 
 
@@ -243,8 +243,9 @@ def user(email):
 @login_required
 def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
+    comment_form=Comment_Form(request.form)
     return render_template('index5.html', project=project,
-                            now=datetime.utcnow())
+                            now=datetime.utcnow(), comment_form=comment_form)
 
 
 @application.route('/like/<int:project_id>/<action>')
@@ -263,7 +264,13 @@ def like_action(project_id, action):
 @login_required
 @application.route('/comment/<int:project_id>/comment', methods=['POST'])
 def comment(project_id):
-
+    project = Project.query.get_or_404(project_id)
+    form = Comment_Form()
+    if form.validate_on_submit():
+        comment = Comment(text=form.text, author=current_user, project=project)
+        db.session.add(comment)
+        db.session.commit()
+    return redirect(request.referrer)
 
 
 @application.route('/search', methods=['POST'])
