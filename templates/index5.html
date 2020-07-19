@@ -131,20 +131,16 @@
                   <div class='col'>
                     <h5>To Do</h5>
                     <div class="list-group">
-                      {% for task in project.tasks %}
-                        {% if not task.complete %}
-                          <div class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                              <p href='user={{ task.author.email }}' class="mb-1">
-                                <u>{{ task.title }}</u>
-                                <br>
-                                <small style="padding:0px;margin:0px;">{{ task.author.name }}</small>
-                              </p>
-                              <small>{{ time_to_str(task.post_stamp) }}</small>
-                            </div>
-                            <p class="mb-1">{{ task.text }}</p>
+                      {% for task in get_complete(project.tasks) %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <a href='user={{ task.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                              {{ task.author.name }}
+                            </a>
+                            <small>Posted: {{ time_to_str(task.post_stamp) }}</small>
                           </div>
-                        {% endif %}
+                          <p class="mb-1">{{ task.text }}</p>
+                        </div>
                       {% endfor %}
                     </div>
                   </div>

@@ -178,7 +178,7 @@ class Project(db.Model):
     # comments
     comments = relationship('Comment', back_populates='project')
     # tasks
-    tasks = relationship('Task', back_populates='project')
+    tasks = relationship('Task', back_populates='project', lazy='dynamic')
 
     def __init__(self, name, oneliner, summary, url, open,
                 requires_application, application_question, estimated_time,
@@ -255,8 +255,6 @@ class Task(db.Model):
     __tablename__ = 'task'
     # id
     id = Column(Integer, primary_key=True)
-    # title
-    title = Column(String(40), nullable=False)
     # text
     text = Column(String(250), nullable=True)
     # author
@@ -273,8 +271,7 @@ class Task(db.Model):
     complete_stamp = Column(DateTime, nullable=True)
     complete = Column(Boolean, default=False)
 
-    def __init__(self, title, text, author, project):
-        self.title = title
+    def __init__(self, text, author, project):
         self.text = text
         self.author = author
         self.project = project

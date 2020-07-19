@@ -47,9 +47,11 @@ def utility_processor():
         time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
         time = time.lstrip("0").replace(" 0", " ")
         return time
-    # def calc_days_remaining(since):
+    def get_complete(tasks):
+        return tasks.filter_by(complete=True)
     return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
-                elapsed_style=elapsed_style, time_to_str=time_to_str)
+                elapsed_style=elapsed_style, time_to_str=time_to_str,
+                get_complete=get_complete)
 
 
 # querying
