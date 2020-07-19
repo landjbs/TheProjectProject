@@ -126,21 +126,40 @@
             <div class="line"></div>
 
             <div class="row">
-
               <div class="col">
-                <h5>Tasks</h5>
-                <div class="list-group">
-                  {% for comment in project.comments %}
-                    <div class="list-group-item list-group-item-action flex-column align-items-start">
-                      <div class="d-flex w-100 justify-content-between">
-                        <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
-                          {{ comment.author.name }}
-                        </a>
-                        <small>{{ comment.timestamp }}</small>
-                      </div>
-                      <p class="mb-1">{{ comment.text }}</p>
+                <div class='row'>
+                  <div class='col'>
+                    <h5>To Do</h5>
+                    <div class="list-group">
+                      {% for comment in project.comments %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                              {{ comment.author.name }}
+                            </a>
+                            <small>{{ comment.timestamp }}</small>
+                          </div>
+                          <p class="mb-1">{{ comment.text }}</p>
+                        </div>
+                      {% endfor %}
                     </div>
-                  {% endfor %}
+                  </div>
+                  <div class='col'>
+                    <h5>Completed Tasks</h5>
+                    <div class="list-group">
+                      {% for comment in project.comments %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
+                              {{ comment.author.name }}
+                            </a>
+                            <small>{{ comment.timestamp }}</small>
+                          </div>
+                          <p class="mb-1">{{ comment.text }}</p>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
                 </div>
               </div>
 
