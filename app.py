@@ -33,11 +33,14 @@ login_manager.init_app(application)
 @application.context_processor
 def utility_processor():
     def calc_days_since(now, start):
-        return (int((now - start).days) + 10)
-    def elapsed_style():
-
+        return int((now - start).days + 3)
+    def calc_days_left(elapsed, estimated_time):
+        return int((estimated_time - elapsed))
+    def elapsed_style(elapsed, estimated_time):
+        return f'width: {100*float(elapsed/estimated_time)}%;'
     # def calc_days_remaining(since):
-    return dict(calc_days_since=calc_days_since, elapsed_style=elapsed_style)
+    return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
+                elapsed_style=elapsed_style)
 
 
 # querying

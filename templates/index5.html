@@ -33,16 +33,19 @@
             </div>
             <ul class="list-unstyled components">
                 <div class='bio'>
-                  <p class='time'>
-                    {% set elapsed = calc_days_since(now, project.posted_on) %}
-                    {% set PROGRESS_STYLE = 'width: {{ elapsed }}%; '%}
-                    <center><div class="progress" style='width:80%;'>
+                  {% set elapsed = calc_days_since(now, project.posted_on) %}
+                  {% set est = project.estimated_time %}
+                  {% set elapsed_style = elapsed_style(elapsed, est) %}
+                  <center>
+                    <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+                    <div class="progress" style='width:80%;'>
                       <div class="progress-bar" role="progressbar"
-                          style='{{ PROGRESS_STYLE }}'
+                          style='{{ elapsed_style }}'
                           aria-valuenow="{{ elapsed }}" aria-valuemin="0"
-                          aria-valuemax="10">{{ elapsed }}</div>
-                    </div></center>
-                  </p>
+                          aria-valuemax="{{ est }}"></div>
+                    </div>
+                  </center>
+                  <br>
                 </div>
                 <li class="active">
                     <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
