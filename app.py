@@ -30,11 +30,14 @@ login_manager.init_app(application)
 
 
 # functions
-@app.context_processor
+@application.context_processor
 def utility_processor():
     def calc_days_since(now, start):
-        return (now - start).days
-    return dict(calc_days_since=calc_days_since)
+        return (int((now - start).days) + 10)
+    def elapsed_style():
+
+    # def calc_days_remaining(since):
+    return dict(calc_days_since=calc_days_since, elapsed_style=elapsed_style)
 
 
 # querying
@@ -225,7 +228,7 @@ def user(email):
 def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
     return render_template('index5.html', project=project,
-                            time=datetime.datetime.utcnow())
+                            now=datetime.datetime.utcnow())
 
 
 @application.route('/like/<int:project_id>/<action>')

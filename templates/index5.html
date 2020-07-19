@@ -34,9 +34,13 @@
             <ul class="list-unstyled components">
                 <div class='bio'>
                   <p class='time'>
-                    {{ project.estimated_time }} / {{ project.estimated_time }} days
+                    {% set elapsed = calc_days_since(now, project.posted_on) %}
+                    {% set PROGRESS_STYLE = 'width: {{ elapsed }}%; '%}
                     <center><div class="progress" style='width:80%;'>
-                      <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="{{ time - project.posted_on }}" aria-valuemin="0" aria-valuemax="100">25%</div>
+                      <div class="progress-bar" role="progressbar"
+                          style='{{ PROGRESS_STYLE }}'
+                          aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                          aria-valuemax="10">{{ elapsed }}</div>
                     </div></center>
                   </p>
                 </div>
