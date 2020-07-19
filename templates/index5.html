@@ -140,7 +140,7 @@
                                 <br>
                                 <small style="padding:0px;margin:0px;">{{ task.author.name }}</small>
                               </p>
-                              <small>{{ task.post_stamp }}</small>
+                              <small>{{ time_to_str(task.post_stamp) }}</small>
                             </div>
                             <p class="mb-1">{{ task.text }}</p>
                           </div>
@@ -157,7 +157,7 @@
                             <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
                               {{ comment.author.name }}
                             </a>
-                            <small>{{ comment.timestamp }}</small>
+                            <small>{{ time_to_str(comment.timestamp) }}</small>
                           </div>
                           <p class="mb-1">{{ comment.text }}</p>
                         </div>
@@ -177,7 +177,7 @@
                         <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
                           {{ comment.author.name }}
                         </a>
-                        <small>{{ comment.timestamp }}</small>
+                        <small>{{ time_to_str(comment.timestamp) }}</small>
                       </div>
                       <p class="mb-1">{{ comment.text }}</p>
                     </div>

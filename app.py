@@ -4,7 +4,8 @@ from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
-import datetime
+from datetime import datetime
+from dateutil import tz
 
 from application import db
 from application.models import User, Project
@@ -39,7 +40,13 @@ def utility_processor():
     def elapsed_style(elapsed, estimated_time):
         return f'width: {100*float(elapsed/estimated_time)}%;'
     def time_to_str(time):
-        return time.strftime('%B %d, %Y')
+        from_zone = tz.tzutc()
+        to_zone = tz.tzlocal()
+        time = time.replace(tzinfo=from_zone)
+        time = time.astimezone(to_zone)
+        time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
+        time = time.lstrip("0").replace(" 0", " ")
+        return time
     # def calc_days_remaining(since):
     return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
                 elapsed_style=elapsed_style, time_to_str=time_to_str)
@@ -233,7 +240,7 @@ def user(email):
 def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
     return render_template('index5.html', project=project,
-                            now=datetime.datetime.utcnow())
+                            now=datetime.utcnow())
 
 
 @application.route('/like/<int:project_id>/<action>')
