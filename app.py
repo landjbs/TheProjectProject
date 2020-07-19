@@ -260,9 +260,14 @@ def like_action(project_id, action):
     return redirect(request.referrer)
 
 
+@login_required
+@application.route('/comment', methods=['POST'])
+def comment():
+    
+
+
 @application.route('/search', methods=['POST'])
 def search():
-    print(request.form)
     return render_template('project.html', project=project)
 
 

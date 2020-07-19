@@ -136,3 +136,8 @@ class Add_Project(BaseForm):
                             validators=[],
                             description=('Whether the project has been '
                             'completed.'))
+
+
+class Comment(BaseForm):
+    text = TextField('Comment', validators=[DataRequired(), Length(1,160),
+                     render_kw={'max':160}])
