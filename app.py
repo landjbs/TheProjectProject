@@ -257,11 +257,14 @@ def project(project_name):
     ## role data visualization ##
     roles = []
     for member_role in project.members:
-        for role in member_role:
-            roles.append(role)
+        for role in member_role.roles:
+            if not role.name in ['Pending', 'Member']:
+                roles.append(role)
+    role_data = Counter(roles)
     return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,
-                            task_form=task_form, task_data=task_data)
+                            task_form=task_form, task_data=task_data,
+                            role_data=role_data)
 
 
 @application.route('/like/<int:project_id>/<action>')
