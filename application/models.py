@@ -31,10 +31,10 @@ role_to_member_role = Table('role_to_member_role', db.Model.metadata,
                 Column('role_id', Integer, ForeignKey('role.id')),
                 Column('member_role_id', Integer, ForeignKey('member_role.id')))
 
-#
-# project_to_comment = Table('project_to_comment', db.Model.metadata,
-#                 Column('project_id', Integer, ForeignKey('project.id')),
-#                 Column('comment_id', Integer, ForeignKey('comment.id')))
+
+user_to_task = Table('user_to_task', db.Model.metadata,
+                Column('user_id', Integer, ForeignKey('user.id')),
+                Column('task_id', Integer, ForeignKey('task.id')))
 
 
 class Member_Role(db.Model):
@@ -246,20 +246,22 @@ class Role(db.Model):
         return f'<Role {self.name}>'
 
 
-# class Task(db.Model):
-#     __tablename__ = 'task'
-#     # id
-#     id = Column(Integer, primary_key=True)
-#     # text
-#     text = Column(String(250), nullable=False)
-#     # author
-#     author_id = Column(Integer, ForeignKey('user.id'))
-#     author = relationship('User', back_populates='comments')
-#     # project
-#     project_id = Column(Integer, ForeignKey('project.id'))
-#     project = relationship('Project', back_populates='comments')
-#     # completed by
-#
+class Task(db.Model):
+    __tablename__ = 'task'
+    # id
+    id = Column(Integer, primary_key=True)
+    # title
+    title = Column(String(40), nullable=False)
+    # text
+    text = Column(String(250), nullable=True)
+    # author
+    author_id = Column(Integer, ForeignKey('user.id'))
+    author = relationship('User', back_populates='comments')
+    # project
+    project_id = Column(Integer, ForeignKey('project.id'))
+    project = relationship('Project', back_populates='comments')
+    # completed by
+
 
 
 class Comment(db.Model):
