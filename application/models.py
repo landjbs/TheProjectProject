@@ -260,8 +260,9 @@ class Task(db.Model):
     # project
     project_id = Column(Integer, ForeignKey('project.id'))
     project = relationship('Project', back_populates='comments')
-    # completed by
-
+    # workers
+    workers = relationship('User', secondary=user_to_task,
+                           back_populates='tasks')
 
 
 class Comment(db.Model):
