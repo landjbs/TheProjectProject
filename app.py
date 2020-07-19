@@ -9,7 +9,7 @@ from dateutil import tz
 
 from application import db
 from application.models import User, Project, Comment
-from application.forms import Apply, Login, Add_Project, Comment_Form
+from application.forms import Apply, Login, Add_Project, Comment_Form, Task_Form
 
 
 ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
@@ -244,8 +244,10 @@ def user(email):
 def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
     comment_form=Comment_Form(request.form)
+    task_form = Task_Form(request.form)
     return render_template('index5.html', project=project,
-                            now=datetime.utcnow(), comment_form=comment_form)
+                            now=datetime.utcnow(), comment_form=comment_form,
+                            task_form=task_form)
 
 
 @application.route('/like/<int:project_id>/<action>')
@@ -262,12 +264,12 @@ def like_action(project_id, action):
 
 
 @login_required
-@application.route('/comment/<int:project_id>/comment', methods=['POST'])
+@application.route('/project/<int:project_id>/comment', methods=['POST'])
 def comment(project_id):
     project = Project.query.get_or_404(project_id)
-    form = Comment_Form()
+    form = Comment_Form(request.form)
     if form.validate_on_submit():
-        comment = Comment(text=form.text, author=current_user, project=project)
+        comment = Comment(text=form.text.data, author=current_user, project=project)
         db.session.add(comment)
         db.session.commit()
     return redirect(request.referrer)

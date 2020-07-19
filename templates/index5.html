@@ -155,7 +155,7 @@
                   <div class='col'>
                     <h5>Completed Tasks</h5>
                     <div class="list-group">
-                      {% for task in complete(project.tasks) %}
+                      {% for task in complete(project.tasks)|reverse %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <div class="d-flex w-100 justify-content-between">
                             <a href='user={{ task.author.email }}' class="mb-1" style='text-decoration:underline;'>
@@ -186,7 +186,7 @@
               <div class="col">
                 <h5>Comments</h5>
                 <div class="list-group">
-                  {% for comment in project.comments %}
+                  {% for comment in project.comments|reverse %}
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                       <div class="d-flex w-100 justify-content-between">
                         <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
@@ -201,7 +201,7 @@
                 <form class='post_form' id='comment_form' method='post'
                   action="{{url_for('comment', project_id=project.id)}}">
                   {{ comment_form.hidden_tag() }}
-                  {{ comment_form.text() }}
+                  {{ comment_form.text(placeholder='Comment') }}
                   <button action='comment'>Add</button>
                 </form>
               </div>

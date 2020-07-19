@@ -138,6 +138,11 @@ class Add_Project(BaseForm):
                             'completed.'))
 
 
+class Task_Form(BaseForm):
+    text = TextField('Task', validators=[DataRequired(), Length(1,160)],
+                     render_kw={'max':160})
+
+
 class Comment_Form(BaseForm):
     text = TextField('Comment', validators=[DataRequired(), Length(1,160)],
                      render_kw={'max':160})

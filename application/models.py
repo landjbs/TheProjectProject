@@ -256,7 +256,7 @@ class Task(db.Model):
     # id
     id = Column(Integer, primary_key=True)
     # text
-    text = Column(String(250), nullable=True)
+    text = Column(String(160), nullable=True)
     # author
     author_id = Column(Integer, ForeignKey('user.id'))
     author = relationship('User', back_populates='tasks_authored')
