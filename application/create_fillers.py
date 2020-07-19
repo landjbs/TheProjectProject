@@ -167,18 +167,4 @@ projects = [Project(name='Boogle',
 def create_fillers():
     for project in projects:
         create_project(project, user1)
-    p = db.session.query(Project).get(1)
-    for i in range(10):
-        c = Comment(text=f'Hi x {i}!', author=user2, project=p)
-        t = Task(text=f'Do {i} please!', author=user1, project=p)
-        db.session.add(c)
-        db.session.add(t)
-    t = Task(text='Redesign front-end.', author=user2, project=p)
-    t.mark_complete(user1)
-    t.add_worker(user2)
-    db.session.add(t)
-    p = db.session.query(Project).get(2)
-    for i in range(10):
-        c = Comment(text=f'Hi2 x {i}!', author=user2, project=p)
-        db.session.add(c)
     db.session.commit()

@@ -132,8 +132,12 @@
                 <div class='row'>
                   <div class='col'>
                     <h5>To Do</h5>
+                    {% set todo_tasks = not_complete(project.tasks) %}
                     <div class="list-group">
-                      {% for task in not_complete(project.tasks) %}
+                      {% if (todo_tasks.all()|length)==0 %}
+                        <p class='empty-text'>No tasks to do.</p>
+                      {% endif %}
+                      {% for task in todo_tasks %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <h6 class="mb-1">{{ task.text }}</h6>
                           <div class="d-flex w-100 justify-content-between">
@@ -162,8 +166,12 @@
 
                   <div class='col'>
                     <h5>Completed Tasks</h5>
+                    {% set completed_tasks = complete(project.tasks) %}
                     <div class="list-group">
-                      {% for task in complete(project.tasks)|reverse %}
+                      {% if completed_tasks.all()|length==0 %}
+                        <p class='empty-text'>No tasks yet.</p>
+                      {% endif %}
+                      {% for task in completed_tasks|reverse %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <h6 class="mb-1">{{ task.text }}</h6>
                           <div class="d-flex w-100 justify-content-between">
@@ -202,6 +210,9 @@
               <div class="col">
                 <h5>Comments</h5>
                 <div class="list-group">
+                  {% if project.comments|length==0 %}
+                    <p class='empty-text'>No comments yet.</p>
+                  {% endif %}
                   {% for comment in project.comments|reverse %}
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                       <div class="d-flex w-100 justify-content-between">
