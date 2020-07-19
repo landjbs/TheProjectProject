@@ -167,4 +167,7 @@ projects = [Project(name='Boogle',
 def create_fillers():
     for project in projects:
         create_project(project, user1)
+    p = db.session.query(Project).get(1)
+    t = Task(project=p, author=user2, text='Build front-end.')
+    db.session.add(t)
     db.session.commit()

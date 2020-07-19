@@ -169,7 +169,7 @@
                     {% set completed_tasks = complete(project.tasks) %}
                     <div class="list-group">
                       {% if completed_tasks.all()|length==0 %}
-                        <p class='empty-text'>No tasks yet.</p>
+                        <p class='empty-text'>No tasks completed.</p>
                       {% endif %}
                       {% for task in completed_tasks|reverse %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
