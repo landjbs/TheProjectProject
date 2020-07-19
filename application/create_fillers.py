@@ -173,7 +173,7 @@ def create_fillers():
         t = Task(text=f'Do {i} please!', author=user1, project=p)
         db.session.add(c)
         db.session.add(t)
-    t = Task(text='Done this.', author=user2, project=p)
+    t = Task(text='Redesign front-end.', author=user2, project=p)
     t.mark_complete(user1)
     t.add_worker(user2)
     db.session.add(t)

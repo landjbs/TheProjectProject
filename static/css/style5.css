@@ -230,12 +230,12 @@ a.article, a.article:hover {
   background: rgba(0,0,0,0.02);
 }
 
-
 .progress-bar {
-  background: #FF5D00;
+  /* background: #FF5D00; */
+  background: #00FF5D;
 }
 
-form {
+.post_form {
   /* This bit sets up the horizontal layout */
   display:flex;
   flex-direction:row;
