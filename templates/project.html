@@ -109,12 +109,12 @@
                 <canvas id="contribution_chart"></canvas>
               </div>
               <div class="col-sm-4">
-                <h6>Task Completed</h6>
+                <h6>Tasks Completed</h6>
                 <canvas id="tasks_complete"></canvas>
               </div>
               <div class="col-sm-4">
-                <h6>Avg. Distance Traveled</h6>
-                <canvas id="distance_traveled"></canvas>
+                <h6>Role Breakdown</h6>
+                <canvas id="role_breakdown"></canvas>
               </div>
             </div>
 
@@ -328,42 +328,24 @@
         }
     });
 
-    // distance traveled chart
-    var ctx = document.getElementById('distance_traveled');
+    var ctx = document.getElementById('role_breakdown');
     Chart.defaults.global.legend.display = false;
-    var myChart = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-            labels: ['Strada', 'CW-Savings', 'Cheapest-Arc',
-                    'Automatic'],
-            datasets: [{
-                data: [2.88160187, 3.23577137, 3.23577137, 3.23577137],
-                backgroundColor: [
-                  '#FF9E63',
-                  'rgba(255, 99, 118, 0.2)',
-                  'rgba(255, 99, 118, 0.2)',
-                  'rgba(255, 99, 118, 0.2)'
-                ],
-                borderColor: [
-                  '#FF9E63',
-                  '#FF6376',
-                  '#FF6376',
-                  '#FF6376'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+    var myRadarChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+          labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
+          datasets: [{
+              data: [20, 10, 4, 2]
+          }]
+      },
+      options: {
+        scale: {
+            angleLines: {
+                display: true
             }
         }
+      }
     });
-    
     </script>
 
   {% endblock %}
