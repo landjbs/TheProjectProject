@@ -145,9 +145,11 @@
                         </div>
                       {% endfor %}
                     </div>
-                    <form class='post_form' id='task_form' method='post'>
-                      <input type='text' placeholder='Task'/>
-                      <button action='add_task'>Add</button>
+                    <form class='post_form' id='task_form' method='post'
+                      action="{{url_for('add_task', project_id=project.id)}}">
+                      {{ task_form.hidden_tag() }}
+                      {{ task_form.text(placeholder='Task') }}
+                      <button>Add</button>
                     </form>
                   </div>
 
@@ -199,10 +201,10 @@
                   {% endfor %}
                 </div>
                 <form class='post_form' id='comment_form' method='post'
-                  action="{{url_for('comment', project_id=project.id)}}">
+                  action="{{url_for('add_comment', project_id=project.id)}}">
                   {{ comment_form.hidden_tag() }}
                   {{ comment_form.text(placeholder='Comment') }}
-                  <button action='comment'>Add</button>
+                  <button>Add</button>
                 </form>
               </div>
             </div>

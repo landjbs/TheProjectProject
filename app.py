@@ -265,7 +265,19 @@ def like_action(project_id, action):
 
 @login_required
 @application.route('/project/<int:project_id>/comment', methods=['POST'])
-def comment(project_id):
+def add_comment(project_id):
+    project = Project.query.get_or_404(project_id)
+    form = Comment_Form(request.form)
+    if form.validate_on_submit():
+        comment = Comment(text=form.text.data, author=current_user, project=project)
+        db.session.add(comment)
+        db.session.commit()
+    return redirect(request.referrer)
+
+
+@login_required
+@application.route('/project/<int:project_id>/comment', methods=['POST'])
+def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     form = Comment_Form(request.form)
     if form.validate_on_submit():
