@@ -6,6 +6,7 @@ from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
 from datetime import datetime
 from dateutil import tz
+from collections import Counter
 
 from application import db
 from application.models import User, Project, Comment, Task
@@ -243,11 +244,17 @@ def user(email):
 @login_required
 def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
-    comment_form=Comment_Form(request.form)
+    comment_form = Comment_Form(request.form)
     task_form = Task_Form(request.form)
+    # compile counts of tasks completed by each worker
+    for task in project.tasks.filter_by(complete=True):
+        for worker in task:
+            completers.append(worker)
+    # select top 5 to plot
+    task_data = Counter(completers).most_common(n=5)
     return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,
-                            task_form=task_form)
+                            task_form=task_form, task_data=task_data)
 
 
 @application.route('/like/<int:project_id>/<action>')
