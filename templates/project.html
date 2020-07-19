@@ -135,6 +135,7 @@
                     <div class="list-group">
                       {% for task in not_complete(project.tasks) %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <h6 class="mb-1">{{ task.text }}</h6>
                           <div class="d-flex w-100 justify-content-between">
                             <small>Requested by
                             <a href='user={{ task.author.email }}' class="mb-1">
@@ -142,7 +143,6 @@
                             </a>
                             on {{ time_to_str(task.post_stamp) }}</small>
                           </div>
-                          <p class="mb-1">{{ task.text }}</p>
                         </div>
                       {% endfor %}
                     </div>
@@ -160,24 +160,27 @@
                     <div class="list-group">
                       {% for task in complete(project.tasks)|reverse %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <h6 class="mb-1">{{ task.text }}</h6>
                           <div class="d-flex w-100 justify-content-between">
-                            <a href='user={{ task.author.email }}' class="mb-1" style='text-decoration:underline;'>
-                              {{ task.author.name }}
-                            </a>
-                            <small>Completed: {{ time_to_str(task.post_stamp) }}</small>
+                            <small>Completed by
+                              {% for worker in task.workers %}
+                                  {% if loop.index==(task.workers|length) %}
+                                    <a href='user={{ worker.email }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                  {% elif (task.workers|length)==2 %}
+                                    <a href='user={{ worker.email }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                    and
+                                  {% else %}
+                                    <a href='user={{ worker.email }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                  {% endif %}
+                              {% endfor %}
+                            on {{ time_to_str(task.complete_stamp) }}</small>
                           </div>
-                          <p class="mb-1">{{ task.text }}</p>
-                          <small>completed by
-                            {% for worker in task.workers %}
-                              <a href='user={{ worker.email }}' class='user-name'>
-                                {% if loop.index>1 %}
-                                  , {{ worker.name }}
-                                {% else %}
-                                  {{ worker.name }}
-                                {% endif %}
-                              </a>
-                            {% endfor %}
-                          </small>
                         </div>
                       {% endfor %}
                     </div>

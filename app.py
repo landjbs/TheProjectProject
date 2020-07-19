@@ -245,7 +245,7 @@ def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
     comment_form=Comment_Form(request.form)
     task_form = Task_Form(request.form)
-    return render_template('index5.html', project=project,
+    return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,
                             task_form=task_form)
 
