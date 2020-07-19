@@ -265,6 +265,10 @@ class Task(db.Model):
     # workers
     workers = relationship('User', secondary=user_to_task,
                            back_populates='tasks')
+    # timing
+    post_stamp = Column(DateTime, default=datetime.utcnow(), index=True)
+    complete_stamp = Column(DateTime, nullable=True)
+    complete = Column(Boolean, default=False)
 
 
 class Comment(db.Model):
