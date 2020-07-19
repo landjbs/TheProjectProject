@@ -173,6 +173,7 @@ def create_fillers():
         t = Task(text=f'Do {i} please!', author=user1, project=p)
         db.session.add(c)
         db.session.add(t)
+    t = Task(text='Done this.', author=user2, project=p)
     p = db.session.query(Project).get(2)
     for i in range(10):
         c = Comment(text=f'Hi2 x {i}!', author=user2, project=p)
