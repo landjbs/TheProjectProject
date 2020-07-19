@@ -299,6 +299,34 @@
       }
     });
 
+    // search time chart
+    var ctx = document.getElementById('tasks_complete');
+    Chart.defaults.global.legend.display = false;
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: [{% for k in task_data.keys() %}'{{ k.name }}'{% endfor %}],
+            datasets: [{
+                data: [{% for v in task_data.values() %}'{{ v }}'{% endfor %}],
+                backgroundColor: [
+                  '#FF9E63'
+                ],
+                borderColor: [
+                  '#FF9E63'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 
     // distance traveled chart
     var ctx = document.getElementById('distance_traveled');
@@ -335,34 +363,7 @@
             }
         }
     });
-    // search time chart
-    var ctx = document.getElementById('tasks_complete');
-    Chart.defaults.global.legend.display = false;
-    var myChart = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: {
-            labels: [{% for k in task_data.keys() %}'{{ k.name }}'{% endfor %}],
-            datasets: [{
-                data: [{% for v in task_data.values() %}'{{ v }}'{% endfor %}],
-                backgroundColor: [
-                  '#FF9E63'
-                ],
-                borderColor: [
-                  '#FF9E63'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
+    
     </script>
 
   {% endblock %}
