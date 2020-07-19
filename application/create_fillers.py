@@ -175,6 +175,7 @@ def create_fillers():
         db.session.add(t)
     t = Task(text='Done this.', author=user2, project=p)
     t.mark_complete(user1)
+    t.add_worker(user2)
     db.session.add(t)
     p = db.session.query(Project).get(2)
     for i in range(10):

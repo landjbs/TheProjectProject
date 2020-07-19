@@ -157,15 +157,17 @@
                           </div>
                           <p class="mb-1">{{ task.text }}</p>
                           <small>completed by
-                            {% for worker in task.workers %}
-                              <a href='user={{ worker.email }}' class='user-name'>
-                                {% if loop.index>1 %}
-                                  {{ worker.name }},
-                                {% else %}
-                                  {{ worker.name }}
-                                {% endif %}
-                              </a>
-                            {% endfor %}
+                            <span>
+                              {% for worker in task.workers %}
+                                <a href='user={{ worker.email }}' class='user-name'>
+                                  {% if loop.index>1 %}
+                                    , {{ worker.name }}
+                                  {% else %}
+                                    {{ worker.name }}
+                                  {% endif %}
+                                </a>
+                              {% endfor %}
+                            </span>
                           </small>
                         </div>
                       {% endfor %}
