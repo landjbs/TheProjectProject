@@ -190,11 +190,11 @@ def home():
     top_tabs = partition_query(tops)
     # user projects
     user_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
-    user_tabs = list(partition_query(user_projs))
+    user_tabs = partition_query(user_projs)
     project_application = Project_Application(request.form)
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, user_tabs=user_tabs,
-                            user_project_count=len(user_projs),
+                            user_project_count=user_projs.count(),
                             current_user=current_user,
                             project_application=project_application)
 
