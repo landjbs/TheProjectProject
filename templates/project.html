@@ -15,6 +15,9 @@
 {% endblock %}
 
 {% block content %}
+    <!-- GLOBALS -->
+    {% set is_member = is_project_member(current_user, project) %}
+    <!-- PAGE -->
     <div class="wrapper">
         <!-- Sidebar Holder -->
         <nav id="sidebar">
@@ -192,12 +195,14 @@
                         </div>
                       {% endfor %}
                     </div>
-                    <form class='post_form' id='task_form' method='post'
-                      action="{{url_for('add_task', project_id=project.id)}}">
-                      {{ task_form.hidden_tag() }}
-                      {{ task_form.text(class='post-input', placeholder='Task') }}
-                      <button>Add</button>
-                    </form>
+                    {% if is_member %}
+                      <form class='post_form' id='task_form' method='post'
+                        action="{{url_for('add_task', project_id=project.id)}}">
+                        {{ task_form.hidden_tag() }}
+                        {{ task_form.text(class='post-input', placeholder='Task') }}
+                        <button>Add</button>
+                      </form>
+                    {% endif %}
                   </div>
 
 
