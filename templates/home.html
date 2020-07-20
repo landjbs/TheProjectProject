@@ -10,7 +10,7 @@
 <div class='container my-4'>
   <h4 style='text-align:left;'>Recommended Projects</h4>
   <hr class="my-4">
-  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+  <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
       {% for tab in recommended_tabs %}
@@ -87,13 +87,14 @@
     </div>
     <!--Controls-->
     <div class="controls-top">
-      <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-      <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+      <a class="btn-floating" href="#rec-carousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+      <a class="btn-floating" href="#rec-carousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </div>
     <!--/.Controls-->
   </div>
 </div>
+<div id="top-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
 <div class='container my-4'>
   <h4 style='text-align:left;'>Top Projects</h4>
   <hr class="my-4">
@@ -135,12 +136,13 @@
       </div>
     {% endfor %}
   </div>
+</div>
 
 
 <div class='container my-4'>
   <h4 style='text-align:left;'>My Projects</h4>
   <hr class="my-4">
-  <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+  <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
       {% for tab in users_tabs %}
@@ -176,6 +178,7 @@
       {% endfor %}
     </div>
   </div>
+</div>
 </div>
 </div>
 
@@ -215,16 +218,16 @@
 
 
 <script>
-$('#multi-item-example').on('slid.bs.carousel', function () {
-var currentSlide = $('#multi-item-example div.active').index();
+$('#rec-carousel').on('slid.bs.carousel', function () {
+var currentSlide = $('#rec-carousel div.active').index();
 sessionStorage.setItem('lastSlide', currentSlide);
 });
 if(sessionStorage.lastSlide){
-  $("#multi-item-example").carousel((sessionStorage.lastSlide+1)*1);
+  $("#rec-carousel").carousel((sessionStorage.lastSlide+1)*1);
 }
 
-$('#multi-item-example').bind('mousewheel', function() {
-    $(this).carousel('next');
-});
+// $('#rec-carousel').bind('mousewheel', function() {
+//     $(this).carousel('next');
+// });
 </script>
 {% endblock %}

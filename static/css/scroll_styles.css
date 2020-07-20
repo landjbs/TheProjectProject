@@ -3,8 +3,8 @@
 }
 
 .card-text {
-    min-height: 200px;
-    max-height: 200px;
+    min-height: 10vh;
+    max-height: 10vh;
     overflow: scroll;
     text-align: left;
 }
@@ -13,18 +13,18 @@
   text-align: left;
   white-space: normal;
   text-overflow: clip;
-  min-height: 50px;
-  max-height: 50px;
+  min-height: 3vh;
+  max-height: 3vh;
 }
 
 .little {
-  min-height: 45px;
-  max-height: 45px;
+  min-height: 4vh;
+  max-height: 4vh;
 }
 
 .tiny {
-  min-height: 30px;
-  max-height: 30px;
+  min-height: 3vh;
+  max-height: 3vh;
 }
 
 a {
