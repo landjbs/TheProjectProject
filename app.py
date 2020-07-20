@@ -190,7 +190,7 @@ def home():
     top_tabs = partition_query(tops)
     # user projects
     users_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
-    users_tabs = partition_query(recs)
+    users_tabs = partition_query(users_projs)
     project_application = Project_Application(request.form)
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, users_tabs=users_tabs,
@@ -246,8 +246,8 @@ def user(email):
     return render_template('user.html', user=user)
 
 
-@application.route('/project=<project_name>')
 @login_required
+@application.route('/project=<project_name>')
 def project(project_name):
     project = Project.query.filter_by(name=project_name).first_or_404()
     comment_form = Comment_Form(request.form)
@@ -276,8 +276,8 @@ def project(project_name):
                             role_data=role_data, filled_data=filled_data)
 
 
-@application.route('/join_project/<int:project_id>')
 @login_required
+@application.route('/join_project/<int:project_id>')
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
@@ -301,8 +301,8 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/leave_project/<int:project_id>/<int:new_owner_id>')
 @login_required
+@application.route('/leave_project/<int:project_id>/<int:new_owner_id>')
 def leave_project(project_id, new_owner_id):
     project = Project.query.get_or_404(project_id)
     if not is_project_member(current_user, project):
@@ -318,8 +318,8 @@ def leave_project(project_id, new_owner_id):
     return redirect(request.referrer)
 
 
-@application.route('/like/<int:project_id>/<action>')
 @login_required
+@application.route('/like/<int:project_id>/<action>')
 def like_action(project_id, action):
     project = Project.query.get_or_404(project_id)
     if action == 'like':

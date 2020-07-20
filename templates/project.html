@@ -91,14 +91,7 @@
                     {% for member in project.members %}
                       <li>
                           <a href="user={{ member.user.email }}" style='padding-bottom:5px;'>
-                            {% for role in member.roles %}
-                              {% if loop.index==1 %}
-                                {{ member.user.name }}&nbsp;-&nbsp;
-                              {% else %}
-                                {{ member.user.name }},&nbsp;
-                              {% endif %}
-                              {{ role.name }}
-                            {% endfor %}
+                            {{ member.user.name }}
                           </a>
                       </li>
                     {% endfor %}
