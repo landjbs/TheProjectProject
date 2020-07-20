@@ -272,17 +272,22 @@ def project(project_name):
                             role_data=role_data, filled_data=filled_data)
 
 
-@application.route('/join_project/<int:project_id>/<int:user_id>')
+@application.route('/join_project/<int:project_id>')
 @login_required
 def join_project(project_id, user_id):
     project = Project.query.get_or_404(project_id)
-    user = User.query.get_or_404(user_id)
     form = Project_Application(request.form)
     # TODO: CHECK IF USER IS ALREADY IN PROJECT
+    a = Member_Role(roles=form.roles.data)
+    a.project = project
     if project.open:
-        a = Member_Role()
-        project.members.append
-    project.pending.append(user)
+        if not project.requires_application:
+            current_user.projects.append(a)
+        else:
+            project.pending.append(user)
+        db.session.add(project)
+        db.session.commit()
+    return redirect(request.referrer)
 
 
 @application.route('/like/<int:project_id>/<action>')

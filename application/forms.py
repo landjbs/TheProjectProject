@@ -133,7 +133,6 @@ class Add_Project(BaseForm):
                                          'team to be.'),
                             render_kw={'min':1, 'max':30, 'start':7})
     complete = BooleanField('Completed',
-                            validators=[],
                             description=('Whether the project has been '
                             'completed.'))
 
@@ -141,7 +140,7 @@ class Add_Project(BaseForm):
 class Project_Application(BaseForm):
     response = TextField('Response', validators=[Length(1,250)],
                          render_kw={'max':250})
-    roles = SelectMultipleField()
+    roles = SelectMultipleField('Roles', description='Select roles.')
 
 
 class Task_Form(BaseForm):
