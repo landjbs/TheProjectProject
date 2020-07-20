@@ -24,9 +24,11 @@
                   {{ project.stars.all()|length }}
                   <!-- edit button -->
                   {% if project.owner.id == current_user.id %}
-                    <br>
-                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                    {{ project.stars.all()|length }}
+                  <br>
+                  <a href='/'>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Edit
+                  </a>
                   {% endif %}
                 </p>
                 <a href='/project={{ project.name }}'>
