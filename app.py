@@ -263,9 +263,8 @@ def project(project_name):
                     filled.append(role)
     role_data = Counter(roles)
     filled_data = Counter(filled)
-    print(role_data)
     return render_template('project.html', project=project,
-                            now=datetime.utcnow(), comment_form=comment_form,
+                            now=datetime.utcnow, comment_form=comment_form,
                             task_form=task_form, task_data=task_data,
                             role_data=role_data, filled_data=filled_data)
 

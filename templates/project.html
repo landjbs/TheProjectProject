@@ -44,7 +44,7 @@
                     {{ project.oneliner }}
                   </p>
                   <p>{{ project.summary }}</p>
-                  {% set elapsed = calc_days_since(now, project.posted_on) %}
+                  {% set elapsed = calc_days_since(now(), project.posted_on) %}
                   {% set est = project.estimated_time %}
                   {% set elapsed_style = elapsed_style(elapsed, est) %}
                   <center>
@@ -180,9 +180,11 @@
                           </div>
                           <!-- TODO: check if user in project -->
                           <div class='action-bar'>
-                            <a class='delete-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
+                            {% if current_user==task.author %}
+                              <a class='delete-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                            {% endif %}
                             <a class='complete-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
                               <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </a>
@@ -399,7 +401,7 @@
             pointBorderColor: ['#5D00FF'],
             pointBackgroundColor: ['#5D00FF'],
             pointHoverBackgroundColor: ['#5D00FF'],
-            pointHoverBorderColor: ['#5D00FF']  
+            pointHoverBorderColor: ['#5D00FF']
           }
         ]
       },
