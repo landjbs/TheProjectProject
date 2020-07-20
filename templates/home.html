@@ -25,13 +25,15 @@
                 <div class="card mb-2">
                   <div class="card-body">
                     <div class='member-hoverable float-right'>
+                      <!-- <span class="tooltiptext">
+                        {% for member in project.members %}
+                          <p>{{ member.user.name }}</p>
+                        {% endfor %}
+                      </span> -->
+                      <button type="button" data-toggle="tooltip" data-placement="left" id="tip_{{ project.id }}" title="member_tip">
                         <i class='far fa-user-circle'></i>
                         {{ project.members.all()|length }}
-                        <span class="tooltiptext">
-                          {% for member in project.members %}
-                            <p>{{ member.user.name }}</p>
-                          {% endfor %}
-                        </span>
+                      </button>
                       <br>
                       <i class="fa fa-star"></i>
                       {{ project.stars.all()|length }}
@@ -96,7 +98,7 @@
 </div>
 <div id="top-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
 <div class='container my-4'>
-  <h4 style='text-align:left;'>Top Projects</h4>
+  <h4 style='text-align:left;'>Trending Projects</h4>
   <hr class="my-4">
   <div class="carousel-inner" role="listbox">
     {% for tab in top_tabs %}
