@@ -271,6 +271,13 @@ def project(project_name):
                             role_data=role_data, filled_data=filled_data)
 
 
+@application.route('/join_project/<int:project_id>/<int:user_id>')
+@login_required
+def join_project(project_id, user_id):
+    project = Project.query.get_or_404(project_id)
+    user = User.query.get_or_404(user_id)
+    
+
 @application.route('/like/<int:project_id>/<action>')
 @login_required
 def like_action(project_id, action):
