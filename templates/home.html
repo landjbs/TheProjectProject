@@ -193,32 +193,50 @@
 <div>
   {% for tab in recommended_tabs %}
     {% for project in tab %}
-      <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-              {% if project.requires_application %}
-                <p>{{ project.application_question }}</p>
-                {{ project_application.hidden_tag() }}
-                {{ project_application.response(placeholder='Response') }}
-              {% else %}
-                <p>Welcome to {{ project.name }}!</p>
-              {% endif %}
-              <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
-                Join
-              </a>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      {% if not is_project_member(current_user, project) %}
+        <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                {% if project.requires_application %}
+                  <p>{{ project.application_question }}</p>
+                  {{ project_application.hidden_tag() }}
+                  {{ project_application.response(placeholder='Response') }}
+                {% else %}
+                  <p>Welcome to {{ project.name }}!</p>
+                {% endif %}
+                <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
+                  Join
+                </a>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
             </div>
           </div>
-
         </div>
-      </div>
+      {% else %}
+        <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to leave {{ project.name }}?</p>
+                <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
+                  Leave
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
     {% endfor %}
   {% endfor %}
 </div>
