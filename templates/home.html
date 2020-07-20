@@ -72,7 +72,9 @@
                       {% endif %}
                       &nbsp;
                       <button type="button" class="btn" data-toggle="modal"
-                          data-target="#{{ project.name }}_modal">Join</button>
+                          data-target="#{{ project.id }}_modal">
+                          Join
+                      </button>
                       &nbsp;
                       <i class="fa fa-share-alt" aria-hidden="false"></i>
                     </div>
@@ -80,7 +82,7 @@
                 </div>
               </div>
               <!-- join modal -->
-              <div id="{{ project.name }}_modal" class="modal fade" role="dialog">
+              <div id="{{ project.id }}_modal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                   <!-- Modal content-->
                   <div class="modal-content">
