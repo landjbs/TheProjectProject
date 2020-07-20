@@ -139,8 +139,8 @@ class Add_Project(BaseForm):
 
 
 class Project_Application(BaseForm):
-    response = TextField('Response', validators=[DataRequired(), Length(1,160)],
-                     render_kw={'max':250})
+    response = TextField('Response', validators=[DataRequired(), Length(1,250)],
+                         render_kw={'max':250})
 
 
 class Task_Form(BaseForm):
