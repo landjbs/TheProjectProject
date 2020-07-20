@@ -78,7 +78,7 @@ projects = [Project(name='Boogle',
                     estimated_time=5,
                     team_size=3,
                     requires_application=True),
-            Project(name='NonLinear Gradient Optimization',
+            Project(name='NonLinGradient Optimizer',
                     oneliner='A new type of batch optimizer.',
                     summary=('We take advantage of batch redundancy to '
                             'run batch gradient through nonlinearity with '
