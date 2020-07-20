@@ -329,13 +329,5 @@ def search():
     return render_template('project.html', project=project)
 
 
-@application.route('/test', methods=['GET', 'POST'])
-def test():
-    recs = db.session.query(Project).limit(30)
-    recommended_tabs = partition_query(recs)
-    return render_template('test.html', recommended_tabs=recommended_tabs)
-
-
-
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
