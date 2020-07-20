@@ -290,9 +290,10 @@ def join_project(project_id):
     if project.open:
         if not project.requires_application:
             current_user.projects.append(a)
-            flash(f'Your application to {project.name} been submitted.')
+            flash(f'You have been added to {project.name}!')
         else:
             project.pending_members.append(current_user)
+            flash(f'Your application to {project.name} been submitted.')
         db.session.add(project)
         db.session.commit()
     else:
