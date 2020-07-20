@@ -231,14 +231,15 @@ a.article, a.article:hover {
 }
 
 .progress-bar {
-  /* background: #FF5D00; */
   background: #00FF5D;
 }
 
 .complete-btn {
-  padding: 1px;
-  border: 1px solid black;
-  border-radius: 4%;
+  color: #00FF5D;
+}
+
+.complete-btn:hover {
+  color: #5D00FF;
 }
 
 .post_form {

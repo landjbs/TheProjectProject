@@ -179,8 +179,8 @@
                             on {{ time_to_str(task.post_stamp) }}</small>
                           </div>
                           <center>
-                            <a class='complete-btn' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
-                              Mark Complete
+                            <a class='complete-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                              <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </a>
                           </center>
                         </div>
@@ -226,8 +226,8 @@
                             on {{ time_to_str(task.complete_stamp) }}</small>
                           </div>
                           <center>
-                            <a class='complete-btn' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
-                              I Helped
+                            <a class='complete-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                              <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </a>
                           </center>
                         </div>

@@ -37,7 +37,7 @@ login_manager.init_app(application)
 @application.context_processor
 def utility_processor():
     def calc_days_since(now, start):
-        return int((now - start).days + 3)
+        return int((now - start).days)
     def calc_days_left(elapsed, estimated_time):
         return int((estimated_time - elapsed))
     def elapsed_style(elapsed, estimated_time):
@@ -262,12 +262,13 @@ def project(project_name):
     roles, filled = [], []
     for member_role in project.members:
         for role in member_role.roles:
-            if not role.name:
+            if not (role.name=='Creator'):
                 roles.append(role)
                 if not member_role.user is None:
                     filled.append(role)
     role_data = Counter(roles)
     filled_data = Counter(filled)
+    print(role_data)
     return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,
                             task_form=task_form, task_data=task_data,
