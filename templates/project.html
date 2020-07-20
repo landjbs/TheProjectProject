@@ -120,6 +120,9 @@
                           <a href="user={{ pending.email }}">
                             {{ pending.name }}
                           </a>
+                          <a href="{{ url_for('change_project_status', project_id=project.id, user_id=pending.id, action='accept') }}">
+                            Accept
+                          </a>
                         </li>
                       {% endfor %}
                     </ul>
