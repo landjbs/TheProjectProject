@@ -309,6 +309,7 @@ def leave_project(project_id, new_owner_id):
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
     if (current_user == project.owner):
+        flash(f'You have transferred ownership of {project.owner} to .')
         print('here')
     role = project.members.filter_by(user=current_user).first()
     db.session.delete(role)
