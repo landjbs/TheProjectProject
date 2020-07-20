@@ -238,15 +238,15 @@ a.article, a.article:hover {
   color: #00FF5D;
 }
 
-.complete-btn:hover {
-  color: #FFDC00;
-}
-
 .delete-btn {
   color: #FF0023;
 }
 
-.delete-btn:hover {
+.back-btn {
+  color: #5D00FF;
+}
+
+.task-btn:hover {
   color: #FFDC00;
 }
 

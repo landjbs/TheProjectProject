@@ -181,11 +181,11 @@
                           <!-- TODO: check if user in project -->
                           <div class='action-bar'>
                             {% if current_user==task.author %}
-                              <a class='delete-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
+                              <a class='delete-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                             {% endif %}
-                            <a class='complete-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                            <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
                               <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </a>
                           </div>
@@ -231,11 +231,16 @@
                               {% endfor %}
                             on {{ time_to_str(task.complete_stamp) }}</small>
                           </div>
-                          <center>
-                            <a class='complete-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                          <div class='action-bar'>
+                            {% if current_user in task.workers %}
+                              <a class='back-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                              </a>
+                            {% endif %}
+                            <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
                               <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </a>
-                          </center>
+                          </div>
                         </div>
                       {% endfor %}
                     </div>
