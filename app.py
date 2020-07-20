@@ -10,7 +10,8 @@ from collections import Counter
 
 from application import db
 from application.models import User, Project, Comment, Task
-from application.forms import Apply, Login, Add_Project, Comment_Form, Task_Form
+from application.forms import (Apply, Login, Add_Project, Comment_Form,
+                                Task_Form, Project_Application)
 import manager as manager
 
 
@@ -276,7 +277,13 @@ def project(project_name):
 def join_project(project_id, user_id):
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
-    
+    form = Project_Application
+    # TODO: CHECK IF USER IS ALREADY IN PROJECT
+    if project.open:
+        a = Member_Role()
+        project.members.append
+    project.pending.append(user)
+
 
 @application.route('/like/<int:project_id>/<action>')
 @login_required
