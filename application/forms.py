@@ -112,6 +112,10 @@ class Add_Project(BaseForm):
                                    description=('What subjects might this '
                                                 'project involve?'),
                                    choices=list(subjects))
+    roles = SelectMultipleField('Roles',
+                                   description=('What roles might fit on this '
+                                                'project?'),
+                                   choices=list(subjects))
     open = BooleanField('Open',
                         validators=[],
                         description=('Open projects can have team members.'))
