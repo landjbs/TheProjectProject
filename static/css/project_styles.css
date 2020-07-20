@@ -239,7 +239,7 @@ a.article, a.article:hover {
 }
 
 .complete-btn:hover {
-  color: #5D00FF;
+  color: #FFDC00;
 }
 
 .delete-btn {
@@ -247,7 +247,7 @@ a.article, a.article:hover {
 }
 
 .delete-btn:hover {
-  color: #FF5D00;
+  color: #FFDC00;
 }
 
 .post_form {
