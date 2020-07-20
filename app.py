@@ -274,7 +274,7 @@ def project(project_name):
 
 @application.route('/join_project/<int:project_id>')
 @login_required
-def join_project(project_id, user_id):
+def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     form = Project_Application(request.form)
     # TODO: CHECK IF USER IS ALREADY IN PROJECT
