@@ -33,6 +33,9 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 login_manager.init_app(application)
 
 
+def is_project_member(user, project):
+    return (project.members.filter_by(user=user).first() is not None)
+
 # functions
 @application.context_processor
 def utility_processor():
