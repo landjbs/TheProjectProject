@@ -41,25 +41,25 @@
                 <p>
                   by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
                 </p>
-                <div class='action-bar' style='border-top: 1px solid white;'>
-                  {% if current_user.has_starred(project) %}
-                    <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
-                      <i class="fa fa-star"></i>
-                    </a>
-                  {% else %}
-                    <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
-                      <i class="fa fa-star-o"></i>
-                    </a>
-                  {% endif %}
-                  &nbsp;
-                  <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
-                      Join
-                  </button>
-                  &nbsp;
-                  <i class="fa fa-share-alt" aria-hidden="false"></i>
-                </div>
             </div>
             <ul class="list-unstyled components">
+              <div class='action-bar' style='border-bottom: 1px solid white;'>
+                {% if current_user.has_starred(project) %}
+                  <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
+                    <i class="fa fa-star"></i>
+                  </a>
+                {% else %}
+                  <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
+                    <i class="fa fa-star-o"></i>
+                  </a>
+                {% endif %}
+                &nbsp;
+                <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+                    Join
+                </button>
+                &nbsp;
+                <i class="fa fa-share-alt" aria-hidden="false"></i>
+              </div>
                 <div class='bio'>
                   <p class='oneliner'>
                     {{ project.oneliner }}
