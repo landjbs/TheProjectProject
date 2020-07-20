@@ -150,42 +150,46 @@
 <div class='container my-4'>
   <h4 style='text-align:left;'>My Projects</h4>
   <hr class="my-4">
-  <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-      {% for tab in users_tabs %}
-        {% if loop.index==1 %}
-        <div class="carousel-item active">
-        {% else %}
-        <div class="carousel-item">
-        {% endif %}
-          <div class='row'>
-            {% for project in tab %}
-              <div class="col-md-4">
-                <div class="card mb-2">
-                  <div class="card-body">
-                    <p class="float-right">
-                      <i class='far fa-user-circle'></i>
-                      {{ project.members.all()|length  }}
-                    </p>
-                    <div class='card-head tiny'>
-                      <a class='project-name' href='project={{ project.name }}'>
-                        <h5>{{ project.name }}</h5>
-                      </a>
+  {% if (user_tabs|length)>0 %}
+    <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+      <!--Slides-->
+      <div class="carousel-inner" role="listbox">
+        {% for tab in users_tabs %}
+          {% if loop.index==1 %}
+          <div class="carousel-item active">
+          {% else %}
+          <div class="carousel-item">
+          {% endif %}
+            <div class='row'>
+              {% for project in tab %}
+                <div class="col-md-4">
+                  <div class="card mb-2">
+                    <div class="card-body">
+                      <p class="float-right">
+                        <i class='far fa-user-circle'></i>
+                        {{ project.members.all()|length  }}
+                      </p>
+                      <div class='card-head tiny'>
+                        <a class='project-name' href='project={{ project.name }}'>
+                          <h5>{{ project.name }}</h5>
+                        </a>
+                      </div>
+                      <!-- summary -->
+                      <p class='oneliner'>
+                        {{ project.oneliner }}
+                      </p>
                     </div>
-                    <!-- summary -->
-                    <p class='oneliner'>
-                      {{ project.oneliner }}
-                    </p>
                   </div>
                 </div>
-              </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
+  {% else %}
+    <center></center>
+  {% endif %}
 </div>
 </div>
 </div>
