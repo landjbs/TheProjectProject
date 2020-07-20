@@ -281,7 +281,7 @@ def project(project_name):
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
-        flash(f'Could not join {project.name} because {current_user.name} is '
+        flash(f'Could not join {project.name} because you are '
                 'already a member.')
         return redirect(request.referrer)
     form = Project_Application(request.form)
@@ -290,6 +290,7 @@ def join_project(project_id):
     if project.open:
         if not project.requires_application:
             current_user.projects.append(a)
+            flash(f'Your application to {project.name} been submitted.')
         else:
             project.pending_members.append(current_user)
         db.session.add(project)

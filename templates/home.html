@@ -76,6 +76,8 @@
                         <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
                             Join
                         </button>
+                      {% elif current_user in project.pending %}
+                          Pending
                       {% else %}
                         <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
                             Leave
