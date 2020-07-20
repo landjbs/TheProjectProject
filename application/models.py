@@ -280,7 +280,7 @@ class Task(db.Model):
             self.complete = True
             self.complete_stamp = datetime.utcnow()
 
-    def mark_uncomplete(self):
+    def mark_incomplete(self):
         if self.complete:
             self.complete = False
             self.complete_stamp = None

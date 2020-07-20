@@ -334,13 +334,15 @@ def mark_complete(project_id, task_id, action):
             task.mark_complete(current_user)
         else:
             task.add_worker(current_user)
-        db.session.commit()
     elif (action=='back'):
         if current_user in task.workers:
             task.workers.remove(current_user)
         if (len(task.workers)==0):
             task.mark_incomplete()
-        db.session.commit()
+    elif (action=='delete'):
+        if (current_user==task.author):
+            db.session.delete(task)
+    db.session.commit()
     return redirect(request.referrer)
 
 
