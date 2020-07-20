@@ -242,6 +242,14 @@ a.article, a.article:hover {
   color: #5D00FF;
 }
 
+.delete-btn {
+  color: #FF0023;
+}
+
+.delete-btn:hover {
+  color: #FF5D00;
+}
+
 .post_form {
   /* This bit sets up the horizontal layout */
   display:flex;
