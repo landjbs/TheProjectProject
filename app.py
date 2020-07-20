@@ -9,7 +9,7 @@ from dateutil import tz
 from collections import Counter
 
 from application import db
-from application.models import User, Project, Comment, Task
+from application.models import User, Project, Comment, Task, Member_Role
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
                                 Task_Form, Project_Application)
 import manager as manager
@@ -285,15 +285,17 @@ def join_project(project_id):
                 'already a member.')
         return redirect(request.referrer)
     form = Project_Application(request.form)
-    a = Member_Role(roles=form.roles.data)
+    a = Member_Role(roles=[]) # form.roles.data)
     a.project = project
     if project.open:
         if not project.requires_application:
             current_user.projects.append(a)
         else:
-            project.pending.append(user)
+            project.pending_members.append(current_user)
         db.session.add(project)
         db.session.commit()
+    else:
+        flash('The project owner has closed this project.')
     return redirect(request.referrer)
 
 
@@ -377,6 +379,8 @@ def search():
 @login_required
 def logout():
     logout_user()
+    return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     application.run(host='0.0.0.0')

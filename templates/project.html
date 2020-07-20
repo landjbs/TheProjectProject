@@ -107,6 +107,9 @@
               <li>
                   <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
                     Media
+                    &nbsp;
+                    <i class="fa fa-link" aria-hidden="true"></i>
+                    {{ [project.url]|length }}
                   </a>
                   <ul class="collapse list-unstyled" id="mediaSubmenu">
                     {% for link in [project.url] %}
@@ -139,12 +142,14 @@
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
                     {% for pending in project.pending_members %}
                       <li>
-                        <a href="user={{ pending.email }}">
-                          {{ pending.name }}
-                        </a>
-                        <a href="{{ url_for('change_project_status', project_id=project.id, user_id=pending.id, action='accept') }}">
-                          Accept
-                        </a>
+                        <div class='row' style='padding-left: 1.5vh;'>
+                          <a href="user={{ pending.email }}">
+                            {{ pending.name }}
+                          </a>
+                          <a href="{{ url_for('change_project_status', project_id=project.id, user_id=pending.id, action='accept') }}">
+                            Accept
+                          </a>
+                        </div>
                       </li>
                     {% endfor %}
                   </ul>
