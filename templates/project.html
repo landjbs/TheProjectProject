@@ -301,7 +301,7 @@
                       <p class="mb-1">{{ comment.text }}</p>
                       <div class='action-bar'>
                         {% if current_user in [comment.author, project.owner] %}
-                          <a class='delete-btn task-btn float-right' href="{{ url_for('delete_comment', project_id=project.id, task_id=comment.id) }}">
+                          <a class='delete-btn task-btn float-right' href="{{ url_for('delete_comment', project_id=project.id, comment_id=comment.id) }}">
                             <i class="fa fa-times-circle" aria-hidden="true"></i>
                           </a>
                         {% endif %}
