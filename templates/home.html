@@ -190,8 +190,12 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              Join Project
-              <input type='text'/>
+              {% if project.requires_application %}
+                <p>{{ project.application_question }}</p>
+                <input type='text'/>
+              {% else %}
+                <p>Welcome to {{ project.name }}!</p>
+              {% endif %}
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
