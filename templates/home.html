@@ -192,7 +192,8 @@
             <div class="modal-body">
               {% if project.requires_application %}
                 <p>{{ project.application_question }}</p>
-                <input type='text'/>
+                {{ project_application.hidden_tag() }}
+                {{ project_application.response(placeholder='Response') }}
               {% else %}
                 <p>Welcome to {{ project.name }}!</p>
               {% endif %}
