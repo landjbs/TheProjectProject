@@ -338,6 +338,9 @@ def mark_complete(project_id, task_id, action):
     elif (action=='back'):
         if current_user in task.workers:
             task.workers.remove(current_user)
+        if (len(task.workers)==0):
+            task.mark_incomplete()
+        db.session.commit()
     return redirect(request.referrer)
 
 
