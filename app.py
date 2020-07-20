@@ -277,7 +277,7 @@ def project(project_name):
 def join_project(project_id, user_id):
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
-    form = Project_Application
+    form = Project_Application(request.form)
     # TODO: CHECK IF USER IS ALREADY IN PROJECT
     if project.open:
         a = Member_Role()

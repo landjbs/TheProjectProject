@@ -141,7 +141,7 @@ class Add_Project(BaseForm):
 class Project_Application(BaseForm):
     response = TextField('Response', validators=[Length(1,250)],
                          render_kw={'max':250})
-    roles =
+    roles = SelectMultipleField()
 
 
 class Task_Form(BaseForm):
