@@ -36,6 +36,7 @@ login_manager.init_app(application)
 def is_project_member(user, project):
     return (project.members.filter_by(user=user).first() is not None)
 
+
 # functions
 @application.context_processor
 def utility_processor():
@@ -57,9 +58,12 @@ def utility_processor():
         return tasks.filter_by(complete=True)
     def not_complete(tasks):
         return tasks.filter_by(complete=False)
+    def is_project_member_(user, project):
+        return is_project_member(user, project)
     return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
                 elapsed_style=elapsed_style, time_to_str=time_to_str,
-                not_complete=not_complete, complete=complete)
+                not_complete=not_complete, complete=complete,
+                is_project_member=is_project_member_)
 
 
 # querying
