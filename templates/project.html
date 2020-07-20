@@ -23,7 +23,7 @@
                   <i class="fa fa-star"></i>
                   {{ project.stars.all()|length }}
                 </p>
-                <a href='#'>
+                <a href='/project={{ project.name }}'>
                   <h3>{{ project.name }}</h3>
                 </a>
                 <p>
@@ -114,7 +114,11 @@
               </div>
               <div class="col-sm-4">
                 <h6>Role Breakdown</h6>
-                <canvas id="role_breakdown"></canvas>
+                {% if ((role_data|length) != 0) %}
+                  <canvas id="role_breakdown"></canvas>
+                {% else %}
+                  <p class='empty-text'>No roles yet.</p>
+                {% endif %}
               </div>
             </div>
 
@@ -301,7 +305,6 @@
 
     // search time chart
     var ctx = document.getElementById('tasks_complete');
-    Chart.defaults.global.legend.display = false;
     var myChart = new Chart(ctx, {
         type: 'horizontalBar',
         data: {
@@ -329,7 +332,6 @@
     });
 
     var ctx = document.getElementById('role_breakdown');
-    Chart.defaults.global.legend.display = false;
     var myRadarChart = new Chart(ctx, {
       type: 'radar',
       data: {
@@ -371,11 +373,11 @@
           },
           ticks: {
               suggestedMin: 0,
-              showLabelBackdrop: false,
               display: false
           },
-        line: {
-        }
+        },
+        legend: {
+          display: true
         }
       }
     });
