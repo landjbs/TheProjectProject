@@ -191,6 +191,7 @@ def home():
     # user projects
     users_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
     users_tabs = partition_query(users_projs)
+    print(user_projs, user_tabs)
     project_application = Project_Application(request.form)
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, users_tabs=users_tabs,
