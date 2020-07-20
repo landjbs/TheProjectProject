@@ -301,9 +301,11 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/join_project/<int:project_id>')
+@application.route('/leave_project/<int:project_id>/<int:new_owner_id>')
 @login_required
-def leave_project(project_id, new_owner_id=None)
+def leave_project(project_id, new_owner_id):
+    project = Project.query.get_or_404(project_id)
+    
 
 
 
