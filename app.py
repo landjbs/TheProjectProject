@@ -281,6 +281,8 @@ def project(project_name):
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
+        flash(f'Could not join {project.name} because {current_user.name} is '
+                'already a member.')
         return redirect(request.referrer)
     form = Project_Application(request.form)
     a = Member_Role(roles=form.roles.data)

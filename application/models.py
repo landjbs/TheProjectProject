@@ -42,7 +42,7 @@ class Member_Role(db.Model):
     # primary key
     id = Column(Integer, primary_key=True)
     # members
-    user_id = Column('user_id', ForeignKey('user.id'), nullable=True)
+    user_id = Column('user_id', ForeignKey('user.id'), nullable=True, unique=True)
     user = relationship('User', back_populates='projects')
     # projects
     project_id = Column('project_id', ForeignKey('project.id'), nullable=False)
