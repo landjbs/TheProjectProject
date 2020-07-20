@@ -53,9 +53,14 @@ def utility_processor():
         return tasks.filter_by(complete=True)
     def not_complete(tasks):
         return tasks.filter_by(complete=False)
+    def join_modal_target(project_id):
+        return f'#{project_id}_modal'
+    def join_modal_id(project_id):
+        return f'{project_id}_modal'
     return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
                 elapsed_style=elapsed_style, time_to_str=time_to_str,
-                not_complete=not_complete, complete=complete)
+                not_complete=not_complete, complete=complete,
+                join_modal_target=join_modal_target, join_modal_id=join_modal_id)
 
 
 # querying
