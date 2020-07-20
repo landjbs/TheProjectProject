@@ -337,6 +337,10 @@ def add_comment(project_id):
 @login_required
 def mark_complete(project_id, task_id, action):
     project = Project.query.get_or_404(project_id)
+    # screen non-members
+    if not is_project_member(current_user, project):
+        return redirect(request.referrer)
+    # get task
     task = Task.query.get_or_404(task_id)
     if (action=='complete'):
         if not task.complete:

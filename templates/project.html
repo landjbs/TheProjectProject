@@ -181,17 +181,18 @@
                             </a>
                             on {{ time_to_str(task.post_stamp) }}</small>
                           </div>
-                          <!-- TODO: check if user in project -->
-                          <div class='action-bar'>
-                            {% if current_user==task.author %}
-                              <a class='delete-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                          {% if is_member %}
+                            <div class='action-bar'>
+                              {% if current_user==task.author %}
+                                <a class='delete-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
+                                  <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </a>
+                              {% endif %}
+                              <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
                               </a>
-                            {% endif %}
-                            <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
-                              <i class="fa fa-check-circle" aria-hidden="true"></i>
-                            </a>
-                          </div>
+                            </div>
+                          {% endif %}
                         </div>
                       {% endfor %}
                     </div>
