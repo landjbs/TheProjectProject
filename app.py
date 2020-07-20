@@ -180,8 +180,8 @@ def partition_query(l, n=3):
 @application.route('/home', methods=['GET', 'POST'])
 def home():
     # recommended projects
-    recs = db.session.query(Project).limit(1)
-    recommended_tabs = partition_query(recs)
+    recs = db.session.query(Project).limit(30)
+    recommended_tabs = list(partition_query(recs))
     # top projects
     tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
     top_tabs = partition_query(tops)
