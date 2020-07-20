@@ -312,6 +312,8 @@ def leave_project(project_id, new_owner_id):
         print('here')
     role = project.members.filter_by(user=current_user).first()
     db.session.delete(role)
+    db.session.commit()
+    flash(f'You have left {project.name}.')
     return redirect(request.referrer)
 
 
