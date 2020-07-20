@@ -113,12 +113,12 @@
                 {% if ((complete(project.tasks).all()|length)!=0) %}
                   <canvas id="tasks_complete"></canvas>
                 {% else %}
-                  <p class='empty-text'>No tasks completed.</p>
+                  <p class='empty-text'>No tasks completed yet.</p>
                 {% endif %}
               </div>
               <div class="col-sm-4">
                 <h6>Role Breakdown</h6>
-                {% if ((role_data|length) != 0) %}
+                {% if ((role_data|length) > 1) %}
                   <canvas id="role_breakdown"></canvas>
                 {% else %}
                   <p class='empty-text'>No roles yet.</p>
@@ -136,7 +136,7 @@
                     {% set todo_tasks = not_complete(project.tasks) %}
                     <div class="list-group">
                       {% if (todo_tasks.all()|length)==0 %}
-                        <p class='empty-text'>No tasks to do.</p>
+                        <p class='empty-text'>No tasks to do yet.</p>
                       {% endif %}
                       {% for task in todo_tasks %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
@@ -170,7 +170,7 @@
                     {% set completed_tasks = complete(project.tasks) %}
                     <div class="list-group">
                       {% if completed_tasks.all()|length==0 %}
-                        <p class='empty-text'>No tasks completed.</p>
+                        <p class='empty-text'>No tasks completed yet.</p>
                       {% endif %}
                       {% for task in completed_tasks|reverse %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start">

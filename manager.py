@@ -46,9 +46,8 @@ def add_role_to_user(project, user, role):
 
 
 def create_project(project, user):
-    a = Member_Role(roles=[creator_role])
+    a = Member_Role(roles=[db.session.query(Role).filter_by(name='Creator').first()])
     a.project = project
-    print(user)
     user.projects.append(a)
     db.session.add(project)
 

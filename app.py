@@ -11,6 +11,7 @@ from collections import Counter
 from application import db
 from application.models import User, Project, Comment, Task
 from application.forms import Apply, Login, Add_Project, Comment_Form, Task_Form
+import manager as manager
 
 
 ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
@@ -223,7 +224,7 @@ def add_project():
                           team_size = form.team_size.data,
                           complete = form.complete.data)
             try:
-                db.session.add(project)
+                manager.create_project(project, current_user)
                 db.session.commit()
                 db.session.close()
             except Exception as e:
