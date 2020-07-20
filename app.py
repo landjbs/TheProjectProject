@@ -373,5 +373,10 @@ def search():
     return render_template('project.html', project=project)
 
 
+@application.route('/logout')
+@login_required
+def logout():
+    logout_user()
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
