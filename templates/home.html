@@ -80,26 +80,6 @@
                   </div>
                 </div>
               </div>
-
-              <!-- join modal -->
-              <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title">{{ project.name }}</h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>Some text in the modal.</p>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
             {% endfor %}
           </div>
         </div>
@@ -196,6 +176,32 @@
       {% endfor %}
     </div>
   </div>
+
+  <div>
+    {% for tab in recommended_tabs %}
+      {% for project in tab %}
+        <!-- join modal -->
+        <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{ project.name }}</h4>
+              </div>
+              <div class="modal-body">
+                <p>Some text in the modal.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+
 </div>
 
 <script>
