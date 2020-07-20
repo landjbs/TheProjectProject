@@ -108,16 +108,18 @@
                 </li>
                 {% if project.owner.id == current_user.id %}
                   <li>
-                    <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                    <a href="#pendingSubmenu" data-toggle="collapse" aria-expanded="false">
                       Pending Members
                       &nbsp;
                       <i class="fa fa-bell" aria-hidden="true"></i>
                       {{ project.pending_members|length }}
                     </a>
-                    <ul class="collapse list-unstyled" id="subjectSubmenu">
-                      {% for subject in project.subjects %}
+                    <ul class="collapse list-unstyled" id="pendingSubmenu">
+                      {% for pending in project.pending_members %}
                         <li>
-                            <a href="#">{{ subject }}</a>
+                          <a href="user={{ pending.email }}">
+                            {{ pending.name }}
+                          </a>
                         </li>
                       {% endfor %}
                     </ul>
