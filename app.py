@@ -359,6 +359,12 @@ def mark_complete(project_id, task_id, action):
     return redirect(request.referrer)
 
 
+@application.route('/change_project_status/<int:project_id>/<action>')
+@login_required
+def change_project_status(project_id, action):
+    raise RuntimeError('change_project_status not implemented.')
+
+
 @application.route('/search', methods=['POST'])
 def search():
     return render_template('project.html', project=project)
