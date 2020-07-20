@@ -292,20 +292,21 @@
                       <div class="d-flex w-100 justify-content-between">
                         <a href='user={{ comment.author.email }}' class="mb-1">
                           <u>{{ comment.author.name }}</u>
-                          {% if is_project_member(comment.author, project) %}
+                          {% if (comment.author == project.owner) %}
+                            <i class="fa fa-circle" style='color:#FF5D00;'></i>
+                          {% elif is_project_member(comment.author, project) %}
                             <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
                           {% endif %}
                         </a>
                         <small>{{ time_to_str(comment.timestamp) }}</small>
                       </div>
-                      <p class="mb-1">{{ comment.text }}</p>
-                      <div class='action-bar'>
+                      <p class="mb-1">{{ comment.text }}
                         {% if current_user in [comment.author, project.owner] %}
                           <a class='delete-btn task-btn float-right' href="{{ url_for('delete_comment', project_id=project.id, comment_id=comment.id) }}">
                             <i class="fa fa-times-circle" aria-hidden="true"></i>
                           </a>
                         {% endif %}
-                      </div>
+                      </p>
                     </div>
                   {% endfor %}
                 </div>
