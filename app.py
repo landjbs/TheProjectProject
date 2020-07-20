@@ -311,6 +311,8 @@ def like_action(project_id, action):
 @application.route('/project/<int:project_id>/task', methods=['POST'])
 def add_task(project_id):
     project = Project.query.get_or_404(project_id)
+    if not is_project_member(current_user, project):
+        return redirect(request.referrer)
     form = Comment_Form(request.form)
     if form.validate_on_submit():
         comment = Task(text=form.text.data, author=current_user, project=project)
