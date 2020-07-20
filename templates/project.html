@@ -43,7 +43,7 @@
                 </p>
             </div>
             <ul class="list-unstyled components">
-              <div class='action-bar' style='border-bottom: 1px solid white;'>
+              <div class='action-bar' style='border-bottom: 1px solid white; padding-bottom:10px;'>
                 {% if current_user.has_starred(project) %}
                   <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
                     <i class="fa fa-star"></i>
@@ -60,95 +60,95 @@
                 &nbsp;
                 <i class="fa fa-share-alt" aria-hidden="false"></i>
               </div>
-                <div class='bio'>
-                  <p class='oneliner'>
-                    {{ project.oneliner }}
-                  </p>
-                  <p>{{ project.summary }}</p>
-                  {% set elapsed = calc_days_since(now(), project.posted_on) %}
-                  {% set est = project.estimated_time %}
-                  {% set elapsed_style = elapsed_style(elapsed, est) %}
-                  <center>
-                    <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
-                    <div class="progress" style='width:80%;'>
-                      <div class="progress-bar" role="progressbar"
-                          style='{{ elapsed_style }}'
-                          aria-valuenow="{{ elapsed }}" aria-valuemin="0"
-                          aria-valuemax="{{ est }}"></div>
-                    </div>
-                  </center>
-                  <br>
-                </div>
-                <li class="active">
-                    <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
-                      Members
-                      &nbsp;
-                      <i class='far fa-user-circle'></i>
-                      {{ project.members.all()|length }}
-                    </a>
-                    <ul class="collapse in list-unstyled" id="memberSubmenu">
-                      {% for member in project.members %}
-                        <li>
-                            <a href="user={{ member.user.email }}" style='padding-bottom:5px;'>
-                              {% for role in member.roles %}
-                                {% if loop.index==1 %}
-                                  {{ member.user.name }}&nbsp;-&nbsp;
-                                {% else %}
-                                  {{ member.user.name }},&nbsp;
-                                {% endif %}
-                                {{ role.name }}
-                              {% endfor %}
-                            </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                </li>
-                <li>
-                    <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
-                      Media
-                    </a>
-                    <ul class="collapse list-unstyled" id="mediaSubmenu">
-                      {% for link in [project.url] %}
-                        <li>
-                            <a href="{{ link }}">{{ link }}</a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                </li>
-                <li>
-                  <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
-                    Subjects
+              <div class='bio'>
+                <p class='oneliner'>
+                  {{ project.oneliner }}
+                </p>
+                <p>{{ project.summary }}</p>
+                {% set elapsed = calc_days_since(now(), project.posted_on) %}
+                {% set est = project.estimated_time %}
+                {% set elapsed_style = elapsed_style(elapsed, est) %}
+                <center>
+                  <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+                  <div class="progress" style='width:80%;'>
+                    <div class="progress-bar" role="progressbar"
+                        style='{{ elapsed_style }}'
+                        aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                        aria-valuemax="{{ est }}"></div>
+                  </div>
+                </center>
+                <br>
+              </div>
+              <li class="active">
+                  <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Members
+                    &nbsp;
+                    <i class='far fa-user-circle'></i>
+                    {{ project.members.all()|length }}
                   </a>
-                  <ul class="collapse list-unstyled" id="subjectSubmenu">
-                    {% for subject in project.subjects %}
+                  <ul class="collapse in list-unstyled" id="memberSubmenu">
+                    {% for member in project.members %}
                       <li>
-                          <a href="#">{{ subject }}</a>
+                          <a href="user={{ member.user.email }}" style='padding-bottom:5px;'>
+                            {% for role in member.roles %}
+                              {% if loop.index==1 %}
+                                {{ member.user.name }}&nbsp;-&nbsp;
+                              {% else %}
+                                {{ member.user.name }},&nbsp;
+                              {% endif %}
+                              {{ role.name }}
+                            {% endfor %}
+                          </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                  <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Media
+                  </a>
+                  <ul class="collapse list-unstyled" id="mediaSubmenu">
+                    {% for link in [project.url] %}
+                      <li>
+                          <a href="{{ link }}">{{ link }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                  Subjects
+                </a>
+                <ul class="collapse list-unstyled" id="subjectSubmenu">
+                  {% for subject in project.subjects %}
+                    <li>
+                        <a href="#">{{ subject }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% if project.owner.id == current_user.id %}
+                <li>
+                  <a href="#pendingSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Pending Members
+                    &nbsp;
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    {{ project.pending_members|length }}
+                  </a>
+                  <ul class="collapse list-unstyled" id="pendingSubmenu">
+                    {% for pending in project.pending_members %}
+                      <li>
+                        <a href="user={{ pending.email }}">
+                          {{ pending.name }}
+                        </a>
+                        <a href="{{ url_for('change_project_status', project_id=project.id, user_id=pending.id, action='accept') }}">
+                          Accept
+                        </a>
                       </li>
                     {% endfor %}
                   </ul>
                 </li>
-                {% if project.owner.id == current_user.id %}
-                  <li>
-                    <a href="#pendingSubmenu" data-toggle="collapse" aria-expanded="false">
-                      Pending Members
-                      &nbsp;
-                      <i class="fa fa-bell" aria-hidden="true"></i>
-                      {{ project.pending_members|length }}
-                    </a>
-                    <ul class="collapse list-unstyled" id="pendingSubmenu">
-                      {% for pending in project.pending_members %}
-                        <li>
-                          <a href="user={{ pending.email }}">
-                            {{ pending.name }}
-                          </a>
-                          <a href="{{ url_for('change_project_status', project_id=project.id, user_id=pending.id, action='accept') }}">
-                            Accept
-                          </a>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  </li>
-                {% endif %}
+              {% endif %}
             </ul>
         </nav>
 
