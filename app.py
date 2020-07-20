@@ -305,8 +305,11 @@ def join_project(project_id):
 @login_required
 def leave_project(project_id, new_owner_id):
     project = Project.query.get_or_404(project_id)
+    if not is_project_member(current_user, project):
+        flash(f'Cannot leave {project.name} without being a member.')
+        return redirect(request.referrer)
+    project.members.remove(project.members.filter_by(user=user).first())
     
-
 
 
 @application.route('/like/<int:project_id>/<action>')
