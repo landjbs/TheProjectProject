@@ -280,8 +280,9 @@ def project(project_name):
 @login_required
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
+    if is_project_member(current_user, project):
+        return redirect(request.referrer)
     form = Project_Application(request.form)
-    # TODO: CHECK IF USER IS ALREADY IN PROJECT
     a = Member_Role(roles=form.roles.data)
     a.project = project
     if project.open:

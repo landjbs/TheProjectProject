@@ -71,9 +71,15 @@
                         </a>
                       {% endif %}
                       &nbsp;
-                      <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
-                          Join
-                      </button>
+                      {% if is_project_member(current_user, project) %}
+                        <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+                            Join
+                        </button>
+                      {% else %}
+                        <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+                            Leave
+                        </button>
+                      {% endif %}
                       &nbsp;
                       <i class="fa fa-share-alt" aria-hidden="false"></i>
                     </div>
