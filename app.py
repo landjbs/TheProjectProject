@@ -308,8 +308,11 @@ def leave_project(project_id, new_owner_id):
     if not is_project_member(current_user, project):
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
-    project.members.remove(project.members.filter_by(user=user).first())
-    
+    if (current_user == project.owner):
+        print('here')
+    role = project.members.filter_by(user=current_user).first()
+    db.session.delete(role)
+    return redirect(request.referrer)
 
 
 @application.route('/like/<int:project_id>/<action>')
