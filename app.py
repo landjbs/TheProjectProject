@@ -259,7 +259,7 @@ def project(project_name):
     roles, filled = [], []
     for member_role in project.members:
         for role in member_role.roles:
-            if not role.name in ['Pending', 'Member']:
+            if not role.name:
                 roles.append(role)
                 if not member_role.user is None:
                     filled.append(role)

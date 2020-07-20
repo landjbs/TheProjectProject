@@ -79,6 +79,8 @@ class User(db.Model, UserMixin):
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Member_Role', back_populates='user', lazy='dynamic')
+    pending_projects = relationship('Project', secondary=user_to_project,
+                                    back_populates='pending_members')
     # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
@@ -151,6 +153,7 @@ class Project(db.Model):
     owner_id = Column(Integer, ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
     members = relationship('Member_Role', back_populates='project', lazy='dynamic')
+    pending_members = relationship('User', secondary=user_to_project, back_populates='pending_projects')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
