@@ -150,11 +150,11 @@
 <div class='container my-4'>
   <h4 style='text-align:left;'>My Projects</h4>
   <hr class="my-4">
-  {% if (user_tabs|length)>0 %}
+  {% if user_project_count>0 %}
     <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
-        {% for tab in users_tabs %}
+        {% for tab in user_tabs %}
           {% if loop.index==1 %}
           <div class="carousel-item active">
           {% else %}
