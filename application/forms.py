@@ -99,17 +99,20 @@ class Add_Project(BaseForm):
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
                            description='One line description of your project.',
-                           render_kw={'placeholder':'A community of project builders.',
+                           render_kw={'placeholder':'Project building community.',
                                       'max': 40})
     summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         description='Describe your project in more detail.',
-                        render_kw={'placeholder':'', 'max':400})
+                        render_kw={'placeholder': ('I need help designing this '
+                                                   'online community of '
+                                                   'builders...'),
+                                  'max':400})
     url = StringField(label='URL',
                     validators=[Length(0, 128)],
                     description=('You can link media (eg. a Github, website, '
                                  'doc, etc.) to showcase your progress.'),
-                    render_kw={'placeholder':'', 'max':128})
+                    render_kw={'placeholder':'https://www.github.com/me/example', 'max':128})
     subjects = SelectMultipleField('Subjects',
                                    description=('What subjects might this '
                                                 'project involve?'),

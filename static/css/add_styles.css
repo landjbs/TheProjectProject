@@ -72,11 +72,17 @@ body {
 }
 
 input[type='text'] {
-  border-radius: 4%;
+  border-radius: 2%;
   border-color: transparent;
-  width: 98%;
+  width: 100%;
 }
+
+textarea {
+  border-radius: 2%;
+  border-color: transparent;
+  width: 100%;
 }
+
 
 .input-control {
   text-align: center;
