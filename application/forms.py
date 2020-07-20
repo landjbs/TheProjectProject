@@ -93,12 +93,12 @@ class Add_Project(BaseForm):
     name = StringField(label='Project Name',
                        validators=[DataRequired(), Length(1, 25)],
                        description='Give your project a name!',
-                       render_kw={'placeholder':'',
+                       render_kw={'placeholder':'TheProjectProject',
                                   'max': 40})
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
                            description='One line description of your project.',
-                           render_kw={'placeholder':'',
+                           render_kw={'placeholder':'A community of project builders.',
                                       'max': 40})
     summary = TextField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
@@ -128,7 +128,8 @@ class Add_Project(BaseForm):
                                 validators=[Length(0, 128)],
                                 description=('Add a question to screen '
                                             'applicants.'),
-                                render_kw={'placeholder':'', 'max':128})
+                                render_kw={'placeholder':'What do you look for in a team?',
+                                           'max':128})
     estimated_time = FloatField('Estimated Time',
                                   description=('How long you '
                                   'think the project might take.'),
