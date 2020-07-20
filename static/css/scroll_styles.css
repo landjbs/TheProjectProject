@@ -1,3 +1,7 @@
+.controls-top {
+    text-align: center;
+}
+
 .card {
   background: rgba(0, 0, 255, 0.01);
 }
@@ -115,7 +119,6 @@ a:hover {
 .action-bar {
   text-align: center;
 }
-
 
 .add_button {
   color: #5D00FF;
