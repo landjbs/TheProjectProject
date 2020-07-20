@@ -280,6 +280,11 @@ class Task(db.Model):
             self.complete = True
             self.complete_stamp = datetime.utcnow()
 
+    def mark_uncomplete(self):
+        if self.complete:
+            self.complete = False
+            self.complete_stamp = None
+
     def add_worker(self, worker):
         self.workers.append(worker)
 

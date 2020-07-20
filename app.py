@@ -335,8 +335,9 @@ def mark_complete(project_id, task_id, action):
         else:
             task.add_worker(current_user)
         db.session.commit()
-    elif (action=='uncomplete'):
-        raise RuntimeError('uncomplete functionality not yet built.')
+    elif (action=='back'):
+        if current_user in task.workers:
+            task.workers.remove(current_user)
     return redirect(request.referrer)
 
 
