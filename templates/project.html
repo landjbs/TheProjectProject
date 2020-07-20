@@ -43,7 +43,7 @@
                 </p>
             </div>
             <ul class="list-unstyled components">
-              <div class='action-bar' style='border-bottom: 1px solid white; padding-bottom:10px;'>
+              <div class='action-bar' style='border-bottom: 1px solid white; padding-bottom:1vh;'>
                 {% if current_user.has_starred(project) %}
                   <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
                     <i class="fa fa-star"></i>
@@ -54,7 +54,8 @@
                   </a>
                 {% endif %}
                 &nbsp;
-                <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+                <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}"
+                      style='color: white;'>
                     Join
                 </button>
                 &nbsp;
