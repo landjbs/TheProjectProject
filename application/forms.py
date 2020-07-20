@@ -60,12 +60,12 @@ class Apply(BaseForm):
                                    'like your school to be added.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
     github = StringField('Github',
-                    validators=[DataRequired(), Length(1, 254),
+                    validators=[Length(1, 254),
                                   Site_URL_Validator('github')],
                     description=("Show off past projects on your github if "
                                    "you'd like!"),
                     render_kw={'placeholder': 'https://www.github.com/example'})
-    about = TextField('About',
+    about = TextField('About You',
                     validators=[DataRequired(), Length(1, 500)],
                     description=('Describe yourself! This might include '
                                'projects you have worked on, passions you '
@@ -95,7 +95,7 @@ class Add_Project(BaseForm):
                        validators=[DataRequired(), Length(1, 25)],
                        description='Give your project a name!',
                        render_kw={'placeholder':'TheProjectProject',
-                                  'max': 40})
+                                  'max': 25})
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
                            description='One line description of your project.',
