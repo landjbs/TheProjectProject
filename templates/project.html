@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/scroll_styles.css">
     <link rel="stylesheet" href="css/project_styles.css">
@@ -266,8 +267,11 @@
                   {% for comment in project.comments|reverse %}
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                       <div class="d-flex w-100 justify-content-between">
-                        <a href='user={{ comment.author.email }}' class="mb-1" style='text-decoration:underline;'>
-                          {{ comment.author.name }}
+                        <a href='user={{ comment.author.email }}' class="mb-1">
+                          <u>{{ comment.author.name }}</u>
+                          {% if is_project_member(comment.author, project) %}
+                            <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
+                          {% endif %}
                         </a>
                         <small>{{ time_to_str(comment.timestamp) }}</small>
                       </div>
