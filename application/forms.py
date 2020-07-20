@@ -3,7 +3,8 @@ import sys
 from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
-                    SelectMultipleField, FloatField, IntegerField, validators)
+                    SelectMultipleField, FloatField, IntegerField,
+                    TextAreaField, validators)
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
@@ -100,7 +101,7 @@ class Add_Project(BaseForm):
                            description='One line description of your project.',
                            render_kw={'placeholder':'A community of project builders.',
                                       'max': 40})
-    summary = TextField(label='Summary',
+    summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         description='Describe your project in more detail.',
                         render_kw={'placeholder':'', 'max':400})
