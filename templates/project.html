@@ -337,6 +337,7 @@
                     '{{ k.name }}',
                   {% endfor %}],
           datasets: [{
+              label: 'All Roles',
               data: [{% for v in role_data.values() %}
                         '{{ v }}',
                       {% endfor %}],
@@ -347,7 +348,21 @@
               pointBackgroundColor: ['#00FF5D'],
               pointHoverBackgroundColor: ['#00FF5D'],
               pointHoverBorderColor: ['#00FF5D']
-          }]
+          },
+          {
+            label: 'Unfilled Roles',
+            data: [{% for v in unfilled_data.values() %}
+                      '{{ v }}',
+                    {% endfor %}],
+            fill: true,
+            backgroundColor: ['rgba(0,255,93,0.5)'],
+            borderColor: ['#00FF5D'],
+            pointBorderColor: ['#00FF5D'],
+            pointBackgroundColor: ['#00FF5D'],
+            pointHoverBackgroundColor: ['#00FF5D'],
+            pointHoverBorderColor: ['#00FF5D']
+          }
+        ]
       },
       options: {
         scale: {
