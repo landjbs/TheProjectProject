@@ -357,6 +357,19 @@ def add_comment(project_id):
     return redirect(request.referrer)
 
 
+@login_required
+@application.route('/project/<int:project_id>/<int:comment_id>')
+def delete_comment(project_id, comment_id):
+    project = Project.query.get_or_404(project_id)
+    comment = Comment.query.get_or_404(comment_id)
+    if current_user in [project.owner, comment.author]:
+        db.session.delete(comment)
+        db.session.commit()
+    else:
+        flash('Cannot delete comment.')
+    return redirect(request.referrer)
+
+
 @application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
 @login_required
 def mark_complete(project_id, task_id, action):
