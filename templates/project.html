@@ -95,8 +95,24 @@
                     </ul>
                 </li>
                 <li>
+                  <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Subjects
+                  </a>
+                  <ul class="collapse list-unstyled" id="subjectSubmenu">
+                    {% for subject in project.subjects %}
+                      <li>
+                          <a href="#">{{ subject }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+                {% if project.owner.id == current_user.id %}
+                  <li>
                     <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
-                      Subjects
+                      Pending Members
+                      &nbsp;
+                      <i class="fa fa-bell" aria-hidden="true"></i>
+                      {{ project.pending_members|length }}
                     </a>
                     <ul class="collapse list-unstyled" id="subjectSubmenu">
                       {% for subject in project.subjects %}
@@ -105,7 +121,8 @@
                         </li>
                       {% endfor %}
                     </ul>
-                </li>
+                  </li>
+                {% endif %}
             </ul>
         </nav>
 
