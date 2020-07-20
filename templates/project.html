@@ -22,6 +22,12 @@
                 <p class='float-right'>
                   <i class="fa fa-star"></i>
                   {{ project.stars.all()|length }}
+                  <!-- edit button -->
+                  {% if project.owner.id == current_user.id %}
+                    <br>
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    {{ project.stars.all()|length }}
+                  {% endif %}
                 </p>
                 <a href='/project={{ project.name }}'>
                   <h3>{{ project.name }}</h3>
@@ -236,7 +242,6 @@
             </div>
 
         </div>
-
 
     </div>
 
