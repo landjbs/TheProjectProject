@@ -255,19 +255,19 @@ def project(project_name):
     # select top 5 to plot
     task_data = Counter(completers)
     ## role data visualization ##
-    roles, unfilled = [], []
+    roles, filled = [], []
     for member_role in project.members:
         for role in member_role.roles:
             if not role.name in ['Pending', 'Member']:
                 roles.append(role)
-                if member_role.user is None:
-                    unfilled.append(role)
+                if not member_role.user is None:
+                    filled.append(role)
     role_data = Counter(roles)
-    unfilled_data = Counter(unfilled)
+    filled_data = Counter(filled)
     return render_template('project.html', project=project,
                             now=datetime.utcnow(), comment_form=comment_form,
                             task_form=task_form, task_data=task_data,
-                            role_data=role_data, unfilled_data=unfilled_data)
+                            role_data=role_data, filled_data=filled_data)
 
 
 @application.route('/like/<int:project_id>/<action>')
