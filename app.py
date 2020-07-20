@@ -301,6 +301,12 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
+@application.route('/join_project/<int:project_id>')
+@login_required
+def leave_project(project_id, new_owner_id=None)
+
+
+
 @application.route('/like/<int:project_id>/<action>')
 @login_required
 def like_action(project_id, action):

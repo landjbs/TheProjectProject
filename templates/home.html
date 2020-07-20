@@ -229,7 +229,7 @@
               </div>
               <div class="modal-body">
                 <p>Are you sure you want to leave {{ project.name }}?</p>
-                <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
+                <a class='btn' href="{{ url_for('leave_project', project_id=project.id, new_owner_id=None) }}">
                   Leave
                 </a>
               </div>
