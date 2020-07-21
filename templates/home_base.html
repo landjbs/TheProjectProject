@@ -56,7 +56,9 @@
           <li class="nav-item">
               <div class="dropdown">
                 <button class="dropbtn" style="border:0px; display:inline;">
-                  {{ current_user.name }}
+                  <a href='user={{ current_user.email}}' style='color:white;'>
+                    {{ current_user.name }}
+                  </a>
                 </button>
                 <div class="dropdown-content">
                   <a href="/user={{ current_user.email }}">Profile</a>
