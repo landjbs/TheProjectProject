@@ -204,9 +204,11 @@ def home():
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
     form = Add_Project(request.form)
-    # check additional errors
+    # url to none
+    if form.url.data=='':
+        form.url.data=None
+    # special errors
     error_flag = False
-    # dependent errors
     if form.requires_application.data and form.application_question.data=='':
         form.application_question.errors = ['Question cannot be blank.']
         error_flag = True
