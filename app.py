@@ -298,6 +298,8 @@ def project(project_name):
     comment_form = Comment_Form(request.form)
     task_form = Task_Form(request.form)
     ## task data visualization ##
+    # activity data
+    start_activity, end_activity, earliest = tasks_to_daily_activity(project.tasks)
     # compile counts of tasks completed by each worker
     completers = []
     for task in project.tasks.filter_by(complete=True):
@@ -317,7 +319,9 @@ def project(project_name):
     filled_data = Counter(filled)
     return render_template('project.html', project=project,
                             now=datetime.utcnow, comment_form=comment_form,
-                            task_form=task_form, task_data=task_data,
+                            task_form=task_form, start_activity=start_activity,
+                            end_activity=end_activity, earliest=earliest,
+                            task_data=task_data,
                             role_data=role_data, filled_data=filled_data)
 
 
