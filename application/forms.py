@@ -17,8 +17,7 @@ from application.models import User, Subject, Role
 
 BaseForm = model_form_factory(FlaskForm)
 # query all subjects
-# subjects = db.session.query(Subject)
-subjects = ['blue', 'green', 'red']
+subjects = db.session.query(Subject)
 roles = db.session.query(Role)
 
 
@@ -114,10 +113,11 @@ class Add_Project(BaseForm):
                     description=('You can link media (eg. a Github, website, '
                                  'doc, etc.) to showcase your progress.'),
                     render_kw={'placeholder':'https://www.github.com/me/example', 'max':128})
-    subjects = SelectMultipleField('Subjects',
-                                   description=('What subjects might this '
-                                                'project involve?'),
-                                   choices=list(subjects))
+    # subjects = SelectMultipleField('Subjects',
+    #                                description=('What subjects might this '
+    #                                             'project involve?'),
+    #                                choices=list(subjects))
+    subjects = MultiCheckboxField('Subjects', coerce=int)
     roles = SelectMultipleField('Roles',
                                    description=('What roles might fit on this '
                                                 'project?'),
