@@ -84,9 +84,6 @@ def load_user(id):
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
-    z = Add_Project()
-    z.a = 3
-    print(z.a)
     return render_template('index.html')
 
 
