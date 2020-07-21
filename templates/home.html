@@ -60,7 +60,7 @@
                       </p>
                       <div class='subject-section'>
                         <i class="fa fa-flask" aria-hidden="true"></i>
-                        {% for subject in project.subjects %}
+                        {% for subject in project.subjects|reverse %}
                           <a href='/user={{ current_user.email }}'>
                             {% if loop.index>1 %}
                             ,
