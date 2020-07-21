@@ -54,9 +54,13 @@
                       <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
                     </div>
                     <div class='card-foot'>
-                      <p class='float-left' style='display:inline;'>
+                      <p class='float-left'>
                         <i class="fa fa-clock-o"></i>
                         {{ project.estimated_time }} days left
+                        <br>
+                        {% for subject in subjects %}
+                          {{ subject.name }}
+                        {% endfor %}
                       </p>
                     </div>
                     <br>
