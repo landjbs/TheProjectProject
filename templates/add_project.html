@@ -105,7 +105,21 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              <span class="select_subject" id='{{ elt.name }}' name='{{ elt.name }}'></span>
+              <!-- <span class="select_subject" id='{{ elt.name }}' name='{{ elt.name }}'></span> -->
+              <legend class="border-bottom mb-4">User Choices</legend>
+                {% if elt.choices.errors %}
+                <div class="invalid-feedback">
+                    {% for error in form.choices.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% for choice in elt.choices %}
+                    <div class="form-check">
+                        {{ elt(class="form-check-input") }}
+                        {{ elt.label(class="form-check-label") }}
+                    </div>
+                {% endfor %}
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="20" value="10" class="slider"

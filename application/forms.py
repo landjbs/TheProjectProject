@@ -17,7 +17,8 @@ from application.models import User, Subject, Role
 
 BaseForm = model_form_factory(FlaskForm)
 # query all subjects
-subjects = db.session.query(Subject)
+# subjects = db.session.query(Subject)
+subjects = ['blue', 'green', 'red']
 roles = db.session.query(Role)
 
 
