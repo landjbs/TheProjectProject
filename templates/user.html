@@ -134,13 +134,13 @@
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: [{% for i in range(end_activity|length) %}
-                  '{{ i }},'
+        labels: [{% for i in range(earliest) %}
+                  '{{ i }}',
                 {% endfor %}],
         datasets: [
           {
             data: [{% for activity in end_activity %}
-                      '{{ activity }},'
+                      '{{ activity }}',
                     {% endfor %}],
             label: "Task Completed",
             borderColor: "#3e95cd",
