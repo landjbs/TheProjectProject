@@ -9,7 +9,8 @@ from dateutil import tz
 from collections import Counter
 
 from application import db
-from application.models import User, Project, Comment, Task, Member_Role, Subject
+from application.models import (User, Project, Comment, Task, Member_Role,
+                                Subject)
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
                                 Task_Form, Project_Application)
 import manager as manager
