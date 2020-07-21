@@ -276,3 +276,7 @@ section.range-slider input:last-of-type::-moz-range-track {
   padding: 10px;
   width: 100%;
 }
+
+select {
+  width: 100%;
+}
