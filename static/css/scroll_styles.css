@@ -128,3 +128,11 @@ a:hover {
   color: white;
   background-color: black;
 }
+
+.subject-tag {
+  border-radius: 5%;
+  text-align: center;
+  display: inline;
+  width: 10%;
+  font-size: 80%;
+}

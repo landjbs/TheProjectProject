@@ -59,13 +59,12 @@
                         {{ project.estimated_time }} days left
                       </p>
                       <br>
-                      <div style='display: inline;'>
+                      <div>
                         {% for subject in project.subjects %}
-                          <p style='color:white; display: inline; background:grey;'>
+                          <p class='subject-tag' style='display: inline;' style='background-color:{{ subject.color }};'>
                             {{ subject.name }}
                           </p>
                         {% endfor %}
-                      </div>
                     </div>
                     <br>
                     <hr class="my-4">
