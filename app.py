@@ -298,25 +298,32 @@ def project(project_name):
     comment_form = Comment_Form(request.form)
     task_form = Task_Form(request.form)
     ## task data visualization ##
+    start_activity = None
+    end_activity = None
+    earliest = None
+    task_data = None
+    role_data = None
+    filled_data = None
     # activity data
-    start_activity, end_activity, earliest = tasks_to_daily_activity(project.tasks)
-    # compile counts of tasks completed by each worker
-    completers = []
-    for task in project.tasks.filter_by(complete=True):
-        for worker in task.workers:
-            completers.append(worker)
-    # select top 5 to plot
-    task_data = Counter(completers)
-    ## role data visualization ##
-    roles, filled = [], []
-    for member_role in project.members:
-        for role in member_role.roles:
-            if not (role.name=='Creator'):
-                roles.append(role)
-                if not member_role.user is None:
-                    filled.append(role)
-    role_data = Counter(roles)
-    filled_data = Counter(filled)
+    if len(project.tasks)>0:
+        start_activity, end_activity, earliest = tasks_to_daily_activity(project.tasks)
+        # compile counts of tasks completed by each worker
+        completers = []
+        for task in project.tasks.filter_by(complete=True):
+            for worker in task.workers:
+                completers.append(worker)
+        # select top 5 to plot
+        task_data = Counter(completers)
+        ## role data visualization ##
+        roles, filled = [], []
+        for member_role in project.members:
+            for role in member_role.roles:
+                if not (role.name=='Creator'):
+                    roles.append(role)
+                    if not member_role.user is None:
+                        filled.append(role)
+        role_data = Counter(roles)
+        filled_data = Counter(filled)
     return render_template('project.html', project=project,
                             now=datetime.utcnow, comment_form=comment_form,
                             task_form=task_form, start_activity=start_activity,
