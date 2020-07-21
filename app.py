@@ -204,47 +204,45 @@ def home():
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
     form = Add_Project(request.form)
-    if request.method=='POST' and form.validate_on_submit():
-        error_flag = False
-        # dependent errors
-        if form.requires_application.data and form.application_question.data=='':
-            form.application_question.errors = ['Question cannot be blank.']
-            error_flag = True
-        # unique errors
-        if not (db.session.query(Project).filter_by(name=form.name.data).first() is None):
-            form.name.errors = ['A project with this name already exists.']
-            error_flag = True
-        if not (db.session.query(Project).filter_by(url=form.url.data).first() is None):
-            form.url.errors = ['A project with this url already exists.']
-            error_flag = True
-        if (len(form.subjects.data)>5):
-            form.subjects.errors = ['Exceeded 5 subjects limit.']
-            error_flag = True
+    # check additional errors
+    error_flag = False
+    # dependent errors
+    if form.requires_application.data and form.application_question.data=='':
+        form.application_question.errors = ['Question cannot be blank.']
+        error_flag = True
+    # unique errors
+    if not (db.session.query(Project).filter_by(name=form.name.data).first() is None):
+        form.name.errors = ['A project with this name already exists.']
+        error_flag = True
+    if not (db.session.query(Project).filter_by(url=form.url.data).first() is None):
+        form.url.errors = ['A project with this url already exists.']
+        error_flag = True
+    if (len(form.subjects.data)>5):
+        form.subjects.errors = ['Can only choose up to 5 subjects.']
+        error_flag = True
+    if request.method=='POST' and form.validate_on_submit() and not error_flag:
         # subjects
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
-        print(subjects)
-        # add the project
-        if not error_flag:
-            project = Project(name = form.name.data,
-                          oneliner=form.oneliner.data,
-                          summary = form.summary.data,
-                          url = form.url.data,
-                          subjects = subjects,
-                          owner = current_user,
-                          open = form.open.data,
-                          requires_application = form.requires_application.data,
-                          application_question = form.application_question.data,
-                          estimated_time = form.estimated_time.data,
-                          team_size = form.team_size.data,
-                          complete = form.complete.data)
-            try:
-                manager.create_project(project, current_user)
-                db.session.commit()
-                db.session.close()
-            except Exception as e:
-                print(f'ERROR: {e}')
-                db.session.rollback()
-            return redirect(url_for('home'))
+        project = Project(name = form.name.data,
+                      oneliner=form.oneliner.data,
+                      summary = form.summary.data,
+                      url = form.url.data,
+                      subjects = subjects,
+                      owner = current_user,
+                      open = form.open.data,
+                      requires_application = form.requires_application.data,
+                      application_question = form.application_question.data,
+                      estimated_time = form.estimated_time.data,
+                      team_size = form.team_size.data,
+                      complete = form.complete.data)
+        try:
+            manager.create_project(project, current_user)
+            db.session.commit()
+            db.session.close()
+        except Exception as e:
+            print(f'ERROR: {e}')
+            db.session.rollback()
+        return redirect(url_for('home'))
     return render_template('add_project.html', form=form, subjects=db.session.query(Subject))
 
 
