@@ -75,9 +75,9 @@ def tasks_to_daily_activity(tasks):
     start_stamps = []
     end_stamps = []
     for task in tasks:
-        start_stamps.append((current_time-task.post_stamp).seconds)
+        start_stamps.append(round((current_time-task.post_stamp).seconds * (1/60)))
         if task.complete:
-            end_stamps.append((current_time-task.complete_stamp).seconds)
+            end_stamps.append(round(((current_time-task.complete_stamp).seconds * (1/60))))
     start_activity = Counter(start_stamps)
     end_activity = Counter(end_stamps)
     earliest = max(start_activity)
