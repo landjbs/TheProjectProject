@@ -25,14 +25,17 @@
             <div class="sidebar-header">
                 <p class='float-right'>
                   <i class="fa fa-star"></i>
-                  {{ project.stars.all()|length }}
-                  <!-- edit button -->
-                  {% if project.owner.id == current_user.id %}
+                  <!-- {{ project.stars.all()|length }} -->
                   <br>
-                  <a href='/'>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Edit
-                  </a>
+                  <i class="fa fa-circle" style='color:#FF5D00;'></i>
+                  {{ user.owned.all()|length }}
+                  <!-- edit button -->
+                  {% if user == current_user %}
+                    <br>
+                    <a href='/'>
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                      Edit
+                    </a>
                   {% endif %}
                 </p>
                 <a href='/project={{ project.name }}'>
