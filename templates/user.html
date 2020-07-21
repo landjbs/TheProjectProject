@@ -38,50 +38,18 @@
                     </a>
                   {% endif %}
                 </p>
-                <a href='/project={{ project.name }}'>
-                  <h3>{{ project.name }}</h3>
+                <a href='/user={{ user.name }}'>
+                  <h3>{{ user.name }}</h3>
                 </a>
-                <p>
-                  by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
-                </p>
-            </div>
-            <div class='action-bar'>
-              {% if current_user.has_starred(project) %}
-                <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
-                  <i class="fa fa-star"></i>
+                <a href='mailto:{{ user.email }}'>
+                  {{ user.email }}
                 </a>
-              {% else %}
-                <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
-                  <i class="fa fa-star-o"></i>
-                </a>
-              {% endif %}
-              &nbsp;
-              <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}"
-                    style='color: white;'>
-                  Join
-              </button>
-              &nbsp;
-              <i class="fa fa-share-alt" aria-hidden="false"></i>
             </div>
             <ul class="list-unstyled components">
               <div class='bio'>
                 <p class='oneliner'>
-                  {{ project.oneliner }}
+                  {{ user.about }}
                 </p>
-                <p>{{ project.summary }}</p>
-                {% set elapsed = calc_days_since(now(), project.posted_on) %}
-                {% set est = project.estimated_time %}
-                {% set elapsed_style = elapsed_style(elapsed, est) %}
-                <center>
-                  <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
-                  <div class="progress" style='width:80%;'>
-                    <div class="progress-bar" role="progressbar"
-                        style='{{ elapsed_style }}'
-                        aria-valuenow="{{ elapsed }}" aria-valuemin="0"
-                        aria-valuemax="{{ est }}"></div>
-                  </div>
-                </center>
-                <br>
               </div>
               <li class="active">
                   <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
