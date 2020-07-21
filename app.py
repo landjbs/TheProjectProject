@@ -76,9 +76,11 @@ def tasks_to_daily_activity(tasks):
     start_stamps = []
     end_stamps = []
     for task in tasks:
-        start_stamps.append(round((current_time-task.post_stamp).seconds * (1/60)))
+        # start_stamps.append(round((current_time-task.post_stamp).seconds * (1/60)))
+        start_stamps.append((current_time-task.post_stamp).days)
         if task.complete:
-            end_stamps.append(round(((current_time-task.complete_stamp).seconds * (1/60))))
+            # end_stamps.append(round(((current_time-task.complete_stamp).seconds * (1/60))))
+            end_stamps.append((current_time-task.complete_stamp).days)
     start_activity = Counter(start_stamps)
     end_activity = Counter(end_stamps)
     earliest = max(start_activity)
@@ -280,9 +282,11 @@ def add_project():
 @application.route('/user=<email>')
 def user(email):
     user = User.query.filter_by(email=email).first_or_404()
+    # worked tasks
     tasks = user.tasks_worked
     if len(tasks)!=0:
         _, end_activity, earliest = tasks_to_daily_activity(tasks)
+    #
     return render_template('user.html', user=user, end_activity=end_activity,
                             earliest=earliest)
 
