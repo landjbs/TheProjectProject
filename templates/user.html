@@ -15,7 +15,460 @@
     <link rel="stylesheet" href="css/project_styles.css">
 {% endblock %}
 
-
 {% block content %}
-<h1>{{ user.name }} </h1>
-{% endblock %}
+    <!-- GLOBALS -->
+    {% set is_member = is_project_member(current_user, project) %}
+    <!-- PAGE -->
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <p class='float-right'>
+                  <i class="fa fa-star"></i>
+                  {{ project.stars.all()|length }}
+                  <!-- edit button -->
+                  {% if project.owner.id == current_user.id %}
+                  <br>
+                  <a href='/'>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    Edit
+                  </a>
+                  {% endif %}
+                </p>
+                <a href='/project={{ project.name }}'>
+                  <h3>{{ project.name }}</h3>
+                </a>
+                <p>
+                  by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
+                </p>
+            </div>
+            <div class='action-bar'>
+              {% if current_user.has_starred(project) %}
+                <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
+                  <i class="fa fa-star"></i>
+                </a>
+              {% else %}
+                <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
+                  <i class="fa fa-star-o"></i>
+                </a>
+              {% endif %}
+              &nbsp;
+              <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}"
+                    style='color: white;'>
+                  Join
+              </button>
+              &nbsp;
+              <i class="fa fa-share-alt" aria-hidden="false"></i>
+            </div>
+            <ul class="list-unstyled components">
+              <div class='bio'>
+                <p class='oneliner'>
+                  {{ project.oneliner }}
+                </p>
+                <p>{{ project.summary }}</p>
+                {% set elapsed = calc_days_since(now(), project.posted_on) %}
+                {% set est = project.estimated_time %}
+                {% set elapsed_style = elapsed_style(elapsed, est) %}
+                <center>
+                  <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+                  <div class="progress" style='width:80%;'>
+                    <div class="progress-bar" role="progressbar"
+                        style='{{ elapsed_style }}'
+                        aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                        aria-valuemax="{{ est }}"></div>
+                  </div>
+                </center>
+                <br>
+              </div>
+              <li class="active">
+                  <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Members
+                    &nbsp;
+                    <i class='far fa-user-circle'></i>
+                    {{ project.members.all()|length }}
+                  </a>
+                  <ul class="collapse in list-unstyled" id="memberSubmenu">
+                    {% for member in project.members %}
+                      <li>
+                          <a href="user={{ member.user.email }}" style='padding-bottom:5px;'>
+                            {{ member.user.name }}
+                          </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                  <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Media
+                    &nbsp;
+                    <i class="fa fa-link" aria-hidden="true"></i>
+                    {{ [project.url]|length }}
+                  </a>
+                  <ul class="collapse list-unstyled" id="mediaSubmenu">
+                    {% for link in [project.url] %}
+                      <li>
+                          <a href="{{ link }}">{{ link }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+              </li>
+              <li>
+                <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
+                  Subjects
+                  &nbsp;
+                  <i class="fa fa-flask" aria-hidden="true"></i>
+                  {{ project.subjects.all()|length }}
+                </a>
+                <ul class="collapse list-unstyled" id="subjectSubmenu">
+                  {% for subject in project.subjects|reverse %}
+                    <a href='/subject={{ subject.name }}'>
+                      <p class='subject-tag' style='background:{{ subject.color }};'>
+                        {{ subject.name }}
+                      </p>
+                    </a>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% if project.owner.id == current_user.id %}
+                <li>
+                  <a href="#pendingSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Pending Members
+                    &nbsp;
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    {{ project.pending_members|length }}
+                  </a>
+                  <ul class="collapse list-unstyled" id="pendingSubmenu">
+                    {% for pending in project.pending_members %}
+                      <li>
+                        <div class='row' style='padding-left: 1.5vh;'>
+                          <a href="user={{ pending.email }}">
+                            {{ pending.name }}
+                          </a>
+                          <a href="{{ url_for('change_project_status', project_id=project.id, user_id=pending.id, action='accept') }}">
+                            Accept
+                          </a>
+                        </div>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <div class="row">
+              <div class="col-sm-4">
+                <h6>Contributions</h6>
+                <canvas id="contribution_chart"></canvas>
+              </div>
+              <div class="col-sm-4">
+                <h6>Tasks Completed</h6>
+                {% if ((complete(project.tasks).all()|length)!=0) %}
+                  <canvas id="tasks_complete"></canvas>
+                {% else %}
+                  <p class='empty-text'>No tasks completed yet.</p>
+                {% endif %}
+              </div>
+              <div class="col-sm-4">
+                <h6>Role Breakdown</h6>
+                {% if ((role_data|length) > 1) %}
+                  <canvas id="role_breakdown"></canvas>
+                {% else %}
+                  <p class='empty-text'>No roles yet.</p>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="line"></div>
+
+            <div class="row">
+              <div class="col">
+                <div class='row'>
+                  <div class='col'>
+                    <h5>To Do</h5>
+                    {% set todo_tasks = not_complete(project.tasks) %}
+                    <div class="list-group">
+                      {% if (todo_tasks.all()|length)==0 %}
+                        <p class='empty-text'>No tasks to do yet.</p>
+                      {% endif %}
+                      {% for task in todo_tasks %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <h6 class="mb-1">{{ task.text }}</h6>
+                          <div class="d-flex w-100 justify-content-between">
+                            <small>Requested by
+                            <a href='user={{ task.author.email }}' class="mb-1">
+                              <u>{{ task.author.name }}</u>
+                            </a>
+                            on {{ time_to_str(task.post_stamp) }}</small>
+                          </div>
+                          {% if is_member %}
+                            <div class='action-bar'>
+                              {% if current_user==task.author %}
+                                <a class='delete-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
+                                  <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </a>
+                              {% endif %}
+                              <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                              </a>
+                            </div>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                    {% if is_member %}
+                      <form class='post_form' id='task_form' method='post'
+                        action="{{url_for('add_task', project_id=project.id)}}">
+                        {{ task_form.hidden_tag() }}
+                        {{ task_form.text(class='post-input', placeholder='Task') }}
+                        <button>Add</button>
+                      </form>
+                    {% endif %}
+                  </div>
+
+
+                  <div class='col'>
+                    <h5>Completed Tasks</h5>
+                    {% set completed_tasks = complete(project.tasks) %}
+                    <div class="list-group">
+                      {% if completed_tasks.all()|length==0 %}
+                        <p class='empty-text'>No tasks completed yet.</p>
+                      {% endif %}
+                      {% for task in completed_tasks|reverse %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <h6 class="mb-1">{{ task.text }}</h6>
+                          <div class="d-flex w-100 justify-content-between">
+                            <small>Completed by
+                              {% for worker in task.workers %}
+                                  {% if loop.index==(task.workers|length) %}
+                                    <a href='user={{ worker.email }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                  {% elif (task.workers|length)==2 %}
+                                    <a href='user={{ worker.email }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                    and
+                                  {% else %}
+                                    <a href='user={{ worker.email }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                  {% endif %}
+                              {% endfor %}
+                            on {{ time_to_str(task.complete_stamp) }}</small>
+                          </div>
+                          {% if is_member %}
+                            <div class='action-bar'>
+                              {% if current_user in task.workers %}
+                                <a class='back-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='back') }}">
+                                  <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                                </a>
+                              {% endif %}
+                              <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                              </a>
+                            </div>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="col">
+                <h5>Comments</h5>
+                <div class="list-group">
+                  {% if project.comments|length==0 %}
+                    <p class='empty-text'>No comments yet.</p>
+                  {% endif %}
+                  {% for comment in project.comments|reverse %}
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-between">
+                        <a href='user={{ comment.author.email }}' class="mb-1">
+                          <u>{{ comment.author.name }}</u>
+                          {% if (comment.author == project.owner) %}
+                            <i class="fa fa-circle" style='color:#FF5D00;'></i>
+                          {% elif is_project_member(comment.author, project) %}
+                            <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
+                          {% endif %}
+                        </a>
+                        <small>{{ time_to_str(comment.timestamp) }}</small>
+                      </div>
+                      <p class="mb-1">{{ comment.text }}
+                        {% if current_user in [comment.author, project.owner] %}
+                          <a class='delete-btn task-btn float-right' href="{{ url_for('delete_comment', project_id=project.id, comment_id=comment.id) }}">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                          </a>
+                        {% endif %}
+                      </p>
+                    </div>
+                  {% endfor %}
+                </div>
+                <form class='post_form' id='comment_form' method='post'
+                  action="{{url_for('add_comment', project_id=project.id)}}">
+                  {{ comment_form.hidden_tag() }}
+                  {{ comment_form.text(class='post-input', placeholder='Comment') }}
+                  <button>Add</button>
+                </form>
+              </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $(this).toggleClass('active');
+            });
+        });
+    </script>
+
+
+    <script>
+    // best solutions chart
+    var ctx = document.getElementById('contribution_chart');
+    Chart.defaults.global.legend.display = false;
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+        datasets: [
+          {
+            data: [86,114,106,106,107,111,133,221,783,2478],
+            label: "Africa",
+            borderColor: "#3e95cd",
+            fill: false
+          }, {
+            data: [282,350,411,502,635,809,947,1402,3700,5267],
+            label: "Asia",
+            borderColor: "#8e5ea2",
+            fill: false
+          }, {
+            data: [168,170,178,190,203,276,408,547,675,734],
+            label: "Europe",
+            borderColor: "#3cba9f",
+            fill: false
+          }, {
+            data: [40,20,10,16,24,38,74,167,508,784],
+            label: "Latin America",
+            borderColor: "#e8c3b9",
+            fill: false
+          }, {
+            data: [6,3,2,2,7,26,82,172,312,433],
+            label: "North America",
+            borderColor: "#c45850",
+            fill: false
+          }
+        ]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true
+                  }
+              }]
+          }
+      }
+    });
+
+    // task completion chart
+    {% if (task_data|length) > 0 %}
+      var ctx = document.getElementById('tasks_complete');
+      var myChart = new Chart(ctx, {
+          type: 'horizontalBar',
+          data: {
+              labels: [{% for k in task_data.keys() %}'{{ k.name }}'{% endfor %}],
+              datasets: [{
+                  data: [{% for v in task_data.values() %}'{{ v }}'{% endfor %}],
+                  backgroundColor: [
+                    'rgba(255,220,0,0.5)'
+                  ],
+                  borderColor: [
+                    '#FFDC00'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+    {% endif %}
+
+    // role breakdown chart
+    var ctx = document.getElementById('role_breakdown');
+    var myRadarChart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+          labels: [{% for k in role_data.keys() %}
+                    '{{ k.name }}',
+                  {% endfor %}],
+          datasets: [{
+            label: 'Filled Roles',
+            data: [{% for v in filled_data.values() %}
+                      '{{ v }}',
+                    {% endfor %}],
+            fill: true,
+            backgroundColor: ['rgba(93, 0, 255,0.5)'],
+            borderColor: ['#5D00FF'],
+            pointBorderColor: ['#5D00FF'],
+            pointBackgroundColor: ['#5D00FF'],
+            pointHoverBackgroundColor: ['#5D00FF'],
+            pointHoverBorderColor: ['#5D00FF']
+          },
+          {
+              label: 'All Roles',
+              data: [{% for v in role_data.values() %}
+                        '{{ v }}',
+                      {% endfor %}],
+              fill: true,
+              backgroundColor: ['rgba(255, 220, 0, 0.5)'],
+              borderColor: ['#FFDC00'],
+              pointBorderColor: ['#FFDC00'],
+              pointBackgroundColor: ['#FFDC00'],
+              pointHoverBackgroundColor: ['#FFDC00'],
+              pointHoverBorderColor: ['#FFDC00']
+          }
+        ]
+      },
+      options: {
+        scale: {
+              angleLines: {
+              display: false
+          },
+          ticks: {
+              suggestedMin: 0,
+              display: false
+          },
+        },
+        legend: {
+          display: true
+        }
+      }
+    });
+    </script>
+
+  {% endblock %}
