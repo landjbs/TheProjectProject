@@ -23,10 +23,9 @@
             <div class="sidebar-header">
                 <p class='float-right'>
                   <i class="fa fa-star"></i>
-                  <!-- {{ project.stars.all()|length }} -->
                   <br>
                   <i class="fa fa-circle" style='color:#FF5D00;'></i>
-                  {{ user.owned.all()|length }}
+                  {{ user.owned|length }}
                   <!-- edit button -->
                   {% if user == current_user %}
                     <br>
@@ -80,9 +79,9 @@
                 <div class='row'>
                   <div class='col'>
                     <h5>Completed Tasks</h5>
-                    {% set completed_tasks = complete(user.tasks) %}
+                    {% set completed_tasks = user.tasks_worked %}
                     <div class="list-group">
-                      {% if completed_tasks.all()|length==0 %}
+                      {% if completed_tasks|length==0 %}
                         <p class='empty-text'>No tasks completed yet.</p>
                       {% endif %}
                       {% for task in completed_tasks|reverse %}
