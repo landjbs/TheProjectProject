@@ -161,7 +161,11 @@
   };
 
   function submit() {
-    document.getElementById("project_form").submit();
+    var elts = document.getElementById("project_form").elements;
+    for (var i = 0, elt; elt = elts[i++];) {
+      alert(elt.data);
+    }
+    // document.getElementById("project_form").submit();
   };
 
   // toggles //
@@ -240,8 +244,6 @@
           no_application();
       }
   }
-
-  alert(request);
 
   // start with not completed and default subsequents
   document.getElementById("off-complete").checked = true;
