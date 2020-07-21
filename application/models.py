@@ -183,13 +183,14 @@ class Project(db.Model):
     # tasks
     tasks = relationship('Task', back_populates='project', lazy='dynamic')
 
-    def __init__(self, name, oneliner, summary, url, open,
+    def __init__(self, name, oneliner, summary, url, open, subjects,
                 requires_application, application_question, estimated_time,
                 team_size, complete, owner):
         self.name = str(name)
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url)
+        self.subjects = subjects
         # members
         self.owner = owner
         self.team_size = team_size
