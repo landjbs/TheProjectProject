@@ -341,38 +341,39 @@
 
 
     <script>
-    // best solutions chart
-    // best solutions chart
-    var ctx = document.getElementById('contribution_chart');
-    Chart.defaults.global.legend.display = false;
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [{% for i in range(earliest) %}
-                  '{{ i }}',
-                {% endfor %}],
-        datasets: [
-          {
-            data: [{% for activity in end_activity %}
-                      '{{ activity }}',
-                    {% endfor %}],
-            label: "Task Completed",
-            borderColor: "#FF5D00",
-            backgroundColor: "rgba(255,93,0,0.5)",
-            fill: false
-          }
-        ]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
-      }
-    });
+    // contribution chart
+    {% if start_activity and end_activity and earliest %}
+      var ctx = document.getElementById('contribution_chart');
+      Chart.defaults.global.legend.display = false;
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [{% for i in range(earliest) %}
+                    '{{ i }}',
+                  {% endfor %}],
+          datasets: [
+            {
+              data: [{% for activity in end_activity %}
+                        '{{ activity }}',
+                      {% endfor %}],
+              label: "Task Completed",
+              borderColor: "#FF5D00",
+              backgroundColor: "rgba(255,93,0,0.5)",
+              fill: false
+            }
+          ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+      });
+    {% endif %}
 
     // task completion chart
     {% if (task_data|length) > 0 %}
