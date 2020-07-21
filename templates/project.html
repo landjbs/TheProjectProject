@@ -268,10 +268,11 @@
                                 <a class='back-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='back') }}">
                                   <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                                 </a>
+                              {% else %}
+                                <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </a>
                               {% endif %}
-                              <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                              </a>
                             </div>
                           {% endif %}
                         </div>
