@@ -135,5 +135,10 @@ a:hover {
   display: inline;
   font-size: 80%;
   color: white;
-  padding: 1px 3px 1px 3px;
+  padding: 0px 3px 0px 3px;
+}
+
+
+.subject-section {
+  text-align: left;
 }
