@@ -113,11 +113,10 @@ class Add_Project(BaseForm):
                     description=('You can link media (eg. a Github, website, '
                                  'doc, etc.) to showcase your progress.'),
                     render_kw={'placeholder':'https://www.github.com/me/example', 'max':128})
-    # subjects = SelectMultipleField('Subjects',
-    #                                description=('What subjects might this '
-    #                                             'project involve?'),
-    #                                choices=list(subjects))
-    subjects = MultiCheckboxField('Subjects', coerce=int)
+    subjects = SelectMultipleField('Subjects',
+                                   description=('What subjects might this '
+                                                'project involve?'),
+                                   choices=list(subjects))
     roles = SelectMultipleField('Roles',
                                    description=('What roles might fit on this '
                                                 'project?'),
