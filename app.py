@@ -9,7 +9,7 @@ from dateutil import tz
 from collections import Counter
 
 from application import db
-from application.models import User, Project, Comment, Task, Member_Role
+from application.models import User, Project, Comment, Task, Member_Role, Subject
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
                                 Task_Form, Project_Application)
 import manager as manager
@@ -239,7 +239,7 @@ def add_project():
                 print(f'ERROR: {e}')
                 db.session.rollback()
             return redirect(url_for('home'))
-    return render_template('add_project.html', form=form)
+    return render_template('add_project.html', form=form, subjects=db.session.query(Subject))
 
 
 @application.route('/user=<email>')

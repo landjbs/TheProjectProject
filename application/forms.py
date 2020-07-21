@@ -116,7 +116,7 @@ class Add_Project(BaseForm):
     subjects = SelectMultipleField('Subjects',
                                    description=('What subjects might this '
                                                 'project involve?'),
-                                   choices=list(subjects))
+                                   choices=[])
     roles = SelectMultipleField('Roles',
                                    description=('What roles might fit on this '
                                                 'project?'),

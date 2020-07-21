@@ -253,7 +253,7 @@
 
   // multiselect
   const subjects = [];
-  {% for elt in form.subjects.choices %}
+  {% for elt in subjects %}
     subjects.push({label: '{{ elt.name }}',
                    value: '{{ elt.id }}'},)
   {% endfor %}
