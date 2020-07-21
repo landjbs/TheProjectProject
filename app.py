@@ -71,7 +71,7 @@ def utility_processor():
 
 
 def tasks_to_daily_activity(tasks):
-    current_time = datetime.datetime.utcnow()
+    current_time = datetime.utcnow()
     start_stamps = []
     end_stamps = []
     for task in tasks:
@@ -89,6 +89,7 @@ def tasks_to_daily_activity(tasks):
     start_activity = start_activity.values()
     end_activity = end_activity.values()
     return (start_activity, end_activity)
+
 
 # querying
 def query_user_by_id(id):
@@ -278,7 +279,10 @@ def add_project():
 @application.route('/user=<email>')
 def user(email):
     user = User.query.filter_by(email=email).first_or_404()
-    return render_template('user.html', user=user)
+    tasks = user.tasks_worked
+    if len(tasks)!=0:
+        _, end_activity = tasks_to_daily_activity(tasks)
+    return render_template('user.html', user=user, end_activity=end_activity)
 
 
 @login_required
