@@ -228,7 +228,6 @@
                     {% endif %}
                   </div>
 
-
                   <div class='col'>
                     <h5>Completed Tasks</h5>
                     {% set completed_tasks = complete(project.tasks) %}
@@ -342,7 +341,7 @@
 
     <script>
     // contribution chart
-    {% if start_activity and end_activity and earliest %}
+    {% if earliest %}
       var ctx = document.getElementById('contribution_chart');
       Chart.defaults.global.legend.display = false;
       new Chart(ctx, {
