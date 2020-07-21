@@ -123,3 +123,8 @@ a:hover {
 .add_button {
   color: #5D00FF;
 }
+
+.btn:hover {
+  color: white;
+  background-color: black;
+}
