@@ -216,6 +216,7 @@ def add_project():
         if not (db.session.query(Project).filter_by(url=form.url.data).first() is None):
             form.url.errors = ['A project with this url already exists.']
             error_flag = True
+        print([x for x in form.subjects])
         # add the project
         if not error_flag:
             project = Project(name = form.name.data,
