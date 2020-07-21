@@ -226,27 +226,28 @@ def add_project():
         if not error_flag:
             # subjects
             subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
-            project = Project(name = form.name.data,
-                          oneliner=form.oneliner.data,
-                          summary = form.summary.data,
-                          url = form.url.data,
-                          subjects = subjects,
-                          owner = current_user,
-                          open = form.open.data,
-                          requires_application = form.requires_application.data,
-                          application_question = form.application_question.data,
-                          estimated_time = form.estimated_time.data,
-                          team_size = form.team_size.data,
-                          complete = form.complete.data)
             try:
+                project = Project(name = form.name.data,
+                              oneliner=form.oneliner.data,
+                              summary = form.summary.data,
+                              url = form.url.data,
+                              subjects = subjects,
+                              owner = current_user,
+                              open = form.open.data,
+                              requires_application = form.requires_application.data,
+                              application_question = form.application_question.data,
+                              estimated_time = form.estimated_time.data,
+                              team_size = form.team_size.data,
+                              complete = form.complete.data)
                 manager.create_project(project, current_user)
                 db.session.commit()
                 db.session.close()
             except Exception as e:
                 print(f'ERROR: {e}')
                 db.session.rollback()
+                return render_template('add_project.html', form=form)
             return redirect(url_for('home'))
-    return render_template('add_project.html', form=form, subjects=db.session.query(Subject))
+    return render_template('add_project.html', form=form)
 
 
 @application.route('/user=<email>')

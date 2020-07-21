@@ -57,11 +57,13 @@
                       <p class='float-left'>
                         <i class="fa fa-clock-o"></i>
                         {{ project.estimated_time }} days left
-                        <br>
-                        {% for subject in subjects %}
-                          {{ subject.name }}
-                        {% endfor %}
                       </p>
+                      <br>
+                      {% for subject in project.subjects %}
+                        <p style='color:white; background:grey;'>
+                          {{ subject.name }}
+                        </p>
+                      {% endfor %}
                     </div>
                     <br>
                     <hr class="my-4">

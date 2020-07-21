@@ -4,7 +4,7 @@ sys.path.append('.')
 from sqlalchemy.sql import exists
 
 from application import db
-from application.models import Project, User, Member_Role, Role, Comment, Task
+from application.models import Project, User, Member_Role, Role, Comment, Task, Subject
 
 from application.create_roles import create_roles
 from application.create_subjects import create_subjects
@@ -32,7 +32,7 @@ for user in (users):
     db.session.add(user)
 db.session.commit()
 
-
+ai = Subject.query.get(1)
 
 user1 = db.session.query(User).get(int(1))
 user2 = db.session.query(User).get(int(2))
@@ -46,6 +46,7 @@ projects = [Project(name='Boogle',
                             'full-stack experts.'),
                     url='boogle.com',
                     application_question='What do you bring to the team?',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -59,6 +60,7 @@ projects = [Project(name='Boogle',
                             'many trucks, loads and constraints. '),
                     url='stradarouting.com',
                     application_question='What is your ML experience?',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -72,6 +74,7 @@ projects = [Project(name='Boogle',
                             'the synth and someone to help me with the ML.'),
                     url=None,
                     application_question='What is your ML experience?',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -86,6 +89,7 @@ projects = [Project(name='Boogle',
                             'speeds and accelerate convergence of easy params.'),
                     url=None,
                     application_question='Do you like math?',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -100,6 +104,7 @@ projects = [Project(name='Boogle',
                             'could ship this behavior to the real-world.'),
                     url=None,
                     application_question='',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -113,6 +118,7 @@ projects = [Project(name='Boogle',
                             'We can then confirm this in vitrio.'),
                     url=None,
                     application_question='',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -127,6 +133,7 @@ projects = [Project(name='Boogle',
                             'AWS people and graphics enthusiasts.'),
                     url=None,
                     application_question='',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -141,6 +148,7 @@ projects = [Project(name='Boogle',
                             'join together to complete them.'),
                     url=None,
                     application_question='',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -155,6 +163,7 @@ projects = [Project(name='Boogle',
                             'complexity over time.'),
                     url=None,
                     application_question='',
+                    subjects = [ai],
                     open=True,
                     complete=False,
                     owner=user1,

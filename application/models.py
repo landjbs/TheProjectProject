@@ -190,7 +190,6 @@ class Project(db.Model):
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url)
-        print(subjects)
         self.subjects = subjects
         # members
         self.owner = owner
