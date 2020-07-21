@@ -70,6 +70,16 @@ def utility_processor():
                 is_project_member=is_project_member_)
 
 
+def tasks_to_daily_activity(tasks):
+    current_time = datetime.datetime.utcnow()
+    start_stamps = []
+    end_stamps = []
+    for task in tasks:
+        start_stamps.append(task.post_stamp)
+        if task.complete:
+            end_stamps.append(task.complete_stamp)
+
+
 # querying
 def query_user_by_id(id):
     return db.session.query(User).get(int(id))
