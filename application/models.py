@@ -190,12 +190,12 @@ class Project(db.Model):
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url)
+        print(subjects)
         self.subjects = subjects
         # members
         self.owner = owner
         self.team_size = team_size
         # application
-        print(bool(open))
         self.open = bool(open)
         self.requires_application = bool(requires_application)
         self.application_question = str(application_question) if requires_application else None
