@@ -163,7 +163,9 @@
   function submit() {
     var elts = document.getElementById("project_form").elements;
     for (var i = 0, elt; elt = elts[i++];) {
-      alert(elt.data);
+      if (elt.id == 'subjects') {
+          alert(elt.name);
+      }
     }
     // document.getElementById("project_form").submit();
   };
