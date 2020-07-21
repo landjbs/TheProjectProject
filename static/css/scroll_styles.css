@@ -2,6 +2,19 @@
     text-align: center;
 }
 
+.controls-top a:hover {
+    color: #5D00FF;
+}
+
+.controls-top a:active {
+    color: black;
+}
+
+.controls-top a:selected {
+    color: black;
+}
+
+
 .card {
   background: rgba(0, 0, 255, 0.01);
 }
