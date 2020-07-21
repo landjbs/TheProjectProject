@@ -35,6 +35,8 @@ login_manager.init_app(application)
 
 
 def is_project_member(user, project):
+    if user==None:
+        return False
     return (project.members.filter_by(user=user).first() is not None)
 
 
@@ -251,8 +253,8 @@ def add_project():
     return render_template('add_project.html', form=form)
 
 
-@application.route('/user=<email>')
 @login_required
+@application.route('/user=<email>')
 def user(email):
     user = User.query.filter_by(email=email).first_or_404()
     return render_template('user.html', user=user)
