@@ -204,10 +204,11 @@ def home():
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
     form = Add_Project(request.form)
-    print(request.method)
-    if request.method=='POST' and form.validate():
-        print('here')
+    if request.method=='POST':
         error_flag = False
+        if not form.validate_on_submit():
+            error_flag = True
+            flash('Invalid project submission.')
         # dependent errors
         if form.requires_application.data and form.application_question.data=='':
             form.application_question.errors = ['Question cannot be blank.']
