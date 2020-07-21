@@ -1,3 +1,4 @@
+import numpy as np
 from sqlalchemy import asc, desc
 from sqlalchemy.sql.expression import func
 from flask import (Flask, render_template, request, flash, redirect,
