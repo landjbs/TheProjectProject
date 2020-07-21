@@ -17,7 +17,7 @@ from application.models import User, Subject, Role
 
 BaseForm = model_form_factory(FlaskForm)
 # query all subjects
-subjects = db.session.query(Subject)
+subjects = [(i, v) for i, v in enumerate(db.session.query(Subject))]
 roles = db.session.query(Role)
 
 
@@ -116,7 +116,7 @@ class Add_Project(BaseForm):
     subjects = SelectMultipleField('Subjects',
                                    description=('What subjects might this '
                                                 'project involve?'),
-                                   choices=[])
+                                   choices=list(subjects))
     roles = SelectMultipleField('Roles',
                                    description=('What roles might fit on this '
                                                 'project?'),

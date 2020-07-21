@@ -204,7 +204,9 @@ def home():
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
     form = Add_Project(request.form)
+    print(request.method)
     if request.method=='POST' and form.validate():
+        print('here')
         error_flag = False
         # dependent errors
         if form.requires_application.data and form.application_question.data=='':
@@ -217,8 +219,7 @@ def add_project():
         if not (db.session.query(Project).filter_by(url=form.url.data).first() is None):
             form.url.errors = ['A project with this url already exists.']
             error_flag = True
-        for fieldname, value in form.data.items():
-            print(f'{fieldname}: {value}')
+        print(form.subjects.data)
         # add the project
         if not error_flag:
             project = Project(name = form.name.data,
