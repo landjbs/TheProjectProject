@@ -105,6 +105,7 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
+              {{ elt() }}
               <span class="select_subject" id='{{ elt.name }}' name='{{ elt.name }}'></span>
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
