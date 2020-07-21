@@ -61,10 +61,13 @@
                       <br>
                       <div>
                         {% for subject in project.subjects %}
-                          <p class='subject-tag' style='display: inline;' style='background-color:{{ subject.color }};'>
+                        <a href='/user={{ current_user.email }}'>
+                          <p class='subject-tag' style='background:{{ subject.color }};'>
                             {{ subject.name }}
                           </p>
+                        </a>
                         {% endfor %}
+                      </div>
                     </div>
                     <br>
                     <hr class="my-4">
