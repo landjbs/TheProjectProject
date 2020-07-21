@@ -106,6 +106,7 @@
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
               {{ elt(id=elt.name) }}
+              <small>Limit 5.</small>
               {% if elt.errors %}
                 <p class='warning'>{{ elt.errors[0] }}</p>
               {% endif %}

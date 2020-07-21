@@ -217,7 +217,10 @@ def add_project():
         if not (db.session.query(Project).filter_by(url=form.url.data).first() is None):
             form.url.errors = ['A project with this url already exists.']
             error_flag = True
-        print(form.subjects.data)
+        if (len(form.subjects.data)>5):
+            form.subjects.errors = ['Exceeded 5 subjects limit.']
+            error_flag = True
+        # subjects
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
         print(subjects)
         # add the project
