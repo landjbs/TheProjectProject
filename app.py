@@ -8,6 +8,7 @@ from flask_login import (current_user, login_user, logout_user,
 from datetime import datetime
 from dateutil import tz
 from collections import Counter
+from operator import itemgetter
 
 from application import db
 from application.models import (User, Project, Comment, Task, Member_Role,
