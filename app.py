@@ -75,9 +75,12 @@ def tasks_to_daily_activity(tasks):
     start_stamps = []
     end_stamps = []
     for task in tasks:
-        start_stamps.append(task.post_stamp)
+        start_stamps.append((current_time-task.post_stamp).days)
         if task.complete:
-            end_stamps.append(task.complete_stamp)
+            end_stamps.append((current_time-task.complete_stamp).days)
+    start_activity = Counter(start_stamps)
+    end_activity = Counter(end_stamps)
+
 
 
 # querying
