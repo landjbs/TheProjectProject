@@ -101,9 +101,12 @@ a:hover {
 }
 
 .card-foot {
-  max-height: 1vh;
-  min-height: 1vh;
+  max-height: 5vh;
+  min-height: 5vh;
+  overflow: scroll;
   color: rgba(0,0,0,0.5);
+  margin-bottom: 1vh;
+  padding-bottom: 1vh;
 }
 
 .fa-star {
@@ -120,6 +123,7 @@ a:hover {
 
 .action-bar {
   text-align: center;
+  position: relative;
 }
 
 .add_button {
@@ -137,11 +141,6 @@ a:hover {
   display: inline;
   font-size: 80%;
   color: white;
-  padding: 0px 3px 0px 3px;
-}
-
-
-.subject-section {
-  text-align: left;
-  padding-bottom: 1vh;
+  padding: 1px 4px 1px 4px;
+  white-space: nowrap;
 }

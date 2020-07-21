@@ -58,7 +58,7 @@
                         <i class="fa fa-clock-o"></i>
                         {{ project.estimated_time }} days left
                       </p>
-                      <div class='subject-section'>
+                      <div>
                         <i class="fa fa-flask" aria-hidden="true"></i>
                         {% for subject in project.subjects|reverse %}
                           <a href='/user={{ current_user.email }}'>
