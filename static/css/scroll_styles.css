@@ -101,6 +101,8 @@ a:hover {
 }
 
 .card-foot {
+  max-height: 1vh;
+  min-height: 1vh;
   color: rgba(0,0,0,0.5);
 }
 
@@ -141,4 +143,5 @@ a:hover {
 
 .subject-section {
   text-align: left;
+  padding-bottom: 1vh;
 }

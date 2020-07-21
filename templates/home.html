@@ -53,13 +53,12 @@
                       </p>
                       <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
                     </div>
-                    <div class='card-foot'>
-                      <p class='float-left'>
+                    <div class='card-foot float-left'>
+                      <p style="padding-bottom:0px; margin-bottom:0px;">
                         <i class="fa fa-clock-o"></i>
                         {{ project.estimated_time }} days left
                       </p>
-                      <br>
-                      <div class='subject-section justify-content-left'>
+                      <div class='subject-section'>
                         <i class="fa fa-flask" aria-hidden="true"></i>
                         {% for subject in project.subjects %}
                           <a href='/user={{ current_user.email }}'>
