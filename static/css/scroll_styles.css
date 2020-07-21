@@ -101,13 +101,12 @@ a:hover {
 }
 
 .card-foot {
-  max-height: 5vh;
-  min-height: 5vh;
-  white-space: nowrap;
-  overflow-x: scroll;
   color: rgba(0,0,0,0.5);
-  margin-bottom: 1vh;
-  padding-bottom: 1vh;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: auto;
+  overflow-y: hidden;
+  -ms-overflow-y: hidden;
 }
 
 .fa-star {
@@ -139,7 +138,7 @@ a:hover {
 .subject-tag {
   border-radius: 5%;
   text-align: center;
-  display: inline;
+  display: inline-block;
   font-size: 80%;
   color: white;
   padding: 1px 4px 1px 4px;
