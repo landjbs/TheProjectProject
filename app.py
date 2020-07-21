@@ -87,8 +87,8 @@ def tasks_to_daily_activity(tasks):
             start_activity.update({i:0})
         if i not in end_activity:
             end_activity.update({i:0})
-    start_activity = list(start_activity.values())
-    end_activity = list(end_activity.values())
+    start_activity = [x[1] for x in sorted(start_activity.items(), key=itemgetter(0), reverse=True)]
+    end_activity = [x[1] for x in sorted(end_activity.items(), key=itemgetter(0), reverse=True)]
     return (start_activity, end_activity, earliest)
 
 
