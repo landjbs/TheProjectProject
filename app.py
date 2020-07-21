@@ -82,7 +82,13 @@ def tasks_to_daily_activity(tasks):
     end_activity = Counter(end_stamps)
     earliest = max(start_activity)
     for i in range(earliest):
-        
+        if i not in start_activity:
+            start_activity.update({i:0})
+        if i not in end_activity:
+            end_activity.update({i:0})
+    start_activity = start_activity.values()
+    end_activity = end_activity.values()
+    return (start_activity, end_activity)
 
 # querying
 def query_user_by_id(id):
