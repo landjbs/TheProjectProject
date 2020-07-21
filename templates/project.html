@@ -115,12 +115,17 @@
               <li>
                 <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
                   Subjects
+                  &nbsp;
+                  <i class="fa fa-flask" aria-hidden="true"></i>
+                  {{ project.subjects.all()|length }}
                 </a>
                 <ul class="collapse list-unstyled" id="subjectSubmenu">
-                  {% for subject in project.subjects %}
-                    <li>
-                        <a href="#">{{ subject }}</a>
-                    </li>
+                  {% for subject in project.subjects|reverse %}
+                    <a href='/subject={{ subject.name }}'>
+                      <p class='subject-tag' style='background:{{ subject.color }};'>
+                        {{ subject.name }}
+                      </p>
+                    </a>
                   {% endfor %}
                 </ul>
               </li>
