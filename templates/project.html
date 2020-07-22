@@ -121,6 +121,9 @@
                 </a>
                 <ul class="collapse list-unstyled" id="subjectSubmenu">
                   {% for subject in project.subjects|reverse %}
+                    {% if loop.index > 1 %}
+                    ,
+                    {% endif %}
                     <a href='/subject={{ subject.code }}' style='display:inline;'>
                       <p class='subject-tag' style='background:{{ subject.color }};'>
                         {{ subject.name }}

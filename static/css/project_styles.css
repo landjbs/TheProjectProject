@@ -81,10 +81,17 @@ a, a:hover, a:focus {
     font-size: 1.1em;
     display: block;
 }
+
 #sidebar ul li a:hover {
     color: #5D00FF;
     background: #fff;
 }
+
+.subject-hover:hover {
+  color: white;
+  background: transparent;
+}
+
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
