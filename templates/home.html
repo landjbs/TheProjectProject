@@ -220,8 +220,8 @@
                 </a>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-              <div class="modal-body">
-                <form action="url_for('join_project', project_id=project.id)" method='post'>
+              <form action="url_for('join_project', project_id=project.id)" method='post'>
+                <div class="modal-body">
                   {% if project.requires_application %}
                     "{{ project.application_question }}"</p>
                       {{ project_application.hidden_tag() }}
@@ -229,11 +229,11 @@
                   {% else %}
                     <p>Welcome to {{ project.name }}! Click to join.</p>
                   {% endif %}
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button class='btn'>Join</button>
-              </div>
+                </div>
+                <div class="modal-footer">
+                  <button class='btn'>Join</button>
+                </div>
+              </form<
             </div>
           </div>
         </div>
