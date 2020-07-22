@@ -485,10 +485,11 @@ def mark_complete(project_id, task_id, action):
 def change_project_status(project_id, user_id, action):
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
-    flag = False
+    error_flag = False
     if action=='accept':
         if user in project.members:
             flash('Cannot accept user already in project.')
+            error_flag = True
     elif action=='reject':
         # remove user from project
         if user in project.members:
@@ -500,8 +501,12 @@ def change_project_status(project_id, user_id, action):
                 project.pending_members.remove(application)
             else:
                 flash('Cannot reject user not affiliated with project.')
+                error_flag = True
     else:
         flash('Invalid action.')
+        error_flag = True
+    if not error_flag:
+        db.session.commit()
     return redirect(request.referrer)
 
 
