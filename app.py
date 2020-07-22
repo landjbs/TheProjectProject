@@ -360,9 +360,8 @@ def project(project_name):
 @login_required
 @application.route('/subject=<subject_name>')
 def subject(subject_name):
-    subject = Subject.query.filter_by(name=subject_name).first_or_404()
-    subject_projects = Project.query.filter(subject in Project.subjects)
-    print(subject_projects.all())
+    subject = Subject.query.filter_by(code=subject_name).first_or_404()
+    subject_projects = Project.query.filter(Project.subjects.contains(subject))
     return redirect(request.referrer)
 
 
