@@ -104,8 +104,8 @@
               </div>
 
               <div class="col-sm-4">
-                <h6>Role Breakdown</h6>
-                {% if role_data %}
+                <h6>Subject Breakdown</h6>
+                {% if subject_data %}
                   <canvas id="role_breakdown"></canvas>
                 {% else %}
                   <p class='empty-text'>No roles yet.</p>
@@ -313,16 +313,16 @@
       });
     {% endif %}
 
-    {% if role_data %}
+    {% if subject_data %}
       var ctx = document.getElementById('role_breakdown');
       var myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: [{% for k in role_data.keys() %}
+            labels: [{% for k in subject_data.keys() %}
                       '{{ k }}',
                     {% endfor %}],
             datasets: [{
-              data: [{% for v in role_data.values() %}
+              data: [{% for v in subject_data.values() %}
                         '{{ v }}',
                       {% endfor %}],
               fill: true,

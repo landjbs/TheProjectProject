@@ -320,12 +320,11 @@ def user(email):
         stars += project.stars.count()
         subjects += [subject.name for subject in project.subjects]
     if subjects!=[]:
-        role_data = Counter(subjects)
+        subject_data = Counter(subjects)
     else:
-        role_data = False
-    print(role_data)
+        subject_data = False
     return render_template('user.html', user=user, stars=stars,
-                            task_data=task_data, role_data=role_data,
+                            task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs)
 
 
