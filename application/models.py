@@ -227,9 +227,10 @@ class Subject(db.Model):
 
     def __init__(self, name, color):
         self.name = str(name)
+        self.color = str(color)
+        self.code = str(name).replace('/', '_').replace(' ', '_').lower()
         self.users = []
         self.projects = []
-        self.color = str(color)
 
     def __repr__(self):
         return f'<Subject {self.name}>'
