@@ -225,7 +225,7 @@ def home():
     user_tabs = partition_query(user_projs)
     project_application = Project_Application_Form(request.form)
     # notifcations
-    if current_user.notifcations.count()>0:
+    if len(current_user.notifications)>0:
         for notification in current_user.notifications:
             flash(notification.text)
             current_user.notifications.remove(notification)

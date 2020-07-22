@@ -90,7 +90,6 @@ class User(db.Model, UserMixin):
         self.github = str(github) if github!='' else None
         self.about = str(about)
         self.accepted = False
-        self.notifications = []
 
     def __repr__(self):
         return f'<User {self.name}>'
