@@ -289,6 +289,10 @@ def user(email):
         _, end_activity, earliest = tasks_to_daily_activity(tasks)
         task_data['end_activity'] = end_activity
         task_data['earliest'] = earliest
+    # role data
+    roles = user.projects
+    role_data = {} if (len(roles)>0) else None
+    
     return render_template('user.html', user=user, task_data=task_data)
 
 
