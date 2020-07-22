@@ -72,7 +72,7 @@
               </div>
               <div class="col-sm-4">
                 <h6>Role Breakdown</h6>
-                {% if ((role_data|length) > 1) %}
+                {% if role_data %}
                   <canvas id="role_breakdown"></canvas>
                 {% else %}
                   <p class='empty-text'>No roles yet.</p>
@@ -180,7 +180,6 @@
                       '{{ k.name }}',
                     {% endfor %}],
             datasets: [{
-              label: 'Filled Roles',
               data: [{% for v in role_data.values() %}
                         '{{ v }}',
                       {% endfor %}],
@@ -203,9 +202,6 @@
                 suggestedMin: 0,
                 display: false
             },
-          },
-          legend: {
-            display: true
           }
         }
       });

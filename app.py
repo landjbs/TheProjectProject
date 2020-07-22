@@ -291,13 +291,14 @@ def user(email):
         task_data['earliest'] = earliest
     # role data
     projects = user.projects
-    role_data = (len(projects)>0)
+    role_data = (projects.count()>0)
     if role_data:
         roles = []
         for membership in projects:
-            for role in membership:
-                roles.append(role.name)
-    role_data = Counter(roles)
+            for role in membership.roles:
+                if not (role.name in ['Creator', 'Pending']):
+                    roles.append(role)
+        role_data = Counter(roles)
     return render_template('user.html', user=user, task_data=task_data,
                            role_data=role_data)
 
