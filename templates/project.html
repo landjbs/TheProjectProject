@@ -120,6 +120,7 @@
                   {{ project.subjects.all()|length }}
                 </a>
                 <ul class="collapse list-unstyled" id="subjectSubmenu">
+                  <li>
                   {% for subject in project.subjects|reverse %}
                     <a href='/subject={{ subject.code }}'>
                       <p class='subject-tag' style='background:{{ subject.color }};'>
@@ -127,6 +128,7 @@
                       </p>
                     </a>
                   {% endfor %}
+                  <li>
                 </ul>
               </li>
               {% if project.owner.id == current_user.id %}
