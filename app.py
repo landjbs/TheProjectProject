@@ -493,7 +493,9 @@ def change_project_status(project_id, user_id, action):
             error_flag = True
         else:
             project.members.append(user)
-            project.pending.remove(user)
+            application = project.pending_members.get(user=user)
+            if application is not None:
+                project.pending_members.remove(application)
     ## REJECT ##
     elif action=='reject':
         # remove user from project

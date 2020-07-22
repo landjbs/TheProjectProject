@@ -23,7 +23,11 @@ users = [User(name='Landon Smith',
              password='boop',
              subjects=None,
              github='www.github.com/hroatman',
-             about='I study Math.')]
+             about='I study Math.'),
+        User(name='Lonely Lodge',
+            email='lonely@college.harvard.edu',
+            about='I am so lonely :( add me to projects pls',
+            github='www.github.com/lonely')]
 
 
 for user in (users):
