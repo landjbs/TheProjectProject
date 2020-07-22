@@ -59,7 +59,7 @@ class Apply(BaseForm):
                                    'like your school to be added.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
     github = StringField('Github',
-                    validators=[Length(1, 254),
+                    validators=[Length(0, 254),
                                   Site_URL_Validator('github')],
                     description=("Show off past projects on your github if "
                                    "you'd like!"),

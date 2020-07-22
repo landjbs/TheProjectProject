@@ -511,7 +511,11 @@ def change_project_status(project_id, user_id, action):
                 error_flag = True
     ## MAKE OWNER ##
     elif action=='make_owner':
-        raise RuntimeError('make_owner not yet imp')
+        if user in project.members:
+            project.owner = user
+        else:
+            flash('Cannot make non-member a project owner.')
+            error_flag = True
     else:
         flash('Invalid action.')
         error_flag = True

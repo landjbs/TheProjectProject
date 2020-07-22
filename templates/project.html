@@ -98,7 +98,7 @@
                           </a>
                         </div>
                           {% if is_owner and member!=project.owner %}
-                            <div class='col float-right' style='display: inline;'>
+                            <div class='col float-right' style='display: inline; text-align: right'>
                               <a class='delete-btn task-btn member-hovers'
                               style='display: inline;'
                               href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
