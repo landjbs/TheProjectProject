@@ -203,7 +203,11 @@ def reject():
 
 ## HOME ##
 def partition_query(l, n=3):
-    for i in range(0, l.count(), n):
+    if type(l)==list:
+        c = len(l)
+    else:
+        c = l.count()
+    for i in range(0, c, n):
         yield l[i:i+n]
 
 
@@ -299,8 +303,10 @@ def user(email):
                 # if not (role.name in ['Creator', 'Pending']):
                 roles.append(role)
         role_data = Counter(roles)
+    # owned projects
+    owned_tabs = partition_query(user.owned)
     return render_template('user.html', user=user, task_data=task_data,
-                           role_data=role_data)
+                           role_data=role_data, owned_tabs=owned_tabs)
 
 
 @login_required
@@ -317,7 +323,6 @@ def project(project_name):
         activity_data['start_activity'] = start_activity
         activity_data['end_activity'] = end_activity
         activity_data['earliest'] = earliest
-    print(activity_data)
     # compile counts of tasks completed by each worker
     completers = []
     for task in project.tasks.filter_by(complete=True):
