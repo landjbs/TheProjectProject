@@ -181,7 +181,7 @@
                     {% endfor %}],
             datasets: [{
               label: 'Filled Roles',
-              data: [{% for v in filled_data.values() %}
+              data: [{% for v in role_data.values() %}
                         '{{ v }}',
                       {% endfor %}],
               fill: true,
