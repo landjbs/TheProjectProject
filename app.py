@@ -480,10 +480,21 @@ def mark_complete(project_id, task_id, action):
     return redirect(request.referrer)
 
 
-@application.route('/change_project_status/<int:project_id>/<action>')
+@application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
-def change_project_status(project_id, action):
-    raise RuntimeError('change_project_status not implemented.')
+def change_project_status(project_id, user_id, action):
+    project = Project.query.get_or_404(project_id)
+    user = User.query.get_or_404(user_id)
+    flag = False
+    if action=='accept':
+        if not
+    elif action=='reject':
+
+    else:
+        flag = True
+    if flag:
+        flash('Invalid action.')
+    return redirect(request.referrer)
 
 
 @application.route('/search', methods=['POST'])
