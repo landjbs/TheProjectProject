@@ -61,7 +61,7 @@
               <div class="col-sm-4">
                 <h6>Daily Activity</h6>
                 {% if task_data %}
-                  <canvas id="contribution_chart"></canvas>
+                  <canvas id="activity_chart"></canvas>
                 {% else %}
                   <p class='empty-text'>No activity yet.</p>
                 {% endif %}
@@ -136,37 +136,40 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <script>
-    // best solutions chart
-    var ctx = document.getElementById('contribution_chart');
     Chart.defaults.global.legend.display = false;
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: [{% for i in range(earliest) %}
-                  '{{ i }}',
-                {% endfor %}],
-        datasets: [
-          {
-            data: [{% for activity in end_activity %}
-                      '{{ activity }}',
-                    {% endfor %}],
-            label: "Task Completed",
-            borderColor: "#FF5D00",
-            backgroundColor: "rgba(255,93,0,0.5)",
-            fill: false
-          }
-        ]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true
-                  }
-              }]
-          }
-      }
-    });
+
+    // daily activity
+    {% if task_data %}
+      var ctx = document.getElementById('activity_chart');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: [{% for i in range(task_data['earliest']) %}
+                    '{{ i }}',
+                  {% endfor %}],
+          datasets: [
+            {
+              data: [{% for activity in task_data['end_activity'] %}
+                        '{{ activity }}',
+                      {% endfor %}],
+              label: "Task Completed",
+              borderColor: "#FF5D00",
+              backgroundColor: "rgba(255,93,0,0.5)",
+              fill: false
+            }
+          ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+      });
+    {% endif %}
   </script>
 
 
