@@ -141,13 +141,14 @@
                     {{ project.pending_members|length }}
                   </a>
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
-                    {% for pending in project.pending_members %}
+                    {% for application in project.pending_members %}
                       <li>
                         <div class='row' style='padding-left: 1.5vh;'>
-                          <a href="user={{ pending.email }}">
-                            {{ pending.name }}
+                          <a href="user={{ application.user.email }}">
+                            {{ application.user.name }}
                           </a>
-                          <a href="{{ url_for('change_project_status', project_id=project.id, user_id=pending.id, action='accept') }}">
+                          {{ application.text }}
+                          <a href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
                             Accept
                           </a>
                         </div>
