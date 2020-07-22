@@ -224,7 +224,7 @@
                 {% if project.requires_application %}
                   "{{ project.application_question }}"</p>
                   {{ project_application.hidden_tag() }}
-                  {{ project_application.response(elt='input valid', placeholder='Response') }}
+                  {{ project_application.response(class='join-input', placeholder='Response') }}
                 {% else %}
                   <p>Welcome to {{ project.name }}! Click to join.</p>
                 {% endif %}
