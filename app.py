@@ -478,7 +478,7 @@ def mark_complete(project_id, task_id, action):
             db.session.delete(task)
     db.session.commit()
     return redirect(request.referrer)
-
+    
 
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required

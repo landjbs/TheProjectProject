@@ -27,7 +27,9 @@ users = [User(name='Landon Smith',
         User(name='Lonely Lodge',
             email='lonely@college.harvard.edu',
             about='I am so lonely :( add me to projects pls',
-            github='www.github.com/lonely')]
+            github='www.github.com/lonely',
+            password='boop',
+            subjects=None)]
 
 
 for user in (users):
