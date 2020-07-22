@@ -339,7 +339,7 @@ def project(project_name):
     # select top 5 to plot
     task_data = Counter(completers)
     ## subject visualization ##
-    # TODO: this
+    # TODO:
     role_data = {}
     return render_template('project.html', project=project,
                             now=datetime.utcnow, comment_form=comment_form,
@@ -398,8 +398,7 @@ def leave_project(project_id, new_owner_id):
     if (current_user == project.owner):
         flash(f'You have transferred ownership of {project.owner} to .')
         print('here')
-    role = project.members.filter_by(user=current_user).first()
-    db.session.delete(role)
+    project.users.delete(current_user)
     db.session.commit()
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
