@@ -33,28 +33,11 @@ user_to_task = Table('user_to_task', db.Model.metadata,
 
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
-    user = Column(Integer, ForeignKey('user.id'), primary_key=True),
-    project = Column(Integer, ForeignKey('project.id'), primary_key=True),
+    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user = relationship('User', back_populates='pending_project')
+    project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
+    project = relationship('Project', back_populates='pending_users')
     text = Column('text', String(250), nullable=True))
-
-
-# class Member_Role(db.Model):
-#     __tablename__ = 'member_role'
-#     # primary key
-#     id = Column(Integer, primary_key=True)
-#     # members
-#     user_id = Column('user_id', ForeignKey('user.id'), nullable=True)
-#     user = relationship('User', back_populates='projects')
-#     # projects
-#     project_id = Column('project_id', ForeignKey('project.id'), nullable=False)
-#     project = relationship('Project', back_populates='members')
-#     # roles
-#     roles = relationship('Role', secondary=role_to_member_role)
-#     # commits
-#     commits = Column(Integer, nullable=False, default=0)
-#     # tasks completed
-#     # tasks = relationship('Task', secondary=task_to_member_role,
-#                          # back_populates='members')
 
 
 ## BASE CLASSES ##
@@ -81,7 +64,7 @@ class User(db.Model, UserMixin):
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary=user_to_project,
                             back_populates='members', lazy='dynamic')
-    pending_projects = relationship('Project', secondary=user_to_project,
+    pending_projects = relationship('Project_Application',
                                     back_populates='pending_members')
     # interactions
     starred = relationship('Project', secondary='user_to_project',
