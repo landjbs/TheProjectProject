@@ -220,7 +220,7 @@
                 </a>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-              <form action="url_for('join_project', project_id=project.id)" method='post'>
+              <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
                 <div class="modal-body">
                   {% if project.requires_application %}
                     "{{ project.application_question }}"</p>
@@ -233,7 +233,7 @@
                 <div class="modal-footer">
                   <button class='btn'>Join</button>
                 </div>
-              </form<
+              </form>
             </div>
           </div>
         </div>

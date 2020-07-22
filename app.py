@@ -361,7 +361,7 @@ def subject(subject_name):
 
 
 @login_required
-@application.route('/join_project/<int:project_id>')
+@application.route('/join_project/<int:project_id>', methods=['POST'])
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
@@ -373,8 +373,8 @@ def join_project(project_id):
             current_user.projects.append(project)
             flash(f'You have been added to {project.name}!')
         else:
+            form = Project_Application_Form(request.form)
             if form.validate_on_submit():
-                form = Project_Application_Form(request.form)
                 application = Project_Application(project=project,
                                                 user=current_user,
                                                 text=form.response.data)
@@ -384,8 +384,6 @@ def join_project(project_id):
         db.session.commit()
     else:
         flash('The project owner has closed this project.')
-    else:
-        flash(form.errors)
     return redirect(request.referrer)
 
 

@@ -317,7 +317,7 @@
                   {% endfor %}
                 </div>
                 <form class='post_form' id='comment_form' method='post'
-                  action="{{url_for('add_comment', project_id=project.id)}}">
+                  action="{{ url_for('add_comment', project_id=project.id) }}">
                   {{ comment_form.hidden_tag() }}
                   {{ comment_form.text(class='post-input', placeholder='Comment') }}
                   <button>Add</button>
