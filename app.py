@@ -368,23 +368,22 @@ def join_project(project_id):
         flash(f'Could not join {project.name} because you are '
                 'already a member.')
         return redirect(request.referrer)
-    form = Project_Application_Form(request.form)
-    if form.validate_on_submit():
-        if project.open:
-            if not project.requires_application:
-                current_user.projects.append(project)
-                flash(f'You have been added to {project.name}!')
-            else:
-                print(form.response.data)
+    if project.open:
+        if not project.requires_application:
+            current_user.projects.append(project)
+            flash(f'You have been added to {project.name}!')
+        else:
+            if form.validate_on_submit():
+                form = Project_Application_Form(request.form)
                 application = Project_Application(project=project,
                                                 user=current_user,
                                                 text=form.response.data)
                 project.pending_members.append(application)
                 flash(f'Your application to {project.name} been submitted.')
-            db.session.add(project)
-            db.session.commit()
-        else:
-            flash('The project owner has closed this project.')
+        db.session.add(project)
+        db.session.commit()
+    else:
+        flash('The project owner has closed this project.')
     else:
         flash(form.errors)
     return redirect(request.referrer)
