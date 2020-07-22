@@ -369,7 +369,7 @@ def subject(subject_name):
     subject_tabs = []
     return render_template('search.html', project_tabs=project_tabs,
                         user_tabs=user_tabs, subject_tabs=subject_tabs,
-                        search_text=search_text)
+                        search_text=subject.name)
 
 
 @login_required
