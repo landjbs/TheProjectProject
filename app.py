@@ -224,6 +224,12 @@ def home():
     user_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
     user_tabs = partition_query(user_projs)
     project_application = Project_Application_Form(request.form)
+    # notifcations
+    if current_user.notifcations.count()>0:
+        for notification in current_user.notifications:
+            flash(notification.text)
+            current_user.notifications.remove(notification)
+        db.session.commit()
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, user_tabs=user_tabs,
                             user_project_count=user_projs.count(),
