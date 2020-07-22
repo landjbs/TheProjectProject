@@ -504,7 +504,8 @@ def search():
                                      User.about.contains(search_text))
     # subject results
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
-    return redirect(request.referrer)
+    return render_template('search.html', project_results=project_results,
+                    user_results=user_results, subject_results=subject_results)
 
 
 @application.route('/logout')
