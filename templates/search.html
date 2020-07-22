@@ -9,7 +9,7 @@
 
 {% block content %}
 <div class='container my-4'>
-  <h3>Results for {{ search_text }}<h3>
+  <h3>Results for "{{ search_text }}"<h3>
   <hr class="my-4">
   <h4 style='text-align:left;'>Projects</h4>
   <hr class="my-4">
@@ -171,20 +171,17 @@
               {% for subject in tab %}
                 <div class="col-md-4">
                   <div class="card mb-2">
-                    <div class="card-body">
+                    <div class="card-body"
+                    style='background: {{ subject.color }};'>
                       <p class="float-right">
                         <i class='far fa-user-circle'></i>
-                        {{ subject.projects|all  }}
+                        {{ subject.projects.all()|length  }}
                       </p>
                       <div class='card-head tiny'>
-                        <a class='project-name' href='project={{ project.name }}'>
+                        <a class='project-name' href='subject={{ subject.name }}'>
                           <h5>{{ subject.name }}</h5>
                         </a>
                       </div>
-                      <!-- summary -->
-                      <p class='oneliner'>
-                        {{ project.oneliner }}
-                      </p>
                     </div>
                   </div>
                 </div>
