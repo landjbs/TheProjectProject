@@ -373,10 +373,9 @@ def join_project(project_id):
                 'already a member.')
         return redirect(request.referrer)
     form = Project_Application(request.form)
-    a.project = project
     if project.open:
         if not project.requires_application:
-            current_user.projects.append(a)
+            current_user.projects.append(project)
             flash(f'You have been added to {project.name}!')
         else:
             project.pending_members.append(current_user)

@@ -27,11 +27,6 @@ user_to_project = Table('user_to_project', db.Model.metadata,
         Column('project_id', Integer, ForeignKey('project.id')))
 
 
-role_to_member_role = Table('role_to_member_role', db.Model.metadata,
-                Column('role_id', Integer, ForeignKey('role.id')),
-                Column('member_role_id', Integer, ForeignKey('member_role.id')))
-
-
 user_to_task = Table('user_to_task', db.Model.metadata,
                 Column('user_id', Integer, ForeignKey('user.id')),
                 Column('task_id', Integer, ForeignKey('task.id')))
@@ -79,7 +74,7 @@ class User(db.Model, UserMixin):
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('User', secondary=user_to_project,
-                            back_populates='member', lazy='dynamic')
+                            back_populates='members', lazy='dynamic')
     pending_projects = relationship('Project', secondary=user_to_project,
                                     back_populates='pending_members')
     # interactions
