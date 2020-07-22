@@ -293,16 +293,6 @@ def user(email):
         _, end_activity, earliest = tasks_to_daily_activity(tasks)
         task_data['end_activity'] = end_activity
         task_data['earliest'] = earliest
-    # role data
-    # projects = user.projects
-    # role_data = (projects.count()>0)
-    # if role_data:
-    #     roles = []
-    #     for membership in projects:
-    #         for role in membership.roles:
-    #             # if not (role.name in ['Creator', 'Pending']):
-    #             roles.append(role)
-    #     role_data = Counter(roles)
     # owned projects
     owned = user.owned
     owned_tabs = partition_query(owned)
