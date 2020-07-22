@@ -375,6 +375,7 @@ def join_project(project_id):
             current_user.projects.append(project)
             flash(f'You have been added to {project.name}!')
         else:
+            print(form.response.data)
             application = Project_Application(project=project,
                                             user=current_user,
                                             text=form.response.data)
