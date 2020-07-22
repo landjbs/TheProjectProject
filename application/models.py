@@ -36,7 +36,7 @@ class Project_Application(db.Model):
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='pending_project')
     project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
-    project = relationship('Project', back_populates='pending_users')
+    project = relationship('Project', back_populates='pending_members')
     text = Column('text', String(250), nullable=True))
 
 
@@ -139,7 +139,7 @@ class Project(db.Model):
     owner = relationship('User', back_populates='owned')
     members = relationship('User', secondary='user_to_project',
                            back_populates='projects', lazy='dynamic')
-    pending_members = relationship('User', secondary=user_to_project,
+    pending_members = relationship('Project_Application',
                                    back_populates='pending_projects')
     ## join process ##
     # open (allows others to join)
