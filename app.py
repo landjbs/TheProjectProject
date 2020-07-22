@@ -545,7 +545,11 @@ def change_project_status(project_id, user_id, action):
     ## MAKE OWNER ##
     elif action=='make_owner':
         if user in project.members:
+            notification = Notification(text=f'{project.owner.name} has '
+                    f'transferred ownership of {project.name} to {user.name}.')
             project.owner = user
+            flash(f'You have transferred ownership of {project.name} to '
+                  f'{user.name}.')
         else:
             flash('Cannot make non-member a project owner.')
             error_flag = True
