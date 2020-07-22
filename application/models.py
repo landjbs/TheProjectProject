@@ -37,23 +37,23 @@ user_to_task = Table('user_to_task', db.Model.metadata,
                 Column('task_id', Integer, ForeignKey('task.id')))
 
 
-class Member_Role(db.Model):
-    __tablename__ = 'member_role'
-    # primary key
-    id = Column(Integer, primary_key=True)
-    # members
-    user_id = Column('user_id', ForeignKey('user.id'), nullable=True)
-    user = relationship('User', back_populates='projects')
-    # projects
-    project_id = Column('project_id', ForeignKey('project.id'), nullable=False)
-    project = relationship('Project', back_populates='members')
-    # roles
-    roles = relationship('Role', secondary=role_to_member_role)
-    # commits
-    commits = Column(Integer, nullable=False, default=0)
-    # tasks completed
-    # tasks = relationship('Task', secondary=task_to_member_role,
-                         # back_populates='members')
+# class Member_Role(db.Model):
+#     __tablename__ = 'member_role'
+#     # primary key
+#     id = Column(Integer, primary_key=True)
+#     # members
+#     user_id = Column('user_id', ForeignKey('user.id'), nullable=True)
+#     user = relationship('User', back_populates='projects')
+#     # projects
+#     project_id = Column('project_id', ForeignKey('project.id'), nullable=False)
+#     project = relationship('Project', back_populates='members')
+#     # roles
+#     roles = relationship('Role', secondary=role_to_member_role)
+#     # commits
+#     commits = Column(Integer, nullable=False, default=0)
+#     # tasks completed
+#     # tasks = relationship('Task', secondary=task_to_member_role,
+#                          # back_populates='members')
 
 
 ## BASE CLASSES ##
