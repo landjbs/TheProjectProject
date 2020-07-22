@@ -298,7 +298,8 @@ def user(email):
             for role in membership:
                 roles.append(role.name)
     role_data = Counter(roles)
-    return render_template('user.html', user=user, task_data=task_data)
+    return render_template('user.html', user=user, task_data=task_data,
+                           role_data=role_data)
 
 
 @login_required

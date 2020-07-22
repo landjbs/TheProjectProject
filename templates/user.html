@@ -170,6 +170,48 @@
         }
       });
     {% endif %}
+
+    {% if role_data %}
+      var ctx = document.getElementById('role_breakdown');
+      var myRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: [{% for k in role_data.keys() %}
+                      '{{ k.name }}',
+                    {% endfor %}],
+            datasets: [{
+              label: 'Filled Roles',
+              data: [{% for v in filled_data.values() %}
+                        '{{ v }}',
+                      {% endfor %}],
+              fill: true,
+              backgroundColor: ['rgba(93, 0, 255,0.5)'],
+              borderColor: ['#5D00FF'],
+              pointBorderColor: ['#5D00FF'],
+              pointBackgroundColor: ['#5D00FF'],
+              pointHoverBackgroundColor: ['#5D00FF'],
+              pointHoverBorderColor: ['#5D00FF']
+            }
+          ]
+        },
+        options: {
+          scale: {
+                angleLines: {
+                display: false
+            },
+            ticks: {
+                suggestedMin: 0,
+                display: false
+            },
+          },
+          legend: {
+            display: true
+          }
+        }
+      });
+    {% endif %}
+
+
   </script>
 
 
