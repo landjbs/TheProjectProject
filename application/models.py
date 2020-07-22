@@ -29,7 +29,7 @@ user_to_project = Table('user_to_project', db.Model.metadata,
 pending_to_project = Table('user_to_project', db.Model.metadata,
                         Column('user_id', Integer, ForeignKey('user.id')),
                         Column('project_id', Integer, ForeignKey('project.id')),
-                        Coliumn('application', String(250), nullable=True))
+                        Column('application', String(250), nullable=True))
 
 user_to_task = Table('user_to_task', db.Model.metadata,
                     Column('user_id', Integer, ForeignKey('user.id')),
