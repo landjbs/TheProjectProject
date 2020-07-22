@@ -319,7 +319,7 @@
         type: 'radar',
         data: {
             labels: [{% for k in role_data.keys() %}
-                      '{{ k.name }}',
+                      '{{ k }}',
                     {% endfor %}],
             datasets: [{
               data: [{% for v in role_data.values() %}

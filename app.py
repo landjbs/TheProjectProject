@@ -315,10 +315,10 @@ def user(email):
     subjects = []
     for project in owned:
         stars += project.stars.count()
-        subjects.append(project.subjects)
+        subjects += [subject.name for subject in project.subjects]
     for project in member_projects:
         stars += project.stars.count()
-        subjects.append(project.subjects)
+        subjects += [subject.name for subject in project.subjects]
     if subjects!=[]:
         role_data = Counter(subjects)
     else:
