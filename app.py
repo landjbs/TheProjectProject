@@ -495,7 +495,7 @@ def change_project_status(project_id, action):
 
 @application.route('/search', methods=['POST'])
 def search():
-    print(request.search_projects) 
+    form = 
     return render_template('results.html', )
 
 
