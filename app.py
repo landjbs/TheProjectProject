@@ -391,6 +391,12 @@ def join_project(project_id):
                                                 text=form.response.data)
                 project.pending_members.append(application)
                 flash(f'Your application to {project.name} been submitted.')
+                # notify project owner
+                notification = Notification(text=f'{current_user.name} has '
+                                                 f'applied to {project.name}')
+                project.owner.notifications.append(notification)
+            else:
+                flash(f'Invalid application.')
         db.session.add(project)
         db.session.commit()
     else:
