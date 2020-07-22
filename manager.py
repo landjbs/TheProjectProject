@@ -26,9 +26,7 @@ def add_role_to_project(project, role, user=None):
 
 
 def add_user_to_project(project, user, role):
-    a = Member_Role(roles=[role])
-    a.project = project
-    user.projects.append(a)
+    user.projects.append(project)
     db.session.add(project)
     db.session.commit()
 
