@@ -130,7 +130,7 @@ a:hover {
 }
 
 .fa-share-alt:hover {
-  color: blue;
+  color: #5D00FF;
 }
 
 .action-bar {
@@ -144,7 +144,7 @@ a:hover {
 
 .btn:hover {
   color: white;
-  background-color: black;
+  background-color: #5D00FF;
 }
 
 .subject-tag {

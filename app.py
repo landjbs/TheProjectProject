@@ -302,16 +302,10 @@ def user(email):
     # sum stars and aggregate subjects
     stars = 0
     subjects = []
-    for project in owned:
+    for project in user.projects:
         stars += project.stars.count()
         subjects += [subject.name for subject in project.subjects]
-    for project in member_projects:
-        stars += project.stars.count()
-        subjects += [subject.name for subject in project.subjects]
-    if subjects!=[]:
-        subject_data = Counter(subjects)
-    else:
-        subject_data = False
+    subject_data = Counter(subjects) if subjects!=[] else False
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs)
