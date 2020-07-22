@@ -76,10 +76,10 @@ def tasks_to_daily_activity(tasks):
     start_stamps = []
     end_stamps = []
     for task in tasks:
-        start_stamps.append(round((current_time-task.post_stamp).seconds * (1/(60**2)) ))
+        start_stamps.append(round((current_time-task.post_stamp).seconds * (1/(60)) ))
         # start_stamps.append((current_time-task.post_stamp).days)
         if task.complete:
-            end_stamps.append(round(((current_time-task.complete_stamp).seconds * (1/(60**2)) )))
+            end_stamps.append(round(((current_time-task.complete_stamp).seconds * (1/(60)) )))
             # end_stamps.append((current_time-task.complete_stamp).days)
     start_activity = Counter(start_stamps)
     end_activity = Counter(end_stamps)
@@ -294,15 +294,15 @@ def user(email):
         task_data['end_activity'] = end_activity
         task_data['earliest'] = earliest
     # role data
-    projects = user.projects
-    role_data = (projects.count()>0)
-    if role_data:
-        roles = []
-        for membership in projects:
-            for role in membership.roles:
-                # if not (role.name in ['Creator', 'Pending']):
-                roles.append(role)
-        role_data = Counter(roles)
+    # projects = user.projects
+    # role_data = (projects.count()>0)
+    # if role_data:
+    #     roles = []
+    #     for membership in projects:
+    #         for role in membership.roles:
+    #             # if not (role.name in ['Creator', 'Pending']):
+    #             roles.append(role)
+    #     role_data = Counter(roles)
     # owned projects
     owned = user.owned
     owned_tabs = partition_query(owned)
@@ -310,12 +310,19 @@ def user(email):
     member_projects = [r.project for r in user.projects
                        if not r.project in owned]
     member_tabs = partition_query(member_projects)
-    # sum stars
+    # sum stars and aggregate subjects
     stars = 0
+    subjects = []
     for project in owned:
         stars += project.stars.count()
+        subjects.append(project.subjects)
     for project in member_projects:
         stars += project.stars.count()
+        subjects.append(project.subjects)
+    if subjects!=[]:
+        role_data = Counter(subjects)
+    else:
+        role_data = False
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, role_data=role_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs)
