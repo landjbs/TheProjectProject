@@ -90,8 +90,8 @@
                   <ul class="collapse in list-unstyled" id="memberSubmenu">
                     {% for member in project.members %}
                       <li>
-                          <a href="user={{ member.user.email }}" style='padding-bottom:5px;'>
-                            {{ member.user.name }}
+                          <a href="user={{ member.email }}" style='padding-bottom:5px;'>
+                            {{ member.name }}
                           </a>
                       </li>
                     {% endfor %}

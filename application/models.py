@@ -73,7 +73,7 @@ class User(db.Model, UserMixin):
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
-    projects = relationship('User', secondary=user_to_project,
+    projects = relationship('Project', secondary=user_to_project,
                             back_populates='members', lazy='dynamic')
     pending_projects = relationship('Project', secondary=user_to_project,
                                     back_populates='pending_members')
@@ -150,7 +150,8 @@ class Project(db.Model):
     owner = relationship('User', back_populates='owned')
     members = relationship('User', secondary='user_to_project',
                            back_populates='projects', lazy='dynamic')
-    pending_members = relationship('User', secondary=user_to_project, back_populates='pending_projects')
+    pending_members = relationship('User', secondary=user_to_project,
+                                   back_populates='pending_projects')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)

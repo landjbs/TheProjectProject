@@ -25,12 +25,7 @@
               <div class="col-md-4">
                 <div class="card mb-2">
                   <div class="card-body">
-                    <div class='member-hoverable float-right'>
-                      <span class="tooltiptext">
-                        {% for member in project.members %}
-                          <p>{{ member.user.name }}</p>
-                        {% endfor %}
-                      </span>
+                    <div class='float-right'>
                       <i class='far fa-user-circle'></i>
                       {{ project.members.all()|length }}
                       <br>

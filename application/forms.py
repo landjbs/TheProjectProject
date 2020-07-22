@@ -12,7 +12,7 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
 sys.path.append('.')
 
 from application import db
-from application.models import User, Subject, Role
+from application.models import User, Subject
 
 
 BaseForm = model_form_factory(FlaskForm)
@@ -116,10 +116,6 @@ class Add_Project(BaseForm):
                                    description=('What subjects might this '
                                                 'project involve?'),
                                    choices=list(subjects))
-    roles = SelectMultipleField('Roles',
-                                   description=('What roles might fit on this '
-                                                'project?'),
-                                   choices=list(roles))
     open = BooleanField('Open',
                         validators=[],
                         description=('Open projects can have team members.'))

@@ -38,7 +38,7 @@ login_manager.init_app(application)
 def is_project_member(user, project):
     if user==None:
         return False
-    return (project.members.filter_by(user=user).first() is not None)
+    return (user in project.members)
 
 
 # functions
@@ -296,8 +296,8 @@ def user(email):
     owned = user.owned
     owned_tabs = partition_query(owned)
     # member projects
-    member_projects = [r.project for r in user.projects
-                       if not r.project in owned]
+    member_projects = [project for project in user.projects
+                       if not project in owned]
     member_tabs = partition_query(member_projects)
     # sum stars and aggregate subjects
     stars = 0
@@ -341,6 +341,7 @@ def project(project_name):
     ## subject visualization ##
     # TODO:
     role_data = {}
+    filled_data = {}
     return render_template('project.html', project=project,
                             now=datetime.utcnow, comment_form=comment_form,
                             task_form=task_form,
