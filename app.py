@@ -83,7 +83,7 @@ def tasks_to_daily_activity(tasks):
             # end_stamps.append((current_time-task.complete_stamp).days)
     start_activity = Counter(start_stamps)
     end_activity = Counter(end_stamps)
-    earliest = max(start_activity)
+    earliest = max(start_activity)+1
     for i in range(earliest):
         if i not in start_activity:
             start_activity.update({i:0})
@@ -317,6 +317,7 @@ def project(project_name):
         activity_data['start_activity'] = start_activity
         activity_data['end_activity'] = end_activity
         activity_data['earliest'] = earliest
+    print(activity_data)
     # compile counts of tasks completed by each worker
     completers = []
     for task in project.tasks.filter_by(complete=True):
