@@ -155,6 +155,46 @@
   </div>
 </div>
 
+<div class='container my-4'>
+  <h4 style='text-align:left;'>Subjects</h4>
+  <hr class="my-4">
+    <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+      <!--Slides-->
+      <div class="carousel-inner" role="listbox">
+        {% for tab in subject_tabs %}
+          {% if loop.index==1 %}
+          <div class="carousel-item active">
+          {% else %}
+          <div class="carousel-item">
+          {% endif %}
+            <div class='row'>
+              {% for subject in tab %}
+                <div class="col-md-4">
+                  <div class="card mb-2">
+                    <div class="card-body">
+                      <p class="float-right">
+                        <i class='far fa-user-circle'></i>
+                        {{ subject.projects|all  }}
+                      </p>
+                      <div class='card-head tiny'>
+                        <a class='project-name' href='project={{ project.name }}'>
+                          <h5>{{ subject.name }}</h5>
+                        </a>
+                      </div>
+                      <!-- summary -->
+                      <p class='oneliner'>
+                        {{ project.oneliner }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
 
 
 
