@@ -361,7 +361,7 @@ def subject(subject_name):
 
 
 @login_required
-@application.route('/join_project/<int:project_id>/')
+@application.route('/join_project/<int:project_id>')
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
