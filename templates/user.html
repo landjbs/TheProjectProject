@@ -115,11 +115,16 @@
             <div class="line"></div>
 
             <div class="row">
-              </div>
-
-              <div class="col">
-                <h5>Projects</h5>
-              </div>
+              <h5>Projects</h5>
+              {% for i in range(3) %}
+                <div class='row'>
+                  {% for j in range(3) %}
+                    <div class='col'>
+                      Boop
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
             </div>
 
         </div>
