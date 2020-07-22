@@ -79,7 +79,8 @@ class User(db.Model, UserMixin):
     tasks_worked = relationship('Task', secondary=user_to_task,
                          back_populates='workers')
     # notifications
-
+    notifications = relationship('Notification', secondary=user_to_notification,
+                                back_populates='users')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
