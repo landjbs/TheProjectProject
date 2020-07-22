@@ -152,6 +152,8 @@ class Project_Application(BaseForm):
                          render_kw={'max':250})
     # roles = SelectMultipleField('Roles', description='Select roles.')
 
+class Search_Form(BaseForm):
+    search = TextField('Search', validators=[Length(1,128)])
 
 class Task_Form(BaseForm):
     text = TextField('Task', validators=[DataRequired(), Length(1,160)],
