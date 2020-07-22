@@ -23,13 +23,13 @@ project_to_subject = Table('project_to_subject', db.Model.metadata,
 
 
 user_to_project = Table('user_to_project', db.Model.metadata,
-        Column('user_id', Integer, ForeignKey('user.id')),
-        Column('project_id', Integer, ForeignKey('project.id')))
+                        Column('user_id', Integer, ForeignKey('user.id')),
+                        Column('project_id', Integer, ForeignKey('project.id')))
 
 
 user_to_task = Table('user_to_task', db.Model.metadata,
-                Column('user_id', Integer, ForeignKey('user.id')),
-                Column('task_id', Integer, ForeignKey('task.id')))
+                    Column('user_id', Integer, ForeignKey('user.id')),
+                    Column('task_id', Integer, ForeignKey('task.id')))
 
 
 # class Member_Role(db.Model):
