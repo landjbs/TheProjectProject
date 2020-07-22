@@ -361,7 +361,8 @@ def project(project_name):
 @application.route('/subject=<subject_name>')
 def subject(subject_name):
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
-    subject_projects = Project.query.filter(Project.subjects.contains(subject))
+    subject_projects = Project.query.filter(Project.subjects.contains(subject)).limit(30)
+    subject_tabs = partition_query(subject_projects)
     return redirect(request.referrer)
 
 
