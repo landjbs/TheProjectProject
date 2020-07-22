@@ -215,22 +215,24 @@
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
+                <a href='project={{ project.name }}' style='color:black;'>
+                  <h5>{{ project.name }}</h5>
+                </a>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
                 {% if project.requires_application %}
-                  <p>{{ project.application_question }}</p>
+                  "{{ project.application_question }}"</p>
                   {{ project_application.hidden_tag() }}
                   {{ project_application.response(elt='input valid', placeholder='Response') }}
                 {% else %}
                   <p>Welcome to {{ project.name }}! Click to join.</p>
                 {% endif %}
+              </div>
+              <div class="modal-footer">
                 <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
                   Join
                 </a>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
