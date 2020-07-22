@@ -147,7 +147,7 @@
                           <a href="user={{ application.user.email }}">
                             {{ application.user.name }}
                           </a>
-                          {{ application.text }}
+                          <p style='color:white;'>{{ application.text }}</p>
                           <a href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
                             Accept
                           </a>
