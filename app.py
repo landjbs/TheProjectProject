@@ -304,7 +304,12 @@ def user(email):
                 roles.append(role)
         role_data = Counter(roles)
     # owned projects
-    owned_tabs = partition_query(user.owned)
+    owned = user.owned
+    owned_tabs = partition_query(owned)
+    # member projects
+    member_projects = [r.project for r in user.projects
+                       if not r.project in owned]
+    member_tabs = partition_query(member_projects)
     return render_template('user.html', user=user, task_data=task_data,
                            role_data=role_data, owned_tabs=owned_tabs)
 
