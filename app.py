@@ -512,7 +512,8 @@ def change_project_status(project_id, user_id, action):
             notification = Notification(text=f'{user.name} has been accepted '
                                              f'to {project.name}.')
             for member in project.members:
-                member.notifications.append(notification)
+                if not member==project.member:
+                    member.notifications.append(notification)
             project.members.append(user)
             application = project.pending_members.filter_by(user=user).first()
             if application is not None:
@@ -530,7 +531,9 @@ def change_project_status(project_id, user_id, action):
             notification = Notification(text=f'{project.owner.name} has removed '
                                             f'{user.name} from {project.name}')
             for member in project.members:
-                member.notifications.append(notification)
+                if not member==project.member:
+                    member.notifications.append(notification)
+            flash(f'{user.name} removed from {project.name}.')
         # remove user from pending
         else:
             application = project.pending_members.filter_by(user=user).first()
