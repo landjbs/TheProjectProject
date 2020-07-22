@@ -502,6 +502,8 @@ def change_project_status(project_id, user_id, action):
             else:
                 flash('Cannot reject user not affiliated with project.')
                 error_flag = True
+    elif action=='make_owner':
+        raise RuntimeError('make_owner not yet imp')
     else:
         flash('Invalid action.')
         error_flag = True
