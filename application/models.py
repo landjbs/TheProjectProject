@@ -240,26 +240,6 @@ class Subject(db.Model):
         return f'<Subject {self.name}>'
 
 
-# class Role(db.Model):
-#     __tablename__ = 'role'
-#     # id
-#     id = Column(Integer, primary_key=True)
-#     # name
-#     name = Column(String(40), unique=True, nullable=False)
-#     # color
-#     color = Column(String(6), unique=True, nullable=False)
-#     # projects
-#     projects = relationship('Member_Role', secondary=role_to_member_role,
-#                             back_populates='roles', lazy='dynamic')
-#
-#     def __init__(self, name, color):
-#         self.name = str(name)
-#         self.color = str(name)
-#
-#     def __repr__(self):
-#         return f'<Role {self.name}>'
-
-
 class Task(db.Model):
     __tablename__ = 'task'
     # id
