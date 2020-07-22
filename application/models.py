@@ -33,8 +33,8 @@ user_to_task = Table('user_to_task', db.Model.metadata,
 
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
-    user = Column('user_id', Integer, ForeignKey('user.id')),
-    project = Column('project_id', Integer, ForeignKey('project.id')),
+    user = Column(Integer, ForeignKey('user.id'), primary_key=True),
+    project = Column(Integer, ForeignKey('project.id'), primary_key=True),
     text = Column('text', String(250), nullable=True))
 
 
