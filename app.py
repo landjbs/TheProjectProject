@@ -310,8 +310,15 @@ def user(email):
     member_projects = [r.project for r in user.projects
                        if not r.project in owned]
     member_tabs = partition_query(member_projects)
-    return render_template('user.html', user=user, task_data=task_data,
-                           role_data=role_data, owned_tabs=owned_tabs)
+    # sum stars
+    stars = 0
+    for project in owned:
+        stars += project.stars.count()
+    for project in member_projects:
+        starts += project.stars.count()
+    return render_template('user.html', user=user, stars=stars,
+                            task_data=task_data, role_data=role_data,
+                            owned_tabs=owned_tabs)
 
 
 @login_required
