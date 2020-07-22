@@ -294,5 +294,5 @@ class Notification(db.Model):
     # text
     text = Column(String(160), nullable=False)
     # user
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship('User', back_populates='notifications')
+    users = relationship('User', secondary= user_to_notification,
+                         back_populates='notifications')
