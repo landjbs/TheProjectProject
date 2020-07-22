@@ -221,9 +221,9 @@
                 {% if project.requires_application %}
                   <p>{{ project.application_question }}</p>
                   {{ project_application.hidden_tag() }}
-                  {{ project_application.response(placeholder='Response') }}
+                  {{ project_application.response(elt='input valid', placeholder='Response') }}
                 {% else %}
-                  <p>Welcome to {{ project.name }}!</p>
+                  <p>Welcome to {{ project.name }}! Click to join.</p>
                 {% endif %}
                 <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
                   Join

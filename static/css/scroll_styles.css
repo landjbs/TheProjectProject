@@ -48,11 +48,11 @@ a {
 }
 
 a:hover {
-  color: blue;
+  color: #5D00FF;
 }
 
 .card-head a {
-  color: blue;
+  color: #5D00FF;
 }
 
 .card-head h5 {
