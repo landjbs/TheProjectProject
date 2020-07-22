@@ -70,7 +70,7 @@
               <div class="col-sm-4">
                 <h6>Completed Tasks</h6>
                   {% set completed_tasks = user.tasks_worked %}
-                  <div class="list-group">
+                  <div class="list-group list-small">
                     {% if completed_tasks|length==0 %}
                       <p class='empty-text'>No tasks completed yet.</p>
                     {% endif %}

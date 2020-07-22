@@ -229,6 +229,12 @@ a.article, a.article:hover {
   background: rgba(0,0,0,0.02);
 }
 
+
+.list-small {
+  min-height: 20vh;
+  max-height: 20vh;
+}
+
 .progress-bar {
   background: #00FF5D;
 }
