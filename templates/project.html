@@ -90,9 +90,16 @@
                   <ul class="collapse in list-unstyled" id="memberSubmenu">
                     {% for member in project.members %}
                       <li>
-                          <a href="user={{ member.email }}" style='padding-bottom:5px;'>
+                        <p>
+                          <a href="user={{ member.email }}" style='padding-bottom:5px; display: inline;'>
                             {{ member.name }}
                           </a>
+                          <a class='delete-btn task-btn'
+                          style='background: transparent;  display: inline;'
+                          href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                          </a>
+                        </p>
                       </li>
                     {% endfor %}
                   </ul>
