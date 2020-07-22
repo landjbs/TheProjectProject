@@ -487,12 +487,14 @@ def change_project_status(project_id, user_id, action):
     user = User.query.get_or_404(user_id)
     flag = False
     if action=='accept':
-        if not
+        if user in project.members:
+            flash('Cannot accept user already in project.')
     elif action=='reject':
+        # remove user from project
+        if user in project.members:
+            project.members.remove(user)
 
     else:
-        flag = True
-    if flag:
         flash('Invalid action.')
     return redirect(request.referrer)
 
