@@ -339,15 +339,7 @@ def project(project_name):
     # select top 5 to plot
     task_data = Counter(completers)
     ## subject visualization ##
-    # roles, filled = [], []
-    # for member_role in project.members:
-    #     for role in member_role.roles:
-    #         if not (role.name=='Creator'):
-    #             roles.append(role)
-    #             if not member_role.user is None:
-    #                 filled.append(role)
-    # role_data = Counter(roles)
-    # filled_data = Counter(filled)
+    # TODO: this
     role_data = {}
     return render_template('project.html', project=project,
                             now=datetime.utcnow, comment_form=comment_form,
@@ -381,7 +373,6 @@ def join_project(project_id):
                 'already a member.')
         return redirect(request.referrer)
     form = Project_Application(request.form)
-    a = Member_Role(roles=[]) # form.roles.data)
     a.project = project
     if project.open:
         if not project.requires_application:

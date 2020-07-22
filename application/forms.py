@@ -18,7 +18,6 @@ from application.models import User, Subject, Role
 BaseForm = model_form_factory(FlaskForm)
 # query all subjects
 subjects = [(str(s.id), s.name) for s in db.session.query(Subject)]
-roles = db.session.query(Role)
 
 
 class Email_Ext_Validator(object):
@@ -150,7 +149,6 @@ class Add_Project(BaseForm):
 class Project_Application(BaseForm):
     response = TextField('Response', validators=[Length(1,250)],
                          render_kw={'max':250})
-    # roles = SelectMultipleField('Roles', description='Select roles.')
 
 
 class Task_Form(BaseForm):

@@ -4,14 +4,12 @@ sys.path.append('.')
 from sqlalchemy.sql import exists
 
 from application import db
-from application.models import Project, User, Member_Role, Role, Comment, Task, Subject
+from application.models import Project, User, Comment, Task, Subject
 
-from application.create_roles import create_roles
 from application.create_subjects import create_subjects
 
-create_roles()
 create_subjects()
-from manager import create_project, add_role_to_user, add_comment
+from manager import create_project, add_comment
 
 
 users = [User(name='Landon Smith',

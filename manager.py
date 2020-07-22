@@ -1,11 +1,5 @@
 from application import db
-from application.models import Project, User, Member_Role, Role
-
-
-def create_role(title, color):
-    role = Role(title, color)
-    db.session.add(role)
-    db.session.commit()
+from application.models import Project, User
 
 
 def create_subject(name, color):
@@ -19,30 +13,14 @@ def create_user(user):
     db.session.commit()
 
 
-def add_role_to_project(project, role, user=None):
-    a = Member_Role(roles=[role])
-    a.project = project
-    db.session.add(project)
-
-
 def add_user_to_project(project, user, role):
     user.projects.append(project)
     db.session.add(project)
     db.session.commit()
 
 
-def add_role_to_user(project, user, role):
-    member_role = user.projects.filter_by(id=project.id).first()
-    if not role in member_role.roles:
-        member_role.roles.append(role)
-    db.session.add(member_role)
-    db.session.commit()
-
-
 def create_project(project, user):
-    a = Member_Role(roles=[db.session.query(Role).filter_by(name='Creator').first()])
-    a.project = project
-    user.projects.append(a)
+    user.projects.append(project)
     db.session.add(project)
 
 
