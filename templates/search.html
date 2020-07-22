@@ -63,7 +63,7 @@
                       <div>
                         <i class="fa fa-flask" aria-hidden="true"></i>
                         {% for subject in project.subjects|reverse %}
-                          <a href='/subject={{ subject.name }}'>
+                          <a href='/subject={{ subject.code }}'>
                             {% if loop.index>1 %}
                             ,
                             {% endif %}
@@ -178,7 +178,7 @@
                         {{ subject.projects.all()|length  }}
                       </p>
                       <div class='card-head tiny'>
-                        <a class='project-name' href='subject={{ subject.name }}'>
+                        <a class='project-name' href='subject={{ subject.code }}'>
                           <h5>{{ subject.name }}</h5>
                         </a>
                       </div>

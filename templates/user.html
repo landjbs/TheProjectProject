@@ -171,7 +171,7 @@
                                   <div>
                                     <i class="fa fa-flask" aria-hidden="true"></i>
                                     {% for subject in project.subjects|reverse %}
-                                      <a href='/subject={{ subject.name }}'>
+                                      <a href='/subject={{ subject.code }}'>
                                         {% if loop.index>1 %}
                                         ,
                                         {% endif %}
