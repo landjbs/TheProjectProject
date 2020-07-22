@@ -203,10 +203,10 @@ def reject():
 
 ## HOME ##
 def partition_query(l, n=3):
-    if type(l)==list:
-        c = len(l)
-    else:
+    try:
         c = l.count()
+    except:
+        c = len(l)
     for i in range(0, c, n):
         yield l[i:i+n]
 
