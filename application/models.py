@@ -281,4 +281,7 @@ class Comment(db.Model):
 
 class Notification(db.Model):
     __tablename__ = 'notification'
-    
+    # id
+    id = Column(Integer, primary_key=True)
+    # text
+    text = Column(String(160), nullable=False)
