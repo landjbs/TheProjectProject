@@ -499,13 +499,16 @@ def search():
     # project results
     project_results = Project.query.filter(Project.name.contains(search_text) |
                                    Project.oneliner.contains(search_text))
+    project_tabs = partition_query(project_results)
     # user results
     user_results = User.query.filter(User.name.contains(search_text) |
                                      User.about.contains(search_text))
+    user_tabs = partition_query(user_results)
     # subject results
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
-    return render_template('search.html', project_results=project_results,
-                    user_results=user_results, subject_results=subject_results)
+    subject_tabs = partition_query(subject_results)
+    return render_template('search.html', project_tabs=project_tabs,
+                        user_tabs=user_tabs, subject_tabs=subject_tabs)
 
 
 @application.route('/logout')
