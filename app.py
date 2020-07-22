@@ -512,7 +512,7 @@ def change_project_status(project_id, user_id, action):
             notification = Notification(text=f'{user.name} has been accepted '
                                              f'to {project.name}.')
             for member in project.members:
-                if not member==project.member:
+                if not member==current_user:
                     member.notifications.append(notification)
             project.members.append(user)
             application = project.pending_members.filter_by(user=user).first()
@@ -531,7 +531,7 @@ def change_project_status(project_id, user_id, action):
             notification = Notification(text=f'{project.owner.name} has removed '
                                             f'{user.name} from {project.name}')
             for member in project.members:
-                if not member==project.member:
+                if not member==current_user:
                     member.notifications.append(notification)
             flash(f'{user.name} removed from {project.name}.')
         # remove user from pending
@@ -547,7 +547,11 @@ def change_project_status(project_id, user_id, action):
         if user in project.members:
             notification = Notification(text=f'{project.owner.name} has '
                     f'transferred ownership of {project.name} to {user.name}.')
+            for member in project.members:
+                if not member in [user, current_user]:
+                    member.notifications.append(notification)
             project.owner = user
+            
             flash(f'You have transferred ownership of {project.name} to '
                   f'{user.name}.')
         else:
