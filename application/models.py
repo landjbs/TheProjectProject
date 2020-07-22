@@ -218,6 +218,8 @@ class Subject(db.Model):
     name = Column(String(128), unique=True, nullable=False)
     # color
     color = Column(String(6), unique=True, nullable=False)
+    # code
+    code = Column(String(128), unique=True, nullable=False)
     # users
     users = relationship('User', secondary='user_to_subject',
                         back_populates='subjects', lazy='dynamic')
