@@ -161,8 +161,8 @@
             <div class="row">
               <div class="col-sm-4">
                 <h6>Daily Activity</h6>
-                {% if vis_activity %}
-                  <canvas id="contribution_chart"></canvas>
+                {% if activity_data %}
+                  <canvas id="activity_chart"></canvas>
                 {% else %}
                   <p class='empty-text'>No activity yet.</p>
                 {% endif %}
@@ -348,17 +348,17 @@
     Chart.defaults.global.legend.display = false;
     // contribution chart
     {% if vis_activity %}
-      var ctx = document.getElementById('contribution_chart');
+      var ctx = document.getElementById('activity_chart');
       Chart.defaults.global.legend.display = false;
       new Chart(ctx, {
         type: 'line',
         data: {
-          labels: [{% for i in range(earliest) %}
+          labels: [{% for i in range(activity_data['earliest']) %}
                     '{{ i }}',
                   {% endfor %}],
           datasets: [
             {
-              data: [{% for activity in end_activity %}
+              data: [{% for activity in activity_data['end_activity'] %}
                         '{{ activity }}',
                       {% endfor %}],
               label: "Tasks Completed",
@@ -367,7 +367,7 @@
               fill: false
             },
             {
-              data: [{% for activity in start_activity %}
+              data: [{% for activity in activity_data['start_activity'] %}
                         '{{ activity }}',
                       {% endfor %}],
               label: "Tasks Posted",
