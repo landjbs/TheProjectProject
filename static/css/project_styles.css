@@ -87,9 +87,9 @@ a, a:hover, a:focus {
     background: #fff;
 }
 
-.subject-hover:hover {
-  color: white;
-  background: transparent;
+a.subject-hover:hover {
+  color: white !important;
+  background: transparent !important;
 }
 
 
