@@ -284,8 +284,8 @@ def user(email):
     user = User.query.filter_by(email=email).first_or_404()
     # worked tasks
     tasks = user.tasks_worked
-    task_data = (len(tasks)>0)
-    if task_data:
+    task_data = {} if (len(tasks)>0) else None
+    if task_data is not None:
         _, end_activity, earliest = tasks_to_daily_activity(tasks)
         task_data['end_activity'] = end_activity
         task_data['earliest'] = earliest
