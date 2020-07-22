@@ -142,17 +142,21 @@
                   </a>
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
                       {% for application in project.pending_members %}
-                        <div class="list-group-item list-group-item-action flex-column align-items-start">
-                          <div class="d-flex w-100 justify-content-between">
-                            <a href='user={{ application.user.email }}' class="mb-1">
-                              <u>{{ application.user.name }}</u>
-                            </a>
-                          </div>
-                          <p class="mb-1">{{ application.text }}
-                            <a class='delete-btn task-btn float-right'
-                            href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept')}} ">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
+                        <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
+                          <a href='user={{ application.user.email }}' class="mb-1" style='background: transparent; color: white;'>
+                            <u>{{ application.user.name }}</u>
+                          </a>
+                          <p class="mb-1">{{ application.text }}</p>
+                              <a class='delete-btn task-btn float-left'
+                              style='background: transparent;'
+                              href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                              <a class='complete-btn task-btn float-right'
+                              style='background: transparent;'
+                              href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                              </a>
                           </p>
                         </div>
                       {% endfor %}
