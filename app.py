@@ -486,6 +486,7 @@ def change_project_status(project_id, user_id, action):
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
     error_flag = False
+    ## ACCEPT ##
     if action=='accept':
         if user in project.members:
             flash('Cannot accept user already in project.')
@@ -493,6 +494,7 @@ def change_project_status(project_id, user_id, action):
         else:
             project.members.append(user)
             project.pending.remove(user)
+    ## REJECT ##
     elif action=='reject':
         # remove user from project
         if user in project.members:
@@ -505,6 +507,7 @@ def change_project_status(project_id, user_id, action):
             else:
                 flash('Cannot reject user not affiliated with project.')
                 error_flag = True
+    ## MAKE OWNER ##
     elif action=='make_owner':
         raise RuntimeError('make_owner not yet imp')
     else:
