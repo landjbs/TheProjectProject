@@ -380,6 +380,8 @@ def join_project(project_id):
             db.session.commit()
         else:
             flash('The project owner has closed this project.')
+    else:
+        flash('Could not accept application.')
     return redirect(request.referrer)
 
 
