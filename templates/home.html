@@ -221,15 +221,15 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
               <div class="modal-body">
-                {% if project.requires_application %}
-                  "{{ project.application_question }}"</p>
-                  <form>
-                    {{ project_application.hidden_tag() }}
-                    {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
-                  </form>
-                {% else %}
-                  <p>Welcome to {{ project.name }}! Click to join.</p>
-                {% endif %}
+                <form>
+                  {% if project.requires_application %}
+                    "{{ project.application_question }}"</p>
+                      {{ project_application.hidden_tag() }}
+                      {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
+                  {% else %}
+                    <p>Welcome to {{ project.name }}! Click to join.</p>
+                  {% endif %}
+                </form>
               </div>
               <div class="modal-footer">
                 <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
