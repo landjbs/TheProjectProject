@@ -358,6 +358,11 @@ def project(project_name):
 
 
 @login_required
+@application.route('/subject=<subject_name>')
+def subject
+
+
+@login_required
 @application.route('/join_project/<int:project_id>')
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
