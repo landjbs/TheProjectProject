@@ -143,13 +143,15 @@
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
                       {% for application in project.pending_members %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-                          <a href='user={{ application.user.email }}' class="mb-1" style='background: transparent; color: white;'>
-                            <u>{{ application.user.name }}</u>
+                          <a href='user={{ application.user.email }}' class="mb-1"
+                          style='background: transparent; color: white; margin:0px; padding:0px;'>
+                            {{ application.user.name }}
                           </a>
-                          <p class="mb-1">{{ application.text }}</p>
+                          <p class="mb-1">Question: {{ project.application_question }}<br>
+                              Response: {{ application.text }}</p>
                               <a class='delete-btn task-btn float-left'
                               style='background: transparent;'
-                              href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                              href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                               <a class='complete-btn task-btn float-right'
