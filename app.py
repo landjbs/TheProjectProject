@@ -315,10 +315,10 @@ def user(email):
     for project in owned:
         stars += project.stars.count()
     for project in member_projects:
-        starts += project.stars.count()
+        stars += project.stars.count()
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, role_data=role_data,
-                            owned_tabs=owned_tabs)
+                            owned_tabs=owned_tabs, member_tabs=member_tabs)
 
 
 @login_required
@@ -329,8 +329,8 @@ def project(project_name):
     task_form = Task_Form(request.form)
     ## task data visualization ##
     # vis activity
-    activity_data = {} if project.tasks.count()>0 else None
-    if activity_data is not None:
+    activity_data = {} if project.tasks.count()>0 else False
+    if activity_data != False:
         start_activity, end_activity, earliest = tasks_to_daily_activity(project.tasks)
         activity_data['start_activity'] = start_activity
         activity_data['end_activity'] = end_activity

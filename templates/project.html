@@ -347,7 +347,7 @@
     <script>
     Chart.defaults.global.legend.display = false;
     // contribution chart
-    {% if vis_activity != False %}
+    {% if activity_data != False %}
       var ctx = document.getElementById('activity_chart');
       Chart.defaults.global.legend.display = false;
       new Chart(ctx, {
@@ -355,7 +355,7 @@
         data: {
           labels: [{% for i in range(activity_data['earliest']) %}
                     '{{ i }}',
-                  {% endfor %}],
+                   {% endfor %}],
           datasets: [
             {
               data: [{% for activity in activity_data['end_activity'] %}
