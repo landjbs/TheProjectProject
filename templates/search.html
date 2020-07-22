@@ -120,37 +120,30 @@
 
 <div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
 <div class='container my-4'>
-  <h4 style='text-align:left;'>Trending Projects</h4>
+  <h4 style='text-align:left;'>Users</h4>
   <hr class="my-4">
   <div class="carousel-inner" role="listbox">
-    {% for tab in top_tabs %}
+    {% for tab in user_tabs %}
       {% if loop.index==1 %}
       <div class="carousel-item active">
       {% else %}
       <div class="carousel-item">
       {% endif %}
         <div class='row'>
-          {% for project in tab %}
+          {% for user in tab %}
             <div class="col-md-4">
               <div class="card mb-2">
                 <div class="card-body">
-                  <p class="float-right">
-                    <i class='far fa-user-circle'></i>
-                    {{ project.members.all()|length  }}
-                    <br>
-                    <i class="fa fa-star"></i>
-                    {{ project.stars.all()|length }}
-                  </p>
                   <div class='card-head little'>
-                    <a class='project-name' href='project={{ project.name }}'>
-                      <h5>{{ project.name }}</h5>
+                    <a class='project-name' href='user={{ user.email }}'>
+                      <h5>{{ user.name }}</h5>
                     </a>
-                    <a href='user={{ project.owner.email }}'>
-                      <p>{{ project.owner.name }}</p>
+                    <a href='mailto:{{ user.email }}'>
+                      <p>{{ user.email }}</p>
                     </a>
                   </div>
                   <p class='oneliner'>
-                    {{ project.oneliner }}
+                    {{ user.about }}
                   </p>
                 </div>
               </div>
@@ -162,54 +155,9 @@
   </div>
 </div>
 
-<div class='container my-4'>
-  <h4 style='text-align:left;'>My Projects</h4>
-  <hr class="my-4">
-  {% if user_project_count>0 %}
-    <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-      <!--Slides-->
-      <div class="carousel-inner" role="listbox">
-        {% for tab in user_tabs %}
-          {% if loop.index==1 %}
-          <div class="carousel-item active">
-          {% else %}
-          <div class="carousel-item">
-          {% endif %}
-            <div class='row'>
-              {% for project in tab %}
-                <div class="col-md-4">
-                  <div class="card mb-2">
-                    <div class="card-body">
-                      <p class="float-right">
-                        <i class='far fa-user-circle'></i>
-                        {{ project.members.all()|length  }}
-                      </p>
-                      <div class='card-head tiny'>
-                        <a class='project-name' href='project={{ project.name }}'>
-                          <h5>{{ project.name }}</h5>
-                        </a>
-                      </div>
-                      <!-- summary -->
-                      <p class='oneliner'>
-                        {{ project.oneliner }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  {% else %}
-  <div style='text-align:center;'>
-    <a type="button" href="/add_project">
-      <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
-    </a>
-  </div>
-  {% endif %}
-</div>
+
+
+
 </div>
 </div>
 
