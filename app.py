@@ -290,9 +290,13 @@ def user(email):
         task_data['end_activity'] = end_activity
         task_data['earliest'] = earliest
     # role data
-    roles = user.projects
-    role_data = {} if (len(roles)>0) else None
-    
+    projects = user.projects
+    role_data = {} if (len(projects)>0) else None
+    if role_data is not None:
+        roles = []
+        for membership in projects:
+            for role in membership:
+                roles.append(role)
     return render_template('user.html', user=user, task_data=task_data)
 
 
