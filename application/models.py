@@ -31,6 +31,11 @@ user_to_task = Table('user_to_task', db.Model.metadata,
                     Column('task_id', Integer, ForeignKey('task.id')))
 
 
+user_to_notification = Table('user_to_notification', db.Model.metadata,
+            Column('user_id', Integer, ForeignKey('user.id')),
+            Column('notification_id', Integer, ForeignKey('notification.id')))
+
+
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
@@ -73,6 +78,8 @@ class User(db.Model, UserMixin):
     tasks_authored = relationship('Task', back_populates='author')
     tasks_worked = relationship('Task', secondary=user_to_task,
                          back_populates='workers')
+    # notifications
+
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
