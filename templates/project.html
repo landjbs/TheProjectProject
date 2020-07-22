@@ -101,6 +101,11 @@
                             href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
                               <i class="fa fa-times-circle" aria-hidden="true"></i>
                             </a>
+                            <a class='task-btn member-hovers'
+                            style='display: inline; color: gold;'
+                            href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
+                              <i class='fas fa-crown'></i>
+                            </a>
                           {% endif %}
                         </p>
                       </li>
