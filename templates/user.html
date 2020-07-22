@@ -114,18 +114,22 @@
 
             <div class="line"></div>
 
-            <div class="row">
-              <h5>Projects</h5>
-              {% for i in range(3) %}
-                <div class='row'>
-                  {% for j in range(3) %}
-                    <div class='col'>
-                      Boop
+            <h5>Projects</h5>
+            {% for i in range(3) %}
+              <div class='row'>
+                {% for j in range(3) %}
+                  <div class='col'>
+                    <div class="card">
+                        <div class="card-block">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
                     </div>
-                  {% endfor %}
-                </div>
-              {% endfor %}
-            </div>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endfor %}
 
         </div>
 
