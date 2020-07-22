@@ -34,10 +34,10 @@ user_to_task = Table('user_to_task', db.Model.metadata,
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='pending_project')
+    user = relationship('User', back_populates='pending_projects')
     project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
     project = relationship('Project', back_populates='pending_members')
-    text = Column('text', String(250), nullable=True))
+    text = Column('text', String(250), nullable=True)
 
 
 ## BASE CLASSES ##
@@ -65,7 +65,7 @@ class User(db.Model, UserMixin):
     projects = relationship('Project', secondary=user_to_project,
                             back_populates='members', lazy='dynamic')
     pending_projects = relationship('Project_Application',
-                                    back_populates='pending_members')
+                                    back_populates='user')
     # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
@@ -140,7 +140,7 @@ class Project(db.Model):
     members = relationship('User', secondary='user_to_project',
                            back_populates='projects', lazy='dynamic')
     pending_members = relationship('Project_Application',
-                                   back_populates='pending_projects')
+                                   back_populates='project')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)

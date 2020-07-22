@@ -11,9 +11,10 @@ from collections import Counter
 from operator import itemgetter
 
 from application import db
-from application.models import (User, Project, Comment, Task, Subject)
+from application.models import (User, Project, Comment, Task, Subject,
+                                Project_Application)
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
-                                Task_Form, Project_Application)
+                                Task_Form, Project_Application_Form)
 import manager as manager
 
 
@@ -222,7 +223,7 @@ def home():
     # user projects
     user_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
     user_tabs = partition_query(user_projs)
-    project_application = Project_Application(request.form)
+    project_application = Project_Application_Form(request.form)
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, user_tabs=user_tabs,
                             user_project_count=user_projs.count(),
@@ -367,24 +368,24 @@ def join_project(project_id):
         flash(f'Could not join {project.name} because you are '
                 'already a member.')
         return redirect(request.referrer)
-    form = Project_Application(request.form)
-    if form.validate_on_submit():
-        if project.open:
-            if not project.requires_application:
-                current_user.projects.append(project)
-                flash(f'You have been added to {project.name}!')
-            else:
-                application = Project_Application(project=project,
-                                                user=current_user,
-                                                text=form.response.text)
-                project.pending_members.append(current_user)
-                flash(f'Your application to {project.name} been submitted.')
-            db.session.add(project)
-            db.session.commit()
+    form = Project_Application_Form(request.form)
+    # if form.validate_on_submit():
+    if project.open:
+        if not project.requires_application:
+            current_user.projects.append(project)
+            flash(f'You have been added to {project.name}!')
         else:
-            flash('The project owner has closed this project.')
+            application = Project_Application(project=project,
+                                            user=current_user,
+                                            text=form.response.data)
+            project.pending_members.append(application)
+            flash(f'Your application to {project.name} been submitted.')
+        db.session.add(project)
+        db.session.commit()
     else:
-        flash('Could not accept application.')
+        flash('The project owner has closed this project.')
+    # else:
+        # flash('Could not accept application.')
     return redirect(request.referrer)
 
 

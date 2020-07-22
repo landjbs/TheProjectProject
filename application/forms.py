@@ -142,7 +142,7 @@ class Add_Project(BaseForm):
                             'completed.'))
 
 
-class Project_Application(BaseForm):
+class Project_Application_Form(BaseForm):
     response = TextField('Response', validators=[Length(0,250)],
                          render_kw={'max':250})
 
