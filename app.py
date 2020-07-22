@@ -376,13 +376,13 @@ def join_project(project_id):
         return redirect(request.referrer)
     if project.open:
         if not project.requires_application:
-            current_user.projects.append(project)
-            flash(f'You have been added to {project.name}!')
             # notify users
             notification = Notification(text=f'{current_user.name} has joined '
-                                             f'your project {project.name}.')
+                                             f'{project.name}.')
             for member in project.members:
                 member.notifications.append(notification)
+            current_user.projects.append(project)
+            flash(f'You have been added to {project.name}!')
         else:
             form = Project_Application_Form(request.form)
             if form.validate_on_submit():
