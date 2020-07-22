@@ -495,8 +495,9 @@ def change_project_status(project_id, action):
 
 @application.route('/search', methods=['POST'])
 def search():
-    form = 
-    return render_template('results.html', )
+    search_text = request.form.get('search')
+    
+    return render_template('results.html', search_text=search_text)
 
 
 @application.route('/logout')
