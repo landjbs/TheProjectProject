@@ -96,7 +96,11 @@
                                   </a>
                                 {% endif %}
                             {% endfor %}
-                          on {{ time_to_str(task.complete_stamp) }}</small>
+                          on {{ time_to_str(task.complete_stamp) }}
+                        for
+                        <a href='project={{ task.project.name }}' class='user-name'>
+                          {{ task.project.name }}
+                        </a></small>
                         </div>
                       </div>
                     {% endfor %}
