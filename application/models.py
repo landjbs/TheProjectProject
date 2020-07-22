@@ -277,3 +277,8 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}>'
+
+
+class Notification(db.Model):
+    __tablename__ = 'notification'
+    
