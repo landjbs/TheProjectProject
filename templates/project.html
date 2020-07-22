@@ -395,15 +395,11 @@
       var myChart = new Chart(ctx, {
           type: 'horizontalBar',
           data: {
-              labels: [{% for k in task_data.keys() %}'{{ k.name }}'{% endfor %}],
+              labels: [{% for k in task_data.keys() %}'{{ k.name }}',{% endfor %}],
               datasets: [{
-                  data: [{% for v in task_data.values() %}'{{ v }}'{% endfor %}],
-                  backgroundColor: [
-                    'rgba(255,220,0,0.5)'
-                  ],
-                  borderColor: [
-                    '#FFDC00'
-                  ],
+                  data: [{% for v in task_data.values() %}'{{ v }}',{% endfor %}],
+                  backgroundColor: 'rgba(255,220,0,0.5)',
+                  borderColor: '#FFDC00',
                   borderWidth: 1
               }]
           },
