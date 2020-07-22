@@ -372,6 +372,7 @@ def join_project(project_id):
         if not project.requires_application:
             current_user.projects.append(project)
             flash(f'You have been added to {project.name}!')
+            # notify users
         else:
             form = Project_Application_Form(request.form)
             if form.validate_on_submit():
