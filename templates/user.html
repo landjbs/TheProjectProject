@@ -60,7 +60,11 @@
             <div class="row">
               <div class="col-sm-4">
                 <h6>Daily Activity</h6>
-                <canvas id="contribution_chart"></canvas>
+                {% if task_data %}
+                  <canvas id="contribution_chart"></canvas>
+                {% else %}
+                  <p class='empty-text'>No activity yet.</p>
+                {% endif %}
               </div>
               <div class="col-sm-4">
                 <h6>Tasks Completed</h6>
