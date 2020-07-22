@@ -225,9 +225,6 @@
                   "{{ project.application_question }}"</p>
                   {{ project_application.hidden_tag() }}
                   {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
-                  {% if project_application.errors %}
-                    <p class='warning'>{{ project_application.errors[0] }}</p>
-                  {% endif %}
                 {% else %}
                   <p>Welcome to {{ project.name }}! Click to join.</p>
                 {% endif %}
