@@ -296,9 +296,10 @@ def user(email):
         roles = []
         for membership in projects:
             for role in membership.roles:
-                if not (role.name in ['Creator', 'Pending']):
-                    roles.append(role)
+                # if not (role.name in ['Creator', 'Pending']):
+                roles.append(role)
         role_data = Counter(roles)
+    print(role_data)
     return render_template('user.html', user=user, task_data=task_data,
                            role_data=role_data)
 
