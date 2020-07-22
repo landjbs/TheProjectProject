@@ -493,7 +493,9 @@ def change_project_status(project_id, user_id, action):
         # remove user from project
         if user in project.members:
             project.members.remove(user)
-
+        elif
+        else:
+            flash('Cannot reject user not affiliated with project.')
     else:
         flash('Invalid action.')
     return redirect(request.referrer)
