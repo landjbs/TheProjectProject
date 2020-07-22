@@ -509,6 +509,11 @@ def change_project_status(project_id, user_id, action):
             flash('Cannot accept user already in project.')
             error_flag = True
         else:
+            notification = Notification(text=f'{user.name} has been accepted '
+                                             f'to {project.name}.')
+            for member in project.members:
+                if not member==project.owner:
+                    member.notifications.append(notification)
             project.members.append(user)
             application = project.pending_members.filter_by(user=user).first()
             if application is not None:
