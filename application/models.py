@@ -153,7 +153,8 @@ class Project(db.Model):
     ## people ##
     owner_id = Column(Integer, ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
-    members = relationship('Member_Role', back_populates='project', lazy='dynamic')
+    members = relationship('User', secondary='user_to_project',
+                           back_populates='projects', lazy='dynamic')
     pending_members = relationship('User', secondary=user_to_project, back_populates='pending_projects')
     ## join process ##
     # open (allows others to join)
