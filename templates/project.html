@@ -347,7 +347,7 @@
     <script>
     Chart.defaults.global.legend.display = false;
     // contribution chart
-    {% if vis_activity %}
+    {% if vis_activity != False %}
       var ctx = document.getElementById('activity_chart');
       Chart.defaults.global.legend.display = false;
       new Chart(ctx, {

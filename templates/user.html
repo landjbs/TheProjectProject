@@ -66,10 +66,42 @@
                   <p class='empty-text'>No activity yet.</p>
                 {% endif %}
               </div>
+
               <div class="col-sm-4">
-                <h6>Tasks Completed</h6>
-                  <canvas id="tasks_complete"></canvas>
+                <h6>Completed Tasks</h6>
+                  {% set completed_tasks = user.tasks_worked %}
+                  <div class="list-group">
+                    {% if completed_tasks|length==0 %}
+                      <p class='empty-text'>No tasks completed yet.</p>
+                    {% endif %}
+                    {% for task in completed_tasks|reverse %}
+                      <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <h6 class="mb-1">{{ task.text }}</h6>
+                        <div class="d-flex w-100 justify-content-between">
+                          <small>Completed by
+                            {% for worker in task.workers %}
+                                {% if loop.index==(task.workers|length) %}
+                                  <a href='user={{ worker.email }}' class='user-name'>
+                                    {{ worker.name }}
+                                  </a>
+                                {% elif (task.workers|length)==2 %}
+                                  <a href='user={{ worker.email }}' class='user-name'>
+                                    {{ worker.name }}
+                                  </a>
+                                  and
+                                {% else %}
+                                  <a href='user={{ worker.email }}' class='user-name'>
+                                    {{ worker.name }}
+                                  </a>
+                                {% endif %}
+                            {% endfor %}
+                          on {{ time_to_str(task.complete_stamp) }}</small>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
               </div>
+
               <div class="col-sm-4">
                 <h6>Role Breakdown</h6>
                 {% if role_data %}
@@ -83,39 +115,6 @@
             <div class="line"></div>
 
             <div class="row">
-              <div class='col'>
-                <h5>Completed Tasks</h5>
-                {% set completed_tasks = user.tasks_worked %}
-                <div class="list-group">
-                  {% if completed_tasks|length==0 %}
-                    <p class='empty-text'>No tasks completed yet.</p>
-                  {% endif %}
-                  {% for task in completed_tasks|reverse %}
-                    <div class="list-group-item list-group-item-action flex-column align-items-start">
-                      <h6 class="mb-1">{{ task.text }}</h6>
-                      <div class="d-flex w-100 justify-content-between">
-                        <small>Completed by
-                          {% for worker in task.workers %}
-                              {% if loop.index==(task.workers|length) %}
-                                <a href='user={{ worker.email }}' class='user-name'>
-                                  {{ worker.name }}
-                                </a>
-                              {% elif (task.workers|length)==2 %}
-                                <a href='user={{ worker.email }}' class='user-name'>
-                                  {{ worker.name }}
-                                </a>
-                                and
-                              {% else %}
-                                <a href='user={{ worker.email }}' class='user-name'>
-                                  {{ worker.name }}
-                                </a>
-                              {% endif %}
-                          {% endfor %}
-                        on {{ time_to_str(task.complete_stamp) }}</small>
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
               </div>
 
               <div class="col">
