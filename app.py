@@ -284,10 +284,12 @@ def user(email):
     user = User.query.filter_by(email=email).first_or_404()
     # worked tasks
     tasks = user.tasks_worked
-    if len(tasks)!=0:
+    task_data = (len(tasks)>0)
+    if task_data:
         _, end_activity, earliest = tasks_to_daily_activity(tasks)
-    return render_template('user.html', user=user, end_activity=end_activity,
-                            earliest=earliest)
+        task_data['end_activity'] = end_activity
+        task_data['earliest'] = earliest
+    return render_template('user.html', user=user, task_data=task_data)
 
 
 @login_required
