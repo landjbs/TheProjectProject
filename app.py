@@ -490,6 +490,8 @@ def change_project_status(project_id, user_id, action):
         if user in project.members:
             flash('Cannot accept user already in project.')
             error_flag = True
+        else:
+            project.members.append(user)
     elif action=='reject':
         # remove user from project
         if user in project.members:
