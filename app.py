@@ -363,11 +363,13 @@ def subject(subject_name):
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
     # project tabs
     subject_projects = Project.query.filter(Project.subjects.contains(subject)).limit(300)
-    subject_tabs = partition_query(subject_projects)
+    project_tabs = partition_query(subject_projects)
     # users
     user_tabs = []
     subject_tabs = []
-    return redirect(request.referrer)
+    return render_template('search.html', project_tabs=project_tabs,
+                        user_tabs=user_tabs, subject_tabs=subject_tabs,
+                        search_text=search_text)
 
 
 @login_required
