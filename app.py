@@ -374,6 +374,9 @@ def join_project(project_id):
                 current_user.projects.append(project)
                 flash(f'You have been added to {project.name}!')
             else:
+                application = Project_Application(project=project,
+                                                user=current_user,
+                                                text=form.response.text)
                 project.pending_members.append(current_user)
                 flash(f'Your application to {project.name} been submitted.')
             db.session.add(project)
