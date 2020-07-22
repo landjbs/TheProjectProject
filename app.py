@@ -493,9 +493,13 @@ def change_project_status(project_id, user_id, action):
         # remove user from project
         if user in project.members:
             project.members.remove(user)
-        elif
+        # remove user from pending
         else:
-            flash('Cannot reject user not affiliated with project.')
+            application = project.pending_members.get(user=user)
+            if application is not None:
+                project.pending_members.remove(application)
+            else:
+                flash('Cannot reject user not affiliated with project.')
     else:
         flash('Invalid action.')
     return redirect(request.referrer)
