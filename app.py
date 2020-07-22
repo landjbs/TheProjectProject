@@ -299,7 +299,6 @@ def user(email):
                 # if not (role.name in ['Creator', 'Pending']):
                 roles.append(role)
         role_data = Counter(roles)
-    print(role_data)
     return render_template('user.html', user=user, task_data=task_data,
                            role_data=role_data)
 
@@ -312,8 +311,8 @@ def project(project_name):
     task_form = Task_Form(request.form)
     ## task data visualization ##
     # vis activity
-    vis_activity = True if project.tasks.count()>0 else False
-    if vis_activity:
+    activity_data = {} if project.tasks.count()>0 else None
+    if activity_data is not None:
         start_activity, end_activity, earliest = tasks_to_daily_activity(project.tasks)
     # compile counts of tasks completed by each worker
     completers = []
