@@ -91,23 +91,25 @@
                   <ul class="collapse in list-unstyled" id="memberSubmenu">
                     {% for member in project.members %}
                       <li>
-                        <p>
+                        <div class='row'>
                           <a class='member-hovers' href="user={{ member.email }}" style='padding-bottom:5px; display: inline;'>
                             {{ member.name }}
                           </a>
                           {% if is_owner and member!=project.owner %}
-                            <a class='delete-btn task-btn member-hovers'
-                            style='display: inline;'
-                            href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
-                            <a class='task-btn member-hovers'
-                            style='display: inline; color: gold;'
-                            href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
-                              <i class='fas fa-crown'></i>
-                            </a>
+                            <div class='col float-right' style='display: inline;'>
+                              <a class='delete-btn task-btn member-hovers'
+                              style='display: inline;'
+                              href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                              <a class='task-btn member-hovers'
+                              style='display: inline; color: gold;'
+                              href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
+                                <i class='fas fa-crown'></i>
+                              </a>
+                            </div>
                           {% endif %}
-                        </p>
+                        </div>
                       </li>
                     {% endfor %}
                   </ul>
