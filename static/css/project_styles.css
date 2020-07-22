@@ -288,3 +288,8 @@ button {
   border: 1px solid white;
   border-radius: 0% !important;
 }
+
+.member-hovers:hover {
+  color: #FF5D00 !important;
+  background: transparent !important;
+}

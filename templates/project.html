@@ -18,6 +18,7 @@
 {% block content %}
     <!-- GLOBALS -->
     {% set is_member = is_project_member(current_user, project) %}
+    {% set is_owner = (project.owner==current_user)) %}
     <!-- PAGE -->
     <div class="wrapper">
         <!-- Sidebar Holder -->
@@ -27,7 +28,7 @@
                   <i class="fa fa-star"></i>
                   {{ project.stars.all()|length }}
                   <!-- edit button -->
-                  {% if project.owner.id == current_user.id %}
+                  {% if is_owner %}
                   <br>
                   <a href='/'>
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -91,14 +92,16 @@
                     {% for member in project.members %}
                       <li>
                         <p>
-                          <a href="user={{ member.email }}" style='padding-bottom:5px; display: inline;'>
+                          <a class='member-hovers' href="user={{ member.email }}" style='padding-bottom:5px; display: inline;'>
                             {{ member.name }}
                           </a>
-                          <a class='delete-btn task-btn'
-                          style='background: transparent;  display: inline;'
-                          href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
-                            <i class="fa fa-times-circle" aria-hidden="true"></i>
-                          </a>
+                          {% if is_owner %}
+                            <a class='delete-btn task-btn member-hovers'
+                            style='display: inline;'
+                            href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
+                              <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </a>
+                          {% endif %}
                         </p>
                       </li>
                     {% endfor %}
@@ -139,7 +142,7 @@
                   {% endfor %}
                 </ul>
               </li>
-              {% if project.owner == current_user %}
+              {% if is_owner %}
                 <li>
                   <a href="#pendingSubmenu" data-toggle="collapse" aria-expanded="false">
                     Pending Members
