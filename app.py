@@ -496,8 +496,15 @@ def change_project_status(project_id, action):
 @application.route('/search', methods=['POST'])
 def search():
     search_text = request.form.get('search')
-    
-    return render_template('results.html', search_text=search_text)
+    # project results
+    project_results = Project.query.filter(Project.name.contains(search_text) |
+                                   Project.oneliner.contains(search_text))
+    # user results
+    user_results = User.query.filter(User.name.contains(search_text) |
+                                     User.about.contains(search_text))
+    # subject results
+    subject_results = Subject.query.filter(Subject.name.contains(search_text))
+    return redirect(request.referrer)
 
 
 @application.route('/logout')
