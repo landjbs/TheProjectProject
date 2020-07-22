@@ -138,7 +138,7 @@
                     Pending Members
                     &nbsp;
                     <i class="fa fa-bell" aria-hidden="true"></i>
-                    {{ project.pending_members|length }}
+                    {{ project.pending_members.all()|length }}
                   </a>
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
                       {% for application in project.pending_members %}

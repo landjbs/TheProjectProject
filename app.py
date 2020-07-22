@@ -493,9 +493,9 @@ def change_project_status(project_id, user_id, action):
             error_flag = True
         else:
             project.members.append(user)
-            application = project.pending_members.all().filter_by(user=user).first()
+            application = project.pending_members.filter_by(user=user).first()
             if application is not None:
-                project.pending_members.remove(application)
+                db.session.delete(application)
     ## REJECT ##
     elif action=='reject':
         # remove user from project
@@ -503,9 +503,9 @@ def change_project_status(project_id, user_id, action):
             project.members.remove(user)
         # remove user from pending
         else:
-            application = project.pending_members.all().filter_by(user=user).first()
+            application = project.pending_members.filter_by(user=user).first()
             if application is not None:
-                project.pending_members.remove(application)
+                db.session.delete(application)
             else:
                 flash('Cannot reject user not affiliated with project.')
                 error_flag = True
