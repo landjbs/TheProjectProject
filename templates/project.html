@@ -18,7 +18,7 @@
 {% block content %}
     <!-- GLOBALS -->
     {% set is_member = is_project_member(current_user, project) %}
-    {% set is_owner = (project.owner==current_user)) %}
+    {% set is_owner = (project.owner==current_user) %}
     <!-- PAGE -->
     <div class="wrapper">
         <!-- Sidebar Holder -->
@@ -95,7 +95,7 @@
                           <a class='member-hovers' href="user={{ member.email }}" style='padding-bottom:5px; display: inline;'>
                             {{ member.name }}
                           </a>
-                          {% if is_owner %}
+                          {% if is_owner and member!=project.owner %}
                             <a class='delete-btn task-btn member-hovers'
                             style='display: inline;'
                             href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
