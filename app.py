@@ -291,12 +291,13 @@ def user(email):
         task_data['earliest'] = earliest
     # role data
     projects = user.projects
-    role_data = {} if (len(projects)>0) else None
-    if role_data is not None:
+    role_data = (len(projects)>0)
+    if role_data:
         roles = []
         for membership in projects:
             for role in membership:
                 roles.append(role.name)
+    role_data = Counter(roles)
     return render_template('user.html', user=user, task_data=task_data)
 
 
