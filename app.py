@@ -296,7 +296,7 @@ def user(email):
         roles = []
         for membership in projects:
             for role in membership:
-                roles.append(role)
+                roles.append(role.name)
     return render_template('user.html', user=user, task_data=task_data)
 
 
