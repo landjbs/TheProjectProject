@@ -523,6 +523,11 @@ def change_project_status(project_id, user_id, action):
         # remove user from project
         if user in project.members:
             project.members.remove(user)
+            # notify kicked member
+            notification = Notification(text=f'You have been removed from '
+                                             f'{project.name} by the owner.')
+            user.notifications.append(notification)
+            # notify team members
         # remove user from pending
         else:
             application = project.pending_members.filter_by(user=user).first()
