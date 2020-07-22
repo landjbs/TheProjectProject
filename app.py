@@ -478,7 +478,7 @@ def mark_complete(project_id, task_id, action):
             db.session.delete(task)
     db.session.commit()
     return redirect(request.referrer)
-    
+
 
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
@@ -493,7 +493,7 @@ def change_project_status(project_id, user_id, action):
             error_flag = True
         else:
             project.members.append(user)
-            application = project.pending_members.get(user=user)
+            application = project.pending_members.all().filter_by(user=user).first()
             if application is not None:
                 project.pending_members.remove(application)
     ## REJECT ##
@@ -503,7 +503,7 @@ def change_project_status(project_id, user_id, action):
             project.members.remove(user)
         # remove user from pending
         else:
-            application = project.pending_members.get(user=user)
+            application = project.pending_members.all().filter_by(user=user).first()
             if application is not None:
                 project.pending_members.remove(application)
             else:

@@ -140,7 +140,7 @@ class Project(db.Model):
     members = relationship('User', secondary='user_to_project',
                            back_populates='projects', lazy='dynamic')
     pending_members = relationship('Project_Application',
-                                   back_populates='project')
+                                   back_populates='project', lazy='dynamic')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)

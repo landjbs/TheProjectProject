@@ -143,8 +143,8 @@
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
                       {% for application in project.pending_members %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-                          <a href='user={{ application.user.email }}' class="mb-1"
-                          style='background: transparent; color: white; margin:0px; padding:0px;'>
+                          <a href='user={{ application.user.email }}' class="mb-1 user-name"
+                          style='background: transparent; color: white; padding:0px;'>
                             {{ application.user.name }}
                           </a>
                           <p class="mb-1">Question: {{ project.application_question }}<br>

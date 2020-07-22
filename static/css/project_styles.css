@@ -285,4 +285,6 @@ button {
 
 .pending-item {
   background: #FF5D00 !important;
+  border: 1px solid white;
+  border-radius: 0% !important;
 }
