@@ -26,14 +26,16 @@ user_to_project = Table('user_to_project', db.Model.metadata,
                         Column('user_id', Integer, ForeignKey('user.id')),
                         Column('project_id', Integer, ForeignKey('project.id')))
 
-pending_to_project = Table('user_to_project', db.Model.metadata,
-                        Column('user_id', Integer, ForeignKey('user.id')),
-                        Column('project_id', Integer, ForeignKey('project.id')),
-                        Column('application', String(250), nullable=True))
-
 user_to_task = Table('user_to_task', db.Model.metadata,
                     Column('user_id', Integer, ForeignKey('user.id')),
                     Column('task_id', Integer, ForeignKey('task.id')))
+
+
+class Project_Application(db.Model):
+    __tablename__ = 'project_application'
+    user = Column('user_id', Integer, ForeignKey('user.id')),
+    project = Column('project_id', Integer, ForeignKey('project.id')),
+    text = Column('text', String(250), nullable=True))
 
 
 # class Member_Role(db.Model):
