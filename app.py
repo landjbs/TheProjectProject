@@ -11,8 +11,7 @@ from collections import Counter
 from operator import itemgetter
 
 from application import db
-from application.models import (User, Project, Comment, Task, Member_Role,
-                                Subject)
+from application.models import (User, Project, Comment, Task, Subject)
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
                                 Task_Form, Project_Application)
 import manager as manager
@@ -339,16 +338,17 @@ def project(project_name):
             completers.append(worker)
     # select top 5 to plot
     task_data = Counter(completers)
-    ## role data visualization ##
-    roles, filled = [], []
-    for member_role in project.members:
-        for role in member_role.roles:
-            if not (role.name=='Creator'):
-                roles.append(role)
-                if not member_role.user is None:
-                    filled.append(role)
-    role_data = Counter(roles)
-    filled_data = Counter(filled)
+    ## subject visualization ##
+    # roles, filled = [], []
+    # for member_role in project.members:
+    #     for role in member_role.roles:
+    #         if not (role.name=='Creator'):
+    #             roles.append(role)
+    #             if not member_role.user is None:
+    #                 filled.append(role)
+    # role_data = Counter(roles)
+    # filled_data = Counter(filled)
+    role_data = {}
     return render_template('project.html', project=project,
                             now=datetime.utcnow, comment_form=comment_form,
                             task_form=task_form,
