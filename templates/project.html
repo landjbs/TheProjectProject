@@ -132,7 +132,7 @@
                   {% endfor %}
                 </ul>
               </li>
-              {% if project.owner != current_user %}
+              {% if project.owner == current_user %}
                 <li>
                   <a href="#pendingSubmenu" data-toggle="collapse" aria-expanded="false">
                     Pending Members
@@ -141,24 +141,21 @@
                     {{ project.pending_members|length }}
                   </a>
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
-                    <li>
-                        {% for application in project.pending_members %}
-                          <div class="list-group-item list-group-item-action flex-column align-items-start">
-                            <div class="d-flex w-100 justify-content-between">
-                              <a href='user={{ application.user.email }}' class="mb-1">
-                                <u>{{ application.user.name }}</u>
-                              </a>
-                            </div>
-                            <p class="mb-1">{{ application.text }}
-                              <a class='delete-btn task-btn float-right'
-                              href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept')}} ">
-                                <i class="fa fa-times-circle" aria-hidden="true"></i>
-                              </a>
-                            </p>
+                      {% for application in project.pending_members %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start">
+                          <div class="d-flex w-100 justify-content-between">
+                            <a href='user={{ application.user.email }}' class="mb-1">
+                              <u>{{ application.user.name }}</u>
+                            </a>
                           </div>
-                        {% endfor %}
-                      </div>
-                    </li>
+                          <p class="mb-1">{{ application.text }}
+                            <a class='delete-btn task-btn float-right'
+                            href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept')}} ">
+                              <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </a>
+                          </p>
+                        </div>
+                      {% endfor %}
                   </ul>
                 </li>
               {% endif %}
