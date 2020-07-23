@@ -53,6 +53,15 @@ def remove_user_from_project(user, project):
     return True
 
 
+def delete_project(project):
+    for member in project.members:
+        for subect in project.subjects:
+            remove_subject_from_user(member, subject)
+    db.session.delete(project)
+    db.session.commit()
+    return True
+
+
 def create_project(project, user):
     # add project subjects to user
     for subject in project.subjects:
