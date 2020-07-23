@@ -403,7 +403,8 @@ def project(project_name):
             for user_subject in member.subjects:
                 name = user_subject.subject.name
                 if name in project_subjects:
-                    project_subjects[name] += user_subject.number
+                    # -1 to account for skills gained via project association
+                    project_subjects[name] += (user_subject.number-1)
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             task_form=task_form,
