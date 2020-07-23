@@ -201,9 +201,9 @@ def accept():
                             f'{user.name}! We are excited to have you.'))
     n2 = Notification(text=('You can browse and join projects below or '
                             'create and manage your own project with the '
-                            '"add project" tab.'))
-    n3 = Notification(text=('We recommend you start by adding projects you '
-                            'have already worked on to showcase your experience.'))
+                            '"add project" tab. We recommend you start by '
+                            'adding projects you have already worked on to '
+                            'showcase your experience.'))
     for n in [n1, n2, n3]:
         user.notifications.append(n)
     setattr(user, 'accepted', True)
@@ -478,6 +478,8 @@ def leave_project(project_id):
     project.members.remove(current_user)
     notification = Notification(text=f'{current_user.name} has left '
                                      f'{project.name}.')
+    for member in project.members:
+        member.notifications.append(notification)
     db.session.commit()
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
