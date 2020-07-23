@@ -261,7 +261,7 @@
                         </div>
                       {% endfor %}
                     </div>
-                    {% if is_member %}
+                    {% if is_member and not project.complete %}
                       <form class='post_form' id='task_form' method='post'
                         action="{{url_for('add_task', project_id=project.id)}}">
                         {{ task_form.hidden_tag() }}
