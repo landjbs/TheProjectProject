@@ -381,8 +381,9 @@ def project(project_name):
         activity_data['end_activity'] = end_activity
         activity_data['earliest'] = earliest
     # compile counts of tasks completed by each worker
-    completers = []
+    authors, completers = [], []
     for task in project.tasks.filter_by(complete=True):
+        authors.append(task.author)
         for worker in task.workers:
             completers.append(worker)
     # select top 5 to plot
