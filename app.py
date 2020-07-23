@@ -303,29 +303,29 @@ def add_project():
                     db.session.rollback()
                     return render_template('add_project.html', form=form)
                 # successful message
-                flash('Congratulations—your project has been added!')
+                flash(f'Congratulations—your project, {form.name.data} '
+                       'has been added!')
                 task_message = True
                 if form.complete.data==True:
-                    flash(f'As a completed project, {project.name} will be '
+                    flash(f'As a completed project, {form.name.data} will be '
                         'visible, but not joinable or editable.')
                     task_message = False
                 elif form.open.data==False:
-                    flash(f'As a closed project, {project.name} will be '
+                    flash(f'As a closed project, {form.name.data} will be '
                           'visible and editable, but not joinable.')
                 elif form.requires_application.data==False:
                      flash(f'As an open project with no application, '
-                           f'{project.name} will be available for others to '
+                           f'{form.name.data} will be available for others to '
                            'join at any time.')
                 elif form.requires_application.data==True:
                     flash(f'As an open project with an application, '
-                          f'{project.name}, you will have to accept ')
+                          f'{form.name.data} can be joined by users you accept. '
+                          'Check back soon to manage applicants!')
                 if task_message:
                     flash('Try adding some tasks to show what needs to'
                           'be done on your project.')
                 flash('Post some comments to tell people what your project '
                       'is all about!')
-                flash('You can change the settings at any time by clicking the '
-                      '"edit" button.')
                 return redirect(f'/project={form.name.data}')
     return render_template('add_project.html', form=form)
 
