@@ -8,15 +8,13 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-4'>
-  <h3>Results for "{{ search_text }}"<h3>
-  <hr class="my-4">
-  <h4 style='text-align:left;'>Projects</h4>
+<div class='container my-4' style='min-width: 90%'>
+  <h4 style='text-align:left;'>Recommended Projects</h4>
   <hr class="my-4">
   <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
     <!--Slides-->
     <div class="carousel-inner" role="listbox">
-      {% for tab in project_tabs %}
+      {% for tab in recommended_tabs %}
         {% if loop.index==1 %}
         <div class="carousel-item active">
         {% else %}
@@ -53,7 +51,8 @@
                     <div class='card-foot float-left'>
                       <p style="padding-bottom:0px; margin-bottom:0px;">
                         <i class="fa fa-clock-o"></i>
-                        {{ project.estimated_time }} days left
+                        {{ calc_days_since(now(), project.posted_on) }} / {{ project.estimated_time }}
+                        days
                       </p>
                       <div>
                         <i class="fa fa-flask" aria-hidden="true"></i>
@@ -111,72 +110,96 @@
     </div>
     <!--/.Controls-->
   </div>
-  </div>
 
-<div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-<div class='container my-4'>
-  <h4 style='text-align:left;'>Users</h4>
-  <hr class="my-4">
-  <div class="carousel-inner" role="listbox">
-    {% for tab in user_tabs %}
-      {% if loop.index==1 %}
-      <div class="carousel-item active">
-      {% else %}
-      <div class="carousel-item">
-      {% endif %}
-        <div class='row'>
-          {% for user in tab %}
-            <div class="col-md-4">
-              <div class="card mb-2">
-                <div class="card-body">
-                  <div class='card-head little'>
-                    <a class='project-name' href='user={{ user.email }}'>
-                      <h5>{{ user.name }}</h5>
-                    </a>
-                    <a href='mailto:{{ user.email }}'>
-                      <p>{{ user.email }}</p>
-                    </a>
+  <div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+    <h4 style='text-align:left;'>Trending Projects</h4>
+    <hr class="my-4">
+    <div class="carousel-inner" role="listbox">
+      {% for tab in top_tabs %}
+        {% if loop.index==1 %}
+        <div class="carousel-item active">
+        {% else %}
+        <div class="carousel-item">
+        {% endif %}
+          <div class='row'>
+            {% for project in tab %}
+              <div class="col-md-4">
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <p class="float-right">
+                      <i class='far fa-user-circle'></i>
+                      {{ project.members.all()|length  }}
+                      <br>
+                      <i class="fa fa-star"></i>
+                      {{ project.stars.all()|length }}
+                    </p>
+                    <div class='card-head little'>
+                      <a class='project-name' href='project={{ project.name }}'>
+                        <h5>{{ project.name }}</h5>
+                      </a>
+                      <a href='user={{ project.owner.email }}'>
+                        <p>{{ project.owner.name }}</p>
+                      </a>
+                    </div>
+                    <p class='oneliner'>
+                      {{ project.oneliner }}
+                    </p>
                   </div>
-                  <p class='oneliner'>
-                    {{ user.about }}
-                  </p>
                 </div>
               </div>
-            </div>
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
-</div>
+  <!--Controls-->
+  <div class="controls-top">
+    <a class="btn-floating" href="#trending-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+    <a class="btn-floating" href="#trending-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+  </div>
+  <!--/.Controls-->
 
-<div class='container my-4'>
-  <h4 style='text-align:left;'>Subjects</h4>
+  <h4 style='text-align:left;'>My Projects</h4>
   <hr class="my-4">
+  {% if user_project_count>0 %}
     <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
-        {% for tab in subject_tabs %}
+        {% for tab in user_tabs %}
           {% if loop.index==1 %}
           <div class="carousel-item active">
           {% else %}
           <div class="carousel-item">
           {% endif %}
             <div class='row'>
-              {% for subject in tab %}
+              {% for project in tab %}
                 <div class="col-md-4">
                   <div class="card mb-2">
-                    <div class="card-body"
-                    style='background: {{ subject.color }};'>
-                      <p class="float-right">
-                        <i class='far fa-user-circle'></i>
-                        {{ subject.projects.all()|length  }}
-                      </p>
+                    <div class="card-body">
+                      <div class='float-right'>
+                        {% if current_user==project.owner %}
+                          {% set pending = project.pending_members.all()|length %}
+                          {% if pending>0 %}
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                          {% else %}
+                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                          {% endif %}
+                          {{ pending }}
+                          <br>
+                        {% endif %}
+                        <i class="fa fa-star"></i>
+                        {{ project.stars.all()|length }}
+                      </div>
                       <div class='card-head tiny'>
-                        <a class='project-name' href='subject={{ subject.code }}'>
-                          <h5>{{ subject.name }}</h5>
+                        <a class='project-name' href='project={{ project.name }}'>
+                          <h5>{{ project.name }}</h5>
                         </a>
                       </div>
+                      <!-- summary -->
+                      <p class='oneliner'>
+                        {{ project.oneliner }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -186,15 +209,23 @@
         {% endfor %}
       </div>
     </div>
+  {% else %}
+  <div style='text-align:center;'>
+    <a type="button" href="/add_project">
+      <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+    </a>
+  </div>
+  {% endif %}
 </div>
-
-
-
+<!--Controls-->
+<div class="controls-top">
+  <a class="btn-floating" href="#my-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+  <a class="btn-floating" href="#my-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
 </div>
-</div>
+<!--/.Controls-->
 
 <div>
-  {% for tab in project_tabs %}
+  {% for tab in recommended_tabs %}
     {% for project in tab %}
       {% if not is_project_member(current_user, project) %}
         <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
@@ -202,23 +233,25 @@
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
+                <a href='project={{ project.name }}' style='color:black;'>
+                  <h5>{{ project.name }}</h5>
+                </a>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-              <div class="modal-body">
-                {% if project.requires_application %}
-                  <p>{{ project.application_question }}</p>
-                  {{ project_application.hidden_tag() }}
-                  {{ project_application.response(placeholder='Response') }}
-                {% else %}
-                  <p>Welcome to {{ project.name }}!</p>
-                {% endif %}
-                <a class='btn' href="{{ url_for('join_project', project_id=project.id) }}">
-                  Join
-                </a>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
+              <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
+                <div class="modal-body">
+                  {% if project.requires_application %}
+                    "{{ project.application_question }}"</p>
+                      {{ project_application.hidden_tag() }}
+                      {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
+                  {% else %}
+                    <p>Welcome to {{ project.name }}! Click to join.</p>
+                  {% endif %}
+                </div>
+                <div class="modal-footer">
+                  <button class='btn'>Join</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -228,14 +261,38 @@
             <!-- Modal content-->
             <div class="modal-content">
               <div class="modal-header">
+                <a href='project={{ project.name }}' style='color:black;'>
+                  <h5>{{ project.name }}</h5>
+                </a>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
               </div>
-              <div class="modal-body">
-                <p>Are you sure you want to leave {{ project.name }}?</p>
-                <a class='btn' href="{{ url_for('leave_project', project_id=project.id, new_owner_id=1) }}">
-                  Leave
-                </a>
-              </div>
+              <form action="{{ url_for('leave_project', project_id=project.id) }}" method='post'>
+                  <div class="modal-body">
+                    {% if project.owner==current_user %}
+                      {% if project.members.all()|length>1 %}
+                        <label for="new_owner">Select new project owner:</label>
+                        <br>
+                        <select name="new_owner" id="new_owner" style='border:0px; border-bottom:1px solid black; width:100%;'>
+                          {% for member in project.members %}
+                            {% if not member==project.owner %}
+                              <option value="{{ member.id }}">{{ member.name }}</option>
+                            {% endif %}
+                          {% endfor %}
+                        </select>
+                      {% else %}
+                        <p>
+                          If you leave {{ project.name }}, there will be no members left and the
+                          project will be deleted. Are you sure you want to leave?
+                        </p>
+                      {% endif %}
+                    {% else %}
+                      <p>Are you sure you want to leave {{ project.name }}?</p>
+                    {% endif %}
+                  </div>
+                  <div class="modal-footer">
+                    <button class='btn'>Leave</button>
+                  </div>
+                </form>
             </div>
           </div>
         </div>
@@ -247,16 +304,32 @@
 
 
 <script>
+// log tabs
 $('#rec-carousel').on('slid.bs.carousel', function () {
-var currentSlide = $('#rec-carousel div.active').index();
-sessionStorage.setItem('lastSlide', currentSlide);
-});
-if(sessionStorage.lastSlide){
-  $("#rec-carousel").carousel((sessionStorage.lastSlide+1)*1);
-}
+  sessionStorage.setItem('recSlide', $('#rec-carousel div.active').index());
+  });
 
-// $('#rec-carousel').bind('mousewheel', function() {
-//     $(this).carousel('next');
-// });
+$('#trending-carousel').on('slid.bs.carousel', function () {
+  sessionStorage.setItem('trendingSlide', $('#trending-carousel div.active').index());
+  });
+
+$('#my-carousel').on('slid.bs.carousel', function () {
+  sessionStorage.setItem('mySlide', $('#my-carousel div.active').index());
+  });
+
+// rescroll carousels
+if(sessionStorage.recSlide){
+    $("#rec-carousel").carousel(sessionStorage.recSlide*1);
+  }
+
+if(sessionStorage.trendingSlide){
+    $("#trending-carousel").carousel(sessionStorage.trendingSlide*1);
+  }
+
+if(sessionStorage.mySlide){
+    $("#my-carousel").carousel(sessionStorage.mySlide*1);
+  }
 </script>
+
+
 {% endblock %}

@@ -421,7 +421,7 @@ def subject(subject_name):
     subject_projects = Project.query.filter(Project.subjects.contains(subject)).limit(30)
     project_tabs = partition_query(subject_projects)
     # users
-    subject_users = subject.users.limit(30)
+    subject_users = [s.user for s in subject.users[:30]]
     user_tabs = partition_query(subject_users)
     #
     subject_tabs = []
