@@ -476,6 +476,8 @@ def leave_project(project_id):
         flash(f'{project.name} deleted.')
         return redirect(request.referrer)
     project.members.remove(current_user)
+    notification = Notification(text=f'{current_user.name} has left '
+                                     f'{project.name}.')
     db.session.commit()
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
