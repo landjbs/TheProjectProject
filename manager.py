@@ -43,8 +43,12 @@ def add_user_to_project(user, project):
 
 
 def remove_user_from_project(user, project):
+    # remove project subjects from user
     for subject in project.subjects:
         remove_subject_from_user(user, subject)
+    # remove project from user projects
+    user.projects.remove(project)
+    return True
 
 
 
