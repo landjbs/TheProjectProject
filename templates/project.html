@@ -261,13 +261,19 @@
                           {% if is_member %}
                             <div class='action-bar'>
                               {% if current_user==task.author %}
-                                <a class='delete-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
-                                  <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </a>
+                                <div class='hoverable'>
+                                  <a class='delete-btn task-btn float-left' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='delete') }}">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                  </a>
+                                  <span class='tooltiptext'>Delete Task</span>
+                                </div>
                               {% endif %}
-                              <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                              </a>
+                              <div class='hoverable'>
+                                <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </a>
+                                <span class='tooltiptext'>Mark Complete</span>
+                              </div>
                             </div>
                           {% endif %}
                         </div>
