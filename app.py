@@ -195,6 +195,8 @@ def admin():
 @application.route('/accept', methods=['POST'])
 def accept():
     user = query_user_by_id(request.form['accept'])
+    notification = Notification(text=('Welcome to TheProjectProject, a '
+                                      'community of college innovators.'))
     setattr(user, 'accepted', True)
     db.session.commit()
     return admin()
