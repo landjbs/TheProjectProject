@@ -483,8 +483,7 @@ def leave_project(project_id):
                 flash('Owner transfer unsuccessful.')
                 return redirect(request.referrer)
         else:
-            db.session.delete(project)
-            db.session.commit()
+            manager.delete_project(project)
             flash(f'{project.name} deleted.')
             return redirect(request.referrer)
     project.members.remove(current_user)

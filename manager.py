@@ -33,6 +33,7 @@ def remove_subject_from_user(user, subject):
         return False
     return True
 
+
 ## USER TO PROJECTS ##
 def add_user_to_project(user, project):
     user.projects.append(project)
@@ -48,8 +49,8 @@ def remove_user_from_project(user, project):
         remove_subject_from_user(user, subject)
     # remove project from user projects
     user.projects.remove(project)
+    db.session.commit()
     return True
-
 
 
 def create_project(project, user):
