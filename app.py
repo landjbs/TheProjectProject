@@ -418,10 +418,12 @@ def project(project_name):
 def subject(subject_name):
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
     # project tabs
-    subject_projects = Project.query.filter(Project.subjects.contains(subject)).limit(300)
+    subject_projects = Project.query.filter(Project.subjects.contains(subject)).limit(30)
     project_tabs = partition_query(subject_projects)
     # users
-    user_tabs = []
+    subject_users = subject.users.limit(30)
+    user_tabs = partition_query(subject_users)
+    #
     subject_tabs = []
     return render_template('search.html', project_tabs=project_tabs,
                         user_tabs=user_tabs, subject_tabs=subject_tabs,
