@@ -29,7 +29,7 @@ user_to_project = Table('user_to_project', db.Model.metadata,
                         Column('project_id', Integer, ForeignKey('project.id')))
 
 
-user_to_project = Table('user_to_project_2', db.Model.metadata,
+user_to_project_2 = Table('user_to_project_2', db.Model.metadata,
                         Column('user_id', Integer, ForeignKey('user.id')),
                         Column('project_id', Integer, ForeignKey('project.id')))
 

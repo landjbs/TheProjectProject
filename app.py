@@ -419,7 +419,7 @@ def leave_project(project_id, new_owner_id):
         return redirect(request.referrer)
     if (current_user == project.owner):
         flash(f'You have transferred ownership of {project.owner} to .')
-    project.users.delete(current_user)
+    project.members.delete(current_user)
     db.session.commit()
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
@@ -429,7 +429,6 @@ def leave_project(project_id, new_owner_id):
 @application.route('/like/<int:project_id>/<action>')
 def like_action(project_id, action):
     project = Project.query.get_or_404(project_id)
-    print(is_project_member(current_user, project))
     db.session.commit()
     if action == 'like':
         current_user.star_project(project)
@@ -437,7 +436,6 @@ def like_action(project_id, action):
     if action == 'unlike':
         current_user.unstar_project(project)
         db.session.commit()
-    print(is_project_member(current_user, project))
     return redirect(request.referrer)
 
 
