@@ -204,7 +204,7 @@ def accept():
                             '"add project" tab. We recommend you start by '
                             'adding projects you have already worked on to '
                             'showcase your experience.'))
-    for n in [n1, n2, n3]:
+    for n in [n1, n2]:
         user.notifications.append(n)
     setattr(user, 'accepted', True)
     db.session.commit()
@@ -465,16 +465,17 @@ def leave_project(project_id):
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
     # transfer ownership
-    if (current_user==project.owner) and (project.members.count()>1):
-        new_owner = User.query.get_or_404(request.form.get('new_owner'))
-        success = transfer_ownership(project, new_owner)
-        if not success:
-            flash('Owner transfer unsuccessful.')
+    if (current_user==project.owner):
+        if (project.members.count()>1):
+            new_owner = User.query.get_or_404(request.form.get('new_owner'))
+            success = transfer_ownership(project, new_owner)
+            if not success:
+                flash('Owner transfer unsuccessful.')
+                return redirect(request.referrer)
+        else:
+            db.session.delete(project)
+            flash(f'{project.name} deleted.')
             return redirect(request.referrer)
-    else:
-        db.session.delete(project)
-        flash(f'{project.name} deleted.')
-        return redirect(request.referrer)
     project.members.remove(current_user)
     notification = Notification(text=f'{current_user.name} has left '
                                      f'{project.name}.')
