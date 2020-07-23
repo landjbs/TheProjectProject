@@ -28,6 +28,12 @@ user_to_project = Table('user_to_project', db.Model.metadata,
                         Column('user_id', Integer, ForeignKey('user.id')),
                         Column('project_id', Integer, ForeignKey('project.id')))
 
+
+user_to_project_2 = Table('user_to_project_2', db.Model.metadata,
+                        Column('user_id', Integer, ForeignKey('user.id')),
+                        Column('project_id', Integer, ForeignKey('project.id')))
+
+
 user_to_task = Table('user_to_task', db.Model.metadata,
                     Column('user_id', Integer, ForeignKey('user.id')),
                     Column('task_id', Integer, ForeignKey('task.id')))
@@ -42,7 +48,7 @@ class Project_Membership(db.Model):
     __tablename__ = 'project_membership'
     # user
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    users = relationship('User', back_populates='projects')
+    members = relationship('User', back_populates='projects')
     # project
     project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
     projects = relationship('Project', back_populates='members')
@@ -95,8 +101,9 @@ class User(db.Model, UserMixin):
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project_Membership',
                             back_populates='members', lazy='dynamic')
-    pending_projects = relationship('Project_Application',
-                                    back_populates='user')
+    pending_projects = relationship('Project', secondary='user_to_project_2',
+                                    back_populates='members')
+    comments = relationship('Comment', back_populate
     # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
@@ -177,7 +184,7 @@ class Project(db.Model):
     # members = relationship('User', secondary='user_to_project',
                            # back_populates='projects', lazy='dynamic')
     members = relationship('Project_Membership',
-                            back_populates='projectd', lazy='dynamic')
+                            back_populates='projects', lazy='dynamic')
     pending_members = relationship('Project_Application',
                                    back_populates='project', lazy='dynamic')
     ## join process ##
