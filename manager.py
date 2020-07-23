@@ -25,7 +25,9 @@ def add_subject_to_user(user, subject):
 def remove_subject_from_user(user, subject):
     prev = user.subjects.filter_by(subject=subject).first()
     if prev:
-        prev.number += 1
+        new_number = (prev.number - 1)
+        if (new_number < 1):
+            user.subjects.remove(subject)
     else:
         return False
 
