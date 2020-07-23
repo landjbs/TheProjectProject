@@ -195,8 +195,15 @@ def admin():
 @application.route('/accept', methods=['POST'])
 def accept():
     user = query_user_by_id(request.form['accept'])
-    notification = Notification(text=('Welcome to TheProjectProject, a '
-                                      'community of college innovators.'))
+    n1 = Notification(text=('Welcome to TheProjectProject, a community of '
+                            'innovators who complete projects together.'))
+    n2 = Notification(text=('You can browse and join projects below or '
+                            'create and manage your own project with the'
+                            '"add project" tab.'))
+    n3 = Notification(text=('We recommend you start by adding projects you '
+                            'have already worked on to showcase your experience.'))
+    for n in [n1, n2, n3]:
+        user.notifications.append(n)
     setattr(user, 'accepted', True)
     db.session.commit()
     return admin()
