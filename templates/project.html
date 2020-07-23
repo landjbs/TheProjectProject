@@ -506,13 +506,13 @@
       var myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
-            labels: [{% for k in role_data.keys() %}
-                      '{{ k.name }}',
+            labels: [{% for subject in project_subjects.keys() %}
+                      '{{ subject }}',
                     {% endfor %}],
             datasets: [{
               label: 'Filled Roles',
-              data: [{% for v in filled_data.values() %}
-                        '{{ v }}',
+              data: [{% for skill in project_subjects.values() %}
+                        '{{ skill }}',
                       {% endfor %}],
               fill: true,
               backgroundColor: ['rgba(93, 0, 255,0.5)'],
@@ -521,19 +521,6 @@
               pointBackgroundColor: ['#5D00FF'],
               pointHoverBackgroundColor: ['#5D00FF'],
               pointHoverBorderColor: ['#5D00FF']
-            },
-            {
-                label: 'All Roles',
-                data: [{% for v in role_data.values() %}
-                          '{{ v }}',
-                        {% endfor %}],
-                fill: true,
-                backgroundColor: ['rgba(255, 220, 0, 0.5)'],
-                borderColor: ['#FFDC00'],
-                pointBorderColor: ['#FFDC00'],
-                pointBackgroundColor: ['#FFDC00'],
-                pointHoverBackgroundColor: ['#FFDC00'],
-                pointHoverBorderColor: ['#FFDC00']
             }
           ]
         },
