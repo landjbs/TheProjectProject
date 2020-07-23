@@ -38,6 +38,18 @@ user_to_notification = Table('user_to_notification', db.Model.metadata,
             Column('notification_id', Integer, ForeignKey('notification.id')))
 
 
+class User_Subjects(db.Model):
+    __tablename__ = 'user_subjects'
+    # user
+    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user = relationship('User', back_populates='users')
+    # subjects
+    subject_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
+    subject = relationship('Subject', back_populates='subjects')
+    # count
+    count = Column(Integer, nullable=False, default=0)
+
+
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
