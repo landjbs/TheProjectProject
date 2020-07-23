@@ -96,6 +96,8 @@ class User(db.Model, UserMixin):
     notifications = relationship('Notification', secondary=user_to_notification,
                                 back_populates='users', lazy='dynamic',
                                 order_by='desc(Notification.timestamp)')
+    # subjects
+    subjects = relationship('User_Subjects', back_populates='user')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
