@@ -24,6 +24,8 @@ def add_subject_to_user(user, subject):
 
 def add_user_to_project(project, user, role):
     user.projects.append(project)
+    for subject in project.subjects:
+        add_subject_to_user(user, subject)
     db.session.add(project)
     db.session.commit()
 
