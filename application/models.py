@@ -29,7 +29,7 @@ user_to_project = Table('user_to_project', db.Model.metadata,
                         Column('project_id', Integer, ForeignKey('project.id')))
 
 
-user_to_project_2 = Table('user_to_project_2', db.Model.metadata,
+user_to_project = Table('user_to_project_2', db.Model.metadata,
                         Column('user_id', Integer, ForeignKey('user.id')),
                         Column('project_id', Integer, ForeignKey('project.id')))
 
@@ -101,9 +101,10 @@ class User(db.Model, UserMixin):
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project_Membership',
                             back_populates='members', lazy='dynamic')
-    pending_projects = relationship('Project', secondary='user_to_project_2',
-                                    back_populates='members')
-    comments = relationship('Comment', back_populate
+    projects = relationship('Project', secondary='user_to_project_2',
+                            back_populates='members')
+    pending_projects = relationship('Project_Application',
+                                    back_populates='user')
     # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
