@@ -225,11 +225,17 @@ def home():
     user_tabs = partition_query(user_projs)
     project_application = Project_Application_Form(request.form)
     # notifcations
-    if len(current_user.notifications)>0:
-        for notification in current_user.notifications:
-            flash(notification.text)
-            current_user.notifications.remove(notification)
-        db.session.commit()
+    for i in range(4):
+        n = Notification(text=f'hi {i}')
+        print(n.text)
+        current_user.notifications.append(n)
+    db.session.commit()
+    # if len(current_user.notifications)>0:
+    for notification in current_user.notifications:
+        print(notification.text)
+        flash(notification.text)
+        # current_user.notifications.remove(notification)
+    db.session.commit()
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, user_tabs=user_tabs,
                             user_project_count=user_projs.count(),

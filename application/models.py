@@ -6,6 +6,8 @@ from datetime import datetime
 from sqlalchemy import (Table, Column, ForeignKey, Integer, String, Boolean,
                         DateTime)
 from sqlalchemy_utils import IntRangeType
+from sqlalchemy import desc
+
 
 sys.path.append('.')
 from application import db
@@ -80,7 +82,7 @@ class User(db.Model, UserMixin):
                          back_populates='workers')
     # notifications
     notifications = relationship('Notification', secondary=user_to_notification,
-                                back_populates='users')
+                                back_populates='users', order_by='Notification.')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
@@ -296,3 +298,5 @@ class Notification(db.Model):
     # user
     users = relationship('User', secondary=user_to_notification,
                          back_populates='notifications')
+    # timestamp
+    timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
