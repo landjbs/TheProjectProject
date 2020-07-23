@@ -228,10 +228,10 @@
               </div>
               <div class="col-sm-4">
                 <h6>Team Skills</h6>
-                {% if ((role_data|length) > 1) %}
-                  <canvas id="role_breakdown"></canvas>
+                {% if project_subjects %}
+                  <canvas id="team_skills"></canvas>
                 {% else %}
-                  <p class='empty-text'>No roles yet.</p>
+                  <p class='empty-text'>Project has no subjects.</p>
                 {% endif %}
               </div>
             </div>
@@ -502,7 +502,7 @@
 
     // subject breakdown chart
     {% if project_subjects %}
-      var ctx = document.getElementById('role_breakdown');
+      var ctx = document.getElementById('team_skills');
       var myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
