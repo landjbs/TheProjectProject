@@ -294,14 +294,34 @@
 
 
 <script>
+// log tabs
 $('#rec-carousel').on('slid.bs.carousel', function () {
-  var currentSlide = $('#rec-carousel div.active').index();
-  sessionStorage.setItem('lastSlide', currentSlide);
+  sessionStorage.setItem('recSlide', $('#rec-carousel div.active').index());
   });
 
-  if(sessionStorage.lastSlide){
-    $("#rec-carousel").carousel(sessionStorage.lastSlide*1);
+$('#trending-carousel').on('slid.bs.carousel', function () {
+  sessionStorage.setItem('trendingSlide', $('#trending-carousel div.active').index());
+  });
+
+$('#my-carousel').on('slid.bs.carousel', function () {
+  sessionStorage.setItem('mySlide', $('#my-carousel div.active').index());
+  });
+
+// rescroll carousels
+if(sessionStorage.recSlide){
+    $("#rec-carousel").carousel(sessionStorage.recSlide*1);
   }
+
+if(sessionStorage.trendingSlide){
+    $("#trending-carousel").carousel(sessionStorage.trendingSlide*1);
+  }
+
+if(sessionStorage.mySlide){
+    $("#my-carousel").carousel(sessionStorage.mySlide*1);
+  }
+
+
+
 </script>
 
 {% endblock %}
