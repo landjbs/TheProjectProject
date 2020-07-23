@@ -17,7 +17,7 @@ def add_subject_to_user(user, subject):
     if prev:
         prev.number += 1
     else:
-        new = User_Subjects(user, subject)
+        new = User_Subjects(user=user, subject=subject)
         user.subjects.append(new)
     return True
 

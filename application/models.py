@@ -48,10 +48,10 @@ class User_Subjects(db.Model):
     __tablename__ = 'user_subjects'
     # user
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    users = relationship('User', back_populates='subjects')
+    user = relationship('User', back_populates='subjects')
     # subjects
     subject_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
-    subjects = relationship('Subject', back_populates='users')
+    subject = relationship('Subject', back_populates='users')
     # count
     number = Column(Integer, nullable=False, default=1)
 
@@ -105,7 +105,7 @@ class User(db.Model, UserMixin):
                                 back_populates='users', lazy='dynamic',
                                 order_by='Notification.timestamp')
     # subjects
-    subjects = relationship('User_Subjects', back_populates='users',
+    subjects = relationship('User_Subjects', back_populates='user',
                             lazy='dynamic', order_by='User_Subjects.number')
 
     def __init__(self, name, email, password, subjects, github, about):
@@ -244,7 +244,7 @@ class Subject(db.Model):
     # code
     code = Column(String(128), unique=True, nullable=False)
     # users
-    users = relationship('User_Subjects', back_populates='subjects',
+    users = relationship('User_Subjects', back_populates='subject',
                          order_by='User_Subjects.number')
     # projects
     projects = relationship('Project', secondary='project_to_subject',
