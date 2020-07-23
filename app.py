@@ -321,7 +321,8 @@ def add_project():
                           f'{project.name} will be available for others to '
                           'join at any time.')
                 if task_message:
-                    flash('Try adding some tasks to tell others what needs to')
+                    flash('Try adding some tasks to show what needs to'
+                          'be done on your project.')
 
                 flash('You can change the settings at any time by clicking the '
                       '"edit" button.')
