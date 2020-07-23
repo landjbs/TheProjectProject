@@ -27,8 +27,11 @@ def remove_subject_from_user(user, subject):
     prev = user.subjects.filter_by(subject=subject).first()
     if prev:
         new_number = (prev.number - 1)
-        if (new_number < 1):
-            user.subjects.remove(subject)
+        try:
+            if (new_number < 1):
+                user.subjects.remove(subject)
+        except KeyError as ke:
+            print(ke)
     else:
         return False
     return True
