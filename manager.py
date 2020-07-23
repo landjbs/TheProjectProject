@@ -1,5 +1,5 @@
 from application import db
-from application.models import Project, User, Subject
+from application.models import Project, User, Subject, User_Subjects
 
 
 def create_subject(name, color):

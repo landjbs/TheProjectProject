@@ -44,18 +44,6 @@ user_to_notification = Table('user_to_notification', db.Model.metadata,
             Column('notification_id', Integer, ForeignKey('notification.id')))
 
 
-# class Project_Membership(db.Model):
-#     __tablename__ = 'project_membership'
-#     # user
-#     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-#     members = relationship('User', back_populates='projects')
-#     # project
-#     project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
-#     projects = relationship('Project', back_populates='members')
-#     # timestamp
-#     join_stamp = Column(DateTime, nullable=False, default=datetime.utcnow())
-
-
 class User_Subjects(db.Model):
     __tablename__ = 'user_subjects'
     # user
