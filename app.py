@@ -414,7 +414,7 @@ def join_project(project_id):
 @application.route('/leave_project/<int:project_id>/<int:new_owner_id>')
 def leave_project(project_id, new_owner_id):
     project = Project.query.get_or_404(project_id)
-    if not is_project_member(current_user, project):
+    if not current_user in project.members:
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
     if (current_user == project.owner):
