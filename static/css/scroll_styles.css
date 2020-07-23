@@ -93,8 +93,6 @@ a:hover {
   position: absolute;
   z-index: 1;
   border: 1px solid white;
-  top: 2vh;
-  right: 2.2vh;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
