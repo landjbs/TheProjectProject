@@ -419,9 +419,8 @@ def leave_project(project_id, new_owner_id):
         return redirect(request.referrer)
     if (current_user == project.owner):
         flash(f'You have transferred ownership of {project.owner} to .')
-
-    # project.members.delete(current_user)
-    # db.session.commit()
+    project.members.remove(current_user)
+    db.session.commit()
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
 
