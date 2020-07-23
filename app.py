@@ -625,7 +625,7 @@ def change_project_status(project_id, user_id, action):
     elif action=='reject':
         # remove user from project
         if user in project.members:
-            project.members.remove(user)
+            manager.remove_user_from_project(user, project)
             # notify kicked member
             notification = Notification(text=f'You have been removed from '
                                              f'{project.name} by the owner.')
