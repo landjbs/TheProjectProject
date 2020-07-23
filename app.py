@@ -285,7 +285,7 @@ def add_project():
                     print(f'ERROR: {e}')
                     db.session.rollback()
                     return render_template('add_project.html', form=form)
-                return redirect(url_for('home'))
+                return redirect(f'/project={form.name.data}')
     return render_template('add_project.html', form=form)
 
 
