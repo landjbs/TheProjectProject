@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-4'>
+<div class='container my-4' style='min-width: 90%'>
   <h4 style='text-align:left;'>Recommended Projects</h4>
   <hr class="my-4">
   <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -110,53 +110,50 @@
     </div>
     <!--/.Controls-->
   </div>
-  </div>
 
-<div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-<div class='container my-4'>
-  <h4 style='text-align:left;'>Trending Projects</h4>
-  <hr class="my-4">
-  <div class="carousel-inner" role="listbox">
-    {% for tab in top_tabs %}
-      {% if loop.index==1 %}
-      <div class="carousel-item active">
-      {% else %}
-      <div class="carousel-item">
-      {% endif %}
-        <div class='row'>
-          {% for project in tab %}
-            <div class="col-md-4">
-              <div class="card mb-2">
-                <div class="card-body">
-                  <p class="float-right">
-                    <i class='far fa-user-circle'></i>
-                    {{ project.members.all()|length  }}
-                    <br>
-                    <i class="fa fa-star"></i>
-                    {{ project.stars.all()|length }}
-                  </p>
-                  <div class='card-head little'>
-                    <a class='project-name' href='project={{ project.name }}'>
-                      <h5>{{ project.name }}</h5>
-                    </a>
-                    <a href='user={{ project.owner.email }}'>
-                      <p>{{ project.owner.name }}</p>
-                    </a>
+  <div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+    <h4 style='text-align:left;'>Trending Projects</h4>
+    <hr class="my-4">
+    <div class="carousel-inner" role="listbox">
+      {% for tab in top_tabs %}
+        {% if loop.index==1 %}
+        <div class="carousel-item active">
+        {% else %}
+        <div class="carousel-item">
+        {% endif %}
+          <div class='row'>
+            {% for project in tab %}
+              <div class="col-md-4">
+                <div class="card mb-2">
+                  <div class="card-body">
+                    <p class="float-right">
+                      <i class='far fa-user-circle'></i>
+                      {{ project.members.all()|length  }}
+                      <br>
+                      <i class="fa fa-star"></i>
+                      {{ project.stars.all()|length }}
+                    </p>
+                    <div class='card-head little'>
+                      <a class='project-name' href='project={{ project.name }}'>
+                        <h5>{{ project.name }}</h5>
+                      </a>
+                      <a href='user={{ project.owner.email }}'>
+                        <p>{{ project.owner.name }}</p>
+                      </a>
+                    </div>
+                    <p class='oneliner'>
+                      {{ project.oneliner }}
+                    </p>
                   </div>
-                  <p class='oneliner'>
-                    {{ project.oneliner }}
-                  </p>
                 </div>
               </div>
-            </div>
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
-</div>
 
-<div class='container my-4'>
   <h4 style='text-align:left;'>My Projects</h4>
   <hr class="my-4">
   {% if user_project_count>0 %}
@@ -203,7 +200,6 @@
     </a>
   </div>
   {% endif %}
-</div>
 </div>
 </div>
 
