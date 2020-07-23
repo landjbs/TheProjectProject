@@ -65,10 +65,12 @@ def utility_processor():
         return tasks.filter_by(complete=False)
     def is_project_member_(user, project):
         return is_project_member(user, project)
+    def now():
+        return datetime.utcnow
     return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
                 elapsed_style=elapsed_style, time_to_str=time_to_str,
                 not_complete=not_complete, complete=complete,
-                is_project_member=is_project_member_)
+                is_project_member=is_project_member_, now=now)
 
 
 def tasks_to_daily_activity(tasks):
@@ -390,7 +392,7 @@ def project(project_name):
     role_data = {}
     filled_data = {}
     return render_template('project.html', project=project,
-                            now=datetime.utcnow, comment_form=comment_form,
+                            comment_form=comment_form,
                             task_form=task_form,
                             activity_data=activity_data,
                             task_data=task_data,
