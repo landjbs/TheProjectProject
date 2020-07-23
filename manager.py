@@ -10,11 +10,14 @@ def create_subject(name, color):
 
 def create_user(user):
     db.session.add(user)
-    db.session.commit()
 
 
 def add_subject_to_user(user, subject):
     prev = user.subjects.filter_by(subject=subject).first()
+    if prev:
+        prev.count += 1
+    else:
+        new = User_Subjects(user, subject)
 
 
 def add_user_to_project(project, user, role):

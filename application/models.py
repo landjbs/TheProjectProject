@@ -53,7 +53,7 @@ class User_Subjects(db.Model):
     subject_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
     subjects = relationship('Subject', back_populates='users')
     # count
-    count = Column(Integer, nullable=False, default=0)
+    count = Column(Integer, nullable=False, default=1)
 
 
 class Project_Application(db.Model):
