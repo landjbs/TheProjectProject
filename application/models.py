@@ -245,7 +245,7 @@ class Subject(db.Model):
     code = Column(String(128), unique=True, nullable=False)
     # users
     users = relationship('User_Subjects', back_populates='subject',
-                         order_by='User_Subjects.number')
+                         order_by='desc(User_Subjects.number)')
     # projects
     projects = relationship('Project', secondary='project_to_subject',
                             back_populates='subjects', lazy='dynamic')
