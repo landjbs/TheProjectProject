@@ -196,8 +196,7 @@ def admin():
 def accept():
     user = query_user_by_id(request.form['accept'])
     n1 = Notification(text=('Welcome to TheProjectProject, '
-                            f'{user.name}! We are excited to have you '
-                            'in the community.'))
+                            f'{user.name}! We are excited to have you.'))
     n2 = Notification(text=('You can browse and join projects below or '
                             'create and manage your own project with the '
                             '"add project" tab.'))
@@ -440,7 +439,7 @@ def join_project(project_id):
                 flash(f'Your application to {project.name} been submitted.')
                 # notify project owner
                 notification = Notification(text=f'{current_user.name} has '
-                                                 f'applied to {project.name}')
+                                                 f'applied to {project.name}.')
                 project.owner.notifications.append(notification)
             else:
                 flash(f'Invalid application.')
