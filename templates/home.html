@@ -249,20 +249,30 @@
               </a>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <form action="{{ url_for('leave_project', project_id=project.id) }}" method='post'>
-              <div class="modal-body">
-                {% if project.owner==current_user %}
-                  Select new project owner:</p>
-                    {{ project_application.hidden_tag() }}
-                    {{ project_application.new_owner(class='join-input', placeholder='Response', required=True) }}
-                {% else %}
-                  <p>Are you sure you want to leave {{ project.name }}?</p>
-                {% endif %}
-              </div>
-              <div class="modal-footer">
-                <button class='btn'>Leave</button>
-              </div>
-            </form>
+            {% if project.owner==current_user %}
+              <form action="{{ url_for('leave_project', project_id=project.id) }}" method='post'>
+                <div class="modal-body">
+                  {% if project.owner==current_user %}
+                    <label for="cars">Select new project owner:</label>
+                      <select name="cars" id="cars">
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="opel">Opel</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                      <br><br>
+                      <input type="submit" value="Submit">
+                  {% else %}
+                    <p>Are you sure you want to leave {{ project.name }}?</p>
+                  {% endif %}
+                </div>
+                <div class="modal-footer">
+                  <button class='btn'>Leave</button>
+                </div>
+              </form>
+            {% else %}
+
+            {% endif %}
           </div>
         </div>
       </div>
