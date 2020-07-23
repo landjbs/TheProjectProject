@@ -302,7 +302,16 @@ def add_project():
                     print(e)
                     db.session.rollback()
                     return render_template('add_project.html', form=form)
-                flash('Congratulations! Your project has been added.')
+                # successful message
+                flash('Congratulations—your project has been added!')
+                if form.complete.data==True:
+                    flash(f'As a completed project, {project.name} will be '
+                        'visible, but not joinable or editable.')
+                elif form.open.data==False:
+                    flash(f'As a closed project, {project.name} will be '
+                          'visible and editable, but not joinable.')
+                flash('You can change the settings at any time by clicking the '
+                      '"edit" button.')
                 return redirect(f'/project={form.name.data}')
     return render_template('add_project.html', form=form)
 
