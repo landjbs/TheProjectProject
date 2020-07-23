@@ -146,7 +146,8 @@ class Project_Application_Form(BaseForm):
     # if joining
     response = TextField('Response', validators=[Length(0,250)],
                          render_kw={'max':250})
-    # if leaving
+    # if leaving and owner
+    new_owner = SelectField('Owner', coerce=int)
 
 
 class Task_Form(BaseForm):
