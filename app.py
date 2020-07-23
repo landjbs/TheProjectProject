@@ -417,8 +417,8 @@ def leave_project(project_id, new_owner_id):
     if not current_user in project.members:
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
-    if (current_user == project.owner):
-        flash(f'You have transferred ownership of {project.owner} to .')
+    if (current_user==project.owner):
+        raise RuntimeError('transfer not implemented.')
     project.members.remove(current_user)
     db.session.commit()
     flash(f'You have left {project.name}.')
