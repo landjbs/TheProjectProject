@@ -473,6 +473,8 @@ def leave_project(project_id):
             return redirect(request.referrer)
     else:
         db.session.delete(project)
+        flash(f'{project.name} deleted.')
+        return redirect(request.referrer)
     project.members.remove(current_user)
     db.session.commit()
     flash(f'You have left {project.name}.')
