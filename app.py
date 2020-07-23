@@ -491,7 +491,6 @@ def leave_project(project_id):
                                      f'{project.name}.')
     for member in project.members:
         member.notifications.append(notification)
-    db.session.commit()
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
 
@@ -618,7 +617,7 @@ def change_project_status(project_id, user_id, action):
             for member in project.members:
                 if not member==current_user:
                     member.notifications.append(notification)
-            project.members.append(user)
+            manager.add_user_to_project(user, project)
             application = project.pending_members.filter_by(user=user).first()
             if application is not None:
                 db.session.delete(application)
