@@ -469,11 +469,20 @@
           data: {
               labels: [{% for k in task_data.keys() %}'{{ k.name }}',{% endfor %}],
               datasets: [{
-                  data: [{% for v in task_data.values() %}'{{ v }}',{% endfor %}],
+                  data: [{% for v in task_data.values() %}'{{ v[0] }}',{% endfor %}],
                   backgroundColor: 'rgba(255,220,0,0.5)',
                   borderColor: '#FFDC00',
-                  borderWidth: 1
-              }]
+                  borderWidth: 1,
+                  label: 'Authored Tasks'
+              },
+              {
+                  data: [{% for v in task_data.values() %}'{{ v[1] }}',{% endfor %}],
+                  backgroundColor: 'rgba(255,220,0,0.5)',
+                  borderColor: 'blue',
+                  borderWidth: 1,
+                  label: 'Completed Tasks'
+              }
+            ],
           },
           options: {
               scales: {

@@ -387,8 +387,8 @@ def project(project_name):
         for worker in task.workers:
             completers.append(worker)
     # select top 5 to plot
-    completion_data = Counter(completers)
     author_data = Counter(authors)
+    completion_data = Counter(completers)
     task_data = {}
     # all people related to project tasks
     for n in set(completion_data.keys()).union(set(author_data.keys())):
@@ -396,6 +396,7 @@ def project(project_name):
         completed = completion_data.get(n)
         task_data[n] = ((authored if authored else 0),
                         (completed if completed else 0))
+    print(task_data)
     ## subject visualization ##
     # TODO:
     role_data = {}
