@@ -74,7 +74,7 @@ a:hover {
   color: #DD00FF;
 }
 
-.member-hoverable {
+.hoverable {
   display: inline;
 }
 
@@ -84,7 +84,7 @@ a:hover {
 }
 
 /* Tooltip text */
-.member-hoverable .tooltiptext {
+.hoverable .tooltiptext {
   display: none;
   text-align: left;
   padding: 1px 7px;
@@ -98,7 +98,7 @@ a:hover {
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
-.member-hoverable:hover .tooltiptext {
+.hoverable:hover .tooltiptext {
   display: inline;
   opacity: 1;
   background: rgba(0,0,0,0.7);
