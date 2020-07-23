@@ -66,7 +66,7 @@ def utility_processor():
     def is_project_member_(user, project):
         return is_project_member(user, project)
     def now():
-        return datetime.utcnow
+        return datetime.utcnow()
     return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
                 elapsed_style=elapsed_style, time_to_str=time_to_str,
                 not_complete=not_complete, complete=complete,
