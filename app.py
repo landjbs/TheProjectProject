@@ -557,22 +557,22 @@ def transfer_ownership(project, user):
     if user==project.owner:
         flash(f'{user.name} is already the project owner.')
         return False
-    if user in project.members:
-        notification = Notification(text=f'{project.owner.name} has '
-                f'transferred ownership of {project.name} to {user.name}.')
-        for member in project.members:
-            if not member in [user, current_user]:
-                member.notifications.append(notification)
-        project.owner = user
-        notification = Notification(text='You have been promoted to owner '
-                                         f'of {project.name}!')
-        user.notifications.append(notification)
-        flash(f'You have transferred ownership of {project.name} to '
-              f'{user.name}.')
-        return True
-    else:
+    if not user in project.members:
         flash('Cannot make non-member a project owner.')
         return False
+    notification = Notification(text=f'{project.owner.name} has '
+            f'transferred ownership of {project.name} to {user.name}.')
+    for member in project.members:
+        if not member in [user, current_user]:
+            member.notifications.append(notification)
+    project.owner = user
+    notification = Notification(text='You have been promoted to owner '
+                                     f'of {project.name}!')
+    user.notifications.append(notification)
+    flash(f'You have transferred ownership of {project.name} to '
+          f'{user.name}.')
+    return True
+
 
 
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
