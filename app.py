@@ -457,9 +457,8 @@ def join_project(project_id):
 
 
 @login_required
-@application.route('/leave_project/<int:project_id>/')
-@application.route('/leave_project/<int:project_id>/<int:new_owner_id>')
-def leave_project(project_id, new_owner_id=None):
+@application.route('/leave_project/<int:project_id>')
+def leave_project(project_id):
     project = Project.query.get_or_404(project_id)
     if not current_user in project.members:
         flash(f'Cannot leave {project.name} without being a member.')
