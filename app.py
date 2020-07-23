@@ -387,7 +387,8 @@ def project(project_name):
         for worker in task.workers:
             completers.append(worker)
     # select top 5 to plot
-    task_data = Counter(completers)
+    completion_data = Counter(completers)
+    author_data = Counter(authors)
     ## subject visualization ##
     # TODO:
     role_data = {}
