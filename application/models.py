@@ -42,19 +42,19 @@ class Project_Membership(db.Model):
     __tablename__ = 'project_membership'
     # user
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='subjects')
+    users = relationship('User', back_populates='subjects')
     # project
     project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
-    project = relationship('Project', back_populates='pending_members')
+    projects = relationship('Project', back_populates='pending_members')
     # timestamp
     join_stamp = Column(DateTime, nullable=False, default=datetime.utcnow())
-    
+
 
 class User_Subjects(db.Model):
     __tablename__ = 'user_subjects'
     # user
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='subjects')
+    users = relationship('User', back_populates='subjects')
     # subjects
     subject_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
     subjects = relationship('Subject', back_populates='users')
@@ -93,8 +93,8 @@ class User(db.Model, UserMixin):
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
-    projects = relationship('Project', secondary=user_to_project,
-                            back_populates='members', lazy='dynamic')
+    projects = relationship('Project_Membership',
+                            back_populates='users', lazy='dynamic')
     pending_projects = relationship('Project_Application',
                                     back_populates='user')
     # interactions
@@ -109,7 +109,7 @@ class User(db.Model, UserMixin):
                                 back_populates='users', lazy='dynamic',
                                 order_by='desc(Notification.timestamp)')
     # subjects
-    subjects = relationship('User_Subjects', back_populates='user')
+    subjects = relationship('User_Subjects', back_populates='users')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
