@@ -295,15 +295,11 @@
 
 <script>
 $('#rec-carousel').on('slid.bs.carousel', function () {
-var currentSlide = $('#rec-carousel div.active').index();
-sessionStorage.setItem('lastSlide', currentSlide);
-});
-if(sessionStorage.lastSlide){
-  $("#rec-carousel").carousel((sessionStorage.lastSlide+1)*1);
-}
-
-// $('#rec-carousel').bind('mousewheel', function() {
-//     $(this).carousel('next');
-// });
+  var currentSlide = $('#rec-carousel carousel-item.active').index();
+  sessionStorage.setItem('lastSlide', currentSlide);
+  });
+  if(sessionStorage.lastSlide){
+    $("#rec-carousel").carousel(sessionStorage.lastSlide*1);
+  }
 </script>
 {% endblock %}
