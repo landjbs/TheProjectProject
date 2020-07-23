@@ -465,12 +465,13 @@ def leave_project(project_id):
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
     # transfer ownership
-    if (current_user==project.owner):
+    if (current_user==project.owner) and (project.members.count()>1):
         new_owner = User.query.get_or_404(request.form.get('new_owner'))
         success = transfer_ownership(project, new_owner)
         if not success:
             flash('Owner transfer unsuccessful.')
             return redirect(request.referrer)
+
     project.members.remove(current_user)
     db.session.commit()
     flash(f'You have left {project.name}.')
