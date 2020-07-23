@@ -276,6 +276,7 @@ def add_project():
         if (len(form.subjects.data)>5):
             form.subjects.errors = ['Can only choose up to 5 subjects.']
             error_flag = True
+        print(f'form: {form.team_size.data}')
         if not error_flag:
             # subjects
             subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
