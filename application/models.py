@@ -106,7 +106,7 @@ class User(db.Model, UserMixin):
                                 order_by='Notification.timestamp')
     # subjects
     subjects = relationship('User_Subjects', back_populates='users',
-                            lazy='dynamic')
+                            lazy='dynamic', order_by='User_Subjects.number')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)
@@ -245,7 +245,7 @@ class Subject(db.Model):
     code = Column(String(128), unique=True, nullable=False)
     # users
     users = relationship('User_Subjects', back_populates='subjects',
-                         order_by='User_Subjects.count')
+                         order_by='User_Subjects.number')
     # projects
     projects = relationship('Project', secondary='project_to_subject',
                             back_populates='subjects', lazy='dynamic')
