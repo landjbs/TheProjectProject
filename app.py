@@ -303,7 +303,7 @@ def add_project():
                     db.session.rollback()
                     return render_template('add_project.html', form=form)
                 # successful message
-                flash(f'Congratulations—your project, {form.name.data} '
+                flash(f'Congratulations—your project, {form.name.data}, '
                        'has been added!')
                 task_message = True
                 if form.complete.data==True:
@@ -320,12 +320,14 @@ def add_project():
                 elif form.requires_application.data==True:
                     flash(f'As an open project with an application, '
                           f'{form.name.data} can be joined by users you accept. '
-                          'Check back soon to manage applicants!')
+                          'Check back soon to manage applicants.')
                 if task_message:
-                    flash('Try adding some tasks to show what needs to'
-                          'be done on your project.')
-                flash('Post some comments to tell people what your project '
-                      'is all about!')
+                    flash('Try adding some tasks to show what needs to '
+                          'be done on your project and posting some comments '
+                          "to tell people what it's all about!")
+                else:
+                    flash('Post some comments to tell people what your project '
+                          'is all about!')
                 return redirect(f'/project={form.name.data}')
     return render_template('add_project.html', form=form)
 
