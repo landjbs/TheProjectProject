@@ -238,22 +238,33 @@
           </div>
         </div>
       {% else %}
-        <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <p>Are you sure you want to leave {{ project.name }}?</p>
-                <a class='btn' href="{{ url_for('leave_project', project_id=project.id, new_owner_id=1) }}">
-                  Leave
-                </a>
-              </div>
+      <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <a href='project={{ project.name }}' style='color:black;'>
+                <h5>{{ project.name }}</h5>
+              </a>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <form action="{{ url_for('leave_project', project_id=project.id) }}" method='post'>
+              <div class="modal-body">
+                {% if project.owner==current_user %}
+                  Select new project owner:</p>
+                    {{ project_application.hidden_tag() }}
+                    {{ project_application.new_owner(class='join-input', placeholder='Response', required=True) }}
+                {% else %}
+                  <p>Are you sure you want to leave {{ project.name }}?</p>
+                {% endif %}
+              </div>
+              <div class="modal-footer">
+                <button class='btn'>Leave</button>
+              </div>
+            </form>
           </div>
         </div>
+      </div>
       {% endif %}
     {% endfor %}
   {% endfor %}
