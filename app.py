@@ -195,10 +195,11 @@ def admin():
 @application.route('/accept', methods=['POST'])
 def accept():
     user = query_user_by_id(request.form['accept'])
-    n1 = Notification(text=('Welcome to TheProjectProject, a community of '
-                            'innovators who complete projects together.'))
+    n1 = Notification(text=('Welcome to TheProjectProject, '
+                            f'{user.name}! We are excited to have you '
+                            'in the community.'))
     n2 = Notification(text=('You can browse and join projects below or '
-                            'create and manage your own project with the'
+                            'create and manage your own project with the '
                             '"add project" tab.'))
     n3 = Notification(text=('We recommend you start by adding projects you '
                             'have already worked on to showcase your experience.'))

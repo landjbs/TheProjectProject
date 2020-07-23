@@ -115,7 +115,7 @@ class User(db.Model, UserMixin):
     # notifications
     notifications = relationship('Notification', secondary=user_to_notification,
                                 back_populates='users', lazy='dynamic',
-                                order_by='desc(Notification.timestamp)')
+                                order_by='Notification.timestamp')
     # subjects
     subjects = relationship('User_Subjects', back_populates='users')
 

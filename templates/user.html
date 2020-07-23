@@ -29,7 +29,7 @@
                   {{ user.owned|length }}
                   <br>
                   <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
-                  {{ (user.projects.all()|length) - (user.owned|length) }}
+                  {{ (user.projects|length) - (user.owned|length) }}
                   <!-- edit button -->
                   {% if user == current_user %}
                     <br>
