@@ -179,8 +179,13 @@
                     <div class="card-body">
                       <div class='float-right'>
                         {% if current_user==project.owner %}
-                          <i class="fa fa-bell" aria-hidden="true"></i>
-                          {{ project.pending_members.all()|length }}
+                          {% set pending = project.pending_members.all()|length %}
+                          {% if pending>0 %}
+                            <i class="fa fa-bell" aria-hidden="true"></i>
+                          {% else %}
+                            <i class="fa fa-bell-o" aria-hidden="true"></i>
+                          {% endif %}
+                          {{ pending }}
                           <br>
                         {% endif %}
                         <i class="fa fa-star"></i>
