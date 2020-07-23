@@ -429,12 +429,15 @@ def leave_project(project_id, new_owner_id):
 @application.route('/like/<int:project_id>/<action>')
 def like_action(project_id, action):
     project = Project.query.get_or_404(project_id)
+    print(is_project_member(current_user, project))
+    db.session.commit()
     if action == 'like':
         current_user.star_project(project)
         db.session.commit()
     if action == 'unlike':
         current_user.unstar_project(project)
         db.session.commit()
+    print(is_project_member(current_user, project))
     return redirect(request.referrer)
 
 
