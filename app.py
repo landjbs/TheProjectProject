@@ -398,11 +398,12 @@ def project(project_name):
                         (completed if completed else 0))
     ## subject visualization ##
     project_subjects = {s.name:0 for s in project.subjects}
-    for member in project.members:
-        for user_subject in member.subjects:
-            name = user_subject.subject.name
-            if name in project_subjects:
-                project_subjects[name] += user_subject.number
+    if project_subjects!={}:
+        for member in project.members:
+            for user_subject in member.subjects:
+                name = user_subject.subject.name
+                if name in project_subjects:
+                    project_subjects[name] += user_subject.number
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             task_form=task_form,
