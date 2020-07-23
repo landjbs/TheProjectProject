@@ -392,7 +392,9 @@ def project(project_name):
     task_data = {}
     # all people related to project tasks
     for n in set(completion_data.keys()).union(set(author_data.keys())):
-
+        authored = author_data.get(n)
+        completed = completion_data.get(n)
+        
 
     ## subject visualization ##
     # TODO:
