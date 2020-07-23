@@ -12,6 +12,7 @@ def create_user(user):
     db.session.add(user)
 
 
+## USER SUBJECTS ##
 def add_subject_to_user(user, subject):
     prev = user.subjects.filter_by(subject=subject).first()
     if prev:
@@ -30,8 +31,9 @@ def remove_subject_from_user(user, subject):
             user.subjects.remove(subject)
     else:
         return False
+    return True
 
-
+## USER TO PROJECTS ##
 def add_user_to_project(user, project):
     user.projects.append(project)
     for subject in project.subjects:
