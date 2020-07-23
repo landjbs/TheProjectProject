@@ -40,12 +40,20 @@ def add_user_to_project(user, project):
         add_subject_to_user(user, subject)
     db.session.add(project)
     db.session.commit()
-    
+
+
+def remove_user_from_project(user, project):
+    for subject in project.subjects:
+        remove_subject_from_user(user, subject)
+
+
 
 def create_project(project, user):
-    user.projects.append(project)
+    # add project subjects to user
     for subject in project.subjects:
         add_subject_to_user(user, subject)
+    # add project to user projects
+    user.projects.append(project)
     db.session.add(project)
 
 
