@@ -457,7 +457,7 @@ def join_project(project_id):
 
 
 @login_required
-@application.route('/leave_project/<int:project_id>')
+@application.route('/leave_project/<int:project_id>', methods=['POST'])
 def leave_project(project_id):
     project = Project.query.get_or_404(project_id)
     if not current_user in project.members:

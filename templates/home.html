@@ -251,7 +251,6 @@
               </div>
               {% if project.owner==current_user %}
                 <form action="{{ url_for('leave_project', project_id=project.id) }}" method='post'>
-                  <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
                     <div class="modal-body">
                       {% if project.owner==current_user %}
                         <label for="new_owner">Select new project owner:</label>
