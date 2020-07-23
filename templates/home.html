@@ -178,9 +178,11 @@
                   <div class="card mb-2">
                     <div class="card-body">
                       <div class='float-right'>
-                        <i class="fa fa-bell" aria-hidden="true"></i>
-                        {{ project.pending_members.all()|length }}
-                        <br>
+                        {% if current_user==project.owner %}
+                          <i class="fa fa-bell" aria-hidden="true"></i>
+                          {{ project.pending_members.all()|length }}
+                          <br>
+                        {% endif %}
                         <i class="fa fa-star"></i>
                         {{ project.stars.all()|length }}
                       </div>
