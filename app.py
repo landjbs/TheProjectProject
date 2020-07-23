@@ -312,7 +312,6 @@ def add_project():
                 elif form.open.data==False:
                     flash(f'As a closed project, {project.name} will be '
                           'visible and editable, but not joinable.')
-                    task_message = False
                 elif form.requires_application.data==False:
                      flash(f'As an open project with no application, '
                            f'{project.name} will be available for others to '
@@ -321,6 +320,8 @@ def add_project():
                     flash(f'As an open project with an application, '
                           f'{project.name} will be available for others to '
                           'join at any time.')
+                if task_message:
+                    flash('Try adding some tasks to tell others what needs to')
 
                 flash('You can change the settings at any time by clicking the '
                       '"edit" button.')
