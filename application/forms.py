@@ -143,8 +143,10 @@ class Add_Project(BaseForm):
 
 
 class Project_Application_Form(BaseForm):
+    # if joining
     response = TextField('Response', validators=[Length(0,250)],
                          render_kw={'max':250})
+    # if leaving
 
 
 class Task_Form(BaseForm):
