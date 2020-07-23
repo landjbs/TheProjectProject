@@ -358,9 +358,6 @@ def user(email):
     stars = 0
     for project in user.projects:
         stars += project.stars.count()
-    # subjects
-    subject_data = Counter(subjects) if subjects!=[] else False
-
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs)
