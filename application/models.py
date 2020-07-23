@@ -42,10 +42,10 @@ class User_Subjects(db.Model):
     __tablename__ = 'user_subjects'
     # user
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='users')
+    user = relationship('User', back_populates='subjects')
     # subjects
     subject_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
-    subject = relationship('Subject', back_populates='subjects')
+    subjects = relationship('Subject', back_populates='users')
     # count
     count = Column(Integer, nullable=False, default=0)
 
