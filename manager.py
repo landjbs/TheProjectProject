@@ -1,5 +1,5 @@
 from application import db
-from application.models import Project, User
+from application.models import Project, User, Subject
 
 
 def create_subject(name, color):
@@ -11,6 +11,10 @@ def create_subject(name, color):
 def create_user(user):
     db.session.add(user)
     db.session.commit()
+
+
+def add_subject_to_user(user, subject):
+    
 
 
 def add_user_to_project(project, user, role):
