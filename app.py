@@ -553,7 +553,8 @@ def mark_complete(project_id, task_id, action):
 def transfer_ownership(project, user):
     if current_user!=project.owner:
         flash('Only the owner can transfer project ownership.')
-    elif user in project.members:
+        return False
+    if user in project.members:
         notification = Notification(text=f'{project.owner.name} has '
                 f'transferred ownership of {project.name} to {user.name}.')
         for member in project.members:
@@ -565,9 +566,10 @@ def transfer_ownership(project, user):
         user.notifications.append(notification)
         flash(f'You have transferred ownership of {project.name} to '
               f'{user.name}.')
+        return True
     else:
         flash('Cannot make non-member a project owner.')
-        error_flag = True
+        return False
 
 
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
