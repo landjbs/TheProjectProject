@@ -3,7 +3,7 @@ import sys
 from flask_wtf import FlaskForm
 from wtforms_alchemy import model_form_factory
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
-                    SelectMultipleField, FloatField, IntegerField,
+                    SelectMultipleField, SelectField, FloatField, IntegerField,
                     TextAreaField, validators)
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
