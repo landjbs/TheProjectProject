@@ -560,6 +560,7 @@ def transfer_ownership(project, user):
     if not user in project.members:
         flash('Cannot make non-member a project owner.')
         return False
+    # notifications
     notification = Notification(text=f'{project.owner.name} has '
             f'transferred ownership of {project.name} to {user.name}.')
     for member in project.members:
@@ -572,7 +573,6 @@ def transfer_ownership(project, user):
     flash(f'You have transferred ownership of {project.name} to '
           f'{user.name}.')
     return True
-
 
 
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
