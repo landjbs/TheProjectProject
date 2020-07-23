@@ -354,13 +354,13 @@ def user(email):
     member_projects = [project for project in user.projects
                        if not project in owned]
     member_tabs = partition_query(member_projects)
-    # sum stars and aggregate subjects
+    # sum stars
     stars = 0
-    subjects = []
     for project in user.projects:
         stars += project.stars.count()
-        subjects += [subject.name for subject in project.subjects]
+    # subjects
     subject_data = Counter(subjects) if subjects!=[] else False
+
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs)

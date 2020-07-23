@@ -15,7 +15,7 @@ def create_user(user):
 def add_subject_to_user(user, subject):
     prev = user.subjects.filter_by(subject=subject).first()
     if prev:
-        prev.count += 1
+        prev.number += 1
     else:
         new = User_Subjects(user, subject)
         user.subjects.append(new)
