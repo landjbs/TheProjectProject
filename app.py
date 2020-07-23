@@ -157,6 +157,8 @@ def apply():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
     form = Login(request.form)
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
