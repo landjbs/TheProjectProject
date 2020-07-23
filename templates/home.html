@@ -253,15 +253,22 @@
                 <form action="{{ url_for('leave_project', project_id=project.id) }}" method='post'>
                     <div class="modal-body">
                       {% if project.owner==current_user %}
-                        <label for="new_owner">Select new project owner:</label>
-                        <br>
-                        <select name="new_owner" id="new_owner" style='border:0px; border-bottom:1px solid black; width:100%;'>
-                          {% for member in project.members %}
-                            {% if not member==project.owner %}
-                              <option value="{{ member.id }}">{{ member.name }}</option>
-                            {% endif %}
-                          {% endfor %}
-                        </select>
+                        {% if project.members|length>1 %}
+                          <label for="new_owner">Select new project owner:</label>
+                          <br>
+                          <select name="new_owner" id="new_owner" style='border:0px; border-bottom:1px solid black; width:100%;'>
+                            {% for member in project.members %}
+                              {% if not member==project.owner %}
+                                <option value="{{ member.id }}">{{ member.name }}</option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                        {% else %}
+                          <p>
+                            If you leave {{ project.name }}, there will be no members left, and the
+                            project will be deleted. Are you sure you want to leave?
+                          </p>
+                        {% endif %}
                       {% else %}
                         <p>Are you sure you want to leave {{ project.name }}?</p>
                       {% endif %}
