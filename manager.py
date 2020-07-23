@@ -22,7 +22,7 @@ def add_subject_to_user(user, subject):
     return True
 
 
-def add_user_to_project(project, user, role):
+def add_user_to_project(user, project):
     user.projects.append(project)
     for subject in project.subjects:
         add_subject_to_user(user, subject)

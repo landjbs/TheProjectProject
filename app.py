@@ -439,7 +439,7 @@ def join_project(project_id):
                                              f'{project.name}.')
             for member in project.members:
                 member.notifications.append(notification)
-            current_user.projects.append(project)
+            manager.add_user_to_project(user, project)
             flash(f'You have been added to {project.name}!')
         else:
             form = Project_Application_Form(request.form)
