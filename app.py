@@ -232,7 +232,7 @@ def partition_query(l, n=3):
 @application.route('/home', methods=['GET', 'POST'])
 def home():
     # recommended projects
-    recs = db.session.query(Project).filter(Project.owner!=current_user).limit(30)
+    recs = db.session.query(Project).limit(30) #.filter(Project.owner!=current_user)
     recommended_tabs = list(partition_query(recs))
     # top projects
     tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
