@@ -396,17 +396,17 @@ def project(project_name):
         completed = completion_data.get(n)
         task_data[n] = ((authored if authored else 0),
                         (completed if completed else 0))
-    print(task_data)
     ## subject visualization ##
-    # TODO:
-    role_data = {}
-    filled_data = {}
+    project_subjects = {s.name:0 for s in project.subjects}
+    for member in project.members:
+        for subject in subjects:
+
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             task_form=task_form,
                             activity_data=activity_data,
                             task_data=task_data,
-                            role_data=role_data, filled_data=filled_data)
+                            role_data=role_data)
 
 
 @login_required
