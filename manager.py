@@ -14,7 +14,7 @@ def create_user(user):
 
 
 def add_subject_to_user(user, subject):
-    
+    prev = user.subjects.filter_by(subject=subject).first()
 
 
 def add_user_to_project(project, user, role):
