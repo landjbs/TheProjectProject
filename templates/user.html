@@ -24,12 +24,6 @@
                 <p class='float-right'>
                   <i class="fa fa-star"></i>
                   {{ stars }}
-                  <br>
-                  <i class="fa fa-circle" style='color:#FF5D00;'></i>
-                  {{ user.owned|length }}
-                  <br>
-                  <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
-                  {{ (user.projects|length) - (user.owned|length) }}
                   <!-- edit button -->
                   {% if user == current_user %}
                     <br>
@@ -119,7 +113,11 @@
 
             <div class="line"></div>
 
-            <h4 style='text-align:left;'>Owned Projects</h4>
+            <h4 style='text-align:left;'>
+              Owned Projects
+              <i class="fa fa-circle" style='color:#FF5D00;'></i>
+              {{ user.owned|length }}
+            </h4>
             <hr class="my-4">
             <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
               <!--Slides-->

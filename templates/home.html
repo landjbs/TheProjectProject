@@ -51,7 +51,8 @@
                     <div class='card-foot float-left'>
                       <p style="padding-bottom:0px; margin-bottom:0px;">
                         <i class="fa fa-clock-o"></i>
-                        {{ project.estimated_time }} days left
+                        {{ calc_days_since(now(), project.posted_on) }} / {{ project.estimated_time }}
+                        days
                       </p>
                       <div>
                         <i class="fa fa-flask" aria-hidden="true"></i>
