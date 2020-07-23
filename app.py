@@ -389,6 +389,9 @@ def project(project_name):
     # select top 5 to plot
     completion_data = Counter(completers)
     author_data = Counter(authors)
+    # all people related to project tasks
+    task_affiliates = set(completion_data.keys()).union(set(author_data.keys())
+    
     ## subject visualization ##
     # TODO:
     role_data = {}
