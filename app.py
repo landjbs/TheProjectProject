@@ -76,10 +76,10 @@ def tasks_to_daily_activity(tasks):
     start_stamps = []
     end_stamps = []
     for task in tasks:
-        start_stamps.append(round((current_time-task.post_stamp).seconds * (1/(60**2)) ))
+        start_stamps.append(round((current_time-task.post_stamp).seconds * (1/(60)) ))
         # start_stamps.append((current_time-task.post_stamp).days)
         if task.complete:
-            end_stamps.append(round(((current_time-task.complete_stamp).seconds * (1/(60**2)) )))
+            end_stamps.append(round(((current_time-task.complete_stamp).seconds * (1/(60)) )))
             # end_stamps.append((current_time-task.complete_stamp).days)
     start_activity = Counter(start_stamps)
     end_activity = Counter(end_stamps)
@@ -227,7 +227,6 @@ def home():
     # notifcations
     if (current_user.notifications.count())>0:
         for notification in current_user.notifications:
-            print(notification.timestamp)
             flash(notification.text)
             current_user.notifications.remove(notification)
         db.session.commit()
@@ -538,6 +537,7 @@ def change_project_status(project_id, user_id, action):
         # remove user from pending
         else:
             application = project.pending_members.filter_by(user=user).first()
+            # notification Notification(text='')
             if application is not None:
                 db.session.delete(application)
             else:
