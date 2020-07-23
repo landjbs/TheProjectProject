@@ -318,12 +318,12 @@ def add_project():
                            'join at any time.')
                 elif form.requires_application.data==True:
                     flash(f'As an open project with an application, '
-                          f'{project.name} will be available for others to '
-                          'join at any time.')
+                          f'{project.name}, you will have to accept ')
                 if task_message:
                     flash('Try adding some tasks to show what needs to'
                           'be done on your project.')
-
+                flash('Post some comments to tell people what your project '
+                      'is all about!')
                 flash('You can change the settings at any time by clicking the '
                       '"edit" button.')
                 return redirect(f'/project={form.name.data}')
