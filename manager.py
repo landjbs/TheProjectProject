@@ -40,7 +40,7 @@ def add_user_to_project(user, project):
         add_subject_to_user(user, subject)
     db.session.add(project)
     db.session.commit()
-
+    
 
 def create_project(project, user):
     user.projects.append(project)
