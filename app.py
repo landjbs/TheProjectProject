@@ -550,6 +550,26 @@ def mark_complete(project_id, task_id, action):
     return redirect(request.referrer)
 
 
+def transfer_ownership(project, user):
+    if current_user!=project.owner:
+        flash('Only the owner can transfer project ownership.')
+    elif user in project.members:
+        notification = Notification(text=f'{project.owner.name} has '
+                f'transferred ownership of {project.name} to {user.name}.')
+        for member in project.members:
+            if not member in [user, current_user]:
+                member.notifications.append(notification)
+        project.owner = user
+        notification = Notification(text='You have been promoted to owner '
+                                         f'of {project.name}!')
+        user.notifications.append(notification)
+        flash(f'You have transferred ownership of {project.name} to '
+              f'{user.name}.')
+    else:
+        flash('Cannot make non-member a project owner.')
+        error_flag = True
+
+
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
 def change_project_status(project_id, user_id, action):
