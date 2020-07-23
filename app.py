@@ -623,20 +623,8 @@ def change_project_status(project_id, user_id, action):
                 error_flag = True
     ## MAKE OWNER ##
     elif action=='make_owner':
-        if user in project.members:
-            notification = Notification(text=f'{project.owner.name} has '
-                    f'transferred ownership of {project.name} to {user.name}.')
-            for member in project.members:
-                if not member in [user, current_user]:
-                    member.notifications.append(notification)
-            project.owner = user
-            notification = Notification(text='You have been promoted to owner '
-                                             f'of {project.name}!')
-            user.notifications.append(notification)
-            flash(f'You have transferred ownership of {project.name} to '
-                  f'{user.name}.')
-        else:
-            flash('Cannot make non-member a project owner.')
+        successful_transfer = transfer_ownership(project, user)
+        if not successful_transfer:
             error_flag = True
     else:
         flash('Invalid action.')
