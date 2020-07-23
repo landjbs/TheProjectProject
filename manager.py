@@ -22,6 +22,14 @@ def add_subject_to_user(user, subject):
     return True
 
 
+def remove_subject_from_user(user, subject):
+    prev = user.subjects.filter_by(subject=subject).first()
+    if prev:
+        prev.number += 1
+    else:
+        return False
+
+
 def add_user_to_project(user, project):
     user.projects.append(project)
     for subject in project.subjects:
