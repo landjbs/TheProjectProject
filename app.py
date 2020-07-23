@@ -554,6 +554,8 @@ def transfer_ownership(project, user):
     if current_user!=project.owner:
         flash('Only the owner can transfer project ownership.')
         return False
+    if user==project.owner:
+        flash(f'{user.name} is already the project owner.')
     if user in project.members:
         notification = Notification(text=f'{project.owner.name} has '
                 f'transferred ownership of {project.name} to {user.name}.')
