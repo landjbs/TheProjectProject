@@ -394,8 +394,8 @@ def project(project_name):
     for n in set(completion_data.keys()).union(set(author_data.keys())):
         authored = author_data.get(n)
         completed = completion_data.get(n)
-        
-
+        task_data[n] = ((authored if authored else 0),
+                        (completed if completed else 0))
     ## subject visualization ##
     # TODO:
     role_data = {}
