@@ -470,15 +470,15 @@
               labels: [{% for k in task_data.keys() %}'{{ k.name }}',{% endfor %}],
               datasets: [{
                   data: [{% for v in task_data.values() %}'{{ v[0] }}',{% endfor %}],
-                  backgroundColor: 'rgba(255,220,0,0.5)',
-                  borderColor: '#FFDC00',
+                  backgroundColor: 'rgba(93, 0, 255,0.5)',
+                  borderColor: '#5D00FF',
                   borderWidth: 1,
                   label: 'Authored Tasks'
               },
               {
                   data: [{% for v in task_data.values() %}'{{ v[1] }}',{% endfor %}],
-                  backgroundColor: 'rgba(255,220,0,0.5)',
-                  borderColor: 'blue',
+                  backgroundColor: 'rgba(255,93,0,0.5)',
+                  borderColor: '#FF5D00',
                   borderWidth: 1,
                   label: 'Completed Tasks'
               }
