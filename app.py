@@ -529,7 +529,7 @@ def change_project_status(project_id, user_id, action):
             user.notifications.append(notification)
             # notify team members
             notification = Notification(text=f'{project.owner.name} has removed '
-                                            f'{user.name} from {project.name}')
+                                            f'{user.name} from {project.name}.')
             for member in project.members:
                 if not member==current_user:
                     member.notifications.append(notification)
