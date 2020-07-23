@@ -460,9 +460,11 @@ def join_project(project_id):
 @application.route('/leave_project/<int:project_id>', methods=['POST'])
 def leave_project(project_id):
     project = Project.query.get_or_404(project_id)
+    # validate that user is member
     if not current_user in project.members:
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
+    # transfer ownership
     if (current_user==project.owner):
         new_owner = User.query.get_or_404(request.form.get('new_owner'))
         success = transfer_ownership(project, new_owner)
