@@ -19,7 +19,6 @@ def add_subject_to_user(user, subject):
     else:
         new = User_Subjects(user, subject)
         user.subjects.append(new)
-    db.session.commit()
     return True
 
 
@@ -31,6 +30,8 @@ def add_user_to_project(project, user, role):
 
 def create_project(project, user):
     user.projects.append(project)
+    for subject in project.subjects:
+        add_subject_to_user(user, subject)
     db.session.add(project)
 
 
