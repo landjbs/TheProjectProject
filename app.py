@@ -158,7 +158,11 @@ def apply():
 @application.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        if current_user.accepted:
+            return redirect(url_for('home'))
+        else:
+            flash('Your application is under review—check back soon!')
+            return redirect(url_for('index'))
     form = Login(request.form)
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
