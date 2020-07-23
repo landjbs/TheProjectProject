@@ -297,9 +297,12 @@ def add_project():
                     db.session.commit()
                     db.session.close()
                 except Exception as e:
-                    print(f'ERROR: {e}')
+                    flash("Sorry! An error occured when trying to add your "
+                        "project. Please try again later.")
+                    print(e)
                     db.session.rollback()
                     return render_template('add_project.html', form=form)
+                flash('Congrats')
                 return redirect(f'/project={form.name.data}')
     return render_template('add_project.html', form=form)
 
