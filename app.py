@@ -302,7 +302,7 @@ def add_project():
                     print(e)
                     db.session.rollback()
                     return render_template('add_project.html', form=form)
-                flash('Congrats')
+                flash('Congratulations! Your project has been added.')
                 return redirect(f'/project={form.name.data}')
     return render_template('add_project.html', form=form)
 
