@@ -28,7 +28,7 @@ def remove_subject_from_user(user, subject):
     if prev:
         new_number = (prev.number - 1)
         if (new_number < 1):
-            user.subjects.remove(subject)
+            user.subjects.remove(prev)
         else:
             prev.number = new_number
     else:
