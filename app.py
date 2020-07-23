@@ -464,7 +464,7 @@ def leave_project(project_id):
         flash(f'Cannot leave {project.name} without being a member.')
         return redirect(request.referrer)
     if (current_user==project.owner):
-        new_owner = request.form.get('new_owner')
+        new_owner = User.query.get_or_404(request.form.get('new_owner'))
         success = transfer_ownership(project, new_owner)
         if not success:
             flash('Owner transfer unsuccessful.')
@@ -555,6 +555,7 @@ def mark_complete(project_id, task_id, action):
 
 
 def transfer_ownership(project, user):
+    print(user)
     if current_user!=project.owner:
         flash('Only the owner can transfer project ownership.')
         return False
