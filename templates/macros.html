@@ -192,6 +192,11 @@
   {% endif %}
 {% endmacro -%}
 
+
+{% macro render_project_share_button(project) -%}
+  <i class="fa fa-share-alt" aria-hidden="false"></i>
+{% endmacro -%}
+
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
     {% if not current_user in project.members %}
