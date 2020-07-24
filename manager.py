@@ -68,7 +68,7 @@ def remove_user_from_project(user, project, admin=False):
         remove_subject_from_user(user, subject)
     # remove project from user projects
     user.projects.remove(project)
-    # notify all remaining members
+    # notify all members depending on manner of removal
     if admin:
         member_note = Notification(text=f'{user.name} has been removed from '
                                          f'{project.name} by the owner.')
