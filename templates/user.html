@@ -148,7 +148,11 @@
 
 
               <div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-                <h4 style='text-align:left;'>Trending Projects</h4>
+                <h4 style='text-align:left;'>
+                  Member Projects
+                  <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
+                  {{ (user.projects|length) - (user.owned|length) }}
+                </h4>
                 <hr class="my-4">
                 <div class="carousel-inner" role="listbox">
                   {% for tab in member_tabs %}
