@@ -204,6 +204,21 @@
 {% endmacro -%}
 
 
+{% macro render_user_action_bar(current_user, target_user) -%}
+<div class='action-bar'>
+  <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
+    <i class="fa fa-star"></i>
+  </a>
+  {% endif %}
+  &nbsp;
+  {{ render_collaborate_button(current_user, target_user) }}
+  &nbsp;
+  {{ render_project_share_button(project) }}
+</div>
+{% endmacro -%}
+
+
+
 {% macro render_project_share_button(project) -%}
   <div class='hoverable'>
     <i class="fa fa-share-alt" aria-hidden="false"></i>
