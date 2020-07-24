@@ -61,24 +61,29 @@ def add_user_to_project(user, project):
     return True
 
 
-def remove_user_from_project(user, project):
+def remove_user_from_project(user, project, admin=False):
+    ''' admin: true if owner removed false if user '''
     # remove project subjects from user
     for subject in project.subjects:
         remove_subject_from_user(user, subject)
     # remove project from user projects
     user.projects.remove(project)
     # notify all remaining members
-    notification = Notification(text=f'{user.name} has been removed from '
-                                     f'{project.name} by the owner.')
-    for member in project.members:
-        if not member==user:
-            member.notifications.append(notification)
-    # notify removed member
-    notification = Notification(text=f'You have been removed from '
+    if admin:
+        member_note = Notification(text=f'{user.name} has been removed from '
+                                         f'{project.name} by the owner.')
+        rem_note = Notification(text=f'You have been removed from '
                                      f'{project.name} by the owner. We promise '
                                      "it's nothing personal! Please contact us "
                                      'if you think something is wrong or have '
                                      'any questions.')
+    else:
+
+    for member in project.members:
+        if not member==user:
+            member.notifications.append(notification)
+    # notify removed member
+    notification =
     user.notifications.append(notification)
     # add to session
     db.session.commit()
