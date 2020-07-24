@@ -5,11 +5,11 @@
   <div class="card mb-2">
     <div class="card-body">
       <div class='float-right'>
-        <i class='far fa-user-circle'></i>
         {{ project.members.all()|length }}
+        <i class='far fa-user-circle'></i>
         <br>
-        <i class="fa fa-star"></i>
         {{ project.stars.all()|length }}
+        <i class="fa fa-star"></i>
       </div>
       <div class='card-head'>
         <a class='project-name' href='project={{ project.name }}'>
@@ -115,16 +115,16 @@
       <div class='float-right'>
         {% if current_user==project.owner %}
           {% set pending = project.pending_members.all()|length %}
+          {{ pending }}
           {% if pending>0 %}
             <i class="fa fa-bell" aria-hidden="true"></i>
           {% else %}
             <i class="fa fa-bell-o" aria-hidden="true"></i>
           {% endif %}
-          {{ pending }}
           <br>
         {% endif %}
-        <i class="fa fa-star"></i>
         {{ project.stars.all()|length }}
+        <i class="fa fa-star"></i>
       </div>
       <div class='card-head tiny'>
         <a class='project-name' href='project={{ project.name }}'>
@@ -170,11 +170,11 @@
     <div class="card-body"
     style='background: {{ subject.color }}'>
       <p class="float-right" style='color:white;'>
-        <i class='fa fa-circle'></i>
         {{ subject.projects.all()|length  }}
+        <i class='fa fa-circle'></i>
         <br>
-        <i class='fa fa-user-circle'></i>
         {{ subject.users|length  }}
+        <i class='fa fa-user-circle'></i>
       </p>
       <div class='card-head tiny'>
         <a class='project-name' href='subject={{ subject.code }}'>
