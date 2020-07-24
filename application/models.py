@@ -99,7 +99,7 @@ class User(db.Model, UserMixin):
     pending_projects = relationship('Project_Application',
                                     back_populates='user', lazy='dynamic')
     invitations = relationship('Project', secondary='project_invitation',
-                               back_populates='invitations')
+                               back_populates='invitations', lazy='dynamic')
     # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
@@ -186,7 +186,7 @@ class Project(db.Model):
     pending_members = relationship('Project_Application',
                                    back_populates='project', lazy='dynamic')
     invitations = relationship('User', secondary='project_invitation',
-                               back_populates='invitations')
+                               back_populates='invitations', lazy='dynamic')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
