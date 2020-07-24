@@ -79,11 +79,11 @@ def remove_user_from_project(user, project, admin=False):
                                      'any questions.')
         user.notifications.append(rem_note)
     else:
-        member_note = Notification(text=f'{current_user.name} has left '
+        member_note = Notification(text=f'{user.name} has left '
                                         f'{project.name}.')
     for member in project.members:
         if not member==user:
-            member.notifications.append(notification)
+            member.notifications.append(member_note)
     # add to session
     db.session.commit()
     return True
@@ -107,6 +107,7 @@ def reject_user_from_pending(user, project):
     db.session.commit()
     flash(f'{user.name} has been removed from {project.name}.')
     return True
+
 
 def delete_project(project):
     for member in project.members:
