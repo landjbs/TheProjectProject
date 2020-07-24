@@ -1,4 +1,5 @@
 {% extends "home_base.html" %}
+{% import 'macros.html' as macros %}
 {% block title %}Home{% endblock %}
 
 {% block head %}
@@ -126,23 +127,7 @@
       {% endif %}
         <div class='row'>
           {% for user in tab %}
-            <div class="col-md-4">
-              <div class="card mb-2">
-                <div class="card-body">
-                  <div class='card-head little'>
-                    <a class='project-name' href='user={{ user.email }}'>
-                      <h5>{{ user.name }}</h5>
-                    </a>
-                    <a href='mailto:{{ user.email }}'>
-                      <p>{{ user.email }}</p>
-                    </a>
-                  </div>
-                  <p class='oneliner'>
-                    {{ user.about }}
-                  </p>
-                </div>
-              </div>
-            </div>
+            {{ macros.render_user_card(user) }}
           {% endfor %}
         </div>
       </div>
