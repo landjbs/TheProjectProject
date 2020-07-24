@@ -722,6 +722,11 @@ def collaborate(target_user_id):
         db.session.commit()
     return redirect(request.referrer)
 
+
+@application.route('/report_user/<int:target_user_id>', methods=['POST'])
+
+
+
 @application.route('/logout')
 @login_required
 def logout():
