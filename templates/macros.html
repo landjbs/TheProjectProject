@@ -178,7 +178,7 @@
 
 
 <!-- BUTTONS -->
-{% macro render_join_button(current_member, project) -%}
+{% macro render_join_button(current_user, project) -%}
   {% if not current_user in project.members %}
     <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
         Join
