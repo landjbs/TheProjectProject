@@ -701,17 +701,17 @@ def collaborate(target_user_id):
     target_user = User.query.get(target_user_id)
     if project is None:
         flash('Selected project does not exist.')
-        error_flag = True
+        return redirect(request.referrer)
     elif not current_user==project.owner:
         flash('Cannot invite collaborator to project you do not own.')
         error_flag = True
     if target_user is None:
         flash(f'Selected user does not exist.')
-        error_flag = True
+        return redirect(request.referrer)
     elif not target_user.accepted:
         flash(f'{target_user.name} user has not been accepted to TheProjectProject yet.')
         error_flag = True
-    elif (project is not None) and (target_user in project.members):
+    elif target_user in project.members:
         flash(f'{target_user.name} is already a member of {project.name}.')
         error_flag = True
     elif target_user.has_applied(project):
