@@ -99,7 +99,15 @@ a:hover {
 .hoverable:hover .tooltiptext {
   display: inline;
   opacity: 1;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.9);
+}
+
+.tooltiptext a {
+  color: white;
+}
+
+.tooltiptext a:hover {
+  color: #FF5D00;
 }
 
 .oneliner {
