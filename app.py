@@ -719,7 +719,7 @@ def collaborate(target_user_id):
     return redirect(url_for('home'))
 
 
-@application.route('/accept_collaboration/<int:project_id>', methods=['POST'])
+@application.route('/accept_collaboration/<int:project_id>')
 def accept_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user in project.invitations:
