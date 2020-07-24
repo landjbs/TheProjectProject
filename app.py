@@ -450,11 +450,6 @@ def join_project(project_id):
         return redirect(request.referrer)
     if project.open:
         if not project.requires_application:
-            # notify users
-            notification = Notification(text=f'{current_user.name} has joined '
-                                             f'{project.name}.')
-            for member in project.members:
-                member.notifications.append(notification)
             manager.add_user_to_project(current_user, project)
             flash(f'You have been added to {project.name}!')
         else:
