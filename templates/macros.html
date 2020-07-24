@@ -199,7 +199,7 @@
 
 {% macro render_collaborate_button(current_user, target_user) -%}
   <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ target_user.id }}">
-      Collaborate
+      Collab
   </button>
 {% endmacro -%}
 
@@ -325,7 +325,7 @@
               <option value="{{ project.id }}">{{ project.name }}</option>
             {% endfor %}
           </select>
-          <br>
+          <br><br>
           <p>{{ target_user.name }} will be sent an invitation
             and will be able to join without applying.
           </p>
