@@ -705,6 +705,8 @@ def collaborate(target_user_id):
     if not current_user==project.owner:
         flash('Cannot invite collaborator to project you do not own.')
         error_flag = True
+    elif current_user==target_user:
+        flash('You cannot collaborate with yourself!')
     elif not target_user.accepted:
         flash(f'{target_user.name} user has not been accepted to TheProjectProject yet.')
         error_flag = True
