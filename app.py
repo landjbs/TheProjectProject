@@ -731,6 +731,12 @@ def reject_collaboration(project_id):
     if current_user in project.invitations:
         flash(f'You have declined the offer to collaborate on {project.name}.')
         project.invitations.remove(current_user)
+        # notify project owner
+        notification = Notification(text=(f'{current_user.name} has decided '
+                                    f'not to collaborate on {project.name}. '
+                                    "We promise it's nothing personal! Please "
+                                    'contact us if you think a mistake was made.'))
+        project.owner
     return redirect(request.referrer)
 
 
