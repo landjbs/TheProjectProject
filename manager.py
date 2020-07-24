@@ -42,8 +42,14 @@ def add_user_to_project(user, project):
         add_subject_to_user(user, subject)
     notification = Notification(text=f'{user.name} has joined {project.name}.')
     for member in project.members:
-        if not member==current_user:
-            member.notifications.append(notification)
+        member.notifications.append(notification)
+    # delete possible application
+    application = project.pending_members.filter_by(user=user).first()
+    if application is not None:
+        db.session.delete(application)
+    # delete possible invitation
+    
+    # add to session
     user.projects.append(project)
     db.session.add(project)
     db.session.commit()
