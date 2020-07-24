@@ -724,7 +724,9 @@ def collaborate(target_user_id):
 
 
 @application.route('/report_user/<int:target_user_id>', methods=['POST'])
-
+def report_user(target_user_id):
+    error_flag = False
+    if 
 
 
 @application.route('/logout')
