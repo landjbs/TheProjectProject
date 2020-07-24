@@ -696,18 +696,23 @@ def search():
 
 @application.route('/collaborate/<int:target_user_id>', methods=['POST'])
 def collaborate(target_user_id):
-    error_flag = True
+    error_flag = False
     project = request.form.get('selected_project')
+    user = User.query.get(target_user_id)
     if project is None:
         flash('Selected project does not exist.')
+        error_flag = True
+    if user is None:
+        flash('Selected user does not exist.')
+        error_flag = True
+    if not user.accepted:
+        flash('Selected user has not been accepted to TheProjectProject yet.')
         error_flag = True
     elif not current_user==project.owner:
         flash('Cannot invite collaborator to project you do not own.')
         error_flag = True
     if not error_flag:
-        
-
-    flash('Cannot to add to ')
+        notifcation = Notification()
 
 @application.route('/logout')
 @login_required
