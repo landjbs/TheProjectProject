@@ -151,6 +151,9 @@ class User(db.Model, UserMixin):
     def has_starred(self, project):
         return (project in self.starred)
 
+    def has_applied(self, project):
+        return ((self.pending_projects.filter_by(project=project).first()) is not None)
+
 
 class Project(db.Model):
     __tablename__ = 'project'
