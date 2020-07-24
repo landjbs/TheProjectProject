@@ -133,8 +133,10 @@
       <p class='oneliner'>
         {{ user.about }}
       </p>
-      <hr class="my-4">
-      {{ render_user_action_bar(current_user, user) }}
+      {% if current_user!=user %}
+        <hr class="my-4">
+        {{ render_user_action_bar(current_user, user) }}
+      {% endif %}
     </div>
   </div>
 </div>
