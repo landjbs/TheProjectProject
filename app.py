@@ -711,7 +711,7 @@ def collaborate(target_user_id):
     elif not target_user.accepted:
         flash(f'{target_user.name} user has not been accepted to TheProjectProject yet.')
         error_flag = True
-    elif target_user in project.members:
+    elif (project is not None) and (target_user in project.members):
         flash(f'{target_user.name} is already a member of {project.name}.')
         error_flag = True
     elif target_user.has_applied(project):
