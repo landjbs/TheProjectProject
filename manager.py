@@ -38,11 +38,13 @@ def remove_subject_from_user(user, subject):
 
 ## USER TO PROJECTS ##
 def add_user_to_project(user, project):
-    user.projects.append(project)
     for subject in project.subjects:
         add_subject_to_user(user, subject)
-    notification = Notification()
-    for
+    notification = Notification(text=f'{user.name} has joined {project.name}.')
+    for member in project.members:
+        if not member==current_user:
+            member.notifications.append(notification)
+    user.projects.append(project)
     db.session.add(project)
     db.session.commit()
 
