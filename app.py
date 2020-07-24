@@ -12,7 +12,7 @@ from operator import itemgetter
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject,
-                                Project_Application, Notification)
+                                Project_Application, Notification, Invitation)
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
                                 Task_Form, Project_Application_Form)
 import manager as manager
@@ -714,6 +714,8 @@ def collaborate(target_user_id):
         flash(f'{target_user.name} has already applied to {project.name}. '
             'Go to the project page to accept their application.')
     else:
+        invitation = Invitation(project=project)
+        target_user.invitations.append(invitation)
         notifcation = Notification(text=f'{current_user.name} has invited you '
                                         f'to collaborate on {project.name}! '
                                         'Visit your profile page to reply.')
