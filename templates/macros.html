@@ -320,7 +320,7 @@
         <div class="modal-body">
           <label for="new_owner">Select new project to invite {{ target_user.name }}:</label>
           <br>
-          <select name="new_owner" id="new_owner" style='border:0px; border-bottom:1px solid black; width:100%;'>
+          <select name="selected_project" id="selected_project" style='border:0px; border-bottom:1px solid black; width:100%;'>
             {% for project in current_user.owned %}
               <option value="{{ project.id }}">{{ project.name }}</option>
             {% endfor %}

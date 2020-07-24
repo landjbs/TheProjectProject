@@ -696,7 +696,16 @@ def search():
 
 @application.route('/collaborate/<int:target_user_id>', methods=['POST'])
 def collaborate(target_user_id):
-    pass
+    error_flag = True
+    project = request.form.get('selected_project')
+    if project is None:
+        flash('Selected project does not exist.')
+        error_flag = True
+    elif not current_user==project.owner:
+        flash('Cannot invite collaborator to project you do not own.')
+        error_flag = True
+    
+    flash('Cannot to add to ')
 
 @application.route('/logout')
 @login_required
