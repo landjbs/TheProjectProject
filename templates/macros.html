@@ -163,6 +163,27 @@
 {% endmacro -%}
 
 
+<!-- subject cards -->
+{% macro render_subject_card(user) -%}
+<div class="col-md-4">
+  <div class="card mb-2">
+    <div class="card-body"
+    style='background: {{ subject.color }};'>
+      <p class="float-right">
+        <i class='far fa-user-circle'></i>
+        {{ subject.projects.all()|length  }}
+      </p>
+      <div class='card-head tiny'>
+        <a class='project-name' href='subject={{ subject.code }}'>
+          <h5>{{ subject.name }}</h5>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
     {% if not current_user in project.members %}
