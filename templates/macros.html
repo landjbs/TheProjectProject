@@ -299,8 +299,8 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <a href='user={{ user.email }}' style='color:black;'>
-          <h5>{{ user.name }}</h5>
+        <a href='user={{ target_user.email }}' style='color:black;'>
+          <h5>{{ target_user.name }}</h5>
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
@@ -311,7 +311,10 @@
               {{ project_application.hidden_tag() }}
               {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
           {% else %}
-            <p>Welcome to {{ project.name }}! Click to join.</p>
+            <p>Cannot invite {{ target_user.name }} to collaborate because
+              you do not own any projects! Try
+              <a href='/add_project'>adding a project</a> first.
+            </p>
           {% endif %}
         </div>
         <div class="modal-footer">
