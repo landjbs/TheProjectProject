@@ -419,7 +419,7 @@ def subject(subject_name):
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
     # project tabs
     subject_projects = Project.query.filter(Project.subjects.contains(subject)).limit(30)
-    project_tabs = partition_query(subject_projects)
+    project_tabs = list(partition_query(subject_projects))
     # users
     subject_users = [s.user for s in subject.users[:30]]
     user_tabs = partition_query(subject_users)
@@ -671,7 +671,7 @@ def search():
     # project results
     project_results = Project.query.filter(Project.name.contains(search_text) |
                                    Project.oneliner.contains(search_text))
-    project_tabs = partition_query(project_results.limit(30))
+    project_tabs = list(partition_query(project_results.limit(30)))
     # user results
     user_results = User.query.filter(User.name.contains(search_text) |
                                      User.about.contains(search_text))
