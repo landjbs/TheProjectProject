@@ -183,10 +183,10 @@ class Project(db.Model):
     owner = relationship('User', back_populates='owned')
     members = relationship('User', secondary='user_to_project_2',
                            back_populates='projects', lazy='dynamic')
-    # members = relationship('Project_Membership',
-    #                         back_populates='projects', lazy='dynamic')
     pending_members = relationship('Project_Application',
                                    back_populates='project', lazy='dynamic')
+    invitations = relationship('User', secondary='project_invitation',
+                               back_populates='invitations')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
