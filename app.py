@@ -714,8 +714,8 @@ def collaborate(target_user_id):
         error_flag = True
     if not error_flag:
         notifcation = Notification(text=f'{current_user.name} has invited you '
-                                    f'to collaborate on {project.name}! '
-                                     'Visit your profile page to accept.')
+                                        f'to collaborate on {project.name}! '
+                                        'Visit your profile page to reply.')
         target_user.notifications.append(notifcation)
         flash(f'You have sent {target_user.name} an invitation to collaborate '
               f'on {project.name}. You will be notified when they respond.')
