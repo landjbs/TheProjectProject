@@ -206,14 +206,11 @@
 
 {% macro render_user_action_bar(current_user, target_user) -%}
 <div class='action-bar'>
-  <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
-    <i class="fa fa-star"></i>
-  </a>
-  {% endif %}
+  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
   &nbsp;
   {{ render_collaborate_button(current_user, target_user) }}
   &nbsp;
-  {{ render_project_share_button(project) }}
+  <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
 </div>
 {% endmacro -%}
 
@@ -235,6 +232,30 @@
       </a>
       <a class="twitter-share-button"
           href="https://twitter.com/share?url=https://theprojectproject.io/project={{ project.name }}"
+          data-size="large">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      </a>
+    </span>
+  </div>
+{% endmacro -%}
+
+
+{% macro render_user_share_button(user) -%}
+  <div class='hoverable'>
+    <i class="fa fa-share-alt" aria-hidden="false"></i>
+    <span class='tooltiptext'>
+      <a class="twitter-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.email }}"
+          data-size="large">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a class="twitter-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.email }}"
+          data-size="large">
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a class="twitter-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.email }}"
           data-size="large">
         <i class="fa fa-facebook-square" aria-hidden="true"></i>
       </a>
