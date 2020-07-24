@@ -77,14 +77,13 @@ def remove_user_from_project(user, project, admin=False):
                                      "it's nothing personal! Please contact us "
                                      'if you think something is wrong or have '
                                      'any questions.')
+        user.notifications.append(rem_note)
     else:
-
+        member_note = Notification(text=f'{current_user.name} has left '
+                                        f'{project.name}.')
     for member in project.members:
         if not member==user:
             member.notifications.append(notification)
-    # notify removed member
-    notification =
-    user.notifications.append(notification)
     # add to session
     db.session.commit()
     return True
