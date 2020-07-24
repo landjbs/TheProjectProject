@@ -71,6 +71,11 @@ def remove_user_from_project(user, project):
         if not member==user:
             member.notifications.append(notification)
     # notify removed member
+    notification = Notification(text=f'You have been removed from '
+                                     f'{project.name} by the owner. We promise '
+                                     "it's nothing personal! Please contact us "
+                                     'if you think something is wrong or have '
+                                     'any questions.')
     db.session.commit()
     return True
 
