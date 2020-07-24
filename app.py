@@ -706,13 +706,17 @@ def collaborate(target_user_id):
         flash('Cannot invite collaborator to project you do not own.')
         error_flag = True
     if target_user is None:
-        flash('Selected user does not exist.')
+        flash(f'Selected user does not exist.')
         error_flag = True
     elif not target_user.accepted:
-        flash('Selected user has not been accepted to TheProjectProject yet.')
+        flash(f'{target_user.name} user has not been accepted to TheProjectProject yet.')
         error_flag = True
     elif target_user in project.members:
-        flash(f'Selected user is already a member of {project.name}.')
+        flash(f'{target_user.name} is already a member of {project.name}.')
+        error_flag = True
+    elif target_user.has_applied():
+        flash(f'Selected')
+        error_flag = True
     if not error_flag:
         notifcation = Notification(text='')
         target_user.
