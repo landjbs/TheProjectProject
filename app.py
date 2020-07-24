@@ -515,7 +515,6 @@ def leave_project(project_id):
 @application.route('/like/<int:project_id>/<action>')
 def like_action(project_id, action):
     project = Project.query.get_or_404(project_id)
-    db.session.commit()
     if action == 'like':
         current_user.star_project(project)
         db.session.commit()

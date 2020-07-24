@@ -50,7 +50,7 @@
         {% endif %}
           <div class='row'>
             {% for user in tab %}
-              {{ macros.render_user_card(user) }}
+              {{ macros.render_user_card(current_user, user) }}
             {% endfor %}
           </div>
         </div>
