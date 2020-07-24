@@ -277,7 +277,7 @@ class Task(db.Model):
     workers = relationship('User', secondary=user_to_task,
                            back_populates='tasks_worked')
     # timing
-    post_stamp = Column(DateTime, default=datetime.utcnow(), index=True)
+    post_stamp = Column(DateTime, default=datetime.utcnow, index=True)
     complete_stamp = Column(DateTime, nullable=True)
     complete = Column(Boolean, default=False)
 
@@ -309,7 +309,7 @@ class Comment(db.Model):
     project_id = Column(Integer, ForeignKey('project.id'))
     project = relationship('Project', back_populates='comments')
     # time
-    timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
+    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
 
     def __repr__(self):
         return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}>'
