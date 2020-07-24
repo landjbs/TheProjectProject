@@ -43,21 +43,8 @@
                   by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
                 </p>
             </div>
-            <div class='action-bar'>
-              {% if current_user.has_starred(project) %}
-                <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
-                  <i class="fa fa-star"></i>
-                </a>
-              {% else %}
-                <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
-                  <i class="fa fa-star-o"></i>
-                </a>
-              {% endif %}
-              &nbsp;
-              {{ macros.render_join_button(current_user, project) }}
-              &nbsp;
-              {{ macros.render_project_share_button(project) }}
-            </div>
+            {{ macros.render_project_action_bar(current_user, project) }}
+            <br>
             <ul class="list-unstyled components">
               <div class='bio'>
                 <p class='oneliner'>
