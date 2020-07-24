@@ -73,15 +73,15 @@
                             href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
                               <i class="fa fa-times-circle" aria-hidden="true"></i>
                             </a>
-                            <span class='tooltiptext'>Reject Applicant</span>
+                            <span class='tooltiptext'>Reject</span>
                           </div>
                           <div class='hoverable'>
                             <a class='complete-btn task-btn float-right'
                             style='background: transparent;'
-                            href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                            href="{{ url_for('join_project', project_id=project.id) }}">
                               <i class="fa fa-check-circle" aria-hidden="true"></i>
                             </a>
-                            <span class='tooltiptext'>Accept Applicant</span>
+                            <span class='tooltiptext'>Accept</span>
                           </div>
                         </div>
                       {% endfor %}
