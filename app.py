@@ -717,7 +717,8 @@ def collaborate(target_user_id):
                                     f'to collaborate on {project.name}! '
                                      'Visit your profile page to accept.')
         target_user.notifications.append(notifcation)
-        flash(f'Invitation to collaborate sent to {target_user.name}.')
+        flash(f'You have sent {target_user.name} an invitation to collaborate '
+              f'on {project.name}. You will be notified when they respond.')
     return redirect(request.referrer)
 
 @application.route('/logout')
