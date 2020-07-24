@@ -726,6 +726,11 @@ def collaborate(target_user_id):
     return redirect(request.referrer)
 
 
+@application.route('/collaborate/<int:target_user_id>', methods=['POST'])
+def reject_collaboration(project_id):
+    pass
+
+
 @application.route('/report_user/<int:target_user_id>', methods=['POST'])
 def report_user(target_user_id):
     error_flag = False
