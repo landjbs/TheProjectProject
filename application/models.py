@@ -92,7 +92,7 @@ class User(db.Model, UserMixin):
     projects = relationship('Project', secondary='user_to_project_2',
                             back_populates='members')
     pending_projects = relationship('Project_Application',
-                                    back_populates='user')
+                                    back_populates='user', lazy='dynamic')
     # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
