@@ -719,6 +719,7 @@ def collaborate(target_user_id):
         target_user.notifications.append(notifcation)
         flash(f'You have sent {target_user.name} an invitation to collaborate '
               f'on {project.name}. You will be notified when they respond.')
+        db.session.commit()
     return redirect(request.referrer)
 
 @application.route('/logout')
