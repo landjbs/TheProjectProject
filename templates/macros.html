@@ -60,17 +60,7 @@
           </a>
         {% endif %}
         &nbsp;
-        {% if not current_user in project.members %}
-          <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
-              Join
-          </button>
-        {% elif current_user in project.pending %}
-            Pending
-        {% else %}
-          <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
-              Leave
-          </button>
-        {% endif %}
+        {{ render_join_button(current_user, project) }}
         &nbsp;
         <i class="fa fa-share-alt" aria-hidden="false"></i>
       </div>
@@ -186,6 +176,11 @@
 </div>
 {% endmacro -%}
 
+
+<!-- BUTTONS -->
+{% macro render_join_button() -%}
+  {}
+{% endmacro -%}
 
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
