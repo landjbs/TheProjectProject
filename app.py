@@ -725,7 +725,7 @@ def accept_collaboration(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/reject_collaboration/<int:project_id>', methods=['POST'])
+@application.route('/reject_collaboration/<int:project_id>')
 def reject_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user in project.invitations:
@@ -736,7 +736,7 @@ def reject_collaboration(project_id):
                                     f'not to collaborate on {project.name}. '
                                     "We promise it's nothing personal! Please "
                                     'contact us if you think a mistake was made.'))
-        project.owner
+        project.owner.notifications.append(notifcation)
     return redirect(request.referrer)
 
 
