@@ -632,7 +632,7 @@ def change_project_status(project_id, user_id, action):
             error_flag = manager.reject_user_from_pending(user, project)
     ## MAKE OWNER ##
     elif action=='make_owner':
-        successful_transfer = transfer_ownership(project, user)
+        successful_transfer = (not transfer_ownership(project, user))
         if not successful_transfer:
             error_flag = True
     else:
