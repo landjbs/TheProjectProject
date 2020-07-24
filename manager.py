@@ -92,6 +92,13 @@ def reject_user_from_pending(user, project):
         flash(f'Cannot reject {user.name} application to {project.name} '
                "because they haven't applied.")
         return False
+    db.session.delete(application)
+    # notify rejected user
+    notifcation = Notification(text=f'The owner of {project.name} decided not '
+                                     'to add you to the project right now. '
+                                     "We promise it's nothing personal! "
+                                     'Please contact us if you think something'
+                                     ' is wrong or have any questions.')
 
 
 def delete_project(project):
