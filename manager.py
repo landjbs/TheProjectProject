@@ -105,6 +105,7 @@ def reject_user_from_pending(user, project):
                                      ' is wrong or have any questions.')
     user.notifications.append(notifcation)
     db.session.commit()
+    flash(f'{user.name} has been removed from {project.name}.')
     return True
 
 def delete_project(project):
