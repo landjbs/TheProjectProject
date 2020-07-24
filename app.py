@@ -647,7 +647,6 @@ def change_project_status(project_id, user_id, action):
         # remove user from pending
         else:
             application = project.pending_members.filter_by(user=user).first()
-            # notification Notification(text='')
             if application is not None:
                 db.session.delete(application)
             else:
@@ -728,6 +727,7 @@ def accept_collaboration(project_id):
         manager.add_user_to_project(current_user, project)
     else:
         flash(f'Could not join {current_user.name} as you have not been invited.')
+    return redirect(request.referrer)
 
 
 @application.route('/reject_collaboration/<int:project_id>', methods=['POST'])
