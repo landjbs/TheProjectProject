@@ -197,7 +197,7 @@
 
 
 {% macro render_collaborate_button(current_user, target_user) -%}
-  <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ user.id }}">
+  <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ target_user.id }}">
       Collaborate
   </button>
 {% endmacro -%}
@@ -314,7 +314,7 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('extend_collaboration', target_user_id=target_user_id.id) }}" method='post'>
+      <form action="{{ url_for('collaborate', target_user_id=target_user.id) }}" method='post'>
         <div class="modal-body">
           {% if (current_user.owned|length)>0 %}
             <p>here</p>
