@@ -16,6 +16,7 @@ from application.models import (User, Project, Comment, Task, Subject,
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
                                 Task_Form, Project_Application_Form)
 import manager as manager
+import recommendation as rec
 
 
 ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
