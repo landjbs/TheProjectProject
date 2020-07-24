@@ -728,7 +728,7 @@ def collaborate(target_user_id):
     return redirect(url_for('home'))
 
 
-@application.route('/reject_collaboration/<int:target_user_id>', methods=['POST'])
+@application.route('/reject_collaboration/<int:project_id>', methods=['POST'])
 def reject_collaboration(project_id):
     pass
 
