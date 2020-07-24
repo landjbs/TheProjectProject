@@ -1,5 +1,5 @@
 from application import db
-from application.models import Project, User, Subject, User_Subjects
+from application.models import Project, User, Subject, User_Subjects, Notification
 
 
 def create_subject(name, color):
@@ -41,6 +41,8 @@ def add_user_to_project(user, project):
     user.projects.append(project)
     for subject in project.subjects:
         add_subject_to_user(user, subject)
+    notification = Notification()
+    for
     db.session.add(project)
     db.session.commit()
 
