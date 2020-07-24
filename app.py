@@ -714,8 +714,9 @@ def collaborate(target_user_id):
     elif target_user in project.members:
         flash(f'{target_user.name} is already a member of {project.name}.')
         error_flag = True
-    elif target_user.has_applied():
-        flash(f'Selected')
+    elif target_user.has_applied(project):
+        flash(f'{target_user.name} has already applied to {project.name}. '
+            'Go to the project page to accept their application.')
         error_flag = True
     if not error_flag:
         notifcation = Notification(text='')
