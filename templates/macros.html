@@ -216,6 +216,7 @@
   </div>
 {% endmacro -%}
 
+
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
     {% if not current_user in project.members %}
@@ -290,3 +291,7 @@
     {% endif %}
   </div>
 {%- endmacro %}
+
+
+{% macro render_collaborate_modal(current_user, target_user) -%}
+{% endmacro -%}
