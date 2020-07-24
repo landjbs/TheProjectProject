@@ -637,7 +637,6 @@ def change_project_status(project_id, user_id, action):
             for member in project.members:
                 if not member==current_user:
                     member.notifications.append(notification)
-            flash(f'{user.name} removed from {project.name}.')
         # remove user from pending
         else:
             application = project.pending_members.filter_by(user=user).first()

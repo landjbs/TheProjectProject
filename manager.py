@@ -64,6 +64,12 @@ def remove_user_from_project(user, project):
         remove_subject_from_user(user, subject)
     # remove project from user projects
     user.projects.remove(project)
+    # notify all members
+    notification = Notification(text=f'{user.name} has been removed from '
+                                     f'{project.name} by the owner.')
+    for member in project.members:
+        if not member==user:
+            member.notifications.append(notification)
     db.session.commit()
     return True
 
