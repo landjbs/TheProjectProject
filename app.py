@@ -719,8 +719,12 @@ def collaborate(target_user_id):
             'Go to the project page to accept their application.')
         error_flag = True
     if not error_flag:
-        notifcation = Notification(text='')
-        target_user.
+        notifcation = Notification(text=f'{current_user.name} has invited you '
+                                    f'to collaborate on {project.name}! '
+                                     'Visit your profile page to accept.')
+        target_user.notifications.append(notifcation)
+        flash(f'Invitation to collaborate sent to {target_user.name}.')
+    return redirect(request.referrer)
 
 @application.route('/logout')
 @login_required
