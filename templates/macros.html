@@ -294,4 +294,31 @@
 
 
 {% macro render_collaborate_modal(current_user, target_user) -%}
+<div id="modal_{{ target_user.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <a href='user={{ user.email }}' style='color:black;'>
+          <h5>{{ user.name }}</h5>
+        </a>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('extend_collaboration', target_user_id=target_user_id.id) }}" method='post'>
+        <div class="modal-body">
+          {% if (current_user.owned|length)>0 %}
+            "{{ project.application_question }}"</p>
+              {{ project_application.hidden_tag() }}
+              {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
+          {% else %}
+            <p>Welcome to {{ project.name }}! Click to join.</p>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>Join</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endmacro -%}
