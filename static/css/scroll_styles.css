@@ -140,6 +140,11 @@ a:hover {
   color: #5D00FF;
 }
 
+.btn {
+  color: black;
+  background: white;
+}
+
 .btn:hover {
   color: white;
   background-color: #5D00FF;
