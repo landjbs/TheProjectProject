@@ -704,22 +704,17 @@ def collaborate(target_user_id):
     target_user = User.query.get_or_404(target_user_id)
     if not current_user==project.owner:
         flash('Cannot invite collaborator to project you do not own.')
-        error_flag = True
     elif current_user==target_user:
         flash("You don't need to send an invitation to collaborate with "
               "yourself!")
-        error_flag = True
     elif not target_user.accepted:
         flash(f'{target_user.name} user has not been accepted to TheProjectProject yet.')
-        error_flag = True
     elif target_user in project.members:
         flash(f'{target_user.name} is already a member of {project.name}.')
-        error_flag = True
     elif target_user.has_applied(project):
         flash(f'{target_user.name} has already applied to {project.name}. '
             'Go to the project page to accept their application.')
-        error_flag = True
-    if not error_flag:
+    else:
         notifcation = Notification(text=f'{current_user.name} has invited you '
                                         f'to collaborate on {project.name}! '
                                         'Visit your profile page to reply.')
