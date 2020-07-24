@@ -318,15 +318,16 @@
       {% if (current_user.owned|length)>0 %}
       <form action="{{ url_for('collaborate', target_user_id=target_user.id) }}" method='post'>
         <div class="modal-body">
-
-            <p>here</p>
-            <p>Cannot invite {{ target_user.name }} to collaborate because
-              you do not own any projects! Try
-              <a href='/add_project'>adding a project</a> first.
-            </p>
+          <label for="new_owner">Select new project to invite {{ target_user.name }}:</label>
+          <br>
+          <select name="new_owner" id="new_owner" style='border:0px; border-bottom:1px solid black; width:100%;'>
+            {% for project in current_user.owned %}
+              <option value="{{ project.id }}">{{ project.name }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div class="modal-footer">
-          <button class='btn'>Join</button>
+          <button class='btn'>Invite</button>
         </div>
       </form>
       {% else %}
