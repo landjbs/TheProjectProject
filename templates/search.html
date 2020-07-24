@@ -94,11 +94,19 @@
 
 <!-- modals -->
 <div>
+  <!-- project modals -->
   {% for tab in project_tabs %}
     {% for project in tab %}
       {{ macros.render_join_modal(current_user, project, project_application) }}
     {% endfor %}
   {% endfor %}
+  <!-- user modals -->
+  {% for tab in user_tabs %}
+    {% for user in tab %}
+      {{ macros.render_collaborate_modal(current_user, user) }}
+    {% endfor %}
+  {% endfor %}
+
 </div>
 
 
