@@ -51,7 +51,7 @@ body {
   color: gold;
 }
 
-.container {
+#project_form {
   text-align: center;
   position: absolute;
   top: 50%;
