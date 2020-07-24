@@ -325,7 +325,7 @@
                     {% if project.members.all()|length>1 %}
                       <label for="new_owner">Select new project owner:</label>
                       <br>
-                      <select name="new_owner" id="new_owner" style='border:0px; border-bottom:1px solid black; width:100%;'>
+                      <select name="new_owner" id="new_owner" class='select-clean'>
                         {% for member in project.members %}
                           {% if not member==project.owner %}
                             <option value="{{ member.id }}">{{ member.name }}</option>
@@ -370,7 +370,7 @@
         <div class="modal-body">
           <label for="new_owner">Select project on which to collaborate with {{ target_user.name }}:</label>
           <br>
-          <select name="selected_project" id="selected_project" style='border:0px; border-bottom:1px solid black; width:100%;'>
+          <select name="selected_project" id="selected_project" class='select-clean'>
             {% for project in current_user.owned %}
               <option value="{{ project.id }}">{{ project.name }}</option>
             {% endfor %}
