@@ -194,10 +194,15 @@
 
 
 {% macro render_project_share_button(project) -%}
-  <!-- <i class="fa fa-share-alt" aria-hidden="false"></i> -->
-  <a class="twitter-share-button"
-    href="https://twitter.com/intent/tweet?text=Hello%20world">
-  Tweet</a>
+  <div class='hoverable'>
+    <i class="fa fa-share-alt" aria-hidden="false"></i>
+    <span class='tooltiptext'>
+      <a class="twitter-share-button"
+        href="https://twitter.com/intent/tweet?text=Hello%20world">
+        Tweet  
+      </a>
+    </span>
+  </div>
 {% endmacro -%}
 
 <!-- MODALS -->
