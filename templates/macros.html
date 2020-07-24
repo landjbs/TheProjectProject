@@ -146,23 +146,23 @@
 <!-- subject cards -->
 {% macro render_subject_card(subject) -%}
 <div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body"
-    style='background: {{ subject.color }}'>
-      <p class="float-right" style='color:white;'>
-        {{ subject.projects.all()|length  }}
-        <i class='fa fa-circle'></i>
-        <br>
-        {{ subject.users|length  }}
-        <i class='fa fa-user-circle'></i>
-      </p>
-      <div class='card-head tiny'>
-        <a class='project-name' href='subject={{ subject.code }}'>
+  <a class='project-name' href='subject={{ subject.code }}'>
+    <div class="card mb-2">
+      <div class="card-body"
+      style='background: {{ subject.color }}'>
+        <p class="float-right" style='color:white;'>
+          {{ subject.projects.all()|length  }}
+          <i class='fa fa-circle'></i>
+          <br>
+          {{ subject.users|length  }}
+          <i class='fa fa-user-circle'></i>
+        </p>
+        <div class='card-head tiny'>
           <h5 style='color:white;'>{{ subject.name }}</h5>
-        </a>
+        </div>
       </div>
     </div>
-  </div>
+  </a>
 </div>
 {% endmacro -%}
 
