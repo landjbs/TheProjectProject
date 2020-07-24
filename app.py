@@ -629,12 +629,7 @@ def change_project_status(project_id, user_id, action):
             manager.remove_user_from_project(user, project)
         # remove user from pending
         else:
-            application = project.pending_members.filter_by(user=user).first()
-            if application is not None:
-                db.session.delete(application)
-            else:
-                flash('Cannot reject user not affiliated with project.')
-                error_flag = True
+            error_flag = manager.reject_user_from_pending(user, project)
     ## MAKE OWNER ##
     elif action=='make_owner':
         successful_transfer = transfer_ownership(project, user)

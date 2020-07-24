@@ -99,7 +99,9 @@ def reject_user_from_pending(user, project):
                                      "We promise it's nothing personal! "
                                      'Please contact us if you think something'
                                      ' is wrong or have any questions.')
-
+    user.notifications.append(notifcation)
+    db.session.commit()
+    return True
 
 def delete_project(project):
     for member in project.members:
