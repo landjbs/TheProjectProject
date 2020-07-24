@@ -39,19 +39,19 @@
     <!--/.Controls-->
   </div>
 
-  <div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+  <div id="user-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
     <h4 style='text-align:left;'>User</h4>
     <hr class="my-4">
     <div class="carousel-inner" role="listbox">
-      {% for tab in top_tabs %}
+      {% for tab in user_tabs %}
         {% if loop.index==1 %}
         <div class="carousel-item active">
         {% else %}
         <div class="carousel-item">
         {% endif %}
           <div class='row'>
-            {% for project in tab %}
-              {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
+            {% for user in tab %}
+              {{ macros.render_user_card(user) }}
             {% endfor %}
           </div>
         </div>
@@ -60,8 +60,8 @@
   </div>
   <!--Controls-->
   <div class="controls-top">
-    <a class="btn-floating" href="#trending-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-    <a class="btn-floating" href="#trending-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+    <a class="btn-floating" href="#user-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+    <a class="btn-floating" href="#user-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
   </div>
   <!--/.Controls-->
 
@@ -117,8 +117,8 @@ $('#project-carousel').on('slid.bs.carousel', function () {
   sessionStorage.setItem('recSlide', $('#project-carousel div.active').index());
   });
 
-$('#trending-carousel').on('slid.bs.carousel', function () {
-  sessionStorage.setItem('trendingSlide', $('#trending-carousel div.active').index());
+$('#user-carousel').on('slid.bs.carousel', function () {
+  sessionStorage.setItem('trendingSlide', $('#user-carousel div.active').index());
   });
 
 $('#my-carousel').on('slid.bs.carousel', function () {
@@ -131,7 +131,7 @@ if(sessionStorage.recSlide){
   }
 
 if(sessionStorage.trendingSlide){
-    $("#trending-carousel").carousel(sessionStorage.trendingSlide*1);
+    $("#user-carousel").carousel(sessionStorage.trendingSlide*1);
   }
 
 if(sessionStorage.mySlide){
