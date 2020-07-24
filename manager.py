@@ -77,6 +77,7 @@ def remove_user_from_project(user, project):
                                      'if you think something is wrong or have '
                                      'any questions.')
     user.notifications.append(notification)
+    # add to session
     db.session.commit()
     return True
 
