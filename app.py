@@ -585,7 +585,6 @@ def mark_complete(project_id, task_id, action):
 
 
 def transfer_ownership(project, user):
-    print(user)
     if current_user!=project.owner:
         flash('Only the owner can transfer project ownership.')
         return False
