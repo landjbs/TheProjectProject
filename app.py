@@ -349,7 +349,7 @@ def user(email):
         task_data['earliest'] = earliest
     # owned projects
     owned = user.owned
-    owned_tabs = partition_query(owned)
+    owned_tabs = list(partition_query(owned))
     # member projects
     member_projects = [project for project in user.projects
                        if not project in owned]
