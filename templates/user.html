@@ -129,7 +129,7 @@
                   {% endif %}
                     <div class='row'>
                       {% for project in tab %}
-
+                        {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
                       {% endfor %}
                     </div>
                   </div>
