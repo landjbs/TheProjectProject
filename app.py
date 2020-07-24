@@ -498,7 +498,7 @@ def leave_project(project_id):
         else:
             manager.delete_project(project)
             flash(f'{project.name} deleted.')
-            return redirect(request.referrer)
+            return redirect(url_for('home'))
     manager.remove_user_from_project(current_user, project)
     notification = Notification(text=f'{current_user.name} has left '
                                      f'{project.name}.')
