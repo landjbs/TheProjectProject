@@ -168,14 +168,17 @@
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body"
-    style='background: {{ subject.color }};'>
-      <p class="float-right">
-        <i class='far fa-user-circle'></i>
+    style='background: {{ subject.color }}; opacity:0.9;'>
+      <p class="float-right" style='color:white;'>
+        <i class='fa fa-circle'></i>
         {{ subject.projects.all()|length  }}
+        <br>
+        <i class='fa fa-user-circle'></i>
+        {{ subject.users|length  }}
       </p>
       <div class='card-head tiny'>
         <a class='project-name' href='subject={{ subject.code }}'>
-          <h5>{{ subject.name }}</h5>
+          <h5 style='color:white;'>{{ subject.name }}</h5>
         </a>
       </div>
     </div>
