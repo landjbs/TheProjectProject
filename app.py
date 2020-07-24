@@ -498,10 +498,6 @@ def leave_project(project_id):
             flash(f'{project.name} deleted.')
             return redirect(url_for('home'))
     manager.remove_user_from_project(current_user, project, admin=False)
-    notification = Notification(text=f'{current_user.name} has left '
-                                     f'{project.name}.')
-    for member in project.members:
-        member.notifications.append(notification)
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
 
@@ -626,7 +622,7 @@ def change_project_status(project_id, user_id, action):
     elif action=='reject':
         # remove user from project
         if user in project.members:
-            manager.remove_user_from_project(user, project)
+            manager.remove_user_from_project(user, project, admin=True)
         # remove user from pending
         else:
             error_flag = (not manager.reject_user_from_pending(user, project))
