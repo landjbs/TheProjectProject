@@ -192,18 +192,19 @@
 
 {% macro render_project_action_bar(current_user, project) -%}
 <div class='action-bar'>
-  <div class='hoverable'>
-    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-    <span class='tooltiptext'>
-      <a href="{{ url_for('report_user', target_user_id=target_user.id) }}">
-        Report User
-      </a>
-    </span>
-  </div>
+  {% if current_user.has_starred(project) %}
+    <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
+      <i class="fa fa-star"></i>
+    </a>
+  {% else %}
+    <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
+      <i class="fa fa-star-o"></i>
+    </a>
+  {% endif %}
   &nbsp;
-  {{ render_collaborate_button(current_user, target_user) }}
+  {{ render_join_button(current_user, project) }}
   &nbsp;
-  {{ render_user_share_button(target_user) }}
+  {{ render_project_share_button(project) }}
 </div>
 {% endmacro -%}
 
