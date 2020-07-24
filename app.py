@@ -93,6 +93,7 @@ def tasks_to_daily_activity(tasks):
             end_activity.update({i:0})
     start_activity = [x[1] for x in sorted(start_activity.items(), key=itemgetter(0), reverse=True)]
     end_activity = [x[1] for x in sorted(end_activity.items(), key=itemgetter(0), reverse=True)]
+    # for i in range(start_activity):
     return (start_activity, end_activity, earliest)
 
 
@@ -425,9 +426,12 @@ def subject(subject_name):
     user_tabs = partition_query(subject_users)
     #
     subject_tabs = []
+    # application
+    project_application = Project_Application_Form(request.form)
     return render_template('search.html', project_tabs=project_tabs,
                         user_tabs=user_tabs, subject_tabs=subject_tabs,
-                        search_text=subject.name)
+                        search_text=subject.name,
+                        project_application=project_application)
 
 
 @login_required
