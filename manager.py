@@ -57,7 +57,7 @@ def remove_user_from_project(user, project):
 
 def delete_project(project):
     for member in project.members:
-        for subect in project.subjects:
+        for subject in project.subjects:
             remove_subject_from_user(member, subject)
     db.session.delete(project)
     db.session.commit()
