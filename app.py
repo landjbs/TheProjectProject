@@ -679,9 +679,12 @@ def search():
     # subject results
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
     subject_tabs = partition_query(subject_results.limit(30))
+    # forms
+    project_application = Project_Application_Form(request.form)
     return render_template('search.html', project_tabs=project_tabs,
                         user_tabs=user_tabs, subject_tabs=subject_tabs,
-                        search_text=search_text)
+                        search_text=search_text,
+                        project_application=project_application)
 
 
 @application.route('/logout')
