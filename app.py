@@ -704,7 +704,9 @@ def collaborate(target_user_id):
     elif not current_user==project.owner:
         flash('Cannot invite collaborator to project you do not own.')
         error_flag = True
-    
+    if not error_flag:
+        
+
     flash('Cannot to add to ')
 
 @application.route('/logout')
