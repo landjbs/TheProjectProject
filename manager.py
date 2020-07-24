@@ -76,6 +76,7 @@ def remove_user_from_project(user, project):
                                      "it's nothing personal! Please contact us "
                                      'if you think something is wrong or have '
                                      'any questions.')
+    user.notifications.append(notification)
     db.session.commit()
     return True
 
