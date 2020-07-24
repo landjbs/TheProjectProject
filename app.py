@@ -713,6 +713,9 @@ def collaborate(target_user_id):
     elif target_user.has_applied(project):
         flash(f'{target_user.name} has already applied to {project.name}. '
             'Go to the project page to accept their application.')
+    elif target_user in project.invitations:
+        flash(f'You have already invited {target_user.name} to join '
+              f'{project.name}. You will be notified when they respond.')
     else:
         target_user.invitations.append(project)
         notifcation = Notification(text=f'{current_user.name} has invited you '
