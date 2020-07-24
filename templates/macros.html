@@ -1,5 +1,90 @@
-{% macro render_join_modal(current_user, project, project_application) -%}
+{% macro render_big_project_card(current_user, project) -%}
+<div class="col-md-4">
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class='float-right'>
+        <i class='far fa-user-circle'></i>
+        {{ project.members.all()|length }}
+        <br>
+        <i class="fa fa-star"></i>
+        {{ project.stars.all()|length }}
+      </div>
+      <div class='card-head'>
+        <a class='project-name' href='project={{ project.name }}'>
+          <h5>{{ project.name }}</h5>
+        </a>
+        <a href='user={{ project.owner.email }}'>
+          <p class='owner'>{{ project.owner.name }}</p>
+        </a>
+      </div>
+      <hr class="my-4">
+      <!-- summary -->
+      <div class='card-text'>
+        <p class='oneliner'>
+          {{ project.oneliner }}
+        </p>
+        <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
+      </div>
+      <div class='card-foot float-left'>
+        <p style="padding-bottom:0px; margin-bottom:0px;">
+          <i class="fa fa-clock-o"></i>
+          {{ calc_days_since(now(), project.posted_on) }} / {{ project.estimated_time }}
+          days
+        </p>
+        <div>
+          <i class="fa fa-flask" aria-hidden="true"></i>
+          {% for subject in project.subjects|reverse %}
+            <a href='/subject={{ subject.code }}'>
+              {% if loop.index>1 %}
+              ,
+              {% endif %}
+              <p class='subject-tag' style='background:{{ subject.color }};'>
+                {{ subject.name }}
+              </p>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      <br><br>
+      <hr class="my-4">
+      <div class='action-bar'>
+        {% if current_user.has_starred(project) %}
+          <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
+            <i class="fa fa-star"></i>
+          </a>
+        {% else %}
+          <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
+            <i class="fa fa-star-o"></i>
+          </a>
+        {% endif %}
+        &nbsp;
+        {% if not is_project_member(current_user, project) %}
+          <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+              Join
+          </button>
+        {% elif current_user in project.pending %}
+            Pending
+        {% else %}
+          <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+              Leave
+          </button>
+        {% endif %}
+        &nbsp;
+        <i class="fa fa-share-alt" aria-hidden="false"></i>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endmacro %}
 
+
+
+
+
+
+
+
+{% macro render_join_modal(current_user, project, project_application) -%}
     {% if not current_user in project.members %}
       <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -71,6 +156,4 @@
       </div>
     {% endif %}
   </div>
-
-
 {%- endmacro %}
