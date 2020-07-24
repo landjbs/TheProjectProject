@@ -714,8 +714,7 @@ def collaborate(target_user_id):
         flash(f'{target_user.name} has already applied to {project.name}. '
             'Go to the project page to accept their application.')
     else:
-        invitation = Invitation(project=project)
-        target_user.invitations.append(invitation)
+        target_user.invitations.append(project)
         notifcation = Notification(text=f'{current_user.name} has invited you '
                                         f'to collaborate on {project.name}! '
                                         'Visit your profile page to reply.')
@@ -726,7 +725,7 @@ def collaborate(target_user_id):
     return redirect(request.referrer)
 
 
-@application.route('/collaborate/<int:target_user_id>', methods=['POST'])
+@application.route('/reject_collaboration/<int:target_user_id>', methods=['POST'])
 def reject_collaboration(project_id):
     pass
 
