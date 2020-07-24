@@ -29,13 +29,13 @@
   text-align: left;
   white-space: normal;
   text-overflow: clip;
-  min-height: 4vh;
-  max-height: 4vh;
+  min-height: 3vh;
+  max-height: 3vh;
 }
 
 .little {
-  min-height: 4vh;
-  max-height: 4vh;
+  min-height: 5vh;
+  max-height: 5vh;
 }
 
 .tiny {
