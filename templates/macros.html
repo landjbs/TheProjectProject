@@ -193,6 +193,21 @@
 {% endmacro -%}
 
 
+{% macro render_join_button(current_user, project) -%}
+  {% if not current_user in project.members %}
+    <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ user.id }}">
+        Join
+    </button>
+  {% elif current_user in project.pending %}
+      Pending
+  {% else %}
+    <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ user.id }}">
+        Leave
+    </button>
+  {% endif %}
+{% endmacro -%}
+
+
 {% macro render_project_share_button(project) -%}
   <div class='hoverable'>
     <i class="fa fa-share-alt" aria-hidden="false"></i>
