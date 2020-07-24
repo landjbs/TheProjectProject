@@ -164,25 +164,27 @@
                           style='background: transparent; color: white; padding:0px;'>
                             {{ application.user.name }}
                           </a>
-                          <p class="mb-1">Question: {{ project.application_question }}<br>
-                              Response: {{ application.text }}</p>
-                              <div class='hoverable'>
-                                <a class='delete-btn task-btn float-left'
-                                style='background: transparent;'
-                                href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
-                                  <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </a>
-                                <span class='tooltiptext'>Reject Applicant</span>
-                              </div>
-                              <div class='hoverable'>
-                                <a class='complete-btn task-btn float-right'
-                                style='background: transparent;'
-                                href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
-                                  <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                </a>
-                                <span class='tooltiptext'>Accept Applicant</span>
-                              </div>
+                          <p class="mb-1">
+                            Question: {{ project.application_question }}
+                            <br>
+                            Response: {{ application.text }}
                           </p>
+                          <div class='hoverable'>
+                            <a class='delete-btn task-btn float-left'
+                            style='background: transparent;'
+                            href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
+                              <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </a>
+                            <span class='tooltiptext'>Reject Applicant</span>
+                          </div>
+                          <div class='hoverable'>
+                            <a class='complete-btn task-btn float-right'
+                            style='background: transparent;'
+                            href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                              <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </a>
+                            <span class='tooltiptext'>Accept Applicant</span>
+                          </div>
                         </div>
                       {% endfor %}
                   </ul>
