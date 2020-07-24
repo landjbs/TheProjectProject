@@ -361,9 +361,12 @@ def user(email):
         stars += project.stars.count()
     # subjects
     subject_data = {s.subject.name : s.number for s in user.subjects}
+    # application to projects
+    project_application = Project_Application_Form(request.form)
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
-                            owned_tabs=owned_tabs, member_tabs=member_tabs)
+                            owned_tabs=owned_tabs, member_tabs=member_tabs,
+                            project_application=project_application)
 
 
 @login_required
