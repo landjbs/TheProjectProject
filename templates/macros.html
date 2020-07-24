@@ -212,18 +212,20 @@
 
 {% macro render_user_action_bar(current_user, target_user) -%}
 <div class='action-bar'>
-  <div class='hoverable'>
-    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-    <span class='tooltiptext'>
-      <a href="{{ url_for('report_user', target_user_id=target_user.id) }}">
-        Report User
-      </a>
-    </span>
-  </div>
-  &nbsp;
-  {{ render_collaborate_button(current_user, target_user) }}
-  &nbsp;
-  {{ render_user_share_button(target_user) }}
+  {% if current_user!= target_user %}
+    <div class='hoverable'>
+      <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+      <span class='tooltiptext'>
+        <a href="{{ url_for('report_user', target_user_id=target_user.id) }}">
+          Report User
+        </a>
+      </span>
+    </div>
+    &nbsp;
+    {{ render_collaborate_button(current_user, target_user) }}
+    &nbsp;
+    {{ render_user_share_button(target_user) }}
+  {% endif %}
 </div>
 {% endmacro -%}
 
