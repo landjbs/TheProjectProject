@@ -1,3 +1,5 @@
+<!-- CARDS -->
+<!-- project cards -->
 {% macro render_big_project_card(current_user, project, now, calc_days_since) -%}
 <div class="col-md-4">
   <div class="card mb-2">
@@ -78,7 +80,6 @@
 {%- endmacro %}
 
 
-
 {% macro render_mid_project_card(current_user, project, now, calc_days_since) -%}
 <div class="col-md-4">
   <div class="card mb-2">
@@ -107,8 +108,41 @@
 {% endmacro -%}
 
 
+{% macro render_small_project_card(current_user, project, now, calc_days_since) -%}
+<div class="col-md-4">
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class='float-right'>
+        {% if current_user==project.owner %}
+          {% set pending = project.pending_members.all()|length %}
+          {% if pending>0 %}
+            <i class="fa fa-bell" aria-hidden="true"></i>
+          {% else %}
+            <i class="fa fa-bell-o" aria-hidden="true"></i>
+          {% endif %}
+          {{ pending }}
+          <br>
+        {% endif %}
+        <i class="fa fa-star"></i>
+        {{ project.stars.all()|length }}
+      </div>
+      <div class='card-head tiny'>
+        <a class='project-name' href='project={{ project.name }}'>
+          <h5>{{ project.name }}</h5>
+        </a>
+      </div>
+      <!-- summary -->
+      <p class='oneliner'>
+        {{ project.oneliner }}
+      </p>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
 
 
+
+<!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
     {% if not current_user in project.members %}
       <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
