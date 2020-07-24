@@ -149,22 +149,7 @@
           {% endif %}
             <div class='row'>
               {% for subject in tab %}
-                <div class="col-md-4">
-                  <div class="card mb-2">
-                    <div class="card-body"
-                    style='background: {{ subject.color }};'>
-                      <p class="float-right">
-                        <i class='far fa-user-circle'></i>
-                        {{ subject.projects.all()|length  }}
-                      </p>
-                      <div class='card-head tiny'>
-                        <a class='project-name' href='subject={{ subject.code }}'>
-                          <h5>{{ subject.name }}</h5>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                {{ macros.render_subject_card(subject) }}
               {% endfor %}
             </div>
           </div>
