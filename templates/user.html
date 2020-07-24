@@ -44,11 +44,50 @@
             {{ macros.render_user_action_bar(current_user, user) }}
             <br>
             <ul class="list-unstyled components">
-              <!-- <div class='bio'> -->
+              <div class='bio'>
                 <p class='oneliner'>
                   {{ user.about }}
                 </p>
-              <!-- </div> -->
+              </div>
+              {% if current_user==user %}
+                <li>
+                  <a href="#pendingSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Invitations
+                    &nbsp;
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    {{ user.invitations.all()|length }}
+                  </a>
+                  <ul class="collapse list-unstyled" id="pendingSubmenu">
+                      {% for invitation in user.invitations %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
+                          <a href='user={{ application.user.email }}' class="mb-1 user-name"
+                          style='background: transparent; color: white; padding:0px;'>
+                            {{ invitation.user.name }}
+                          </a>
+                          <p class="mb-1">Question: {{ project.application_question }}<br>
+                              Response: {{ application.text }}</p>
+                              <div class='hoverable'>
+                                <a class='delete-btn task-btn float-left'
+                                style='background: transparent;'
+                                href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
+                                  <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                </a>
+                                <span class='tooltiptext'>Reject Applicant</span>
+                              </div>
+                              <div class='hoverable'>
+                                <a class='complete-btn task-btn float-right'
+                                style='background: transparent;'
+                                href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </a>
+                                <span class='tooltiptext'>Accept Applicant</span>
+                              </div>
+                          </p>
+                        </div>
+                      {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
             </ul>
         </nav>
 
