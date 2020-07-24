@@ -1,4 +1,4 @@
-{% macro render_big_project_card(current_user, project) -%}
+{% macro render_big_project_card(current_user, project, now, calc_days_since) -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
@@ -58,7 +58,7 @@
           </a>
         {% endif %}
         &nbsp;
-        {% if not is_project_member(current_user, project) %}
+        {% if not current_user in project.members %}
           <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
               Join
           </button>
