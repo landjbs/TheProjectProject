@@ -736,7 +736,8 @@ def reject_collaboration(project_id):
                                     f'not to collaborate on {project.name}. '
                                     "We promise it's nothing personal! Please "
                                     'contact us if you think a mistake was made.'))
-        project.owner.notifications.append(notifcation)
+        project.owner.notifications.append(notification)
+        db.session.commit()
     return redirect(request.referrer)
 
 
