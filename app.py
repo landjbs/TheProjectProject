@@ -694,6 +694,10 @@ def search():
                         project_application=project_application)
 
 
+@application.route('/collaborate/<int:target_user_id>', methods=['POST'])
+def collaborate(target_user_id):
+    pass
+
 @application.route('/logout')
 @login_required
 def logout():

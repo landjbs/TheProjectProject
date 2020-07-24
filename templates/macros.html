@@ -147,6 +147,7 @@
       <p class='oneliner'>
         {{ user.about }}
       </p>
+      <hr class="my-4">
       <div class='action-bar'>
         {{ render_collaborate_button(current_user, user) }}
       </div>
@@ -183,13 +184,13 @@
 <!-- BUTTONS -->
 {% macro render_join_button(current_user, project) -%}
   {% if not current_user in project.members %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+    <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
         Join
     </button>
   {% elif current_user in project.pending %}
       Pending
   {% else %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}">
+    <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
         Leave
     </button>
   {% endif %}
@@ -197,7 +198,7 @@
 
 
 {% macro render_collaborate_button(current_user, target_user) -%}
-  <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ target_user.id }}">
+  <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ target_user.id }}">
       Collaborate
   </button>
 {% endmacro -%}
@@ -230,7 +231,7 @@
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
     {% if not current_user in project.members %}
-      <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
+      <div id="modal_project_{{ project.id }}" class="modal fade" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
           <div class="modal-content">
@@ -258,7 +259,7 @@
         </div>
       </div>
     {% else %}
-      <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
+      <div id="modal_project_{{ project.id }}" class="modal fade" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
           <div class="modal-content">
