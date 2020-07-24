@@ -227,7 +227,7 @@
 <div>
   {% for tab in recommended_tabs %}
     {% for project in tab %}
-      {{ macros.render_join_modal(current_user, project) }}
+      {{ macros.render_join_modal(current_user, project, project_application) }}
     {% endfor %}
   {% endfor %}
 </div>
