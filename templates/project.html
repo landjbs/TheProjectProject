@@ -54,11 +54,7 @@
                 </a>
               {% endif %}
               &nbsp;
-              {% if user in project.members %}
-              <button type="button" class="btn" data-toggle="modal" data-target="#modal_{{ project.id }}"
-                    style='color: white;'>
-                  Join
-              </button>
+              {{ macros.render_join_button(current_user, project) }}
               &nbsp;
               <i class="fa fa-share-alt" aria-hidden="false"></i>
             </div>
