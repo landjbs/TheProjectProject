@@ -60,7 +60,7 @@
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
                       {% for invitation in user.invitations %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-                          <a href='user={{ application.user.email }}' class="mb-1 user-name"
+                          <a href='project={{ project.name }}' class="mb-1 user-name"
                           style='background: transparent; color: white; padding:0px;'>
                             {{ invitation.project.name }}
                           </a>
