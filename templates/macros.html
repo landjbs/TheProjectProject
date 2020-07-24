@@ -360,7 +360,7 @@
       {% if (current_user.owned|length)>0 %}
       <form action="{{ url_for('collaborate', target_user_id=target_user.id) }}" method='post'>
         <div class="modal-body">
-          <label for="new_owner">Select new project to invite {{ target_user.name }}:</label>
+          <label for="new_owner">Select project on which to collaborate with {{ target_user.name }}:</label>
           <br>
           <select name="selected_project" id="selected_project" style='border:0px; border-bottom:1px solid black; width:100%;'>
             {% for project in current_user.owned %}
