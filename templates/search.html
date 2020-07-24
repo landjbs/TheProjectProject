@@ -65,21 +65,21 @@
   </div>
   <!--/.Controls-->
 
-  <h4 style='text-align:left;'>My Projects</h4>
+  <h4 style='text-align:left;'>Subjects</h4>
   <hr class="my-4">
   {% if user_project_count>0 %}
-    <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+    <div id="subject-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
-        {% for tab in user_tabs %}
+        {% for tab in subject_tabs %}
           {% if loop.index==1 %}
           <div class="carousel-item active">
           {% else %}
           <div class="carousel-item">
           {% endif %}
             <div class='row'>
-              {% for project in tab %}
-                {{ macros.render_small_project_card(current_user, project, now, calc_days_since) }}
+              {% for subject in tab %}
+                {{ macros.render_subject_card(subject) }}
               {% endfor %}
             </div>
           </div>
@@ -96,8 +96,8 @@
 </div>
 <!--Controls-->
 <div class="controls-top">
-  <a class="btn-floating" href="#my-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-  <a class="btn-floating" href="#my-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+  <a class="btn-floating" href="#subject-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+  <a class="btn-floating" href="#subject-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
 </div>
 <!--/.Controls-->
 
@@ -121,8 +121,8 @@ $('#user-carousel').on('slid.bs.carousel', function () {
   sessionStorage.setItem('trendingSlide', $('#user-carousel div.active').index());
   });
 
-$('#my-carousel').on('slid.bs.carousel', function () {
-  sessionStorage.setItem('mySlide', $('#my-carousel div.active').index());
+$('#subject-carousel').on('slid.bs.carousel', function () {
+  sessionStorage.setItem('mySlide', $('#subject-carousel div.active').index());
   });
 
 // rescroll carousels
@@ -135,7 +135,7 @@ if(sessionStorage.trendingSlide){
   }
 
 if(sessionStorage.mySlide){
-    $("#my-carousel").carousel(sessionStorage.mySlide*1);
+    $("#subject-carousel").carousel(sessionStorage.mySlide*1);
   }
 </script>
 
