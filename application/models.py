@@ -152,8 +152,6 @@ class User(db.Model, UserMixin):
         return (project in self.starred)
 
     def has_applied(self, project):
-        if project is None:
-            return False
         return ((self.pending_projects.filter_by(project=project).first()) is not None)
 
 
