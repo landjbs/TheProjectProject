@@ -1,3 +1,5 @@
+from flask import flash
+
 from application import db
 from application.models import Project, User, Subject, User_Subjects, Notification
 
@@ -56,6 +58,7 @@ def add_user_to_project(user, project):
     user.projects.append(project)
     db.session.add(project)
     db.session.commit()
+    return True
 
 
 def remove_user_from_project(user, project):
@@ -80,6 +83,15 @@ def remove_user_from_project(user, project):
     # add to session
     db.session.commit()
     return True
+
+
+def reject_user_from_pending(user, project):
+    ''' Rejects user with pending application to project '''
+    application = project.pending_members.filter_by(user=user).first()
+    if application is None:
+        flash(f'Cannot reject {user.name} application to {project.name} '
+               "because they haven't applied.")
+        return False
 
 
 def delete_project(project):
