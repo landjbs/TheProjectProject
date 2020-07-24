@@ -1,6 +1,6 @@
 {% macro render_join_modal(current_user, project) -%}
 
-    {% if not is_project_member(current_user, project) %}
+    {% if not current_user in project.members %}
       <div id="modal_{{ project.id }}" class="modal fade" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
