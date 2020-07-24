@@ -315,21 +315,31 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+      {% if (current_user.owned|length)>0 %}
       <form action="{{ url_for('collaborate', target_user_id=target_user.id) }}" method='post'>
         <div class="modal-body">
-          {% if (current_user.owned|length)>0 %}
+
             <p>here</p>
-          {% else %}
             <p>Cannot invite {{ target_user.name }} to collaborate because
               you do not own any projects! Try
               <a href='/add_project'>adding a project</a> first.
             </p>
-          {% endif %}
         </div>
         <div class="modal-footer">
           <button class='btn'>Join</button>
         </div>
       </form>
+      {% else %}
+        <div class="modal-body">
+          <p>Cannot invite {{ target_user.name }} to collaborate because
+            you do not own any projects! Try
+            <a href='/add_project'>adding a project</a> first.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>Add Project</button>
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
