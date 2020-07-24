@@ -12,7 +12,7 @@ from operator import itemgetter
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject,
-                                Project_Application, Notification, Invitation)
+                                Project_Application, Notification)
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
                                 Task_Form, Project_Application_Form)
 import manager as manager
