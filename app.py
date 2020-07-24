@@ -406,12 +406,15 @@ def project(project_name):
                 if name in project_subjects:
                     # -1 to account for skills gained via project association
                     project_subjects[name] += (user_subject.number-1)
+    ## forms ##
+    project_application = Project_Application_Form(request.form)
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             task_form=task_form,
                             activity_data=activity_data,
                             task_data=task_data,
-                            project_subjects=project_subjects)
+                            project_subjects=project_subjects,
+                            project_application=project_application)
 
 
 @login_required
