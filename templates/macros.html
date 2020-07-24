@@ -307,9 +307,7 @@
       <form action="{{ url_for('extend_collaboration', target_user_id=target_user_id.id) }}" method='post'>
         <div class="modal-body">
           {% if (current_user.owned|length)>0 %}
-            "{{ project.application_question }}"</p>
-              {{ project_application.hidden_tag() }}
-              {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
+            <p>here</p>
           {% else %}
             <p>Cannot invite {{ target_user.name }} to collaborate because
               you do not own any projects! Try
