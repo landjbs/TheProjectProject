@@ -196,18 +196,23 @@
 {% macro render_project_share_button(project) -%}
   <div class='hoverable'>
     <i class="fa fa-share-alt" aria-hidden="false"></i>
-    <!-- <span class='tooltiptext'> -->
-    <a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet"
-        data-size="large"
-        data-text="custom share text"
-        data-url="https://dev.twitter.com/web/tweet-button"
-        data-hashtags="example,demo"
-        data-via="twitterdev"
-        data-related="twitterapi,twitter">
-        Tweet
-    </a>
-    <!-- </span> -->
+    <span class='tooltiptext'>
+      <a class="twitter-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/project={{ project.name }}"
+          data-size="large">
+        <i class="fa fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a class="twitter-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/project={{ project.name }}"
+          data-size="large">
+        <i class="fa fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a class="twitter-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/project={{ project.name }}"
+          data-size="large">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      </a>
+    </span>
   </div>
 {% endmacro -%}
 
