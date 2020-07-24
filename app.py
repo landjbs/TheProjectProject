@@ -450,8 +450,8 @@ def join_project(project_id):
         return redirect(request.referrer)
     if project.open:
         if not project.requires_application:
-            manager.add_user_to_project(current_user, project)
             flash(f'You have been added to {project.name}!')
+            manager.add_user_to_project(current_user, project)
         else:
             form = Project_Application_Form(request.form)
             if form.validate_on_submit():
