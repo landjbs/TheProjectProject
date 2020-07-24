@@ -325,16 +325,19 @@
               <option value="{{ project.id }}">{{ project.name }}</option>
             {% endfor %}
           </select>
+          <br>
+          <p>{{ target_user.name }} will be sent an invitation
+            and will be able to join without applying.
+          </p>
         </div>
         <div class="modal-footer">
-          <button class='btn'>Invite</button>
+          <button class='btn'>Collaborate</button>
         </div>
       </form>
       {% else %}
         <div class="modal-body">
           <p>Cannot invite {{ target_user.name }} to collaborate because
-            you do not own any projects! Try
-            <a href='/add_project'>adding a project</a> first.
+            you do not own any projects! Try <a href='/add_project'>adding a project</a> first.
           </p>
         </div>
         <div class="modal-footer">
