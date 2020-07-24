@@ -725,7 +725,7 @@ def collaborate(target_user_id):
         flash(f'You have sent {target_user.name} an invitation to collaborate '
               f'on {project.name}. You will be notified when they respond.')
         db.session.commit()
-    return redirect(request.referrer)
+    return redirect(url_for('home'))
 
 
 @application.route('/reject_collaboration/<int:target_user_id>', methods=['POST'])
