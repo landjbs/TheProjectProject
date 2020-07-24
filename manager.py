@@ -38,8 +38,10 @@ def remove_subject_from_user(user, subject):
 
 ## USER TO PROJECTS ##
 def add_user_to_project(user, project):
+    # add project subjects to user
     for subject in project.subjects:
         add_subject_to_user(user, subject)
+    # notify all members
     notification = Notification(text=f'{user.name} has joined {project.name}.')
     for member in project.members:
         member.notifications.append(notification)
@@ -48,7 +50,8 @@ def add_user_to_project(user, project):
     if application is not None:
         db.session.delete(application)
     # delete possible invitation
-    
+    if user in project.invitations:
+        project.invitations.remove(user)
     # add to session
     user.projects.append(project)
     db.session.add(project)
