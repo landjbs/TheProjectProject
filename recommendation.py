@@ -13,12 +13,12 @@ PROJECT_LIMIT = 30
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user '''
     # sum raw subject counts across project users
-    user_sum = 0
-    for member in project.members:
-        for s in member.subjects:
-            if s.subject in project.subjects:
-                user_sum += s.number
-    
+    # for member in project.members:
+    #     for s in member.subjects:
+    #         if s.subject in project.subjects:
+    #             user_sum += s.number
+    # project_subjects = {subject:(1-) for subject in}
+    return 1
 
 
 def recommend_projects(user):
@@ -36,7 +36,7 @@ def recommend_projects(user):
     user_subjects = {s.subject : (s.number/subject_sum)
                     for s in user.subjects}
     ## score each candidate ##
-    for project in candidates:
-        score_project(project, user_subjects)
+    results = [(project,score_project(project, user_subjects)) for project in candidates]
+    results = sorted(results, key=itemgetter(1), reverse=True)
     return candidates
     # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
