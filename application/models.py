@@ -49,6 +49,11 @@ project_invitation = Table('project_invitation', db.Model.metadata,
             Column('project_id', Integer, ForeignKey('project.id')))
 
 
+# stores users/projects rejected from each other
+project_rejections = Table('project_rejections', db.Model.metadata,
+                    Column('user_id', Integer, ForeignKey('user.id')),
+                    Column('project_id', Integer, ForeignKey('project.id')))
+
 class User_Subjects(db.Model):
     __tablename__ = 'user_subjects'
     # user
