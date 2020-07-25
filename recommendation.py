@@ -14,8 +14,9 @@ def score_project(project, user_subjects):
     ''' Assigns project ranking given user '''
     # sum raw subject counts across project users
     user_sum = 0
-    for m in project.members:
-        
+    for member in project.members:
+        for s in member.subjects:
+            user_sum += member.subject
 
 
 def recommend_projects(user):
