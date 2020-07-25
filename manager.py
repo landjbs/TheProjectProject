@@ -82,7 +82,7 @@ def remove_user_from_project(user, project, admin=False):
         member_note = Notification(text=f'{user.name} has left '
                                         f'{project.name}.')
     for member in project.members:
-        if not member==user:
+        if not member in [user, project.owner]:
             member.notifications.append(member_note)
     # add to session
     db.session.commit()
