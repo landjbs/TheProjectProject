@@ -198,6 +198,8 @@ class Project(db.Model):
                                    back_populates='project', lazy='dynamic')
     invitations = relationship('User', secondary='project_invitation',
                                back_populates='invitations', lazy='dynamic')
+    rejections = relationship('User', secondar='project_rejections',
+                            back_populates='rejections', lazy='dynamic')
     ## join process ##
     # open (allows others to join)
     open = Column(Boolean, nullable=False)
