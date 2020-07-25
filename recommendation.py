@@ -11,7 +11,8 @@ PROJECT_LIMIT = 30
 
 
 def score_project(project, user_subjects):
-    ''' Assigns project ranking '''
+    ''' Assigns project ranking given user '''
+    print(user_subjects)
     
 
 
