@@ -511,10 +511,8 @@ def like_action(project_id, action):
     print(f'before {current_user.has_starred(project)}')
     if action == 'like':
         current_user.star_project(project)
-        db.session.commit()
     if action == 'unlike':
         current_user.unstar_project(project)
-        db.session.commit()
     print(f'after {current_user.has_starred(project)}')
     return redirect(request.referrer)
 

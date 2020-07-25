@@ -157,14 +157,16 @@ class User(db.Model, UserMixin):
         return str(self.id)
 
     def star_project(self, project):
-        if not self.has_starred(project):
-            self.starred.append(project)
-            project.buzz += 1
+        # if not self.has_starred(project):
+        self.starred.append(project)
+        project.buzz += 1
+        db.session.commit()
 
     def unstar_project(self, project):
-        if self.has_starred(project):
-            self.starred.remove(project)
-            project.buzz -= 1
+        # if self.has_starred(project):
+        self.starred.remove(project)
+        project.buzz -= 1
+        db.session.commit()
 
     def has_starred(self, project):
         return (project in self.starred)
