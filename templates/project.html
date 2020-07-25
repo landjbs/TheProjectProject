@@ -206,7 +206,7 @@
               </div>
               <div class="col-sm-4">
                 <h6>Tasks Completed</h6>
-                {% if ((complete(project.tasks).all()|length)!=0) %}
+                {% if (authored|length) > 0 %}
                   <canvas id="tasks_complete"></canvas>
                 {% else %}
                   <p class='empty-text'>No tasks completed yet.</p>
