@@ -9,5 +9,5 @@ PROJECT_LIMIT = 30
 
 
 def recommend_projects(user):
-    return Project.query.filter(Project.owner!=user,
-                                ~Project.id.in_(user.projects))
+    user_projects = user.projects
+    return Project.query.filter(~Project.id.in_(user_projects))
