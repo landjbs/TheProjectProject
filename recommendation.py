@@ -10,4 +10,4 @@ PROJECT_LIMIT = 30
 
 def recommend_projects(user):
     Project.query.filter(Project.owner!=user,
-                         )
+                         not Project.id.in_(user.projects))
