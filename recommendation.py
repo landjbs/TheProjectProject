@@ -16,7 +16,9 @@ def score_project(project, user_subjects):
     user_sum = 0
     for member in project.members:
         for s in member.subjects:
-            user_sum += member.subject
+            if s.subject in project.subjects:
+                user_sum += s.number
+    
 
 
 def recommend_projects(user):
