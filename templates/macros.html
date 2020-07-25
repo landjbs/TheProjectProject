@@ -133,15 +133,15 @@
       <p class='oneliner'>
         {{ user.about }}
       </p>
-      <div>
+      <div class='card-foot float-left'>
         <i class="fa fa-flask" aria-hidden="true"></i>
-        {% for subject in user.subjects|reverse %}
-          <a href='/subject={{ subject.code }}'>
+        {% for s in user.subjects[:5]|reverse %}
+          <a href='/subject={{ s.subject.code }}'>
             {% if loop.index>1 %}
             ,
             {% endif %}
-            <p class='subject-tag' style='background:{{ subject.color }};'>
-              {{ subject.name }}
+            <p class='subject-tag' style='background:{{ s.subject.color }};'>
+              {{ s.subject.name }}
             </p>
           </a>
         {% endfor %}
