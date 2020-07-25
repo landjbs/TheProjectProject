@@ -117,6 +117,20 @@ def reject_user_from_pending(user, project):
     return True
 
 
+def reject_project_invitations(user, project):
+    if not current_user in project.invitations:
+        return False
+    flash(f'You have declined the offer to collaborate on {project.name}.')
+    project.invitations.remove(current_user)
+    # notify project owner
+    notification = Notification(text=(f'{current_user.name} has decided '
+                                f'not to collaborate on {project.name}. '
+                                "We promise it's nothing personal! Please "
+                                'contact us if you think a mistake was made.'))
+    project.owner.notifications.append(notification)
+    db.session.commit()
+
+
 def delete_project(project):
     for member in project.members:
         for subject in project.subjects:
