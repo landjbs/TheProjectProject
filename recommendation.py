@@ -9,6 +9,8 @@ PROJECT_LIMIT = 30
 
 
 def recommend_projects(user):
-    user_projects = Project.query.filter(user in Project.members)
-    print(user_projects)
+    open_projects = Project.query.filter_by(open=True, complete=False)
+    print(open_projects.all())
+    # user_projects = Project.query.filter(Project.in_(user.projects))
+    # print(user_projects)
     # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
