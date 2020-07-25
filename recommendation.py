@@ -18,7 +18,7 @@ def score_project(project, user_subjects):
     #         if s.subject in project.subjects:
     #             user_sum += s.number
     # project_subjects = {subject:(1-) for subject in}
-    return 1
+    return int(len(project.subjects.all()))
 
 
 def recommend_projects(user):
@@ -37,6 +37,6 @@ def recommend_projects(user):
                     for s in user.subjects}
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
-    results = sorted(results, key=itemgetter(1), reverse=True)
-    return candidates
+    results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
+    return results
     # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
