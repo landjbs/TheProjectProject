@@ -21,7 +21,7 @@ def recommend_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(user_projects))
     ## format user preferences ##
-    
+    user_subjects = {s.subject:s.number for s in user.subjects}
     ## score each candidate ##
     return candidates
     # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
