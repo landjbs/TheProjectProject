@@ -39,11 +39,13 @@ user_to_task = Table('user_to_task', db.Model.metadata,
                     Column('task_id', Integer, ForeignKey('task.id')))
 
 
+# stores users and notifcations they have recieved
 user_to_notification = Table('user_to_notification', db.Model.metadata,
             Column('user_id', Integer, ForeignKey('user.id')),
             Column('notification_id', Integer, ForeignKey('notification.id')))
 
 
+# stores invitations of users to join projects
 project_invitation = Table('project_invitation', db.Model.metadata,
             Column('user_id', Integer, ForeignKey('user.id')),
             Column('project_id', Integer, ForeignKey('project.id')))
@@ -51,8 +53,10 @@ project_invitation = Table('project_invitation', db.Model.metadata,
 
 # stores users/projects rejected from each other
 project_rejections = Table('project_rejections', db.Model.metadata,
-                    Column('user_id', Integer, ForeignKey('user.id')),
-                    Column('project_id', Integer, ForeignKey('project.id')))
+                Column('user_id', Integer, ForeignKey('user.id')),
+                Column('project_id', Integer, ForeignKey('project.id')))
+
+
 
 class User_Subjects(db.Model):
     __tablename__ = 'user_subjects'
