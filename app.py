@@ -234,8 +234,8 @@ def partition_query(l, n=3):
 @application.route('/home', methods=['GET', 'POST'])
 def home():
     # recommended projects
-    recs = rec.recommend_projects(current_user)
-    # recs = db.session.query(Project).limit(30)
+    # recs = rec.recommend_projects(current_user)
+    recs = db.session.query(Project).limit(30)
     recommended_tabs = list(partition_query(recs))
     # top projects
     tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
@@ -508,12 +508,14 @@ def leave_project(project_id):
 @application.route('/like/<int:project_id>/<action>')
 def like_action(project_id, action):
     project = Project.query.get_or_404(project_id)
+    print(f'before {current_user.has_starred(project)}')
     if action == 'like':
         current_user.star_project(project)
         db.session.commit()
     if action == 'unlike':
         current_user.unstar_project(project)
         db.session.commit()
+    print(f'after {current_user.has_starred(project)}')
     return redirect(request.referrer)
 
 
