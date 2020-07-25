@@ -28,8 +28,8 @@ def recommend_projects(user):
     for s in user.subjects:
         subject_sum += s.number
     # get normalized subject counts
-    user_subjects = [(s.subject,s.number) for s in user.subjects]
-
+    user_subjects = {s.subject : (s.number/subject_sum)
+                    for s in user.subjects}
     #
     user_subjects = {}
     ## score each candidate ##
