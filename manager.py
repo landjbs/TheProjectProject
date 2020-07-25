@@ -87,6 +87,8 @@ def remove_user_from_project(user, project, admin=False):
     for member in project.members:
         if not member in [user, project.owner]:
             member.notifications.append(member_note)
+    # add rejection to user and project
+    user.rejections.append(project)
     # add to session
     db.session.commit()
     flash(f'You have removed {user.name} from {project.name}.')
