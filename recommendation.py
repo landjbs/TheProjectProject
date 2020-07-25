@@ -10,9 +10,9 @@ from application.models import User, Project, Subject
 PROJECT_LIMIT = 30
 
 
-def score_project(user, project):
+def score_project(project, user_subjects):
     ''' Assigns project ranking '''
-
+    
 
 
 
@@ -30,8 +30,6 @@ def recommend_projects(user):
     # get normalized subject counts
     user_subjects = {s.subject : (s.number/subject_sum)
                     for s in user.subjects}
-    #
-    user_subjects = {}
     ## score each candidate ##
     return candidates
     # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
