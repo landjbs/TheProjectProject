@@ -38,6 +38,7 @@ db.session.commit()
 
 ai = Subject.query.get(1)
 
+
 user1 = db.session.query(User).get(int(1))
 user2 = db.session.query(User).get(int(2))
 
@@ -50,7 +51,11 @@ projects = [Project(name='Boogle',
                             'full-stack experts.'),
                     url='boogle.com',
                     application_question='What do you bring to the team?',
-                    subjects = [ai],
+                    subjects = [Subject.query.filter_by(name='AI/ML').first(),
+                                Subject.query.filter_by(name='Algorithms').first(),
+                                Subject.query.filter_by(name='Web Dev').first(),
+                                Subject.query.filter_by(name='Software Engineering').first()
+                                ],
                     open=True,
                     complete=False,
                     owner=user1,
@@ -64,7 +69,12 @@ projects = [Project(name='Boogle',
                             'many trucks, loads and constraints. '),
                     url='stradarouting.com',
                     application_question='What is your ML experience?',
-                    subjects = [ai],
+                    subjects = [Subject.query.filter_by(name='AI/ML').first(),
+                                Subject.query.filter_by(name='Startup').first(),
+                                Subject.query.filter_by(name='Software Engineering').first(),
+                                Subject.query.filter_by(name='Theory').first(),
+                                Subject.query.filter_by(name='Research').first()
+                                ],
                     open=True,
                     complete=False,
                     owner=user1,
