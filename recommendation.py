@@ -18,7 +18,11 @@ def score_project(project, user_subjects):
     #         if s.subject in project.subjects:
     #             user_sum += s.number
     # project_subjects = {subject:(1-) for subject in}
-    return int(len(project.subjects.all()))
+    score = 0
+    for subject, subject_score in user_subjects:
+        if subject in project.subjects:
+            score += subject_score
+    return int(subject_score)
 
 
 def recommend_projects(user):
