@@ -54,6 +54,9 @@ def add_user_to_project(user, project):
     # delete possible invitation
     if user in project.invitations:
         project.invitations.remove(user)
+    # delete possible rejection
+    if user in project.rejections:
+        project.rejections.remove(user)
     # add to session
     user.projects.append(project)
     db.session.add(project)
