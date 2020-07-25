@@ -418,7 +418,8 @@ def project(project_name):
                             comment_form=comment_form,
                             task_form=task_form,
                             activity_data=activity_data,
-                            task_data=task_data,
+                            author_data=author_data,
+                            completed_data=completed_data,
                             project_subjects=project_subjects,
                             project_application=project_application)
 
