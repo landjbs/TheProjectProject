@@ -109,6 +109,8 @@ class User(db.Model, UserMixin):
                                     back_populates='user', lazy='dynamic')
     invitations = relationship('Project', secondary='project_invitation',
                                back_populates='invitations', lazy='dynamic')
+    rejections = relationship('Project', secondar='project_rejections',
+                            back_populates='rejections', lazy='dynamic')
     # interactions
     starred = relationship('Project', secondary='user_to_project',
                            back_populates='stars')
