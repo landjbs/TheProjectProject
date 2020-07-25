@@ -399,10 +399,10 @@ def project(project_name):
     # all people related to project tasks
     for n in set(completed_counts.keys()).union(set(author_counts.keys())):
         # get number of authored and completed tasks
-        authored = author_counts.get(n)
-        completed = completed_counts.get(n)
-        author_data[n] = authored if authored else 0
-        completed)[n] = completed if completed else 0
+        user_author_count = author_counts.get(n)
+        user_completed_count = completed_counts.get(n)
+        authored[n] = user_author_count if user_author_count else 0
+        completed[n] = user_completed_count if user_completed_count else 0
     ## subject visualization ##
     project_subjects = {s.name:0 for s in project.subjects}
     if project_subjects!={}:
@@ -418,8 +418,8 @@ def project(project_name):
                             comment_form=comment_form,
                             task_form=task_form,
                             activity_data=activity_data,
-                            author_data=author_data,
-                            completed_data=completed_data,
+                            authored=authored,
+                            completed=completed,
                             project_subjects=project_subjects,
                             project_application=project_application)
 

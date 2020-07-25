@@ -454,26 +454,28 @@
     {% endif %}
 
     // task completion chart
-    {% if (task_data|length) > 0 %}
+    {% if (authored|length) > 0 %}
       var ctx = document.getElementById('tasks_complete');
       var myChart = new Chart(ctx, {
           type: 'horizontalBar',
           data: {
-              labels: [{% for k in task_data.keys() %}'{{ k.name }}',{% endfor %}],
+              labels: [{% for k in authored.keys() %}'{{ k.name }}',{% endfor %}],
               datasets: [{
-                  data: [{% for v in task_data.values() %}'{{ v[0] }}',{% endfor %}],
+                  data: [{% for v in authored.values() %}'{{ v[0] }}',{% endfor %}],
                   backgroundColor: 'rgba(93, 0, 255,0.5)',
                   borderColor: '#5D00FF',
                   borderWidth: 1,
                   label: 'Authored Tasks'
               },
-              {
-                  data: [{% for v in task_data.values() %}'{{ v[1] }}',{% endfor %}],
-                  backgroundColor: 'rgba(255,93,0,0.5)',
-                  borderColor: '#FF5D00',
-                  borderWidth: 1,
-                  label: 'Completed Tasks'
-              },
+              {% if (completed|length) > 0 %}
+                {
+                    data: [{% for v in completed.values() %}'{{ v[1] }}',{% endfor %}],
+                    backgroundColor: 'rgba(255,93,0,0.5)',
+                    borderColor: '#FF5D00',
+                    borderWidth: 1,
+                    label: 'Completed Tasks'
+                }
+              {% endif %}
             ],
           },
           options: {
