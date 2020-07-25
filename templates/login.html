@@ -66,6 +66,7 @@
     // This function will display the specified tab of the form ...
     var x = document.getElementsByClassName("tab");
     x[n].style.display = "block";
+    x[n].getElementsByTagName('input')[0].focus();
     // ... and fix the Previous/Next buttons:
     if (n == 0) {
       document.getElementById("prevBtn").style.display = "none";

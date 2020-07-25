@@ -23,7 +23,7 @@ def score_project(project, user_subjects):
         if subject in project.subjects:
             score += subject_score
     print(f'{project.name}: {score}')
-    return int(score)
+    return score
 
 
 def recommend_projects(user):

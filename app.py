@@ -410,7 +410,7 @@ def project(project_name):
                 name = user_subject.subject.name
                 if name in project_subjects:
                     # -1 to account for skills gained via project association
-                    project_subjects[name] += (user_subject.number-1)
+                    project_subjects[name] += (user_subject.number)
     ## forms ##
     project_application = Project_Application_Form(request.form)
     return render_template('project.html', project=project,
@@ -556,8 +556,8 @@ def delete_comment(project_id, comment_id):
     return redirect(request.referrer)
 
 
-@application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
 @login_required
+@application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
 def mark_complete(project_id, task_id, action):
     project = Project.query.get_or_404(project_id)
     # screen non-members
@@ -582,6 +582,7 @@ def mark_complete(project_id, task_id, action):
     return redirect(request.referrer)
 
 
+@login_required
 def transfer_ownership(project, user):
     if current_user!=project.owner:
         flash('Only the owner can transfer project ownership.')
@@ -607,8 +608,8 @@ def transfer_ownership(project, user):
     return True
 
 
-@application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
+@application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 def change_project_status(project_id, user_id, action):
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
@@ -639,6 +640,7 @@ def change_project_status(project_id, user_id, action):
     return redirect(request.referrer)
 
 
+@login_required
 @application.route('/search', methods=['POST'])
 def search():
     search_text = request.form.get('search')
@@ -661,6 +663,7 @@ def search():
                         project_application=project_application)
 
 
+@login_required
 @application.route('/collaborate/<int:target_user_id>', methods=['POST'])
 def collaborate(target_user_id):
     error_flag = False
@@ -693,6 +696,7 @@ def collaborate(target_user_id):
     return redirect(url_for('home'))
 
 
+@login_required
 @application.route('/accept_collaboration/<int:project_id>')
 def accept_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
@@ -704,6 +708,7 @@ def accept_collaboration(project_id):
     return redirect(request.referrer)
 
 
+@login_required
 @application.route('/reject_collaboration/<int:project_id>')
 def reject_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
@@ -711,14 +716,15 @@ def reject_collaboration(project_id):
     return redirect(request.referrer)
 
 
+@login_required
 @application.route('/report_user/<int:target_user_id>', methods=['POST'])
 def report_user(target_user_id):
     error_flag = False
     # if not eror
 
 
-@application.route('/logout')
 @login_required
+@application.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
