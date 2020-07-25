@@ -133,6 +133,19 @@
       <p class='oneliner'>
         {{ user.about }}
       </p>
+      <div>
+        <i class="fa fa-flask" aria-hidden="true"></i>
+        {% for subject in user.subjects|reverse %}
+          <a href='/subject={{ subject.code }}'>
+            {% if loop.index>1 %}
+            ,
+            {% endif %}
+            <p class='subject-tag' style='background:{{ subject.color }};'>
+              {{ subject.name }}
+            </p>
+          </a>
+        {% endfor %}
+      </div>
       {% if current_user!=user %}
         <hr class="my-4">
         {{ render_user_action_bar(current_user, user) }}
