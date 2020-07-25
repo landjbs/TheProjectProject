@@ -23,9 +23,14 @@ def recommend_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(user_projects))
     ## format user preferences ##
-    # query raw counts of user subjects
+    # sum raw counts of user subjects
+    subject_sum = 0
+    for s in user.subjects:
+        subject_sum += s.number
+    # get normalized subject counts
     user_subjects = [(s.subject,s.number) for s in user.subjects]
-    # normalize subject counts
+
+    #
     user_subjects = {}
     ## score each candidate ##
     return candidates
