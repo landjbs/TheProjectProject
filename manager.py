@@ -86,7 +86,7 @@ def remove_user_from_project(user, project, admin=False):
             member.notifications.append(member_note)
     # add to session
     db.session.commit()
-    flash(f'{user.name} has been removed from {project.name}.')
+    flash(f'You have removed {user.name} from {project.name}.')
     return True
 
 
