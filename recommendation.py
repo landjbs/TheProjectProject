@@ -13,8 +13,9 @@ PROJECT_LIMIT = 30
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user '''
     # sum raw subject counts across project users
-    
-
+    user_sum = 0
+    for m in project.members:
+        
 
 
 def recommend_projects(user):
