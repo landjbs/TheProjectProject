@@ -58,4 +58,4 @@ def recommend_users(project):
     project_invitations = [u.id for u in project.invitations]
     return User.query.filter(~User.id.in_(project_members),
                              ~User.id.in_(project_pending),
-                             ~User.id.in_())
+                             ~User.id.in_(project_invitations))
