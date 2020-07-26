@@ -124,7 +124,7 @@ class User(db.Model, UserMixin):
                                 order_by='Notification.timestamp')
     # subjects
     subjects = relationship('User_Subjects', back_populates='user',
-                            lazy='dynamic', order_by='User_Subjects.number')
+                            lazy='dynamic', order_by='desc(User_Subjects.number)')
 
     def __init__(self, name, email, password, subjects, github, about):
         self.name = str(name)

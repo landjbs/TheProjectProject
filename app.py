@@ -362,7 +362,7 @@ def user(email):
     for project in user.projects:
         stars += project.stars.count()
     # subjects
-    subject_data = {s.subject.name : s.number for s in user.subjects}
+    subject_data = {s.subject.name : s.number for s in user.subjects[:10]}
     # application to projects
     project_application = Project_Application_Form(request.form)
     return render_template('user.html', user=user, stars=stars,
