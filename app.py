@@ -144,6 +144,7 @@ def apply():
                     github      =       form.data['github'],
                     about       =       form.data['about']
                 )
+        manager.create_user(user, form.data['subjects'])
         try:
             db.session.add(user)
             db.session.commit()

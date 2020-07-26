@@ -10,6 +10,7 @@ def create_subject(name, color):
     db.session.commit()
 
 
+## USER ##
 def create_user(user):
     db.session.add(user)
 
