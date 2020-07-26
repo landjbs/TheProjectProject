@@ -36,7 +36,7 @@
                   </a>
                   {% endif %}
                 </p>
-                <a href='/project={{ project.code }}'>
+                <a href='/project={{ project.name }}'>
                   <h3>{{ project.name }}</h3>
                 </a>
                 <p>
@@ -128,26 +128,6 @@
                       </li>
                     {% endfor %}
                   </ul>
-              </li>
-              <li>
-                <a href="#subjectSubmenu" data-toggle="collapse" aria-expanded="false">
-                  Subjects
-                  &nbsp;
-                  <i class="fa fa-flask" aria-hidden="true"></i>
-                  {{ project.subjects.all()|length }}
-                </a>
-                <ul class="collapse list-unstyled" id="subjectSubmenu">
-                  {% for subject in project.subjects|reverse %}
-                    {% if loop.index > 1 %}
-                    ,
-                    {% endif %}
-                    <a class='subject-hover' href='/subject={{ subject.code }}' style='display:inline;'>
-                      <p class='subject-tag' style='background:{{ subject.color }};'>
-                        {{ subject.name }}
-                      </p>
-                    </a>
-                  {% endfor %}
-                </ul>
               </li>
               {% if is_owner %}
                 <li>

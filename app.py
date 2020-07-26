@@ -373,8 +373,8 @@ def user(email):
 
 @login_required
 @application.route('/project=<project_code>')
-def project(projct_code):
-    project = Project.query.filter_by(name=project_name).first_or_404()
+def project(project_code):
+    project = Project.query.filter_by(code=project_code).first_or_404()
     comment_form = Comment_Form(request.form)
     task_form = Task_Form(request.form)
     ## task data visualization ##

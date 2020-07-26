@@ -35,9 +35,9 @@
                   {% endif %}
                 </p>
                 <a href='/user={{ user.email }}'>
-                  <h3>{{ user.name }}</h3>
+                  <h3 contenteditable="true">{{ user.name }}</h3>
                 </a>
-                <a href='mailto:{{ user.email }}'>
+                <a contenteditable="true" href='mailto:{{ user.email }}'>
                   {{ user.email }}
                 </a>
             </div>
