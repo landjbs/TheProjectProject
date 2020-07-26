@@ -175,25 +175,6 @@
 
         <!-- Page Content Holder -->
         <div id="content">
-          <div class='row'>
-            <div class='container my-4'>
-              <h4 style='text-align:left;'>Recommended Members</h4>
-              <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                  {% for user in recommended_members %}
-                    {% if loop.index==1 %}
-                    <div class="carousel-item active">
-                    {% else %}
-                    <div class="carousel-item">
-                    {% endif %}
-                      {{ macros.render_user_card(current_user, user) }}
-                    </div>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-
             <div class="row">
               <div class="col-sm-4">
                 <h6>Daily Activity</h6>
@@ -377,6 +358,32 @@
                 </form>
               </div>
             </div>
+
+            {% if recommended_tabs %}
+              <div class='row'>
+                <div class='container my-4'>
+                  <h4 style='text-align:left;'>Recommended Members</h4>
+                  <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                      {% for tab in recommended_tabs%}
+                        {% if loop.index==1 %}
+                        <div class="carousel-item active">
+                        {% else %}
+                        <div class="carousel-item">
+                        {% endif %}
+                          <div class='row'>
+                            {% for user in tab %}
+                              {{ macros.render_user_card(current_user, user) }}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class='my-4'>
+            {% endif %}
 
         </div>
 

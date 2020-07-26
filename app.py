@@ -415,7 +415,7 @@ def project(project_code):
                     # -1 to account for skills gained via project association
                     project_subjects[name] += (user_subject.number)
     ## recommended members ##
-    recommended_members = False
+    recommended_tabs = False
     if current_user==project.owner:
         recommended_members = User.query.filter(user!=current_user)
         recommended_tabs = partition_query(recommended_members)

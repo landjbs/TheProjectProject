@@ -50,3 +50,8 @@ def recommend_projects(user):
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     return results
     # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
+
+
+def recommend_users(project):
+    project_members = [u.id for u in project.members]
+    return User.query.filter(~User.id.in_(project_members))
