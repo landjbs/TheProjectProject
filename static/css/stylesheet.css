@@ -16,10 +16,6 @@ mark {
   color: black;
 }
 
-select {
-  min-height: 100%;
-}
-
 select option {
     background-color: black;
     color: white;
