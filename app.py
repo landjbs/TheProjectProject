@@ -142,13 +142,12 @@ def apply():
                     password    =       form.data['password'],
                     subject_ids =       form.data['subjects'],
                     github      =       form.data['github'],
-                    about       =       form.data['about']
-                )
-        manager.create_user(user, form.data['subjects'])
+                    about       =       form.data['about'])
         try:
-            db.session.add(user)
-            db.session.commit()
+            manager.create_user(user, form.data['subjects'])
             db.session.close()
+            flash('Your application to TheProjectProject has been submitted! '
+                  '')
         except Exception as e:
             db.session.rollback()
         return render_template('index.html')
