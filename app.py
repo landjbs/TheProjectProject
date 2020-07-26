@@ -375,8 +375,10 @@ def user(email):
 @application.route('/project=<project_code>')
 def project(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
+    # forms
     comment_form = Comment_Form(request.form)
     task_form = Task_Form(request.form)
+    project_application = Project_Application_Form(request.form)
     ## task data visualization ##
     # vis activity
     activity_data = {} if project.tasks.count()>0 else False
@@ -412,16 +414,19 @@ def project(project_code):
                 if name in project_subjects:
                     # -1 to account for skills gained via project association
                     project_subjects[name] += (user_subject.number)
-    ## forms ##
-    project_application = Project_Application_Form(request.form)
+    ## recommended members ##
+    recommended_members = False
+    if current_user==project.owner:
+        recommended_members = Users.query.filter(user!=current_user)
     return render_template('project.html', project=project,
                             comment_form=comment_form,
+                            project_application=project_application
                             task_form=task_form,
                             activity_data=activity_data,
                             authored=authored,
                             completed=completed,
                             project_subjects=project_subjects,
-                            project_application=project_application)
+                            recommended_members=recommended_members)
 
 
 @login_required
