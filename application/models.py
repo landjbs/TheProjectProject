@@ -182,6 +182,8 @@ class Project(db.Model):
     ## base info ##
     # name
     name = Column(String(25), unique=True, nullable=False)
+    # code for search
+    code = Column(String(128), unique=True, nullable=False)
     # oneliner
     oneliner = Column(String(40))
     # summary
@@ -359,4 +361,4 @@ class Badge(db.Model):
     id = Column(Integer, primary_key=True)
     # name
     name = Column(String(60), nullable=False)
-    # 
+    #
