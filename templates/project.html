@@ -382,7 +382,6 @@
                   </div>
                 </div>
               </div>
-              <hr class='my-4'>
             {% endif %}
 
         </div>
@@ -394,7 +393,7 @@
       {{ macros.render_join_modal(current_user, project, project_application) }}
       {% for tab in recommended_tabs %}
         {% for user in tab %}
-          {{ macros.render_collaborate_modal(current_user, user) }}
+          {{ macros.render_collaborate_modal(current_user, user, project) }}
         {% endfor %}
       {% endfor %}
     </div>

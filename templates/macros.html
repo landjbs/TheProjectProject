@@ -374,7 +374,7 @@
 {%- endmacro %}
 
 
-{% macro render_collaborate_modal(current_user, target_user) -%}
+{% macro render_collaborate_modal(current_user, target_user, target_project=None) -%}
 <div id="modal_user_{{ target_user.id }}" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -392,7 +392,11 @@
           <br>
           <select name="selected_project" id="selected_project" class='select-clean'>
             {% for project in current_user.owned %}
-              <option value="{{ project.id }}">{{ project.name }}</option>
+              {% if projecft=target_project %}
+                <option value="{{ project.id }}" selected>{{ project.name }}</option>
+              {% else %}
+                <option value="{{ project.id }}">{{ project.name }}</option>
+              {% endif %}
             {% endfor %}
           </select>
           <br><br>
