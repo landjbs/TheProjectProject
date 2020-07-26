@@ -128,12 +128,6 @@ class User(db.Model, UserMixin):
         self.name = str(name)
         self.email = str(email)
         self.password = str(self.set_password(password))
-        self.subjects = []
-        if subject_ids:
-            for s_id in subject_ids:
-                s = Subject.query.get(s_id).first()
-                if s is not None:
-                    self.subjects.append(User_Subjects)
         self.github = str(github) if github!='' else None
         self.about = str(about)
         self.accepted = False
