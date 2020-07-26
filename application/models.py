@@ -100,7 +100,7 @@ class User(db.Model, UserMixin):
     # accepted
     accepted = Column(Boolean, nullable=False)
     ## projects ##
-    owned = relationship('Project', back_populates='owner', lazy='dynamic')
+    owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',
                             back_populates='members')
     pending = relationship('Project_Application',
