@@ -140,7 +140,7 @@ def apply():
         user = User(name        =       form.data['name'],
                     email       =       form.data['email'],
                     password    =       form.data['password'],
-                    subjects    =       form.data['subjects'],
+                    subject_ids =       form.data['subjects'],
                     github      =       form.data['github'],
                     about       =       form.data['about']
                 )
