@@ -23,7 +23,7 @@ def get_normed_user_subjects(user, temp):
 
 
 def get_normed_project_subjects(project, temp):
-    subject_num = len(project.subjects)
+    subject_num = project.subjects.count()
     project_subjects = {subject : (1/subject_num)
                         for subject in project.subjects}
     return project_subjects
@@ -70,5 +70,6 @@ def recommend_users(project):
                   + project_invitations + project_rejections)
     candidates = User.query.filter(~User.id.in_(nowshow_ids))
     ## rank candidates ##
-
+    project_subjects = get_normed_project_subjects(project, temp=3)
+    print(project_subjects)
     return candidates
