@@ -14,7 +14,7 @@ def create_subject(name, color):
 def create_user(user, subject_ids):
     db.session.add(user)
     for id in subject_ids:
-        subject = Subject.get(id)
+        subject = Subject.query.get(id)
         add_subject_to_user(user, subject)
     db.session.add(user)
     db.session.commit()

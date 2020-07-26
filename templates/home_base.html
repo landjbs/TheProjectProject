@@ -35,6 +35,17 @@
   </head>
 
   <body>
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	      {% for message in messages %}
+		      <div class="alert alert-warning alert-dismissible" style='margin:0px;' role="alert">
+		          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	          {{message}}
+           </div>
+        {% endfor %}
+	    {% endif %}
+	  {% endwith %}
+
     <nav class="navbar navbar-expand-lg navbar-dark static-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="/home">
@@ -72,16 +83,6 @@
       </div>
     </nav>
 
-    {% with messages = get_flashed_messages() %}
-	    {% if messages %}
-	      {% for message in messages %}
-		      <div class="alert alert-warning alert-dismissible" style='margin:0px;' role="alert">
-		          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-	          {{message}}
-           </div>
-        {% endfor %}
-	    {% endif %}
-	  {% endwith %}
 
     {% block content %} {% endblock %}
 
