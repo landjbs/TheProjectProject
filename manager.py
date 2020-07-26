@@ -48,7 +48,7 @@ def add_user_to_project(user, project):
     for member in project.members:
         member.notifications.append(notification)
     # delete possible application
-    application = project.pending_members.filter_by(user=user).first()
+    application = project.pending.filter_by(user=user).first()
     if application is not None:
         db.session.delete(application)
     # delete possible invitation
@@ -97,7 +97,7 @@ def remove_user_from_project(user, project, admin=False):
 
 def reject_user_from_pending(user, project):
     ''' Rejects user with pending application to project '''
-    application = project.pending_members.filter_by(user=user).first()
+    application = project.pending.filter_by(user=user).first()
     if application is None:
         flash(f'Cannot reject {user.name} application to {project.name} '
                "because they haven't applied.")

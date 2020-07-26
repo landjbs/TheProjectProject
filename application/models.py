@@ -73,9 +73,9 @@ class User_Subjects(db.Model):
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='pending_projects')
+    user = relationship('User', back_populates='pending')
     project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
-    project = relationship('Project', back_populates='pending_members')
+    project = relationship('Project', back_populates='pending')
     text = Column('text', String(250), nullable=True)
 
 
@@ -101,12 +101,10 @@ class User(db.Model, UserMixin):
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
-    # projects = relationship('Project_Membership',
-                            # back_populates='members', lazy='dynamic')
     projects = relationship('Project', secondary='user_to_project_2',
                             back_populates='members')
-    pending_projects = relationship('Project_Application',
-                                    back_populates='user', lazy='dynamic')
+    pending = relationship('Project_Application',
+                            back_populates='user', lazy='dynamic')
     invitations = relationship('Project', secondary='project_invitation',
                                back_populates='invitations', lazy='dynamic')
     rejections = relationship('Project', secondary='project_rejections',
@@ -172,7 +170,7 @@ class User(db.Model, UserMixin):
         return (project in self.starred)
 
     def has_applied(self, project):
-        return ((self.pending_projects.filter_by(project=project).first()) is not None)
+        return ((self.pending.filter_by(project=project).first()) is not None)
 
 
 class Project(db.Model):
@@ -198,8 +196,8 @@ class Project(db.Model):
     owner = relationship('User', back_populates='owned')
     members = relationship('User', secondary='user_to_project_2',
                            back_populates='projects', lazy='dynamic')
-    pending_members = relationship('Project_Application',
-                                   back_populates='project', lazy='dynamic')
+    pending = relationship('Project_Application',
+                            back_populates='project', lazy='dynamic')
     invitations = relationship('User', secondary='project_invitation',
                                back_populates='invitations', lazy='dynamic')
     rejections = relationship('User', secondary='project_rejections',

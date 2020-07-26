@@ -54,5 +54,6 @@ def recommend_projects(user):
 
 def recommend_users(project):
     project_members = [u.id for u in project.members]
-    print(project_members)
-    return User.query.filter(~User.id.in_(project_members))
+    project_pending = [a.user.id for a in project.pending]
+    return User.query.filter(~User.id.in_(project_members),
+                             ~User.id.in_(project_pending),)

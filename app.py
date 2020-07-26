@@ -465,14 +465,14 @@ def join_project(project_id):
         else:
             form = Project_Application_Form(request.form)
             if form.validate_on_submit():
-                application = project.pending_members.filter_by(user=current_user).first()
+                application = project.pending.filter_by(user=current_user).first()
                 if application is not None:
                     flash(f'You have already applied to {project.name}!')
                 else:
                     application = Project_Application(project=project,
                                                     user=current_user,
                                                     text=form.response.data)
-                    project.pending_members.append(application)
+                    project.pending.append(application)
                     flash(f'Your application to {project.name} been submitted.')
                     # notify project owner
                     notification = Notification(text=f'{current_user.name} has '

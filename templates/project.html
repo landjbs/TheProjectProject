@@ -135,10 +135,10 @@
                     Pending Members
                     &nbsp;
                     <i class="fa fa-bell" aria-hidden="true"></i>
-                    {{ project.pending_members.all()|length }}
+                    {{ project.pending.all()|length }}
                   </a>
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
-                      {% for application in project.pending_members %}
+                      {% for application in project.pending %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
                           <a href='user={{ application.user.email }}' class="mb-1 user-name"
                           style='background: transparent; color: white; padding:0px;'>
