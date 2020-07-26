@@ -36,7 +36,7 @@
                   </a>
                   {% endif %}
                 </p>
-                <a href='/project={{ project.name }}'>
+                <a href='/project={{ project.code }}'>
                   <h3>{{ project.name }}</h3>
                 </a>
                 <p>
@@ -360,6 +360,8 @@
             </div>
 
             {% if recommended_tabs %}
+              <div class='line'>
+
               <div class='row'>
                 <div class='container my-4' style='min-width: 99%;'>
                   <h4 style='text-align:left;'>Recommended Members</h4>
@@ -389,7 +391,7 @@
     </div>
 
     <!-- modals -->
-    <div>
+    <div style='display:hidden;'>
       {{ macros.render_join_modal(current_user, project, project_application) }}
       {% if recommended_tabs != False %}
         {% for tab in recommended_tabs %}
