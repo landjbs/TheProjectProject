@@ -136,6 +136,8 @@ def terms():
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = Apply(request.form)
+    for x in form:
+        print(x)
     if request.method=='POST' and form.validate():
         user = User(name        =       form.data['name'],
                     email       =       form.data['email'],

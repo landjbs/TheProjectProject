@@ -41,7 +41,9 @@
           <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
           <span class="tooltiptext">{{ elt.description}}</span>
         </div>
-        {{ elt(id=elt.name) }}
+        <br>
+        {{ elt(id=elt.name, style='width:30%;') }}
+        <br>
         <small>Limit 5.</small>
         {% if elt.errors %}
           <p class='warning'>{{ elt.errors[0] }}</p>

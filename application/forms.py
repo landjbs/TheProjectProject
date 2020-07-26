@@ -73,7 +73,7 @@ class Apply(BaseForm):
     subjects = SelectMultipleField('Interests',
                                    description=('What subjects are you '
                                                 'interested in?'),
-                                   choices=list(subjects)),
+                                   choices=list(subjects))
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')],
