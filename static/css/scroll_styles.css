@@ -16,6 +16,7 @@
 
 .card {
   background: rgba(0, 0, 255, 0.01);
+  overflow-x: scroll;
 }
 
 .card-text {
