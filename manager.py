@@ -16,6 +16,8 @@ def create_user(user, subject_ids):
     for id in subject_ids:
         subject = Subject.get(id)
         add_subject_to_user(user, subject)
+    db.session.add(user)
+    db.session.commit()
     return True
 
 ## USER SUBJECTS ##
