@@ -643,8 +643,10 @@ def change_project_status(project_id, user_id, action):
 
 
 @login_required
-@application.route('/search', methods=['POST'])
+@application.route('/search', methods=['GET', 'POST'])
 def search():
+    if request.method=='GET':
+        return redirect(url_for('home'))
     search_text = request.form.get('search')
     # project results
     project_results = Project.query.filter(Project.name.contains(search_text) |
