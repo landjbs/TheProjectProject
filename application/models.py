@@ -182,7 +182,7 @@ class Project(db.Model):
     ## base info ##
     # name
     name = Column(String(25), unique=True, nullable=False)
-    # code for search
+    # code for url
     code = Column(String(128), unique=True, nullable=False)
     # oneliner
     oneliner = Column(String(40))
