@@ -35,16 +35,18 @@
       </div>
     <!-- select multiple field -->
     {% elif elt.type=='SelectMultipleField' %}
-      <h4 style="display: inline;">{{ elt.label }}</h4>
-      <div class='boop'>
-        <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-        <span class="tooltiptext">{{ elt.description}}</span>
+      <div class="row input-segment tab">
+        <h4 style="display: inline;">{{ elt.label }}</h4>
+        <div class='boop'>
+          <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+          <span class="tooltiptext">{{ elt.description}}</span>
+        </div>
+        {{ elt(id=elt.name) }}
+        <small>Limit 5.</small>
+        {% if elt.errors %}
+          <p class='warning'>{{ elt.errors[0] }}</p>
+        {% endif %}
       </div>
-      {{ elt(id=elt.name) }}
-      <small>Limit 5.</small>
-      {% if elt.errors %}
-        <p class='warning'>{{ elt.errors[0] }}</p>
-      {% endif %}
     {% else %}
       <div class="row input-segment tab">
         <h4 style="display: inline;">{{ elt.label }}</h4>
