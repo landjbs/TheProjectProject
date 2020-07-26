@@ -361,7 +361,7 @@
 
             {% if recommended_tabs %}
               <div class='row'>
-                <div class='container my-4'>
+                <div class='container my-4' style='min-width: 99%;'>
                   <h4 style='text-align:left;'>Recommended Members</h4>
                   <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
@@ -392,6 +392,11 @@
     <!-- modals -->
     <div>
       {{ macros.render_join_modal(current_user, project, project_application) }}
+      {% for tab in recommended_tabs %}
+        {% for user in tab %}
+          {{ macros.render_collaborate_modal(current_user, user) }}
+        {% endfor %}
+      {% endfor %}
     </div>
     <!-- /modals -->
 

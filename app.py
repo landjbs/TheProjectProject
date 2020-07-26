@@ -418,7 +418,7 @@ def project(project_code):
     recommended_tabs = False
     if current_user==project.owner:
         recommended_members = rec.recommend_users(project)
-        recommended_tabs = partition_query(recommended_members)
+        recommended_tabs = list(partition_query(recommended_members))
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             project_application=project_application,
