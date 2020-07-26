@@ -9,6 +9,7 @@ from application.models import User, Project, Subject
 
 
 PROJECT_LIMIT = 30
+USER_OWNED_CUTOFF = 5 # max number of active owned projects to be recommended
 
 
 def get_normed_user_subjects(user, temp):
@@ -60,6 +61,6 @@ def recommend_users(project):
     project_rejections = [u.id for u in project.rejections]
     nowshow_ids = (project_members + project_pending
                   + project_invitations + project_rejections)
-    candidates =  User.query.filter(~User.id.in_(nowshow_ids))
+    candidates = User.query.filter(~User.id.in_(nowshow_ids))
 
     return candidates
