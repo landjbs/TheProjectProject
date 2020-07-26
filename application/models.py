@@ -351,3 +351,12 @@ class Notification(db.Model):
                          back_populates='notifications')
     # timestamp
     timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
+
+
+class Badge(db.Model):
+    __tablename__ = 'badge'
+    # id
+    id = Column(Integer, primary_key=True)
+    # name
+    name = Column(String(60), nullable=False)
+    # 
