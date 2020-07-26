@@ -22,6 +22,12 @@ def get_normed_user_subjects(user, temp):
     return user_subjects
 
 
+def get_normed_project_subjects(project, temp):
+    subject_num = len(project.subjects)
+    project_subjects = {subject : (1/subject_num)
+                        for subject in project.subjects}
+
+
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user '''
     # sum raw subject counts across project users
@@ -62,5 +68,6 @@ def recommend_users(project):
     nowshow_ids = (project_members + project_pending
                   + project_invitations + project_rejections)
     candidates = User.query.filter(~User.id.in_(nowshow_ids))
+    ## rank candidates ##
 
     return candidates
