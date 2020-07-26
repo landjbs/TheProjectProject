@@ -26,6 +26,7 @@ def get_normed_project_subjects(project, temp):
     subject_num = len(project.subjects)
     project_subjects = {subject : (1/subject_num)
                         for subject in project.subjects}
+    return project_subjects
 
 
 def score_project(project, user_subjects):
