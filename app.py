@@ -418,6 +418,7 @@ def project(project_code):
     recommended_members = False
     if current_user==project.owner:
         recommended_members = User.query.filter(user!=current_user)
+        recommended_tabs = partition_query(recommended_members)
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             project_application=project_application,
@@ -426,7 +427,7 @@ def project(project_code):
                             authored=authored,
                             completed=completed,
                             project_subjects=project_subjects,
-                            recommended_members=recommended_members)
+                            recommended_tabs=recommended_tabs)
 
 
 @login_required
