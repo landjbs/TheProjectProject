@@ -70,9 +70,9 @@ class Apply(BaseForm):
                                'projects you have worked on, passions you '
                                'have, or reasons you want to join the '
                                'community.'))
-    subjects = SelectMultipleField('Subjects',
-                                   description=('What subjects might this '
-                                                'project involve?'),
+    subjects = SelectMultipleField('Interests',
+                                   description=('What subjects are you '
+                                                'interested in?'),
                                    choices=list(subjects)),
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
