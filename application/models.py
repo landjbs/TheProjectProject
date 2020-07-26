@@ -181,7 +181,7 @@ class Project(db.Model):
     id = Column(Integer, primary_key=True)
     ## base info ##
     # name
-    name = Column(String(25), unique=True, nullable=False)
+    name = Column(String(25), unique=False, nullable=False)
     # code for url
     code = Column(String(128), unique=True, nullable=False)
     # oneliner
@@ -237,6 +237,7 @@ class Project(db.Model):
                 requires_application, application_question, estimated_time,
                 team_size, complete, owner):
         self.name = str(name)
+        self.code = str(name).replace('/', '_').replace(' ', '_').lower()
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url) if url else None
