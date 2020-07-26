@@ -2,12 +2,22 @@
 Ranking, sorting, and searching algorithms for projects, users, and subjects.
 '''
 
+import numpy as np
 from operator import itemgetter
 
 from application.models import User, Project, Subject
 
 
 PROJECT_LIMIT = 30
+
+
+def get_normed_user_subjects(user, temp):
+    # sum raw counts of user subjects
+    norm_sum = 0
+    for s in user.subjects:
+        norm_sum += np.exp(s.number / temp)
+    user_subjects = {s.subject : (np.exp(s.number/temp) / norm_sum)
+                    for s in user.subjects}
 
 
 def score_project(project, user_subjects):
@@ -33,7 +43,7 @@ def recommend_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(user_projects))
     ## format user preferences ##
-    # sum raw counts of user subjects
+
     subject_sum = 0
     for s in user.subjects:
         subject_sum += s.number
