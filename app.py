@@ -722,7 +722,7 @@ def accept_collaboration(project_id):
 @application.route('/reject_collaboration/<int:project_id>')
 def reject_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
-    manager.reject_project_invitations(project)
+    manager.reject_project_invitations(current_user, project)
     return redirect(request.referrer)
 
 

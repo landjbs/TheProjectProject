@@ -118,14 +118,14 @@ def reject_user_from_pending(user, project):
 
 
 def reject_project_invitations(user, project):
-    if not current_user in project.invitations:
+    if not user in project.invitations:
         return False
     # remove invitation
-    project.invitations.remove(current_user)
+    project.invitations.remove(user)
     # add rejection to user and project
     user.rejections.append(project)
     # notify project owner
-    notification = Notification(text=(f'{current_user.name} has decided '
+    notification = Notification(text=(f'{user.name} has decided '
                                 f'not to collaborate on {project.name}. '
                                 "We promise it's nothing personal! Please "
                                 'contact us if you think a mistake was made.'))

@@ -391,11 +391,13 @@
     <!-- modals -->
     <div>
       {{ macros.render_join_modal(current_user, project, project_application) }}
-      {% for tab in recommended_tabs %}
-        {% for user in tab %}
-          {{ macros.render_collaborate_modal(current_user, user, project) }}
+      {% if recommended_tabs != False %}
+        {% for tab in recommended_tabs %}
+          {% for user in tab %}
+            {{ macros.render_collaborate_modal(current_user, user, project) }}
+          {% endfor %}
         {% endfor %}
-      {% endfor %}
+      {% endif %}
     </div>
     <!-- /modals -->
 
