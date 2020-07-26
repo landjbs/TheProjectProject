@@ -147,8 +147,9 @@ def apply():
             manager.create_user(user, form.data['subjects'])
             db.session.close()
             flash('Your application to TheProjectProject has been submitted! '
-                  '')
+                  'We will ')
         except Exception as e:
+            print(f'ERROR: {e}')
             db.session.rollback()
         return render_template('index.html')
     start_on = 0
