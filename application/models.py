@@ -129,10 +129,11 @@ class User(db.Model, UserMixin):
         self.email = str(email)
         self.password = str(self.set_password(password))
         self.subjects = []
-        if subjects:
+        if subject_ids:
             for s_id in subject_ids:
-                subjects.append(User_Subjects(Subject.query.get(s_id)))
-        self.subjects = subjects if subjects else []
+                s = Subject.query.get(s_id).first()
+                if s is not None:
+                    self.subjects.append(User_Subjects)
         self.github = str(github) if github!='' else None
         self.about = str(about)
         self.accepted = False
