@@ -44,10 +44,9 @@ def recommend_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(user_projects))
     ## format user preferences ##
-    user_subjects = get_normed_user_subjects(user, temp=3)
+    user_subjects = get_normed_user_subjects(user, temp=2)
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
-    print(results)
     return results
     # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
