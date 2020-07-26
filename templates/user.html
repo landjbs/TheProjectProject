@@ -161,7 +161,7 @@
                 {{ user.owned|length }}
               </h4>
               <hr class="my-4">
-              <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+              <div id="owned-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                 <!--Slides-->
                 <div class="carousel-inner" role="listbox">
                   {% for tab in owned_tabs %}
@@ -180,14 +180,14 @@
                     </div>
                 <!--Controls-->
                 <div class="controls-top">
-                  <a class="btn-floating" href="#rec-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-                  <a class="btn-floating" href="#rec-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+                  <a class="btn-floating" href="#owned-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                  <a class="btn-floating" href="#owned-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
                 </div>
                 <!--/.Controls-->
               </div>
 
 
-              <div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+              <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                 <h4 style='text-align:left;'>
                   Member Projects
                   <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
@@ -212,8 +212,8 @@
               </div>
               <!--Controls-->
               <div class="controls-top">
-                <a class="btn-floating" href="#trending-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-                <a class="btn-floating" href="#trending-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+                <a class="btn-floating" href="#member-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                <a class="btn-floating" href="#member-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
               </div>
             </div>
           </div>
@@ -309,6 +309,25 @@
         }
       });
     {% endif %}
+  </script>
+
+  <!-- log tab locations -->
+  <script>
+  $('#owned-carousel').on('slid.bs.carousel', function () {
+    sessionStorage.setItem('ownedSlide', $('#owned-carousel div.active').index());
+    });
+
+  $('#member-carousel').on('slid.bs.carousel', function () {
+    sessionStorage.setItem('memberSlide', $('#member-carousel div.active').index());
+    });
+
+  if(sessionStorage.ownedSlide){
+      $("#owned-carousel").carousel(sessionStorage.ownedSlide*1);
+    }
+
+  if(sessionStorage.memberSlide){
+      $("#member-carousel").carousel(sessionStorage.memberSlide*1);
+    }
 
 
   </script>
