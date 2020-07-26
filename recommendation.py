@@ -15,9 +15,10 @@ def get_normed_user_subjects(user, temp):
     # sum raw counts of user subjects
     norm_sum = 0
     for s in user.subjects:
-        norm_sum += np.exp(s.number / temp)
+        norm_sum += np.exp(s.number/temp)
     user_subjects = {s.subject : (np.exp(s.number/temp) / norm_sum)
                     for s in user.subjects}
+    return user_subjects
 
 
 def score_project(project, user_subjects):
@@ -43,13 +44,7 @@ def recommend_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(user_projects))
     ## format user preferences ##
-
-    subject_sum = 0
-    for s in user.subjects:
-        subject_sum += s.number
-    # get normalized subject counts
-    user_subjects = {s.subject : (s.number/subject_sum)
-                    for s in user.subjects}
+    user_subjects = get_normed_user_subjects(user, temp=3)
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
