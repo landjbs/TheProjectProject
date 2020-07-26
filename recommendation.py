@@ -45,6 +45,10 @@ def score_project(project, user_subjects):
     return score
 
 
+def score_user(user, project_subjects):
+    
+
+
 def recommend_projects(user):
     ## get initial candidates ##
     user_projects = [p.id for p in user.projects]
@@ -71,5 +75,6 @@ def recommend_users(project):
     candidates = User.query.filter(~User.id.in_(nowshow_ids))
     ## rank candidates ##
     project_subjects = get_normed_project_subjects(project, temp=3)
-    print(project_subjects)
+    results = [(user, score_user(user, project_subjects))
+                for user in candidates]
     return candidates
