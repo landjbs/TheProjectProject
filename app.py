@@ -301,6 +301,7 @@ def add_project():
                                   estimated_time = form.estimated_time.data,
                                   team_size = form.team_size.data,
                                   complete = form.complete.data)
+                    project_code = project.code
                     manager.create_project(project, current_user)
                     db.session.commit()
                     db.session.close()
@@ -336,7 +337,7 @@ def add_project():
                 else:
                     flash('Post some comments to tell people what your project '
                           'is all about!')
-                return redirect(f'/project={form.name.data}')
+                return redirect(f'/project={project_code}')
     return render_template('add_project.html', form=form)
 
 
