@@ -417,10 +417,10 @@ def project(project_code):
     ## recommended members ##
     recommended_members = False
     if current_user==project.owner:
-        recommended_members = Users.query.filter(user!=current_user)
+        recommended_members = User.query.filter(user!=current_user)
     return render_template('project.html', project=project,
                             comment_form=comment_form,
-                            project_application=project_application
+                            project_application=project_application,
                             task_form=task_form,
                             activity_data=activity_data,
                             authored=authored,

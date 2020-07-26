@@ -67,10 +67,10 @@ a, a:hover, a:focus {
     display: block;
 }
 
-#sidebar ul li a:hover {
+/* #sidebar ul li a:hover {
     color: #5D00FF;
     background: #fff;
-}
+} */
 
 a.subject-hover:hover {
   color: white !important;
@@ -78,10 +78,10 @@ a.subject-hover:hover {
 }
 
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
+/* #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
     background: #5D00FF;
-}
+} */
 
 
 a[data-toggle="collapse"] {
@@ -96,7 +96,7 @@ a[data-toggle="collapse"] {
     transform: translateY(-50%);
 }
 
-ul ul a {
+/* ul ul a {
     background: #5D00FF;
 }
 
@@ -120,7 +120,7 @@ a.download {
 a.article, a.article:hover {
     background: #5D00FF !important;
     color: #fff !important;
-}
+} */
 
 
 

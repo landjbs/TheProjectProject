@@ -172,8 +172,20 @@
               {% endif %}
             </ul>
             <div class='container my-4'>
-              <h4 style='text-align:left;'>Recommended Projects</h4>
-              <hr class="my-4">
+              <h4 style='text-align:left;'>Recommended Members</h4>
+              <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                  {% for user in recommended_members %}
+                    {% if loop.index==1 %}
+                    <div class="carousel-item active">
+                    {% else %}
+                    <div class="carousel-item">
+                    {% endif %}
+                      {{ macros.render_user_card(current_user, user) }}
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
             </div>
         </nav>
 
