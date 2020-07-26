@@ -734,5 +734,13 @@ def logout():
     return redirect(url_for('index'))
 
 
+@login_required
+@application.route('/delete_user')
+def delete_user():
+    db.session.delete(current_user)
+    logout_user()
+    return redirect(url_for('index'))
+
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
