@@ -16,6 +16,16 @@ mark {
   color: black;
 }
 
+select {
+  min-height: 100%;
+}
+
+select option {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
 input:focus,
 select:focus,
 textarea:focus,
