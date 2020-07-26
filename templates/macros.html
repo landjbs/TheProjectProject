@@ -34,7 +34,7 @@
           days
         </p>
         <div>
-          <i class="fa fa-flask" aria-hidden="true"></i>
+          <!-- <i class="fa fa-flask" aria-hidden="true"></i> -->
           {% for subject in project.subjects|reverse %}
             <a href='/subject={{ subject.code }}'>
               {% if loop.index>1 %}
@@ -134,8 +134,8 @@
         {{ user.about }}
       </p>
       <div class='card-foot float-left'>
-        <i class="fa fa-flask" aria-hidden="true"></i>
-        {% for s in user.subjects[:5]|reverse %}
+        <!-- <i class="fa fa-flask" aria-hidden="true"></i> -->
+        {% for s in (user.subjects|reverse)[:5] %}
           <a href='/subject={{ s.subject.code }}'>
             {% if loop.index>1 %}
             ,
