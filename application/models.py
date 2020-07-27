@@ -82,7 +82,7 @@ class User_Badge(db.Model):
     progress = Column(Float, nullable=False, default=float(0))
     earned = Column(Boolean, nullable=False, default=False)
     earn_stamp = Column(DateTime, nullable=True)
-    
+
 
 
 class Project_Application(db.Model):
@@ -379,5 +379,7 @@ class Badge(db.Model):
     name = Column(String(60), nullable=False, unique=True)
     # url for icon
     icon_url = Column(String(250), nullable=False, unique=True)
+    # color
+    color = Column(String(6), unique=True, nullable=False)
     # users
     users = relationship('User_Badge', back_populates='badge', lazy='dynamic')

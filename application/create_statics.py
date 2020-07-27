@@ -27,6 +27,10 @@ subjects = [Subject('AI/ML', '#FF5733'),
             Subject('Startup', '#33C1FF'),
             Subject('Theory', '#3352FF')]
 
+
+badges = [Badge(),]
+
+
 def create_subjects():
     for subject in subjects:
         db.session.add(subject)
