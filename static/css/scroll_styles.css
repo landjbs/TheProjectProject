@@ -25,13 +25,19 @@
     text-align: left;
 }
 
+.card-oneline {
+  min-height: 3vh;
+  max-height: 3vh;
+  overflow: scroll;
+}
+
 .card-head {
   text-align: left;
-  white-space: normal;
+  white-space: nowrap;
   text-overflow: clip;
   min-height: 3vh;
   max-height: 3vh;
-  x-overflow: inherit;
+  overflow-x: scroll;
 }
 
 .little {
@@ -143,6 +149,8 @@ a:hover {
 .action-bar {
   text-align: center;
   position: relative;
+  padding: 0px;
+  margin: 0px;
 }
 
 .add_button {
