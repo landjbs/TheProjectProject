@@ -188,29 +188,13 @@
         Join
     </button>
   {% elif current_user.has_applied(project) %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+    <button type="button" class="btn" disabled>
         Pending
     </button>
   {% elif project in current_user.invitations %}
-      <p class="mb-1">
-          {{ invitation.oneliner }}
-        <div class='hoverable'>
-          <a class='delete-btn task-btn float-left'
-          style='background: transparent;'
-          href="{{ url_for('reject_collaboration', project_id=invitation.id) }}">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-          </a>
-        <span class='tooltiptext'>Reject</span>
-        </div>
-        <div class='hoverable'>
-          <a class='complete-btn task-btn float-right'
-          style='background: transparent;'
-          href="{{ url_for('accept_collaboration', project_id=invitation.id) }}">
-            <i class="fa fa-check-circle" aria-hidden="true"></i>
-          </a>
-          <span class='tooltiptext'>Accept</span>
-        </div>
-      </p>
+    <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+        Respond
+    </button>
   {% else %}
     <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
         Leave
