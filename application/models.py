@@ -110,9 +110,16 @@ class User_Report(db.Model):
     ## administrative ##
     # has report been addressed
     resolved = Column(Boolean, nullable=False, default=False)
-    # what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
+    # action: what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
     action = Column(Integer, nullable=True)
+    # resolve_stamp: when action was taken
+    resolve_stamp = Column(DateTime, nullable=True)
 
+    def resolve(action):
+        ''' action = {0:pass, 1:warning, 2:tempban, 3:permaban} '''
+        self.resolved = True
+        self.action = int(action)
+        self.resolve_stamp = datetime.utcnow()
 
 ## BASE CLASSES ##
 class User(db.Model, UserMixin):
