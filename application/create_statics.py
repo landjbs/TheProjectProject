@@ -31,3 +31,9 @@ def create_subjects():
     for subject in subjects:
         db.session.add(subject)
     db.session.commit()
+
+
+def create_badges():
+    for badge in badges:
+        db.session.add(badge)
+    db.session.commit()
