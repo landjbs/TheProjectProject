@@ -58,7 +58,7 @@ def recommend_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(user_projects))
     ## get invited projects ##
-    invited = [project for projct in user.invited]
+    invited = [project for project in user.invitations]
     ## format user preferences ##
     user_subjects = get_normed_user_subjects(user, temp=2)
     ## score each candidate ##
