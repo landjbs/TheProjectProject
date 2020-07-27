@@ -86,6 +86,8 @@ class User(db.Model, UserMixin):
     id = Column(Integer, primary_key=True)
     # name
     name = Column(String(128), unique=False)
+    # code
+    code = Column(String(128), nullable=False, unique=True)
     # email
     email = Column(String(254), unique=True, nullable=False)
     # password
