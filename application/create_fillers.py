@@ -35,9 +35,10 @@ users = [User(name='Landon Smith',
             github='www.github.com/maxbobby',
             password='boop')]
 
+subject_ids = [[i for i in np.random.choice(range(Subjects.query.all().count()), size=4)]]
 
-for user in users:
-    create_user(user)
+for user, ids in zip(users, subject_ids):
+    create_user(user, ids)
 db.session.commit()
 
 ai = Subject.query.get(1)
