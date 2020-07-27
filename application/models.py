@@ -94,6 +94,18 @@ class Project_Application(db.Model):
     text = Column('text', String(250), nullable=True)
 
 
+class User_Report(db.Model):
+    __tablename__ = 'user_report'
+    #
+    reporter_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    reporter = relationship('User', back_populates='reported')
+    #
+    reported_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    reported = relationship('User', back_populates='reports')
+    # description
+    text = Column('text', String(250), nullable=True)
+
+
 ## BASE CLASSES ##
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
@@ -133,6 +145,7 @@ class User(db.Model, UserMixin):
     tasks_authored = relationship('Task', back_populates='author')
     tasks_worked = relationship('Task', secondary=user_to_task,
                          back_populates='workers')
+    badges = relationship('User_Badge', back_populates='user', lazy='dynamic')
     # notifications
     notifications = relationship('Notification', secondary=user_to_notification,
                                 back_populates='users', lazy='dynamic',

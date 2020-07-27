@@ -28,7 +28,14 @@ subjects = [Subject('AI/ML', '#FF5733'),
             Subject('Theory', '#3352FF')]
 
 
-badges = [Badge(),]
+# badges = [Badge('Super-Owner', ),    # own and complete many projects
+#           Badge('Super-Member'),     # work on many projects
+#           Badge('Well-Studied'),    # have many subject skills
+#           Badge('Specialist'),      # have many points in one subject
+#           Badge('Star Struck'),      # have many stars
+#           Badge('Well-Connected'),  # work with many different users
+#           Badge(' ')
+#           ]
 
 
 def create_subjects():
@@ -38,6 +45,7 @@ def create_subjects():
 
 
 def create_badges():
-    for badge in badges:
-        db.session.add(badge)
-    db.session.commit()
+    pass
+    # for badge in badges:
+    #     db.session.add(badge)
+    # db.session.commit()
