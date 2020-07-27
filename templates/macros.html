@@ -308,36 +308,31 @@
 
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
-    {% if not current_user in project.members %}
-      <div id="modal_project_{{ project.id }}" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-            <div class="modal-header">
-              <a href='project={{ project.code }}' style='color:black;'>
-                <h5>{{ project.name }}</h5>
-              </a>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
-              <div class="modal-body">
-                {% if project.requires_application %}
-                  "{{ project.application_question }}"</p>
-                    {{ project_application.hidden_tag() }}
-                    {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
-                {% else %}
-                  <p>Welcome to {{ project.name }}! Click to join.</p>
-                {% endif %}
-              </div>
-              <div class="modal-footer">
-                <button class='btn'>Join</button>
-              </div>
-            </form>
-          </div>
-        </div>
+<div id="modal_project_{{ project.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a href='project={{ project.code }}' style='color:black;'>
+          <h5>{{ project.name }}</h5>
+        </a>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+    {% if not current_user in project.members %}
+      <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
+        <div class="modal-body">
+          {% if project.requires_application %}
+            "{{ project.application_question }}"</p>
+              {{ project_application.hidden_tag() }}
+              {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
+          {% else %}
+            <p>Welcome to {{ project.name }}! Click to join.</p>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>Join</button>
+        </div>
+      </form>
     {% else %}
-      <div id="modal_project_{{ project.id }}" class="modal fade" role="dialog">
         <div class="modal-dialog">
           <!-- Modal content-->
           <div class="modal-content">
@@ -376,8 +371,8 @@
               </form>
           </div>
         </div>
-      </div>
     {% endif %}
+    </div>
   </div>
 {%- endmacro %}
 
