@@ -315,6 +315,21 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+    {% if project in current_user.invitations %}
+      <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
+        <div class="modal-body">
+          {% if project.requires_application %}
+            "{{ project.application_question }}"</p>
+              {{ project_application.hidden_tag() }}
+              {{ project_application.response(class='join-input', placeholder='Response', required=True) }}
+          {% else %}
+            <p>Welcome to {{ project.name }}! Click to join.</p>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>Join</button>
+        </div>
+      </form>
     {% elif not current_user in project.members %}
       <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
         <div class="modal-body">
