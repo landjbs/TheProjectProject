@@ -9,31 +9,35 @@ from application.models import Project, User, Comment, Task, Subject
 from application.create_subjects import create_subjects
 
 create_subjects()
-from manager import create_project, add_comment
+from manager import create_project, add_comment, create_user
 
 
 users = [User(name='Landon Smith',
               email='landonsmith@college.harvard.edu',
               password='boop',
-              subjects=None,
               github='www.github.com/landjbs',
               about='I love ML and NLP. CEO of Strada Routing.'),
         User(name='Harrison Oatman',
              email='hroatman@college.harvard.edu',
              password='boop',
-             subjects=None,
              github='www.github.com/hroatman',
              about='I study Math.'),
         User(name='Lonely Lodge',
             email='lonely@college.harvard.edu',
             about='I am so lonely :( add me to projects pls',
             github='www.github.com/lonely',
-            password='boop',
-            subjects=None)]
+            password='boop'),
+        User(name='Max Bobby',
+             email='maxbobby@college.harvard.edu',
+             about='I study economics and computer science, and hope to go '
+                    'into finance. I am interested in entrepreneurship '
+                    'and consulting.',
+            github='www.github.com/maxbobby',
+            password='boop')]
 
 
-for user in (users):
-    db.session.add(user)
+for user in users:
+    create_user(user)
 db.session.commit()
 
 ai = Subject.query.get(1)

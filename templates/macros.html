@@ -122,7 +122,7 @@
   <div class="card mb-2">
     <div class="card-body">
       <div class='card-head little'>
-        <a class='project-name' href='user={{ user.email }}'>
+        <a class='project-name' href='user={{ user.code }}'>
           <h5>{{ user.name }}</h5>
         </a>
         <a href='mailto:{{ user.email }}'>
@@ -277,12 +277,12 @@
     <i class="fa fa-share-alt" aria-hidden="false"></i>
     <span class='tooltiptext'>
       <a class="twitter-share-button"
-          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.email }}"
+          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.code }}"
           data-size="large">
           <i class="fa fa-twitter-square" aria-hidden="true"></i>
       </a>
       <a class="linkedin-share-button"
-          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.email }}"
+          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.code }}"
           data-size="large">
         <i class="fa fa-linkedin-square" aria-hidden="true"></i>
       </a>
@@ -292,7 +292,7 @@
         <i class="fa fa-facebook-square" aria-hidden="true"></i>
       </a>
       <a class="email-share-button"
-          href="mailto:?subject={{ user.name }} on TheProjectProject&body=Check out {{ user.name }}'s profile on TheProjectProject:%0D%0Ahttps://theprojectproject.io/user={{ user.email }}!">
+          href="mailto:?subject={{ user.name }} on TheProjectProject&body=Check out {{ user.name }}'s profile on TheProjectProject:%0D%0Ahttps://theprojectproject.io/user={{ user.code }}!">
           <i class="fa fa-envelope" aria-hidden="true"></i>
       </a>
     </span>
