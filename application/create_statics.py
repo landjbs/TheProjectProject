@@ -2,7 +2,7 @@ import sys
 sys.path.append('.')
 
 from application import db
-from application.models import Subject
+from application.models import Subject, Badge
 
 
 subjects = [Subject('AI/ML', '#FF5733'),

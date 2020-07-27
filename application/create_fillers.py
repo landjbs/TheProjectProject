@@ -7,9 +7,11 @@ from sqlalchemy.sql import exists
 from application import db
 from application.models import Project, User, Comment, Task, Subject
 
-from application.create_subjects import create_subjects
+from application.create_statics import create_subjects, create_badges
 
 create_subjects()
+create_badges()
+
 from manager import create_project, add_comment, create_user
 
 
