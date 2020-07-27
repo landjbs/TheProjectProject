@@ -148,6 +148,10 @@ def reject_project_invitation(user, project, admin):
         flash(f'You have declined the offer to collaborate on {project.name}.')
     else:
         flash(f'You have withdrawn your invitation of {user.name} to {project.name}.')
+        # remove invitation from user notifcations
+        for note in user.notifications:
+            if project.name in note.text:
+                user.notifications.remove(note)
     db.session.commit()
     return True
 
