@@ -99,11 +99,13 @@ class User_Report(db.Model):
     # id
     id = Column(Integer, primary_key=True)
     # reporter: user who posted report
-    reporter_id = Column(Integer, ForeignKey('user.id'))
-    reporter = relationship('User', back_populates='reported')
+    reporter_id = Column('reporter_id', Integer, ForeignKey('user.id'),
+                        primary_key=True)
+    reporter = relationship('User', back_populates='reports')
     # reported: user described in report
-    reported_id = Column(Integer, ForeignKey('user.id'))
-    reported = relationship('User', back_populates='reports')
+    reported_id = Column('reported_id', Integer, ForeignKey('user.id'),
+                         primary_key=True)
+    reported = relationship('User', back_populates='reported')
     ## description ##
     # report description
     text = Column('text', String(250), nullable=True)
