@@ -1,6 +1,7 @@
 import sys
 sys.path.append('.')
 
+import numpy as np
 from sqlalchemy.sql import exists
 
 from application import db
@@ -35,13 +36,11 @@ users = [User(name='Landon Smith',
             github='www.github.com/maxbobby',
             password='boop')]
 
-subject_ids = [[i for i in np.random.choice(range(Subjects.query.all().count()), size=4)]]
+subject_ids = [[i for i in np.random.choice(range(len(Subject.query.all())), size=5)]]
 
-for user, ids in zip(users, subject_ids):
-    create_user(user, ids)
+for i, user in enumerate(users):
+    create_user(user, subject_ids[i])
 db.session.commit()
-
-ai = Subject.query.get(1)
 
 
 user1 = db.session.query(User).get(int(1))

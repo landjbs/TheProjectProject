@@ -126,7 +126,7 @@ class User(db.Model, UserMixin):
     subjects = relationship('User_Subjects', back_populates='user',
                             lazy='dynamic', order_by='desc(User_Subjects.number)')
 
-    def __init__(self, name, email, password, subject_ids, github, about):
+    def __init__(self, name, email, password, github, about):
         self.name = str(name)
         self.code = str(name).replace('/', '_').replace(' ', '_').lower()
         self.email = str(email)
