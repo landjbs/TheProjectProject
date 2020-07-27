@@ -317,10 +317,13 @@
       </div>
     {% if project in current_user.invitations %}
       <div class="modal-body">
-        <p>You have been invited to join {{ project.name }}.</p>
+        <p>
+          You have been invited to join <a href='/project={{ project.code }}'>{{ project.name }}</a>.
+          Respond below!
+        </p>
       </div>
       <div class="modal-footer">
-
+        <button class='btn'>Decline</button>
         <button class='btn'>Accept</button>
       </div>
     {% elif not current_user in project.members %}
