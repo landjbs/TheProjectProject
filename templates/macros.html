@@ -317,14 +317,21 @@
       </div>
     {% if project in current_user.invitations %}
       <div class="modal-body">
-        <p>
           You have been invited to join <a href='/project={{ project.code }}'>{{ project.name }}</a>.
-          Respond below!
-        </p>
+          Accept below to join!
       </div>
       <div class="modal-footer">
-        <button class='btn'>Decline</button>
-        <button class='btn'>Accept</button>
+        <a class='delete-btn task-btn float-left'
+        style='background: transparent;'
+        href="{{ url_for('reject_collaboration', project_id=project.id) }}">
+          <button class='btn'>Decline</button>
+        </a>
+        <a class='complete-btn task-btn float-right'
+            style='background: transparent;'
+            href="{{ url_for('accept_collaboration', project_id=project.id) }}">
+          <button class='btn'>Accept</button>
+        </a>
+
       </div>
     {% elif not current_user in project.members %}
       <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
