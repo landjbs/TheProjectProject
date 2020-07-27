@@ -46,7 +46,9 @@ def score_project(project, user_subjects):
 
 
 def score_user(user, project_subjects):
-    
+    score = 0
+    # for subject, subject_score in project_subjects.items():
+
 
 
 def recommend_projects(user):
