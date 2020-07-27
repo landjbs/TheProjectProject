@@ -169,6 +169,15 @@ class User(db.Model, UserMixin):
     # subjects
     subjects = relationship('User_Subjects', back_populates='user',
                             lazy='dynamic', order_by='desc(User_Subjects.number)')
+    ## reporting ##
+    # reports posted by user
+    reported = relationship('User_Report', back_populates='reporter',
+                            lazy='dynamic',
+                            order_by='desc(User_Report.timestamp)')
+    # reports targeting user
+    reports = relationship('User_Report', back_populates='reports',
+                            lazy='dynamic',
+                            order_by='desc(User_Report.timestamp)')
 
     def __init__(self, name, email, password, github, about):
         self.name = str(name)
