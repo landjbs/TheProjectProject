@@ -76,8 +76,13 @@ class User_Badge(db.Model):
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='badges')
     # badges
-    badge_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
-    badge = relationship('Subject', back_populates='users')
+    badge_id = Column(Integer, ForeignKey('badge.id'), primary_key=True)
+    badge = relationship('Badge', back_populates='users')
+    # progress
+    progress = Column(Float, nullable=False, default=float(0))
+    earned = Column(Boolean, nullable=False, default=False)
+    earn_stamp = Column(DateTime, nullable=True)
+    
 
 
 class Project_Application(db.Model):
