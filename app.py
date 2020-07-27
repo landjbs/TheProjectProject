@@ -723,14 +723,17 @@ def accept_collaboration(project_id):
 @application.route('/reject_collaboration/<int:project_id>')
 def reject_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
-    manager.reject_project_invitations(current_user, project, admin=False)
+    manager.reject_project_invitation(current_user, project, admin=False)
     return redirect(request.referrer)
 
 
 @login_required
 @application.route('/withdraw_collaboration/<int:user_id>/<int:project_id>')
 def withdraw_collaboration(user_id, project_id):
-    pass
+    user = User.query.get_or_404(user_id)
+    project = Project.query.get_or_404(project_id)
+    manager.reject_project_invitation(user, project, admin=True)
+    return redirect(request.referrer)
 
 
 @login_required
