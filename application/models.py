@@ -363,3 +363,4 @@ class Badge(db.Model):
     # name
     name = Column(String(60), nullable=False)
     #
+    icon = Column(String(250), nullable=False)
