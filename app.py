@@ -737,6 +737,13 @@ def withdraw_collaboration(user_id, project_id):
 
 
 @login_required
+@application.route('/withdraw_application/<int:project_id>')
+def withdraw_application(project_id):
+    pass
+
+
+
+@login_required
 @application.route('/report_user/<int:target_user_id>', methods=['POST'])
 def report_user(target_user_id):
     error_flag = False
