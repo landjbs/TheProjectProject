@@ -118,8 +118,11 @@ def reject_user_from_pending(user, project, admin=True):
                                          'Please contact us if you think something'
                                          ' is wrong or have any questions.')
         user.notifications.append(notifcation)
+    # remove all unseen pertinent notifications from owner
     else:
-        pass
+        for note in project.owner.notifications:
+            if (user.name in note.text) and (project.name in note.text):
+                project.owner.notifications.remove(note)
     # add rejection to user and project
     user.rejections.append(project)
     db.session.commit()

@@ -353,7 +353,7 @@ class Notification(db.Model):
     users = relationship('User', secondary=user_to_notification,
                          back_populates='notifications')
     # timestamp
-    timestamp = Column(DateTime, default=datetime.utcnow(), index=True)
+    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
 
 
 class Badge(db.Model):
