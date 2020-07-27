@@ -102,7 +102,7 @@ def remove_user_from_project(user, project, admin=False):
     return True
 
 
-def reject_user_from_pending(user, project):
+def reject_user_from_pending(user, project, admin=True):
     ''' Rejects user with pending application to project '''
     application = project.pending.filter_by(user=user).first()
     if application is None:
@@ -111,12 +111,15 @@ def reject_user_from_pending(user, project):
         return False
     db.session.delete(application)
     # notify rejected user
-    notifcation = Notification(text=f'The owner of {project.name} decided not '
-                                     'to add you to the project right now. '
-                                     "We promise it's nothing personal! "
-                                     'Please contact us if you think something'
-                                     ' is wrong or have any questions.')
-    user.notifications.append(notifcation)
+    if admin:
+        notifcation = Notification(text=f'The owner of {project.name} decided not '
+                                         'to add you to the project right now. '
+                                         "We promise it's nothing personal! "
+                                         'Please contact us if you think something'
+                                         ' is wrong or have any questions.')
+        user.notifications.append(notifcation)
+    else:
+        pass
     # add rejection to user and project
     user.rejections.append(project)
     db.session.commit()

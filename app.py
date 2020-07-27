@@ -637,7 +637,7 @@ def change_project_status(project_id, user_id, action):
             manager.remove_user_from_project(user, project, admin=True)
         # remove user from pending
         else:
-            error_flag = (not manager.reject_user_from_pending(user, project))
+            error_flag = (not manager.reject_user_from_pending(user, project, admin=True))
     ## MAKE OWNER ##
     elif action=='make_owner':
         error_flag = (not transfer_ownership(project, user))
