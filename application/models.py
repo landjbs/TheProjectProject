@@ -128,6 +128,7 @@ class User(db.Model, UserMixin):
 
     def __init__(self, name, email, password, subject_ids, github, about):
         self.name = str(name)
+        self.code = str(name).replace('/', '_').replace(' ', '_').lower()
         self.email = str(email)
         self.password = str(self.set_password(password))
         self.github = str(github) if github!='' else None
