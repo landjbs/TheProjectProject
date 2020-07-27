@@ -364,5 +364,5 @@ class Badge(db.Model):
     name = Column(String(60), nullable=False, unique=True)
     # url for icon
     icon_url = Column(String(250), nullable=False, unique=True)
-    # progress
-    progress = Column(Float, nullable=False)
+    # progress int out of 100
+    progress = Column(Integer, nullable=False)
