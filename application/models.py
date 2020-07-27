@@ -110,8 +110,8 @@ class User_Report(db.Model):
     ## administrative ##
     # has report been addressed
     resolved = Column(Boolean, nullable=False, default=False)
-    # what action was taken {0:pass, 1:warning, 2:expulsion}
-    action = Column(String(250))
+    # what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
+    action = Column(Integer, nullable=True)
 
 
 ## BASE CLASSES ##
