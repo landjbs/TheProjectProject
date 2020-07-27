@@ -101,30 +101,6 @@ ul ul a {
     background: #5D00FF;
 }
 
-ul.CTAs {
-    padding: 20px;
-}
-
-ul.CTAs a {
-    text-align: center;
-    font-size: 0.9em !important;
-    display: block;
-    border-radius: 5px;
-    margin-bottom: 5px;
-}
-
-a.download {
-    background: #fff;
-    color: #5D00FF;
-}
-
-a.article, a.article:hover {
-    background: #5D00FF !important;
-    color: #fff !important;
-}
-
-
-
 
 /* ---------------------------------------------------
     CONTENT STYLE

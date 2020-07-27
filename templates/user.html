@@ -45,19 +45,17 @@
             <br>
             <ul class="list-unstyled components">
               <div class='bio'>
-                {% for s in user.subjects[:5] %}
-                  <a href='/subject={{ s.subject.code }}'>
-                    {% if loop.index>1 %}
-                    ,
-                    {% endif %}
-                    <p class='subject-tag' style='background:{{ s.subject.color }};'>
-                      {{ s.subject.name }}
-                    </p>
-                  </a>
-                {% endfor %}
-                <p class='oneliner'>
-                  {{ user.about }}
-                </p>
+                <p class='oneliner'>{{ user.about }}</p>
+                <center>
+                  <p style="margin:0px;">Badge</p>
+                  <div class="progress" style='width:80%;'>
+                    <div class="progress-bar" role="progressbar"
+                        style='width: 40%;'
+                        aria-valuenow="0.4" aria-valuemin="0"
+                        aria-valuemax="1"></div>
+                  </div>
+                </center>
+                <br>
               </div>
               {% if current_user==user %}
                 <li>
