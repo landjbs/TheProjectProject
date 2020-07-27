@@ -102,7 +102,7 @@
                               <div class='hoverable'>
                                 <a class='task-btn member-hovers'
                                 style='display: inline; color: gold;'
-                                href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
+                                href="{{ url_for('withdraw_application', project_id=project.id, user_id=member.id) }}">
                                   <i class='fas fa-crown'></i>
                                 </a>
                                 <span class='tooltiptext'>Make owner</span>
@@ -163,6 +163,35 @@
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Accept Applicant</span>
+                            </div>
+                          </p>
+                        </div>
+                      {% endfor %}
+                  </ul>
+                </li>
+                <li>
+                  <a href="#invitationSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Invitations
+                    &nbsp;
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    {{ project.invitations.all()|length }}
+                  </a>
+                  <ul class="collapse list-unstyled" id="invitationSubmenu">
+                      {% for user in project.invitations %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
+                          <a href='user={{ user.code }}' class="mb-1 user-name"
+                          style='background: transparent; color: white; padding:0px;'>
+                            {{ user.name }}
+                          </a>
+                          <p class="mb-1">
+                            {{ user.about }}
+                            <div class='hoverable'>
+                              <a class='delete-btn task-btn float-right'
+                              style='background: transparent;'
+                              href="{{ url_for('change_project_status', project_id=project.id, user_id=user.id, action='accept') }}">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                              <span class='tooltiptext'>Withdraw Invitation</span>
                             </div>
                           </p>
                         </div>

@@ -54,9 +54,9 @@ def score_user(user, project_subjects):
 def recommend_projects(user):
     ## get initial candidates ##
     member_projects = [p.id for p in user.projects]
-    pending_projects = [p.id for p in user.pending]
+    pending_projects = [p.project.id for p in user.pending]
     invited_projects = [p.id for p in user.invitations]
-    rejected_project = [p.id for p in user.rejections]
+    rejected_projects = [p.id for p in user.rejections]
     nowshow_ids = (member_projects + pending_projects
                    + invited_projects + rejected_projects)
     candidates = Project.query.filter(Project.open==True,
