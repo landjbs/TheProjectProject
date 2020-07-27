@@ -31,6 +31,7 @@
   text-overflow: clip;
   min-height: 3vh;
   max-height: 3vh;
+  x-overflow: inherit;
 }
 
 .little {

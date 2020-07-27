@@ -129,9 +129,11 @@
           <p>{{ user.email }}</p>
         </a>
       </div>
-      <p class='oneliner'>
-        {{ user.about }}
-      </p>
+      <div>
+        <p class='oneliner'>
+          {{ user.about }}
+        </p>
+      </div>
       <div class='card-foot float-left'>
         {% for s in user.subjects[:5] %}
           <a href='/subject={{ s.subject.code }}'>
