@@ -121,6 +121,7 @@ class User_Report(db.Model):
         self.action = int(action)
         self.resolve_stamp = datetime.utcnow()
 
+
 ## BASE CLASSES ##
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
