@@ -118,6 +118,7 @@ def reject_user_from_pending(user, project, admin=True):
                                          'Please contact us if you think something'
                                          ' is wrong or have any questions.')
         user.notifications.append(notifcation)
+        flash(f'You have rejected {user.name} from {project.name}.')
     # remove all unseen pertinent notifications from owner
     else:
         for note in project.owner.notifications:
@@ -126,7 +127,6 @@ def reject_user_from_pending(user, project, admin=True):
     # add rejection to user and project
     user.rejections.append(project)
     db.session.commit()
-    flash(f'{user.name} has been rejected from {project.name}.')
     return True
 
 
