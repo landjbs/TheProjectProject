@@ -102,11 +102,15 @@ class User_Report(db.Model):
     # reported: user described in report
     reported_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     reported = relationship('User', back_populates='reports')
-    # description
+    ## description ##
+    # report description
     text = Column('text', String(250), nullable=True)
-    # administrative
+    # report time
+    timestamp = Column(DateTime, nullable=False, default=datetime.utcnow)
+    ## administrative ##
+    # has report been addressed
     resolved = Column(Boolean, nullable=False, default=False)
-    
+    action = Column(String(250))
 
 
 ## BASE CLASSES ##
