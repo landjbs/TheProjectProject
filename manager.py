@@ -124,7 +124,7 @@ def reject_user_from_pending(user, project):
     return True
 
 
-def reject_project_invitations(user, project, admin):
+def reject_project_invitation(user, project, admin):
     if not user in project.invitations:
         return False
     # remove invitation

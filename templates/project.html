@@ -102,7 +102,7 @@
                               <div class='hoverable'>
                                 <a class='task-btn member-hovers'
                                 style='display: inline; color: gold;'
-                                href="{{ url_for('withdraw_application', project_id=project.id, user_id=member.id) }}">
+                                href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
                                   <i class='fas fa-crown'></i>
                                 </a>
                                 <span class='tooltiptext'>Make owner</span>
@@ -188,7 +188,7 @@
                             <div class='hoverable'>
                               <a class='delete-btn task-btn float-right'
                               style='background: transparent;'
-                              href="{{ url_for('change_project_status', project_id=project.id, user_id=user.id, action='accept') }}">
+                              href="{{ url_for('withdraw_collaboration', user_id=user.id, project_id=project.id) }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Withdraw Invitation</span>
