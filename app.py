@@ -740,7 +740,7 @@ def withdraw_collaboration(user_id, project_id):
 @application.route('/withdraw_application/<int:project_id>')
 def withdraw_application(project_id):
     flash('Withdrawn')
-    pass
+    return redirect(request.referrer)
 
 
 
