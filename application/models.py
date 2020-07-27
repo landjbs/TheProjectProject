@@ -96,11 +96,13 @@ class Project_Application(db.Model):
 
 class User_Report(db.Model):
     __tablename__ = 'user_report'
+    # id
+    id = Column(Integer, primary_key=True)
     # reporter: user who posted report
-    reporter_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    reporter_id = Column(Integer, ForeignKey('user.id'))
     reporter = relationship('User', back_populates='reported')
     # reported: user described in report
-    reported_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    reported_id = Column(Integer, ForeignKey('user.id'))
     reported = relationship('User', back_populates='reports')
     ## description ##
     # report description
