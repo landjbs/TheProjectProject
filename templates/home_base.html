@@ -58,12 +58,12 @@
           <li class="nav-item" style='list-style-type:none;'>
               <div class="dropdown">
                 <button class="dropbtn" style="border:0px; display:inline;">
-                  <a href='user={{ current_user.email}}' style='color:white;'>
+                  <a href='user={{ current_user.code }}' style='color:white;'>
                     {{ current_user.name }}
                   </a>
                 </button>
                 <div class="dropdown-content">
-                  <a href="/user={{ current_user.email }}">Profile</a>
+                  <a href="/user={{ current_user.code }}">Profile</a>
                   <a href="/logout">Log Out</a>
                 </div>
               </div>

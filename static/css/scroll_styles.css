@@ -35,8 +35,6 @@
   text-align: left;
   white-space: nowrap;
   text-overflow: clip;
-  min-height: 3vh;
-  max-height: 3vh;
   overflow-x: scroll;
 }
 

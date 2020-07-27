@@ -15,7 +15,7 @@
         <a class='project-name' href='project={{ project.code }}'>
           <h5>{{ project.name }}</h5>
         </a>
-        <a href='user={{ project.owner.email }}'>
+        <a href='user={{ project.owner.code }}'>
           <p class='owner'>{{ project.owner.name }}</p>
         </a>
       </div>
@@ -70,7 +70,7 @@
         <a class='project-name' href='project={{ project.code }}'>
           <h5>{{ project.name }}</h5>
         </a>
-        <a href='user={{ project.owner.email }}'>
+        <a href='user={{ project.owner.code }}'>
           <p>{{ project.owner.name }}</p>
         </a>
       </div>
@@ -382,7 +382,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <a href='user={{ target_user.email }}' style='color:black;'>
+        <a href='user={{ target_user.code }}' style='color:black;'>
           <h5>{{ target_user.name }}</h5>
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>

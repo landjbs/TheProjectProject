@@ -40,7 +40,7 @@
                   <h3>{{ project.name }}</h3>
                 </a>
                 <p>
-                  by <a class='user-name' href='user={{ project.owner.email }}'>{{ project.owner.name }}</a>
+                  by <a class='user-name' href='user={{ project.owner.code }}'>{{ project.owner.name }}</a>
                 </p>
             </div>
             {{ macros.render_project_action_bar(current_user, project) }}
@@ -85,7 +85,7 @@
                       <li>
                         <div class='row' style='margin-left: 0.2vh; margin-bottom: 1vh;'>
                           <div class='col'>
-                          <a class='member-hovers' href="user={{ user.code }}" style='padding-bottom:5px; display: inline;'>
+                          <a class='member-hovers' href="user={{ member.code }}" style='padding-bottom:5px; display: inline;'>
                             {{ member.name }}
                           </a>
                         </div>
@@ -140,7 +140,7 @@
                   <ul class="collapse list-unstyled" id="pendingSubmenu">
                       {% for application in project.pending %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-                          <a href='user={{ application.user.email }}' class="mb-1 user-name"
+                          <a href='user={{ application.user.code }}' class="mb-1 user-name"
                           style='background: transparent; color: white; padding:0px;'>
                             {{ application.user.name }}
                           </a>
@@ -219,7 +219,7 @@
                           <h6 class="mb-1">{{ task.text }}</h6>
                           <div class="d-flex w-100 justify-content-between">
                             <small>Requested by
-                            <a href='user={{ task.author.email }}' class="mb-1">
+                            <a href='user={{ task.author.code }}' class="mb-1">
                               <u>{{ task.author.name }}</u>
                             </a>
                             on {{ time_to_str(task.post_stamp) }}</small>
@@ -269,16 +269,16 @@
                             <small>Completed by
                               {% for worker in task.workers %}
                                   {% if loop.index==(task.workers|length) %}
-                                    <a href='user={{ worker.email }}' class='user-name'>
+                                    <a href='user={{ worker.code }}' class='user-name'>
                                       {{ worker.name }}
                                     </a>
                                   {% elif (task.workers|length)==2 %}
-                                    <a href='user={{ worker.email }}' class='user-name'>
+                                    <a href='user={{ worker.code }}' class='user-name'>
                                       {{ worker.name }}
                                     </a>
                                     and
                                   {% else %}
-                                    <a href='user={{ worker.email }}' class='user-name'>
+                                    <a href='user={{ worker.code }}' class='user-name'>
                                       {{ worker.name }}
                                     </a>
                                   {% endif %}

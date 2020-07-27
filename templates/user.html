@@ -117,16 +117,16 @@
                           <small>Completed by
                             {% for worker in task.workers %}
                                 {% if loop.index==(task.workers|length) %}
-                                  <a href='user={{ worker.email }}' class='user-name'>
+                                  <a href='user={{ worker.code }}' class='user-name'>
                                     {{ worker.name }}
                                   </a>
                                 {% elif (task.workers|length)==2 %}
-                                  <a href='user={{ worker.email }}' class='user-name'>
+                                  <a href='user={{ worker.code }}' class='user-name'>
                                     {{ worker.name }}
                                   </a>
                                   and
                                 {% else %}
-                                  <a href='user={{ worker.email }}' class='user-name'>
+                                  <a href='user={{ worker.code }}' class='user-name'>
                                     {{ worker.name }}
                                   </a>
                                 {% endif %}
