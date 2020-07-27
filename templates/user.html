@@ -60,7 +60,7 @@
                   <ul class="collapse list-unstyled" id="invitationSubmenu">
                       {% for invitation in user.invitations %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-                          <a href='project={{ invitation.name }}' class="mb-1 user-name"
+                          <a href='project={{ invitation.code }}' class="mb-1 user-name"
                           style='background: transparent; color: white; padding:0px;'>
                             {{ invitation.name }}
                           </a>
@@ -95,30 +95,21 @@
                     {{ user.pending.all()|length }}
                   </a>
                   <ul class="collapse list-unstyled" id="applicationSubmenu">
-                      {% for invitation in user.invitations %}
+                      {% for application in user.pending %}
                         <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-                          <a href='project={{ invitation.name }}' class="mb-1 user-name"
+                          <a href='project={{ application.project.code }}' class="mb-1 user-name"
                           style='background: transparent; color: white; padding:0px;'>
-                            {{ invitation.name }}
+                            {{ application.project.name }}
                           </a>
                           <p class="mb-1">
-                              {{ invitation.oneliner }}
+                              {{ application.project.oneliner }}
                             <div class='hoverable'>
-                              <a class='delete-btn task-btn float-left'
+                              <a class='delete-btn task-btn float-right'
                               style='background: transparent;'
-                              href="{{ url_for('reject_collaboration', project_id=invitation.id) }}">
+                              href="{{ url_for('withdraw_application', project_id=invitation.id) }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
-                            <span class='tooltiptext'>Decline</span>
-                            </div>
-                            <div class='hoverable'>
-                              <a class='complete-btn task-btn float-right'
-                              style='background: transparent;'
-                              href="{{ url_for('accept_collaboration', project_id=invitation.id) }}">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                              </a>
-                              <span class='tooltiptext'>Accept</span>
-                            </div>
+                            <span class='tooltiptext'>Withdraw Application</span>
                           </p>
                         </div>
                       {% endfor %}
