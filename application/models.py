@@ -70,6 +70,16 @@ class User_Subjects(db.Model):
     number = Column(Integer, nullable=False, default=1)
 
 
+class User_Badge(db.Model):
+    __tablename__ = 'user_badge'
+    # user
+    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user = relationship('User', back_populates='badges')
+    # badges
+    badge_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
+    badge = relationship('Subject', back_populates='users')
+
+
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
