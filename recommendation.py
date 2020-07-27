@@ -57,13 +57,15 @@ def recommend_projects(user):
     candidates = Project.query.filter(Project.open==True,
                                       Project.complete==False,
                                       ~Project.id.in_(user_projects))
+    ## get invited projects ##
+    invited = [project for projct in user.invited]
     ## format user preferences ##
     user_subjects = get_normed_user_subjects(user, temp=2)
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
+    results = (invited + results)
     return results
-    # return Project.query.filter(~Project.in_(Project.query.filter(user in )))
 
 
 def recommend_users(project):
