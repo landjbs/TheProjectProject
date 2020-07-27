@@ -131,6 +131,7 @@ def reject_user_from_pending(user, project, admin=True):
 
 
 def reject_project_invitation(user, project, admin):
+    ''' admin: true if rejected by project owner '''
     if not user in project.invitations:
         return False
     # remove invitation
