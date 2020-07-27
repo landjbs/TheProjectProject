@@ -739,7 +739,8 @@ def withdraw_collaboration(user_id, project_id):
 @login_required
 @application.route('/withdraw_application/<int:project_id>')
 def withdraw_application(project_id):
-    flash('Withdrawn')
+    project = Project.query.get_or_404(project_id)
+    manager.reject_user_from_pending(current_user, project, admin=False)
     return redirect(request.referrer)
 
 

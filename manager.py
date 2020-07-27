@@ -110,7 +110,7 @@ def reject_user_from_pending(user, project, admin=True):
                "because they haven't applied.")
         return False
     db.session.delete(application)
-    # notify rejected user
+    # notify rejected user if admin rejected
     if admin:
         notifcation = Notification(text=f'The owner of {project.name} decided not '
                                          'to add you to the project right now. '
