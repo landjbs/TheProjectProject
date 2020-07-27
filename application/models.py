@@ -84,7 +84,6 @@ class User_Badge(db.Model):
     earn_stamp = Column(DateTime, nullable=True)
 
 
-
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
@@ -99,13 +98,11 @@ class User_Report(db.Model):
     # id
     id = Column(Integer, primary_key=True)
     # reporter: user who posted report
-    reporter_id = Column('reporter_id', Integer, ForeignKey('user.id'),
-                        primary_key=True)
-    reporter = relationship('User', back_populates='reports')
+    reporter_id = Column(Integer, ForeignKey('user.id'))
+    reporter = Column('User', foreign_keys=[reporter_id])
     # reported: user described in report
-    reported_id = Column('reported_id', Integer, ForeignKey('user.id'),
-                         primary_key=True)
-    reported = relationship('User', back_populates='reported')
+    reported_id = Column(Integer, ForeignKey('user.id'))
+    reported = Column('User', foreign_keys=[reported_id])
     ## description ##
     # report description
     text = Column('text', String(250), nullable=True)
@@ -175,13 +172,10 @@ class User(db.Model, UserMixin):
                             lazy='dynamic', order_by='desc(User_Subjects.number)')
     ## reporting ##
     # reports posted by user
-    reported = relationship('User_Report', back_populates='reporter',
-                            lazy='dynamic',
-                            order_by='desc(User_Report.timestamp)')
+    reports_posted = relationship('User_Report', back_populates='reports')
     # reports targeting user
-    reports = relationship('User_Report', back_populates='reports',
-                            lazy='dynamic',
-                            order_by='desc(User_Report.timestamp)')
+    reports_involving = relationship('User_Report', back_populates='reported')
+
 
     def __init__(self, name, email, password, github, about):
         self.name = str(name)
