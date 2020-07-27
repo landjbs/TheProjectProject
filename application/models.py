@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 from sqlalchemy import (Table, Column, ForeignKey, Integer, String, Boolean,
-                        DateTime)
+                        DateTime, Float)
 from sqlalchemy_utils import IntRangeType
 from sqlalchemy import desc
 
@@ -364,5 +364,5 @@ class Badge(db.Model):
     name = Column(String(60), nullable=False, unique=True)
     # url for icon
     icon_url = Column(String(250), nullable=False, unique=True)
-    # progress int out of 100
-    progress = Column(Integer, nullable=False)
+    # users
+    users = relationship('User_Badge', back_populates='badge', lazy='dynamic')
