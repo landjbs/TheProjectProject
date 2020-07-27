@@ -16,7 +16,6 @@ def create_user(user, subject_ids):
     for id in subject_ids:
         subject = Subject.query.get(id)
         if subject:
-            print(f'a {user}')
             add_subject_to_user(user, subject)
     db.session.add(user)
     db.session.commit()
@@ -24,7 +23,6 @@ def create_user(user, subject_ids):
 
 ## USER SUBJECTS ##
 def add_subject_to_user(user, subject):
-    print(user)
     prev = user.subjects.filter_by(subject=subject).first()
     if prev is not None:
         prev.number += 1

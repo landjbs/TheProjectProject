@@ -341,9 +341,9 @@ def add_project():
 
 
 @login_required
-@application.route('/user=<email>')
-def user(email):
-    user = User.query.filter_by(email=email).first_or_404()
+@application.route('/user=<code>')
+def user(code):
+    user = User.query.filter_by(code=code).first_or_404()
     # worked tasks
     tasks = user.tasks_worked
     task_data = {} if (len(tasks)>0) else None
