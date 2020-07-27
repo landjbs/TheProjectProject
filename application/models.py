@@ -96,14 +96,17 @@ class Project_Application(db.Model):
 
 class User_Report(db.Model):
     __tablename__ = 'user_report'
-    #
+    # reporter: user who posted report
     reporter_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     reporter = relationship('User', back_populates='reported')
-    #
+    # reported: user described in report
     reported_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
     reported = relationship('User', back_populates='reports')
     # description
     text = Column('text', String(250), nullable=True)
+    # administrative
+    resolved = Column(Boolean, nullable=False, default=False)
+    
 
 
 ## BASE CLASSES ##
