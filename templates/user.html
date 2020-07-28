@@ -28,7 +28,7 @@
                   <!-- edit button -->
                   {% if user == current_user %}
                     <br>
-                    <a href='/'>
+                    <button type='button' data-toggle='modal' data-target='#edit_modal'>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       Edit
                     </a>
@@ -385,9 +385,5 @@
   if(sessionStorage.memberSlide){
       $("#member-carousel").carousel(sessionStorage.memberSlide*1);
     }
-
-
   </script>
-
-
   {% endblock %}
