@@ -99,11 +99,12 @@ class User_Report(db.Model):
     id = Column(Integer, primary_key=True)
     # reporter: user who posted report
     reporter_id = Column(Integer, ForeignKey('user.id'))
-    reporter = Column('User', foreign_keys=[reporter_id],
-                      back_populates='reports_posted')
+    reporter = relationship('User', foreign_keys=[reporter_id],
+                            back_populates='reports_posted')
     # reported: user described in report
     reported_id = Column(Integer, ForeignKey('user.id'))
-    reported = Column('User', foreign_keys=[reported_id])
+    reported = relationship('User', foreign_keys=[reporter_id],
+                            back_populates='reports')
     ## description ##
     # report description
     text = Column('text', String(250), nullable=True)
@@ -173,9 +174,9 @@ class User(db.Model, UserMixin):
                             lazy='dynamic', order_by='desc(User_Subjects.number)')
     ## reporting ##
     # reports posted by user
-    reports_posted = relationship('User_Report', back_populates='reports')
+    reports_posted = relationship('User_Report', back_populates='reporter')
     # reports targeting user
-    reported = relationship('User_Report', back_populates='reported')
+    reports = relationship('User_Report', back_populates='reported')
 
 
     def __init__(self, name, email, password, github, about):
