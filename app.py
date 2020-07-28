@@ -371,6 +371,25 @@ def user(code):
     edit_form = Edit_User(request.form) if (current_user==user) else False
     if request.method=='POST':
         if edit_form.validate_on_submit():
+            # name
+            new_name = edit_form.name.data
+            if new_name!=user.name:
+                user.name = new_name
+            # email
+            new_email = edit_form.email.data
+            if new_email!=user.email:
+                user.email = new_email
+            # github
+            new_github = edit_form.github.data
+            if new_github!=user.github:
+                user.github = new_github
+            # about
+            new_about = edit_form.about.data
+            if new_about!=user.about:
+                user.about = new_about
+            # new password
+            if not user.check_password(edit_form.password.data):
+                user.set_password(edit_form.password.data) 
             flash('Accounted edits complete.')
         else:
             flash('Problem.')
