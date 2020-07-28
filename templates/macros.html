@@ -460,10 +460,24 @@
                 <div class="warning">You have submitted an invalid CSRF token.</div>
               {% endif %}
             {% else %}
-              <div>
-                {{ elt.label }}
-                {{ elt(class='input') }}
+            <div class="row input-segment" style='text-align:left;'>
+              <div class='input-title'>
+                <h6 style="display: inline;">{{ elt.label }}</h6>
+                {% if elt.description %}
+                  <div class='boop'>
+                    <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+                    <span class="tooltiptext">{{ elt.description}}</span>
+                  </div>
+                {% endif %}
               </div>
+              <div class='input-box'>
+                {% set c = 'input valid' if not elt.errors else 'input invalid'%}
+                {% set max = elt.render_kw.get('max') %}
+                {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
+                       maxlength=max) }}
+                <p class='warning'>{{ elt.errors[0] }}</p>
+              </div>
+            </div>
             {% endif %}
           {% endfor %}
         </div>
