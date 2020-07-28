@@ -665,7 +665,7 @@ def search():
     user_tabs = list(partition_query(user_results.limit(30)))
     # subject results
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
-    subject_tabs = partition_query(subject_results.limit(30))
+    subject_tabs = list(partition_query(subject_results.limit(30)))
     # forms
     project_application = Project_Application_Form(request.form)
     return render_template('search.html', project_tabs=project_tabs,
