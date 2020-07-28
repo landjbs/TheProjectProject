@@ -479,12 +479,28 @@
           {% if edit_form.github.errors %}
             <p class='warning'>{{ edit_form.github.errors[0] }}</p>
           {% endif %}
+          <hr class='my-2'><br>
+          <!-- about -->
+          {{ edit_form.about.label }}:<br>
+          {{ edit_form.about(class='edit-input', value=user.about) }}
+          {% if edit_form.about.errors %}
+            <p class='warning'>{{ edit_form.about.errors[0] }}</p>
+          {% endif %}
           <hr class='my-4'>
           <!-- PASSWORD -->
           <center>
             <h6 style='text-decoration:underline;'>Change Password</h6>
-            <!--  -->
           </center>
+          {% for password_field in [edit_form.password, edit_form.confirm] %}
+            {{ password_field.label }}:<br>
+            {{ password_field(class='edit-input') }}
+            {% if password_field.errors %}
+              <p class='warning'>{{ password_field.errors[0] }}</p>
+            {% endif %}
+            {% if loop.index==1 %}
+              <hr class='my-2'><br>
+            {% endif %}
+          {% endfor %}
         </div>
         <div class="modal-footer">
           <div class='col float-left'>

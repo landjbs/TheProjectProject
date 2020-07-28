@@ -107,7 +107,6 @@ class Edit_User(BaseForm):
                              render_kw={'max':254})
     # confirm
     confirm = PasswordField('Confirm New Password',
-                            validators=[DataRequired()],
                             render_kw={'max':254})
 
 
