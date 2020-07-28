@@ -99,7 +99,8 @@ class User_Report(db.Model):
     id = Column(Integer, primary_key=True)
     # reporter: user who posted report
     reporter_id = Column(Integer, ForeignKey('user.id'))
-    reporter = Column('User', foreign_keys=[reporter_id])
+    reporter = Column('User', foreign_keys=[reporter_id],
+                      back_populates='reports_posted')
     # reported: user described in report
     reported_id = Column(Integer, ForeignKey('user.id'))
     reported = Column('User', foreign_keys=[reported_id])
@@ -174,7 +175,7 @@ class User(db.Model, UserMixin):
     # reports posted by user
     reports_posted = relationship('User_Report', back_populates='reports')
     # reports targeting user
-    reports_involving = relationship('User_Report', back_populates='reported')
+    reported = relationship('User_Report', back_populates='reported')
 
 
     def __init__(self, name, email, password, github, about):
