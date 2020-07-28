@@ -278,3 +278,9 @@ button {
   color:white;
   padding:0px;
 }
+
+.edit-input {
+  border:0px;
+  border-bottom:1px solid black;
+  width:80%;
+}

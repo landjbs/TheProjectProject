@@ -93,20 +93,20 @@ class Edit_User(BaseForm):
     # email
     email = StringField('New Email',
                     validators=[DataRequired(), Length(1, 254), Email()],
-                    render_kw={'max':254}))
+                    render_kw={'max':254})
     # github
     github = StringField('Github',
                     validators=[Length(0, 254), Site_URL_Validator('github')],
-                    render_kw={'max':254}))
+                    render_kw={'max':254})
     # password
     password = PasswordField('New Password',
                              validators=[Length(0, 254),
                                          EqualTo('confirm')],
-                             render_kw={'max':254}))
+                             render_kw={'max':254})
     # confirm
     confirm = PasswordField('Confirm New Password',
                             validators=[DataRequired()],
-                            render_kw={'max':254}))
+                            render_kw={'max':254})
 
 
 
