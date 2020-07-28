@@ -811,7 +811,6 @@ def delete_user():
                 flash(f'Owner transfer unsuccessful of {project.name}.')
                 return redirect(request.referrer)
         else:
-            flash(f'{project.name} deleted.')
             manager.delete_project(project)
     manager.delete_user(current_user)
     flash('Your account has been deleted. We are sorry to see you go!')
