@@ -389,8 +389,10 @@ def user(code):
                 user.about = new_about
             # new password
             if not user.check_password(edit_form.password.data):
-                user.set_password(edit_form.password.data) 
-            flash('Accounted edits complete.')
+                user.password = user.set_password(edit_form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('You have successfully edited your acount.')
         else:
             flash('Problem.')
     return render_template('user.html', user=user, stars=stars,

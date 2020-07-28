@@ -151,7 +151,7 @@ class User(db.Model, UserMixin):
         self.name = str(name)
         self.code = str(name).replace('/', '_').replace(' ', '_').lower()
         self.email = str(email)
-        self.password = str(self.set_password(password))
+        self.password = self.set_password(password)
         self.github = str(github) if github!='' else None
         self.about = str(about)
         self.accepted = False
@@ -160,7 +160,7 @@ class User(db.Model, UserMixin):
         return f'<User {self.name}>'
 
     def set_password(self, password):
-        return generate_password_hash(password)
+        return str(generate_password_hash(password))
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
