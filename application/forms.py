@@ -91,7 +91,7 @@ class Edit_User(BaseForm):
     name = StringField('Name', validators=[DataRequired(), Length(1, 254)],
                        render_kw={'max':254})
     # email
-    email = StringField('New Email',
+    email = StringField('Email',
                     validators=[DataRequired(), Length(1, 254), Email()],
                     render_kw={'max':254})
     # github

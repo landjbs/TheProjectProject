@@ -453,21 +453,37 @@
       </div>
       <form id='editForm' method='post'>
         <div class="modal-body">
-          {% for elt in edit_form %}
-            {% if elt.type == 'CSRFTokenField' %}
-              {{ elt }}
-              {% if elt.errors %}
-                <div class="warning">You have submitted an invalid CSRF token.</div>
-              {% endif %}
-            {% else %}
-                {{ elt.label }}:
-                <br>
-                {{ elt(style='border:0px; border-bottom:1px solid black; width:80%;',
-                       value='Test') }}
-                <br>
-                <hr class='my-4'>
-            {% endif %}
-          {% endfor %}
+          <!-- token -->
+          {{ edit_form.csrf_token }}
+          <!-- about -->
+          <center>
+            <h6 style='text-decoration:underline;'>About</h6>
+          </center>
+          <!-- name -->
+          {{ edit_form.name.label }}:<br>
+          {{ edit_form.name(class='edit-input', value=user.name) }}
+          {% if edit_form.name.errors %}
+            <p class='warning'>{{ edit_form.name.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-2'>
+          <!-- email -->
+          {{ edit_form.email.label }}:<br>
+          {{ edit_form.email(class='edit-input', value=user.email) }}
+          {% if edit_form.email.errors %}
+            <p class='warning'>{{ edit_form.email.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-2'>
+          <!-- github -->
+          {{ edit_form.github.label }}:<br>
+          {{ edit_form.github(class='edit-input', value=user.github) }}
+          {% if edit_form.github.errors %}
+            <p class='warning'>{{ edit_form.github.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-4'>
+          <!-- password -->
+          <center>
+            <h6 style='text-decoration:underline;'>Change Password</h6>
+          </center>
         </div>
         <div class="modal-footer">
           <div class='col float-left'>
