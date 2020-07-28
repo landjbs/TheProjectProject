@@ -559,7 +559,8 @@
             {% if project.members.all()|length > 1 %}
             <label for="new_owner">Select new owner for {{ project.name }}:</label>
             <br>
-            <select id="new_owner_{{ project.id }}" class='select-clean'>
+            <select name="new_owner_{{ project.id }}"
+              id="new_owner_{{ project.id }}" class='select-clean'>
               {% for member in project.members %}
                 {% if not member==project.owner %}
                   <option value="{{ member.id }}">{{ member.name }}</option>

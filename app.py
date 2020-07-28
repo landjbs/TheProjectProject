@@ -769,8 +769,7 @@ def logout():
 def delete_user():
     for project in current_user.owned:
         if len(project.members.all())>1:
-            print(request.form.get(f'new_owner_{project.id}'))
-    flash('here')
+            new_owner = request.form.get(f'new_owner_{project.id}')
     return redirect(request.referrer)
 
     # db.session.delete(current_user)
