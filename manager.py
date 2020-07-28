@@ -58,7 +58,7 @@ def delete_user(user):
         if task.complete==False:
             db.session.delete(task)
         else:
-            pass
+            task.author = None
     # delete applications submitted by user
     for application in user.pending:
         delete_application(application)

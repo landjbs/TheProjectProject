@@ -317,7 +317,7 @@ class Task(db.Model):
     # text
     text = Column(String(160), nullable=True)
     # author
-    author_id = Column(Integer, ForeignKey('user.id'))
+    author_id = Column(Integer, ForeignKey('user.id'), nullable=True)
     author = relationship('User', back_populates='tasks_authored')
     # project
     project_id = Column(Integer, ForeignKey('project.id'))
