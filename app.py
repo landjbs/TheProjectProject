@@ -371,7 +371,7 @@ def user(code):
     edit_form = Edit_User(request.form) if (current_user==user) else False
     if request.method=='POST':
         if edit_form.validate_on_submit():
-            flash('You have successfully edited your account.')
+            flash('Accounted edits complete.')
         else:
             flash('Problem.')
     return render_template('user.html', user=user, stars=stars,
