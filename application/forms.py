@@ -98,6 +98,8 @@ class Edit_User(BaseForm):
     github = StringField('Github',
                     validators=[Length(0, 254), Site_URL_Validator('github')],
                     render_kw={'max':254})
+    about = TextField('About You', validators=[DataRequired(), Length(1, 500)],
+                      render_kw={'max':500})
     # password
     password = PasswordField('New Password',
                              validators=[Length(0, 254),

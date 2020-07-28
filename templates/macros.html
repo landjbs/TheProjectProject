@@ -455,7 +455,7 @@
         <div class="modal-body">
           <!-- token -->
           {{ edit_form.csrf_token }}
-          <!-- about -->
+          <!-- ABOUT -->
           <center>
             <h6 style='text-decoration:underline;'>About</h6>
           </center>
@@ -465,14 +465,14 @@
           {% if edit_form.name.errors %}
             <p class='warning'>{{ edit_form.name.errors[0] }}</p>
           {% endif %}
-          <hr class='my-2'>
+          <hr class='my-2'><br>
           <!-- email -->
           {{ edit_form.email.label }}:<br>
           {{ edit_form.email(class='edit-input', value=user.email) }}
           {% if edit_form.email.errors %}
             <p class='warning'>{{ edit_form.email.errors[0] }}</p>
           {% endif %}
-          <hr class='my-2'>
+          <hr class='my-2'><br>
           <!-- github -->
           {{ edit_form.github.label }}:<br>
           {{ edit_form.github(class='edit-input', value=user.github) }}
@@ -480,9 +480,10 @@
             <p class='warning'>{{ edit_form.github.errors[0] }}</p>
           {% endif %}
           <hr class='my-4'>
-          <!-- password -->
+          <!-- PASSWORD -->
           <center>
             <h6 style='text-decoration:underline;'>Change Password</h6>
+            <!--  -->
           </center>
         </div>
         <div class="modal-footer">
