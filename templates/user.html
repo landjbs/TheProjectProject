@@ -286,7 +286,12 @@
         {% endfor %}
       {% endfor %}
       <!-- user modal -->
-      {{ macros.render_collaborate_modal(current_user, user) }}
+      {% if current_uuser!=user %}
+        <!-- collaborate -->
+        {{ macros.render_collaborate_modal(current_user, user) }}
+        <!-- edit -->
+        {{ macros.render_edit_user_modal(user) }}
+      {% else %}
     </div>
     <!-- /modals -->
 
