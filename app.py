@@ -778,7 +778,7 @@ def delete_user():
             flash(f'{project.name} deleted.')
             manager.delete_project(project)
     db.session.delete(current_user)
-    logout_user()
+    db.session.commit()
     flash('Your account has been deleted. We are sorry to see you go!')
     return redirect(url_for('index'))
 
