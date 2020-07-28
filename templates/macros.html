@@ -368,9 +368,10 @@
                   {% endfor %}
                 </select>
               {% else %}
-                <p>
-                  If you leave {{ project.name }}, there will be no members left and the
-                  project will be deleted. Are you sure you want to leave?
+                <p style='class:red;'>
+                  WARNING: If you leave {{ project.name }}, there will be no
+                  members left and the project will be deleted. Are you sure
+                  you want to leave?
                 </p>
               {% endif %}
             {% else %}
@@ -527,12 +528,12 @@
       <form id='editForm' method='post'>
         <div class="modal-body">
           <p style='color: red;'>
-            Warning: You are trying to delete your account. THIS CANNOT BE
-            UNDONE (and also it will make us very sad but that's okay).
+            WARNING: You are trying to delete your account. THIS CANNOT BE
+            UNDONE (and also it will make us very sad, but that's okay).
           </p>
           <p>
             You will need to choose a new owner for all of your shared projects.
-            Your empty projects will be permanently deleted.
+            Your solo projects will be permanently deleted.
           </p>
           {% for project in user.projects %}
             {% if project.members.all()|length > 1 %}
