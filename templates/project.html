@@ -30,10 +30,10 @@
                   <!-- edit button -->
                   {% if is_owner %}
                   <br>
-                  <a href='/'>
+                  <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     Edit
-                  </a>
+                  </button>
                   {% endif %}
                 </p>
                 <a href='/project={{ project.code }}'>
@@ -429,7 +429,9 @@
 
     <!-- modals -->
     <div style='display:hidden;'>
+      <!-- join/leave modal -->
       {{ macros.render_join_modal(current_user, project, project_application) }}
+      <!-- collaborate modals -->
       {% if recommended_tabs != False %}
         {% for tab in recommended_tabs %}
           {% for user in tab %}
@@ -437,6 +439,7 @@
           {% endfor %}
         {% endfor %}
       {% endif %}
+      <!-- edit modal -->
     </div>
     <!-- /modals -->
 

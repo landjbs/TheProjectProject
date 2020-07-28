@@ -341,7 +341,7 @@ def add_project():
 
 
 @login_required
-@application.route('/user=<code>')
+@application.route('/user=<code>', methods=['GET', 'POST'])
 def user(code):
     user = User.query.filter_by(code=code).first_or_404()
     # worked tasks
@@ -369,6 +369,11 @@ def user(code):
     project_application = Project_Application_Form(request.form)
     # edit user account
     edit_form = Edit_User(request.form) if (current_user==user) else False
+    if request.method=='POST':
+        if edit_form.validate_on_submit():
+            flash('You have successfully edited your account.')
+        else:
+            flash('Problem.')
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs,
