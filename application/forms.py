@@ -88,6 +88,11 @@ class Apply(BaseForm):
 
 class Edit_User(BaseForm):
     name = StringField('Name', validators=[DataRequired(), Length(1, 254)])
+    email = StringField('Harvard Email',
+                    validators=[DataRequired(), Length(1, 254),
+                                Email(), Email_Ext_Validator()])
+    github = StringField('Github',
+                    validators=[Length(0, 254), Site_URL_Validator('github')])
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')])
