@@ -357,7 +357,7 @@ def user(code):
     # member projects
     member_projects = [project for project in user.projects
                        if not project in owned]
-    member_tabs = partition_query(member_projects)
+    member_tabs = list(partition_query(member_projects))
     # sum stars
     stars = 0
     for project in user.projects:
