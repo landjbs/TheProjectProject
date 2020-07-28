@@ -765,11 +765,18 @@ def logout():
 
 
 @login_required
-@application.route('/delete_user')
+@application.route('/delete_user', methods=['POST'])
 def delete_user():
-    db.session.delete(current_user)
-    logout_user()
-    return redirect(url_for('index'))
+    for project in current_user.owned:
+        if len(project.members.all())>1:
+            print(request.form.get(f'new_owner_{project.id}'))
+    flash('here')
+    return redirect(request.referrer)
+
+    # db.session.delete(current_user)
+    # logout_user()
+    # flash('Your account has been deleted. We are sorry to see you go!')
+    # return redirect(url_for('index'))
 
 
 if __name__ == '__main__':

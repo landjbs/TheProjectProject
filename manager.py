@@ -88,6 +88,7 @@ def remove_user_from_project(user, project, admin=False):
                                      'if you think something is wrong or have '
                                      'any questions.')
         user.notifications.append(rem_note)
+        flash(f'You have removed {user.name} from {project.name}.')
     else:
         member_note = Notification(text=f'{user.name} has left '
                                         f'{project.name}.')
@@ -98,7 +99,6 @@ def remove_user_from_project(user, project, admin=False):
     user.rejections.append(project)
     # add to session
     db.session.commit()
-    flash(f'You have removed {user.name} from {project.name}.')
     return True
 
 
