@@ -406,10 +406,12 @@
           <br>
           <select name="selected_project" id="selected_project" class='select-clean'>
             {% for project in current_user.owned %}
-              {% if project==target_project %}
-                <option value="{{ project.id }}" selected>{{ project.name }}</option>
-              {% else %}
-                <option value="{{ project.id }}">{{ project.name }}</option>
+              {% if (project.complete!=True) and (project.open==True) %}
+                {% if project==target_project %}
+                  <option value="{{ project.id }}" selected>{{ project.name }}</option>
+                {% else %}
+                  <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endif %}
               {% endif %}
             {% endfor %}
           </select>
@@ -441,5 +443,5 @@
 
 
 {% macro render_edit_user_modal(user) -%}
-  
+
 {% endmacro -%}
