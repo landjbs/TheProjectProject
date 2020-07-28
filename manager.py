@@ -46,13 +46,16 @@ def remove_subject_from_user(user, subject):
 
 
 def delete_user(user):
-    for subject in user.subjects:
+    for s in user.subjects:
+        subject = s.subject
         remove_subject_from_user(user, subject)
     for notification in user.notifications:
         db.session.delete(notification)
     for task in user.tasks_authored:
         if task.completed==False:
             db.session.delete(task)
+    for application in user.applications:
+        db.session.delete(application)
     db.session.delete(user)
     db.session.commit()
 
@@ -193,6 +196,11 @@ def add_comment(project, user, comment):
 def add_task(project, user, task):
     db.session.add(task)
 
+
+def delete_application(application):
+    db.session.delete(application)
+    db.session.commit()
+    # TODO: remove notification
 
 # projects = db.session.query(Member_Role.project_id).filter(Member_Role.user_id==None, Member_Role.role==role2)
 # p = db.session.query(Project).filter(Project.id.in_(projects), Project.estimated_time>=11)
