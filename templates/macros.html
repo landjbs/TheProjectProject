@@ -358,7 +358,11 @@
           <div class="modal-body">
             {% if project.owner==current_user %}
               {% if project.members.all()|length>1 %}
-                <label for="new_owner">Select new project owner:</label>
+                <p style='color:red;'>
+                  WARNING: To leave {{ project.name }}, you will have to transfer
+                  all control of the project. You may be unable to join again.
+                </p>
+                <label for="new_owner">Select new project owner to leave:</label>
                 <br>
                 <select name="new_owner" id="new_owner" class='select-clean'>
                   {% for member in project.members %}
@@ -368,30 +372,30 @@
                   {% endfor %}
                 </select>
               {% else %}
-                <p style='class:red;'>
+                <p style='color:red;'>
                   WARNING: If you leave {{ project.name }}, there will be no
                   members left and the project will be deleted. Are you sure
                   you want to leave?
                 </p>
               {% endif %}
             {% elif project.complete==True %}
-              <p style='class:red;'>
+              <p style='color:red;'>
                 WARNING: {{ project.name }} has been marked as complete. If you
                 leave you will not be able to join again unless this status is
                 changed. Are you sure you want to leave?
               </p>
             {% elif project.open==False %}
-            <p style='class:red;'>
-              WARNING: {{ project.name }} has been marked as closed. If you
-              leave you will not be able to join again unless this status is
-              changed. Are you sure you want to leave?
-            </p>
+              <p style='color:red;'>
+                WARNING: {{ project.name }} has been marked as closed. If you
+                leave you will not be able to join again unless this status is
+                changed. Are you sure you want to leave?
+              </p>
             {% elif project.requires_application==True %}
-              <p style='class:red;'>
+              <p style='color:red;'>
                 WARNING: If you leave {{ project.name }}, you will have to
                 apply to join again. Are you sure you want to leave?</p>
             {% else %}
-
+              <p>Are you sure you want to leave {{ project.name }}?</p>
             {% endif %}
           </div>
           <div class="modal-footer">
