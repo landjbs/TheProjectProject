@@ -291,7 +291,7 @@
         {{ macros.render_collaborate_modal(current_user, user) }}
       {% else %}
         <!-- edit -->
-        {{ macros.render_edit_user_modal(user) }}
+        {{ macros.render_edit_user_modal(user, edit_form) }}
       {% endif %}
     </div>
     <!-- /modals -->
