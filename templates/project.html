@@ -440,6 +440,9 @@
         {% endfor %}
       {% endif %}
       <!-- edit modal -->
+      {% if current_user == project.owner %}
+        {{ macros.render_edit_project_modal(project, edit_form) }}
+      {% endif %}
     </div>
     <!-- /modals -->
 

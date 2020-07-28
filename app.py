@@ -13,8 +13,8 @@ from operator import itemgetter
 from application import db
 from application.models import (User, Project, Comment, Task, Subject,
                                 Project_Application, Notification)
-from application.forms import (Apply, Login, Add_Project, Comment_Form,
-                                Task_Form, Project_Application_Form, Edit_User)
+import application.forms as forms
+
 import manager as manager
 import recommendation as rec
 
@@ -135,7 +135,7 @@ def terms():
 
 @application.route('/apply', methods=['GET', 'POST'])
 def apply():
-    form = Apply(request.form)
+    form = forms.Apply(request.form)
     if request.method=='POST' and form.validate():
         user = User(name        =       form.data['name'],
                     email       =       form.data['email'],
@@ -167,7 +167,7 @@ def login():
         else:
             flash('Your application is under review—check back soon!')
             return redirect(url_for('index'))
-    form = Login(request.form)
+    form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
         if user is None:
@@ -243,7 +243,7 @@ def home():
     # user projects
     user_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
     user_tabs = partition_query(user_projs)
-    project_application = Project_Application_Form(request.form)
+    project_application = forms.Project_Application_Form(request.form)
     # notifcations
     if (current_user.notifications.count())>0:
         for notification in current_user.notifications:
@@ -260,7 +260,7 @@ def home():
 @login_required
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
-    form = Add_Project(request.form)
+    form = forms.Add_Project(request.form)
     if request.method=='POST' and form.validate_on_submit():
         # url to none
         if form.url.data=='':
@@ -366,10 +366,10 @@ def user(code):
     subject_data = {s.subject.name : s.number for s in user.subjects[:10]}
     ## forms ##
     # application to projects
-    project_application = Project_Application_Form(request.form)
+    project_application = forms.Project_Application_Form(request.form)
     # edit user account
     show_edit_modal = False
-    edit_form = Edit_User(request.form) if (current_user==user) else False
+    edit_form = forms.Edit_User(request.form) if (current_user==user) else False
     if request.method=='POST':
         if edit_form.validate_on_submit():
             edits_made = False
@@ -417,9 +417,9 @@ def user(code):
 def project(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # forms
-    comment_form = Comment_Form(request.form)
-    task_form = Task_Form(request.form)
-    project_application = Project_Application_Form(request.form)
+    comment_form = forms.Comment_Form(request.form)
+    task_form = forms.Task_Form(request.form)
+    project_application = forms.Project_Application_Form(request.form)
     ## task data visualization ##
     # vis activity
     activity_data = {} if project.tasks.count()>0 else False
@@ -572,7 +572,7 @@ def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     if not is_project_member(current_user, project):
         return redirect(request.referrer)
-    form = Comment_Form(request.form)
+    form = forms.Task_Form(request.form)
     if form.validate_on_submit():
         comment = Task(text=form.text.data, author=current_user, project=project)
         db.session.add(comment)
@@ -584,7 +584,7 @@ def add_task(project_id):
 @application.route('/project/<int:project_id>/comment', methods=['POST'])
 def add_comment(project_id):
     project = Project.query.get_or_404(project_id)
-    form = Comment_Form(request.form)
+    form = forms.Comment_Form(request.form)
     if form.validate_on_submit():
         comment = Comment(text=form.text.data, author=current_user, project=project)
         db.session.add(comment)
