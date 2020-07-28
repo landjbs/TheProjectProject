@@ -270,3 +270,11 @@ button {
   color: #FF5D00 !important;
   background: transparent !important;
 }
+
+/* for editing user or project information */
+.edit-button {
+  background: transparent;
+  border:0px;
+  color:white;
+  padding:0px;
+}

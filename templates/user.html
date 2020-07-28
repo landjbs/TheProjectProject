@@ -28,10 +28,11 @@
                   <!-- edit button -->
                   {% if user == current_user %}
                     <br>
-                    <button type='button' data-toggle='modal' data-target='#edit_modal'>
+                    <button type='button' data-toggle='modal' data-target='#edit_modal'
+                     class='edit-button'>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       Edit
-                    </a>
+                    </button>
                   {% endif %}
                 </p>
                 <a href='/user={{ user.code }}'>
