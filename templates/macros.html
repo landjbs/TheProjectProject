@@ -453,6 +453,16 @@
       </div>
       <form id='editForm' method='post'>
         <div class="modal-body">
+          {% for elt in form %}
+            {% if elt.type == 'CSRFTokenField' %}
+              {{ elt }}
+              {% if elt.errors %}
+                <div class="warning">You have submitted an invalid CSRF token.</div>
+              {% endif %}
+            {% else %}
+              {{  }}
+            {% endif %}
+          {% endfor %}
         </div>
         <div class="modal-footer">
           <button class='btn'>Collaborate</button>
