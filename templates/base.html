@@ -32,7 +32,7 @@
   </head>
 
   <body>
-    <div style='z-order:100'>
+    <div style=' z-index:9999; position:absolute; width:100%;'>
       {% with messages = get_flashed_messages() %}
   	    {% if messages %}
   	      {% for message in messages %}
