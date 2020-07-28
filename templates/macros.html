@@ -521,63 +521,25 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h5>Edit Your Account</h5>
+        <h5>Delete Your Account</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <form id='editForm' method='post'>
         <div class="modal-body">
-          <!-- token -->
-          {{ edit_form.csrf_token }}
-          <!-- ABOUT -->
-          <center>
-            <h6 style='text-decoration:underline;'>About</h6>
-          </center>
-          <!-- name -->
-          {{ edit_form.name.label }}:<br>
-          {{ edit_form.name(class='edit-input', value=user.name) }}
-          {% if edit_form.name.errors %}
-            <p class='warning'>{{ edit_form.name.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- email -->
-          {{ edit_form.email.label }}:<br>
-          {{ edit_form.email(class='edit-input', value=user.email) }}
-          {% if edit_form.email.errors %}
-            <p class='warning'>{{ edit_form.email.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- github -->
-          {{ edit_form.github.label }}:<br>
-          {{ edit_form.github(class='edit-input', value=user.github) }}
-          {% if edit_form.github.errors %}
-            <p class='warning'>{{ edit_form.github.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- about -->
-          {{ edit_form.about.label }}:<br>
-          {{ edit_form.about(class='edit-input', value=user.about) }}
-          {% if edit_form.about.errors %}
-            <p class='warning'>{{ edit_form.about.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-4'>
-          <!-- PASSWORD -->
-          <center>
-            <h6 style='text-decoration:underline;'>Change Password</h6>
-          </center>
-          {% for password_field in [edit_form.password, edit_form.confirm] %}
-            {{ password_field.label }}:<br>
-            {{ password_field(class='edit-input') }}
-            {% if password_field.errors %}
-              <p class='warning'>{{ password_field.errors[0] }}</p>
-            {% endif %}
-            {% if loop.index==1 %}
-              <hr class='my-2'><br>
-            {% endif %}
+          <p style='color: red;'>
+            Warning: You are trying to delete your account. THIS CANNOT BE
+            UNDONE (and also it will make us very sad but that's okay).
+          </p>
+          <p>
+            You will need to choose a new owner for all of your shared projects.
+            Your empty projects will be permanently deleted.
+          </p>
+          {% for project in user.projects %}
+            {{ if project.members|length > 0 }}
           {% endfor %}
         </div>
-        <div class="modal-footer row m-3">
-          <a href='/' class='btn delete-btn col float-left'>Delete Account</a>
-          <button class='btn col'>Change</button>
+        <div class="modal-footer">
+          <button class='btn delete-btn'>Delete</button>
         </div>
       </form>
     </div>
