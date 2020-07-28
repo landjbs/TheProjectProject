@@ -21,6 +21,7 @@ def create_user(user, subject_ids):
     db.session.commit()
     return True
 
+
 ## USER SUBJECTS ##
 def add_subject_to_user(user, subject):
     prev = user.subjects.filter_by(subject=subject).first()
@@ -46,16 +47,27 @@ def remove_subject_from_user(user, subject):
 
 
 def delete_user(user):
+    # delete user/subject associations
     for s in user.subjects:
-        subject = s.subject
-        remove_subject_from_user(user, subject)
+        db.session.delete(s)
+    # delete user notifications
     for notification in user.notifications:
         db.session.delete(notification)
+    # delete incomplete user authored tasks and transfer complete to anonymous
     for task in user.tasks_authored:
-        if task.completed==False:
+        if task.complete==False:
             db.session.delete(task)
-    for application in user.applications:
-        db.session.delete(application)
+        else:
+            pass
+    # delete applications submitted by user
+    for application in user.pending:
+        delete_application(application)
+    # delete invitations extended to user
+    for invitation in user.invitations:
+        db.session.delete(invitation)
+    # delete comments posted by user
+    for comment in user.comments:
+        db.session.delete(comment)
     db.session.delete(user)
     db.session.commit()
 
