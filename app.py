@@ -777,7 +777,7 @@ def delete_user():
         else:
             flash(f'{project.name} deleted.')
             manager.delete_project(project)
-    manager.delete_user(user)
+    manager.delete_user(current_user)
     flash('Your account has been deleted. We are sorry to see you go!')
     return redirect(url_for('index'))
 

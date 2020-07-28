@@ -45,6 +45,18 @@ def remove_subject_from_user(user, subject):
     return True
 
 
+def delete_user(user):
+    for subject in user.subjects:
+        remove_subject_from_user(user, subject)
+    for notification in user.notifications:
+        db.session.delete(notification)
+    for task in user.tasks_authored:
+        if task.completed==False:
+            db.session.delete(task)
+    db.session.delete(user)
+    db.session.commit()
+
+
 ## USER TO PROJECTS ##
 def add_user_to_project(user, project):
     # add project subjects to user
