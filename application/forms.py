@@ -88,7 +88,8 @@ class Apply(BaseForm):
 
 class Edit_User(BaseForm):
     # name
-    name = StringField('Name', validators=[DataRequired(), Length(1, 254)])
+    name = StringField('Name', validators=[DataRequired(), Length(1, 254)],
+                       render_kw={'max':254})
     # email
     email = StringField('New Email',
                     validators=[DataRequired(), Length(1, 254), Email()])
