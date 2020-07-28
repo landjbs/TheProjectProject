@@ -86,6 +86,17 @@ class Apply(BaseForm):
                             render_kw={'placeholder': 'Yes'})
 
 
+class Edit_User(BaseForm):
+    name = StringField('Name', validators=[DataRequired(), Length(1, 254)])
+    password = PasswordField('Create Password',
+                             validators=[DataRequired(), Length(1, 254),
+                                         EqualTo('confirm')])
+    confirm = PasswordField('Confirm Password',
+                            validators=[DataRequired()])
+
+
+
+
 class Login(BaseForm):
     email = StringField('Email', validators=[DataRequired(), Length(1, 254),
                                              Email(), Email_Ext_Validator()])
