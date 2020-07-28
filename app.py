@@ -364,8 +364,11 @@ def user(code):
         stars += project.stars.count()
     # subjects
     subject_data = {s.subject.name : s.number for s in user.subjects[:10]}
+    ## forms ##
     # application to projects
     project_application = Project_Application_Form(request.form)
+    # edit user account
+    edit_form = Edit_User(request.form) if (current_user==user) else False
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs,
