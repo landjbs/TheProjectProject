@@ -374,8 +374,24 @@
                   you want to leave?
                 </p>
               {% endif %}
+            {% elif project.complete==True %}
+              <p style='class:red;'>
+                WARNING: {{ project.name }} has been marked as complete. If you
+                leave you will not be able to join again unless this status is
+                changed. Are you sure you want to leave?
+              </p>
+            {% elif project.open==False %}
+            <p style='class:red;'>
+              WARNING: {{ project.name }} has been marked as closed. If you
+              leave you will not be able to join again unless this status is
+              changed. Are you sure you want to leave?
+            </p>
+            {% elif project.requires_application==True %}
+              <p style='class:red;'>
+                WARNING: If you leave {{ project.name }}, you will have to
+                apply to join again. Are you sure you want to leave?</p>
             {% else %}
-              <p>Are you sure you want to leave {{ project.name }}?</p>
+
             {% endif %}
           </div>
           <div class="modal-footer">
