@@ -368,38 +368,48 @@ def user(code):
     # application to projects
     project_application = Project_Application_Form(request.form)
     # edit user account
+    show_edit_modal = False
     edit_form = Edit_User(request.form) if (current_user==user) else False
     if request.method=='POST':
         if edit_form.validate_on_submit():
+            edits_made = False
             # name
             new_name = edit_form.name.data
             if new_name!=user.name:
                 user.name = new_name
+                edits_made = True
             # email
             new_email = edit_form.email.data
             if new_email!=user.email:
                 user.email = new_email
+                edits_made = True
             # github
             new_github = edit_form.github.data
             if new_github!=user.github:
                 user.github = new_github
+                edits_made = True
             # about
             new_about = edit_form.about.data
             if new_about!=user.about:
                 user.about = new_about
+                edits_made = True
             # new password
-            if not user.check_password(edit_form.password.data):
-                user.password = user.set_password(edit_form.password.data)
-            db.session.add(user)
-            db.session.commit()
-            flash('You have successfully edited your acount.')
+            if edit_form.password.data!='':
+                if not user.check_password(edit_form.password.data):
+                    user.password = user.set_password(edit_form.password.data)
+                    edits_made = True
+            if edits_made:
+                flash('You have successfully edited your acount.')
+                db.session.add(user)
+                db.session.commit()
         else:
-            flash('Problem.')
+            show_edit_modal = True
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs,
                             project_application=project_application,
-                            edit_form=edit_form)
+                            edit_form=edit_form,
+                            show_edit_modal=show_edit_modal)
 
 
 @login_required
