@@ -290,8 +290,9 @@
         <!-- collaborate -->
         {{ macros.render_collaborate_modal(current_user, user) }}
       {% else %}
-        <!-- edit -->
+        <!-- edit and delete modals -->
         {{ macros.render_edit_user_modal(user, edit_form) }}
+        {{ macros.render_delete_account_macro(user) }}
       {% endif %}
     </div>
     <!-- /modals -->
