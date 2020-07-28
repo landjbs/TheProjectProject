@@ -198,60 +198,76 @@
                 {{ user.owned|length }}
               </h4>
               <hr class="my-4">
-              <div id="owned-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-                <!--Slides-->
-                <div class="carousel-inner" role="listbox">
-                  {% for tab in owned_tabs %}
-                    {% if loop.index==1 %}
-                    <div class="carousel-item active">
-                    {% else %}
-                    <div class="carousel-item">
-                    {% endif %}
+              {% if (user.owned|length) > 0 %}
+                <div id="owned-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                  <!--Slides-->
+                  <div class="carousel-inner" role="listbox">
+                    {% for tab in owned_tabs %}
+                      {% if loop.index==1 %}
+                      <div class="carousel-item active">
+                      {% else %}
+                      <div class="carousel-item">
+                      {% endif %}
+                            <div class='row'>
+                              {% for project in tab %}
+                                {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+                              {% endfor %}
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                  <!--Controls-->
+                  <div class="controls-top">
+                    <a class="btn-floating" href="#owned-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                    <a class="btn-floating" href="#owned-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+                  </div>
+                  <!--/.Controls-->
+                </div>
+              {% elif current_user==user %}
+              <div style='text-align:center;'>
+                <a type="button" href="/add_project">
+                  <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+                </a>
+              </div>
+              {% endif %}
+
+
+              <h4 style='text-align:left;'>
+                Member Projects
+                <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
+                {{ (user.projects|length) - (user.owned|length) }}
+              </h4>
+              <hr class="my-4">
+              {% if ((user.projects|length) - (user.owned|length)) > 0 %}
+                <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                      {% for tab in member_tabs %}
+                        {% if loop.index==1 %}
+                        <div class="carousel-item active">
+                        {% else %}
+                        <div class="carousel-item">
+                        {% endif %}
                           <div class='row'>
                             {% for project in tab %}
-                              {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+                              {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
                             {% endfor %}
                           </div>
                         </div>
                       {% endfor %}
                     </div>
+                </div>
                 <!--Controls-->
                 <div class="controls-top">
-                  <a class="btn-floating" href="#owned-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-                  <a class="btn-floating" href="#owned-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+                  <a class="btn-floating" href="#member-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                  <a class="btn-floating" href="#member-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
                 </div>
-                <!--/.Controls-->
-              </div>
-
-
-              <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-                <h4 style='text-align:left;'>
-                  Member Projects
-                  <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
-                  {{ (user.projects|length) - (user.owned|length) }}
-                </h4>
-                <hr class="my-4">
-                <div class="carousel-inner" role="listbox">
-                  {% for tab in member_tabs %}
-                    {% if loop.index==1 %}
-                    <div class="carousel-item active">
-                    {% else %}
-                    <div class="carousel-item">
-                    {% endif %}
-                      <div class='row'>
-                        {% for project in tab %}
-                          {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
-                        {% endfor %}
-                      </div>
-                    </div>
-                  {% endfor %}
+              {% elif current_user==user %}
+                <div style='text-align:center;'>
+                  <a type="button" href="/home">
+                    <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+                  </a>
                 </div>
-              </div>
-              <!--Controls-->
-              <div class="controls-top">
-                <a class="btn-floating" href="#member-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-                <a class="btn-floating" href="#member-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-              </div>
+              {% endif %}
             </div>
           </div>
         </div>
