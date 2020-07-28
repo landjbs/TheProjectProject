@@ -142,9 +142,9 @@ class User(db.Model, UserMixin):
                             lazy='dynamic', order_by='desc(User_Subjects.number)')
     ## reporting ##
     # reports posted by user
-    reports_posted = relationship('User_Report', back_populates='reporter')
+    # reports_posted = relationship('User_Report', back_populates='reporter')
     # reports targeting user
-    reports = relationship('User_Report', back_populates='reported')
+    # reports = relationship('User_Report', back_populates='reported')
 
 
     def __init__(self, name, email, password, github, about):
@@ -391,35 +391,35 @@ class Badge(db.Model):
     users = relationship('User_Badge', back_populates='badge', lazy='dynamic')
 
 
-class User_Report(db.Model):
-    __tablename__ = 'user_report'
-    # id
-    id = Column(Integer, primary_key=True)
-    # reporter: user who posted report
-    reporter_id = Column(Integer, ForeignKey('user.id'))
-    reporter = relationship('User', foreign_keys=reporter_id,
-                            primaryjoin=(reporter_id==User.id),
-                            backref=backref('reports_posted', order_by=id))
-    # reported: user described in report
-    reported_id = Column(Integer, ForeignKey('user.id'))
-    reporter = relationship('User', foreign_keys=reported_id,
-                            primaryjoin=(reported_id==User.id),
-                            backref=backref('reports', order_by=id))
-    ## description ##
-    # report description
-    text = Column('text', String(250), nullable=True)
-    # report time
-    timestamp = Column(DateTime, nullable=False, default=datetime.utcnow)
-    ## administrative ##
-    # has report been addressed
-    resolved = Column(Boolean, nullable=False, default=False)
-    # action: what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
-    action = Column(Integer, nullable=True)
-    # resolve_stamp: when action was taken
-    resolve_stamp = Column(DateTime, nullable=True)
-
-    def resolve(action):
-        ''' action = {0:pass, 1:warning, 2:tempban, 3:permaban} '''
-        self.resolved = True
-        self.action = int(action)
-        self.resolve_stamp = datetime.utcnow()
+# class User_Report(db.Model):
+#     __tablename__ = 'user_report'
+#     # id
+#     id = Column(Integer, primary_key=True)
+#     # reporter: user who posted report
+#     reporter_id = Column(Integer, ForeignKey('user.id'))
+#     reporter = relationship('User', foreign_keys=reporter_id,
+#                             primaryjoin=(reporter_id==User.id),
+#                             backref=backref('reports_posted', order_by=id))
+#     # reported: user described in report
+#     reported_id = Column(Integer, ForeignKey('user.id'))
+#     reporter = relationship('User', foreign_keys=reported_id,
+#                             primaryjoin=(reported_id==User.id),
+#                             backref=backref('reports', order_by=id))
+#     ## description ##
+#     # report description
+#     text = Column('text', String(250), nullable=True)
+#     # report time
+#     timestamp = Column(DateTime, nullable=False, default=datetime.utcnow)
+#     ## administrative ##
+#     # has report been addressed
+#     resolved = Column(Boolean, nullable=False, default=False)
+#     # action: what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
+#     action = Column(Integer, nullable=True)
+#     # resolve_stamp: when action was taken
+#     resolve_stamp = Column(DateTime, nullable=True)
+#
+#     def resolve(action):
+#         ''' action = {0:pass, 1:warning, 2:tempban, 3:permaban} '''
+#         self.resolved = True
+#         self.action = int(action)
+#         self.resolve_stamp = datetime.utcnow()

@@ -40,59 +40,63 @@
     </div>
   {% endif %}
 
-  <div id="user-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-    <h4 style='text-align:left;'>Users</h4>
-    <hr class="my-4">
-    <div class="carousel-inner" role="listbox">
-      {% for tab in user_tabs %}
-        {% if loop.index==1 %}
-        <div class="carousel-item active">
-        {% else %}
-        <div class="carousel-item">
-        {% endif %}
-          <div class='row'>
-            {% for user in tab %}
-              {{ macros.render_user_card(current_user, user) }}
-            {% endfor %}
+  {% if user_tabs!=[] %}
+    <div id="user-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+      <h4 style='text-align:left;'>Users</h4>
+      <hr class="my-4">
+      <div class="carousel-inner" role="listbox">
+        {% for tab in user_tabs %}
+          {% if loop.index==1 %}
+          <div class="carousel-item active">
+          {% else %}
+          <div class="carousel-item">
+          {% endif %}
+            <div class='row'>
+              {% for user in tab %}
+                {{ macros.render_user_card(current_user, user) }}
+              {% endfor %}
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
-  <!--Controls-->
-  <div class="controls-top">
-    <a class="btn-floating" href="#user-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-    <a class="btn-floating" href="#user-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-  </div>
-  <!--/.Controls-->
+    <!--Controls-->
+    <div class="controls-top">
+      <a class="btn-floating" href="#user-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+      <a class="btn-floating" href="#user-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+    </div>
+    <!--/.Controls-->
+  {% endif %}
 
-  <h4 style='text-align:left;'>Subjects</h4>
-  <hr class="my-4">
-  <div id="subject-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-      {% for tab in subject_tabs %}
-        {% if loop.index==1 %}
-        <div class="carousel-item active">
-        {% else %}
-        <div class="carousel-item">
-        {% endif %}
-          <div class='row'>
-            {% for subject in tab %}
-              {{ macros.render_subject_card(subject) }}
-            {% endfor %}
-          </div>
+  {% if subject_tabs!=[] %}
+      <h4 style='text-align:left;'>Subjects</h4>
+      <hr class="my-4">
+      <div id="subject-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+          {% for tab in subject_tabs %}
+            {% if loop.index==1 %}
+            <div class="carousel-item active">
+            {% else %}
+            <div class="carousel-item">
+            {% endif %}
+              <div class='row'>
+                {% for subject in tab %}
+                  {{ macros.render_subject_card(subject) }}
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
         </div>
-      {% endfor %}
+      </div>
     </div>
-  </div>
-</div>
-<!--Controls-->
-<div class="controls-top">
-  <a class="btn-floating" href="#subject-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-  <a class="btn-floating" href="#subject-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-</div>
-<!--/.Controls-->
+    <!--Controls-->
+    <div class="controls-top">
+      <a class="btn-floating" href="#subject-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+      <a class="btn-floating" href="#subject-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+    </div>
+    <!--/.Controls-->
+  {% endif %}
 
 <!-- modals -->
 <div>
