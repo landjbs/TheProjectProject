@@ -14,7 +14,7 @@ from application import db
 from application.models import (User, Project, Comment, Task, Subject,
                                 Project_Application, Notification)
 from application.forms import (Apply, Login, Add_Project, Comment_Form,
-                                Task_Form, Project_Application_Form)
+                                Task_Form, Project_Application_Form, Edit_User)
 import manager as manager
 import recommendation as rec
 
@@ -372,7 +372,8 @@ def user(code):
     return render_template('user.html', user=user, stars=stars,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs,
-                            project_application=project_application)
+                            project_application=project_application,
+                            edit_form=edit_form)
 
 
 @login_required
