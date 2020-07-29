@@ -464,6 +464,7 @@ def project(project_code):
         recommended_tabs = list(partition_query(recommended_members))
         ## edit project form ##
         edit_form = forms.Edit_Project(request.form)
+        edit_application = forms.Edit_Project_Application(request.form)
         if request.method=='POST':
             print(f'complete {edit_form.complete.data}')
             if edit_form.validate_on_submit():
@@ -508,7 +509,8 @@ def project(project_code):
                             completed=completed,
                             project_subjects=project_subjects,
                             recommended_tabs=recommended_tabs,
-                            edit_form=edit_form)
+                            edit_form=edit_form,
+                            edit_application=edit_application)
 
 
 @login_required
@@ -891,6 +893,7 @@ def change_application(project_id, action):
     elif action=='remove':
         manager.remove_application(project)
     elif action=='add':
+        if
         manager.add_application(project)
     return redirect(request.referrer)
 
