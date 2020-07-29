@@ -57,13 +57,13 @@
                     {% set elapsed = calc_days_since(now(), project.posted_on) %}
                     {% set est = project.estimated_time %}
                     {% set elapsed_style = elapsed_style(elapsed, est) %}
-                      <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
-                      <div class="progress" style='width:80%;'>
-                        <div class="progress-bar" role="progressbar"
-                            style='{{ elapsed_style }}'
-                            aria-valuenow="{{ elapsed }}" aria-valuemin="0"
-                            aria-valuemax="{{ est }}"></div>
-                      </div>
+                    <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+                    <div class="progress" style='width:80%;'>
+                      <div class="progress-bar" role="progressbar"
+                          style='{{ elapsed_style }}'
+                          aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                          aria-valuemax="{{ est }}"></div>
+                    </div>
                   {% else %}
                     <p style="margin:0px;">Project Complete!</p>
                     <div class="progress" style='width:80%;'>
@@ -442,7 +442,7 @@
       {% endif %}
       {% if current_user == project.owner %}
         <!-- edit modal -->
-        {{ macros.render_edit_project_modal(project, edit_form) }}
+        {{ macros.render_edit_project_modal(project, edit_form, {'elapsed':elapsed, 'est':est, 'elapsed_style':elapsed_style}) }}
         <!-- complete modal -->
         {{ macros.render_complete_modal(project) }}
         <!-- open/closed modal -->
