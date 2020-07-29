@@ -653,12 +653,12 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        {% if project.open %}
-          <h5>Close {{ project.name }}</h5>
-          {% set action = 'close' %}
+        {% if project.requires_application %}
+          <h5>Remove Application: {{ project.name }}</h5>
+          {% set action = 'remove' %}
         {% else %}
           <h5>Open {{ project.name }}</h5>
-          {% set action = 'open' %}
+          {% set action = 'add' %}
         {% endif %}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
