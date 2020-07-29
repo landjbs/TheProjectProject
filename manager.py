@@ -207,7 +207,7 @@ def open_project(project):
         note = Notification(text=f'{project.name} has been opened by the owner.')
         for member in project.members:
             if not member==project.owner:
-                member.notifcations.append(note)
+                member.notifications.append(note)
     db.session.commit()
     flash(f'You have opened {project.name}.')
     return True
@@ -219,7 +219,7 @@ def close_project(project):
         note = Notification(text=f'{project.name} has been closed by the owner.')
         for member in project.members:
             if not member==project.owner:
-                member.notifcations.append(note)
+                member.notifications.append(note)
     db.session.commit()
     flash(f'You have closed {project.name}.')
     return True
@@ -227,11 +227,11 @@ def close_project(project):
 
 def remove_application(project):
     if project.requires_application:
-        project.remove_application = False
+        project.requires_application = False
         note = Notification(text=f'The application requirement has been removed from {project.name} by the owner.')
         for member in project.members:
             if not member==project.owner:
-                member.notifcations.append(note)
+                member.notifications.append(note)
     db.session.commit()
     flash(f'You have removed the application requirement from {project.name}.')
     return True

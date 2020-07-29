@@ -890,6 +890,8 @@ def change_application(project_id, action):
         flash('Only the owner can change join settings.')
     elif action=='remove':
         manager.remove_application(project)
+    elif action=='add':
+        manager.add_application(project)
     return redirect(request.referrer)
 
 
