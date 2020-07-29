@@ -660,7 +660,7 @@
       </div>
       <form action="{{ url_for('change_application', project_id=project.id, action=action) }}" method='post'>
         <div class="modal-body">
-            {% if project.requires_application %}
+            {% if action=='edit' %}
               <p>
               You are trying to remove the application from {{ project.name }}.
               This will allow anyone to join the project at any point. You can
@@ -673,11 +673,11 @@
               and allow you to choose who can join the project. You can edit this
               in the project settings.
               </p>
-              <br>
-              <p>Application Question</p>
-              {{ edit_application_form.csrf_token()  }}
-              {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
             {% endif %}
+            <br>
+            <p>Application Question</p>
+            {{ edit_application_form.csrf_token()  }}
+            {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
         </div>
         <div class="modal-footer">
           <button class='btn'>
