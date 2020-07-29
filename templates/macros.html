@@ -506,10 +506,10 @@
             <h6 style='text-decoration:underline;'>Team</h6>
           </center>
           <div class='row ml-5 mr-5' style='text-align:center;'>
-            <div class="input-control" onclick='toggle_complete()' id='complete'>
-              <input id="on-complete" class="toggle toggle-left" name="complete" value="true" type="checkbox"
-                style='display: none;'>
-              <label for="on-complete" class="btn">Complete</label>
+            <div class='col'>
+              <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
+                Complete
+              </button>
             </div>
             <div class='col'>
               {{ edit_form.open(checked=project.open) }}
@@ -576,7 +576,7 @@
           </p>
         </div>
         <div class="modal-footer">
-          <button class='btn delete-btn'>Complete</button>
+          <button class='btn'>Complete</button>
         </div>
       </form>
     </div>

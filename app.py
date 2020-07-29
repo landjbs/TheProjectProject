@@ -861,7 +861,12 @@ def delete_user():
 @application.route('/commplete_project/<int:project_id>', methods=['POST'])
 def complete_project(project_id):
     project = Project.query.get_or_404(project_id)
-    if current_user==project.owner:
+    if current_user!=project.owner:
+        flash('Only the owner can mark a project as complete.')
+    else:
+        flash('project completed')
+        # manager.complete_project(project)
+    return redirect(request.referrer)
 
 
 if __name__ == '__main__':
