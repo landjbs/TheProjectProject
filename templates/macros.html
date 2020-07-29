@@ -525,7 +525,8 @@
                   <i class='far fa-user-circle'></i>
                   {{ project.members.all()|length }} /
                   <input type='number' step=1 min='{{ project.members.all()|length }}'
-                      max='{{ edit_form.team_size.render_kw["max"] }}' value="{{ project.team_size }}"/>
+                      max='{{ edit_form.team_size.render_kw["max"] }}' value="{{ project.team_size }}"
+                      name='{{ edit_form.team_size.name }}'/>
                 </span>
               </div>
               <div class='col'>
@@ -535,7 +536,8 @@
                   {{ completion_data['elapsed'] }} /
                   <input type='number' step=1 min='{{ completion_data["elapsed"] }}'
                       max='{{ completion_data["elapsed"] + edit_form.estimated_time.render_kw["max"] }}'
-                      value="{{ project.estimated_time }}"></input>
+                      value="{{ project.estimated_time }}"
+                      name='{{ edit_form.estimated_time.name }}'></input>
                 </span>
               </div>
             </div>

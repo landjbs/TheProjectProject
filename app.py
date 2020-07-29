@@ -468,38 +468,39 @@ def project(project_code):
         edit_form = forms.Edit_Project(request.form)
         edit_application_form = forms.Edit_Project_Application(request.form)
         if request.method=='POST':
-            print(f'complete {edit_form.complete.data}')
+            print('HERE')
             if edit_form.validate_on_submit():
+                print('THERE')
                 edits_made = False
                 # name
                 new_name = edit_form.name.data
                 if new_name!=project.name:
                     project.name = new_name
                     edits_made = True
-                # email
-                # new_email = edit_form.email.data
-                # if new_email!=user.email:
-                #     user.email = new_email
-                #     edits_made = True
-                # # github
-                # new_github = edit_form.github.data
-                # if new_github!=user.github:
-                #     user.github = new_github
-                #     edits_made = True
-                # # about
-                # new_about = edit_form.about.data
-                # if new_about!=user.about:
-                #     user.about = new_about
-                #     edits_made = True
-                # # new password
-                # if edit_form.password.data!='':
-                #     if not user.check_password(edit_form.password.data):
-                #         user.password = user.set_password(edit_form.password.data)
-                #         edits_made = True
-                # if edits_made:
-                    # flash('You have successfully edited your acount.')
-                    # db.session.add(user)
-                    # db.session.commit()
+                # oneliner
+                new_oneliner = edit_form.oneliner.data
+                if new_oneliner!=project.oneliner:
+                    project.oneliner = new_oneliner
+                    edits_made = True
+                # summary
+                new_summary = edit_form.summary.data
+                if new_summary!=project.summary:
+                    project.summary = new_summary
+                    edits_made = True
+                # estimated time
+                new_time = edit_form.estimated_time.data
+                if new_time!=project.estimated_time:
+                    project.estimated_time = new_time
+                    edits_made = True
+                # team size
+                new_size = edit_form.team_size.data
+                if new_size!=project.team_size:
+                    project.team_size = new_size
+                    edits_made = True
+                if edits_made:
+                    flash(f'You have successfully edited {project.name}.')
+                    db.session.add(user)
+                    db.session.commit()
             else:
                 show_edit_modal = True
     return render_template('project.html', project=project,

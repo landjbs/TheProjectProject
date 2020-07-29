@@ -196,10 +196,6 @@ class Edit_Project(BaseForm):
     summary = TextField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         render_kw={'max':400})
-    subjects = SelectMultipleField('Subjects',
-                                    validators=[Select_Limit_Validator(5)],
-                                    choices=list(subjects),
-                                    render_kw={'max':5})
     estimated_time = FloatField('Estimated Time', render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Target Team Size',
                             render_kw={'min':1, 'max':30, 'start':7})
