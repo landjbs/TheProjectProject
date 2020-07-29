@@ -892,12 +892,24 @@ def add_application(project_id):
     project = Project.query.get_or_404(project_id)
     form = forms.Edit_Project_Application(request.form)
     if current_user!=project.owner:
-        flash('Only the owner can change join settings.')
+        flash('Only the owner can change application settings.')
     elif form.validate_on_submit():
         manager.add_application(project, form.application_question.data)
     else:
         flash(f'Could not add application: {form.errors[0]}.')
     return redirect(request.referrer)
+
+
+@login_required
+@application.route('/remove_application_requirement/<int:project_id>', methods=['POST'])
+def remove_application_requirement(project_id):
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can change application settings.')
+    else:
+        manager.remove_application_requirement(project)
+    return redirect(request.referrer)
+
 
 
 if __name__ == '__main__':
