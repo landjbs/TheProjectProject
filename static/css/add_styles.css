@@ -280,3 +280,10 @@ section.range-slider input:last-of-type::-moz-range-track {
 select {
   width: 100%;
 }
+
+
+/* COLOR SUBJECTS */
+.select-pure__options [data-value='1'] {
+  /* background: red; */
+  color: red !important;
+}

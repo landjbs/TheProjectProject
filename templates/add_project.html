@@ -166,12 +166,15 @@
   };
 
   function submit() {
-    // var elts = document.getElementById("project_form").elements;
-    // for (var i = 0, elt; elt = elts[i++];) {
-    //   if (elt.id == 'subjects') {
-    //       alert(elt.name);
-    //   }
+    var selector = document.getElementById('subjects');
+    for (index = 0; index < selected_subjects.length; index++) {
+      alert(selected_subjects[index]);
+    }
+
+    // for (var i = 0, elt; elt = selected_subjects[i++];) {
+    //   alert(elt)
     // }
+    // selector.options[value-1].selected='selected';
     document.getElementById("project_form").submit();
   };
 
@@ -260,11 +263,11 @@
   const subjects = [];
   {% for elt in form.subjects.choices %}
     subjects.push({label: '{{ elt[1] }}',
-                   value: '{{ elt[0] }}'},)
+                   value: '{{ elt[0] }}',
+                  color: '{{ elt[1] }}'},)
   {% endfor %}
-  var selector = document.getElementById('subjects')
 
-  var selected_subjects = new Set();
+  var selected_subjects = [];
   var instance = new SelectPure(".select_subject", {
       options: subjects,
       multiple: true,
@@ -272,8 +275,7 @@
       icon: "fa fa-times",
       inlineIcon: false,
       placeholder: false,
-      // onChange: value => { selected_subjects.add(value); },
-      onChange: value => { selector.options[value-1].selected; },
+      onChange: value => { selected_subjects = value },
       classNames: {
         select: "select-pure__select",
         dropdownShown: "select-pure__select--opened",
