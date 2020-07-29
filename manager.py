@@ -204,10 +204,11 @@ def create_project(project, user):
 def open_project(project):
     if not project.open:
         project.open = True
-        note = Notification(text=f'{project.name} has been openned by the owner.')
+        note = Notification(text=f'{project.name} has been opened by the owner.')
         for member in project.members:
             if not member==project.owner:
                 member.notifcations.append(note)
+    flash(f'You have opened {project.name}.')
     return True
 
 
@@ -218,6 +219,7 @@ def close_project(project):
         for member in project.members:
             if not member==project.owner:
                 member.notifcations.append(note)
+    flash(f'You have closed {project.name}.')
     return True
 
 
