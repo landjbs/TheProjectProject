@@ -662,7 +662,7 @@
         {% endif %}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('change_project_open', project_id=project.id, action=action) }}" method='post'>
+      <form action="{{ url_for('change_application', project_id=project.id, action=action) }}" method='post'>
         <div class="modal-body">
           <p>
             {% if project.open %}
