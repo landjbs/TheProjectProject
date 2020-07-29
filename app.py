@@ -551,7 +551,7 @@ def leave_project(project_id):
         else:
             manager.delete_project(project)
             flash(f'{project.name} deleted.')
-            return redirect(url_for('home'))
+            return redirect(request.referrer)
     manager.remove_user_from_project(current_user, project, admin=False)
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
@@ -748,7 +748,7 @@ def collaborate(target_user_id):
         flash(f'You have sent {target_user.name} an invitation to collaborate '
               f'on {project.name}. You will be notified when they respond.')
         db.session.commit()
-    return redirect(url_for('home'))
+    return redirect(request.referrer)
 
 
 @login_required

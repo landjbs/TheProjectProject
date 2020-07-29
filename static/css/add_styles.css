@@ -177,7 +177,6 @@ section.range-slider input:last-of-type::-moz-range-track {
 
 .select-wrapper {
   margin: auto;
-  /* width: calc(100% - 40px); */
   min-width: 100%;
 }
 
@@ -237,6 +236,11 @@ section.range-slider input:last-of-type::-moz-range-track {
 
 .select-pure__option--hidden {
   display: none;
+}
+
+.select-pure__label {
+  max-height: 300px;
+  overflow-x: scroll;
 }
 
 .select-pure__selected-label {

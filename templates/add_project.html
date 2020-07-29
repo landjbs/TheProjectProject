@@ -107,9 +107,10 @@
             {% elif elt.type=='SelectMultipleField' %}
               {{ elt(id=elt.name, style='display:none;') }}
               <span class="select_subject" id='{{ elt.name }}_select' name='{{ elt.name }}'></span>
-              <small>Limit 5.</small>
               {% if elt.errors %}
                 <p class='warning'>{{ elt.errors[0] }}</p>
+              {% else %}
+                <small>Limit 5.</small>
               {% endif %}
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
@@ -265,7 +266,6 @@
                   color: '{{ elt[1] }}'},)
   {% endfor %}
 
-  var selected_subjects = [];
   var instance = new SelectPure(".select_subject", {
       options: subjects,
       multiple: true,

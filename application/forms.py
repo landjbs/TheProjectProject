@@ -47,6 +47,16 @@ class Site_URL_Validator(object):
             raise ValidationError(f"Invalid URL for {self.site}.")
 
 
+class Select_Limit_Validator(object):
+    def __init__(self, max):
+        self.max = max
+
+    def __call__(self, form, field):
+        print(len(field.data))
+        if len(field.data)>self.max:
+            raise ValidationError(f'Must select no more than {self.max} options.')
+
+
 class Apply(BaseForm):
     name = StringField('Name',
                     validators=[DataRequired(), Length(1, 254)],
@@ -145,6 +155,7 @@ class Add_Project(BaseForm):
     subjects = SelectMultipleField('Subjects',
                                    description=('What subjects might this '
                                                 'project involve?'),
+                                    validators=[Select_Limit_Validator(5)],
                                    choices=list(subjects))
     open = BooleanField('Open',
                         validators=[],
