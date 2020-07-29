@@ -190,10 +190,8 @@ class Edit_Project(BaseForm):
                                 render_kw={'max':128})
     estimated_time = FloatField('Estimated Time', render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Target Team Size',
-                            description=('The biggest you want your '
-                                         'team to be.'),
                             render_kw={'min':1, 'max':30, 'start':7})
-
+    complete = BooleanField('Completed')
 
 
 
