@@ -10,7 +10,7 @@
 
 {% block content %}
 
-<form class='big-box container justify-content-center' id='regForm' method='post'>
+<form class='big-box container justify-content-center' id='login_form' method='post'>
   {% for elt in form %}
     <!-- csrf token -->
     {% if elt.type == 'CSRFTokenField' %}
@@ -96,7 +96,7 @@
     // if you have reached the end of the form... :
     if (currentTab >= x.length) {
       //...the form gets submitted:
-      document.getElementById("regForm").submit();
+      document.getElementById("login_form").submit();
       return false;
     }
     // Otherwise, display the correct tab:

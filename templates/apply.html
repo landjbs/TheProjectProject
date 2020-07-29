@@ -6,12 +6,14 @@
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="select-pure/dist/bundle.min.js"></script>
+  <link type='text/css' href='css/select_styles.css' rel='stylesheet'>
 {% endblock %}
 
 
 {% block content %}
 
-<form class='big-box container justify-content-center' id='regForm' method='post'>
+<form class='big-box container justify-content-center' id='apply_form' method='post'>
   {% for elt in form %}
     <!-- csrf token -->
     {% if elt.type == 'CSRFTokenField' %}
@@ -86,6 +88,17 @@
 </form>
 
 <script>
+  function submit() {
+    var selector = document.getElementById('subjects');
+    var selected_subjects = instance.value();
+    if (selected_subjects) {
+      for (i=0; i<selected_subjects.length; i++) {
+        selector.options[selected_subjects[i]-1].selected='selected';
+      }
+    }
+    document.getElementById("apply_form").submit();
+  };
+
   var currentTab = {{ start_on }}; // Current tab is set to be the first tab (0)
   showTab(currentTab); // Display the current tab
 
@@ -123,7 +136,7 @@
     // if you have reached the end of the form... :
     if (currentTab >= x.length) {
       //...the form gets submitted:
-      document.getElementById("regForm").submit();
+      submit();
       return false;
     }
     // Otherwise, display the correct tab:
