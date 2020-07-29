@@ -660,21 +660,15 @@
       </div>
       <form action="{{ url_for('change_application', project_id=project.id, action=action) }}" method='post'>
         <div class="modal-body">
-            {% if action=='edit' %}
-              <p>
-              You are trying to remove the application from {{ project.name }}.
-              This will allow anyone to join the project at any point. You can
-              edit this in the project settings.
-              </p>
-            {% else %}
+            {% if action=='add' %}
               <p>
               You are trying to add an application to {{ project.name }}. This
               will require applicants to respond to your application question
               and allow you to choose who can join the project. You can edit this
               in the project settings.
               </p>
+              <br>
             {% endif %}
-            <br>
             <p>Application Question</p>
             {{ edit_application_form.csrf_token()  }}
             {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
