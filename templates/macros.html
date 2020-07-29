@@ -507,22 +507,39 @@
           </center>
           <div class='row ml-5 mr-5' style='text-align:center;'>
             <div class='col'>
-              <input type="checkbox" checked data-toggle="toggle" id='open'>
-              {{ edit_form.open.label }}
+              {{ edit_form.complete(checked=project.complete) }}
+              <p>{{ edit_form.complete.label }}</p>
             </div>
             <div class='col'>
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
+              {{ edit_form.open(checked=project.open) }}
+              <p>{{ edit_form.open.label }}</p>
             </div>
             <div class='col'>
-              <label class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-              </label>
+              {{ edit_form.requires_application(checked=project.requires_application) }}
+              <p>{{ edit_form.requires_application.label }}</p>
             </div>
           </div>
+          <hr class='my-2'><br>
+
+          <!-- MANAGEMENT -->
+          <center>
+            <h6 style='text-decoration:underline;'>Management</h6>
+          </center>
+          <div class='row ml-5 mr-5' style='text-align:center;'>
+            <div class='col'>
+              {{ edit_form.complete(checked=project.complete) }}
+              <p>{{ edit_form.complete.label }}</p>
+            </div>
+            <div class='col'>
+              {{ edit_form.open(checked=project.open) }}
+              <p>{{ edit_form.open.label }}</p>
+            </div>
+            <div class='col'>
+              {{ edit_form.requires_application(checked=project.requires_application) }}
+              <p>{{ edit_form.requires_application.label }}</p>
+            </div>
+          </div>
+          <hr class='my-2'><br>
 
         </div>
         <div class="modal-footer row m-3">
