@@ -79,7 +79,7 @@
                     Members
                     &nbsp;
                     <i class='far fa-user-circle'></i>
-                    {{ project.members.all()|length }}
+                    {{ project.members.all()|length }} / {{ project.team_size }}
                   </a>
                   <ul class="collapse in list-unstyled" id="memberSubmenu">
                     {% for member in project.members %}

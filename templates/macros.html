@@ -1,3 +1,19 @@
+<!-- CARD COMPONENTS -->
+{% macro render_project_name(project) -%}
+<a class='project-name' href='project={{ project.code }}'>
+  <h5>
+    <u>{{ project.name }}</u>
+    {% if project.complete %}
+      <i class="fa fa-check-circle" aria-hidden="true" style='color:#00FF5D;'></i>
+    {% endif %}
+    {% if not project.open %}
+      <i class="fa fa-lock" aria-hidden="true" style='color:#00E0FF;'></i>
+    {% endif %}
+  </h5>
+</a>
+{% endmacro -%}
+
+
 <!-- CARDS -->
 <!-- project cards -->
 {% macro render_big_project_card(current_user, project, now, calc_days_since) -%}
@@ -12,9 +28,7 @@
         <i class="fa fa-star"></i>
       </div>
       <div class='card-head'>
-        <a class='project-name' href='project={{ project.code }}'>
-          <h5>{{ project.name }}</h5>
-        </a>
+        {{ render_project_name(project) }}
         <a href='user={{ project.owner.code }}'>
           <p class='owner'>{{ project.owner.name }}</p>
         </a>
@@ -67,9 +81,7 @@
         <i class="fa fa-star"></i>
       </p>
       <div class='card-head little'>
-        <a class='project-name' href='project={{ project.code }}'>
-          <h5>{{ project.name }}</h5>
-        </a>
+        {{ render_project_name(project) }}
         <a href='user={{ project.owner.code }}'>
           <p>{{ project.owner.name }}</p>
         </a>
@@ -102,9 +114,7 @@
         <i class="fa fa-star"></i>
       </div>
       <div class='card-head tiny'>
-        <a class='project-name' href='project={{ project.code }}'>
-          <h5>{{ project.name }}</h5>
-        </a>
+        {{ render_project_name(project) }}
       </div>
       <!-- summary -->
       <p class='oneliner'>

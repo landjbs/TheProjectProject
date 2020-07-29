@@ -499,7 +499,7 @@ def project(project_code):
                     edits_made = True
                 if edits_made:
                     flash(f'You have successfully edited {project.name}.')
-                    db.session.add(user)
+                    db.session.add(project)
                     db.session.commit()
             else:
                 show_edit_modal = True
