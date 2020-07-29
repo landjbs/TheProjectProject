@@ -505,10 +505,31 @@
           <center>
             <h6 style='text-decoration:underline;'>Team</h6>
           </center>
-          <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
+          <div class='row ml-5 mr-5' style='text-align:center;'>
+            <div class='col'>
+              <!-- <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label> -->
+              {% if project.open %}
+                {{ edit_form.open(checked='true') }}
+              {% else %}
+                {{ edit_form.open() }}
+              {% endif %}
+            </div>
+            <div class='col'>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class='col'>
+              <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
 
         </div>
         <div class="modal-footer row m-3">
