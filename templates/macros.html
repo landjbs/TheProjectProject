@@ -530,11 +530,7 @@
               {% else %}
                 <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn' disabled>
               {% endif %}
-                  {% if project.requires_application %}
-                    Remove App.
-                  {% else %}
-                    Require App.
-                  {% endif %}
+                  Edit App.
                 </button>
             </div>
           </div>
@@ -627,7 +623,7 @@
             {% else %}
               You are trying to open {{ project.name }}. This will allow other users
               to see the project in their recommended feed and apply. To edit application
-              settings, please check the "Require App." button.
+              settings, please check the "Edit App" button.
             {% endif %}
           </p>
         </div>
@@ -654,11 +650,11 @@
     <div class="modal-content">
       <div class="modal-header">
         {% if project.requires_application %}
-          <h5>Remove Application: {{ project.name }}</h5>
-          {% set action = 'remove' %}
+          <h5>Edit Application: {{ project.name }}</h5>
+          {% set action = 'edit' %}
         {% else %}
           <h5>Require Application: {{ project.name }}</h5>
-          {% set action = 'required' %}
+          {% set action = 'add' %}
         {% endif %}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>

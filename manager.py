@@ -239,13 +239,16 @@ def remove_application(project):
 
 def add_application(project, question):
     if not project.requires_application:
-        project.requires_application = True
         note = Notification(text=f'An application requirement has been added to {project.name} by the owner.')
         for member in project.members:
             if not member==project.owner:
                 member.notifications.append(note)
+        flash(f'You have added an application requirement to {project.name}.')
+    else:
+        flash(f'You have edited the application for {project.name}.')
+    project.requires_application = True
+    project.application_question = question
     db.session.commit()
-    flash(f'You have added an application requirement to {project.name}.')
     return True
 
 
