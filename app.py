@@ -858,7 +858,7 @@ def delete_user():
 
 
 @login_required
-@application.route('/commplete_project/<int:project_id>', methods=['POST'])
+@application.route('/complete_project/<int:project_id>', methods=['POST'])
 def complete_project(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -870,8 +870,13 @@ def complete_project(project_id):
 
 
 @login_required
-@application.route('/change_project_open/<int:project_id>/<action>')
+@application.route('/change_project_open/<int:project_id>/<action>', methods=['POST'])
 def change_project_open(project_id, action):
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can change join settings.')
+    else:
+        flash(f'project {action}')
     return redirect(request.referrer)
 
 

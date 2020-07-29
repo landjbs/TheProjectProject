@@ -187,6 +187,10 @@
     <button type="button" class="btn" disabled>
         Pending
     </button>
+  {% elif project.open==False and not current_user in project.members %}
+    <button type="button" class="btn" disabled>
+        Closed
+    </button>
   {% else %}
     <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
       {% if project in current_user.invitations %}
@@ -615,12 +619,18 @@
             {% else %}
               You are trying to open {{ project.name }}. This will allow other users
               to see the project in their recommended feed and apply. To edit application
-              settings, please
+              settings, please check the "Require App." button.
             {% endif %}
           </p>
         </div>
         <div class="modal-footer">
-          <button class='btn'>Complete</button>
+          <button class='btn'>
+            {% if project.open %}
+              Close Project
+            {% else %}
+              Open Project
+            {% endif %}
+          </button>
         </div>
       </form>
     </div>

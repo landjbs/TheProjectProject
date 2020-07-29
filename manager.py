@@ -201,6 +201,16 @@ def create_project(project, user):
     db.session.add(project)
 
 
+def open_project(project):
+    if not project.open:
+        project.open = True
+        note = Notification(text=f'{project.name} has been marked as open by the owner.')
+        for member in project.members:
+            if not member==project.owner:
+                member.notifcations.append(note)
+    return True
+
+
 def add_comment(project, user, comment):
     db.session.add(comment)
 
