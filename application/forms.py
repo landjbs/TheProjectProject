@@ -163,7 +163,7 @@ class Add_Project(BaseForm):
                                   description=('How long you '
                                   'think the project might take.'),
                                   render_kw={'min':0, 'max':30, 'start':7})
-    team_size = IntegerField('Max Team Size',
+    team_size = IntegerField('Target Team Size',
                             description=('The biggest you want your '
                                          'team to be.'),
                             render_kw={'min':1, 'max':30, 'start':7})
@@ -178,16 +178,23 @@ class Edit_Project(BaseForm):
                        render_kw={'max': 25})
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
-                           description='One line description of your project.',
-                           render_kw={'placeholder':'Project building community.',
-                                      'max': 40})
+                           render_kw={'max': 40})
     summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
-                        description='Describe your project in more detail.',
-                        render_kw={'placeholder': ('I need help designing this '
-                                                   'online community of '
-                                                   'builders...'),
-                                  'max':400})
+                        render_kw={'max':400})
+    subjects = SelectMultipleField('Subjects', choices=list(subjects))
+    open = BooleanField('Open')
+    requires_application = BooleanField('Requires Application')
+    application_question = TextField('Application Question',
+                                validators=[Length(0, 128)],
+                                render_kw={'max':128})
+    estimated_time = FloatField('Estimated Time', render_kw={'min':0, 'max':30, 'start':7})
+    team_size = IntegerField('Target Team Size',
+                            description=('The biggest you want your '
+                                         'team to be.'),
+                            render_kw={'min':1, 'max':30, 'start':7})
+
+
 
 
 class Project_Application_Form(BaseForm):
