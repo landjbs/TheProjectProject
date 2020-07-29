@@ -525,13 +525,17 @@
               </button>
             </div>
             <div class='col'>
-              <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
-                {% if project.requires_application %}
-                  Remove App.
-                {% else %}
-                  Require App.
-                {% endif %}
-              </button>
+              {% if project.open %}
+                <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
+              {% else %}
+                <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn' disabled>
+              {% endif %}
+                  {% if project.requires_application %}
+                    Remove App.
+                  {% else %}
+                    Require App.
+                  {% endif %}
+                </button>
             </div>
           </div>
           <br>
