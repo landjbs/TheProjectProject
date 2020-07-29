@@ -526,7 +526,11 @@
             </div>
             <div class='col'>
               <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
-                Require App.
+                {% if project.requires_application %}
+                  Remove App.
+                {% else %}
+                  Require App.
+                {% endif %}
               </button>
             </div>
           </div>
