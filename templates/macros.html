@@ -555,6 +555,36 @@
 {% endmacro -%}
 
 
+{% macro render_complete_modal(project) -%}
+<div id="complete_modal" class="modal fade" role="dialog" style='z-index:9999;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Complete {{ project.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('delete_user') }}" method='post'>
+        <div class="modal-body">
+          <p>
+            Congratulations on completing {{ project.name }}! To show off your
+            amazing work, we may want to share your work on TheProjectProject's
+            social media or put you in touch with funding/award opportunities.
+            We will reach out to ask permission if this is the case. If you want
+            to do more work on the project later, you will be able to edit the
+            completed setting.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class='btn delete-btn'>Complete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
 {% macro render_edit_user_modal(user, edit_form) -%}
 <div id="edit_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -629,7 +659,7 @@
 
 
 {% macro render_delete_account_modal(user) -%}
-<div id="delete_account_modal" class="modal fade" role="dialog">
+<div id="delete_account_modal" class="modal fade" role="dialog" style='z-index:9999;'>
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
