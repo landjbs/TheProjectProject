@@ -244,7 +244,9 @@ def add_application(project, question):
         for member in project.members:
             if not member==project.owner:
                 member.notifications.append(note)
-
+    db.session.commit()
+    flash(f'You have added an application requirement to {project.name}.')
+    return True
 
 
 def add_comment(project, user, comment):
