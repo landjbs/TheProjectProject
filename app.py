@@ -875,7 +875,7 @@ def complete_project(project_id):
 @login_required
 @application.route('/uncomplete_project/<int:project_id>', methods=['POST'])
 def uncomplete_project(project_id):
-    projet = Project.query.get_or_404(project_id)
+    project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
         flash('Only the owner can mark a project as incomplete.')
     else:
