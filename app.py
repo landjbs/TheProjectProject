@@ -897,8 +897,9 @@ def change_application(project_id, action):
         manager.remove_application(project)
     elif action=='add':
         if form.validate_on_submit():
-            flash('here')
-        # manager.add_application(project)
+            manager.add_application(project, form.application_question.data)
+        else:
+            flash(f'Could not add application: {form.errors[0]}.')
     return redirect(request.referrer)
 
 
