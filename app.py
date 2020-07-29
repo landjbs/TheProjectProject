@@ -893,13 +893,13 @@ def change_application(project_id, action):
     form = forms.Edit_Project_Application(request.form)
     if current_user!=project.owner:
         flash('Only the owner can change join settings.')
-    elif action=='remove':
-        manager.remove_application(project)
-    elif action=='add':
+    if action in ['add', 'edit']:
         if form.validate_on_submit():
             manager.add_application(project, form.application_question.data)
         else:
             flash(f'Could not add application: {form.errors[0]}.')
+    elif action=='remove':
+        manager.remove_application(project)
     return redirect(request.referrer)
 
 
