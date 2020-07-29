@@ -204,7 +204,17 @@ def create_project(project, user):
 def open_project(project):
     if not project.open:
         project.open = True
-        note = Notification(text=f'{project.name} has been marked as open by the owner.')
+        note = Notification(text=f'{project.name} has been openned by the owner.')
+        for member in project.members:
+            if not member==project.owner:
+                member.notifcations.append(note)
+    return True
+
+
+def close_project(project):
+    if project.open:
+        project.open = False
+        note = Notification(text=f'{project.name} has been closed by the owner.')
         for member in project.members:
             if not member==project.owner:
                 member.notifcations.append(note)
