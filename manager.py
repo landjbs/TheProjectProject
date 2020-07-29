@@ -210,7 +210,8 @@ def complete_project(project):
                 member.notifications.append(note)
         flash(f'Congratulations on completing {project.name}!')
         db.session.commit()
-    return True
+        return True
+    return False
 
 
 def uncomplete_project(project):
@@ -220,8 +221,10 @@ def uncomplete_project(project):
         for member in project.members:
             if not member==project.owner:
                 member.notifications.append(note)
-        flash(f'You have marked {project.name} as incomplete. We are excited to see where you will take things!')
+        flash(f'You have marked {project.name} as incomplete. We are excited to see where you will take it!')
         db.session.commit()
+        return True
+    return False
 
 
 def open_project(project):
