@@ -183,27 +183,31 @@
 
 <!-- BUTTONS -->
 {% macro render_join_button(current_user, project) -%}
-  {% if current_user.has_applied(project) %}
-    <button type="button" class="btn" disabled>
-        Pending
-    </button>
-  {% elif not current_user in project.members %}
-    <button type="button" class="btn" disabled>
-      {% if project.open==False %}
+  {% if not current_user in project.members %}
+    {% if current_user.has_applied(project) %}
+      <button type="button" class="btn" disabled>
+          Pending
+      </button>
+    {% elif project.complete==True %}
+      <button type="button" class="btn" disabled>
+        Complete
+      </button>
+    {% elif project.open==False %}
+      <button type="button" class="btn" disabled>
         Closed
-      {% elif project.complete==True %}
-        Completed
-      {% endif %}
-    </button>
+      </button>
+    {% elif project in current_user.invitations %}
+      <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+        Respond
+      </button>
+    {% else %}
+      <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+        Join
+      </button>
+    {% endif %}
   {% else %}
     <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-      {% if project in current_user.invitations %}
-        Respond
-      {% elif not current_user in project.members %}
-        Join
-      {% else %}
         Leave
-      {% endif %}
     </button>
   {% endif %}
 {% endmacro -%}
