@@ -196,7 +196,10 @@ class Edit_Project(BaseForm):
     summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         render_kw={'max':400})
-    subjects = SelectMultipleField('Subjects', choices=list(subjects))
+    subjects = SelectMultipleField('Subjects',
+                                    validators=[Select_Limit_Validator(5)],
+                                    choices=list(subjects),
+                                    render_kw={'max':5})
     open = BooleanField('Open')
     requires_application = BooleanField('Requires Application')
     application_question = TextField('Application Question',
