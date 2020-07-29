@@ -507,10 +507,7 @@
           </center>
           <div class='row ml-5 mr-5' style='text-align:center;'>
             <div class='col'>
-              <label class="switch">
-                <input type="checkbox" id='open' checked='{{ project.open }}'>
-                <span class="slider round"></span>
-              </label>
+              <input type="checkbox" checked data-toggle="toggle" id='open'>
               {{ edit_form.open.label }}
             </div>
             <div class='col'>

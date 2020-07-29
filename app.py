@@ -414,7 +414,7 @@ def user(code):
 
 
 @login_required
-@application.route('/project=<project_code>')
+@application.route('/project=<project_code>', methods=['GET', 'POST'])
 def project(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # forms
@@ -462,7 +462,43 @@ def project(project_code):
     if current_user==project.owner:
         recommended_members = rec.recommend_users(project)
         recommended_tabs = list(partition_query(recommended_members))
+        ## edit project form ##
         edit_form = forms.Edit_Project(request.form)
+        if request.method=='POST':
+            print(f'open {edit_form.open.data}')
+            if edit_form.validate_on_submit():
+                edits_made = False
+                # name
+                new_name = edit_form.name.data
+                if new_name!=project.name:
+                    project.name = new_name
+                    edits_made = True
+                # email
+                # new_email = edit_form.email.data
+                # if new_email!=user.email:
+                #     user.email = new_email
+                #     edits_made = True
+                # # github
+                # new_github = edit_form.github.data
+                # if new_github!=user.github:
+                #     user.github = new_github
+                #     edits_made = True
+                # # about
+                # new_about = edit_form.about.data
+                # if new_about!=user.about:
+                #     user.about = new_about
+                #     edits_made = True
+                # # new password
+                # if edit_form.password.data!='':
+                #     if not user.check_password(edit_form.password.data):
+                #         user.password = user.set_password(edit_form.password.data)
+                #         edits_made = True
+                # if edits_made:
+                    # flash('You have successfully edited your acount.')
+                    # db.session.add(user)
+                    # db.session.commit()
+            else:
+                show_edit_modal = True
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             project_application=project_application,
