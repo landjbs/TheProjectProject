@@ -507,15 +507,10 @@
           </center>
           <div class='row ml-5 mr-5' style='text-align:center;'>
             <div class='col'>
-              <!-- <label class="switch">
+              <label class="switch" id='open'>
                 <input type="checkbox">
                 <span class="slider round"></span>
-              </label> -->
-              {% if project.open %}
-                {{ edit_form.open(checked='true') }}
-              {% else %}
-                {{ edit_form.open() }}
-              {% endif %}
+              </label>
             </div>
             <div class='col'>
               <label class="switch">
