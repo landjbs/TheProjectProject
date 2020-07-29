@@ -212,6 +212,18 @@ def complete_project(project):
         db.session.commit()
     return True
 
+
+def uncomplete_project(project):
+    if project.complete:
+        project.complete = False
+        note = Notification(text=f'{project.name} has been marked as incomplete by the owner. You can now post and complete tasks!')
+        for member in project.members:
+            if not member==project.owner:
+                member.notifications.append(note)
+        flash(f'You have marked {project.name} as incomplete. We are excited to see where you will take things!')
+        db.session.commit()
+
+
 def open_project(project):
     if not project.open:
         project.open = True

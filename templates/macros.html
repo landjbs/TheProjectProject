@@ -480,92 +480,102 @@
         <h5>Edit {{ project.name }}</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form id='editForm' method='post'>
-        <div class="modal-body">
-          <!-- token -->
-          {{ edit_form.csrf_token }}
-          <!-- DESCRIPTION -->
-          <center>
-            <h6 style='text-decoration:underline;'>Description</h6>
-          </center>
-          <!-- name -->
-          {{ edit_form.name.label }}:<br>
-          {{ edit_form.name(class='edit-input', value=project.name) }}
-          {% if edit_form.name.errors %}
-            <p class='warning'>{{ edit_form.name.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- oneliner -->
-          {{ edit_form.oneliner.label }}:<br>
-          {{ edit_form.oneliner(class='edit-input', value=project.oneliner) }}
-          {% if edit_form.oneliner.errors %}
-            <p class='warning'>{{ edit_form.oneliner.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- summary -->
-          {{ edit_form.summary.label }}:<br>
-          {{ edit_form.summary(class='edit-input', value=project.summary) }}
-          {% if edit_form.summary.errors %}
-            <p class='warning'>{{ edit_form.summary.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- TEAM -->
-          <center>
-            <h6 style='text-decoration:underline;'>Team</h6>
-          </center>
-          <div class='row' style='text-align:center;'>
-            <div class='col'>
-              <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
-                Complete
-              </button>
-            </div>
-            <div class='col'>
-              <button type='button' data-toggle='modal' data-target='#open_modal' class='btn'>
-                {% if project.open %}
-                  Close
-                {% else %}
-                  Open
-                {% endif %}
-              </button>
-            </div>
-            <div class='col'>
-              {% if project.open %}
-                <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn'>
-              {% else %}
-                <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn' disabled>
-              {% endif %}
-                  Edit App.
+      {% if project.complete==False %}
+        <form id='editForm' method='post'>
+          <div class="modal-body">
+            <!-- token -->
+            {{ edit_form.csrf_token }}
+            <!-- DESCRIPTION -->
+            <center>
+              <h6 style='text-decoration:underline;'>Description</h6>
+            </center>
+            <!-- name -->
+            {{ edit_form.name.label }}:<br>
+            {{ edit_form.name(class='edit-input', value=project.name) }}
+            {% if edit_form.name.errors %}
+              <p class='warning'>{{ edit_form.name.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
+            <!-- oneliner -->
+            {{ edit_form.oneliner.label }}:<br>
+            {{ edit_form.oneliner(class='edit-input', value=project.oneliner) }}
+            {% if edit_form.oneliner.errors %}
+              <p class='warning'>{{ edit_form.oneliner.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
+            <!-- summary -->
+            {{ edit_form.summary.label }}:<br>
+            {{ edit_form.summary(class='edit-input', value=project.summary) }}
+            {% if edit_form.summary.errors %}
+              <p class='warning'>{{ edit_form.summary.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
+            <!-- TEAM -->
+            <center>
+              <h6 style='text-decoration:underline;'>Team</h6>
+            </center>
+            <div class='row' style='text-align:center;'>
+              <div class='col'>
+                <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
+                  Complete
                 </button>
+              </div>
+              <div class='col'>
+                <button type='button' data-toggle='modal' data-target='#open_modal' class='btn'>
+                  {% if project.open %}
+                    Close
+                  {% else %}
+                    Open
+                  {% endif %}
+                </button>
+              </div>
+              <div class='col'>
+                {% if project.open %}
+                  <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn'>
+                {% else %}
+                  <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn' disabled>
+                {% endif %}
+                    Edit App.
+                  </button>
+              </div>
             </div>
-          </div>
-          <br>
-          <hr class='my-2'><br>
-
-          <!-- MANAGEMENT -->
-          <center>
-            <h6 style='text-decoration:underline;'>Management</h6>
-          </center>
-          <div>
-            <div class="slidecontainer">
-              <input type="range" min="1" max="30" value="7"
-                    name='Test' id="time_slider">
-            </div>
+            <br>
             <hr class='my-2'><br>
-            <div class="slidecontainer">
-              <input type="range" min="1" max="30" value="7"
-                    name='test' id="time_slider">
-            </div>
-            <hr class='my-2'><br>
-          </div>
 
-        </div>
-        <div class="modal-footer row m-3">
-          <button type='button' data-toggle='modal' data-target='#modal_project_{{ project.id }}' class='btn delete-btn col float-left'>
-            Leave Project
-          </button>
-          <button class='btn col'>Change</button>
-        </div>
-      </form>
+            <!-- MANAGEMENT -->
+            <center>
+              <h6 style='text-decoration:underline;'>Management</h6>
+            </center>
+            <div>
+              <div class="slidecontainer">
+                <input type="range" min="1" max="30" value="7"
+                      name='Test' id="time_slider">
+              </div>
+              <hr class='my-2'><br>
+              <div class="slidecontainer">
+                <input type="range" min="1" max="30" value="7"
+                      name='test' id="time_slider">
+              </div>
+              <hr class='my-2'><br>
+            </div>
+
+          </div>
+          <div class="modal-footer row m-3">
+            <button type='button' data-toggle='modal' data-target='#modal_project_{{ project.id }}' class='btn delete-btn col float-left'>
+              Leave Project
+            </button>
+            <button class='btn col'>Change</button>
+          </div>
+        </form>
+      {% else %}
+        <form action="{{ url_for('uncomplete_project', project_id=project.id) }}" method='post'>
+          <div class="modal-body">
+            <button type='button' class='btn'>
+              UnComplete Project
+            </button>
+          </div>
+        </form>
+      {% endif %}
     </div>
   </div>
 </div>
