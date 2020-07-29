@@ -465,7 +465,7 @@ def project(project_code):
         ## edit project form ##
         edit_form = forms.Edit_Project(request.form)
         if request.method=='POST':
-            print(f'open {edit_form.open.data}')
+            print(f'complete {edit_form.complete.data}')
             if edit_form.validate_on_submit():
                 edits_made = False
                 # name
