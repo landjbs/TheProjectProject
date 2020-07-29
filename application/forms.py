@@ -193,7 +193,7 @@ class Edit_Project(BaseForm):
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
                            render_kw={'max': 40})
-    summary = TextAreaField(label='Summary',
+    summary = TextField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         render_kw={'max':400})
     subjects = SelectMultipleField('Subjects',

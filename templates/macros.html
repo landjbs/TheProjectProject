@@ -489,14 +489,14 @@
           <hr class='my-2'><br>
           <!-- oneliner -->
           {{ edit_form.oneliner.label }}:<br>
-          {{ edit_form.oneliner(class='edit-input', value=user.oneliner) }}
+          {{ edit_form.oneliner(class='edit-input', value=project.oneliner) }}
           {% if edit_form.oneliner.errors %}
             <p class='warning'>{{ edit_form.oneliner.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
           <!-- summary -->
           {{ edit_form.summary.label }}:<br>
-          {{ edit_form.summary(class='edit-input', value=summary.github) }}
+          {{ edit_form.summary(class='edit-input', value=project.summary) }}
           {% if edit_form.summary.errors %}
             <p class='warning'>{{ edit_form.summary.errors[0] }}</p>
           {% endif %}
@@ -505,11 +505,15 @@
           <center>
             <h6 style='text-decoration:underline;'>Team</h6>
           </center>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+          </label>
 
         </div>
         <div class="modal-footer row m-3">
           <button type='button' data-toggle='modal' data-target='#delete_account_modal' class='btn delete-btn col float-left'>
-            Delete Account
+            Leave Project
           </button>
           <button class='btn col'>Change</button>
         </div>
