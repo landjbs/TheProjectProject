@@ -105,7 +105,7 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              <!-- {{ elt(id=elt.name) }} -->
+              {{ elt(id=elt.name, style='display:none;') }}
               <span class="select_subject" id='{{ elt.name }}_select' name='{{ elt.name }}'></span>
               <small>Limit 5.</small>
               {% if elt.errors %}
@@ -258,10 +258,12 @@
 
   // multiselect
   const subjects = [];
-  {% for elt in subjects %}
-    subjects.push({label: '{{ elt.name }}',
-                   value: '{{ elt.id }}'},)
+  {% for elt in form.subjects.choices %}
+    subjects.push({label: '{{ elt[1] }}',
+                   value: '{{ elt[0] }}'},)
   {% endfor %}
+  var selector = document.getElementById('subjects')
+
   var selected_subjects = new Set();
   var instance = new SelectPure(".select_subject", {
       options: subjects,
@@ -271,7 +273,7 @@
       inlineIcon: false,
       placeholder: false,
       // onChange: value => { selected_subjects.add(value); },
-      onChange: value => { document.getElementById("subjects").value += value; },
+      onChange: value => { selector.options[value-1].selected; },
       classNames: {
         select: "select-pure__select",
         dropdownShown: "select-pure__select--opened",

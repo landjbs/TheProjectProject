@@ -261,6 +261,7 @@ def home():
 @application.route('/add_project', methods=['GET', 'POST'])
 def add_project():
     form = forms.Add_Project(request.form)
+    print(form.subjects.data)
     if request.method=='POST' and form.validate_on_submit():
         # url to none
         if form.url.data=='':
