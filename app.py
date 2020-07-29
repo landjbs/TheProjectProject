@@ -471,7 +471,8 @@ def project(project_code):
                             authored=authored,
                             completed=completed,
                             project_subjects=project_subjects,
-                            recommended_tabs=recommended_tabs)
+                            recommended_tabs=recommended_tabs,
+                            edit_form=edit_form)
 
 
 @login_required

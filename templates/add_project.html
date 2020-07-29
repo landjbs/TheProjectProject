@@ -167,9 +167,11 @@
 
   function submit() {
     var selector = document.getElementById('subjects');
-    for (index = 0; index < selected_subjects.length; index++) {
-      var subject_id = selected_subjects[index];
-      selector.options[subject_id-1].selected='selected';
+    var selected_subjects = instance.value();
+    if (selected_subjects) {
+      for (i=0; i<selected_subjects.length; i++) {
+        selector.options[selected_subjects[i]-1].selected='selected';
+      }
     }
     document.getElementById("project_form").submit();
   };
@@ -271,7 +273,12 @@
       icon: "fa fa-times",
       inlineIcon: false,
       placeholder: false,
-      onChange: value => { selected_subjects = value },
+      onChange: value => { if (value.length>5) {
+                            var last_elt = document.querySelectorAll('.select-pure__selected-label');
+                            last_elt[last_elt.length - 1].style.color='red';
+                            last_elt[last_elt.length - 1].style.borderColor='red';
+                          };
+                        },
       classNames: {
         select: "select-pure__select",
         dropdownShown: "select-pure__select--opened",

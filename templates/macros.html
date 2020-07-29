@@ -464,75 +464,7 @@
 
 
 {% macro render_edit_project_modal(project, edit_form) -%}
-<div id="edit_modal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Edit {{ project.name }}</h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <form id='editForm' method='post'>
-        <div class="modal-body">
-          <!-- token -->
-          {{ edit_form.csrf_token }}
-          <!-- ABOUT -->
-          <center>
-            <h6 style='text-decoration:underline;'>About</h6>
-          </center>
-          <!-- name -->
-          {{ edit_form.name.label }}:<br>
-          {{ edit_form.name(class='edit-input', value=user.name) }}
-          {% if edit_form.name.errors %}
-            <p class='warning'>{{ edit_form.name.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- email -->
-          {{ edit_form.email.label }}:<br>
-          {{ edit_form.email(class='edit-input', value=user.email) }}
-          {% if edit_form.email.errors %}
-            <p class='warning'>{{ edit_form.email.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- github -->
-          {{ edit_form.github.label }}:<br>
-          {{ edit_form.github(class='edit-input', value=user.github) }}
-          {% if edit_form.github.errors %}
-            <p class='warning'>{{ edit_form.github.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
-          <!-- about -->
-          {{ edit_form.about.label }}:<br>
-          {{ edit_form.about(class='edit-input', value=user.about) }}
-          {% if edit_form.about.errors %}
-            <p class='warning'>{{ edit_form.about.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-4'>
-          <!-- PASSWORD -->
-          <center>
-            <h6 style='text-decoration:underline;'>Change Password</h6>
-          </center>
-          {% for password_field in [edit_form.password, edit_form.confirm] %}
-            {{ password_field.label }}:<br>
-            {{ password_field(class='edit-input') }}
-            {% if password_field.errors %}
-              <p class='warning'>{{ password_field.errors[0] }}</p>
-            {% endif %}
-            {% if loop.index==1 %}
-              <hr class='my-2'><br>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <div class="modal-footer row m-3">
-          <button type='button' data-toggle='modal' data-target='#delete_account_modal' class='btn delete-btn col float-left'>
-            Delete Account
-          </button>
-          <button class='btn col'>Change</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<div></div>
 {% endmacro -%}
 
 
