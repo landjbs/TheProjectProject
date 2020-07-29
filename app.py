@@ -459,6 +459,7 @@ def project(project_code):
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
+    show_edit_modal = False
     if current_user==project.owner:
         recommended_members = rec.recommend_users(project)
         recommended_tabs = list(partition_query(recommended_members))
