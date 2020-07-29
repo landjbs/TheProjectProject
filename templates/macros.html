@@ -507,13 +507,8 @@
           </center>
           <div class='row ml-5 mr-5' style='text-align:center;'>
             <div class="input-control" onclick='toggle_complete()' id='complete'>
-              {% if project.complete %}
-                <input id="on-complete" class="toggle toggle-left" name="complete" value="true" type="checkbox"
-                  style='display: none;' checked>
-              {% else %}
-                <input id="on-complete" class="toggle toggle-left" name="complete" value="true" type="checkbox"
-                  style='display: none;'>
-              {% endif %}
+              <input id="on-complete" class="toggle toggle-left" name="complete" value="true" type="checkbox"
+                style='display: none;'>
               <label for="on-complete" class="btn">Complete</label>
             </div>
             <div class='col'>
