@@ -526,9 +526,9 @@
             </div>
             <div class='col'>
               {% if project.open %}
-                <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
+                <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn'>
               {% else %}
-                <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn' disabled>
+                <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn' disabled>
               {% endif %}
                   {% if project.requires_application %}
                     Remove App.
@@ -604,6 +604,51 @@
 
 {% macro render_open_modal(project) -%}
 <div id="open_modal" class="modal fade" role="dialog" style='z-index:9997;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        {% if project.open %}
+          <h5>Close {{ project.name }}</h5>
+          {% set action = 'close' %}
+        {% else %}
+          <h5>Open {{ project.name }}</h5>
+          {% set action = 'open' %}
+        {% endif %}
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('change_project_open', project_id=project.id, action=action) }}" method='post'>
+        <div class="modal-body">
+          <p>
+            {% if project.open %}
+              You are tyring to close {{ project.name }}. This will not
+              remove current members, but will prevent other members from joining
+              and will hide {{ project.name }} from other's recommended feed.
+            {% else %}
+              You are trying to open {{ project.name }}. This will allow other users
+              to see the project in their recommended feed and apply. To edit application
+              settings, please check the "Require App." button.
+            {% endif %}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>
+            {% if project.open %}
+              Close Project
+            {% else %}
+              Open Project
+            {% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+{% macro requires_application_modal(project, application_field) -%}
+<div id="requires_application_modal" class="modal fade" role="dialog" style='z-index:9997;'>
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
