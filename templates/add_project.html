@@ -262,8 +262,7 @@
   const subjects = [];
   {% for elt in form.subjects.choices %}
     subjects.push({label: '{{ elt[1] }}',
-                   value: '{{ elt[0] }}',
-                  color: '{{ elt[1] }}'},)
+                   value: '{{ elt[0] }}'},)
   {% endfor %}
 
   var instance = new SelectPure(".select_subject", {
