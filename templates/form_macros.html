@@ -24,7 +24,7 @@
         icon: "fa fa-times",
         inlineIcon: false,
         placeholder: false,
-        onChange: value => { if (value.length>5) {
+        onChange: value => { if (value.length>{{ field.render_kw['max'] }}) {
                               var last_elt = document.querySelectorAll('.select-pure__selected-label');
                               last_elt[last_elt.length - 1].style.color='red';
                               last_elt[last_elt.length - 1].style.borderColor='red';

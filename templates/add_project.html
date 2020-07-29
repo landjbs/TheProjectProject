@@ -1,4 +1,5 @@
 {% extends "home_base.html" %}
+{% import 'form_macros.html' as form_macros %}
 
 {% block title %}Add Project{% endblock %}
 
@@ -6,6 +7,7 @@
   {{ super() }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link type="text/css" href="css/add_styles.css" rel="stylesheet">
+  <link type='text/css' href='css/select_styles.css' rel='stylesheet'>
   <script src="select-pure/dist/bundle.min.js"></script>
 {% endblock %}
 
@@ -105,13 +107,7 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              {{ elt(id=elt.name, style='display:none;') }}
-              <span class="select_subject" id='{{ elt.name }}_select' name='{{ elt.name }}'></span>
-              {% if elt.errors %}
-                <p class='warning'>{{ elt.errors[0] }}</p>
-              {% else %}
-                <small>Limit 5.</small>
-              {% endif %}
+              {{ form_macros.render_multiselect(elt) }}
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="20" value="10" class="slider"
@@ -257,42 +253,6 @@
   // start with not completed and default subsequents
   document.getElementById("off-complete").checked = true;
   toggle_complete();
-
-  // multiselect
-  const subjects = [];
-  {% for elt in form.subjects.choices %}
-    subjects.push({label: '{{ elt[1] }}',
-                   value: '{{ elt[0] }}'},)
-  {% endfor %}
-
-  var instance = new SelectPure(".select_subject", {
-      options: subjects,
-      multiple: true,
-      autocomplete: true,
-      icon: "fa fa-times",
-      inlineIcon: false,
-      placeholder: false,
-      onChange: value => { if (value.length>5) {
-                            var last_elt = document.querySelectorAll('.select-pure__selected-label');
-                            last_elt[last_elt.length - 1].style.color='red';
-                            last_elt[last_elt.length - 1].style.borderColor='red';
-                          };
-                        },
-      classNames: {
-        select: "select-pure__select",
-        dropdownShown: "select-pure__select--opened",
-        multiselect: "select-pure__select--multiple",
-        label: "select-pure__label",
-        placeholder: "select-pure__placeholder",
-        dropdown: "select-pure__options",
-        option: "select-pure__option",
-        autocompleteInput: "select-pure__autocomplete",
-        selectedLabel: "select-pure__selected-label",
-        selectedOption: "select-pure__option--selected",
-        placeholderHidden: "select-pure__placeholder--hidden",
-        optionHidden: "select-pure__option--hidden",
-      }
-  });
 </script>
 
 {% endblock %}

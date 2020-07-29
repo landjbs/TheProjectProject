@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import 'form_macros.html' as form_macros %}
 
 {% block title %}Apply{% endblock %}
 
@@ -42,12 +43,7 @@
           <span class="tooltiptext">{{ elt.description}}</span>
         </div>
         <br>
-        {{ elt(id=elt.name, style='width:30%;', size='10') }}
-        <br>
-        <small>Limit 5.</small>
-        {% if elt.errors %}
-          <p class='warning'>{{ elt.errors[0] }}</p>
-        {% endif %}
+        {{ form_macros.render_multiselect(elt) }}
       </div>
     {% else %}
       <div class="row input-segment tab">
