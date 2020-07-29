@@ -868,8 +868,7 @@ def complete_project(project_id):
     if current_user!=project.owner:
         flash('Only the owner can mark a project as complete.')
     else:
-        flash('project completed')
-        # manager.complete_project(project)
+        manager.complete_project(project)
     return redirect(request.referrer)
 
 

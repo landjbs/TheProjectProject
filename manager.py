@@ -201,6 +201,17 @@ def create_project(project, user):
     db.session.add(project)
 
 
+def complete_project(project):
+    if not project.complete:
+        project.complete = True
+        note = Notification(text=f'Congratulations—{project.name} has been marked as complete by the owner!')
+        for member in project.members:
+            if not member==project.owner:
+                member.notifications.append(note)
+        flash(f'Congratulations on completing {project.name}!')
+        db.session.commit()
+    return True
+
 def open_project(project):
     if not project.open:
         project.open = True

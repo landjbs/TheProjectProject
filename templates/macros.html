@@ -187,9 +187,13 @@
     <button type="button" class="btn" disabled>
         Pending
     </button>
-  {% elif project.open==False and not current_user in project.members %}
+  {% if not current_user in project.members %}
     <button type="button" class="btn" disabled>
+      {% if project.open==False %}
         Closed
+      {% elif project.complete==True %}
+        Completed
+      {% endif %}
     </button>
   {% else %}
     <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
