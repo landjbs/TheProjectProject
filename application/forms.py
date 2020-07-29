@@ -200,12 +200,15 @@ class Edit_Project(BaseForm):
                                     validators=[Select_Limit_Validator(5)],
                                     choices=list(subjects),
                                     render_kw={'max':5})
-    application_question = TextField('Application Question',
-                                validators=[Length(0, 128)],
-                                render_kw={'max':128})
     estimated_time = FloatField('Estimated Time', render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Target Team Size',
                             render_kw={'min':1, 'max':30, 'start':7})
+
+
+class Edit_Project_Application_Form(BaseForm):
+    application_question = TextField('Application Question',
+                                    validators=[Length(0, 128)],
+                                    render_kw={'max':128})
 
 
 
