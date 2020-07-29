@@ -279,12 +279,6 @@
 
     <!-- modals -->
     <div>
-      <!-- project modals -->
-      {% for tab in owned_tabs %}
-        {% for project in tab %}
-          {{ macros.render_join_modal(current_user, project, project_application) }}
-        {% endfor %}
-      {% endfor %}
       <!-- user modal -->
       {% if current_user!=user %}
         <!-- collaborate -->
@@ -294,6 +288,12 @@
         {{ macros.render_edit_user_modal(user, edit_form) }}
         {{ macros.render_delete_account_modal(user) }}
       {% endif %}
+      <!-- project modals -->
+      {% for tab in owned_tabs %}
+        {% for project in tab %}
+          {{ macros.render_join_modal(current_user, project, project_application) }}
+        {% endfor %}
+      {% endfor %}
     </div>
     <!-- /modals -->
 

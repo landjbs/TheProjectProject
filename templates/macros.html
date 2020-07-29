@@ -311,7 +311,7 @@
 
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
-<div id="modal_project_{{ project.id }}" class="modal fade" role="dialog">
+<div id="modal_project_{{ project.id }}" class="modal fade" role="dialog" style='z-index:9999;'>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -540,7 +540,7 @@
 
         </div>
         <div class="modal-footer row m-3">
-          <button type='button' data-toggle='modal' data-target='#modal_project_{{ project.id }}">' class='btn delete-btn col float-left'>
+          <button type='button' data-toggle='modal' data-target='#modal_project_{{ project.id }}' class='btn delete-btn col float-left'>
             Leave Project
           </button>
           <button class='btn col'>Change</button>
@@ -626,7 +626,7 @@
 {% endmacro -%}
 
 
-{% macro render_delete_account_macro(user) -%}
+{% macro render_delete_account_modal(user) -%}
 <div id="delete_account_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
