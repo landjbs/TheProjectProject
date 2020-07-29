@@ -857,5 +857,12 @@ def delete_user():
     return redirect(url_for('index'))
 
 
+@login_required
+@application.route('/commplete_project/<int:project_id>', methods=['POST'])
+def complete_project(project_id):
+    project = Project.query.get_or_404(project_id)
+    if current_user==project.owner:
+
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
