@@ -459,13 +459,14 @@ def project(project_code):
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
+    edit_application_form = False
     show_edit_modal = False
     if current_user==project.owner:
         recommended_members = rec.recommend_users(project)
         recommended_tabs = list(partition_query(recommended_members))
         ## edit project form ##
         edit_form = forms.Edit_Project(request.form)
-        edit_application = forms.Edit_Project_Application(request.form)
+        edit_application_form = forms.Edit_Project_Application(request.form)
         if request.method=='POST':
             print(f'complete {edit_form.complete.data}')
             if edit_form.validate_on_submit():
@@ -511,7 +512,7 @@ def project(project_code):
                             project_subjects=project_subjects,
                             recommended_tabs=recommended_tabs,
                             edit_form=edit_form,
-                            edit_application=edit_application)
+                            edit_application_form=edit_application_form)
 
 
 @login_required
@@ -889,13 +890,15 @@ def change_project_open(project_id, action):
 @application.route('/change_application/<int:project_id>/<action>', methods=['POST'])
 def change_application(project_id, action):
     project = Project.query.get_or_404(project_id)
+    form = forms.Edit_Project_Application(request.form)
     if current_user!=project.owner:
         flash('Only the owner can change join settings.')
     elif action=='remove':
         manager.remove_application(project)
     elif action=='add':
-        if
-        manager.add_application(project)
+        if form.validate_on_submit():
+            flash('here')
+        # manager.add_application(project)
     return redirect(request.referrer)
 
 

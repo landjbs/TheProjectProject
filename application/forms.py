@@ -205,7 +205,7 @@ class Edit_Project(BaseForm):
                             render_kw={'min':1, 'max':30, 'start':7})
 
 
-class Edit_Project_Application_Form(BaseForm):
+class Edit_Project_Application(BaseForm):
     application_question = TextField('Application Question',
                                     validators=[Length(0, 128)],
                                     render_kw={'max':128})

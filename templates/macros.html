@@ -647,7 +647,7 @@
 {% endmacro -%}
 
 
-{% macro render_requires_application_modal(project, application_field) -%}
+{% macro render_requires_application_modal(project, edit_application_form) -%}
 <div id="requires_application_modal" class="modal fade" role="dialog" style='z-index:9997;'>
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -679,7 +679,8 @@
               </p>
               <br>
               <p>Application Question</p>
-              {{ application_field(class='join-input', value=project.application_question, required=True) }}
+              {{ edit_application_form.csrf_token()  }}
+              {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
             {% endif %}
         </div>
         <div class="modal-footer">
