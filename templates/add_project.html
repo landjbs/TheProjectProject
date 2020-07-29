@@ -105,12 +105,12 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              {{ elt(id=elt.name) }}
+              <!-- {{ elt(id=elt.name) }} -->
+              <span class="select_subject" id='{{ elt.name }}_select' name='{{ elt.name }}'></span>
               <small>Limit 5.</small>
               {% if elt.errors %}
                 <p class='warning'>{{ elt.errors[0] }}</p>
               {% endif %}
-              <!-- <span class="select_subject" id='{{ elt.name }}_select' name='{{ elt.name }}'></span> -->
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="20" value="10" class="slider"
@@ -257,36 +257,36 @@
   toggle_complete();
 
   // multiselect
-  // const subjects = [];
-  // {% for elt in subjects %}
-  //   subjects.push({label: '{{ elt.name }}',
-  //                  value: '{{ elt.id }}'},)
-  // {% endfor %}
-  // var selected_subjects = new Set();
-  // var instance = new SelectPure(".select_subject", {
-  //     options: subjects,
-  //     multiple: true,
-  //     autocomplete: true,
-  //     icon: "fa fa-times",
-  //     inlineIcon: false,
-  //     placeholder: false,
-  //     // onChange: value => { selected_subjects.add(value); },
-  //     onChange: value => { document.getElementById("subjects").value += value; },
-  //     classNames: {
-  //       select: "select-pure__select",
-  //       dropdownShown: "select-pure__select--opened",
-  //       multiselect: "select-pure__select--multiple",
-  //       label: "select-pure__label",
-  //       placeholder: "select-pure__placeholder",
-  //       dropdown: "select-pure__options",
-  //       option: "select-pure__option",
-  //       autocompleteInput: "select-pure__autocomplete",
-  //       selectedLabel: "select-pure__selected-label",
-  //       selectedOption: "select-pure__option--selected",
-  //       placeholderHidden: "select-pure__placeholder--hidden",
-  //       optionHidden: "select-pure__option--hidden",
-  //     }
-  // });
+  const subjects = [];
+  {% for elt in subjects %}
+    subjects.push({label: '{{ elt.name }}',
+                   value: '{{ elt.id }}'},)
+  {% endfor %}
+  var selected_subjects = new Set();
+  var instance = new SelectPure(".select_subject", {
+      options: subjects,
+      multiple: true,
+      autocomplete: true,
+      icon: "fa fa-times",
+      inlineIcon: false,
+      placeholder: false,
+      // onChange: value => { selected_subjects.add(value); },
+      onChange: value => { document.getElementById("subjects").value += value; },
+      classNames: {
+        select: "select-pure__select",
+        dropdownShown: "select-pure__select--opened",
+        multiselect: "select-pure__select--multiple",
+        label: "select-pure__label",
+        placeholder: "select-pure__placeholder",
+        dropdown: "select-pure__options",
+        option: "select-pure__option",
+        autocompleteInput: "select-pure__autocomplete",
+        selectedLabel: "select-pure__selected-label",
+        selectedOption: "select-pure__option--selected",
+        placeholderHidden: "select-pure__placeholder--hidden",
+        optionHidden: "select-pure__option--hidden",
+      }
+  });
 </script>
 
 {% endblock %}
