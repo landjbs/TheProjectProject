@@ -488,7 +488,7 @@ def subject(subject_name):
     #
     subject_tabs = []
     # application
-    project_application = Project_Application_Form(request.form)
+    project_application = forms.Project_Application_Form(request.form)
     return render_template('search.html', project_tabs=project_tabs,
                         user_tabs=user_tabs, subject_tabs=subject_tabs,
                         search_text=subject.name,
@@ -508,7 +508,7 @@ def join_project(project_id):
             flash(f'You have been added to {project.name}!')
             manager.add_user_to_project(current_user, project)
         else:
-            form = Project_Application_Form(request.form)
+            form = forms.Project_Application_Form(request.form)
             if form.validate_on_submit():
                 application = project.pending.filter_by(user=current_user).first()
                 if application is not None:
@@ -711,7 +711,7 @@ def search():
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
     subject_tabs = list(partition_query(subject_results.limit(30)))
     # forms
-    project_application = Project_Application_Form(request.form)
+    project_application = forms.Project_Application_Form(request.form)
     return render_template('search.html', project_tabs=project_tabs,
                         user_tabs=user_tabs, subject_tabs=subject_tabs,
                         search_text=search_text,

@@ -81,9 +81,10 @@ class Apply(BaseForm):
                                'have, or reasons you want to join the '
                                'community.'))
     subjects = SelectMultipleField('Interests',
-                                   description=('What subjects are you '
+                                    description=('What subjects are you '
                                                 'interested in?'),
-                                   choices=list(subjects))
+                                    validators=[Select_Limit_Validator(5)],
+                                    choices=list(subjects))
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')],
@@ -153,10 +154,10 @@ class Add_Project(BaseForm):
                                  'doc, etc.) to showcase your progress.'),
                     render_kw={'placeholder':'https://www.github.com/me/example', 'max':128})
     subjects = SelectMultipleField('Subjects',
-                                   description=('What subjects might this '
+                                    description=('What subjects might this '
                                                 'project involve?'),
                                     validators=[Select_Limit_Validator(5)],
-                                   choices=list(subjects))
+                                    choices=list(subjects))
     open = BooleanField('Open',
                         validators=[],
                         description=('Open projects can have team members.'))
