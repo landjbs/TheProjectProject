@@ -674,7 +674,10 @@
             {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
         </div>
         <div class="modal-footer">
-          <button class='btn'>
+          <button type='button' data-toggle='modal' data-target='#remove_application_modal' class='btn delete-btn col'>
+            Remove Application
+          </button>
+          <button class='btn col'>
             Change
           </button>
         </div>

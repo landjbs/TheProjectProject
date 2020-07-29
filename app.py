@@ -887,19 +887,16 @@ def change_project_open(project_id, action):
 
 
 @login_required
-@application.route('/change_application/<int:project_id>/<action>', methods=['POST'])
-def change_application(project_id, action):
+@application.route('/add_application/<int:project_id>', methods=['POST'])
+def add_application(project_id):
     project = Project.query.get_or_404(project_id)
     form = forms.Edit_Project_Application(request.form)
     if current_user!=project.owner:
         flash('Only the owner can change join settings.')
-    if action in ['add', 'edit']:
-        if form.validate_on_submit():
-            manager.add_application(project, form.application_question.data)
-        else:
-            flash(f'Could not add application: {form.errors[0]}.')
-    elif action=='remove':
-        manager.remove_application(project)
+    elif form.validate_on_submit():
+        manager.add_application(project, form.application_question.data)
+    else:
+        flash(f'Could not add application: {form.errors[0]}.')
     return redirect(request.referrer)
 
 
