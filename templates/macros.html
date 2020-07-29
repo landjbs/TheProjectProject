@@ -476,7 +476,7 @@
         <div class="modal-body">
           <!-- token -->
           {{ edit_form.csrf_token }}
-          <!-- ABOUT -->
+          <!-- DESCRIPTION -->
           <center>
             <h6 style='text-decoration:underline;'>Description</h6>
           </center>
@@ -487,41 +487,25 @@
             <p class='warning'>{{ edit_form.name.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
-          <!-- email -->
-          {{ edit_form.email.label }}:<br>
-          {{ edit_form.email(class='edit-input', value=user.email) }}
-          {% if edit_form.email.errors %}
-            <p class='warning'>{{ edit_form.email.errors[0] }}</p>
+          <!-- oneliner -->
+          {{ edit_form.oneliner.label }}:<br>
+          {{ edit_form.oneliner(class='edit-input', value=user.oneliner) }}
+          {% if edit_form.oneliner.errors %}
+            <p class='warning'>{{ edit_form.oneliner.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
-          <!-- github -->
-          {{ edit_form.github.label }}:<br>
-          {{ edit_form.github(class='edit-input', value=user.github) }}
-          {% if edit_form.github.errors %}
-            <p class='warning'>{{ edit_form.github.errors[0] }}</p>
+          <!-- summary -->
+          {{ edit_form.summary.label }}:<br>
+          {{ edit_form.summary(class='edit-input', value=summary.github) }}
+          {% if edit_form.summary.errors %}
+            <p class='warning'>{{ edit_form.summary.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
-          <!-- about -->
-          {{ edit_form.about.label }}:<br>
-          {{ edit_form.about(class='edit-input', value=user.about) }}
-          {% if edit_form.about.errors %}
-            <p class='warning'>{{ edit_form.about.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-4'>
-          <!-- PASSWORD -->
+          <!-- TEAM -->
           <center>
-            <h6 style='text-decoration:underline;'>Change Password</h6>
+            <h6 style='text-decoration:underline;'>Team</h6>
           </center>
-          {% for password_field in [edit_form.password, edit_form.confirm] %}
-            {{ password_field.label }}:<br>
-            {{ password_field(class='edit-input') }}
-            {% if password_field.errors %}
-              <p class='warning'>{{ password_field.errors[0] }}</p>
-            {% endif %}
-            {% if loop.index==1 %}
-              <hr class='my-2'><br>
-            {% endif %}
-          {% endfor %}
+
         </div>
         <div class="modal-footer row m-3">
           <button type='button' data-toggle='modal' data-target='#delete_account_modal' class='btn delete-btn col float-left'>
