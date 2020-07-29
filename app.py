@@ -873,6 +873,17 @@ def complete_project(project_id):
 
 
 @login_required
+@application.route('/uncomplete_project/<int:project_id>', methods=['POST'])
+def uncomplete_project(project_id):
+    projet = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can mark a project as incomplete.')
+    else:
+        manager.uncomplete_project(project)
+    return redirect(request.referrer)
+
+
+@login_required
 @application.route('/change_project_open/<int:project_id>/<action>', methods=['POST'])
 def change_project_open(project_id, action):
     project = Project.query.get_or_404(project_id)
