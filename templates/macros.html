@@ -508,15 +508,18 @@
           <div class='row ml-5 mr-5' style='text-align:center;'>
             <div class='col'>
               {{ edit_form.complete(checked=project.complete) }}
-              <p>{{ edit_form.complete.label }}</p>
+              <br>
+              <small>{{ edit_form.complete.label }}</small>
             </div>
             <div class='col'>
               {{ edit_form.open(checked=project.open) }}
-              <p>{{ edit_form.open.label }}</p>
+              <br>
+              <small>{{ edit_form.open.label }}</small>
             </div>
             <div class='col'>
               {{ edit_form.requires_application(checked=project.requires_application) }}
-              <p>{{ edit_form.requires_application.label }}</p>
+              <br>
+              <small>{{ edit_form.requires_application.label }}</small>
             </div>
           </div>
           <hr class='my-2'><br>
