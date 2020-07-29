@@ -157,7 +157,8 @@ class Add_Project(BaseForm):
                                     description=('What subjects might this '
                                                 'project involve?'),
                                     validators=[Select_Limit_Validator(5)],
-                                    choices=list(subjects))
+                                    choices=list(subjects),
+                                    render_kw={'max':5})
     open = BooleanField('Open',
                         validators=[],
                         description=('Open projects can have team members.'))
