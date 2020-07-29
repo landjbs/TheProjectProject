@@ -664,15 +664,23 @@
       </div>
       <form action="{{ url_for('change_application', project_id=project.id, action=action) }}" method='post'>
         <div class="modal-body">
-          <p>
             {% if project.requires_application %}
+              <p>
               You are trying to remove the application from {{ project.name }}.
-              This will allow anyone to join the project at any point. You will
-              be able to edit this in the project settings.
+              This will allow anyone to join the project at any point. You can
+              edit this in the project settings.
+              </p>
             {% else %}
-              You are trying to add an application to {{ project.name }}. This will
+              <p>
+              You are trying to add an application to {{ project.name }}. This
+              will require applicants to respond to your application question
+              and allow you to choose who can join the project. You can edit this
+              in the project settings.
+              </p>
+              <br>
+              <p>Application Question</p>
+              {{ application_field.response(class='join-input', value='{{ project.application_question }}', required=True) }}
             {% endif %}
-          </p>
         </div>
         <div class="modal-footer">
           <button class='btn'>

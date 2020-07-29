@@ -225,6 +225,18 @@ def close_project(project):
     return True
 
 
+def remove_application(project):
+    if project.requires_application:
+        project.remove_application = False
+        note = Notification(text=f'The application requirement has been removed from {project.name} by the owner.')
+        for member in project.members:
+            if not member==project.owner:
+                member.notifcations.append(note)
+    db.session.commit()
+    flash(f'You have removed the application requirement from {project.name}.')
+    return True
+
+
 def add_comment(project, user, comment):
     db.session.add(comment)
 

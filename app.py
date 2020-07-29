@@ -885,6 +885,11 @@ def change_project_open(project_id, action):
 @login_required
 @application.route('/change_application/<int:project_id>/<action>', methods=['POST'])
 def change_application(project_id, action):
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can change join settings.')
+    elif action=='remove':
+        manager.remove_application(project)
     return redirect(request.referrer)
 
 
