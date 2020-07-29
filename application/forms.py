@@ -172,6 +172,26 @@ class Add_Project(BaseForm):
                             'completed.'))
 
 
+class Edit_Project(BaseForm):
+    name = StringField(label='Project Name',
+                       validators=[DataRequired(), Length(1, 25)],
+                       description='Give your project a name!',
+                       render_kw={'placeholder':'TheProjectProject',
+                                  'max': 25})
+    oneliner = StringField(label='One-Liner',
+                           validators=[DataRequired(), Length(1, 40)],
+                           description='One line description of your project.',
+                           render_kw={'placeholder':'Project building community.',
+                                      'max': 40})
+    summary = TextAreaField(label='Summary',
+                        validators=[DataRequired(), Length(1, 400)],
+                        description='Describe your project in more detail.',
+                        render_kw={'placeholder': ('I need help designing this '
+                                                   'online community of '
+                                                   'builders...'),
+                                  'max':400})
+
+
 class Project_Application_Form(BaseForm):
     # if joining
     response = TextField('Response', validators=[Length(0,250)],

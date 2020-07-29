@@ -461,7 +461,7 @@ def project(project_code):
     if current_user==project.owner:
         recommended_members = rec.recommend_users(project)
         recommended_tabs = list(partition_query(recommended_members))
-        edit_form = forms.EditForm(request.form)
+        edit_form = forms.Edit_Project(request.form)
     return render_template('project.html', project=project,
                             comment_form=comment_form,
                             project_application=project_application,
