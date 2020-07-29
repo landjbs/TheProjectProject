@@ -869,5 +869,11 @@ def complete_project(project_id):
     return redirect(request.referrer)
 
 
+@login_required
+@application.route('/change_project_open/<int:project_id>/<action>')
+def change_project_open(project_id, action):
+    return redirect(request.referrer)
+
+
 if __name__ == '__main__':
     application.run(host='0.0.0.0')
