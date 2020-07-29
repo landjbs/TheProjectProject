@@ -505,21 +505,25 @@
           <center>
             <h6 style='text-decoration:underline;'>Team</h6>
           </center>
-          <div class='row ml-5 mr-5' style='text-align:center;'>
+          <div class='row' style='text-align:center;'>
             <div class='col'>
               <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
                 Complete
               </button>
             </div>
             <div class='col'>
-              {{ edit_form.open(checked=project.open) }}
-              <br>
-              <small>{{ edit_form.open.label }}</small>
+              <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
+                {% if project.open %}
+                  Close
+                {% else %}
+                  Open
+                {% endif %}
+              </button>
             </div>
             <div class='col'>
-              {{ edit_form.requires_application(checked=project.requires_application) }}
-              <br>
-              <small>{{ edit_form.requires_application.label }}</small>
+              <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
+                Complete
+              </button>
             </div>
           </div>
           <hr class='my-2'><br>
