@@ -208,6 +208,7 @@ def open_project(project):
         for member in project.members:
             if not member==project.owner:
                 member.notifcations.append(note)
+    db.session.commit()
     flash(f'You have opened {project.name}.')
     return True
 
@@ -219,6 +220,7 @@ def close_project(project):
         for member in project.members:
             if not member==project.owner:
                 member.notifcations.append(note)
+    db.session.commit()
     flash(f'You have closed {project.name}.')
     return True
 
