@@ -168,13 +168,9 @@
   function submit() {
     var selector = document.getElementById('subjects');
     for (index = 0; index < selected_subjects.length; index++) {
-      alert(selected_subjects[index]);
+      var subject_id = selected_subjects[index];
+      selector.options[subject_id-1].selected='selected';
     }
-
-    // for (var i = 0, elt; elt = selected_subjects[i++];) {
-    //   alert(elt)
-    // }
-    // selector.options[value-1].selected='selected';
     document.getElementById("project_form").submit();
   };
 
