@@ -550,15 +550,21 @@
             <center>
               <h6 style='text-decoration:underline;'>Management</h6>
             </center>
-            <div class="slidecontainer">
-              <input type="range" min="1" max="30" value="7"
-                    name='Test' id="time_slider">
-            </div>
+            {% set elapsed = calc_days_since(now(), project.posted_on) %}
+            {% set est = project.estimated_time %}
+            {% set elapsed_style = elapsed_style(elapsed, est) %}
+            <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+              <div class="progress" style='width:80%;'>
+                <div class="progress-bar" role="progressbar"
+                    style='{{ elapsed_style }}'
+                    aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                    aria-valuemax="{{ est }}"></div>
+              </div>
             <hr class='my-2'><br>
+
             <div class="slidecontainer">
               <input type="range" min="1" max="30" value="7"
                     name='test' id="time_slider">
-              <p id='team-out' style='display: inline;'></p>
             </div>
             <hr class='my-2'><br>
 
