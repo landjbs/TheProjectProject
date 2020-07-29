@@ -653,12 +653,12 @@
           <h5>Edit Application: {{ project.name }}</h5>
           {% set action = 'edit' %}
         {% else %}
-          <h5>Require Application: {{ project.name }}</h5>
+          <h5>Add Application: {{ project.name }}</h5>
           {% set action = 'add' %}
         {% endif %}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('change_application', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('add_application', project_id=project.id) }}" method='post'>
         <div class="modal-body">
             {% if action=='add' %}
               <p>
@@ -674,11 +674,17 @@
             {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
         </div>
         <div class="modal-footer">
-          <button action="{{ url_for('remove_application_requirement', project_id=project.id) }}" method='post'>
-            Remove Application
-          </button>
+          {% if action!='add' %}
+            <button type='submit' formaction="{{ url_for('remove_application_requirement', project_id=project.id) }}" class='btn delete-btn col'>
+              Remove Application
+            </button>
+          {% endif %}
           <button class='btn col'>
-            Change
+            {% if action=='add' %}
+              Add
+            {% else %}
+              Edit
+            {% endif %}
           </button>
         </div>
       </form>

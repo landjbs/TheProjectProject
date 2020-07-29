@@ -225,7 +225,7 @@ def close_project(project):
     return True
 
 
-def remove_application(project):
+def remove_application_requirement(project):
     if project.requires_application:
         project.requires_application = False
         note = Notification(text=f'The application requirement has been removed from {project.name} by the owner.')
