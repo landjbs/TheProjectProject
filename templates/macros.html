@@ -507,10 +507,11 @@
           </center>
           <div class='row ml-5 mr-5' style='text-align:center;'>
             <div class='col'>
-              <label class="switch" id='open'>
-                <input type="checkbox">
+              <label class="switch">
+                <input type="checkbox" id='open' checked='{{ project.open }}'>
                 <span class="slider round"></span>
               </label>
+              {{ edit_form.open.label }}
             </div>
             <div class='col'>
               <label class="switch">
