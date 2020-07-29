@@ -875,8 +875,10 @@ def change_project_open(project_id, action):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
         flash('Only the owner can change join settings.')
-    else:
-        flash(f'project {action}')
+    elif action=='open':
+        manager.open_project(project)
+    elif action=='close':
+        manager.close_project(project)
     return redirect(request.referrer)
 
 
