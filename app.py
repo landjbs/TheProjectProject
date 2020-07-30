@@ -4,7 +4,7 @@ from sqlalchemy.sql.expression import func
 from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
-                         login_required, LoginManager)
+                         login_required, LoginManager, AnonymousUserMixin)
 from datetime import datetime
 from dateutil import tz
 from collections import Counter
@@ -32,14 +32,26 @@ application.debug=True
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 
 
+class Anonymous(AnonymousUserMixin):
+    def __init__(self):
+        self.username = 'Guest'
+
+    def is_authenticated(self):
+        return False
+
+    def is_anonymous(self):
+        return True
+
+
 # initalization
 login_manager = LoginManager(app=application)
-login_manager.init_app()
+login_manager.init_app(app=application)
 login_manager.login_view = 'login'
+login_manager.anonymous_user = Anonymous
 
 @login_manager.user_loader
-def load_user(id):
-    return query_user_by_id(id)
+def user_loader(id):
+    return User.query.get_or_404(id)
 
 
 def is_project_member(user, project):
@@ -207,6 +219,13 @@ def login():
             start_on = i
             break
     return render_template('login.html', form=form, start_on=start_on)
+
+
+@login_required
+@application.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
 # TODO: MAKE SECURE
@@ -851,19 +870,11 @@ def withdraw_application(project_id):
     return redirect(request.referrer)
 
 
-
 @login_required
 @application.route('/report_user/<int:target_user_id>', methods=['POST'])
 def report_user(target_user_id):
     error_flag = False
     # if not eror
-
-
-@login_required
-@application.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
 
 
 @login_required
