@@ -1,6 +1,10 @@
 <!-- CARD COMPONENTS -->
 {% macro render_project_name(project) -%}
-<a class='project-name' href='project={{ project.code }}'>
+{% if current_user.is_authenticated %}
+  <a class='project-name' href='project={{ project.code }}'>
+{% else %}
+  <a class='project-name' href='/login'>
+{% endif %}
   <h5>
     <u>{{ project.name }}</u>
     {% if project.complete %}
@@ -125,7 +129,7 @@
 </div>
 {% endmacro -%}
 
-
+<!-- project card to be shown to anonymous users -->
 {% macro render_anon_project_card(project) -%}
 <div class="col-md-4">
   <div class="card mb-2">
@@ -144,21 +148,24 @@
         </p>
       </div>
       <div class='card-foot float-left'>
-        {% for subject in project.subjects|reverse %}
-          <a href='/subject={{ subject.code }}'>
-            {% if loop.index>1 %}
-            ,
-            {% endif %}
-            <p class='subject-tag' style='background:{{ subject.color }};'>
-              {{ subject.name }}
-            </p>
-          </a>
-        {% endfor %}
+        <div>
+          {% for subject in project.subjects|reverse %}
+            <a href='/subject={{ subject.code }}'>
+              {% if loop.index>1 %}
+              ,
+              {% endif %}
+              <p class='subject-tag' style='background:{{ subject.color }};'>
+                {{ subject.name }}
+              </p>
+            </a>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
 </div>
 {% endmacro -%}
+
 
 <!-- user cards -->
 {% macro render_user_card(current_user, user) -%}
