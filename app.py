@@ -9,6 +9,7 @@ from datetime import datetime
 from dateutil import tz
 from collections import Counter
 from operator import itemgetter
+from itsdangerous import URLSafeTimedSerializer
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject,
@@ -157,6 +158,12 @@ def apply():
             start_on = i
             break
     return render_template('apply.html', form=form, start_on=start_on)
+
+
+def send_password_reset_email(user_email):
+    reset_serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
+    reset_url = url_for('users.reset_with_token',
+                        token=reset_serializer.dumps(user_external=True))
 
 
 @application.route('/login', methods=['GET', 'POST'])
