@@ -54,9 +54,7 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def user_loader(id):
-    x = User.query.get_or_404(id)
-    print(f'USER: {x}')
-    return x
+    return User.query.get_or_404(id)
 
 
 def is_project_member(user, project):
