@@ -33,11 +33,8 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 
 
 class Anonymous(AnonymousUserMixin):
-    def is_authenticated(self):
-        return False
-
-    def is_anonymous(self):
-        return True
+    def __init__(self):
+        super(Anonymous, self).__init__()
 
     def has_starred(self, project):
         return False
@@ -50,7 +47,8 @@ class Anonymous(AnonymousUserMixin):
 login_manager = LoginManager(app=application)
 login_manager.init_app(app=application)
 login_manager.login_view = 'login'
-# login_manager.anonymous_user = Anonymous
+login_manager.anonymous_user = Anonymous
+print(login_manager.anonymous_user.__dict__)
 
 @login_manager.user_loader
 def user_loader(id):

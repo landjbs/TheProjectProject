@@ -51,7 +51,9 @@
                   by <a class='user-name' href='user={{ project.owner.code }}'>{{ project.owner.name }}</a>
                 </p>
             </div>
-            {{ macros.render_project_action_bar(current_user, project) }}
+            {% if not current_user.is_anonymous %}
+              {{ macros.render_project_action_bar(current_user, project) }}
+            {% endif %}
             <br>
             <ul class="list-unstyled components">
               <div class='bio'>
@@ -88,39 +90,41 @@
                     <i class='far fa-user-circle'></i>
                     {{ project.members.all()|length }} / {{ project.team_size }}
                   </a>
-                  <ul class="collapse in list-unstyled" id="memberSubmenu">
-                    {% for member in project.members %}
-                      <li>
-                        <div class='row' style='margin-left: 0.2vh; margin-bottom: 1vh;'>
-                          <div class='col'>
-                          <a class='member-hovers' href="user={{ member.code }}" style='padding-bottom:5px; display: inline;'>
-                            {{ member.name }}
-                          </a>
-                        </div>
-                          {% if is_owner and member!=project.owner %}
-                            <div class='col float-right' style='display: inline; text-align: right'>
-                              <div class='hoverable'>
-                                <a class='delete-btn task-btn member-hovers'
-                                style='display: inline;'
-                                href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
-                                  <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                </a>
-                                <span class='tooltiptext'>Remove from project</span>
+                  {% if not current_user.is_anonymous %}
+                    <ul class="collapse in list-unstyled" id="memberSubmenu">
+                      {% for member in project.members %}
+                        <li>
+                          <div class='row' style='margin-left: 0.2vh; margin-bottom: 1vh;'>
+                            <div class='col'>
+                            <a class='member-hovers' href="user={{ member.code }}" style='padding-bottom:5px; display: inline;'>
+                              {{ member.name }}
+                            </a>
+                          </div>
+                            {% if is_owner and member!=project.owner %}
+                              <div class='col float-right' style='display: inline; text-align: right'>
+                                <div class='hoverable'>
+                                  <a class='delete-btn task-btn member-hovers'
+                                  style='display: inline;'
+                                  href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
+                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                  </a>
+                                  <span class='tooltiptext'>Remove from project</span>
+                                </div>
+                                <div class='hoverable'>
+                                  <a class='task-btn member-hovers'
+                                  style='display: inline; color: gold;'
+                                  href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
+                                    <i class='fas fa-crown'></i>
+                                  </a>
+                                  <span class='tooltiptext'>Make owner</span>
+                                </div>
                               </div>
-                              <div class='hoverable'>
-                                <a class='task-btn member-hovers'
-                                style='display: inline; color: gold;'
-                                href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
-                                  <i class='fas fa-crown'></i>
-                                </a>
-                                <span class='tooltiptext'>Make owner</span>
-                              </div>
-                            </div>
-                          {% endif %}
-                        </div>
-                      </li>
-                    {% endfor %}
-                  </ul>
+                            {% endif %}
+                          </div>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
               </li>
               <li>
                   <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="false">
