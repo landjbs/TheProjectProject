@@ -172,7 +172,7 @@ def send_password_reset_email(user_email):
 @application.route('/reset', methods=['GET', 'POST'])
 def reset():
     form = forms.Login(request.form)
-    print('here')
+    print(form.email.data)
     if form.validate_on_submit():
         # TODO: CHECK THAT EMAIL IS VALID
         print('validated')
@@ -483,8 +483,9 @@ def project(project_code):
     edit_application_form = False
     show_edit_modal = False
     if current_user==project.owner:
-        recommended_members = rec.recommend_users(project)
-        recommended_tabs = list(partition_query(recommended_members))
+        if project.open and not project.complete:
+            recommended_members = rec.recommend_users(project)
+            recommended_tabs = list(partition_query(recommended_members))
         ## edit project form ##
         edit_form = forms.Edit_Project(request.form)
         edit_application_form = forms.Edit_Project_Application(request.form)
@@ -613,7 +614,7 @@ def leave_project(project_id):
         else:
             manager.delete_project(project)
             flash(f'{project.name} deleted.')
-            return redirect(request.referrer)
+            return redirect(url_for('home'))
     manager.remove_user_from_project(current_user, project, admin=False)
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
