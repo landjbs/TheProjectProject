@@ -164,6 +164,9 @@ def send_password_reset_email(user_email):
     reset_serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
     reset_url = url_for('users.reset_with_token',
                         token=reset_serializer.dumps(user_external=True))
+    html = render_template('email/password_reset.html')
+    send_email('Reset Your Password for TheProjectProject',
+                user_email, html)
 
 
 @application.route('/login', methods=['GET', 'POST'])

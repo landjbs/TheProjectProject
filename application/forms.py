@@ -123,7 +123,6 @@ class Edit_User(BaseForm):
 
 
 
-
 class Login(BaseForm):
     email = StringField('Email', validators=[DataRequired(), Length(1, 254),
                                              Email(), Email_Ext_Validator()])
