@@ -311,23 +311,26 @@
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <h6 class="mb-1">{{ task.text }}</h6>
                           <div class="d-flex w-100 justify-content-between">
-                            <small>Completed by
-                              {% for worker in task.workers %}
-                                  {% if loop.index==(task.workers|length) %}
-                                    <a href='user={{ worker.code }}' class='user-name'>
-                                      {{ worker.name }}
-                                    </a>
-                                  {% elif (task.workers|length)==2 %}
-                                    <a href='user={{ worker.code }}' class='user-name'>
-                                      {{ worker.name }}
-                                    </a>
-                                    and
-                                  {% else %}
-                                    <a href='user={{ worker.code }}' class='user-name'>
-                                      {{ worker.name }}
-                                    </a>
-                                  {% endif %}
-                              {% endfor %}
+                            <small>Completed
+                              {% if (task.workers|length > 0) and current_user.is_authenticated %}
+                                by
+                                {% for worker in task.workers %}
+                                    {% if loop.index==(task.workers|length) %}
+                                      <a href='user={{ worker.code }}' class='user-name'>
+                                        {{ worker.name }}
+                                      </a>
+                                    {% elif (task.workers|length)==2 %}
+                                      <a href='user={{ worker.code }}' class='user-name'>
+                                        {{ worker.name }}
+                                      </a>
+                                      and
+                                    {% else %}
+                                      <a href='user={{ worker.code }}' class='user-name'>
+                                        {{ worker.name }}
+                                      </a>
+                                    {% endif %}
+                                {% endfor %}
+                              {% endif %}
                             on {{ time_to_str(task.complete_stamp) }}</small>
                           </div>
                           {% if is_member %}
@@ -366,20 +369,24 @@
                   {% for comment in project.comments|reverse %}
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                       <div class="d-flex w-100 justify-content-between">
-                        <a href='user={{ comment.author.email }}' class="mb-1">
-                          <u>{{ comment.author.name }}</u>
-                          {% if (comment.author == project.owner) %}
-                            <div class='hoverable'>
-                              <i class="fa fa-circle" style='color:#FF5D00;'></i>
-                              <span class='tooltiptext'>Owner</span>
-                            </div>
-                          {% elif is_project_member(comment.author, project) %}
-                            <div class='hoverable'>
-                              <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
-                              <span class='tooltiptext'>Member</span>
-                            </div>
-                          {% endif %}
-                        </a>
+                        {% if current_user.is_authenticated %}
+                          <a href='user={{ comment.author.email }}' class="mb-1">
+                        {% else %}
+                          <a href='/login'>
+                        {% endif %}
+                            <u>{{ comment.author.name }}</u>
+                            {% if (comment.author == project.owner) %}
+                              <div class='hoverable'>
+                                <i class="fa fa-circle" style='color:#FF5D00;'></i>
+                                <span class='tooltiptext'>Owner</span>
+                              </div>
+                            {% elif is_project_member(comment.author, project) %}
+                              <div class='hoverable'>
+                                <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
+                                <span class='tooltiptext'>Member</span>
+                              </div>
+                            {% endif %}
+                          </a>
                         <small>{{ time_to_str(comment.timestamp) }}</small>
                       </div>
                       <p class="mb-1">{{ comment.text }}
@@ -395,12 +402,14 @@
                     </div>
                   {% endfor %}
                 </div>
-                <form class='post_form' id='comment_form' method='post'
-                  action="{{ url_for('add_comment', project_id=project.id) }}">
-                  {{ comment_form.hidden_tag() }}
-                  {{ comment_form.text(class='post-input', placeholder='Comment') }}
-                  <button>Add</button>
-                </form>
+                {% if current_user.is_authenticated %}
+                  <form class='post_form' id='comment_form' method='post'
+                    action="{{ url_for('add_comment', project_id=project.id) }}">
+                    {{ comment_form.hidden_tag() }}
+                    {{ comment_form.text(class='post-input', placeholder='Comment') }}
+                    <button>Add</button>
+                  </form>
+                {% endif %}
               </div>
             </div>
 
