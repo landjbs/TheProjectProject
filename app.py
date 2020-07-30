@@ -33,14 +33,17 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 
 
 class Anonymous(AnonymousUserMixin):
-    def __init__(self):
-        self.username = 'Guest'
-
     def is_authenticated(self):
         return False
 
     def is_anonymous(self):
         return True
+
+    def has_starred(self, project):
+        return False
+
+    def has_applied(self, project):
+        return False
 
 
 # initalization
@@ -298,8 +301,8 @@ def home():
                             project_application=project_application)
 
 
-@login_required
 @application.route('/add_project', methods=['GET', 'POST'])
+@login_required
 def add_project():
     form = forms.Add_Project(request.form)
     print(form.subjects.data)
@@ -382,7 +385,6 @@ def add_project():
     return render_template('add_project.html', form=form)
 
 
-@login_required
 @application.route('/user=<code>', methods=['GET', 'POST'])
 def user(code):
     user = User.query.filter_by(code=code).first_or_404()
@@ -454,7 +456,6 @@ def user(code):
                             show_edit_modal=show_edit_modal)
 
 
-@login_required
 @application.route('/project=<project_code>', methods=['GET', 'POST'])
 def project(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
@@ -558,8 +559,8 @@ def project(project_code):
                             edit_application_form=edit_application_form)
 
 
-@login_required
 @application.route('/subject=<subject_name>')
+@login_required
 def subject(subject_name):
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
     # project tabs
@@ -578,8 +579,8 @@ def subject(subject_name):
                         project_application=project_application)
 
 
-@login_required
 @application.route('/join_project/<int:project_id>', methods=['POST'])
+@login_required
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
@@ -615,8 +616,8 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/leave_project/<int:project_id>', methods=['POST'])
+@login_required
 def leave_project(project_id):
     project = Project.query.get_or_404(project_id)
     # validate that user is member
@@ -640,8 +641,8 @@ def leave_project(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/like/<int:project_id>/<action>')
+@login_required
 def like_action(project_id, action):
     project = Project.query.get_or_404(project_id)
     print(f'before {current_user.has_starred(project)}')
@@ -653,8 +654,8 @@ def like_action(project_id, action):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/project/<int:project_id>/task', methods=['POST'])
+@login_required
 def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     if not is_project_member(current_user, project):
@@ -667,8 +668,8 @@ def add_task(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/project/<int:project_id>/comment', methods=['POST'])
+@login_required
 def add_comment(project_id):
     project = Project.query.get_or_404(project_id)
     form = forms.Comment_Form(request.form)
@@ -679,8 +680,8 @@ def add_comment(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/project/<int:project_id>/<int:comment_id>')
+@login_required
 def delete_comment(project_id, comment_id):
     project = Project.query.get_or_404(project_id)
     comment = Comment.query.get_or_404(comment_id)
@@ -692,8 +693,8 @@ def delete_comment(project_id, comment_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
+@login_required
 def mark_complete(project_id, task_id, action):
     project = Project.query.get_or_404(project_id)
     # screen non-members
@@ -744,8 +745,8 @@ def transfer_ownership(project, user):
     return True
 
 
-@login_required
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
+@login_required
 def change_project_status(project_id, user_id, action):
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
@@ -776,8 +777,8 @@ def change_project_status(project_id, user_id, action):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/search', methods=['GET', 'POST'])
+@login_required
 def search():
     if request.method=='GET':
         return redirect(url_for('home'))
@@ -801,8 +802,8 @@ def search():
                         project_application=project_application)
 
 
-@login_required
 @application.route('/collaborate/<int:target_user_id>', methods=['POST'])
+@login_required
 def collaborate(target_user_id):
     error_flag = False
     project = Project.query.get_or_404(request.form.get('selected_project'))
@@ -834,8 +835,8 @@ def collaborate(target_user_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/accept_collaboration/<int:project_id>')
+@login_required
 def accept_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user in project.invitations:
@@ -846,16 +847,16 @@ def accept_collaboration(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/reject_collaboration/<int:project_id>')
+@login_required
 def reject_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
     manager.reject_project_invitation(current_user, project, admin=False)
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/withdraw_collaboration/<int:user_id>/<int:project_id>')
+@login_required
 def withdraw_collaboration(user_id, project_id):
     user = User.query.get_or_404(user_id)
     project = Project.query.get_or_404(project_id)
@@ -872,15 +873,15 @@ def withdraw_application(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/report_user/<int:target_user_id>', methods=['POST'])
+@login_required
 def report_user(target_user_id):
     error_flag = False
     # if not eror
 
 
-@login_required
 @application.route('/delete_user', methods=['POST'])
+@login_required
 def delete_user():
     for project in current_user.owned:
         if len(project.members.all())>1:
@@ -896,8 +897,8 @@ def delete_user():
     return redirect(url_for('index'))
 
 
-@login_required
 @application.route('/complete_project/<int:project_id>', methods=['POST'])
+@login_required
 def complete_project(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -907,8 +908,8 @@ def complete_project(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/uncomplete_project/<int:project_id>', methods=['POST'])
+@login_required
 def uncomplete_project(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -918,8 +919,8 @@ def uncomplete_project(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/change_project_open/<int:project_id>/<action>', methods=['POST'])
+@login_required
 def change_project_open(project_id, action):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -931,8 +932,8 @@ def change_project_open(project_id, action):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/add_application/<int:project_id>', methods=['POST'])
+@login_required
 def add_application(project_id):
     project = Project.query.get_or_404(project_id)
     form = forms.Edit_Project_Application(request.form)
@@ -945,8 +946,8 @@ def add_application(project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/remove_application_requirement/<int:project_id>', methods=['POST'])
+@login_required
 def remove_application_requirement(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -954,7 +955,6 @@ def remove_application_requirement(project_id):
     else:
         manager.remove_application_requirement(project)
     return redirect(request.referrer)
-
 
 
 if __name__ == '__main__':
