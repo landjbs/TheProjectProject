@@ -47,11 +47,13 @@ class Anonymous(AnonymousUserMixin):
 login_manager = LoginManager(app=application)
 login_manager.init_app(app=application)
 login_manager.login_view = 'login'
-login_manager.anonymous_user = Anonymous
+# login_manager.anonymous_user = Anonymous
 
 @login_manager.user_loader
 def user_loader(id):
-    return User.query.get_or_404(id)
+    x = User.query.get_or_404(id)
+    print(f'USER: {x}')
+    return x
 
 
 def is_project_member(user, project):
@@ -221,8 +223,8 @@ def login():
     return render_template('login.html', form=form, start_on=start_on)
 
 
-@login_required
 @application.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
@@ -269,8 +271,8 @@ def partition_query(l, n=3):
         yield l[i:i+n]
 
 
-@login_required
 @application.route('/home', methods=['GET', 'POST'])
+@login_required
 def home():
     # recommended projects
     recs = rec.recommend_projects(current_user)
