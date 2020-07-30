@@ -177,7 +177,11 @@
                             {% endif %}
                           on {{ time_to_str(task.complete_stamp) }}
                         for
-                        <a href='project={{ task.project.code }}' class='user-name'>
+                        {% if current_user.is_authenticated %}
+                          <a href='project={{ task.project.code }}' class='user-name'>
+                        {% else %}
+                          <a href='/login' class='user-name'>
+                        {% endif %}
                           {{ task.project.name }}
                         </a></small>
                         </div>
