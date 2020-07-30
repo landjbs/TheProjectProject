@@ -25,6 +25,13 @@ ADMIN_PASSWORD = 'asdadsflkj;2kl4j51@$L%jldfka;skf,3m,.rmbnmdnbfd;.'
 
 # login
 login_manager = LoginManager()
+login_manager.init_app()
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(id):
+    return query_user_by_id(id)
+
 
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
@@ -108,11 +115,6 @@ def query_user_by_email(email):
     return db.session.query(User).filter_by(email=email).first()
 
 
-@login_manager.user_loader
-def load_user(id):
-    return query_user_by_id(id)
-
-
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
@@ -145,11 +147,11 @@ def apply():
                     about       =       form.data['about'])
         try:
             manager.create_user(user, form.data['subjects'])
-            db.session.close()
-            flash('Congratulations—your application to TheProjectProject has been submitted! '
+            flash(f'Congratulations, {user.name}, your application to TheProjectProject has been submitted! '
                   'We will reach out to your shortly with our decision.')
+            db.session.close()
         except Exception as e:
-            print(f'ERROR: {e}')
+            flash('Could not add application.')
             db.session.rollback()
         return render_template('index.html')
     start_on = 0

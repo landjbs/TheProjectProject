@@ -159,24 +159,27 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f'<User {self.name}>'
 
+    # auth/login
+    def get_id(self):
+        return str(self.id)
+
+    def is_active(self):
+        return True
+
+    def is_authenticated(self):
+        return self.accepted
+
+    def is_anonymous(self):
+        return False
+
+    # password
     def set_password(self, password):
         return str(generate_password_hash(password))
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def is_active(self):
-        return True
-
-    def is_authenticated(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return str(self.id)
-
+    # starring
     def star_project(self, project):
         if not self.has_starred(project):
             self.starred.append(project)
@@ -192,6 +195,7 @@ class User(db.Model, UserMixin):
     def has_starred(self, project):
         return (project in self.starred)
 
+    # applications
     def has_applied(self, project):
         return ((self.pending.filter_by(project=project).first()) is not None)
 
