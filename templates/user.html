@@ -37,9 +37,11 @@
                 <a href='/user={{ user.code }}'>
                   <h3>{{ user.name }}</h3>
                 </a>
-                <a href='mailto:{{ user.email }}'>
-                  {{ user.email }}
-                </a>
+                {% if current_user.is_authenticated %}
+                  <a href='mailto:{{ user.email }}'>
+                    {{ user.email }}
+                  </a>
+                {% endif %}
             </div>
             {% if current_user.is_authenticated %}
               {{ macros.render_user_action_bar(current_user, user) }}
@@ -153,23 +155,26 @@
                       <div class="list-group-item list-group-item-action flex-column align-items-start">
                         <h6 class="mb-1">{{ task.text }}</h6>
                         <div class="d-flex w-100 justify-content-between">
-                          <small>Completed by
-                            {% for worker in task.workers %}
-                                {% if loop.index==(task.workers|length) %}
-                                  <a href='user={{ worker.code }}' class='user-name'>
-                                    {{ worker.name }}
-                                  </a>
-                                {% elif (task.workers|length)==2 %}
-                                  <a href='user={{ worker.code }}' class='user-name'>
-                                    {{ worker.name }}
-                                  </a>
-                                  and
-                                {% else %}
-                                  <a href='user={{ worker.code }}' class='user-name'>
-                                    {{ worker.name }}
-                                  </a>
-                                {% endif %}
-                            {% endfor %}
+                          <small>Completed
+                            {% if (task.workers|length > 0) and current_user.is_authenticated %}
+                              by
+                              {% for worker in task.workers %}
+                                  {% if loop.index==(task.workers|length) %}
+                                    <a href='user={{ worker.code }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                  {% elif (task.workers|length)==2 %}
+                                    <a href='user={{ worker.code }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                    and
+                                  {% else %}
+                                    <a href='user={{ worker.code }}' class='user-name'>
+                                      {{ worker.name }}
+                                    </a>
+                                  {% endif %}
+                              {% endfor %}
+                            {% endif %}
                           on {{ time_to_str(task.complete_stamp) }}
                         for
                         <a href='project={{ task.project.code }}' class='user-name'>
@@ -212,7 +217,11 @@
                       {% endif %}
                             <div class='row'>
                               {% for project in tab %}
-                                {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+                                {% if current_user.is_authenticated %}
+                                  {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+                                {% else %}
+                                  {{ macros.render_anon_project_card(project) }}
+                                {% endif %}
                               {% endfor %}
                             </div>
                           </div>
@@ -253,7 +262,11 @@
                         {% endif %}
                           <div class='row'>
                             {% for project in tab %}
-                              {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
+                              {% if current_user.is_authenticated %}
+                                {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
+                              {% else %}
+                                {{ macros.render_anon_project_card(project) }}
+                              {% endif %}
                             {% endfor %}
                           </div>
                         </div>
