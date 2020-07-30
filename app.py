@@ -23,15 +23,6 @@ import recommendation as rec
 ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
 ADMIN_PASSWORD = 'asdadsflkj;2kl4j51@$L%jldfka;skf,3m,.rmbnmdnbfd;.'
 
-# login
-login_manager = LoginManager()
-login_manager.init_app()
-login_manager.login_view = 'login'
-
-@login_manager.user_loader
-def load_user(id):
-    return query_user_by_id(id)
-
 
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
@@ -42,7 +33,13 @@ application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 
 
 # initalization
-login_manager.init_app(application)
+login_manager = LoginManager(app=application)
+login_manager.init_app()
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(id):
+    return query_user_by_id(id)
 
 
 def is_project_member(user, project):
