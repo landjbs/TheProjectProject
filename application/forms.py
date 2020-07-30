@@ -127,7 +127,19 @@ class Login(BaseForm):
     email = StringField('Email', validators=[DataRequired(), Length(1, 254),
                                              Email(), Email_Ext_Validator()])
     password = PasswordField('Password',
-                             validators=[DataRequired(), Length(1, 254)])
+                             validators=[Length(0, 254)])
+
+
+class Reset_Password(BaseForm):
+    # password
+    password = PasswordField('New Password',
+                             validators=[Length(0, 254),
+                                         EqualTo('confirm')],
+                             render_kw={'max':254})
+    # confirm
+    confirm = PasswordField('Confirm New Password',
+                            render_kw={'max':254})
+
 
 
 class Add_Project(BaseForm):

@@ -169,6 +169,17 @@ def send_password_reset_email(user_email):
                 user_email, html)
 
 
+@application.route('/reset', methods=['GET', 'POST'])
+def reset():
+    form = forms.Login(request.form)
+    print('here')
+    if form.validate_on_submit():
+        # TODO: CHECK THAT EMAIL IS VALID
+        print('validated')
+    print(form.errors)
+    return redirect(request.referrer)
+
+
 @application.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
