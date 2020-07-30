@@ -1,6 +1,6 @@
 <!-- CARD COMPONENTS -->
-{% macro render_project_name(project) -%}
-{% if current_user.is_authenticated %}
+{% macro render_project_name(project, user) -%}
+{% if user.is_authenticated %}
   <a class='project-name' href='project={{ project.code }}'>
 {% else %}
   <a class='project-name' href='/login'>
@@ -30,7 +30,7 @@
         <i class="fa fa-star"></i>
       </div>
       <div class='card-head'>
-        {{ render_project_name(project) }}
+        {{ render_project_name(project, current_user) }}
         <a href='user={{ project.owner.code }}'>
           <p class='owner'>{{ project.owner.name }}</p>
         </a>
@@ -85,7 +85,7 @@
         <i class="fa fa-star"></i>
       </p>
       <div class='card-head little'>
-        {{ render_project_name(project) }}
+        {{ render_project_name(project, current_user) }}
         <a href='user={{ project.owner.code }}'>
           <p>{{ project.owner.name }}</p>
         </a>
@@ -118,7 +118,7 @@
         <i class="fa fa-star"></i>
       </div>
       <div class='card-head tiny'>
-        {{ render_project_name(project) }}
+        {{ render_project_name(project, current_user) }}
       </div>
       <!-- summary -->
       <p class='oneliner'>
@@ -130,7 +130,7 @@
 {% endmacro -%}
 
 <!-- project card to be shown to anonymous users -->
-{% macro render_anon_project_card(project) -%}
+{% macro render_anon_project_card(project, current_user) -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
@@ -142,7 +142,7 @@
         <i class="fa fa-star"></i>
       </p>
       <div class='card-head little'>
-        {{ render_project_name(project) }}
+        {{ render_project_name(project, current_user) }}
         <p class='oneliner'>
           {{ project.oneliner }}
         </p>

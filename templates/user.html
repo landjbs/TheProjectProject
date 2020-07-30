@@ -224,7 +224,7 @@
                                 {% if current_user.is_authenticated %}
                                   {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
                                 {% else %}
-                                  {{ macros.render_anon_project_card(project) }}
+                                  {{ macros.render_anon_project_card(project, current_user) }}
                                 {% endif %}
                               {% endfor %}
                             </div>
@@ -269,7 +269,7 @@
                               {% if current_user.is_authenticated %}
                                 {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
                               {% else %}
-                                {{ macros.render_anon_project_card(project) }}
+                                {{ macros.render_anon_project_card(project, current_user) }}
                               {% endif %}
                             {% endfor %}
                           </div>
