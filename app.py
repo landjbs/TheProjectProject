@@ -199,6 +199,8 @@ def apply():
                         password    =       form.data['password'],
                         github      =       form.data['github'],
                         about       =       form.data['about'])
+            # try to get user's first name
+            first_name = user.name.split(' ')[0]
             # try:
             manager.create_user(user, form.data['subjects'])
             # emailing
@@ -207,7 +209,8 @@ def apply():
             token = encode_token(user.email)
             confirm_url = generate_url('confirm_email', token=token)
             body = render_template('emails/confirm_email.html',
-                                   confirm_url=confirm_url, user=user)
+                                   confirm_url=confirm_url,
+                                   first_name=first_name)
             # enqueue task
             # with Connection(redis.from_url(redis_url)):
                 # q = Queue()
@@ -215,9 +218,9 @@ def apply():
             # TEMP: dont enqueue just complete
             tasks.send_email(user.email, body)
             # notify user
-            flash(f'Congratulations, {user.name}, your application to '
-                   'TheProjectProject has been submitted '
-                   'Check your email to confirm your address.')
+            flash(f'Congratulations, {first_name}, your application to '
+                   'TheProjectProject has been submitted! '
+                   'A confirmation link has been sent to your email.')
             # teardown
             db.session.close()
             # except Exception as e:
