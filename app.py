@@ -59,35 +59,6 @@ def generate_url(endpoint, token):
     return url_for(endpoint, token=token)
 
 
-def confirm_email(token):
-    email = decode_token(token)
-    if not email:
-        flash('The confirmation link is invalid or expired.')
-        return redirect(url_for('index'))
-    user = User.query.filter_by(email=email).first_or_404()
-    if user.confirmed:
-        flash('Account has already been confirmed.')
-        if user.accepted:
-            return redirect(url_for('login'))
-        else:
-            return redirect(url_for('index'))
-    user.confirmed = True
-    db.session.add(user)
-    db.session.commit()
-    flash('You have confirmed your account!')
-    return redirect(url_for('index'))
-
-
-def send_password_reset_email(user_email):
-    reset_serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
-    reset_url = url_for('users.reset_with_token',
-                        token=reset_serializer.dumps(user_external=True))
-    html = render_template('email/password_reset.html')
-    send_email('Reset Your Password for TheProjectProject',
-                user_email, html)
-
-
-
 class Anonymous(AnonymousUserMixin):
     def __init__(self):
         super(Anonymous, self).__init__()
@@ -254,6 +225,35 @@ def apply():
             start_on = i
             break
     return render_template('apply.html', form=form, start_on=start_on)
+
+
+@application.route('/confirm/<token>')
+def confirm_email(token):
+    email = decode_token(token)
+    if not email:
+        flash('The confirmation link is invalid or expired.')
+        return redirect(url_for('index'))
+    user = User.query.filter_by(email=email).first_or_404()
+    if user.confirmed:
+        flash('Account has already been confirmed.')
+        if user.accepted:
+            return redirect(url_for('login'))
+        else:
+            return redirect(url_for('index'))
+    user.confirmed = True
+    db.session.add(user)
+    db.session.commit()
+    flash('You have confirmed your account!')
+    return redirect(url_for('index'))
+
+
+def send_password_reset_email(user_email):
+    reset_serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
+    reset_url = url_for('users.reset_with_token',
+                        token=reset_serializer.dumps(user_external=True))
+    html = render_template('email/password_reset.html')
+    send_email('Reset Your Password for TheProjectProject',
+                user_email, html)
 
 
 @application.route('/reset', methods=['GET', 'POST'])
