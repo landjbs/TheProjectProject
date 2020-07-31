@@ -158,10 +158,14 @@ def apply():
     if request.method=='POST' and form.validate():
         ## unique validation ##
         error_flag = False
+        # unique email
         if User.query.filter_by(email=form.email.data).first() is not None:
-            form.application_question.errors = ['Question cannot be blank.']
+            form.email.errors = ['An account with that email is already registered.']
             error_flag = True
-
+        # unique github
+        if User.query.filter_by(github=form.github.data).first() is not None:
+            form.github.errors = ['An account with that github is already registered.']
+            error_flag = True
         user = User(name        =       form.data['name'],
                     email       =       form.data['email'],
                     password    =       form.data['password'],
