@@ -27,35 +27,37 @@
 </thead>
 <tbody>
   {% for user in users %}
-  <tr>
-    <th>
-      {{ user.name }}
-    </th>
-    <th>
-      <a href='mailto:{{ user.email }}'>{{ user.email }}</a>
-    </th>
-    <th>
-      <a href='{{ user.github }}'>{{ user.github }}</a>
-    </th>
-    <th>
-      {{ user.about }}
-    </th>
-    <th>
-      {% if user.accepted %}
-        <form class='user-data' method="post" action="/reject">
-          <button type="submit" name='reject' value="{{ user.id }}">
-            Reject
-          </button>
-        </form>
-      {% else %}
-        <form class='user-data' method="post" action="/accept">
-          <button type="submit" name='accept' value="{{ user.id }}">
-            Accept
-          </button>
-        </form>
-      {% endif %}
-    </th>
-  </tr>
+  {% if user.confirmed %}
+    <tr>
+      <th>
+        {{ user.name }}
+      </th>
+      <th>
+        <a href='mailto:{{ user.email }}'>{{ user.email }}</a>
+      </th>
+      <th>
+        <a href='{{ user.github }}'>{{ user.github }}</a>
+      </th>
+      <th>
+        {{ user.about }}
+      </th>
+      <th>
+        {% if user.accepted %}
+          <form class='user-data' method="post" action="/reject">
+            <button type="submit" name='reject' value="{{ user.id }}">
+              Reject
+            </button>
+          </form>
+        {% else %}
+          <form class='user-data' method="post" action="/accept">
+            <button type="submit" name='accept' value="{{ user.id }}">
+              Accept
+            </button>
+          </form>
+        {% endif %}
+      </th>
+    </tr>
+  {% endif %}
   {% endfor %}
 </tbody>
 </table>
