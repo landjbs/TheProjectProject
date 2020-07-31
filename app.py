@@ -10,6 +10,9 @@ from dateutil import tz
 from collections import Counter
 from operator import itemgetter
 from itsdangerous import URLSafeTimedSerializer
+## allocating
+import redis
+from rq import Queue, Connection
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject,
@@ -160,7 +163,13 @@ def apply():
         try:
             manager.create_user(user, form.data['subjects'])
             flash(f'Congratulations, {user.name}, your application to TheProjectProject has been submitted! '
-                  'We will reach out to your shortly with our decision.')
+                  'Check your email to confirm your address.')
+            # emailing
+            redis_url = application.config['REDIS_URL']
+            with Connection(redis.from_url(redis_url)):
+                q = Queue()
+                q.enqueue(send_email, user.email)
+            # teardown
             db.session.close()
         except Exception as e:
             flash('Could not add application.')
