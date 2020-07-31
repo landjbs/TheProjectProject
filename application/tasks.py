@@ -1,7 +1,7 @@
 import time
 import sys
 
-sys.path.append('..')
+sys.path.append('.')
 
 from application import db
 from application.models import User, Subject
@@ -13,6 +13,3 @@ def send_email(user_email):
     # user.emailed = True
     # db.session.commit()
     print('here')
-
-
-send_email('landonsmith@college.harvard.edu')

@@ -114,9 +114,9 @@ class User(db.Model, UserMixin):
     # about
     about = Column(String(500), nullable=False)
     ## setup ##
-    emailed = Column(Boolean, nullable=False)
-    confirmed = Column(Boolean, nullable=False)
-    accepted = Column(Boolean, nullable=False)
+    emailed = Column(Boolean, nullable=False, default=False)
+    confirmed = Column(Boolean, nullable=False, default=False)
+    accepted = Column(Boolean, nullable=False, default=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',

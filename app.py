@@ -18,6 +18,7 @@ from application import db
 from application.models import (User, Project, Comment, Task, Subject,
                                 Project_Application, Notification)
 import application.forms as forms
+import application.tasks as tasks
 
 import manager as manager
 import recommendation as rec
@@ -30,8 +31,8 @@ ADMIN_PASSWORD = 'asdadsflkj;2kl4j51@$L%jldfka;skf,3m,.rmbnmdnbfd;.'
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-application.config['MAIL_SERVER'] = 'landjbs@gmail.com'
-application.config['MAIL_PORT'] = 465
+application.config['REDIS_URL'] = 'redis://redis:6379/0'
+application.config['QUEUES'] = ['default']
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
@@ -165,13 +166,16 @@ def apply():
             flash(f'Congratulations, {user.name}, your application to TheProjectProject has been submitted! '
                   'Check your email to confirm your address.')
             # emailing
-            redis_url = application.config['REDIS_URL']
-            with Connection(redis.from_url(redis_url)):
-                q = Queue()
-                q.enqueue(send_email, user.email)
+            # redis_url = application.config['REDIS_URL']
+            # enqueue task
+            # with Connection(redis.from_url(redis_url)):
+                # q = Queue()
+                # q.enqueue(tasks.send_email, user.email)
+            
             # teardown
             db.session.close()
         except Exception as e:
+            print(f"E: {e}")
             flash('Could not add application.')
             db.session.rollback()
         return render_template('index.html')
