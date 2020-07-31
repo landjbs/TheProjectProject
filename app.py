@@ -166,35 +166,37 @@ def apply():
         if User.query.filter_by(github=form.github.data).first() is not None:
             form.github.errors = ['An account with that github is already registered.']
             error_flag = True
-        user = User(name        =       form.data['name'],
-                    email       =       form.data['email'],
-                    password    =       form.data['password'],
-                    github      =       form.data['github'],
-                    about       =       form.data['about'])
-        try:
-            manager.create_user(user, form.data['subjects'])
-            flash(f'Congratulations, {user.name}, your application to TheProjectProject has been submitted! '
-                  'Check your email to confirm your address.')
-            # emailing
-            redis_url = application.config['REDIS_URL']
-            # generate email token
-            token = encode_token(user.email)
-            confirm_url = generate_url('confirm_email', token)
-            body = render_template('emails/confirm_email.html',
-                                   confirm_url=confirm_url)
-            # enqueue task
-            # with Connection(redis.from_url(redis_url)):
-                # q = Queue()
-                # q.enqueue(tasks.send_email, user.email, body)
-            # TEMP: dont enqueue just complete
-            tasks.send_email(user.email, body)
-            # teardown
-            db.session.close()
-        except Exception as e:
-            print(f"E: {e}")
-            flash('Could not add application.')
-            db.session.rollback()
-        return render_template('index.html')
+        if not error_flag:
+            user = User(name        =       form.data['name'],
+                        email       =       form.data['email'],
+                        password    =       form.data['password'],
+                        github      =       form.data['github'],
+                        about       =       form.data['about'])
+            try:
+                manager.create_user(user, form.data['subjects'])
+                flash(f'Congratulations, {user.name}, your application to '
+                       'TheProjectProject has been submitted '
+                       'Check your email to confirm your address.')
+                # emailing
+                redis_url = application.config['REDIS_URL']
+                # generate email token
+                token = encode_token(user.email)
+                confirm_url = generate_url('confirm_email', token)
+                body = render_template('emails/confirm_email.html',
+                                       confirm_url=confirm_url)
+                # enqueue task
+                # with Connection(redis.from_url(redis_url)):
+                    # q = Queue()
+                    # q.enqueue(tasks.send_email, user.email, body)
+                # TEMP: dont enqueue just complete
+                tasks.send_email(user.email, body)
+                # teardown
+                db.session.close()
+            except Exception as e:
+                print(f"E: {e}")
+                flash('Could not add application.')
+                db.session.rollback()
+            return render_template('index.html')
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:
