@@ -113,7 +113,9 @@ class User(db.Model, UserMixin):
     github = Column(String(254), unique=True, nullable=True)
     # about
     about = Column(String(500), nullable=False)
-    # accepted
+    ## setup ##
+    emailed = Column(Boolean, nullable=False)
+    confirmed = Column(Boolean, nullable=False)
     accepted = Column(Boolean, nullable=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
