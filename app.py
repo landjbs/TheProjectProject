@@ -174,9 +174,6 @@ def apply():
                         about       =       form.data['about'])
             try:
                 manager.create_user(user, form.data['subjects'])
-                flash(f'Congratulations, {user.name}, your application to '
-                       'TheProjectProject has been submitted '
-                       'Check your email to confirm your address.')
                 # emailing
                 redis_url = application.config['REDIS_URL']
                 # generate email token
@@ -190,6 +187,10 @@ def apply():
                     # q.enqueue(tasks.send_email, user.email, body)
                 # TEMP: dont enqueue just complete
                 tasks.send_email(user.email, body)
+                # notify user
+                flash(f'Congratulations, {user.name}, your application to '
+                       'TheProjectProject has been submitted '
+                       'Check your email to confirm your address.')
                 # teardown
                 db.session.close()
             except Exception as e:
@@ -223,7 +224,7 @@ def decode_token(token, expiration=3600):
 
 
 def generate_url(endpoint, token):
-    return url_foor(endpoint, token=token, _external=True)
+    return url_for(endpoint, token=token, _external=True)
 
 
 def confirm_email(token):

@@ -160,7 +160,7 @@ class User(db.Model, UserMixin):
 
     def __init__(self, name, email, password, github, about):
         self.name = str(name)
-        self.code =
+        self.code = generate_code(name, User)
         self.email = str(email)
         self.password = self.set_password(password)
         self.github = str(github) if github!='' else None
@@ -273,7 +273,7 @@ class Project(db.Model):
                 requires_application, application_question, estimated_time,
                 team_size, complete, owner):
         self.name = str(name)
-        self.code = str(name).replace('/', '_').replace(' ', '_').lower()
+        self.code = generate_code(name, User)
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url) if url else None
