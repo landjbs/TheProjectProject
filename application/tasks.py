@@ -22,7 +22,7 @@ def send_email(user_email, body):
     ses.send_email(Source=SES_EMAIL_SOURCE,
                    Destination={'ToAddresses':[user_email]},
                    Message= {'Subject':{'Data': 'Confirm Your Account'},
-                             'Body': {'Data': {'Html': body}}})
+                             'Body': {'Data': {'Text': body}}})
     user = User.query.filter_by(email=user_email).first()
     user.emailed = True
     db.session.commit()

@@ -207,8 +207,7 @@ def apply():
             token = encode_token(user.email)
             confirm_url = generate_url('confirm_email', token=token)
             body = render_template('emails/confirm_email.html',
-                                   confirm_url=confirm_url)
-            print(f'body {body}')
+                                   confirm_url=confirm_url, user=user)
             # enqueue task
             # with Connection(redis.from_url(redis_url)):
                 # q = Queue()
