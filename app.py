@@ -54,7 +54,7 @@ login_manager = LoginManager(app=application)
 login_manager.init_app(app=application)
 login_manager.login_view = 'login'
 login_manager.anonymous_user = Anonymous
-print(login_manager.anonymous_user.__dict__)
+
 
 @login_manager.user_loader
 def user_loader(id):
@@ -156,6 +156,12 @@ def terms():
 def apply():
     form = forms.Apply(request.form)
     if request.method=='POST' and form.validate():
+        ## unique validation ##
+        error_flag = False
+        if User.query.filter_by(email=form.email.data).first() is not None:
+            form.application_question.errors = ['Question cannot be blank.']
+            error_flag = True
+
         user = User(name        =       form.data['name'],
                     email       =       form.data['email'],
                     password    =       form.data['password'],
