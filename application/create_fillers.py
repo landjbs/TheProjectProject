@@ -16,7 +16,7 @@ from manager import create_project, add_comment, create_user
 
 
 users = [User(name='Landon Smith',
-              email='landonsmith@college.harvard.edu',
+              email='landjbs@college.harvard.edu',
               password='boop',
               github='www.github.com/landjbs',
               about='I love ML and NLP. CEO of Strada Routing.'),

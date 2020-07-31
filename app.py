@@ -5,6 +5,8 @@ from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager, AnonymousUserMixin)
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from datetime import datetime
 from dateutil import tz
 from collections import Counter
@@ -38,27 +40,6 @@ application.debug=True
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
 
 
-# TEMP: MAILING HERE FOR NOW
-def encode_token(email_account):
-    serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
-    return serializer
-
-
-def decode_token(token, expiration=3600):
-    serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
-    try:
-        email = serializer.loads(s=token,
-                                salt='email-confirm-salt',
-                                max_age=expiration)
-        return email
-    except Exception as e:
-        return False
-
-
-def generate_url(endpoint, token):
-    return url_for(endpoint, token=token)
-
-
 class Anonymous(AnonymousUserMixin):
     def __init__(self):
         super(Anonymous, self).__init__()
@@ -77,6 +58,10 @@ login_manager.login_view = 'login'
 login_manager.anonymous_user = Anonymous
 
 
+# limiting
+limiter = Limiter(application, key_func=get_remote_address)
+
+
 @login_manager.user_loader
 def user_loader(id):
     return User.query.get_or_404(id)
@@ -86,6 +71,27 @@ def is_project_member(user, project):
     if user==None:
         return False
     return (user in project.members)
+
+
+# TEMP: MAILING HERE FOR NOW
+def encode_token(email_account):
+    serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
+    return serializer
+
+
+def decode_token(token, expiration=3600):
+    serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
+    try:
+        email = serializer.loads(s=token,
+                                salt='email-confirm-salt',
+                                max_age=expiration)
+        return email
+    except Exception as e:
+        return False
+
+
+def generate_url(endpoint, token):
+    return url_for(endpoint, token=token, _external=True)
 
 
 # functions
@@ -202,6 +208,7 @@ def apply():
             confirm_url = generate_url('confirm_email', token=token)
             body = render_template('emails/confirm_email.html',
                                    confirm_url=confirm_url)
+            print(f'body {body}')
             # enqueue task
             # with Connection(redis.from_url(redis_url)):
                 # q = Queue()
@@ -259,7 +266,6 @@ def send_password_reset_email(user_email):
 @application.route('/reset', methods=['GET', 'POST'])
 def reset():
     form = forms.Login(request.form)
-    print(form.email.data)
     if form.validate_on_submit():
         # TODO: CHECK THAT EMAIL IS VALID
         print('validated')
@@ -374,6 +380,7 @@ def home():
 
 @application.route('/add_project', methods=['GET', 'POST'])
 @login_required
+@limiter.limit('2 per minute')
 def add_project():
     form = forms.Add_Project(request.form)
     if request.method=='POST' and form.validate_on_submit():
@@ -456,6 +463,7 @@ def add_project():
 
 
 @application.route('/user=<code>', methods=['GET', 'POST'])
+@limiter.limit('60 per minute')
 def user(code):
     user = User.query.filter_by(code=code).first_or_404()
     # worked tasks
@@ -527,6 +535,7 @@ def user(code):
 
 
 @application.route('/project=<project_code>', methods=['GET', 'POST'])
+@limiter.limit('60 per minute')
 def project(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # forms
@@ -581,9 +590,7 @@ def project(project_code):
         edit_form = forms.Edit_Project(request.form)
         edit_application_form = forms.Edit_Project_Application(request.form)
         if request.method=='POST':
-            print('HERE')
             if edit_form.validate_on_submit():
-                print('THERE')
                 edits_made = False
                 # name
                 new_name = edit_form.name.data
@@ -651,6 +658,7 @@ def subject(subject_name):
 
 @application.route('/join_project/<int:project_id>', methods=['POST'])
 @login_required
+@limiter.limit('5 per minute')
 def join_project(project_id):
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
@@ -713,19 +721,19 @@ def leave_project(project_id):
 
 @application.route('/like/<int:project_id>/<action>')
 @login_required
+@limiter.limit('45 per minute')
 def like_action(project_id, action):
     project = Project.query.get_or_404(project_id)
-    print(f'before {current_user.has_starred(project)}')
     if action == 'like':
         current_user.star_project(project)
     if action == 'unlike':
         current_user.unstar_project(project)
-    print(f'after {current_user.has_starred(project)}')
     return redirect(request.referrer)
 
 
 @application.route('/project/<int:project_id>/task', methods=['POST'])
 @login_required
+@limiter.limit('10 per minute')
 def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     if not is_project_member(current_user, project):
@@ -740,6 +748,7 @@ def add_task(project_id):
 
 @application.route('/project/<int:project_id>/comment', methods=['POST'])
 @login_required
+@limiter.limit('10 per minute')
 def add_comment(project_id):
     project = Project.query.get_or_404(project_id)
     form = forms.Comment_Form(request.form)
@@ -765,6 +774,7 @@ def delete_comment(project_id, comment_id):
 
 @application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
 @login_required
+@limiter.limit('5 per minute')
 def mark_complete(project_id, task_id, action):
     project = Project.query.get_or_404(project_id)
     # screen non-members
@@ -789,7 +799,6 @@ def mark_complete(project_id, task_id, action):
     return redirect(request.referrer)
 
 
-@login_required
 def transfer_ownership(project, user):
     if current_user!=project.owner:
         flash('Only the owner can transfer project ownership.')
@@ -817,6 +826,7 @@ def transfer_ownership(project, user):
 
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
+@limiter.limit('20 per minute')
 def change_project_status(project_id, user_id, action):
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
@@ -849,6 +859,7 @@ def change_project_status(project_id, user_id, action):
 
 @application.route('/search', methods=['GET', 'POST'])
 @login_required
+@limiter.limit('60 per minute')
 def search():
     if request.method=='GET':
         return redirect(url_for('home'))
@@ -874,6 +885,7 @@ def search():
 
 @application.route('/collaborate/<int:target_user_id>', methods=['POST'])
 @login_required
+@limiter.limit('10/minute; 100/hour')
 def collaborate(target_user_id):
     error_flag = False
     project = Project.query.get_or_404(request.form.get('selected_project'))
@@ -907,6 +919,7 @@ def collaborate(target_user_id):
 
 @application.route('/accept_collaboration/<int:project_id>')
 @login_required
+@limiter.limit('60 per minute')
 def accept_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user in project.invitations:
@@ -934,8 +947,8 @@ def withdraw_collaboration(user_id, project_id):
     return redirect(request.referrer)
 
 
-@login_required
 @application.route('/withdraw_application/<int:project_id>')
+@login_required
 def withdraw_application(project_id):
     project = Project.query.get_or_404(project_id)
     manager.reject_user_from_pending(current_user, project, admin=False)
@@ -945,6 +958,7 @@ def withdraw_application(project_id):
 
 @application.route('/report_user/<int:target_user_id>', methods=['POST'])
 @login_required
+@limiter.limit('2 per minute')
 def report_user(target_user_id):
     error_flag = False
     # if not eror
@@ -952,6 +966,7 @@ def report_user(target_user_id):
 
 @application.route('/delete_user', methods=['POST'])
 @login_required
+@limiter.limit('2 per minute')
 def delete_user():
     for project in current_user.owned:
         if len(project.members.all())>1:
@@ -969,6 +984,7 @@ def delete_user():
 
 @application.route('/complete_project/<int:project_id>', methods=['POST'])
 @login_required
+@limiter.limit('3 per minute')
 def complete_project(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -980,6 +996,7 @@ def complete_project(project_id):
 
 @application.route('/uncomplete_project/<int:project_id>', methods=['POST'])
 @login_required
+@limiter.limit('3 per minute')
 def uncomplete_project(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -991,6 +1008,7 @@ def uncomplete_project(project_id):
 
 @application.route('/change_project_open/<int:project_id>/<action>', methods=['POST'])
 @login_required
+@limiter.limit('5 per minute')
 def change_project_open(project_id, action):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -1004,6 +1022,7 @@ def change_project_open(project_id, action):
 
 @application.route('/add_application/<int:project_id>', methods=['POST'])
 @login_required
+@limiter.limit('10 per minute')
 def add_application(project_id):
     project = Project.query.get_or_404(project_id)
     form = forms.Edit_Project_Application(request.form)
