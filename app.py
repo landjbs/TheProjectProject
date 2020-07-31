@@ -173,9 +173,11 @@ def apply():
             body = render_template('emails/confirm_email.html',
                                    confirm_url=confirm_url)
             # enqueue task
-            with Connection(redis.from_url(redis_url)):
-                q = Queue()
-                q.enqueue(tasks.send_email, user.email, body)
+            # with Connection(redis.from_url(redis_url)):
+                # q = Queue()
+                # q.enqueue(tasks.send_email, user.email, body)
+            # TEMP: dont enqueue just complete
+            tasks.send_email(user.email, body)
             # teardown
             db.session.close()
         except Exception as e:
@@ -210,6 +212,22 @@ def decode_token(token, expiration=3600):
 
 def generate_url(endpoint, token):
     return url_foor(endpoint, token=token, _external=True)
+
+
+def confirm_email(token):
+    email = decode_token(token)
+    if not email:
+        flash('The confirmation link is invalid or expired.')
+        return redirect(url_for('index'))
+    user = User.query.filter_by(email=email).first_or_404()
+    if user.confirmed:
+        flash('Account has already been confirmed.')
+        if user.accepted:
+            return redirect(url_for('login'))
+        else:
+            return redirect(url_for('index'))
+    
+
 
 
 def send_password_reset_email(user_email):
