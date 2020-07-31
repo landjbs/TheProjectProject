@@ -164,7 +164,7 @@ def apply():
             error_flag = True
         # unique github
         if User.query.filter_by(github=form.github.data).first() is not None:
-            form.github.errors = ['An account with that github is already registered.']
+            form.github.errors = ['An account with that Github is already registered.']
             error_flag = True
         if not error_flag:
             user = User(name        =       form.data['name'],
