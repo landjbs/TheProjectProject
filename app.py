@@ -171,7 +171,7 @@ def apply():
             # with Connection(redis.from_url(redis_url)):
                 # q = Queue()
                 # q.enqueue(tasks.send_email, user.email)
-            
+
             # teardown
             db.session.close()
         except Exception as e:
@@ -185,6 +185,27 @@ def apply():
             start_on = i
             break
     return render_template('apply.html', form=form, start_on=start_on)
+
+
+# TEMP: MAILING HERE FOR NOW
+def encode_token(email_account):
+    serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
+    return serializer
+
+
+def decode_token(token, expiration=3600):
+    serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
+    try:
+        email = serializer.loads(s=token,
+                                salt='email-confirm-salt',
+                                max_age=expiration)
+        return email
+    except Exception as e:
+        return False
+
+
+def generate_url(endpoint, token):
+    return url_foor(endpoint, token=token, _external=True)
 
 
 def send_password_reset_email(user_email):
