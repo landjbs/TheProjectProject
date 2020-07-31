@@ -54,15 +54,18 @@
     let el = document.createElement('div');
     const rotate = (360 / numberOfEls) * i;
     const translateY = -50;
-    const hue = Math.round(360 / numberOfEls * i);
+    // start: 22; end: 262; span: 240
+    // const hue = Math.round((240 * Math.cos(i / (2 * 3.14))) + 22);
+    const hue = Math.round(100 * (Math.cos(((numberOfEls * i) / 2*3.1456)) + 182));
+    // const hue = Math.round(120 / numberOfEls * i) + 22;
     el.classList.add('el');
-    el.style.backgroundColor = 'hsl(' + hue + ', 40%, 60%)';
+    el.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
     el.style.transform = 'rotate(' + rotate + 'deg) translateY(' + translateY + '%)';
     tl.add({
       begin: function() {
         anime({
           targets: el,
-          backgroundColor: ['hsl(' + hue + ', 40%, 60%)', 'hsl(' + hue + ', 60%, 80%)'],
+          backgroundColor: ['hsl(' + hue + ', 100%, 50%)', 'hsl(' + hue + ', 100%, 50%)'],
           rotate: [rotate + 'deg', rotate + 10 +'deg'],
           translateY: [translateY + '%', translateY + 10 + '%'],
           scale: [1, 1.25],
