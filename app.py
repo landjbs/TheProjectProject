@@ -172,31 +172,31 @@ def apply():
                         password    =       form.data['password'],
                         github      =       form.data['github'],
                         about       =       form.data['about'])
-            try:
-                manager.create_user(user, form.data['subjects'])
-                # emailing
-                redis_url = application.config['REDIS_URL']
-                # generate email token
-                token = encode_token(user.email)
-                confirm_url = generate_url('confirm_email', token)
-                body = render_template('emails/confirm_email.html',
-                                       confirm_url=confirm_url)
-                # enqueue task
-                # with Connection(redis.from_url(redis_url)):
-                    # q = Queue()
-                    # q.enqueue(tasks.send_email, user.email, body)
-                # TEMP: dont enqueue just complete
-                tasks.send_email(user.email, body)
-                # notify user
-                flash(f'Congratulations, {user.name}, your application to '
-                       'TheProjectProject has been submitted '
-                       'Check your email to confirm your address.')
-                # teardown
-                db.session.close()
-            except Exception as e:
-                print(f"E: {e}")
-                flash('Could not add application.')
-                db.session.rollback()
+            # try:
+            manager.create_user(user, form.data['subjects'])
+            # emailing
+            redis_url = application.config['REDIS_URL']
+            # generate email token
+            token = encode_token(user.email)
+            confirm_url = generate_url('confirm_email', token=token)
+            body = render_template('emails/confirm_email.html',
+                                   confirm_url=confirm_url)
+            # enqueue task
+            # with Connection(redis.from_url(redis_url)):
+                # q = Queue()
+                # q.enqueue(tasks.send_email, user.email, body)
+            # TEMP: dont enqueue just complete
+            tasks.send_email(user.email, body)
+            # notify user
+            flash(f'Congratulations, {user.name}, your application to '
+                   'TheProjectProject has been submitted '
+                   'Check your email to confirm your address.')
+            # teardown
+            db.session.close()
+            # except Exception as e:
+                # print(f"E: {e}")
+                # flash('Could not add application.')
+                # db.session.rollback()
             return render_template('index.html')
     start_on = 0
     for i, elt in enumerate(form):
@@ -224,7 +224,7 @@ def decode_token(token, expiration=3600):
 
 
 def generate_url(endpoint, token):
-    return url_for(endpoint, token=token, _external=True)
+    return url_for(endpoint, token=token)
 
 
 def confirm_email(token):
@@ -375,7 +375,6 @@ def home():
 @login_required
 def add_project():
     form = forms.Add_Project(request.form)
-    print(form.subjects.data)
     if request.method=='POST' and form.validate_on_submit():
         # url to none
         if form.url.data=='':
