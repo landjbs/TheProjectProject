@@ -166,12 +166,16 @@ def apply():
             flash(f'Congratulations, {user.name}, your application to TheProjectProject has been submitted! '
                   'Check your email to confirm your address.')
             # emailing
-            # redis_url = application.config['REDIS_URL']
+            redis_url = application.config['REDIS_URL']
+            # generate email token
+            token = encode_token(user.email)
+            confirm_url = generate_url('confirm_email', token)
+            body = render_template('emails/confirm_email.html',
+                                   confirm_url=confirm_url)
             # enqueue task
-            # with Connection(redis.from_url(redis_url)):
-                # q = Queue()
-                # q.enqueue(tasks.send_email, user.email)
-
+            with Connection(redis.from_url(redis_url)):
+                q = Queue()
+                q.enqueue(tasks.send_email, user.email, body)
             # teardown
             db.session.close()
         except Exception as e:
