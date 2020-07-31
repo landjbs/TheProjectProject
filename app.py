@@ -226,8 +226,11 @@ def confirm_email(token):
             return redirect(url_for('login'))
         else:
             return redirect(url_for('index'))
-    
-
+    user.confirmed = True
+    db.session.add(user)
+    db.session.commit()
+    flash('You have confirmed your account!')
+    return redirect(url_for('index'))
 
 
 def send_password_reset_email(user_email):
