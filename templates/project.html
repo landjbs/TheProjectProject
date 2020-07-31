@@ -48,7 +48,14 @@
                   </h3>
                 </a>
                 <p>
-                  by <a class='user-name' href='user={{ project.owner.code }}'>{{ project.owner.name }}</a>
+                  by
+                  {% if current_user.is_authenticated %}
+                    <a class='user-name' href='user={{ project.owner.code }}'>
+                  {% else %}
+                    <a class='user-name' href='/login'>
+                  {% endif %}
+                      {{ project.owner.name }}
+                    </a>
                 </p>
             </div>
             {% if not current_user.is_anonymous %}
@@ -259,18 +266,17 @@
                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                           <h6 class="mb-1">{{ task.text }}</h6>
                           <div class="d-flex w-100 justify-content-between">
-                            <small>Requested by
+                            <small>Requested
                             {% if current_user.is_authenticated %}
+                              by
                               <a href='user={{ task.author.code }}' class="mb-1">
-                            {% else %}
-                              <a href='/login'>
-                            {% endif %}
                                 {% if task.author %}
                                   <u>{{ task.author.name }}</u>
                                 {% else %}
                                   Anonymous
                                 {% endif %}
-                            </a>
+                              </a>
+                            {% endif %}
                             on {{ time_to_str(task.post_stamp) }}</small>
                           </div>
                           {% if is_member %}

@@ -27,6 +27,8 @@ ADMIN_PASSWORD = 'asdadsflkj;2kl4j51@$L%jldfka;skf,3m,.rmbnmdnbfd;.'
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+application.config['MAIL_SERVER'] = 'landjbs@gmail.com'
+application.config['MAIL_PORT'] = 465
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
