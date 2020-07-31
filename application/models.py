@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -11,6 +12,14 @@ from sqlalchemy import desc
 
 sys.path.append('.')
 from application import db
+
+
+def generate_code(name, table):
+    code = str(name).replace('/', '_').replace(' ', '_').lower()
+    temp_code = f'{code}{str(np.random.randint(0, 300))}'
+    while table.query.filter_by(code=temp_code).first() is not None:
+        temp_code = f'{code}{str(np.random.randint(0, 300))}'
+    return temp_code
 
 
 ## ASSOCIATION TABLES ##
@@ -151,7 +160,7 @@ class User(db.Model, UserMixin):
 
     def __init__(self, name, email, password, github, about):
         self.name = str(name)
-        self.code = str(name).replace('/', '_').replace(' ', '_').lower()
+        self.code =
         self.email = str(email)
         self.password = self.set_password(password)
         self.github = str(github) if github!='' else None
