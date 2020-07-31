@@ -7,7 +7,8 @@ sys.path.append('.')
 from application import db
 from application.models import User, Subject
 
-SES_REGION = None
+SES_REGION = 'us-east-1'
+SES_EMAIL_SOURCE = 'landjbs@gmail.com'
 AWS_ACCESS_KEY_ID = None
 AWS_SECRET_ACCESS_KEY= None
 
@@ -17,7 +18,10 @@ def send_email(user_email, body):
                        aws_access_key_id=AWS_ACCESS_KEY_ID,
                        secret_access_key=AWS_SECRET_ACCESS_KEY
                     )
-    ses.send_email(Source=os.getenv('SES_EMAIL_SOURCE'), )
+    ses.send_email(Source=SES_EMAIL_SOURCE,
+                   Destination={'ToAddresses':[user_email]},
+                   Message= {'Subject':{'Data': 'Confirm Your Account'},
+                             'Body': {'Text': {'Data': body}}})
     user = User.query.filter_by(email=user_email).first()
     # user.emailed = True
     # db.session.commit()
