@@ -74,9 +74,9 @@ def is_project_member(user, project):
 
 
 # TEMP: MAILING HERE FOR NOW
-def encode_token(email_account):
+def encode_token(email):
     serializer = URLSafeTimedSerializer(application.config['SECRET_KEY'])
-    return serializer
+    return serializer.dumps(email, salt='email-confirm-salt')
 
 
 def decode_token(token, expiration=3600):
@@ -201,32 +201,32 @@ def apply():
                         about       =       form.data['about'])
             # try to get user's first name
             first_name = user.name.split(' ')[0]
-            # try:
-            manager.create_user(user, form.data['subjects'])
-            # emailing
-            redis_url = application.config['REDIS_URL']
-            # generate email token
-            token = encode_token(user.email)
-            confirm_url = generate_url('confirm_email', token=token)
-            body = render_template('emails/confirm_email.html',
-                                   confirm_url=confirm_url,
-                                   first_name=first_name)
-            # enqueue task
-            # with Connection(redis.from_url(redis_url)):
-                # q = Queue()
-                # q.enqueue(tasks.send_email, user.email, body)
-            # TEMP: dont enqueue just complete
-            tasks.send_email(user.email, body)
-            # notify user
-            flash(f'Congratulations, {first_name}, your application to '
-                   'TheProjectProject has been submitted! '
-                   'A confirmation link has been sent to your email.')
-            # teardown
-            db.session.close()
-            # except Exception as e:
-                # print(f"E: {e}")
-                # flash('Could not add application.')
-                # db.session.rollback()
+            try:
+                manager.create_user(user, form.data['subjects'])
+                # emailing
+                redis_url = application.config['REDIS_URL']
+                # generate email token
+                token = encode_token(user.email)
+                confirm_url = generate_url('confirm_email', token=token)
+                body = render_template('emails/confirm_email.html',
+                                       confirm_url=confirm_url,
+                                       first_name=first_name)
+                # enqueue task
+                # with Connection(redis.from_url(redis_url)):
+                    # q = Queue()
+                    # q.enqueue(tasks.send_email, user.email, body)
+                # TEMP: dont enqueue just complete
+                tasks.send_email(user.email, body)
+                # notify user
+                flash(f'Congratulations, {first_name}, your application to '
+                       'TheProjectProject has been submitted! '
+                       'A confirmation link has been sent to your email.')
+                # teardown
+                db.session.close()
+            except Exception as e:
+                print(f"E: {e}")
+                flash('Could not add application.')
+                db.session.rollback()
             return render_template('index.html')
     start_on = 0
     for i, elt in enumerate(form):
@@ -239,6 +239,7 @@ def apply():
 @application.route('/confirm/<token>')
 def confirm_email(token):
     email = decode_token(token)
+    print(f'email {email}')
     if not email:
         flash('The confirmation link is invalid or expired.')
         return redirect(url_for('index'))
