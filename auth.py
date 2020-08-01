@@ -14,9 +14,8 @@ class UserView(ModelView):
     column_exclude_list = ['password']
     can_export = True
     column_extra_row_actions = [
-        EndpointLinkRowAction('glyphicon glyphicon-ok', 'user.accept_single')
-        EndpointLinkRowAction('glyphicon glyphicon-ok', 'user.reject_single')
-        'glyphicon glyphicon-remove'
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'user.accept_single'),
+        EndpointLinkRowAction('glyphicon glyphicon-remove', 'user.reject_single')
     ]
 
     @expose('/action/accept_single', methods=('GET',))
@@ -27,7 +26,7 @@ class UserView(ModelView):
         return redirect(request.referrer)
 
     @expose('/action/reject_single', methods=('GET',))
-    def accept_single(self):
+    def reject_single(self):
         user = models.User.query.get_or_404(int(request.args.get('id')))
         user.reject()
         flash(f'You have rejected {user.name}.')
