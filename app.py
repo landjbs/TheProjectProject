@@ -4,7 +4,7 @@ from sqlalchemy.sql.expression import func
 from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 from flask_login import (current_user, login_user, logout_user,
-                         login_required, LoginManager, AnonymousUserMixin)
+                         login_required, LoginManager)
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from datetime import datetime
@@ -18,7 +18,8 @@ from rq import Queue, Connection
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject, User_Report,
-                                Project_Application, Notification)
+                                Project_Application, Notification, Anonymous,
+                                Admin)
 import application.forms as forms
 import application.tasks as tasks
 
@@ -38,17 +39,6 @@ application.config['QUEUES'] = ['default']
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
-
-
-class Anonymous(AnonymousUserMixin):
-    def __init__(self):
-        super(Anonymous, self).__init__()
-
-    def has_starred(self, project):
-        return False
-
-    def has_applied(self, project):
-        return False
 
 
 # initalization

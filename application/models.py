@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -103,6 +103,31 @@ class Project_Application(db.Model):
 
 
 ## BASE CLASSES ##
+class Anonymous(AnonymousUserMixin):
+    def __init__(self):
+        super(Anonymous, self).__init__()
+
+    def has_starred(self, project):
+        return False
+
+    def has_applied(self, project):
+        return False
+
+
+class Admin(db.Model, UserMixin):
+    __tablename__ = 'admin'
+    # id
+    id = Column(Integer, primary_key=True)
+    # name
+    name = Column(String(128), unique=False)
+
+    def has_starred(self, project):
+        return False
+
+    def has_applied(self, project):
+        return False
+
+
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     # id primary key
