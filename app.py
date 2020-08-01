@@ -6,6 +6,10 @@ from flask import (Flask, render_template, request, flash, redirect,
 from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
 from flask_limiter import Limiter
+# admin/
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
+# /admin
 from flask_limiter.util import get_remote_address
 from datetime import datetime
 from dateutil import tz
@@ -18,8 +22,7 @@ from rq import Queue, Connection
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject, User_Report,
-                                Project_Application, Notification, Anonymous,
-                                Admin)
+                                Project_Application, Notification, Anonymous)
 import application.forms as forms
 import application.tasks as tasks
 
@@ -27,15 +30,12 @@ import manager as manager
 import recommendation as rec
 
 
-ADMIN_EMAIL = 'lkj;lsdjkf;laksdjf;lajsd;lfkj23lj2451@$%j12l4kj5lsakjfd;.'
-ADMIN_PASSWORD = 'asdadsflkj;2kl4j51@$L%jldfka;skf,3m,.rmbnmdnbfd;.'
-
-
 # Elastic Beanstalk initalization
 application = Flask(__name__, static_url_path='', static_folder='static')
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 application.config['REDIS_URL'] = 'redis://redis:6379/0'
 application.config['QUEUES'] = ['default']
+application.config['FLASK_ADMIN_SWITCH'] = 'cerulean'
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
@@ -50,6 +50,11 @@ login_manager.anonymous_user = Anonymous
 
 # limiting
 limiter = Limiter(application, key_func=get_remote_address)
+
+
+# admin
+admin = Admin(application, template_mode='bootstrap3')
+admin.add_view(ModelView(User, db.session))
 
 
 @login_manager.user_loader
@@ -177,7 +182,6 @@ def apply():
         error_flag = False
         # unique email
         u_query = User.query.filter_by(email=form.email.data).first()
-        a_query = Admin.query.filter_by(email=form.email.data).first()
         if (u_query is not None) or (a_query is not None):
             form.email.errors = ['An account with that email is already registered.']
             error_flag = True
@@ -278,25 +282,17 @@ def login():
             return redirect(url_for('index'))
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
-        error_flag = False
-        u_q = User.query.filter_by(email=form.email.data).first()
-        a_q = Admin.query.filter_by(email=form.email.data).first()
-        if u_q is not None:
-            user = u_q
-        elif a_q is not None:
-            user = a_q
-        else:
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is not None:
             form.email.errors.append('Email not found.')
-            error_flag = True
-        if not error_flag:
-            if not user.check_password(form.password.data):
-                form.password.errors.append('Invalid password.')
-            elif user.accepted==False:
-                    form.email.errors.append('Your application is under review—'
-                                             'check back soon!')
-            else:
-                login_user(user)
-                return home()
+        elif not user.check_password(form.password.data):
+            form.password.errors.append('Invalid password.')
+        elif user.accepted==False:
+                form.email.errors.append('Your application is under review—'
+                                         'check back soon!')
+        else:
+            login_user(user)
+            return home()
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:

@@ -78,6 +78,9 @@ class User_Subjects(db.Model):
     # count
     number = Column(Integer, nullable=False, default=1)
 
+    def __repr__(self):
+        return f'<USER_SUBJECT u={self.user.name} s={self.subject.name} n={self.number}>'
+
 
 class User_Badge(db.Model):
     __tablename__ = 'user_badge'
@@ -92,6 +95,12 @@ class User_Badge(db.Model):
     earned = Column(Boolean, nullable=False, default=False)
     earn_stamp = Column(DateTime, nullable=True)
 
+    def __repr__(self):
+        if not self.earned:
+            return f'<USER_BADGE u={self.user.name} b={self.badge.name} p={self.progress}>'
+        else:
+            return f'<USER_BADGE u={self.user.name} b={self.badge.name} e={self.earn_stamp}>'
+
 
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
@@ -100,6 +109,9 @@ class Project_Application(db.Model):
     project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
     project = relationship('Project', back_populates='pending')
     text = Column('text', String(250), nullable=True)
+
+    def __repr__(self):
+        return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
 
 
 ## BASE CLASSES ##
