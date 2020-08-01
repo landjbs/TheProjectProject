@@ -1,7 +1,8 @@
 from flask import flash
 
 from application import db
-from application.models import Project, User, Subject, User_Subjects, Notification
+from application.models import (Project, User, Subject, User_Subjects,
+                                User_Report, Notification)
 
 
 def create_subject(name, color):
@@ -21,6 +22,14 @@ def create_user(user, subject_ids):
     db.session.commit()
     return True
 
+
+def report_user(reporter, reported, text):
+    report = User_Report(reporter=reporter, text=text)
+    reported.append(report)
+    db.session.add(report)
+    db.session.commit()
+    return True
+    
 
 ## USER SUBJECTS ##
 def add_subject_to_user(user, subject):

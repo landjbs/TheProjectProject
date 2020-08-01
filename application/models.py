@@ -417,7 +417,7 @@ class User_Report(db.Model):
                             backref=backref('reports_posted', order_by=id))
     # reported: user described in report
     reported_id = Column(Integer, ForeignKey('user.id'))
-    reporter = relationship('User', foreign_keys=reported_id,
+    reported = relationship('User', foreign_keys=reported_id,
                             primaryjoin=(reported_id==User.id),
                             backref=backref('reports', order_by=id))
     ## description ##
