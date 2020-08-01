@@ -357,6 +357,7 @@ def partition_query(l, n=3):
 @application.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
+    if current_user.admin==True
     # recommended projects
     recs = rec.recommend_projects(current_user)
     # recs = db.session.query(Project).limit(30)
