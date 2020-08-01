@@ -280,7 +280,9 @@ def login():
     if request.method=='POST' and form.validate():
         user = query_user_by_email(form.email.data)
         if user is None:
-            form.email.errors.append('Email not found.')
+            admin = Admin.query.filter_by(email=form.email.data).first()
+            if admin is None
+                form.email.errors.append('Email not found.')
         elif not user.check_password(form.password.data):
             form.password.errors.append('Invalid password.')
             # application pending

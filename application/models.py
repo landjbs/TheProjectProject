@@ -125,7 +125,19 @@ class Admin(db.Model, UserMixin):
     # password
     password = Column(String(254), nullable=False)
     # permissions
-    accepted = True
+    accepted = Column(Boolean, nullable=False, default=True)
+
+    def __init__(self, name, email, password):
+        self.name = name
+        self.email = email
+        self.password = self.set_password(password)
+
+    def set_password(self, password):
+        return str(generate_password_hash(password))
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
 
     def has_starred(self, project):
         return False

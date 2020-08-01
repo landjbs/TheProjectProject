@@ -60,6 +60,7 @@ subjects = [# data/math/ai:    red
 admins = [Admin(name='Admin', email='landon@theprojectproject.io',
                 password='s;kadjflk;asdjf;lkajsdf')]
 
+
 def create_admins():
     for admin in admins:
         db.session.add(admin)
