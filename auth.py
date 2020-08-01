@@ -27,7 +27,7 @@ class UserView(ModelView):
 
 
     @action('reject', 'Reject', 'Are you sure you want to reject the selected users?')
-    def action_accept(self, ids):
+    def reject_accept(self, ids):
         try:
             query = models.User.query.filter(models.User.id.in_(ids))
             count = 0
