@@ -278,23 +278,26 @@ def login():
             return redirect(url_for('index'))
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
+        error_flag = False
         u_q = User.query.filter_by(email=form.email.data).first()
         a_q = Admin.query.filter_by(email=form.email.data).first()
-        if a_q is None:
+        print(f'admin: {Admin.query.all()}')
+        if u_q is not None:
             user = u_q
-        elif u_q is None:
+        elif u_q is not None:
             user = a_q
         else:
             form.email.errors.append('Email not found.')
-            return redirect(url_for('index'))
-        if not user.check_password(form.password.data):
-            form.password.errors.append('Invalid password.')
-        elif user.accepted==False:
-                form.email.errors.append('Your application is under review—'
-                                         'check back soon!')
-        else:
-            login_user(user)
-            return home()
+            error_flag = True
+        if not error_flag:
+            if not user.check_password(form.password.data):
+                form.password.errors.append('Invalid password.')
+            elif user.accepted==False:
+                    form.email.errors.append('Your application is under review—'
+                                             'check back soon!')
+            else:
+                login_user(user)
+                return home()
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:

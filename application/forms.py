@@ -126,7 +126,7 @@ class Edit_User(BaseForm):
 
 class Login(BaseForm):
     email = StringField('Email', validators=[DataRequired(), Length(1, 254),
-                                             Email(), Email_Ext_Validator()])
+                                             Email()])
     password = PasswordField('Password',
                              validators=[Length(0, 254)])
 

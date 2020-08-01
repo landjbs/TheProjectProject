@@ -58,7 +58,7 @@ subjects = [# data/math/ai:    red
 #           ]
 
 admins = [Admin(name='Admin', email='landon@theprojectproject.io',
-                password='s;kadjflk;asdjf;lkajsdf')]
+                password='boop')]
 
 
 def create_admins():
