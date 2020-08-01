@@ -971,7 +971,9 @@ def report_user(target_user_id):
     elif not target_user.accepted:
         flash('Cannot report user, as they are still pending acceptance.')
     else:
-        flash(f'You have reported {target_user.name}. We are so sorry you')
+        flash(f'You have reported {target_user.name}. We are so sorry you have '
+            'experienced issues while using our platform and will begin '
+            'reviewing your report immediately.')
         manager.report_user(current_user, target_user, text=text)
     return redirect(request.referrer)
 
