@@ -26,7 +26,7 @@ from application.models import (User, Project, Comment, Task, Subject, User_Repo
 import application.forms as forms
 import application.tasks as tasks
 from flask_admin import Admin
-from auth import UserView, ModelView
+from auth import UserView, ModelView, ReportView
 import manager as manager
 import recommendation as rec
 
@@ -60,7 +60,7 @@ admin.add_view(ModelView(Project, db.session))
 admin.add_view(ModelView(Comment, db.session))
 admin.add_view(ModelView(Task, db.session))
 admin.add_view(ModelView(Subject, db.session))
-admin.add_view(ModelView(User_Report, db.session))
+admin.add_view(ReportView(User_Report, db.session))
 admin.add_view(ModelView(Project_Application, db.session))
 admin.add_view(ModelView(Notification, db.session))
 
