@@ -5,7 +5,16 @@ import application.models as models
 
 
 class UserView(ModelView):
-    @action('approve', 'Approve', 'Are you sure you want to approve the selected users?')
-    def action_approve(self, ids):
+    @action('accept', 'Accept', 'Are you sure you want to accept the selected users?')
+    def action_accept(self, ids):
         try:
             query = User.query.filter(User.id.in_(ids))
+            count = 0
+            for user in query.all():
+                if user.approve():
+                    count += 1
+
+            flash(ngettext('User was successfully accepted.',
+                           '%(count)s users were successfully accepted.',
+                           count,
+                           count=count))

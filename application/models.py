@@ -126,37 +126,6 @@ class Anonymous(AnonymousUserMixin):
         return False
 
 
-class Admin(db.Model, UserMixin):
-    __tablename__ = 'admin'
-    # id
-    id = Column(Integer, primary_key=True)
-    # name
-    name = Column(String(128), unique=False)
-    # email
-    email = Column(String(254), unique=True, nullable=False)
-    # password
-    password = Column(String(254), nullable=False)
-    # permissions
-    accepted = Column(Boolean, nullable=False, default=True)
-
-    def __init__(self, name, email, password):
-        self.name = name
-        self.email = email
-        self.password = self.set_password(password)
-
-    def set_password(self, password):
-        return str(generate_password_hash(password))
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
-
-    def has_starred(self, project):
-        return False
-
-    def has_applied(self, project):
-        return False
-
-
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     # id primary key
@@ -180,6 +149,8 @@ class User(db.Model, UserMixin):
     emailed = Column(Boolean, nullable=False, default=False)
     confirmed = Column(Boolean, nullable=False, default=False)
     accepted = Column(Boolean, nullable=False, default=False)
+    applied_on = Column(DateTime, nullable=False, default=datetime.utcnow)
+    accepted_on = Column(DateTime, nullable=True)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',
@@ -238,6 +209,10 @@ class User(db.Model, UserMixin):
 
     def is_anonymous(self):
         return False
+
+    def accept(self):
+        self.accepted = True
+        self.accepted_on = datetime.utcnow()
 
     # password
     def set_password(self, password):
