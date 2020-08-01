@@ -29,7 +29,7 @@ def report_user(reporter, reported, text):
     db.session.add(report)
     db.session.commit()
     return True
-    
+
 
 ## USER SUBJECTS ##
 def add_subject_to_user(user, subject):

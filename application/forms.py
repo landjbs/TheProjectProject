@@ -26,12 +26,12 @@ class Email_Ext_Validator(object):
         self.allowed = set(allowed)
 
     def __call__(self, form, field):
-        return True
-        # email = str(field.data)
-        # ending = email.split('@')[-1]
-        # if not ending in self.allowed:
-        #     raise ValidationError('Currently only Harvard College emails '
-        #                           'are allowed.')
+        # return True
+        email = str(field.data)
+        ending = email.split('@')[-1]
+        if not ending in self.allowed:
+            raise ValidationError('Currently only Harvard College emails '
+                                  'are allowed.')
 
 
 class Site_URL_Validator(object):
