@@ -122,10 +122,11 @@ class User(db.Model, UserMixin):
     github = Column(String(254), unique=True, nullable=True)
     # about
     about = Column(String(500), nullable=False)
-    ## setup ## # TODO: SET DEFAULTS TO FALSE
-    emailed = Column(Boolean, nullable=False, default=True)
-    confirmed = Column(Boolean, nullable=False, default=True)
-    accepted = Column(Boolean, nullable=False, default=True)
+    ## setup ##
+    emailed = Column(Boolean, nullable=False, default=False)
+    confirmed = Column(Boolean, nullable=False, default=False)
+    accepted = Column(Boolean, nullable=False, default=False)
+    admin = Column(Boolean, nullable=False, default=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',
