@@ -278,11 +278,12 @@ def login():
             return redirect(url_for('index'))
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
-        user = query_user_by_email(form.email.data)
-        if user is None:
-            admin = Admin.query.filter_by(email=form.email.data).first()
-            if admin is None
-                form.email.errors.append('Email not found.')
+        user = User.query.filter_by(email=form.email.data).first()
+        admin = Admin.query.filter_by(email=form.email.data).first()
+        if (user is None) and (admin is None):
+            form.email.errors.append('Email not found.')
+            return redirect(url_for('index'))
+
         elif not user.check_password(form.password.data):
             form.password.errors.append('Invalid password.')
             # application pending
