@@ -281,10 +281,9 @@ def login():
         error_flag = False
         u_q = User.query.filter_by(email=form.email.data).first()
         a_q = Admin.query.filter_by(email=form.email.data).first()
-        print(f'admin: {Admin.query.all()}')
         if u_q is not None:
             user = u_q
-        elif u_q is not None:
+        elif a_q is not None:
             user = a_q
         else:
             form.email.errors.append('Email not found.')
