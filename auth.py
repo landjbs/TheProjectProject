@@ -1,10 +1,12 @@
 from gettext import ngettext
 from flask_admin import expose
 from flask_admin.actions import action
+from flask_admin.model.template import EndpointLinkRowAction
 from flask_admin.contrib.sqla import ModelView
 
 import application.models as models
-from flask import flash
+from flask import (Flask, render_template, request, flash, redirect,
+                   url_for, session)
 
 
 class UserView(ModelView):
@@ -12,8 +14,23 @@ class UserView(ModelView):
     column_exclude_list = ['password']
     can_export = True
     column_extra_row_actions = [
-                EndpointLinkRowAction('glyphicon glyphicon-play', 'event.action_play')
-            ]
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'user.accept_single')
+    ]
+
+    @expose('/action/accept_single', methods=('GET',))
+    def accept_single(self):
+        user = models.User.query.get_or_404(int(request.args.get('id')))
+        user.accept()
+        flash(f'You have accepted {user.name}.')
+        return redirect(request.referrer)
+
+    @expose('/action/reject_single', methods=('GET',))
+    def accept_single(self):
+        user = models.User.query.get_or_404(int(request.args.get('id')))
+        user.reject()
+        flash(f'You have rejected {user.name}.')
+        return redirect(request.referrer)
+
 
     @action('accept', 'Accept', 'Are you sure you want to accept the selected users?')
     def action_accept(self, ids):
