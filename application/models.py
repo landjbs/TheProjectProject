@@ -203,7 +203,7 @@ class User(db.Model, UserMixin):
         return str(self.id)
 
     def is_active(self):
-        return True
+        return self.active
 
     def is_authenticated(self):
         return self.accepted

@@ -281,12 +281,8 @@ def reset():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        if current_user.accepted:
-            return redirect(url_for('home'))
-        else:
-            flash('Your application is under review—check back soon!')
-            return redirect(url_for('index'))
+    if current_user.is_authenticated and current_user.accepted:
+        return redirect(url_for('home'))
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
@@ -314,6 +310,8 @@ def login():
 @login_required
 def logout():
     logout_user()
+    user.active = False
+    db.session.commit()
     return redirect(url_for('index'))
 
 
