@@ -16,9 +16,9 @@ from application import db
 
 def generate_code(name, table):
     code = str(name).replace('/', '_').replace(' ', '_').lower()
-    temp_code = f'{code}{str(np.random.randint(0, 300))}'
+    temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
     while table.query.filter_by(code=temp_code).first() is not None:
-        temp_code = f'{code}{str(np.random.randint(0, 300))}'
+        temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
     return temp_code
 
 
