@@ -25,6 +25,7 @@ def create_user(user, subject_ids):
 
 def report_user(reporter, reported, text):
     report = User_Report(reporter=reporter, text=text)
+    print(report.text)
     reported.reports.append(report)
     db.session.add(report)
     db.session.commit()
