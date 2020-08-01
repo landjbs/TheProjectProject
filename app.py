@@ -299,6 +299,8 @@ def login():
                                          'check back soon!')
         else:
             login_user(user)
+            user.active = True
+            db.session.commit()
             return home()
     start_on = 0
     for i, elt in enumerate(form):
