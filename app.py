@@ -17,7 +17,7 @@ import redis
 from rq import Queue, Connection
 
 from application import db
-from application.models import (User, Project, Comment, Task, Subject,
+from application.models import (User, Project, Comment, Task, Subject, User_Report,
                                 Project_Application, Notification)
 import application.forms as forms
 import application.tasks as tasks
@@ -317,7 +317,8 @@ def logout():
 @application.route('/admin', methods=['GET', 'POST'])
 def admin():
     users = db.session.query(User)
-    return render_template('admin.html', users=users)
+    reports = User_Report.query.all()
+    return render_template('admin.html', users=users, reports=reports)
 
 
 @application.route('/accept', methods=['POST'])
@@ -965,7 +966,6 @@ def withdraw_application(project_id):
 def report_user(target_user_id):
     target_user = User.query.get_or_404(int(target_user_id))
     text = request.form.get('report_text')
-    print(text)
     if target_user is None:
         flash('User does not exist.')
     elif target_user==current_user:

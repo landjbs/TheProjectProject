@@ -9,59 +9,94 @@
   <link type="text/css" href="css/admin_styles.css" rel="stylesheet">
   <style>
     body {
-      background: black;
+      background: white;
+      color: black !important;
     }
   </style>
 {% endblock %}
 
+<div class='container'>
+  <div class='row'>
+    <table id="user_table" class="table table-hover big-box" style="width:100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Github</th>
+        <th>About</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      {% if user.confirmed %}
+        <tr>
+          <th>
+            {{ user.name }}
+          </th>
+          <th>
+            <a href='mailto:{{ user.email }}'>{{ user.email }}</a>
+          </th>
+          <th>
+            <a href='{{ user.github }}'>{{ user.github }}</a>
+          </th>
+          <th>
+            {{ user.about }}
+          </th>
+          <th>
+            {% if user.accepted %}
+              <form class='user-data' method="post" action="/reject">
+                <button type="submit" name='reject' value="{{ user.id }}">
+                  Reject
+                </button>
+              </form>
+            {% else %}
+              <form class='user-data' method="post" action="/accept">
+                <button type="submit" name='accept' value="{{ user.id }}">
+                  Accept
+                </button>
+              </form>
+            {% endif %}
+          </th>
+        </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
 
-<table id="user_table" class="table table-hover big-box" style="width:100%">
-<thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Github</th>
-    <th>About</th>
-    <th>Actions</th>
-  </tr>
-</thead>
-<tbody>
-  {% for user in users %}
-  {% if user.confirmed %}
-    <tr>
-      <th>
-        {{ user.name }}
-      </th>
-      <th>
-        <a href='mailto:{{ user.email }}'>{{ user.email }}</a>
-      </th>
-      <th>
-        <a href='{{ user.github }}'>{{ user.github }}</a>
-      </th>
-      <th>
-        {{ user.about }}
-      </th>
-      <th>
-        {% if user.accepted %}
-          <form class='user-data' method="post" action="/reject">
-            <button type="submit" name='reject' value="{{ user.id }}">
-              Reject
-            </button>
-          </form>
-        {% else %}
-          <form class='user-data' method="post" action="/accept">
-            <button type="submit" name='accept' value="{{ user.id }}">
-              Accept
-            </button>
-          </form>
-        {% endif %}
-      </th>
-    </tr>
-  {% endif %}
-  {% endfor %}
-</tbody>
-</table>
+  <div class='row'>
+    <table id="report_table" class="table table-hover big-box" style="width:100%">
+    <thead>
+      <tr>
+        <th>Reported</th>
+        <th>Reporter</th>
+        <th>Time</th>
+        <th>Text</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for report in reports %}
+        <tr>
+          <th>
+            {{ report.reported.name }}
+          </th>
+          <th>
+            {{ report.reporter.name }}
+          </th>
+          <th>
+            {{ report.timestamp }}
+          </th>
+          <th>
+            {{ report.text }}
+          </th>
+        </tr>
+      {% endfor %}
+    </tbody>
+    </table>
+  </div>
 
+</div>
 
 <script>
 $(document).ready( function () {
