@@ -120,6 +120,12 @@ class Admin(db.Model, UserMixin):
     id = Column(Integer, primary_key=True)
     # name
     name = Column(String(128), unique=False)
+    # email
+    email = Column(String(254), unique=True, nullable=False)
+    # password
+    password = Column(String(254), nullable=False)
+    # permissions
+    accepted = True
 
     def has_starred(self, project):
         return False
