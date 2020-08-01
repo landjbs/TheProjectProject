@@ -7,6 +7,7 @@ from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
 from flask_limiter import Limiter
 # auth/
+import auth
 # /auth
 from flask_limiter.util import get_remote_address
 from datetime import datetime
