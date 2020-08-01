@@ -410,8 +410,9 @@ class Badge(db.Model):
 
 class User_Report(db.Model):
     __tablename__ = 'user_report'
-    reporter_id = Column(Integer, ForeignKey(User.id), primary_key=True, unique=False)
-    reported_id = Column(Integer, ForeignKey(User.id), primary_key=True, unique=False)
+    id = Column(Integer, primary_key=True)
+    reporter_id = Column(Integer, ForeignKey(User.id)) #, primary_key=True, unique=False)
+    reported_id = Column(Integer, ForeignKey(User.id)) #, primary_key=True, unique=False)
 
     reporter = relationship('User', foreign_keys='User_Report.reporter_id')
     reported = relationship('User', foreign_keys='User_Report.reported_id')
