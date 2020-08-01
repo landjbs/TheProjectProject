@@ -6,10 +6,8 @@ from flask import (Flask, render_template, request, flash, redirect,
 from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
 from flask_limiter import Limiter
-# admin/
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-# /admin
+# auth/
+# /auth
 from flask_limiter.util import get_remote_address
 from datetime import datetime
 from dateutil import tz
@@ -55,6 +53,13 @@ limiter = Limiter(application, key_func=get_remote_address)
 # admin
 admin = Admin(application, template_mode='bootstrap3')
 admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Project, db.session))
+admin.add_view(ModelView(Comment, db.session))
+admin.add_view(ModelView(Task, db.session))
+admin.add_view(ModelView(Subject, db.session))
+admin.add_view(ModelView(User_Report, db.session))
+admin.add_view(ModelView(Project_Application, db.session))
+admin.add_view(ModelView(Notification, db.session))
 
 
 @login_manager.user_loader
@@ -283,7 +288,7 @@ def login():
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
-        if user is not None:
+        if user is None:
             form.email.errors.append('Email not found.')
         elif not user.check_password(form.password.data):
             form.password.errors.append('Invalid password.')
