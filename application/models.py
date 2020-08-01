@@ -488,6 +488,14 @@ class User_Report(db.Model):
     # resolve_stamp: when action was taken
     resolve_stamp = Column(DateTime, nullable=True)
 
+    def __repr__(self):
+        base = (f'<Report of {self.reported} by {self.reporter} at {self.timestamp}; '
+                f'TEXT={self.text}')
+        if not self.resolved:
+            return (base + f'resolved with {self.action} at {self.resolve_stamp}>')
+        else:
+            return base + '>'
+
     def resolve(action):
         ''' action = {0:pass, 1:warning, 2:tempban, 3:permaban} '''
         self.resolved = True
