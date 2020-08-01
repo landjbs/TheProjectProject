@@ -19,12 +19,14 @@ from itsdangerous import URLSafeTimedSerializer
 import redis
 from rq import Queue, Connection
 
+
 from application import db
 from application.models import (User, Project, Comment, Task, Subject, User_Report,
                                 Project_Application, Notification, Anonymous)
 import application.forms as forms
 import application.tasks as tasks
-
+from flask_admin import Admin
+from auth import UserView, ModelView
 import manager as manager
 import recommendation as rec
 
@@ -53,7 +55,7 @@ limiter = Limiter(application, key_func=get_remote_address)
 
 # admin
 admin = Admin(application, template_mode='bootstrap3')
-admin.add_view(ModelView(User, db.session))
+admin.add_view(UserView(User, db.session))
 admin.add_view(ModelView(Project, db.session))
 admin.add_view(ModelView(Comment, db.session))
 admin.add_view(ModelView(Task, db.session))

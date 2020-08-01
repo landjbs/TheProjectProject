@@ -213,6 +213,7 @@ class User(db.Model, UserMixin):
     def accept(self):
         self.accepted = True
         self.accepted_on = datetime.utcnow()
+        return True
 
     # password
     def set_password(self, password):
