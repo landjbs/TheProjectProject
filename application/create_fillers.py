@@ -151,7 +151,7 @@ projects = [Project(name='Boogle',
                     application_question='',
                     subjects = [Subject.query.filter_by(name='Research').first(),
                                 Subject.query.filter_by(name='Math').first(),
-                                Subject.query.filter_by(name='Biotech').first()
+                                Subject.query.filter_by(name='Biology').first()
                                 ],
                     open=True,
                     complete=False,
@@ -189,7 +189,7 @@ projects = [Project(name='Boogle',
                     subjects = [Subject.query.filter_by(name='Web Dev').first(),
                                 Subject.query.filter_by(name='Mobile Dev').first(),
                                 Subject.query.filter_by(name='Social Issues').first(),
-                                Subject.query.filter_by(name='Architecture').first()
+                                Subject.query.filter_by(name='Databases').first()
                                 ],
                     open=True,
                     complete=False,
@@ -206,7 +206,7 @@ projects = [Project(name='Boogle',
                     url=None,
                     application_question='',
                     subjects = [Subject.query.filter_by(name='AI/ML').first(),
-                                Subject.query.filter_by(name='Biotech').first(),
+                                Subject.query.filter_by(name='Biology').first(),
                                 Subject.query.filter_by(name='Theory').first(),
                                 Subject.query.filter_by(name='Research').first()
                                 ],

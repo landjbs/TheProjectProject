@@ -5,46 +5,46 @@ from application import db
 from application.models import Subject, Badge
 
 
-subjects = [# data/math/ai
-            Subject('AI/ML',                    '#FF5733'),
-            Subject('Data Science',             '#FFF033'),
-            Subject('Math',                     '#3342FF'),
+subjects = [# data/math/ai:    red
+            Subject('AI/ML',                    '#FF0000'),
+            Subject('Data Science',             '#FF2A00'),
+            Subject('Math',                     '#FF4900'),
 
-            # computational theory
-            Subject('Algorithms',               '#FFA533'),
-            Subject('Theory',                   '#3352FF')
-            Subject('Security/Cryptography',    '#49FF33'),
+            # computational theory:     orange
+            Subject('Algorithms',               '#FF7000'),
+            Subject('Theory',                   '#FF8F00'),
 
-            # architecture/os
-            Subject('Databases',                '#FFF033'),
-            Subject('Operating Systems',        '#33FFFF'),
-            Subject('Programming Languages',    '#FF33E9'),
-            Subject('Networks',                 '#33FFFF'),
-            Subject('Parallel Computing',       '#335BFF'),
+            # architecture/os:          blue
+            Subject('Databases',                '#00B6FF'),
+            Subject('Operating Systems',        '#0070FF'),
+            Subject('Networks',                 '#0051FF'),
+            Subject('Programming Languages',    '#0023FF'),
+            Subject('Parallel Computing',       '#0F00FF'),
+            Subject('Security/Cryptography',    '#4600FF'),
+            Subject('Hacking',                  '#5500FF'),
 
-            # fields
-            Subject('Chemistry',                '#FFF033'),
-            Subject('Biology',                  '#B8FF33'),
-            Subject('Engineering',              '#00B6FF'),
-            Subject('Finance',                  '#00B6FF'),
-            Subject('Gaming',                   '#FF00B9'),
-            Subject('Physics',                  '#B8FF33'),
+            # fields:               green
+            Subject('Chemistry',                '#7FE300'),
+            Subject('Biology',                  '#4CE300'),
+            Subject('Engineering',              '#11E300'),
+            Subject('Finance',                  '#00E30A'),
+            Subject('Gaming',                   '#00E356'),
+            Subject('Physics',                  '#00E3A2'),
 
-            # art
-            Subject('Graphics/Design',          '#58FF33'),
-            Subject('Hacking',                  '#33FFCA'),
-            Subject('Hardware',                 '#FF3333'),
-            Subject('Music',                    '#3342FF'),
+            # art:                  purple
+            Subject('Graphics/Design',          '#AB03FF'),
+            Subject('Hardware',                 '#7903FF'),
+            Subject('Music',                    '#B303FF'),
 
-            # dev/engineering
-            Subject('Mobile Dev',               '#E333FF'),
-            Subject('Web Dev',                  '#8D33FF'),
-            Subject('Software Engineering',     '#AF33FF'),
+            # dev/engineering:      pink
+            Subject('Mobile Dev',               '#D503FF'),
+            Subject('Web Dev',                  '#E100F0'),
+            Subject('Software Engineering',     '#F502C5'),
 
-            # project type
-            Subject('Research',                 '#DDFF33'),
-            Subject('Social Issues',            '#33DAFF'),
-            Subject('Startup',                  '#33C1FF')
+            # project type          orange
+            Subject('Social Issues',            '#F7B914'),
+            Subject('Startup',                  '#FFC100'),
+            Subject('Research',                 '#FF8000')
             ]
 
 
