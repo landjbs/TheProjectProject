@@ -303,6 +303,7 @@
         {% if current_user!=user %}
           <!-- collaborate -->
           {{ macros.render_collaborate_modal(current_user, user) }}
+          {{ macros.render_report_modal(user) }}
         {% else %}
           <!-- edit and delete modals -->
           {{ macros.render_edit_user_modal(user, edit_form) }}
