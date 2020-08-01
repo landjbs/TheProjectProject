@@ -536,7 +536,7 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('report_user', target_user_id=target_user.id) }}">
+      <form action="{{ url_for('report_user', target_user_id=target_user.id) }}" method="post">
         <div class="modal-body">
             <p>
               TheProjectProject is intended to be a safe, welcoming place full of innovation
@@ -545,7 +545,7 @@
               what happened:
             </p>
             <br>
-            <input type='text' id='report_text' maxlength=250 class='join-input'/>
+            <input type='text' id='report_text' maxlength=250 class='join-input' required/>
             <small><center>Limit: 250 characters</center></small>
             <br>
             <p>
@@ -555,9 +555,7 @@
             </p>
         </div>
         <div class="modal-footer">
-          <a href='/add_project'>
-            <button class='btn'>Submit Report</button>
-          </a>
+          <button class='btn'>Submit Report</button>
         </div>
       </form>
     </div>

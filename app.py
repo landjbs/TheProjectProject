@@ -964,6 +964,8 @@ def withdraw_application(project_id):
 @limiter.limit('2 per minute')
 def report_user(target_user_id):
     target_user = User.query.get_or_404(int(target_user_id))
+    text = request.form.get('report_text')
+    print(text)
     if target_user is None:
         flash('User does not exist.')
     elif target_user==current_user:

@@ -122,10 +122,10 @@ class User(db.Model, UserMixin):
     github = Column(String(254), unique=True, nullable=True)
     # about
     about = Column(String(500), nullable=False)
-    ## setup ##
-    emailed = Column(Boolean, nullable=False, default=False)
-    confirmed = Column(Boolean, nullable=False, default=False)
-    accepted = Column(Boolean, nullable=False, default=False)
+    ## setup ## # TODO: SET DEFAULTS TO FALSE
+    emailed = Column(Boolean, nullable=False, default=True)
+    confirmed = Column(Boolean, nullable=False, default=True)
+    accepted = Column(Boolean, nullable=False, default=True)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',
@@ -155,7 +155,10 @@ class User(db.Model, UserMixin):
     # reports posted by user
     # reports_posted = relationship('User_Report', back_populates='reporter')
     # reports targeting user
-    # reports = relationship('User_Report', back_populates='reported')
+    reports = relationship('User_Report',
+                           back_populates='reported',
+                           primaryjoin='User.id==User_Report.reported_id',
+                           lazy='dynamic')
 
 
     def __init__(self, name, email, password, github, about):
@@ -408,18 +411,24 @@ class Badge(db.Model):
 
 class User_Report(db.Model):
     __tablename__ = 'user_report'
+    reporter_id = Column(Integer, ForeignKey(User.id), primary_key=True)
+    reported_id = Column(Integer, ForeignKey(User.id), primary_key=True)
+
+    reporter = relationship('User', foreign_keys='User_Report.reporter_id')
+    reported = relationship('User', foreign_keys='User_Report.reported_id')
+
     # id
-    id = Column(Integer, primary_key=True)
+    # id = Column(Integer, primary_key=True)
     # reporter: user who posted report
-    reporter_id = Column(Integer, ForeignKey('user.id'))
-    reporter = relationship('User', foreign_keys=reporter_id,
-                            primaryjoin=(reporter_id==User.id),
-                            backref=backref('reports_posted', order_by=id))
+    # reporter_id = Column(Integer, ForeignKey('user.id'))
+    # reporter = relationship('User', foreign_keys=reporter_id,
+    #                         primaryjoin=(reporter_id==User.id),
+    #                         backref=backref('reports_posted', order_by=id))
     # reported: user described in report
-    reported_id = Column(Integer, ForeignKey('user.id'))
-    reported = relationship('User', foreign_keys=reported_id,
-                            primaryjoin=(reported_id==User.id),
-                            backref=backref('reports', order_by=id))
+    # reported_id = Column(Integer, ForeignKey('user.id'))
+    # reported = relationship('User', foreign_keys=reported_id,
+    #                         primaryjoin=(reported_id==User.id),
+    #                         backref=backref('reports', order_by=id))
     ## description ##
     # report description
     text = Column('text', String(250), nullable=True)
