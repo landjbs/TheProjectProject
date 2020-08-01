@@ -211,12 +211,18 @@ class User(db.Model, UserMixin):
         return False
 
     def accept(self):
-        if not self.confirmed:
-            raise RuntimeError(f'{self} email has not been confirmed.')
-        elif self.accepted:
-            raise RuntimeError(f'{self} has already been accepted.')
+        # if not self.confirmed:
+            # raise RuntimeError(f'{self} email has not been confirmed.')
+        # elif self.accepted:
+            # raise RuntimeError(f'{self} has already been accepted.')
         self.accepted = True
         self.accepted_on = datetime.utcnow()
+        db.session.commit()
+        return True
+
+    def reject(self):
+        self.accepted = False
+        self.accepted_on = None
         db.session.commit()
         return True
 
