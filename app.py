@@ -36,7 +36,7 @@ application = Flask(__name__, static_url_path='', static_folder='static')
 application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 application.config['REDIS_URL'] = 'redis://redis:6379/0'
 application.config['QUEUES'] = ['default']
-application.config['FLASK_ADMIN_SWITCH'] = 'cerulean'
+application.config['FLASK_ADMIN_SWITCH'] = 'orange'
 application.debug=True
 # change this to your own value
 application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
@@ -243,7 +243,6 @@ def apply():
 @application.route('/confirm/<token>')
 def confirm_email(token):
     email = decode_token(token)
-    print(f'email {email}')
     if not email:
         flash('The confirmation link is invalid or expired.')
         return redirect(url_for('index'))

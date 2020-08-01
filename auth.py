@@ -1,4 +1,5 @@
 from gettext import ngettext
+from flask_admin import expose
 from flask_admin.actions import action
 from flask_admin.contrib.sqla import ModelView
 
@@ -7,6 +8,13 @@ from flask import flash
 
 
 class UserView(ModelView):
+    ''' admin view for user model '''
+    column_exclude_list = ['password']
+    can_export = True
+    column_extra_row_actions = [
+                EndpointLinkRowAction('glyphicon glyphicon-play', 'event.action_play')
+            ]
+
     @action('accept', 'Accept', 'Are you sure you want to accept the selected users?')
     def action_accept(self, ids):
         try:
@@ -43,3 +51,8 @@ class UserView(ModelView):
             if not self.handle_view_exception(e):
                 raise
             flash(gettext('Failed to reject users. %(error)s', error=str(ex)), 'error')
+
+
+# class ReportView(ModelView):
+#     ''' admin view for user reports '''
+#     @expose('/')
