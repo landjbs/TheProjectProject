@@ -297,9 +297,9 @@
     <div class='hoverable'>
       <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
       <span class='tooltiptext'>
-        <a href="{{ url_for('report_user', target_user_id=target_user.id) }}">
+        <button type='button' data-toggle='modal' data-target='#report_modal_{{ target_user.id }}' class='btn'>
           Report User
-        </a>
+        </button>
       </span>
     </div>
     &nbsp;
@@ -539,7 +539,7 @@
       <form action="{{ url_for('report_user', target_user_id=target_user.id) }}">
         <div class="modal-body">
             <p>
-              TheProjectProject is built as a safe, welcoming place full of innovation
+              TheProjectProject is intended to be a safe, welcoming place full of innovation
               and passion. We take violations of our community guidelines very seriously,
               and thank you for reporting this potential infraction. Please tell us
               what happened:
@@ -548,7 +548,7 @@
               <br>
               This report is totally anonymous: {{ target_user.name }} will not
               be given any information without your permission. If necessary, we
-              we may want to follow up with you as we investigate. 
+              we may want to follow up with you as we investigate.
             </p>
         </div>
         <div class="modal-footer">
