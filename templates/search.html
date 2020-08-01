@@ -110,7 +110,9 @@
   {% for tab in user_tabs %}
     {% for user in tab %}
       {{ macros.render_collaborate_modal(current_user, user) }}
-      {{ macros.render_report_modal(user) }}
+      {% if not user==current_user %}
+        {{ macros.render_report_modal(user) }}
+      {% endif %}
     {% endfor %}
   {% endfor %}
 
