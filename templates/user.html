@@ -35,7 +35,12 @@
                   {% endif %}
                 </p>
                 <a href='/user={{ user.code }}'>
-                  <h3>{{ user.name }}</h3>
+                  <h3>
+                    {{ user.name }}
+                    {% if user.active %}
+                      <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+                    {% endif %}
+                  </h3>
                 </a>
                 {% if current_user.is_authenticated %}
                   <a href='mailto:{{ user.email }}'>

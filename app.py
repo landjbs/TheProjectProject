@@ -282,6 +282,8 @@ def reset():
 @application.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated and current_user.accepted:
+        current_user.active = True
+        db.session.commit()
         return redirect(url_for('home'))
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
@@ -311,6 +313,7 @@ def login():
 def logout():
     logout_user()
     user.active = False
+    db.session.add(user)
     db.session.commit()
     return redirect(url_for('index'))
 
