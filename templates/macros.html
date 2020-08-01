@@ -526,6 +526,60 @@
 {% endmacro -%}
 
 
+{% macro render_report_modal(target_user) -%}
+<div id="modal_user_{{ target_user.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <a href='user={{ target_user.code }}' style='color:black;'>
+          <h5>{{ target_user.name }}</h5>
+        </a>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      {% if (current_user.owned|length)>0 %}
+      <form action="{{ url_for('collaborate', target_user_id=target_user.id) }}" method='post'>
+        <div class="modal-body">
+          <label for="new_owner">Select project on which to collaborate with {{ target_user.name }}:</label>
+          <br>
+          <select name="selected_project" id="selected_project" class='select-clean'>
+            {% for project in current_user.owned %}
+              {% if (project.complete!=True) and (project.open==True) %}
+                {% if project==target_project %}
+                  <option value="{{ project.id }}" selected>{{ project.name }}</option>
+                {% else %}
+                  <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </select>
+          <br><br>
+          <p>{{ target_user.name }} will be sent an invitation
+            and will be able to join without applying.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>Collaborate</button>
+        </div>
+      </form>
+      {% else %}
+        <div class="modal-body">
+          <p>Cannot invite {{ target_user.name }} to collaborate because
+            you do not own any projects! Try <a href='/add_project'>adding a project</a> first.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href='/add_project'>
+            <button class='btn'>Add Project</button>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
 {% macro render_edit_project_modal(project, edit_form, completion_data) -%}
 <div id="edit_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
