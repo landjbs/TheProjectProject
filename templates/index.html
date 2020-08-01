@@ -54,10 +54,7 @@
     let el = document.createElement('div');
     const rotate = (360 / numberOfEls) * i;
     const translateY = -50;
-    // start: 22; end: 262; span: 240
-    // const hue = Math.round((240 * Math.cos(i / (2 * 3.14))) + 22);
-    const hue = Math.round(100 * (Math.cos(((numberOfEls * i) / 2*3.1456)) + 182));
-    // const hue = Math.round(120 / numberOfEls * i) + 22;
+    const hue = Math.round(360 / numberOfEls * i);
     el.classList.add('el');
     el.style.backgroundColor = 'hsl(' + hue + ', 100%, 50%)';
     el.style.transform = 'rotate(' + rotate + 'deg) translateY(' + translateY + '%)';
