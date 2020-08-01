@@ -71,6 +71,12 @@ class UserView(ModelView):
             flash(gettext('Failed to reject users. %(error)s', error=str(ex)), 'error')
 
 
-# class ReportView(ModelView):
-#     ''' admin view for user reports '''
-#     @expose('/')
+class ReportView(ModelView):
+    ''' admin view for user reports '''
+    column_extra_row_actions = [
+        EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'user_report.resolve_report')
+    ]
+
+    @expose('/action/resolve_report', methods=('GET',))
+    def resolve_report():
+        pass
