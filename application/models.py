@@ -145,12 +145,13 @@ class User(db.Model, UserMixin):
     github = Column(String(254), unique=True, nullable=True)
     # about
     about = Column(String(500), nullable=False)
-    ## setup ##
+    ## permissions and other bools ##
     emailed = Column(Boolean, nullable=False, default=False)
     confirmed = Column(Boolean, nullable=False, default=False)
     accepted = Column(Boolean, nullable=False, default=False)
     applied_on = Column(DateTime, nullable=False, default=datetime.utcnow)
     accepted_on = Column(DateTime, nullable=True)
+    active = Column(Boolean, nullable=False, default=False)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',
