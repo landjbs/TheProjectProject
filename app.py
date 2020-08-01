@@ -312,14 +312,6 @@ def logout():
     return redirect(url_for('index'))
 
 
-# TODO: MAKE SECURE
-@application.route('/admin', methods=['GET', 'POST'])
-def admin():
-    users = db.session.query(User)
-    reports = User_Report.query.all()
-    return render_template('admin.html', users=users, reports=reports)
-
-
 @application.route('/accept', methods=['POST'])
 def accept():
     user = query_user_by_id(request.form['accept'])
@@ -354,10 +346,17 @@ def partition_query(l, n=3):
         yield l[i:i+n]
 
 
+@application.route('/admin', methods=['GET', 'POST'])
+@login_required
+def admin():
+    users = db.session.query(User)
+    reports = User_Report.query.all()
+    return render_template('admin.html', users=users, reports=reports)
+
+
 @application.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-    if current_user.admin==True
     # recommended projects
     recs = rec.recommend_projects(current_user)
     # recs = db.session.query(Project).limit(30)
