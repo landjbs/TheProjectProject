@@ -15,6 +15,8 @@ class UserView(ModelView):
     can_export = True
     column_extra_row_actions = [
         EndpointLinkRowAction('glyphicon glyphicon-ok', 'user.accept_single')
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'user.reject_single')
+        'glyphicon glyphicon-remove'
     ]
 
     @expose('/action/accept_single', methods=('GET',))
