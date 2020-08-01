@@ -176,7 +176,9 @@ def apply():
         ## unique validation ##
         error_flag = False
         # unique email
-        if User.query.filter_by(email=form.email.data).first() is not None:
+        u_query = User.query.filter_by(email=form.email.data).first()
+        a_query = Admin.query.filter_by(email=form.email.data).first()
+        if (u_query is not None) or (a_query is not None):
             form.email.errors = ['An account with that email is already registered.']
             error_flag = True
         # unique github
