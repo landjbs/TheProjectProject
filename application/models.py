@@ -432,7 +432,7 @@ class Comment(db.Model):
     timestamp = Column(DateTime, default=datetime.utcnow, index=True)
 
     def __repr__(self):
-        return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}>'
+        return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}; TEXT={self.text}>'
 
 
 class Notification(db.Model):
@@ -447,6 +447,9 @@ class Notification(db.Model):
     # timestamp
     timestamp = Column(DateTime, default=datetime.utcnow, index=True)
 
+    def __repr__(self):
+        return f'<Notification to {self.users} at {self.timestamp}; TEXT={self.text}>'
+
 
 class Badge(db.Model):
     __tablename__ = 'badge'
@@ -460,6 +463,9 @@ class Badge(db.Model):
     color = Column(String(6), unique=True, nullable=False)
     # users
     users = relationship('User_Badge', back_populates='badge', lazy='dynamic')
+
+    def __repr__(self):
+        return f'<Badge {self.name}>'
 
 
 class User_Report(db.Model):
