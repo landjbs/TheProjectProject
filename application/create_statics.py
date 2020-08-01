@@ -39,10 +39,12 @@ subjects = [# data/math/ai
             # dev/engineering
             Subject('Mobile Dev',               '#E333FF'),
             Subject('Web Dev',                  '#8D33FF'),
-            Subject('Research',                 '#DDFF33'),
             Subject('Software Engineering',     '#AF33FF'),
+
+            # project type
+            Subject('Research',                 '#DDFF33'),
             Subject('Social Issues',            '#33DAFF'),
-            Subject('Startup',                  '#33C1FF'),
+            Subject('Startup',                  '#33C1FF')
             ]
 
 
