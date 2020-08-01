@@ -411,24 +411,10 @@ class Badge(db.Model):
 class User_Report(db.Model):
     __tablename__ = 'user_report'
     id = Column(Integer, primary_key=True)
-    reporter_id = Column(Integer, ForeignKey(User.id)) #, primary_key=True, unique=False)
-    reported_id = Column(Integer, ForeignKey(User.id)) #, primary_key=True, unique=False)
-
+    reporter_id = Column(Integer, ForeignKey(User.id))
+    reported_id = Column(Integer, ForeignKey(User.id))
     reporter = relationship('User', foreign_keys='User_Report.reporter_id')
     reported = relationship('User', foreign_keys='User_Report.reported_id')
-
-    # id
-    # id = Column(Integer, primary_key=True)
-    # reporter: user who posted report
-    # reporter_id = Column(Integer, ForeignKey('user.id'))
-    # reporter = relationship('User', foreign_keys=reporter_id,
-    #                         primaryjoin=(reporter_id==User.id),
-    #                         backref=backref('reports_posted', order_by=id))
-    # reported: user described in report
-    # reported_id = Column(Integer, ForeignKey('user.id'))
-    # reported = relationship('User', foreign_keys=reported_id,
-    #                         primaryjoin=(reported_id==User.id),
-    #                         backref=backref('reports', order_by=id))
     ## description ##
     # report description
     text = Column('text', String(250), nullable=True)
