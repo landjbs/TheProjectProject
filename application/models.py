@@ -406,7 +406,7 @@ class Subject(db.Model):
     # name
     name = Column(String(128), unique=True, nullable=False)
     # color
-    color = Column(String(6), unique=True, nullable=False)
+    color = Column(String(7), unique=True, nullable=False)
     # code
     code = Column(String(128), unique=True, nullable=False)
     # users

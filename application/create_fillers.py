@@ -40,7 +40,7 @@ users = [User(name='Landon Smith',
             github='www.github.com/maxbobby',
             password='boop')]
 
-subject_ids = [[i for i in np.random.choice(range(len(Subject.query.all())), size=5)]
+subject_ids = [[int(i) for i in np.random.choice(range(len(Subject.query.all())), size=5)]
                 for _ in range(len(users))]
 
 for i, user in enumerate(users):

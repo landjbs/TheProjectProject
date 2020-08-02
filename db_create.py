@@ -7,6 +7,7 @@ except:
 from application import db
 from application.models import *
 
+db.drop_all()
 db.create_all()
 
 from application.create_fillers import create_fillers
