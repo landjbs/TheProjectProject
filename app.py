@@ -282,7 +282,6 @@ def reset():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    print('MAIN')
     if current_user.is_authenticated and current_user.accepted:
         current_user.active = True
         db.session.commit()
@@ -314,13 +313,12 @@ def login():
 def login_admin():
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
-        admin = Admin_User.query.filter_by(email=form.email.data).first()
-        if not admin is None and admin.check_password(form.password.data):
+        user = Admin_User.query.filter_by(email=form.email.data).first()
+        if not user is None and user.check_password(form.password.data):
             if current_user.is_authenticated:
                 logout_user(current_user)
-            login_user(admin)
-            print(f'cur: {current_user}')
-            print(f'isadmin: {current_user.is_admin()}')
+            login_user(user)
+            db.session.commit()
             # return redirect(url_for('admin'))
     return render_template('login.html', form=form, start_on=0)
 
@@ -334,29 +332,29 @@ def logout():
     return redirect(url_for('index'))
 
 
-@application.route('/accept', methods=['POST'])
-def accept():
-    user = query_user_by_id(request.form['accept'])
-    n1 = Notification(text=('Welcome to TheProjectProject, '
-                            f'{user.name}! We are excited to have you.'))
-    n2 = Notification(text=('You can browse and join projects below or '
-                            'create and manage your own project with the '
-                            '"add project" tab. We recommend you start by '
-                            'adding projects you have already worked on to '
-                            'showcase your experience.'))
-    for n in [n1, n2]:
-        user.notifications.append(n)
-    setattr(user, 'accepted', True)
-    db.session.commit()
-    return admin()
-
-
-@application.route('/reject', methods=['POST'])
-def reject():
-    user = query_user_by_id(request.form['reject'])
-    setattr(user, 'accepted', False)
-    db.session.commit()
-    return admin()
+# @application.route('/accept', methods=['POST'])
+# def accept():
+#     user = query_user_by_id(request.form['accept'])
+#     n1 = Notification(text=('Welcome to TheProjectProject, '
+#                             f'{user.name}! We are excited to have you.'))
+#     n2 = Notification(text=('You can browse and join projects below or '
+#                             'create and manage your own project with the '
+#                             '"add project" tab. We recommend you start by '
+#                             'adding projects you have already worked on to '
+#                             'showcase your experience.'))
+#     for n in [n1, n2]:
+#         user.notifications.append(n)
+#     setattr(user, 'accepted', True)
+#     db.session.commit()
+#     return admin()
+#
+#
+# @application.route('/reject', methods=['POST'])
+# def reject():
+#     user = query_user_by_id(request.form['reject'])
+#     setattr(user, 'accepted', False)
+#     db.session.commit()
+#     return admin()
 
 ## HOME ##
 def partition_query(l, n=3):

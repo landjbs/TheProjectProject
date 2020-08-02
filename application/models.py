@@ -220,13 +220,17 @@ class User(db.Model, UserMixin):
                            lazy='dynamic')
 
 
-    def __init__(self, name, email, password, github, about):
+    def __init__(self, name, email, password, github, about, admin=False):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
         self.password = self.set_password(password)
         self.github = str(github) if github!='' else None
         self.about = str(about)
+        self.admin = admin
+        self.accepted = True if admin else False
+        self.accepted = True if admin else False
+        self.confirmed = True if admin else False
 
     def __repr__(self):
         return f'<User {self.name}>'
@@ -245,7 +249,7 @@ class User(db.Model, UserMixin):
         return False
 
     def is_admin(self):
-        return False
+        return self.admin
 
     def accept(self):
         # if not self.confirmed:

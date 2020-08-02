@@ -57,15 +57,16 @@ subjects = [# data/math/ai:    red
 #           Badge(' ')
 #           ]
 
-admins = [Admin_User(name='Admin', email='landon@theprojectproject.io',
-                     password='boop')]
-
-
+# admins = [Admin_User(name='Admin', email='landon@theprojectproject.io',
+#                      password='boop')]
+#
+#
 def create_admins():
-    for admin in admins:
-        db.session.add(admin)
-    db.session.commit()
-    return True
+    pass
+    # for admin in admins:
+    #     db.session.add(admin)
+    # db.session.commit()
+    # return True
 
 
 def create_subjects():
