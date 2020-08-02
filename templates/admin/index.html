@@ -3,12 +3,28 @@
   {% extends 'admin/master.html' %}
 
   {% block body %}
-    <p>Hello {{ current_user.name }}.</p>
+    <p>Hello, {{ current_user.name }}.</p>
   {% endblock %}
 
 {% else %}
-  {% extends 'base.html' %}
-  {% block head %}
-    {{ super() }}
-  {% endblock %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+                                  initial-scale=1,
+                                  shrink-to-fit=no">
+    <meta name="description" content="Welcome to the The Project Project!
+                                      We're excited to have you.">
+    <meta name="author" content="Landon Smith">
+      <title>Admin | TheProjectProject</title>
+    <style>
+    body {
+      background: black;
+      color: white;
+    }
+    </style>
+  </head>
+
+  <body>
+    <h1>Not Authorized</h1>
+  </body>
 {% endif %}
