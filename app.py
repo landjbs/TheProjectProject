@@ -314,9 +314,9 @@ def login_admin():
     if request.method=='POST' and form.validate():
         admin = Admin_User.query.filter_by(email=form.email.data).first()
         if not admin is None and admin.check_password(form.password.data):
-            print('logged in')
             login_user(admin)
             print(f'cur: {current_user}')
+            print(f'isadmin: {current_user.is_admin()}')
             return redirect(url_for('admin'))
     return render_template('login.html', form=form, start_on=0)
 
