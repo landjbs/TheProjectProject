@@ -1,5 +1,14 @@
-{% extends 'admin/master.html' %}
+{% if current_user.admin %}
 
-{% block body %}
-  <p>Hello {{ current_user.name }}.</p>
-{% endblock %}
+  {% extends 'admin/master.html' %}
+
+  {% block body %}
+    <p>Hello {{ current_user.name }}.</p>
+  {% endblock %}
+
+{% else %}
+  {% extends 'base.html' %}
+  {% block head %}
+    {{ super() }}
+  {% endblock %}
+{% endif %}
