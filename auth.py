@@ -1,5 +1,6 @@
 # admin
 from gettext import ngettext
+from flask_login import current_user
 from flask_admin import expose
 from flask_admin.actions import action
 from flask_admin.model.template import EndpointLinkRowAction

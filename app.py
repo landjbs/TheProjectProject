@@ -309,14 +309,16 @@ def login():
 
 
 @application.route('/login_admin', methods=['GET', 'POST'])
-def login():
+def login_admin():
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
         admin = Admin_User.query.filter_by(email=form.email.data).first()
+        print(admin)
         if not admin is None and admin.check_password(form.password.data):
             login_user(admin)
-            return admin()
-    return render_template('login.html', form=form)    
+            return redirect(url_for('admin'))
+    return render_template('login.html', form=form, start_on=0)
+
 
 @application.route('/logout')
 @login_required
