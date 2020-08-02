@@ -164,14 +164,14 @@ def query_user_by_email(email):
 
 
 ## error handling ##
-@application.errorhandler(404)
-def page_not_found(e):
-    return (render_template('404.html'), 404)
-
-
-@application.errorhandler(403)
-def page_not_found(e):
-    return (render_template('403.html'), 403)
+# @application.errorhandler(404)
+# def page_not_found(e):
+#     return (render_template('404.html'), 404)
+#
+#
+# @application.errorhandler(403)
+# def page_not_found(e):
+#     return (render_template('403.html'), 403)
 
 
 ## index routes ##
