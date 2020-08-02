@@ -54,6 +54,11 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="/add_project">add project</a>
             </li>
+            {% if current_user.admin %}
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="/admin">admin</a>
+            </li>
+            {% endif %}
           </ul>
           {% if current_user.is_authenticated %}
             <li class="nav-item" style='list-style-type:none;'>
