@@ -53,9 +53,6 @@ limiter = Limiter(application, key_func=get_remote_address)
 
 # admin
 admin = Admin(application, template_mode='bootstrap3')
-# nav links
-admin.add_link(MenuLink(name='Home', url='/home', category='Links'))
-admin.add_link(MenuLink(name='Logout', url='/logout', category='Links'))
 # model views
 admin.add_view(UserView(User, db.session))
 admin.add_view(AdminBaseView(Project, db.session))
@@ -65,6 +62,9 @@ admin.add_view(AdminBaseView(Subject, db.session))
 admin.add_view(ReportView(User_Report, db.session))
 admin.add_view(AdminBaseView(Project_Application, db.session))
 admin.add_view(AdminBaseView(Notification, db.session))
+# nav links
+admin.add_link(MenuLink(name='Home', url='/home', category='Links'))
+admin.add_link(MenuLink(name='Logout', url='/logout', category='Links'))
 
 
 @login_manager.user_loader
