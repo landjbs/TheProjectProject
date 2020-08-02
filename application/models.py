@@ -185,6 +185,7 @@ class User(db.Model, UserMixin):
     applied_on = Column(DateTime, nullable=False, default=datetime.utcnow)
     accepted_on = Column(DateTime, nullable=True)
     active = Column(Boolean, nullable=False, default=False)
+    last_active = Column(DateTime, nullable=True)
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',
