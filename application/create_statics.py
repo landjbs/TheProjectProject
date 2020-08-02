@@ -2,7 +2,7 @@ import sys
 sys.path.append('.')
 
 from application import db
-from application.models import Subject, Badge
+from application.models import Subject, Badge, Admin_User
 
 
 subjects = [# data/math/ai:    red
@@ -57,15 +57,15 @@ subjects = [# data/math/ai:    red
 #           Badge(' ')
 #           ]
 
-# admins = [Admin(name='Admin', email='landon@theprojectproject.io',
-#                 password='boop')]
-#
-#
-# def create_admins():
-#     for admin in admins:
-#         db.session.add(admin)
-#     db.session.commit()
-#     return True
+admins = [Admin_User(name='Admin', email='landon@theprojectproject.io',
+                     password='boop')]
+
+
+def create_admins():
+    for admin in admins:
+        db.session.add(admin)
+    db.session.commit()
+    return True
 
 
 def create_subjects():

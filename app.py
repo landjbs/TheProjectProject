@@ -22,7 +22,7 @@ from rq import Queue, Connection
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject, User_Report,
-                                Project_Application, Notification, Anonymous)
+                                Project_Application, Notification, Anonymous, Admin_User)
 import application.forms as forms
 import application.tasks as tasks
 from flask_admin import Admin

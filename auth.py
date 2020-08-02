@@ -15,7 +15,7 @@ class AdminBaseView(ModelView):
     def is_accessible(self):
         return (current_user.is_active and
                 current_user.is_authenticated and
-                current_user.admin)
+                current_user.is_admin())
 
     def _handle_view(self, name, **kwargs):
         if not self.is_accessible():

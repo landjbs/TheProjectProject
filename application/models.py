@@ -136,8 +136,21 @@ class Admin_User(db.Model, UserMixin):
     email = Column(String(254), unique=True, nullable=False)
     # password
     password = Column(String(254), nullable=False)
-    ## permissions ##
-    admin = True
+
+    def __init__(self, name, email, password):
+        self.name = name
+        self.email = email
+        self.password = self.set_password(password)
+
+    def set_password(self, password):
+        return str(generate_password_hash(password))
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
+    def is_admin(self):
+        return True
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
@@ -223,6 +236,9 @@ class User(db.Model, UserMixin):
         return self.accepted
 
     def is_anonymous(self):
+        return False
+
+    def is_admin(self):
         return False
 
     def accept(self):
