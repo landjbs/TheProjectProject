@@ -229,7 +229,7 @@ class User(db.Model, UserMixin):
         self.about = str(about)
         self.admin = admin
         self.accepted = True if admin else False
-        self.accepted = True if admin else False
+        self.emailed = True if admin else False
         self.confirmed = True if admin else False
 
     def __repr__(self):

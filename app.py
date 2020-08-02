@@ -6,9 +6,6 @@ from flask import (Flask, render_template, request, flash, redirect,
 from flask_login import (current_user, login_user, logout_user,
                          login_required, LoginManager)
 from flask_limiter import Limiter
-# auth/
-import auth
-# /auth
 from flask_limiter.util import get_remote_address
 from datetime import datetime
 from dateutil import tz
@@ -26,6 +23,7 @@ from application.models import (User, Project, Comment, Task, Subject, User_Repo
 import application.forms as forms
 import application.tasks as tasks
 from flask_admin import Admin
+from flask_admin.menu import MenuLink
 from auth import UserView, ReportView, AdminBaseView
 import manager as manager
 import recommendation as rec
@@ -55,6 +53,10 @@ limiter = Limiter(application, key_func=get_remote_address)
 
 # admin
 admin = Admin(application, template_mode='bootstrap3')
+# nav links
+admin.add_link(MenuLink(name='Home', url='/home', category='Links'))
+admin.add_link(MenuLink(name='Logout', url='/logout', category='Links'))
+# model views
 admin.add_view(UserView(User, db.session))
 admin.add_view(AdminBaseView(Project, db.session))
 admin.add_view(AdminBaseView(Comment, db.session))

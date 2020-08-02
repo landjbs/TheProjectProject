@@ -17,7 +17,6 @@ class AdminBaseView(ModelView):
         super(AdminBaseView, self).__init__(*args, **kwargs)
 
     def is_accessible(self):
-        print(f'HERE: {current_user}')
         return (current_user.is_admin())
 
     def _handle_view(self, name, **kwargs):
