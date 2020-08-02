@@ -163,6 +163,18 @@ def query_user_by_email(email):
     return db.session.query(User).filter_by(email=email).first()
 
 
+## error handling ##
+@application.errorhandler(404)
+def page_not_found(e):
+    return (render_template('404.html'), 404)
+
+
+@application.errorhandler(403)
+def page_not_found(e):
+    return (render_template('403.html'), 403)
+
+
+## index routes ##
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
@@ -284,7 +296,7 @@ def reset():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated and current_user.accepted:
+    if current_user.is_authenticated:
         current_user.active = True
         db.session.commit()
         return redirect(url_for('home'))

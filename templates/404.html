@@ -1,0 +1,19 @@
+{% if current_user.accepted %}
+  {% extends 'home_base.html' %}
+{% else %}
+  {% extends 'base.html' %}
+{% endif %}
+
+{% block title %}404{% endblock %}
+
+
+{% block content %}
+  <div class='big-box'>
+    <h1 style='font-size:800%;'>Oops!</h1>
+    <p>
+      We could not find the page you're looking for :(
+      <br>
+      Please <a href='/contact'>contact us</a> if you're having any issues.
+    </p>
+  </div>
+{% endblock %}

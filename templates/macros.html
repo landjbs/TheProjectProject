@@ -176,7 +176,7 @@
         <a class='project-name' href='user={{ user.code }}'>
           <h5>
             {{ user.name }}
-            {% if user.active %}
+            {% if user.recently_active() %}
               <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
             {% endif %}
           </h5>

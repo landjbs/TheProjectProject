@@ -243,12 +243,18 @@ class User(db.Model, UserMixin):
     def is_active(self):
         return self.active
 
-    def recently_active(self, second_window=60):
+    def recently_active(self, second_window=302400):
+        ''' second_window: number of seconds to count as recent.
+            currently half a week.
+            (week=604800), ()
+        '''
         if self.active:
             return True
         if not self.last_active:
             return False
+        print('HERE')
         diff = (datetime.utcnow() - self.last_active).seconds
+        print(diff)
         if diff>second_window:
             return False
         return True
