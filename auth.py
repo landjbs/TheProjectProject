@@ -1,6 +1,3 @@
-# security
-from flask_security import (Security, SQLAlchemyUserDatastore,
-                            UserMixin, RoleMixin, login_required)
 # admin
 from gettext import ngettext
 from flask_admin import expose
@@ -10,14 +7,24 @@ from flask_admin.contrib.sqla import ModelView
 
 import application.models as models
 from flask import (Flask, render_template, request, flash, redirect,
-                   url_for, session)
-
-## USER
+                   url_for, session, abort)
 
 
+## views ##
+class AdminBaseView(ModelView):
+    def is_accessible(self):
+        return (current_user.is_active and
+                current_user.is_authenticated and
+                current_user.admin)
+
+    def _handle_view(self, name, **kwargs):
+        if not self.is_accessible():
+            if current_user.is_authenticated:
+                abort(403)
+            else:
+                return redirect(url_for('security.login', next=request.url))
 
 
-## ADMIN
 class UserView(ModelView):
     ''' admin view for user model '''
     column_exclude_list = ['password']
