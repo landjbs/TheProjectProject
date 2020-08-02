@@ -90,7 +90,7 @@ class UserView(AdminBaseView):
             flash(gettext('Failed to reject users. %(error)s', error=str(ex)), 'error')
 
 
-class ReportView(ModelView):
+class ReportView(AdminBaseView):
     ''' admin view for user reports '''
     column_extra_row_actions = [
         EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'user_report.resolve_report')
