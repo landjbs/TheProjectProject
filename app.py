@@ -411,7 +411,7 @@ def home():
 
 @application.route('/add_project', methods=['GET', 'POST'])
 @login_required
-@limiter.limit('2 per minute')
+@limiter.limit('10 per minute')
 def add_project():
     form = forms.Add_Project(request.form)
     if request.method=='POST' and form.validate_on_submit():

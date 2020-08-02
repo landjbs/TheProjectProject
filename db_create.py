@@ -16,11 +16,11 @@ create_fillers()
 print("DB created.")
 
 # from manager import add_role_to_user, add_user_to_project
-# 
+#
 # for role in range(1,5):
     # add_role_to_user(db.session.query(Project).get(1), db.session.query(User).get(1),
                      # db.session.query(Role).get(role))
-# 
+#
 # add_user_to_project(db.session.query(Project).get(1), db.session.query(User).get(2),
                     # db.session.query(Role).get(3))
 
