@@ -13,7 +13,11 @@ from flask import (Flask, render_template, request, flash, redirect,
 
 ## views ##
 class AdminBaseView(ModelView):
+    def __init__(self, *args, **kwargs):
+        super(AdminBaseView, self).__init__(*args, **kwargs)
+
     def is_accessible(self):
+        print(current_user.is_admin())
         return (current_user.is_admin())
 
     def _handle_view(self, name, **kwargs):
