@@ -289,12 +289,9 @@
                                   <span class='tooltiptext'>Delete Task</span>
                                 </div>
                               {% endif %}
-                              <div class='hoverable'>
-                                <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
-                                  <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                </a>
-                                <span class='tooltiptext'>Mark Complete</span>
-                              </div>
+                              <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                              </a>
                             </div>
                           {% endif %}
                         </div>
@@ -353,12 +350,9 @@
                                   <span class='tooltiptext'>Actually, I Didn't Help</span>
                                 </div>
                               {% else %}
-                                <div class='hoverable'>
-                                  <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
-                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                  </a>
-                                  <span class='tooltiptext'>I Helped!</span>
-                                </div>
+                                <a class='complete-btn task-btn float-right' href="{{ url_for('mark_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                </a>
                               {% endif %}
                             </div>
                           {% endif %}
