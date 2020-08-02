@@ -282,6 +282,7 @@ def reset():
 
 @application.route('/login', methods=['GET', 'POST'])
 def login():
+    print('MAIN')
     if current_user.is_authenticated and current_user.accepted:
         current_user.active = True
         db.session.commit()
@@ -315,10 +316,12 @@ def login_admin():
     if request.method=='POST' and form.validate():
         admin = Admin_User.query.filter_by(email=form.email.data).first()
         if not admin is None and admin.check_password(form.password.data):
+            if current_user.is_authenticated:
+                logout_user(current_user)
             login_user(admin)
-            # print(f'cur: {current_user}')
-            # print(f'isadmin: {current_user.is_admin()}')
-            return redirect(url_for('admin'))
+            print(f'cur: {current_user}')
+            print(f'isadmin: {current_user.is_admin()}')
+            # return redirect(url_for('admin'))
     return render_template('login.html', form=form, start_on=0)
 
 
@@ -363,14 +366,6 @@ def partition_query(l, n=3):
         c = len(l)
     for i in range(0, c, n):
         yield l[i:i+n]
-
-
-@application.route('/admin', methods=['GET', 'POST'])
-@login_required
-def admin():
-    users = db.session.query(User)
-    reports = User_Report.query.all()
-    return render_template('admin.html', users=users, reports=reports)
 
 
 @application.route('/home', methods=['GET', 'POST'])
