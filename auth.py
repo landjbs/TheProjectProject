@@ -28,7 +28,7 @@ class AdminBaseView(ModelView):
                 return redirect(url_for('login', next=request.url))
 
 
-class UserView(AdminBaseView):
+class UserView(ModelView):
     ''' admin view for user model '''
     column_exclude_list = ['password']
     can_export = True
