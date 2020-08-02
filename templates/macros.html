@@ -174,7 +174,12 @@
     <div class="card-body">
       <div class='card-head little'>
         <a class='project-name' href='user={{ user.code }}'>
-          <h5>{{ user.name }}</h5>
+          <h5>
+            {{ user.name }}
+            {% if user.active %}
+              <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+            {% endif %}
+          </h5>
         </a>
         <a href='mailto:{{ user.email }}'>
           <p>{{ user.email }}</p>

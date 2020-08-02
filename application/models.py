@@ -146,6 +146,7 @@ class User(db.Model, UserMixin):
     # about
     about = Column(String(500), nullable=False)
     ## permissions and other bools ##
+    admin = Column(Boolean, nullable=False, default=False)
     emailed = Column(Boolean, nullable=False, default=False)
     confirmed = Column(Boolean, nullable=False, default=False)
     accepted = Column(Boolean, nullable=False, default=False)

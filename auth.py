@@ -1,3 +1,7 @@
+# security
+from flask_security import (Security, SQLAlchemyUserDatastore,
+                            UserMixin, RoleMixin, login_required)
+# admin
 from gettext import ngettext
 from flask_admin import expose
 from flask_admin.actions import action
@@ -8,7 +12,12 @@ import application.models as models
 from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session)
 
+## USER
 
+
+
+
+## ADMIN
 class UserView(ModelView):
     ''' admin view for user model '''
     column_exclude_list = ['password']

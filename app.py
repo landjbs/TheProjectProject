@@ -311,10 +311,9 @@ def login():
 @application.route('/logout')
 @login_required
 def logout():
-    logout_user()
-    user.active = False
-    db.session.add(user)
+    current_user.active = False
     db.session.commit()
+    logout_user()
     return redirect(url_for('index'))
 
 
