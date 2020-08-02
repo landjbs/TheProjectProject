@@ -8,10 +8,9 @@ from application import db
 from application.models import User, Subject
 
 SES_REGION = 'us-east-1'
-SES_EMAIL_SOURCE = 'landjbs@gmail.com'
-# # TEMP: SENDS FROM STRADA
-AWS_ACCESS_KEY_ID = 'AKIAQVSLC6YUUQDAFFUD'
-AWS_SECRET_ACCESS_KEY= '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'
+SES_EMAIL_SOURCE = 'admin@theprojectproject.io'
+AWS_ACCESS_KEY_ID = 'AKIAQVSLC6YU44B3L5FB'
+AWS_SECRET_ACCESS_KEY= '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'
 
 def send_email(user_email, body):
     ses = boto3.client('ses',
