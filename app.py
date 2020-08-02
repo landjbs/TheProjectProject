@@ -308,6 +308,16 @@ def login():
     return render_template('login.html', form=form, start_on=start_on)
 
 
+@application.route('/login_admin', methods=['GET', 'POST'])
+def login():
+    form = forms.Login(request.form)
+    if request.method=='POST' and form.validate():
+        admin = Admin_User.query.filter_by(email=form.email.data).first()
+        if not admin is None and admin.check_password(form.password.data):
+            login_user(admin)
+            return admin()
+    return render_template('login.html', form=form)    
+
 @application.route('/logout')
 @login_required
 def logout():
