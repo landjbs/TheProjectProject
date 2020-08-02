@@ -243,6 +243,17 @@ class User(db.Model, UserMixin):
     def is_active(self):
         return self.active
 
+    def recently_active(self, second_window=60):
+        if self.active:
+            return True
+        if not self.last_active:
+            return False
+        diff = (datetime.utcnow() - self.last_active).seconds
+        if diff>second_window:
+            return False
+        return True
+
+
     def is_authenticated(self):
         return self.accepted
 

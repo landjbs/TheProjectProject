@@ -301,6 +301,7 @@ def login():
         else:
             login_user(user)
             user.active = True
+            user.last_active = datetime.utcnow()
             db.session.commit()
             return home()
     start_on = 0
@@ -329,6 +330,7 @@ def login_admin():
 @login_required
 def logout():
     current_user.active = False
+    user.last_active = datetime.utcnow()
     db.session.commit()
     logout_user()
     return redirect(url_for('index'))
