@@ -126,6 +126,19 @@ class Anonymous(AnonymousUserMixin):
         return False
 
 
+class Admin_User(db.Model, UserMixin):
+    __tablename__ = 'admin_user'
+    # id
+    id = Column(Integer, primary_key=True)
+    # name
+    name = Column(String(128), unique=False)
+    # email
+    email = Column(String(254), unique=True, nullable=False)
+    # password
+    password = Column(String(254), nullable=False)
+    ## permissions ##
+    admin = True
+
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     # id primary key

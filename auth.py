@@ -22,10 +22,10 @@ class AdminBaseView(ModelView):
             if current_user.is_authenticated:
                 abort(403)
             else:
-                return redirect(url_for('security.login', next=request.url))
+                return redirect(url_for('login', next=request.url))
 
 
-class UserView(ModelView):
+class UserView(AdminBaseView):
     ''' admin view for user model '''
     column_exclude_list = ['password']
     can_export = True
