@@ -142,6 +142,9 @@ class Admin_User(db.Model, UserMixin):
         self.email = email
         self.password = self.set_password(password)
 
+    def __repr__(self):
+        return f'<Admin_User {self.name}>'
+
     def set_password(self, password):
         return str(generate_password_hash(password))
 
