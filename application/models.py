@@ -119,6 +119,9 @@ class Anonymous(AnonymousUserMixin):
     def __init__(self):
         super(Anonymous, self).__init__()
 
+    def is_admin(self):
+        return False
+
     def has_starred(self, project):
         return False
 

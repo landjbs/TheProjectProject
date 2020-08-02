@@ -164,6 +164,7 @@ def query_user_by_email(email):
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
+    print(f'index: {current_user}')
     return render_template('index.html')
 
 
@@ -315,8 +316,8 @@ def login_admin():
         admin = Admin_User.query.filter_by(email=form.email.data).first()
         if not admin is None and admin.check_password(form.password.data):
             login_user(admin)
-            print(f'cur: {current_user}')
-            print(f'isadmin: {current_user.is_admin()}')
+            # print(f'cur: {current_user}')
+            # print(f'isadmin: {current_user.is_admin()}')
             return redirect(url_for('admin'))
     return render_template('login.html', form=form, start_on=0)
 

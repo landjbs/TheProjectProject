@@ -17,7 +17,7 @@ class AdminBaseView(ModelView):
         super(AdminBaseView, self).__init__(*args, **kwargs)
 
     def is_accessible(self):
-        print(current_user.is_admin())
+        print(f'HERE: {current_user}')
         return (current_user.is_admin())
 
     def _handle_view(self, name, **kwargs):
@@ -28,7 +28,7 @@ class AdminBaseView(ModelView):
                 return redirect(url_for('login', next=request.url))
 
 
-class UserView(ModelView):
+class UserView(AdminBaseView):
     ''' admin view for user model '''
     column_exclude_list = ['password']
     can_export = True
