@@ -218,7 +218,9 @@ def create_project(project, user=None):
         add_subject_to_user(user, subject)
     # add project to user projects
     user.projects.append(project)
+    print(f'{project} users')
     db.session.add(project)
+    print(f'{project} project')
     db.session.commit()
     db.session.close()
 

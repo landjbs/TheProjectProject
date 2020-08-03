@@ -44,9 +44,9 @@ subject_ids = [[int(i) for i in np.random.choice(range(len(Subject.query.all()))
                 for _ in range(len(users))]
 
 for i, user in enumerate(users):
+    print(user)
     create_user(user, subject_ids[i])
 db.session.commit()
-db.session.close()
 
 user1 = db.session.query(User).get(int(1))
 user2 = db.session.query(User).get(int(2))
@@ -221,6 +221,10 @@ projects = [Project(name='Boogle',
             ]
 
 
+for project in projects:
+    print(project)
+    create_project(project)
+
+
 def create_fillers():
-    for project in projects:
-        create_project(project)
+    pass
