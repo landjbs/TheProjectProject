@@ -95,7 +95,7 @@
                     <i class='far fa-user-circle'></i>
                     {{ project.members.all()|length }} / {{ project.team_size }}
                   </a>
-                  {% if not current_user.is_anonymous %}
+                  {% if current_user.is_authenticated %}
                     <ul class="collapse in list-unstyled" id="memberSubmenu">
                       {% for member in project.members %}
                         <li>
@@ -372,7 +372,7 @@
                     <div class="list-group-item list-group-item-action flex-column align-items-start">
                       <div class="d-flex w-100 justify-content-between">
                         {% if current_user.is_authenticated %}
-                          <a href='user={{ comment.author.email }}' class="mb-1">
+                          <a href='user={{ comment.author.code }}' class="mb-1">
                         {% else %}
                           <a href='/login'>
                         {% endif %}

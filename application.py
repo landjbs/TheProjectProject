@@ -446,7 +446,8 @@ def add_project():
                 else:
                     flash('Post some comments to tell people what your project '
                           'is all about!')
-                return redirect(project_page(project_code))
+                print(current_user)
+                # return redirect(project_page(project_code))
     return render_template('add_project.html', form=form)
 
 
