@@ -102,10 +102,10 @@ class Edit_User(BaseForm):
     # name
     name = StringField('Name', validators=[DataRequired(), Length(1, 254)],
                        render_kw={'max':254})
-    # email
-    email = StringField('Email',
-                    validators=[DataRequired(), Length(1, 254), Email()],
-                    render_kw={'max':254})
+    ## email
+    # email = StringField('Email',
+    #                 validators=[DataRequired(), Length(1, 254), Email()],
+    #                 render_kw={'max':254})
     # github
     github = StringField('Github',
                     validators=[Length(0, 254), Site_URL_Validator('github')],

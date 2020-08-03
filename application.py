@@ -489,10 +489,10 @@ def user_page(code):
                 user.name = new_name
                 edits_made = True
             # email
-            new_email = edit_form.email.data
-            if new_email!=user.email:
-                user.email = new_email
-                edits_made = True
+            # new_email = edit_form.email.data
+            # if new_email!=user.email:
+            #     user.email = new_email
+            #     edits_made = True
             # github
             new_github = edit_form.github.data
             if new_github!=user.github:
