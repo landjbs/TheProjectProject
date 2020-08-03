@@ -222,8 +222,9 @@ projects = [Project(name='Boogle',
 
 
 for project in projects:
-    create_project(project, project.owner, batch=True)
-db.close()
+    print(project)
+    create_project(project, batch=True)
+db.session.close()
 
 def create_fillers():
     pass
