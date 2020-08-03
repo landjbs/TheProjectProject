@@ -322,7 +322,7 @@ def login():
 @login_required
 def logout():
     current_user.active = False
-    user.last_active = datetime.utcnow()
+    current_user.last_active = datetime.utcnow()
     db.session.commit()
     db.session.close()
     logout_user()
@@ -446,13 +446,13 @@ def add_project():
                 else:
                     flash('Post some comments to tell people what your project '
                           'is all about!')
-                return redirect(f'/project={project_code}')
+                return redirect(project_page(project_code))
     return render_template('add_project.html', form=form)
 
 
 @application.route('/user=<code>', methods=['GET', 'POST'])
 @limiter.limit('60 per minute')
-def user(code):
+def user_page(code):
     user = User.query.filter_by(code=code).first_or_404()
     # worked tasks
     tasks = user.tasks_worked
@@ -525,7 +525,7 @@ def user(code):
 
 @application.route('/project=<project_code>', methods=['GET', 'POST'])
 @limiter.limit('60 per minute')
-def project(project_code):
+def project_page(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # forms
     comment_form = forms.Comment_Form(request.form)
@@ -745,7 +745,7 @@ def add_comment(project_id):
     if form.validate_on_submit():
         comment = Comment(text=form.text.data, author=current_user)
         manager.add_comment(project=project, user=current_user, comment=comment)
-    return redirect(f'/project={project.code}')
+    return redirect(request.referrer)
 
 
 @application.route('/project/<int:project_id>/<int:comment_id>')
@@ -759,7 +759,7 @@ def delete_comment(project_id, comment_id):
         db.session.close()
     else:
         flash('Cannot delete comment.')
-    return redirect(f'/project={project.code}')
+    return redirect(request.referrer)
 
 
 @application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
