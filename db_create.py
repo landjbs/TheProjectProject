@@ -6,13 +6,21 @@ except:
 
 from application import db
 from application.models import *
+from termcolor import colored
 
 if input('Database already exists. Are you sure you want to delete? (y/n): ')=='y':
+    print(colored('Dropping tables...', color='yellow'), end='\r')
     db.drop_all()
+    print(colored('COMPLETE: Dropping tables', color='green'))
+    print(colored('Building tables...', color='yellow'), end='\r')
     db.create_all()
+    print(colored('COMPLETE: Buidling tables', color='green'))
+    print(colored('Creating objects...', color='yellow'), end='\r')
     from application.create_fillers import create_fillers
     create_fillers()
+    print(colored('COMPLETE: Creating objects', color='green'))
     print("DB created.")
+    db.session.close()
 else:
     print('Database rebuild prevented.')
 

@@ -9,6 +9,7 @@ def create_subject(name, color):
     subject = Subject(name, color)
     db.session.add(subject)
     db.session.commit()
+    db.session.close()
 
 
 ## USER ##
@@ -20,6 +21,7 @@ def create_user(user, subject_ids):
             add_subject_to_user(user, subject)
     db.session.add(user)
     db.session.commit()
+    db.session.close()
     return True
 
 
@@ -28,6 +30,7 @@ def report_user(reporter, reported, text):
     reported.reports.append(report)
     db.session.add(report)
     db.session.commit()
+    db.session.close()
     return True
 
 
@@ -79,6 +82,7 @@ def delete_user(user):
         db.session.delete(comment)
     db.session.delete(user)
     db.session.commit()
+    db.session.close()
 
 
 ## USER TO PROJECTS ##
@@ -104,6 +108,7 @@ def add_user_to_project(user, project):
     user.projects.append(project)
     db.session.add(project)
     db.session.commit()
+    db.session.close()
     return True
 
 
@@ -135,6 +140,7 @@ def remove_user_from_project(user, project, admin=False):
     user.rejections.append(project)
     # add to session
     db.session.commit()
+    db.session.close()
     return True
 
 
@@ -163,6 +169,7 @@ def reject_user_from_pending(user, project, admin=True):
     # add rejection to user and project
     user.rejections.append(project)
     db.session.commit()
+    db.session.close()
     return True
 
 
@@ -189,6 +196,7 @@ def reject_project_invitation(user, project, admin):
             if project.name in note.text:
                 user.notifications.remove(note)
     db.session.commit()
+    db.session.close()
     return True
 
 
@@ -198,16 +206,21 @@ def delete_project(project):
             remove_subject_from_user(member, subject)
     db.session.delete(project)
     db.session.commit()
+    db.session.close()
     return True
 
 
-def create_project(project, user):
+def create_project(project, user=None):
+    if not user:
+        user = project.owner
     # add project subjects to user
     for subject in project.subjects:
         add_subject_to_user(user, subject)
     # add project to user projects
     user.projects.append(project)
     db.session.add(project)
+    db.session.commit()
+    db.session.close()
 
 
 def complete_project(project):
@@ -219,6 +232,7 @@ def complete_project(project):
                 member.notifications.append(note)
         flash(f'Congratulations on completing {project.name}!')
         db.session.commit()
+        db.session.close()
         return True
     return False
 
@@ -232,6 +246,7 @@ def uncomplete_project(project):
                 member.notifications.append(note)
         flash(f'You have marked {project.name} as incomplete. We are excited to see where you will take it!')
         db.session.commit()
+        db.session.close()
         return True
     return False
 
@@ -244,6 +259,7 @@ def open_project(project):
             if not member==project.owner:
                 member.notifications.append(note)
     db.session.commit()
+    db.session.close()
     flash(f'You have opened {project.name}.')
     return True
 
@@ -256,6 +272,7 @@ def close_project(project):
             if not member==project.owner:
                 member.notifications.append(note)
     db.session.commit()
+    db.session.close()
     flash(f'You have closed {project.name}.')
     return True
 
@@ -268,6 +285,7 @@ def remove_application_requirement(project):
             if not member==project.owner:
                 member.notifications.append(note)
     db.session.commit()
+    db.session.close()
     flash(f'You have removed the application requirement from {project.name}.')
     return True
 
@@ -284,6 +302,7 @@ def add_application(project, question):
     project.requires_application = True
     project.application_question = question
     db.session.commit()
+    db.session.close()
     return True
 
 
@@ -291,15 +310,18 @@ def add_comment(project, user, comment):
     project.comments.append(comment)
     db.session.add(comment)
     db.session.commit()
+    db.session.close()
 
 
 def add_task(project, user, task):
     project.tasks.append(task)
     db.session.add(task)
     db.session.commit()
+    db.session.close()
 
 
 def delete_application(application):
     db.session.delete(application)
     db.session.commit()
+    db.session.close()
     # TODO: rem notification from project owner

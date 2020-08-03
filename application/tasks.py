@@ -26,3 +26,4 @@ def send_email(user_email, body):
     user = User.query.filter_by(email=user_email).first()
     user.emailed = True
     db.session.commit()
+    db.session.close()

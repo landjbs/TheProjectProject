@@ -179,6 +179,7 @@ def page_unauthorized(e):
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
+    db.engine.dispose()
     return render_template('index.html')
 
 
@@ -264,6 +265,7 @@ def confirm_email(token):
     user.confirmed = True
     db.session.add(user)
     db.session.commit()
+    db.session.close()
     flash('You have confirmed your account!')
     return redirect(url_for('index'))
 
@@ -290,6 +292,7 @@ def login():
     if current_user.is_authenticated:
         current_user.active = True
         db.session.commit()
+        db.session.close()
         return redirect(url_for('home'))
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
@@ -315,53 +318,16 @@ def login():
     return render_template('login.html', form=form, start_on=start_on)
 
 
-@application.route('/login_admin', methods=['GET', 'POST'])
-def login_admin():
-    form = forms.Login(request.form)
-    if request.method=='POST' and form.validate():
-        user = Admin_User.query.filter_by(email=form.email.data).first()
-        if not user is None and user.check_password(form.password.data):
-            if current_user.is_authenticated:
-                logout_user(current_user)
-            login_user(user)
-            db.session.commit()
-            # return redirect(url_for('admin'))
-    return render_template('login.html', form=form, start_on=0)
-
-
 @application.route('/logout')
 @login_required
 def logout():
     current_user.active = False
     user.last_active = datetime.utcnow()
     db.session.commit()
+    db.session.close()
     logout_user()
     return redirect(url_for('index'))
 
-
-# @application.route('/accept', methods=['POST'])
-# def accept():
-#     user = query_user_by_id(request.form['accept'])
-#     n1 = Notification(text=('Welcome to TheProjectProject, '
-#                             f'{user.name}! We are excited to have you.'))
-#     n2 = Notification(text=('You can browse and join projects below or '
-#                             'create and manage your own project with the '
-#                             '"add project" tab. We recommend you start by '
-#                             'adding projects you have already worked on to '
-#                             'showcase your experience.'))
-#     for n in [n1, n2]:
-#         user.notifications.append(n)
-#     setattr(user, 'accepted', True)
-#     db.session.commit()
-#     return admin()
-#
-#
-# @application.route('/reject', methods=['POST'])
-# def reject():
-#     user = query_user_by_id(request.form['reject'])
-#     setattr(user, 'accepted', False)
-#     db.session.commit()
-#     return admin()
 
 ## HOME ##
 def partition_query(l, n=3):
@@ -393,6 +359,7 @@ def home():
             flash(notification.text)
             current_user.notifications.remove(notification)
         db.session.commit()
+        db.session.close()
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, user_tabs=user_tabs,
                             user_project_count=user_projs.count(),
@@ -545,6 +512,7 @@ def user(code):
                 flash('You have successfully edited your acount.')
                 db.session.add(user)
                 db.session.commit()
+                db.session.close()
         else:
             show_edit_modal = True
     return render_template('user.html', user=user, stars=stars,
@@ -573,11 +541,11 @@ def project(project_code):
         activity_data['earliest'] = earliest
     # compile counts of tasks completed by each worker
     authors, completers = [], []
-    for task in project.tasks:
-        authors.append(task.author)
-        if task.complete:
-            for worker in task.workers:
-                completers.append(worker)
+    # for task in project.tasks:
+    #     authors.append(task.author)
+    #     if task.complete:
+    #         for worker in task.workers:
+    #             completers.append(worker)
     # select top 5 to plot
     author_counts = Counter(authors)
     completed_counts = Counter(completers)
@@ -642,6 +610,7 @@ def project(project_code):
                     flash(f'You have successfully edited {project.name}.')
                     db.session.add(project)
                     db.session.commit()
+                    db.session.close()
             else:
                 show_edit_modal = True
     return render_template('project.html', project=project,
@@ -710,6 +679,7 @@ def join_project(project_id):
                 flash(f'Invalid application.')
         db.session.add(project)
         db.session.commit()
+        db.session.close()
     else:
         flash('The project owner has closed this project.')
     return redirect(request.referrer)
@@ -786,6 +756,7 @@ def delete_comment(project_id, comment_id):
     if current_user in [project.owner, comment.author]:
         db.session.delete(comment)
         db.session.commit()
+        db.session.close()
     else:
         flash('Cannot delete comment.')
     return redirect(f'/project={project.code}')
@@ -815,6 +786,7 @@ def mark_complete(project_id, task_id, action):
         if (current_user==task.author):
             db.session.delete(task)
     db.session.commit()
+    db.session.close()
     return redirect(request.referrer)
 
 
@@ -873,6 +845,7 @@ def change_project_status(project_id, user_id, action):
         error_flag = True
     if not error_flag:
         db.session.commit()
+        db.session.close()
     return redirect(request.referrer)
 
 
@@ -933,6 +906,7 @@ def collaborate(target_user_id):
         flash(f'You have sent {target_user.name} an invitation to collaborate '
               f'on {project.name}. You will be notified when they respond.')
         db.session.commit()
+        db.session.close()
     return redirect(request.referrer)
 
 
