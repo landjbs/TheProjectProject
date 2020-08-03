@@ -12,10 +12,6 @@ from dateutil import tz
 from collections import Counter
 from operator import itemgetter
 from itsdangerous import URLSafeTimedSerializer
-## allocating
-import redis
-from rq import Queue, Connection
-
 
 from application import db
 from application.models import (User, Project, Comment, Task, Subject, User_Report,
@@ -178,7 +174,6 @@ def query_user_by_email(email):
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
-    print(f'index: {current_user}')
     return render_template('index.html')
 
 
@@ -205,7 +200,7 @@ def apply():
         error_flag = False
         # unique email
         u_query = User.query.filter_by(email=form.email.data).first()
-        if (u_query is not None) or (a_query is not None):
+        if u_query is not None:
             form.email.errors = ['An account with that email is already registered.']
             error_flag = True
         # unique github
@@ -222,19 +217,12 @@ def apply():
             first_name = user.name.split(' ')[0]
             try:
                 manager.create_user(user, form.data['subjects'])
-                # emailing
-                redis_url = application.config['REDIS_URL']
                 # generate email token
-                token = encode_token(user.email)
-                confirm_url = generate_url('confirm_email', token=token)
-                body = render_template('emails/confirm_email.html',
-                                       confirm_url=confirm_url,
-                                       first_name=first_name)
-                # enqueue task
-                # with Connection(redis.from_url(redis_url)):
-                    # q = Queue()
-                    # q.enqueue(tasks.send_email, user.email, body)
-                # TEMP: dont enqueue just complete
+                # token = encode_token(user.email)
+                # confirm_url = generate_url('confirm_email', token=token)
+                # body = render_template('emails/confirm_email.html',
+                #                        confirm_url=confirm_url,
+                #                        first_name=first_name)
                 tasks.send_email(user.email, body)
                 # notify user
                 flash(f'Congratulations, {first_name}, your application to '
@@ -243,7 +231,6 @@ def apply():
                 # teardown
                 db.session.close()
             except Exception as e:
-                print(f"E: {e}")
                 flash('Could not add application.')
                 db.session.rollback()
             return render_template('index.html')
@@ -288,9 +275,7 @@ def send_password_reset_email(user_email):
 def reset():
     form = forms.Login(request.form)
     if form.validate_on_submit():
-        # TODO: CHECK THAT EMAIL IS VALID
-        print('validated')
-    print(form.errors)
+        pass
     return redirect(request.referrer)
 
 
@@ -460,7 +445,6 @@ def add_project():
                 except Exception as e:
                     flash("Sorry! An error occured when trying to add your "
                         "project. Please try again later.")
-                    print(e)
                     db.session.rollback()
                     return render_template('add_project.html', form=form)
                 # successful message
@@ -1091,4 +1075,4 @@ def remove_application_requirement(project_id):
 
 
 if __name__ == '__main__':
-    application.run(host='0.0.0.0')
+    application.run(host='127.0.0.1')

@@ -98,5 +98,4 @@ class ReportView(AdminBaseView):
     @expose('/action/resolve_report', methods=('GET',))
     def resolve_report(self):
         report = models.User_Report.query.get_or_404(int(request.args.get('id')))
-        print(report)
         return redirect(request.referrer)

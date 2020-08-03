@@ -3,6 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 application = Flask(__name__)
 application.config.from_object('config')
-application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(application)
 db.init_app(application)

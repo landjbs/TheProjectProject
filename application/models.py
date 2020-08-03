@@ -252,9 +252,7 @@ class User(db.Model, UserMixin):
             return True
         if not self.last_active:
             return False
-        print('HERE')
         diff = (datetime.utcnow() - self.last_active).seconds
-        print(diff)
         if diff>second_window:
             return False
         return True

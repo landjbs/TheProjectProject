@@ -53,7 +53,6 @@ class Select_Limit_Validator(object):
         self.max = max
 
     def __call__(self, form, field):
-        print(len(field.data))
         if len(field.data)>self.max:
             raise ValidationError(f'Must select no more than {self.max} options.')
 
@@ -64,7 +63,7 @@ class Apply(BaseForm):
                     render_kw={'placeholder': 'John Harvard'})
     email = StringField('Harvard Email',
                     validators=[DataRequired(), Length(1, 254),
-                                   Email(), Email_Ext_Validator()],
+                                   Email()], # Email_Ext_Validator()
                     description=('Currently only Harvard College emails '
                                    'are allowed. Please reach out if you would '
                                    'like your school to be added.'),
