@@ -210,7 +210,9 @@ def delete_project(project):
     return True
 
 
-def create_project(project, user, batch=False):
+def create_project(project, user=None, batch=False):
+    if not user:
+        user = project.owner
     # add project subjects to user
     for subject in project.subjects:
         add_subject_to_user(user, subject)
@@ -218,7 +220,7 @@ def create_project(project, user, batch=False):
     user.projects.append(project)
     db.session.add(project)
     db.session.commit()
-    if batch:
+    if not batch:
         db.session.close()
 
 
