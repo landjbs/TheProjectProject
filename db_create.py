@@ -7,14 +7,14 @@ except:
 from application import db
 from application.models import *
 
-db.drop_all()
-db.create_all()
-
-from application.create_fillers import create_fillers
-
-create_fillers()
-
-print("DB created.")
+if input('Database already exists. Are you sure you want to delete? (y/n): ')=='y':
+    db.drop_all()
+    db.create_all()
+    from application.create_fillers import create_fillers
+    create_fillers()
+    print("DB created.")
+else:
+    print('Database rebuild prevented.')
 
 # from manager import add_role_to_user, add_user_to_project
 #

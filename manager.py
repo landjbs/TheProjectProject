@@ -288,19 +288,18 @@ def add_application(project, question):
 
 
 def add_comment(project, user, comment):
+    project.comments.append(comment)
     db.session.add(comment)
+    db.session.commit()
 
 
 def add_task(project, user, task):
+    project.tasks.append(task)
     db.session.add(task)
+    db.session.commit()
 
 
 def delete_application(application):
     db.session.delete(application)
     db.session.commit()
-    # TODO: remove notification
-
-# projects = db.session.query(Member_Role.project_id).filter(Member_Role.user_id==None, Member_Role.role==role2)
-# p = db.session.query(Project).filter(Project.id.in_(projects), Project.estimated_time>=11)
-# for x in p:
-#     print(x.name)
+    # TODO: rem notification from project owner

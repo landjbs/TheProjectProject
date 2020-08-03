@@ -160,14 +160,19 @@ def query_user_by_email(email):
 
 
 ## error handling ##
-# @application.errorhandler(404)
-# def page_not_found(e):
-#     return (render_template('404.html'), 404)
-#
-#
-# @application.errorhandler(403)
-# def page_not_found(e):
-#     return (render_template('403.html'), 403)
+@application.errorhandler(404)
+def page_not_found(e):
+    return (render_template('404.html'), 404)
+
+
+@application.errorhandler(500)
+def page_mistake(e):
+    return (render_template('500.html'), 500)
+
+
+@application.errorhandler(403)
+def page_unauthorized(e):
+    return (render_template('403.html'), 403)
 
 
 ## index routes ##
@@ -223,7 +228,8 @@ def apply():
                 # body = render_template('emails/confirm_email.html',
                 #                        confirm_url=confirm_url,
                 #                        first_name=first_name)
-                tasks.send_email(user.email, body)
+                # TODO: complete emailing after auth
+                # tasks.send_email(user.email, body)
                 # notify user
                 flash(f'Congratulations, {first_name}, your application to '
                        'TheProjectProject has been submitted! '
@@ -755,9 +761,8 @@ def add_task(project_id):
         return redirect(request.referrer)
     form = forms.Task_Form(request.form)
     if form.validate_on_submit():
-        comment = Task(text=form.text.data, author=current_user, project=project)
-        db.session.add(comment)
-        db.session.commit()
+        task = Task(text=form.text.data, author=current_user)
+        manager.add_task(project, current_user, task)
     return redirect(request.referrer)
 
 
@@ -768,10 +773,9 @@ def add_comment(project_id):
     project = Project.query.get_or_404(project_id)
     form = forms.Comment_Form(request.form)
     if form.validate_on_submit():
-        comment = Comment(text=form.text.data, author=current_user, project=project)
-        db.session.add(comment)
-        db.session.commit()
-    return redirect(request.referrer)
+        comment = Comment(text=form.text.data, author=current_user)
+        manager.add_comment(project=project, user=current_user, comment=comment)
+    return redirect(f'/project={project.code}')
 
 
 @application.route('/project/<int:project_id>/<int:comment_id>')
@@ -784,7 +788,7 @@ def delete_comment(project_id, comment_id):
         db.session.commit()
     else:
         flash('Cannot delete comment.')
-    return redirect(request.referrer)
+    return redirect(f'/project={project.code}')
 
 
 @application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')

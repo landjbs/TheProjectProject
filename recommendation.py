@@ -41,7 +41,6 @@ def score_project(project, user_subjects):
     for subject, subject_score in user_subjects.items():
         if subject in project.subjects:
             score += subject_score
-    print(f'{project.name}: {score}')
     return score
 
 

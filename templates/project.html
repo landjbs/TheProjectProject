@@ -58,9 +58,7 @@
                     </a>
                 </p>
             </div>
-            {% if not current_user.is_anonymous %}
-              {{ macros.render_project_action_bar(current_user, project) }}
-            {% endif %}
+            {{ macros.render_project_action_bar(current_user, project) }}
             <br>
             <ul class="list-unstyled components">
               <div class='bio'>
