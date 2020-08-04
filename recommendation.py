@@ -4,6 +4,7 @@ Ranking, sorting, and searching algorithms for projects, users, and subjects.
 
 import numpy as np
 from operator import itemgetter
+import datetime.datetime as datetime
 
 from application.models import User, Project, Subject
 
@@ -40,23 +41,22 @@ def score_project(project, user_subjects):
     # recently active scoring [0,2]
     if project.recently_active():
         score += 2
-    # tasks scores [0,2] gives boost to projects with tasks
+    # tasks scores [0,2] gives boost to projects with incomplete tasks
     n_incomplete = project.tasks.filter_by(complete=False).count()
-    n_complete = (len(project.tasks) - n_incomplete)
-    # incomplete tasks
     if n_incomplete==1:
-        score += 0.5
+        score += 1
     elif n_incomplete>1 and n_incomplete<3:
-        score += 0.75
+        score += 1.5
     elif n_incomplete>=3:
+        score += 2
+    # time scores [0,1] give boost to newer projects
+    time_since = (project.posted_on - datetime.utcnow()).days
+    if time_since<1:
         score += 1
-    # complete tasks
-    if n_complete==1:
+    elif time_since<3:
+        score += 0.8
+    elif time_since<10:
         score += 0.5
-    elif n_complete>1 and n_complete<3:
-        score += 0.75
-    elif n_complete>=3:
-        score += 1
     # members score [0,1] gives boost to more empty projects
     score += (1 - (len(project.members) / project.team_size))
     return score
