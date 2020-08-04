@@ -74,10 +74,19 @@ def score_user(user, project):
             score += user_subjects[subject]
     score *= 3
     # tasks completed [0, 2] ratio of tasks completed to projects
+    n_tasks = 0
+    n_user_completed = 0
     for project in user.projects:
-        n_tasks = len(project.tasks)
-        print(n_tasks)
-    return 1
+        for task in project.tasks:
+            n_tasks += 1
+            if user in task.workers:
+                n_user_completed += 1
+    if n_tasks>0:
+        score += ((2 * n_user_completed) / n_tasks)
+    if user.is_active():
+        score += 1
+    print(f'{user}: {score}')
+    return score
 
 
 def recommend_projects(user):
@@ -116,7 +125,8 @@ def recommend_users(project):
     candidates = User.query.filter(~User.id.in_(nowshow_ids))
     ## rank candidates ##
     results = [(user, score_user(user, project)) for user in candidates]
-    return candidates
+    results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
+    return results
 
 
 def user_projects(user):
