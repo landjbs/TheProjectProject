@@ -232,10 +232,10 @@
               </div>
               <div class="col-sm-4">
                 <h6>Member Activity</h6>
-                {% if (authored|length) > 0 %}
+                {% if ((authored|length) > 0) %}
                   <canvas id="tasks_complete"></canvas>
                 {% else %}
-                  <p class='empty-text'>No tasks completed yet.</p>
+                  <p class='empty-text'>No tasks yet.</p>
                 {% endif %}
               </div>
               <div class="col-sm-4">

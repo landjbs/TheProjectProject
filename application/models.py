@@ -411,6 +411,13 @@ class Project(db.Model):
             return False
         return True
 
+    def task_number(self):
+        # TODO: make efficient
+        n = 0
+        for task in self.tasks:
+            n += 1
+        return n
+
     def update_last_active(self):
         self.last_active = datetime.utcnow()
 
