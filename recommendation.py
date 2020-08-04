@@ -85,10 +85,18 @@ def score_user(user, project):
     if n_tasks>0:
         score += ((2 * n_user_completed) / n_tasks)
     else:
-        # new users given better score than veteran with <10% task completions
-        score += 0.1
+        # new users given better score than veteran with <15% task completions
+        score += 0.15
     if user.is_active():
-        score += 1
+        score += 2
+    else:
+        time_since = (project.posted_on - datetime.utcnow()).days
+        if time_since < 2:
+            score += 1
+        elif time_since < 4:
+            score += 0.5
+        elif time_since < 10:
+            score += 0.2
     print(f'{user}: {score}')
     return score
 
