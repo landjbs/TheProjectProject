@@ -31,19 +31,16 @@ def get_normed_project_subjects(project, temp):
 
 
 def score_project(project, user_subjects):
-    ''' Assigns project ranking given user [0,6] '''
+    ''' Assigns project ranking given user [0,8] '''
     # subject scoring [0,4]
-    print(f'{"-"*80}\n{project.name}')
     score = 0
     for subject, subject_score in user_subjects.items():
         if subject in project.subjects:
             score += subject_score
     score /= (len(user_subjects) * 0.25)
-    print(f'Subjects: {score}')
     # recently active scoring [0,2]
     if project.recently_active():
         score += 2
-    print(f'Active: {score}')
     # tasks scores [0,2] gives boost to projects with incomplete tasks
     n_incomplete = project.tasks.filter_by(complete=False).count()
     if n_incomplete==1:
@@ -52,7 +49,6 @@ def score_project(project, user_subjects):
         score += 1.5
     elif n_incomplete>=3:
         score += 2
-    print(f'Tasks: {score}')
     # time scores [0,1] give boost to newer projects
     time_since = (project.posted_on - datetime.utcnow()).days
     if time_since<1:
@@ -61,20 +57,27 @@ def score_project(project, user_subjects):
         score += 0.8
     elif time_since<10:
         score += 0.5
-    print(f'Time: {score}')
     # members score [0,1] gives boost to more empty projects
     n_members = 0
     for m in project.members:
         n_members += 1
     score += (1 - (n_members / project.team_size))
-    print(f'Members: {score}')
     return score
 
 
-def score_user(user, project_subjects):
+def score_user(user, project):
     score = 0
-    # for subject, subject_score in project_subjects.items():
-
+    # subject scores [0, 3]
+    user_subjects = get_normed_user_subjects(user, temp=2)
+    for subject, subject_score in project_subjects.items():
+        if subject in user_subjects:
+            score += user_subjects[subject]
+    score *= 3
+    # tasks completed [0, 2] ratio of tasks completed to projects
+    for project in user.projects:
+        n_tasks = len(project.tasks)
+        print(n_tasks)
+    return 1
 
 
 def recommend_projects(user):
@@ -112,9 +115,7 @@ def recommend_users(project):
                   + project_invitations + project_rejections)
     candidates = User.query.filter(~User.id.in_(nowshow_ids))
     ## rank candidates ##
-    project_subjects = get_normed_project_subjects(project, temp=3)
-    results = [(user, score_user(user, project_subjects))
-                for user in candidates]
+    results = [(user, score_user(user, project)) for user in candidates]
     return candidates
 
 
