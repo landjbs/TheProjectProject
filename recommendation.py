@@ -4,7 +4,7 @@ Ranking, sorting, and searching algorithms for projects, users, and subjects.
 
 import numpy as np
 from operator import itemgetter
-import datetime.datetime as datetime
+from datetime import datetime
 
 from application.models import User, Project, Subject
 
