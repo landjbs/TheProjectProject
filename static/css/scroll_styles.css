@@ -26,8 +26,8 @@
 }
 
 .card-oneline {
-  min-height: 3vh;
-  max-height: 3vh;
+  min-height: 5vh;
+  max-height: 5vh;
   overflow: scroll;
 }
 

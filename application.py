@@ -109,7 +109,8 @@ def utility_processor():
         to_zone = tz.tzlocal()
         time = time.replace(tzinfo=from_zone)
         time = time.astimezone(to_zone)
-        time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
+        # time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
+        time = f"{time.strftime('%B %d')}"
         time = time.lstrip("0").replace(" 0", " ")
         return time
     def complete(tasks):
@@ -412,9 +413,7 @@ def add_project():
                                   team_size = form.team_size.data,
                                   complete = form.complete.data)
                     project_code = project.code
-                    manager.create_project(project, current_user)
-                    db.session.commit()
-                    db.session.close()
+                    manager.create_project(project, current_user, batch=True)
                 except Exception as e:
                     flash("Sorry! An error occured when trying to add your "
                         "project. Please try again later.")
@@ -446,8 +445,7 @@ def add_project():
                 else:
                     flash('Post some comments to tell people what your project '
                           'is all about!')
-                print(current_user)
-                # return redirect(project_page(project_code))
+                return project_page(project_code)
     return render_template('add_project.html', form=form)
 
 
@@ -703,9 +701,10 @@ def leave_project(project_id):
                 flash('Owner transfer unsuccessful.')
                 return redirect(request.referrer)
         else:
+            user_code = current_user.code
             manager.delete_project(project)
             flash(f'{project.name} deleted.')
-            return redirect(url_for('home'))
+            return user_page(user_code)
     manager.remove_user_from_project(current_user, project, admin=False)
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)

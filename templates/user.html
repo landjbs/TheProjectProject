@@ -161,25 +161,6 @@
                         <h6 class="mb-1">{{ task.text }}</h6>
                         <div class="d-flex w-100 justify-content-between">
                           <small>Completed
-                            {% if (task.workers|length > 0) and current_user.is_authenticated %}
-                              by
-                              {% for worker in task.workers %}
-                                  {% if loop.index==(task.workers|length) %}
-                                    <a href='user={{ worker.code }}' class='user-name'>
-                                      {{ worker.name }}
-                                    </a>
-                                  {% elif (task.workers|length)==2 %}
-                                    <a href='user={{ worker.code }}' class='user-name'>
-                                      {{ worker.name }}
-                                    </a>
-                                    and
-                                  {% else %}
-                                    <a href='user={{ worker.code }}' class='user-name'>
-                                      {{ worker.name }}
-                                    </a>
-                                  {% endif %}
-                              {% endfor %}
-                            {% endif %}
                           on {{ time_to_str(task.complete_stamp) }}
                         for
                         {% if current_user.is_authenticated %}

@@ -172,7 +172,7 @@
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
-      <div class='card-head little'>
+      <div class='card-head tiny'>
         <a class='project-name' href='user={{ user.code }}'>
           <h5>
             {{ user.name }}
@@ -181,11 +181,8 @@
             {% endif %}
           </h5>
         </a>
-        <a href='mailto:{{ user.email }}'>
-          <p>{{ user.email }}</p>
-        </a>
       </div>
-      <div class='card-oneline'>
+      <div class='card-oneline' style='min-height: 5vh;'>
         <p class='oneliner'>
           {{ user.about }}
         </p>
@@ -204,7 +201,7 @@
       </div>
       <br>
       {% if current_user!=user %}
-        <hr class="my-4">
+        <hr class="my-2">
         {{ render_user_action_bar(current_user, user) }}
       {% endif %}
     </div>
