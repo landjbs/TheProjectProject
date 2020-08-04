@@ -503,7 +503,7 @@
           <br>
           <select name="selected_project" id="selected_project" class='select-clean'>
             {% for project in current_user.owned %}
-              {% if (project.complete!=True) and (project.open==True) %}
+              {% if (project.complete!=True) and (project.open==True) and (target_user not in project.members) and (target_user not in project.invitations )%}
                 {% if project==target_project %}
                   <option value="{{ project.id }}" selected>{{ project.name }}</option>
                 {% else %}
