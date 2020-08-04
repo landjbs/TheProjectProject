@@ -404,8 +404,6 @@ class Project(db.Model):
             currently half a week.
             (week=604800), ()
         '''
-        if self.active:
-            return True
         if not self.last_active:
             return False
         diff = (datetime.utcnow() - self.last_active).seconds

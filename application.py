@@ -293,7 +293,6 @@ def login():
     if current_user.is_authenticated:
         current_user.active = True
         db.session.commit()
-        db.session.close()
         return redirect(url_for('home'))
     form = forms.Login(request.form)
     if request.method=='POST' and form.validate():
