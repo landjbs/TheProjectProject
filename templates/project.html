@@ -440,6 +440,7 @@
                   <!--Controls-->
                   <div class="controls-top">
                     <a class="btn-floating" href="#user-rec-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                    <p id='user-count' class='counter'>0</p>
                     <a class="btn-floating" href="#user-rec-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
                   </div>
                   <!--/.Controls-->
@@ -491,6 +492,17 @@
                 $(this).toggleClass('active');
             });
         });
+
+        $('#user-rec-carousel').on('slid.bs.carousel', function () {
+          var cur = $('#user-rec-carousel div.active').index()
+          sessionStorage.setItem('recSlide', cur);
+          $('#user-count').html(cur);
+        });
+
+        if(sessionStorage.recSlide){
+          $("#user-rec-carousel").carousel(sessionStorage.recSlide*1);
+        }
+
     </script>
 
 
