@@ -27,11 +27,15 @@
                   {{ stars }}
                   <!-- edit button -->
                   {% if user == current_user %}
-                    <br>
-                    <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
-                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                      Edit
-                    </button>
+                      <br>
+                      <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Edit
+                      </button>
+                      <br>
+                      <div class='float-right'>
+                        {{ macros.render_user_share_button(user) }}
+                      </div>
                   {% endif %}
                 </p>
                 <a href='/user={{ user.code }}'>
@@ -187,14 +191,14 @@
             </div>
 
             <!-- PROJECTS -->
-            <div class='container my-4' style='min-width: 100%'>
+            <div class='container my-2' style='min-width: 100%'>
               <!-- owned projects -->
               <h4 style='text-align:left;'>
                 Owned Projects
                 <i class="fa fa-circle" style='color:#FF5D00;'></i>
                 {{ user.owned|length }}
               </h4>
-              <hr class="my-4">
+              <hr class="my-2">
               {% if (user.owned|length) > 0 %}
                 <div id="owned-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                   <!--Slides-->
@@ -240,7 +244,7 @@
                 <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
                 {{ (user.projects|length) - (user.owned|length) }}
               </h4>
-              <hr class="my-4">
+              <hr class="my-2">
               {% if ((user.projects|length) - (user.owned|length)) > 0 %}
                 <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">

@@ -358,9 +358,12 @@ def home():
     if (current_user.notifications.count())>0:
         for notification in current_user.notifications:
             flash(notification.text)
-            current_user.notifications.remove(notification)
-        db.session.commit()
-        db.session.close()
+            try:
+                current_user.notifications.remove(notification)
+                db.session.commit()
+                db.session.close()
+            except:
+                db.session.rollback()
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, user_tabs=user_tabs,
                             user_project_count=user_projs.count(),

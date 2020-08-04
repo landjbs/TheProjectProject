@@ -6,7 +6,7 @@
   <a class='project-name' href='/login'>
 {% endif %}
   <h5>
-    <u>{{ project.name }}</u>
+    {{ project.name }}
     {% if project.complete %}
       <i class="fa fa-check-circle" aria-hidden="true" style='color:#00FF5D;'></i>
     {% elif not project.open %}
@@ -315,7 +315,8 @@
 
 {% macro render_project_share_button(project) -%}
   <!-- TODO: FIX BASE URL SO PROJECT.CODE IS EVAL -->
-  {% set base_url = "https://theprojectproject.io/project={{ project.code }}" %}
+  {% set base_url = "http://theprojectproject.io/project=" %}
+  {% set base_url =  base_url + project.code %}
   <div class='hoverable'>
     <i class="fa fa-share-alt" aria-hidden="false"></i>
     <span class='tooltiptext'>
