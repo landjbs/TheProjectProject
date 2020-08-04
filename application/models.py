@@ -411,6 +411,8 @@ class Project(db.Model):
             return False
         return True
 
+    def update_last_active(self):
+        self.last_active = datetime.utcnow()
 
 class Subject(db.Model):
     __tablename__ = 'subject'

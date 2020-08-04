@@ -351,7 +351,7 @@ def home():
     tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
     top_tabs =  list(partition_query(tops))
     # user projects
-    user_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
+    user_projs = recs.user_projects(user)
     user_tabs = list(partition_query(user_projs))
     project_application = forms.Project_Application_Form(request.form)
     # notifcations
@@ -735,6 +735,7 @@ def add_task(project_id):
     form = forms.Task_Form(request.form)
     if form.validate_on_submit():
         task = Task(text=form.text.data, author=current_user)
+        project.update_last_active()
         manager.add_task(project, current_user, task)
     return redirect(request.referrer)
 

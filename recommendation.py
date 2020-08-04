@@ -86,3 +86,7 @@ def recommend_users(project):
     results = [(user, score_user(user, project_subjects))
                 for user in candidates]
     return candidates
+
+
+def user_project(user):
+    pass

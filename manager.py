@@ -106,6 +106,7 @@ def add_user_to_project(user, project):
         project.rejections.remove(user)
     # add to session
     user.projects.append(project)
+    project.update_last_active()
     db.session.add(project)
     db.session.commit()
     db.session.close()
@@ -232,6 +233,7 @@ def complete_project(project):
             if not member==project.owner:
                 member.notifications.append(note)
         flash(f'Congratulations on completing {project.name}!')
+        project.update_last_active()
         db.session.commit()
         db.session.close()
         return True
@@ -316,6 +318,7 @@ def add_comment(project, user, comment):
 
 def add_task(project, user, task):
     project.tasks.append(task)
+    project.update_last_active()
     db.session.add(task)
     db.session.commit()
     db.session.close()
