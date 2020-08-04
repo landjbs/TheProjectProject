@@ -58,6 +58,7 @@
   <!--Controls-->
   <div class="controls-top">
     <a class="btn-floating" href="#trending-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+    <p id='trending-count' style='display:inline;'>1</p>
     <a class="btn-floating" href="#trending-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
   </div>
   <!--/.Controls-->
@@ -115,7 +116,9 @@ $('#rec-carousel').on('slid.bs.carousel', function () {
   });
 
 $('#trending-carousel').on('slid.bs.carousel', function () {
-  sessionStorage.setItem('trendingSlide', $('#trending-carousel div.active').index());
+  var cur = $('#trending-carousel div.active').index()
+  sessionStorage.setItem('trendingSlide', cur);
+  $('#trending-count').html(cur);
   });
 
 $('#my-carousel').on('slid.bs.carousel', function () {
