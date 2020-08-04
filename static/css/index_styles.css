@@ -50,6 +50,12 @@ input {
   font-size: 300%;
 }
 
+@media (max-width: 991px) {
+  input {
+    font-size: 100%;
+  }
+}
+
 input:focus {
   background-color: transparent;
   color: white;
