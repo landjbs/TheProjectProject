@@ -31,6 +31,10 @@
   overflow: scroll;
 }
 
+.counter {
+  display: inline;
+}
+
 .card-head {
   text-align: left;
   white-space: nowrap;
