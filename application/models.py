@@ -187,9 +187,11 @@ class User(db.Model, UserMixin):
     active = Column(Boolean, nullable=False, default=False)
     last_active = Column(DateTime, nullable=True)
     ## projects ##
-    owned = relationship('Project', back_populates='owner')
+    owned = relationship('Project', back_populates='owner',
+                         order_by='desc(Project.last_active)')
     projects = relationship('Project', secondary='user_to_project_2',
-                            back_populates='members', order_by='desc(Project.last_active)')
+                            back_populates='members',
+                            order_by='desc(Project.last_active)')
     pending = relationship('Project_Application',
                             back_populates='user', lazy='dynamic')
     invitations = relationship('Project', secondary='project_invitation',
@@ -354,7 +356,7 @@ class Project(db.Model):
     # complete_on
     completed_on = Column(DateTime, nullable=True)
     # last activity
-    last_active = Column(DateTime, nullable=False, default=date.utcnow)
+    last_active = Column(DateTime, nullable=False, default=datetime.utcnow)
     # estimated time
     estimated_time = Column(Integer, nullable=True)
     # complete

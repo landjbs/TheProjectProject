@@ -351,7 +351,7 @@ def home():
     tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
     top_tabs =  list(partition_query(tops))
     # user projects
-    user_projs = recs.user_projects(user)
+    user_projs = rec.user_projects(current_user)
     user_tabs = list(partition_query(user_projs))
     project_application = forms.Project_Application_Form(request.form)
     # notifcations
@@ -366,7 +366,7 @@ def home():
                 db.session.rollback()
     return render_template('home.html', recommended_tabs=recommended_tabs,
                             top_tabs=top_tabs, user_tabs=user_tabs,
-                            user_project_count=user_projs.count(),
+                            user_project_count=len(user_projs),
                             current_user=current_user,
                             project_application=project_application)
 
@@ -735,7 +735,6 @@ def add_task(project_id):
     form = forms.Task_Form(request.form)
     if form.validate_on_submit():
         task = Task(text=form.text.data, author=current_user)
-        project.update_last_active()
         manager.add_task(project, current_user, task)
     return redirect(request.referrer)
 
@@ -789,6 +788,7 @@ def mark_complete(project_id, task_id, action):
     elif (action=='delete'):
         if (current_user==task.author):
             db.session.delete(task)
+    project.update_last_active()
     db.session.commit()
     db.session.close()
     return redirect(request.referrer)
@@ -805,6 +805,7 @@ def transfer_ownership(project, user):
         flash('Cannot make non-member a project owner.')
         return False
     # notifications
+    project.update_last_active()
     notification = Notification(text=f'{project.owner.name} has '
             f'transferred ownership of {project.name} to {user.name}.')
     for member in project.members:
@@ -848,6 +849,7 @@ def change_project_status(project_id, user_id, action):
         flash('Invalid action.')
         error_flag = True
     if not error_flag:
+        project.update_last_active()
         db.session.commit()
         db.session.close()
     return redirect(request.referrer)
@@ -909,6 +911,7 @@ def collaborate(target_user_id):
         target_user.notifications.append(notifcation)
         flash(f'You have sent {target_user.name} an invitation to collaborate '
               f'on {project.name}. You will be notified when they respond.')
+        project.update_last_active()
         db.session.commit()
         db.session.close()
     return redirect(request.referrer)
@@ -940,6 +943,7 @@ def reject_collaboration(project_id):
 def withdraw_collaboration(user_id, project_id):
     user = User.query.get_or_404(user_id)
     project = Project.query.get_or_404(project_id)
+    project.update_last_active()
     manager.reject_project_invitation(user, project, admin=True)
     return redirect(request.referrer)
 
@@ -948,6 +952,7 @@ def withdraw_collaboration(user_id, project_id):
 @login_required
 def withdraw_application(project_id):
     project = Project.query.get_or_404(project_id)
+    project.update_last_active()
     manager.reject_user_from_pending(current_user, project, admin=False)
     flash(f'You have withdrawn your application to {project.name}.')
     return redirect(request.referrer)
@@ -1000,6 +1005,7 @@ def complete_project(project_id):
     if current_user!=project.owner:
         flash('Only the owner can mark a project as complete.')
     else:
+        project.update_last_active()
         manager.complete_project(project)
     return redirect(request.referrer)
 
@@ -1012,6 +1018,7 @@ def uncomplete_project(project_id):
     if current_user!=project.owner:
         flash('Only the owner can mark a project as incomplete.')
     else:
+        project.update_last_active()
         manager.uncomplete_project(project)
     return redirect(request.referrer)
 
@@ -1024,8 +1031,10 @@ def change_project_open(project_id, action):
     if current_user!=project.owner:
         flash('Only the owner can change join settings.')
     elif action=='open':
+        project.update_last_active()
         manager.open_project(project)
     elif action=='close':
+        project.update_last_active()
         manager.close_project(project)
     return redirect(request.referrer)
 
@@ -1039,6 +1048,7 @@ def add_application(project_id):
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')
     elif form.validate_on_submit():
+        project.update_last_active()
         manager.add_application(project, form.application_question.data)
     else:
         flash(f'Could not add application: {form.errors[0]}.')
@@ -1052,6 +1062,7 @@ def remove_application_requirement(project_id):
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')
     else:
+        project.update_last_active()
         manager.remove_application_requirement(project)
     return redirect(request.referrer)
 

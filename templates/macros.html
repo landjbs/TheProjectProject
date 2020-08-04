@@ -11,6 +11,8 @@
       <i class="fa fa-check-circle" aria-hidden="true" style='color:#00FF5D;'></i>
     {% elif not project.open %}
       <i class="fa fa-lock" aria-hidden="true" style='color:#F4D510;'></i>
+    {% elif project.recently_active %}
+      <i class="fa fa-circle" aria-hidden="true" style='color:#00FF5D;'></i>
     {% endif %}
   </h5>
 </a>

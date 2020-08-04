@@ -30,17 +30,19 @@ def get_normed_project_subjects(project, temp):
 
 
 def score_project(project, user_subjects):
-    ''' Assigns project ranking given user '''
-    # sum raw subject counts across project users
-    # for member in project.members:
-    #     for s in member.subjects:
-    #         if s.subject in project.subjects:
-    #             user_sum += s.number
-    # project_subjects = {subject:(1-) for subject in}
+    ''' Assigns project ranking given user [0,6] '''
+    # subject scoring [0,4]
     score = 0
     for subject, subject_score in user_subjects.items():
         if subject in project.subjects:
             score += subject_score
+    score /= (len(user.subjects) * 0.25)
+    # recently active scoring [0,1]
+    if project.recently_active():
+        score += 1
+    # members score [0,1] gives boost to more empty projects
+    score += (1 - (len(project.members) / project.team_size))
+    #
     return score
 
 
@@ -60,7 +62,9 @@ def recommend_projects(user):
                    + invited_projects + rejected_projects)
     candidates = Project.query.filter(Project.open==True,
                                       Project.complete==False,
-                                      ~Project.id.in_(nowshow_ids)).limit(200)
+                                      ~Project.id.in_(nowshow_ids),
+                                      len(Project.members)<Project.team_size
+                                  ).limit(200)
     ## get invited projects ##
     invited = [project for project in user.invitations]
     ## format user preferences ##
@@ -69,6 +73,8 @@ def recommend_projects(user):
     results = [(project,score_project(project, user_subjects)) for project in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = (invited + results)
+    if len(results)==0:
+        results = user.projects
     return results
 
 
@@ -88,5 +94,5 @@ def recommend_users(project):
     return candidates
 
 
-def user_project(user):
-    pass
+def user_projects(user):
+    return user.projects
