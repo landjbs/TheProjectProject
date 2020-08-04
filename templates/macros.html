@@ -200,10 +200,8 @@
         {% endfor %}
       </div>
       <br>
-      {% if current_user!=user %}
-        <hr class="my-2">
-        {{ render_user_action_bar(current_user, user) }}
-      {% endif %}
+      <hr class="my-2">
+      {{ render_user_action_bar(current_user, user) }}
     </div>
   </div>
 </div>
@@ -307,8 +305,8 @@
     &nbsp;
     {{ render_collaborate_button(current_user, target_user) }}
     &nbsp;
-    {{ render_user_share_button(target_user) }}
   {% endif %}
+  {{ render_user_share_button(target_user) }}
 </div>
 {% endmacro -%}
 
