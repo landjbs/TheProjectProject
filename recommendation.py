@@ -37,12 +37,28 @@ def score_project(project, user_subjects):
         if subject in project.subjects:
             score += subject_score
     score /= (len(user.subjects) * 0.25)
-    # recently active scoring [0,1]
+    # recently active scoring [0,2]
     if project.recently_active():
+        score += 2
+    # tasks scores [0,2] gives boost to projects with tasks
+    n_incomplete = project.tasks.filter_by(complete=False).count()
+    n_complete = (len(project.tasks) - n_incomplete)
+    # incomplete tasks
+    if n_incomplete==1:
+        score += 0.5
+    elif n_incomplete>1 and n_incomplete<3:
+        score += 0.75
+    elif n_incomplete>=3:
+        score += 1
+    # complete tasks
+    if n_complete==1:
+        score += 0.5
+    elif n_complete>1 and n_complete<3:
+        score += 0.75
+    elif n_complete>=3:
         score += 1
     # members score [0,1] gives boost to more empty projects
     score += (1 - (len(project.members) / project.team_size))
-    #
     return score
 
 
