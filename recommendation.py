@@ -69,7 +69,7 @@ def score_user(user, project):
     score = 0
     # subject scores [0, 3]
     user_subjects = get_normed_user_subjects(user, temp=2)
-    for subject, subject_score in project_subjects.items():
+    for subject in project.subjects:
         if subject in user_subjects:
             score += user_subjects[subject]
     score *= 3
