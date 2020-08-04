@@ -34,6 +34,7 @@
       <!--Controls-->
       <div class="controls-top">
         <a class="btn-floating" href="#project-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+        <p id='project-count' class='counter'>0</p>
         <a class="btn-floating" href="#project-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
       </div>
       <!--/.Controls-->
@@ -63,6 +64,7 @@
     <!--Controls-->
     <div class="controls-top">
       <a class="btn-floating" href="#user-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+      <p id='user-count' class='counter'>0</p>
       <a class="btn-floating" href="#user-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
     </div>
     <!--/.Controls-->
@@ -93,6 +95,7 @@
     <!--Controls-->
     <div class="controls-top">
       <a class="btn-floating" href="#subject-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+      <p id='subject-count' class='counter'>0</p>
       <a class="btn-floating" href="#subject-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
     </div>
     <!--/.Controls-->
@@ -123,15 +126,21 @@
 <script>
 // log tabs
 $('#project-carousel').on('slid.bs.carousel', function () {
-  sessionStorage.setItem('recSlide', $('#project-carousel div.active').index());
+  var cur = $('#project-carousel div.active').index();
+  sessionStorage.setItem('recSlide', cur);
+  $('#project-count').html(cur);
   });
 
 $('#user-carousel').on('slid.bs.carousel', function () {
-  sessionStorage.setItem('trendingSlide', $('#user-carousel div.active').index());
+  var cur = $('#user-carousel div.active').index();
+  sessionStorage.setItem('trendingSlide', cur);
+  $('#user-count').html(cur);
   });
 
 $('#subject-carousel').on('slid.bs.carousel', function () {
-  sessionStorage.setItem('mySlide', $('#subject-carousel div.active').index());
+  var cur = $('#subject-carousel div.active').index();
+  sessionStorage.setItem('mySlide', cur);
+  $('#subject-count').html(cur);
   });
 
 // rescroll carousels
