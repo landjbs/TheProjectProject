@@ -53,6 +53,7 @@ input {
 @media (max-width: 991px) {
   input {
     font-size: 100%;
+    width: 80%;
   }
 }
 
