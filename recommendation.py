@@ -76,6 +76,7 @@ def score_user(user, project):
     # tasks completed [0, 2] ratio of tasks completed to projects
     n_tasks = 0
     n_user_completed = 0
+    n_worked_with = 0
     for project in user.projects:
         for task in project.tasks:
             n_tasks += 1
@@ -83,6 +84,9 @@ def score_user(user, project):
                 n_user_completed += 1
     if n_tasks>0:
         score += ((2 * n_user_completed) / n_tasks)
+    else:
+        # new users given better score than veteran with <10% task completions
+        score += 0.1
     if user.is_active():
         score += 1
     print(f'{user}: {score}')
