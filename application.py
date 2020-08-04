@@ -349,10 +349,10 @@ def home():
     recommended_tabs = list(partition_query(recs))
     # top projects
     tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
-    top_tabs = partition_query(tops)
+    top_tabs =  list(partition_query(tops))
     # user projects
     user_projs = db.session.query(Project).filter_by(owner=current_user).limit(9)
-    user_tabs = partition_query(user_projs)
+    user_tabs = list(partition_query(user_projs))
     project_application = forms.Project_Application_Form(request.form)
     # notifcations
     if (current_user.notifications.count())>0:

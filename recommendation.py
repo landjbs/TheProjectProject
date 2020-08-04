@@ -60,7 +60,7 @@ def recommend_projects(user):
                    + invited_projects + rejected_projects)
     candidates = Project.query.filter(Project.open==True,
                                       Project.complete==False,
-                                      ~Project.id.in_(nowshow_ids))
+                                      ~Project.id.in_(nowshow_ids)).limit(200)
     ## get invited projects ##
     invited = [project for project in user.invitations]
     ## format user preferences ##

@@ -189,7 +189,7 @@ class User(db.Model, UserMixin):
     ## projects ##
     owned = relationship('Project', back_populates='owner')
     projects = relationship('Project', secondary='user_to_project_2',
-                            back_populates='members')
+                            back_populates='members', order_by='desc(Project.last_active)')
     pending = relationship('Project_Application',
                             back_populates='user', lazy='dynamic')
     invitations = relationship('Project', secondary='project_invitation',
@@ -256,7 +256,6 @@ class User(db.Model, UserMixin):
         if diff>second_window:
             return False
         return True
-
 
     def is_authenticated(self):
         return self.accepted
@@ -354,6 +353,8 @@ class Project(db.Model):
     posted_on = Column(DateTime, nullable=False)
     # complete_on
     completed_on = Column(DateTime, nullable=True)
+    # last activity
+    last_active = Column(DateTime, nullable=False, default=date.utcnow)
     # estimated time
     estimated_time = Column(Integer, nullable=True)
     # complete
@@ -395,6 +396,20 @@ class Project(db.Model):
 
     def __repr__(self):
         return f'<Project {self.name}>'
+
+    def recently_active(self, second_window=302400):
+        ''' second_window: number of seconds to count as recent.
+            currently half a week.
+            (week=604800), ()
+        '''
+        if self.active:
+            return True
+        if not self.last_active:
+            return False
+        diff = (datetime.utcnow() - self.last_active).seconds
+        if diff>second_window:
+            return False
+        return True
 
 
 class Subject(db.Model):
