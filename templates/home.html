@@ -113,6 +113,10 @@
 
 <script>
 // log tabs
+$('#rec-carousel').carousel({
+  interval: 50000
+})
+
 $('#rec-carousel').on('slid.bs.carousel', function () {
   var cur = $('#rec-carousel div.active').index()
   sessionStorage.setItem('recSlide', cur);
