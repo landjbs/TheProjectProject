@@ -1055,5 +1055,12 @@ def remove_application_requirement(project_id):
     return redirect(request.referrer)
 
 
+@application.route('/flash_encouragement', methods=['POST'])
+def flash_encouragement():
+    flash('Reminder: You are awesome and will do amazing '
+         'things if you believe in yourself.')
+    return redirect(request.referrer)
+
+
 if __name__ == '__main__':
     application.run(host='127.0.0.1')

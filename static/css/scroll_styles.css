@@ -35,6 +35,10 @@
   display: inline;
 }
 
+.info-nums {
+  text-align: right;
+}
+
 .card-head {
   text-align: left;
   white-space: nowrap;

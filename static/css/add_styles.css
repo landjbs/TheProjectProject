@@ -53,12 +53,7 @@ body {
 
 #project_form {
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  vertical-align: middle;
+  position: relative;
 }
 
 .input-segment {
