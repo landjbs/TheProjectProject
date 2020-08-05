@@ -63,11 +63,11 @@ class Apply(BaseForm):
                                    'are allowed. Please reach out if you would '
                                    'like your school to be added.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
-    github = StringField('Github',
+    url = StringField('URL',
                     validators=[Length(0, 254),
                                   Site_URL_Validator('github')],
-                    description=("Show off past projects on your github if "
-                                   "you'd like!"),
+                    description=('Tell us about yourself with a Github or '
+                                 'personal website!'),
                     render_kw={'placeholder': 'https://www.github.com/example'})
     about = TextField('About You',
                     validators=[DataRequired(), Length(1, 500)],
@@ -110,7 +110,7 @@ class Apply(BaseForm):
         if self.github.data:
             user = User.query.filter_by(github=self.github.data).first()
             if user:
-                self.email.errors.append('There is already an account '
+                self.url.errors.append('There is already an account '
                                          'registered with that github.')
                 return False
 
