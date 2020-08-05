@@ -104,15 +104,16 @@ class Apply(BaseForm):
             self.email.errors.append('There is already an account registered '
                                      'with that email.')
             return False
-        # unique github validation
+        # unique url validation
         if self.url.data=='':
             self.url.data = None
         if self.url.data:
             user = User.query.filter_by(github=self.github.data).first()
             if user:
                 self.url.errors.append('There is already an account '
-                                         'registered with that github.')
+                                         'registered with that URL.')
                 return False
+        return False
 
 
 class Login(BaseForm):
