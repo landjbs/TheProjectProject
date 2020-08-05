@@ -17,6 +17,8 @@ def create_app(config=config.base_config):
     app.config.from_object(config)
     register_extensions(app)
     register_errorhandlers(app)
+    register_jinja_env(app)
+    register_commands(app)
 
 
 def register_errorhandlers(app):
@@ -40,3 +42,10 @@ def register_jinja_env(app):
         # TODO: define url_for_other_page from app.utils
         'url_for_other_page': url_for_other_page,
     })
+
+
+def register_commands(app):
+    """Register custom commands for the Flask CLI."""
+    # TODO: define and import commands frtom app.commands
+    for command in [create_db, drop_db, populate_db, recreate_db]:
+        app.cli.command()(command)
