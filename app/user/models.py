@@ -26,8 +26,8 @@ class User(CRUDMixin, UserMixin, db.Model):
     # subject
     subjects = relationship('Subject', secondary='user_to_subject',
                             back_populates='users', lazy='dynamic')
-    # github
-    github = db.Column(db.String(254), unique=True, nullable=True)
+    # url
+    url = db.Column(db.String(254), unique=True, nullable=True)
     # about
     about = db.Column(db.String(500), nullable=False)
     ## permissions and other bools ##
@@ -76,12 +76,12 @@ class User(CRUDMixin, UserMixin, db.Model):
                            lazy='dynamic')
 
 
-    def __init__(self, name, email, password, github, about, admin=False):
+    def __init__(self, name, email, password, url, about, admin=False):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
         self.set_password(password)
-        self.github = str(github) if github!='' else None
+        self.url = url
         self.about = str(about)
         self.admin = admin
         self.accepted = True if admin else False
