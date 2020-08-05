@@ -1,5 +1,6 @@
 import click
 from faker import Faker
+from termcolor import colored
 
 from app import db
 from app.user.models import User
@@ -51,5 +52,6 @@ def drop_db():
 
 def rebuild_db():
     ''' Drops database and then creates '''
+    print(colored('Dropping...'))
     drop_db()
     create_db()

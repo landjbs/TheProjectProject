@@ -1,3 +1,4 @@
+import numpy as np
 from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy import desc
@@ -9,6 +10,13 @@ from app.extensions import bcrypt
 from app.models import (user_to_subject, user_to_project, user_to_project_2,
                         user_to_task, user_to_notification)
 
+
+def generate_code(name, table):
+    code = str(name).replace('/', '_').replace(' ', '_').lower()
+    temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
+    while table.query.filter_by(code=temp_code).first() is not None:
+        temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
+    return temp_code
 
 
 class User(CRUDMixin, UserMixin, db.Model):
