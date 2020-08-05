@@ -20,6 +20,7 @@ def load_user(id):
 def login():
     form = Login()
     if form.validate_on_submit():
+        print('VALIDATED')
         login_user(form.user)
         return redirect(request.args.get('next') or url_for('home'))
     start_on = 0
