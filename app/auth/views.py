@@ -41,6 +41,12 @@ def apply():
                     about=form.data['about']
                 )
         print('HERE')
+    start_on = 0
+    for i, elt in enumerate(form):
+        if elt.errors:
+            start_on = i
+            break
+    return render_template('apply.html', form=form, start_on=start_on)
 
 
 
