@@ -10,7 +10,8 @@ from app.base import base
 from app.auth import auth
 #
 from app.database import db
-from app.extensions import assets, bcrypt, limiter, lm, migrate, rq, travis, csrf
+from app.extensions import (assets, admin, bcrypt, csrf, limiter,
+                            lm, migrate, rq, travis)
 from app.commands import create_db, drop_db, populate_db, rebuild_db
 from app.utils import url_for_other_page
 
@@ -42,6 +43,7 @@ def create_app(config=config.BaseConfig):
 
 def register_extensions(app):
     csrf.init_app(app)
+    admin.init_app(app)
     travis.init_app(app)
     db.init_app(app)
     lm.init_app(app)

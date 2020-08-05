@@ -1,4 +1,5 @@
 from flask_assets import Environment
+from flask_admin import Admin
 # from flask_babel import Babel
 from flask_wtf.csrf import CSRFProtect
 from flask_bcrypt import Bcrypt
@@ -13,6 +14,7 @@ from flask_travis import Travis
 
 
 assets = Environment()
+admin = Admin(template_mode='bootstrap3')
 # babel = Babel()
 csrf = CSRFProtect()
 bcrypt = Bcrypt()
