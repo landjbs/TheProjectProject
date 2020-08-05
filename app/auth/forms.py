@@ -79,7 +79,7 @@ class Apply(BaseForm):
                                     description=('What subjects are you '
                                                 'interested in?'),
                                     validators=[Select_Limit_Validator(5)],
-                                    choices=list(subjects),
+                                    choices=[], #list(subjects),
                                     render_kw={'max':5})
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),

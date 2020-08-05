@@ -5,8 +5,9 @@ from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 from app import config
+from app.auth import auth
 from app.database import db
-from app.extensions import assets, bcrypt, limiter, lm, migrate, rq, travis
+from app.extensions import assets, bcrypt, limiter, lm, migrate, rq, travis, csrf
 from app.commands import create_db, drop_db, populate_db, rebuild_db
 from app.utils import url_for_other_page
 
@@ -15,7 +16,11 @@ def create_app(config=config.BaseConfig):
     ''' '''
     application = Flask(__name__)
     application.config.from_object(config)
+    # TODO: better secret key define in config
+    application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
+    print(f'SECRET KEY: {application.secret_key}')
     register_extensions(application)
+    register_blueprints(application)
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
@@ -36,6 +41,7 @@ def create_app(config=config.BaseConfig):
 
 
 def register_extensions(app):
+    csrf.init_app(app)
     travis.init_app(app)
     db.init_app(app)
     lm.init_app(app)
@@ -46,6 +52,11 @@ def register_extensions(app):
     rq.init_app(app)
     migrate.init_app(app, db)
     limiter.init_app(app)
+
+
+def register_blueprints(app):
+    ''' Registers all blueprints with application '''
+    app.register_blueprint(auth)
 
 
 def register_errorhandlers(app):

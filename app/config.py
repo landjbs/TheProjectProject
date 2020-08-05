@@ -7,20 +7,20 @@ class BaseConfig(object):
         db_password = 'jl245o234jDFalsdkjf;kl2j4508usdjilfka'
         endpoint = 'theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306'
         db_url = 'dev_db'
-        self.SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{db_user}:{db_password}@{endpoint}/{db_url}'
+        SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{db_user}:{db_password}@{endpoint}/{db_url}'
 
         # VCP ID: vpc-4d83fe37
 
         # Uncomment the line below if you want to work with a local DB
         # SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
 
-        self.SEND_FILE_MAX_AGE_DEFAULT = 0
-        self.REDIS_URL = 'redis://redis:6379/0'
-        self.QUEUES = ['default']
-        self.FLASK_ADMIN_SWITCH = 'orange'
+        SEND_FILE_MAX_AGE_DEFAULT = 0
+        REDIS_URL = 'redis://redis:6379/0'
+        QUEUES = ['default']
+        FLASK_ADMIN_SWITCH = 'orange'
 
-        self.SQLALCHEMY_POOL_RECYCLE = 3600
+        SQLALCHEMY_POOL_RECYCLE = 3600
 
-        self.WTF_CSRF_ENABLED = True
-        self.SECRET_KEY = 'cC1YCIWOj9GgWspgNEo2'
-        # self.SECRET_KEY = '1v8GEdD0oUBA55MQRkD/D/wS7CGmmSHyatMm0arx'
+        WTF_CSRF_ENABLED = True
+        # SECRET_KEY = 'cC1YCIWOj9GgWspgNEo2'
+        SECRET_KEY = '1v8GEdD0oUBA55MQRkD/D/wS7CGmmSHyatMm0arx'
