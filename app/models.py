@@ -1,5 +1,3 @@
-import sys
-import numpy as np
 from flask_login import UserMixin, AnonymousUserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,7 +8,6 @@ from sqlalchemy_utils import IntRangeType
 from sqlalchemy import desc
 
 
-# sys.path.append('.')
 from app.database import db, generate_code
 
 
