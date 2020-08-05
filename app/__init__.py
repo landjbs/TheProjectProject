@@ -2,7 +2,7 @@ import time
 import requests
 from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from app.extensions import register_extensions
+from app.extensions import assets, bcrypt, limiter, lm, migrate, rq, travis
 from app.commands import create_db, drop_db, populate_db, recreate_db
 from app.utils import url_for_other_page
 
@@ -29,6 +29,19 @@ def create_app(config=config.BaseConfig):
         return render_template('index.html')
 
     return app
+
+
+def register_extensions(app):
+    travis.init_app(app)
+    db.init_app(app)
+    lm.init_app(app)
+    # mail.init_app(app)
+    bcrypt.init_app(app)
+    assets.init_app(app)
+    # babel.init_app(app)
+    rq.init_app(app)
+    migrate.init_app(app, db)
+    limiter.init_app(app)
 
 
 def register_errorhandlers(app):

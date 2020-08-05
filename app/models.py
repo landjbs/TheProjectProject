@@ -11,7 +11,7 @@ from sqlalchemy import desc
 
 
 sys.path.append('.')
-from application import db
+from app import db
 
 
 def generate_code(name, table):
