@@ -7,7 +7,7 @@ class BaseConfig(object):
         db_password = 'jl245o234jDFalsdkjf;kl2j4508usdjilfka'
         endpoint = 'theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306'
         db_url = 'dev_db'
-        SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{db_user}:{db_password}@{endpoint}/{db_url}'
+        self.SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{db_user}:{db_password}@{endpoint}/{db_url}'
 
         # VCP ID: vpc-4d83fe37
 

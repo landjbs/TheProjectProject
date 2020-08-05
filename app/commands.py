@@ -4,6 +4,7 @@ from faker import Faker
 from app.database import db
 from app.models import User
 
+print(f'USER: {User}')
 
 @click.option('--num_users', default=5, help='Number of users.')
 def populate_db(num_users):

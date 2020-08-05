@@ -21,6 +21,8 @@ def create_app(config=config.BaseConfig):
     application.config.from_object(config)
     # TODO: better secret key define in config
     application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
+    application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    print(application.__dict__)
     print(f'SECRET KEY: {application.secret_key}')
     register_extensions(application)
     register_blueprints(application)
