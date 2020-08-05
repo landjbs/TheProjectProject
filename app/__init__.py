@@ -8,7 +8,7 @@ from app import config
 # blueprints
 from app.base import base
 from app.auth import auth
-from app.admin import admin
+from app.admin import register_admin_views
 #
 from app.database import db
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
@@ -31,6 +31,7 @@ def create_app(config=config.BaseConfig):
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
+    register_admin_views(admin)
 
     @application.before_request
     def before_request():
@@ -62,7 +63,7 @@ def register_blueprints(app):
     app.register_blueprint(base)
     app.register_blueprint(auth)
     app.register_blueprint(admin)
-    
+
 
 def register_errorhandlers(app):
     ''' Registers handlers for all errors '''
