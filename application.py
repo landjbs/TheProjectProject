@@ -13,11 +13,11 @@ from collections import Counter
 from operator import itemgetter
 from itsdangerous import URLSafeTimedSerializer
 
-from application import db
-from application.models import (User, Project, Comment, Task, Subject, User_Report,
+from app import db
+from app.models import (User, Project, Comment, Task, Subject, User_Report,
                                 Project_Application, Notification, Anonymous, Admin_User)
-import application.forms as forms
-import application.tasks as tasks
+import app.forms as forms
+import app.tasks as tasks
 from flask_admin import Admin
 from flask_admin.menu import MenuLink
 from auth import UserView, ReportView, AdminBaseView
