@@ -40,6 +40,7 @@ def apply():
                     url=form.data['url'],
                     about=form.data['about']
                 )
+        print('HERE')
 
 
 
