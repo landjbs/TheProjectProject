@@ -33,7 +33,14 @@ def login():
 def apply():
     form = Apply()
     if form.validate_on_submit():
-        
+        user = User.create(
+                    name=form.data['name'],
+                    email=form.data['email'],
+                    password=form.data['password'],
+                    url=form.data['url'],
+                    about=form.data['about']
+                )
+
 
 
 @auth.route('/logout')
