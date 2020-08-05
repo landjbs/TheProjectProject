@@ -18,12 +18,12 @@ from app.utils import url_for_other_page
 def create_app(config=config.BaseConfig):
     ''' '''
     application = Flask(__name__)
-    application.config.from_object(config)
+    application.config.from_object(config())
     # TODO: better secret key define in config
-    application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
+    # application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    print(application.__dict__)
-    print(f'SECRET KEY: {application.secret_key}')
+    application.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///test.db'
+    # print(application.config['DATABASE_URI'])
     register_extensions(application)
     register_blueprints(application)
     register_errorhandlers(application)
@@ -78,7 +78,6 @@ def register_jinja_env(app):
     """Configure the Jinja env to enable some functions in templates."""
     app.jinja_env.globals.update({
         'timeago': lambda x: arrow.get(x).humanize(),
-        # TODO: define url_for_other_page from app.utils
         'url_for_other_page': url_for_other_page,
     })
 

@@ -1,10 +1,9 @@
 import click
 from faker import Faker
 
-from app.database import db
+from app import db
 from app.models import User
 
-print(f'USER: {User}')
 
 @click.option('--num_users', default=5, help='Number of users.')
 def populate_db(num_users):
@@ -20,6 +19,17 @@ def populate_db(num_users):
                 password=(fake.word()+fake.word()),
                 github=f'https://github.com/{fake.name()}',
                 about=' '.join([fake.word() for _ in range(30)])
+            )
+        )
+        users.append(
+            User(
+                name='Landon Smith',
+                email='landonsmith@college.harvard.edu',
+                password='boop',
+                github='https://github.com/landjbs',
+                about=('I love AI and NLP. Founder of Strada Routing and '
+                       'TheProjectProject!'),
+                admin=True
             )
         )
     db.session.commit()
