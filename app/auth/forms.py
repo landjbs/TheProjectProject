@@ -8,7 +8,7 @@ from wtforms import (TextField, StringField, PasswordField, BooleanField,
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
-from app.models import User
+from app.user.models import User
 
 
 BaseForm = model_form_factory(FlaskForm)

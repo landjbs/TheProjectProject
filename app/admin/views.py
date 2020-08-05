@@ -9,7 +9,7 @@ from flask_admin.contrib.sqla import ModelView
 from flask_admin.menu import MenuLink
 
 import app.models as models
-
+from app.user.models import User
 
 class AdminBaseView(ModelView):
     def __init__(self, *args, **kwargs):
@@ -37,14 +37,14 @@ class UserView(AdminBaseView):
 
     @expose('/action/accept_single', methods=('GET',))
     def accept_single(self):
-        user = models.User.query.get_or_404(int(request.args.get('id')))
+        user = User.query.get_or_404(int(request.args.get('id')))
         user.accept()
         flash(f'You have accepted {user.name}.')
         return redirect(request.referrer)
 
     @expose('/action/reject_single', methods=('GET',))
     def reject_single(self):
-        user = models.User.query.get_or_404(int(request.args.get('id')))
+        user = User.query.get_or_404(int(request.args.get('id')))
         user.reject()
         flash(f'You have rejected {user.name}.')
         return redirect(request.referrer)
@@ -53,7 +53,7 @@ class UserView(AdminBaseView):
     @action('accept', 'Accept', 'Are you sure you want to accept the selected users?')
     def action_accept(self, ids):
         try:
-            query = models.User.query.filter(models.User.id.in_(ids))
+            query = User.query.filter(User.id.in_(ids))
             count = 0
             for user in query.all():
                 if user.accept():
@@ -72,7 +72,7 @@ class UserView(AdminBaseView):
     @action('reject', 'Reject', 'Are you sure you want to reject the selected users?')
     def reject_accept(self, ids):
         try:
-            query = models.User.query.filter(models.User.id.in_(ids))
+            query = User.query.filter(User.id.in_(ids))
             count = 0
             for user in query.all():
                 if user.reject():
@@ -96,19 +96,19 @@ class ReportView(AdminBaseView):
 
     @expose('/action/resolve_report', methods=('GET',))
     def resolve_report(self):
-        report = models.User_Report.query.get_or_404(int(request.args.get('id')))
+        report = User_Report.query.get_or_404(int(request.args.get('id')))
         return redirect(request.referrer)
 
 
 
 def register_admin_views(admin, db):
     # model views
-    admin.add_view(UserView(models.User, db.session))
+    admin.add_view(UserView(User, db.session))
     admin.add_view(AdminBaseView(models.Project, db.session))
     admin.add_view(AdminBaseView(models.Comment, db.session))
     admin.add_view(AdminBaseView(models.Task, db.session))
     admin.add_view(AdminBaseView(models.Subject, db.session))
-    admin.add_view(ReportView(models.User_Report, db.session))
+    admin.add_view(ReportView(User_Report, db.session))
     admin.add_view(AdminBaseView(models.Project_Application, db.session))
     admin.add_view(AdminBaseView(models.Notification, db.session))
     # nav links

@@ -514,38 +514,3 @@ class Badge(db.Model):
 
     def __repr__(self):
         return f'<Badge {self.name}>'
-
-
-class User_Report(db.Model):
-    __tablename__ = 'user_report'
-    id = db.Column(Integer, primary_key=True)
-    reporter_id = db.Column(Integer, ForeignKey('User.id'))
-    reported_id = db.Column(Integer, ForeignKey('User.id'))
-    reporter = relationship('User', foreign_keys='User_Report.reporter_id')
-    reported = relationship('User', foreign_keys='User_Report.reported_id')
-    ## description ##
-    # report description
-    text = db.Column('text', String(250), nullable=True)
-    # report time
-    timestamp = db.Column(DateTime, nullable=False, default=datetime.utcnow)
-    ## administrative ##
-    # has report been addressed
-    resolved = db.Column(Boolean, nullable=False, default=False)
-    # action: what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
-    action = db.Column(Integer, nullable=True)
-    # resolve_stamp: when action was taken
-    resolve_stamp = db.Column(DateTime, nullable=True)
-
-    def __repr__(self):
-        base = (f'<Report of {self.reported} by {self.reporter} at {self.timestamp}; '
-                f'TEXT={self.text}')
-        if not self.resolved:
-            return (base + f'resolved with {self.action} at {self.resolve_stamp}>')
-        else:
-            return base + '>'
-
-    def resolve(action):
-        ''' action = {0:pass, 1:warning, 2:tempban, 3:permaban} '''
-        self.resolved = True
-        self.action = int(action)
-        self.resolve_stamp = datetime.utcnow()

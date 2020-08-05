@@ -5,16 +5,16 @@ from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin
 from app.extensions import bcrypt
-# from app.models import (Project, Project_Application, Comment, Task, User_Badge,
-                        # Notification, User_Subjects)
+
 from app.models import (user_to_subject, user_to_project, user_to_project_2,
                         user_to_task, user_to_notification)
+
 
 
 class User(CRUDMixin, UserMixin, db.Model):
     __tablename__ = 'user'
     # id primary key
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.db.Integer, primary_key=True)
     # name
     name = db.Column(db.String(128), unique=False)
     # code
@@ -31,14 +31,14 @@ class User(CRUDMixin, UserMixin, db.Model):
     # about
     about = db.Column(db.String(500), nullable=False)
     ## permissions and other bools ##
-    admin = db.Column(db.Boolean, nullable=False, default=False)
-    emailed = db.Column(db.Boolean, nullable=False, default=False)
-    confirmed = db.Column(db.Boolean, nullable=False, default=False)
-    accepted = db.Column(db.Boolean, nullable=False, default=False)
-    applied_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    accepted_on = db.Column(db.DateTime, nullable=True)
-    active = db.Column(db.Boolean, nullable=False, default=False)
-    last_active = db.Column(db.DateTime, nullable=True)
+    admin = db.Column(db.db.Boolean, nullable=False, default=False)
+    emailed = db.Column(db.db.Boolean, nullable=False, default=False)
+    confirmed = db.Column(db.db.Boolean, nullable=False, default=False)
+    accepted = db.Column(db.db.Boolean, nullable=False, default=False)
+    applied_on = db.Column(db.db.DateTime, nullable=False, default=db.DateTime.utcnow)
+    accepted_on = db.Column(db.db.DateTime, nullable=True)
+    active = db.Column(db.db.Boolean, nullable=False, default=False)
+    last_active = db.Column(db.db.DateTime, nullable=True)
     ## projects ##
     owned = relationship('Project', back_populates='owner',
                          order_by='desc(Project.last_active)')
@@ -108,7 +108,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             return True
         if not self.last_active:
             return False
-        diff = (db.DateTime.utcnow() - self.last_active).seconds
+        diff = (db.db.DateTime.utcnow() - self.last_active).seconds
         if diff>second_window:
             return False
         return True
@@ -128,7 +128,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         # elif self.accepted:
             # raise RuntimeError(f'{self} has already been accepted.')
         self.accepted = True
-        self.accepted_on = db.DateTime.utcnow()
+        self.accepted_on = db.db.DateTime.utcnow()
         db.session.commit()
         return True
 
@@ -165,3 +165,39 @@ class User(CRUDMixin, UserMixin, db.Model):
     # applications
     def has_applied(self, project):
         return ((self.pending.filter_by(project=project).first()) is not None)
+
+
+
+class User_Report(db.Model):
+    __tablename__ = 'user_report'
+    id = db.Column(db.Integer, primary_key=True)
+    reporter_id = db.Column(db.Integer, ForeignKey('User.id'))
+    reported_id = db.Column(db.Integer, ForeignKey('User.id'))
+    reporter = relationship('User', foreign_keys='User_Report.reporter_id')
+    reported = relationship('User', foreign_keys='User_Report.reported_id')
+    ## description ##
+    # report description
+    text = db.Column('text', String(250), nullable=True)
+    # report time
+    timestamp = db.Column(db.DateTime, nullable=False, default=db.DateTime.utcnow)
+    ## administrative ##
+    # has report been addressed
+    resolved = db.Column(db.Boolean, nullable=False, default=False)
+    # action: what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
+    action = db.Column(db.Integer, nullable=True)
+    # resolve_stamp: when action was taken
+    resolve_stamp = db.Column(db.DateTime, nullable=True)
+
+    def __repr__(self):
+        base = (f'<Report of {self.reported} by {self.reporter} at {self.timestamp}; '
+                f'TEXT={self.text}')
+        if not self.resolved:
+            return (base + f'resolved with {self.action} at {self.resolve_stamp}>')
+        else:
+            return base + '>'
+
+    def resolve(action):
+        ''' action = {0:pass, 1:warning, 2:tempban, 3:permaban} '''
+        self.resolved = True
+        self.action = int(action)
+        self.resolve_stamp = db.DateTime.utcnow()

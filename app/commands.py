@@ -2,7 +2,7 @@ import click
 from faker import Faker
 
 from app import db
-from app.models import User
+from app.user.models import User
 
 
 @click.option('--num_users', default=5, help='Number of users.')
