@@ -1,4 +1,5 @@
 from flask_login import UserMixin
+from datetime import datetime
 
 from app.database import db, CRUDMixin
 from app.extensions import bcrypt
