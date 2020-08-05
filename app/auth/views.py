@@ -6,8 +6,7 @@ from itsdangerous import URLSafeSerializer, BadSignature
 from app.extensions import lm
 # from app.jobs import send_registration_email
 from app.user.models import User
-# from app.user.forms import RegisterUserForm
-from .forms import Login
+from .forms import Login, Apply
 from ..auth import auth
 
 
@@ -30,6 +29,13 @@ def login():
     return render_template('login.html', form=form, start_on=start_on)
 
 
+@auth.route('/apply', methods=['GET', 'POST'])
+def apply():
+    form = Apply()
+    if form.validate_on_submit():
+        
+
+
 @auth.route('/logout')
 @login_required
 def logout():
@@ -38,6 +44,7 @@ def logout():
     # db.session.commit()
     logout_user()
     return redirect(url_for('base.index'))
+
 
 
 # FROMAPPLICATION

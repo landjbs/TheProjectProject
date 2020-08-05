@@ -92,6 +92,15 @@ class Apply(BaseForm):
                                 validators=[DataRequired()],
                             render_kw={'placeholder': 'Yes'})
 
+    def validate(self):
+        ''' Validates application '''
+        # stock validation
+        rv = BaseForm.validate(self)
+        if not rv:
+            return False
+        # unique validation
+        self.user = 
+
 
 class Login(BaseForm):
     email = StringField('Email', validators=[DataRequired(), Length(1, 254),
@@ -100,7 +109,7 @@ class Login(BaseForm):
                              validators=[Length(0, 254)])
 
     def validate(self):
-        ''' Validates login on all accounts '''
+        ''' Validates login '''
         # stock validation
         rv = BaseForm.validate(self)
         if not rv:
