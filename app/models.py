@@ -11,16 +11,7 @@ from sqlalchemy import desc
 
 
 # sys.path.append('.')
-from app.database import db
-# from app.user.models import User
-
-
-def generate_code(name, table):
-    code = str(name).replace('/', '_').replace(' ', '_').lower()
-    temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
-    while table.query.filter_by(code=temp_code).first() is not None:
-        temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
-    return temp_code
+from app.database import db, generate_code
 
 
 ## ASSOCIATION TABLES ##

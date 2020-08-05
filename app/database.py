@@ -38,7 +38,6 @@ class CRUDMixin(object):
         return commit and db.session.commit()
 
 
-
 def generate_code(name, table):
     ''' Generate unique code for url to access name in table '''
     code = str(name).replace('/', '_').replace(' ', '_').lower()
