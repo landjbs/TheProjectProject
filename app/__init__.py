@@ -31,7 +31,7 @@ def create_app(config=config.BaseConfig):
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
-    register_admin_views(admin)
+    register_admin_views(admin, db)
 
     @application.before_request
     def before_request():
@@ -62,7 +62,6 @@ def register_blueprints(app):
     ''' Registers all blueprints with application '''
     app.register_blueprint(base)
     app.register_blueprint(auth)
-    app.register_blueprint(admin)
 
 
 def register_errorhandlers(app):

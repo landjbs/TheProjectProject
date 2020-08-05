@@ -6,6 +6,7 @@ from flask_admin import expose
 from flask_admin.actions import action
 from flask_admin.model.template import EndpointLinkRowAction
 from flask_admin.contrib.sqla import ModelView
+from flask_admin.menu import MenuLink
 
 import app.models as models
 
@@ -100,7 +101,7 @@ class ReportView(AdminBaseView):
 
 
 
-def register_admin_views(admin):
+def register_admin_views(admin, db):
     # model views
     admin.add_view(UserView(models.User, db.session))
     admin.add_view(AdminBaseView(models.Project, db.session))
