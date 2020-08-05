@@ -1,24 +1,32 @@
+import time
 import requests
-from flask import Flask
+from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from extensions import register_extensions
 
 
-application = Flask(__name__)
-application.config.from_object('config')
-application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(application)
-db.init_app(application)
-
-
 def create_app(config=config.base_config):
     ''' '''
-    app = Flask(__name__, )
+    app = Flask(__name__)
     app.config.from_object(config)
     register_extensions(app)
     register_errorhandlers(app)
     register_jinja_env(app)
     register_commands(app)
+
+    @app.before_request
+    def before_request():
+        ''' prepare to handle each request '''
+        g.request_start_time = time.time()
+        g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
+        g.pjax = 'X-PJAX' in request.headers
+
+    @application.route('/', methods=['GET'])
+    @application.route('/index', methods=['GET'])
+    def index():
+        return render_template('index.html')
+
+    return app
 
 
 def register_errorhandlers(app):

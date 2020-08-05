@@ -180,7 +180,6 @@ def page_unauthorized(e):
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
-    # db.engine.dispose()
     return render_template('index.html')
 
 
