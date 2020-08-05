@@ -31,7 +31,7 @@ def login():
 
 @auth.route('/apply', methods=['GET', 'POST'])
 def apply():
-    form = Apply()
+    form = Apply(request.form)
     if form.validate_on_submit():
         user = User.create(
                     name=form.data['name'],
@@ -40,7 +40,6 @@ def apply():
                     url=form.data['url'],
                     about=form.data['about']
                 )
-        print('HERE')
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:
