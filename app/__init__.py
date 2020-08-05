@@ -5,7 +5,10 @@ from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
 from app import config
+# blueprints
+from app.base import base
 from app.auth import auth
+#
 from app.database import db
 from app.extensions import assets, bcrypt, limiter, lm, migrate, rq, travis, csrf
 from app.commands import create_db, drop_db, populate_db, rebuild_db
@@ -32,25 +35,6 @@ def create_app(config=config.BaseConfig):
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
 
-    @application.route('/', methods=['GET'])
-    @application.route('/index', methods=['GET'])
-    def index():
-        return render_template('index.html')
-
-    @application.route('/about', methods=['GET', 'POST'])
-    def about():
-        return render_template('about.html')
-
-
-    @application.route('/contact', methods=['GET', 'POST'])
-    def contact():
-        return render_template('contact.html')
-
-
-    @application.route('/terms', methods=['GET', 'POST'])
-    def terms():
-        return render_template('terms.html')
-
     return application
 
 
@@ -70,6 +54,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     ''' Registers all blueprints with application '''
+    app.register_blueprint(base)
     app.register_blueprint(auth)
 
 
