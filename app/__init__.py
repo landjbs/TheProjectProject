@@ -37,6 +37,20 @@ def create_app(config=config.BaseConfig):
     def index():
         return render_template('index.html')
 
+    @application.route('/about', methods=['GET', 'POST'])
+    def about():
+        return render_template('about.html')
+
+
+    @application.route('/contact', methods=['GET', 'POST'])
+    def contact():
+        return render_template('contact.html')
+
+
+    @application.route('/terms', methods=['GET', 'POST'])
+    def terms():
+        return render_template('terms.html')
+
     return application
 
 
