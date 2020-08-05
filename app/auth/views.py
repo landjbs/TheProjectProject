@@ -20,9 +20,8 @@ def load_user(id):
 def login():
     form = Login()
     if form.validate_on_submit():
-        print('VALIDATED')
         login_user(form.user)
-        return redirect(request.args.get('next') or url_for('home'))
+        return redirect(request.args.get('next') or url_for('base.index'))
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:

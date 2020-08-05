@@ -21,17 +21,19 @@ def populate_db(num_users):
                 about=' '.join([fake.word() for _ in range(30)])
             )
         )
-        users.append(
-            User(
-                name='Landon Smith',
-                email='landonsmith@college.harvard.edu',
-                password='boop',
-                github='https://github.com/landjbs',
-                about=('I love AI and NLP. Founder of Strada Routing and '
-                       'TheProjectProject!'),
-                admin=True
-            )
+    users.append(
+        User(
+            name='Landon Smith',
+            email='landonsmith@college.harvard.edu',
+            password='boop',
+            github='https://github.com/landjbs',
+            about=('I love AI and NLP. Founder of Strada Routing and '
+                   'TheProjectProject!'),
+            admin=True
         )
+    )
+    for user in users:
+        db.session.add(user)
     db.session.commit()
 
 

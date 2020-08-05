@@ -207,6 +207,13 @@ class User(db.Model, UserMixin):
         self.emailed = True if admin else False
         self.confirmed = True if admin else False
 
+    @classmethod
+    def get_by_id(cls, id):
+        if any((isinstance(id, str) and id.isdigit(),
+                isinstance(id, (int, float))),):
+            return cls.query.get(int(id))
+        return None
+
     def __repr__(self):
         return f'<User {self.name}>'
 
