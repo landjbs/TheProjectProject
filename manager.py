@@ -1,8 +1,8 @@
 from flask import flash
 
-from application import db
-from application.models import (Project, User, Subject, User_Subjects,
-                                User_Report, Notification)
+from app import db
+from app.models import (Project, User, Subject, User_Subjects,
+                        User_Report, Notification)
 
 
 def create_subject(name, color):

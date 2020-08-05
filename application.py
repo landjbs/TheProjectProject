@@ -13,11 +13,12 @@ from collections import Counter
 from operator import itemgetter
 from itsdangerous import URLSafeTimedSerializer
 
-from app import db
+from app import create_app
+# from app import db
 from app.models import (User, Project, Comment, Task, Subject, User_Report,
                                 Project_Application, Notification, Anonymous, Admin_User)
 import app.forms as forms
-import app.tasks as tasks
+import app.jobs as tasks
 from flask_admin import Admin
 from flask_admin.menu import MenuLink
 from auth import UserView, ReportView, AdminBaseView
@@ -26,14 +27,7 @@ import recommendation as rec
 
 
 # Elastic Beanstalk initalization
-application = Flask(__name__, static_url_path='', static_folder='static')
-application.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-application.config['REDIS_URL'] = 'redis://redis:6379/0'
-application.config['QUEUES'] = ['default']
-application.config['FLASK_ADMIN_SWITCH'] = 'orange'
-application.debug=True
-# change this to your own value
-application.secret_key = 'cC1YCIWOj9GgWspgNEo2'
+application = create_app()
 
 
 # initalization

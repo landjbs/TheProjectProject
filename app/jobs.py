@@ -4,8 +4,9 @@ import sys
 
 sys.path.append('.')
 
-from application import db
-from application.models import User, Subject
+from app import db
+from app.models import User
+
 
 SES_REGION = 'us-east-1'
 SES_EMAIL_SOURCE = 'admin@theprojectproject.io'

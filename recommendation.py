@@ -6,7 +6,7 @@ import numpy as np
 from operator import itemgetter
 from datetime import datetime
 
-from application.models import User, Project, Subject
+from app.models import User, Project, Subject
 
 
 PROJECT_LIMIT = 30

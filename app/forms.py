@@ -11,13 +11,14 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
 
 sys.path.append('.')
 
-from application import db
-from application.models import User, Subject
+from app.database import db
+from app.models import User, Subject
 
 
 BaseForm = model_form_factory(FlaskForm)
 # query all subjects
-subjects = [(str(s.id), s.name) for s in db.session.query(Subject)]
+# subjects = [(str(s.id), s.name) for s in db.session.query(Subject)]
+subjects = []
 
 
 class Email_Ext_Validator(object):

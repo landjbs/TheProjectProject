@@ -1,22 +1,26 @@
 import time
+import arrow
 import requests
 from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+
+from app import config
+from app.database import db
 from app.extensions import assets, bcrypt, limiter, lm, migrate, rq, travis
-from app.commands import create_db, drop_db, populate_db, recreate_db
+from app.commands import create_db, drop_db, populate_db, rebuild_db
 from app.utils import url_for_other_page
 
 
 def create_app(config=config.BaseConfig):
     ''' '''
-    app = Flask(__name__)
-    app.config.from_object(config)
-    register_extensions(app)
-    register_errorhandlers(app)
-    register_jinja_env(app)
-    register_commands(app)
+    application = Flask(__name__, static_url_path='', static_folder='static')
+    application.config.from_object(config)
+    register_extensions(application)
+    register_errorhandlers(application)
+    register_jinja_env(application)
+    register_commands(application)
 
-    @app.before_request
+    @application.before_request
     def before_request():
         ''' prepare to handle each request '''
         g.request_start_time = time.time()
@@ -28,7 +32,7 @@ def create_app(config=config.BaseConfig):
     def index():
         return render_template('index.html')
 
-    return app
+    return application
 
 
 def register_extensions(app):
@@ -69,5 +73,5 @@ def register_jinja_env(app):
 
 def register_commands(app):
     """Register custom commands for the Flask CLI."""
-    for command in [create_db, drop_db, populate_db, recreate_db]:
+    for command in [create_db, drop_db, populate_db, rebuild_db]:
         app.cli.command()(command)

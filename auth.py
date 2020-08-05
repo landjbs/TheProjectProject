@@ -6,7 +6,7 @@ from flask_admin.actions import action
 from flask_admin.model.template import EndpointLinkRowAction
 from flask_admin.contrib.sqla import ModelView
 
-import application.models as models
+import app.models as models
 from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session, abort)
 

@@ -14,6 +14,11 @@ class BaseConfig(object):
         # Uncomment the line below if you want to work with a local DB
         # SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
 
+        self.SEND_FILE_MAX_AGE_DEFAULT = 0
+        self.REDIS_URL = 'redis://redis:6379/0'
+        self.QUEUES = ['default']
+        self.FLASK_ADMIN_SWITCH = 'orange'
+
         self.SQLALCHEMY_POOL_RECYCLE = 3600
 
         self.WTF_CSRF_ENABLED = True
