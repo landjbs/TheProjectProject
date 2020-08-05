@@ -10,7 +10,7 @@ from sqlalchemy_utils import IntRangeType
 from sqlalchemy import desc
 
 
-sys.path.append('.')
+# sys.path.append('.')
 from app import db
 
 

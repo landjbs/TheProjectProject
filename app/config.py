@@ -22,4 +22,5 @@ class BaseConfig(object):
         self.SQLALCHEMY_POOL_RECYCLE = 3600
 
         self.WTF_CSRF_ENABLED = True
-        self.SECRET_KEY = '1v8GEdD0oUBA55MQRkD/D/wS7CGmmSHyatMm0arx'
+        self.SECRET_KEY = 'cC1YCIWOj9GgWspgNEo2'
+        # self.SECRET_KEY = '1v8GEdD0oUBA55MQRkD/D/wS7CGmmSHyatMm0arx'
