@@ -1,11 +1,10 @@
 from flask_login import UserMixin
 from datetime import datetime
+from sqlalchemy import desc
+from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin
 from app.extensions import bcrypt
-
-from sqlalchemy import desc
-
 
 
 class User(CRUDMixin, UserMixin, db.Model):
@@ -137,10 +136,11 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     # password
     def set_password(self, password):
-        return str(generate_password_hash(password))
+        hash_ = bcrypt.generate_password_hash(password, 10).decode('utf-8')
+        self.password = hash_
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return bcrypt.check_password_hash(self.password, password)
 
     # starring
     def star_project(self, project):
