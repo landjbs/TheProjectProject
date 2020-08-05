@@ -6,3 +6,11 @@ application.config.from_object('config')
 application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(application)
 db.init_app(application)
+
+
+def create_app(config=config.base_config):
+    ''' '''
+    app = Flask(__name__, )
+    app.config.from_object(config)
+
+    

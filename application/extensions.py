@@ -21,3 +21,16 @@ mail = Mail()
 migrate = Migrate()
 rq = RQ()
 travis = Travis()
+
+
+def register_extensions(app):
+    travis.init_app(app)
+    db.init_app(app)
+    lm.init_app(app)
+    mail.init_app(app)
+    bcrypt.init_app(app)
+    assets.init_app(app)
+    babel.init_app(app)
+    rq.init_app(app)
+    migrate.init_app(app, db)
+    limiter.init_app(app)
