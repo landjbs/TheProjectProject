@@ -129,34 +129,6 @@ class Anonymous(AnonymousUserMixin):
         return False
 
 
-class Admin_User(db.Model, UserMixin):
-    __tablename__ = 'admin_user'
-    # id
-    id = db.Column(Integer, primary_key=True)
-    # name
-    name = db.Column(String(128), unique=False)
-    # email
-    email = db.Column(String(254), unique=True, nullable=False)
-    # password
-    password = db.Column(String(254), nullable=False)
-
-    def __init__(self, name, email, password):
-        self.name = name
-        self.email = email
-        self.password = self.set_password(password)
-
-    def __repr__(self):
-        return f'<Admin_User {self.name}>'
-
-    def set_password(self, password):
-        return str(generate_password_hash(password))
-
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
-
-    def is_admin(self):
-        return True
-
 
 class User(db.Model, UserMixin):
     __tablename__ = 'user'

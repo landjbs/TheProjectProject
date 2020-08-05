@@ -16,7 +16,7 @@ from itsdangerous import URLSafeTimedSerializer
 from app import create_app, db
 # from app import db
 from app.models import (User, Project, Comment, Task, Subject, User_Report,
-                                Project_Application, Notification, Anonymous, Admin_User)
+                        Project_Application, Notification, Anonymous)
 import app.forms as forms
 import app.jobs as tasks
 from flask_admin import Admin

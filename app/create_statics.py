@@ -2,7 +2,7 @@ import sys
 sys.path.append('.')
 
 from application import db
-from application.models import Subject, Badge, Admin_User
+from application.models import Subject, Badge
 
 
 subjects = [# data/math/ai:    red
