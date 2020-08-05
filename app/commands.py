@@ -22,6 +22,7 @@ def populate_db(num_users):
                 about=' '.join([fake.word() for _ in range(30)])
             )
         )
+    db.session.commit()
 
 
 def create_db():

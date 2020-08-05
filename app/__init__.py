@@ -2,7 +2,8 @@ import time
 import requests
 from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from extensions import register_extensions
+from app.extensions import register_extensions
+from app.commands import create_db, drop_db, populate_db, recreate_db
 
 
 def create_app(config=config.base_config):
@@ -54,6 +55,5 @@ def register_jinja_env(app):
 
 def register_commands(app):
     """Register custom commands for the Flask CLI."""
-    # TODO: define and import commands frtom app.commands
     for command in [create_db, drop_db, populate_db, recreate_db]:
         app.cli.command()(command)
