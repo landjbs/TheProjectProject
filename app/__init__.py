@@ -13,7 +13,7 @@ from app.utils import url_for_other_page
 
 def create_app(config=config.BaseConfig):
     ''' '''
-    application = Flask(__name__, static_url_path='', static_folder='static')
+    application = Flask(__name__, template_folder='templates', static_url_path='', static_folder='static')
     application.config.from_object(config)
     register_extensions(application)
     register_errorhandlers(application)

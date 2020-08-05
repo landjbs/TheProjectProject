@@ -13,7 +13,7 @@ from collections import Counter
 from operator import itemgetter
 from itsdangerous import URLSafeTimedSerializer
 
-from app import create_app
+from app import create_app, db
 # from app import db
 from app.models import (User, Project, Comment, Task, Subject, User_Report,
                                 Project_Application, Notification, Anonymous, Admin_User)
@@ -24,7 +24,6 @@ from flask_admin.menu import MenuLink
 from auth import UserView, ReportView, AdminBaseView
 import manager as manager
 import recommendation as rec
-
 
 # Elastic Beanstalk initalization
 application = create_app()
@@ -155,26 +154,26 @@ def query_user_by_email(email):
 
 
 ## error handling ##
-@application.errorhandler(404)
-def page_not_found(e):
-    return (render_template('404.html'), 404)
-
-
-@application.errorhandler(500)
-def page_mistake(e):
-    return (render_template('500.html'), 500)
-
-
-@application.errorhandler(403)
-def page_unauthorized(e):
-    return (render_template('403.html'), 403)
+# @application.errorhandler(404)
+# def page_not_found(e):
+#     return (render_template('404.html'), 404)
+#
+#
+# @application.errorhandler(500)
+# def page_mistake(e):
+#     return (render_template('500.html'), 500)
+#
+#
+# @application.errorhandler(403)
+# def page_unauthorized(e):
+#     return (render_template('403.html'), 403)
 
 
 ## index routes ##
-@application.route('/', methods=['GET', 'POST'])
-@application.route('/index', methods=['GET', 'POST'])
-def index():
-    return render_template('index.html')
+# @application.route('/', methods=['GET', 'POST'])
+# @application.route('/index', methods=['GET', 'POST'])
+# def index():
+    # return render_template('index.html')
 
 
 @application.route('/about', methods=['GET', 'POST'])
