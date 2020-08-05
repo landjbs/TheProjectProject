@@ -14,7 +14,7 @@ from app.models import (user_to_subject, user_to_project, user_to_project_2,
 class User(CRUDMixin, UserMixin, db.Model):
     __tablename__ = 'user'
     # id primary key
-    id = db.Column(db.db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     # name
     name = db.Column(db.String(128), unique=False)
     # code
@@ -31,14 +31,14 @@ class User(CRUDMixin, UserMixin, db.Model):
     # about
     about = db.Column(db.String(500), nullable=False)
     ## permissions and other bools ##
-    admin = db.Column(db.db.Boolean, nullable=False, default=False)
-    emailed = db.Column(db.db.Boolean, nullable=False, default=False)
-    confirmed = db.Column(db.db.Boolean, nullable=False, default=False)
-    accepted = db.Column(db.db.Boolean, nullable=False, default=False)
-    applied_on = db.Column(db.db.DateTime, nullable=False, default=db.DateTime.utcnow)
-    accepted_on = db.Column(db.db.DateTime, nullable=True)
-    active = db.Column(db.db.Boolean, nullable=False, default=False)
-    last_active = db.Column(db.db.DateTime, nullable=True)
+    admin = db.Column(db.Boolean, nullable=False, default=False)
+    emailed = db.Column(db.Boolean, nullable=False, default=False)
+    confirmed = db.Column(db.Boolean, nullable=False, default=False)
+    accepted = db.Column(db.Boolean, nullable=False, default=False)
+    applied_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    accepted_on = db.Column(db.DateTime, nullable=True)
+    active = db.Column(db.Boolean, nullable=False, default=False)
+    last_active = db.Column(db.DateTime, nullable=True)
     ## projects ##
     owned = relationship('Project', back_populates='owner',
                          order_by='desc(Project.last_active)')
@@ -108,7 +108,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             return True
         if not self.last_active:
             return False
-        diff = (db.db.DateTime.utcnow() - self.last_active).seconds
+        diff = (datetime.utcnow() - self.last_active).seconds
         if diff>second_window:
             return False
         return True
@@ -128,7 +128,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         # elif self.accepted:
             # raise RuntimeError(f'{self} has already been accepted.')
         self.accepted = True
-        self.accepted_on = db.db.DateTime.utcnow()
+        self.accepted_on = datetime.utcnow()
         db.session.commit()
         return True
 
@@ -171,15 +171,15 @@ class User(CRUDMixin, UserMixin, db.Model):
 class User_Report(db.Model):
     __tablename__ = 'user_report'
     id = db.Column(db.Integer, primary_key=True)
-    reporter_id = db.Column(db.Integer, ForeignKey('User.id'))
-    reported_id = db.Column(db.Integer, ForeignKey('User.id'))
+    reporter_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    reported_id = db.Column(db.Integer, db.ForeignKey(User.id))
     reporter = relationship('User', foreign_keys='User_Report.reporter_id')
     reported = relationship('User', foreign_keys='User_Report.reported_id')
     ## description ##
     # report description
-    text = db.Column('text', String(250), nullable=True)
+    text = db.Column('text', db.String(250), nullable=True)
     # report time
-    timestamp = db.Column(db.DateTime, nullable=False, default=db.DateTime.utcnow)
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     ## administrative ##
     # has report been addressed
     resolved = db.Column(db.Boolean, nullable=False, default=False)
@@ -200,4 +200,4 @@ class User_Report(db.Model):
         ''' action = {0:pass, 1:warning, 2:tempban, 3:permaban} '''
         self.resolved = True
         self.action = int(action)
-        self.resolve_stamp = db.DateTime.utcnow()
+        self.resolve_stamp = datetime.utcnow()

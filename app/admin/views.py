@@ -9,7 +9,8 @@ from flask_admin.contrib.sqla import ModelView
 from flask_admin.menu import MenuLink
 
 import app.models as models
-from app.user.models import User
+from app.user.models import User, User_Report
+
 
 class AdminBaseView(ModelView):
     def __init__(self, *args, **kwargs):
