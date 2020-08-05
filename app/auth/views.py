@@ -21,7 +21,7 @@ def login():
     form = Login()
     if form.validate_on_submit():
         login_user(form.user)
-        return redirect(request.args.get('next') or url_for('base.index'))
+        return redirect(request.args.get('next') or url_for('admin.index'))
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:

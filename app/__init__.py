@@ -8,6 +8,7 @@ from app import config
 # blueprints
 from app.base import base
 from app.auth import auth
+from app.admin import admin
 #
 from app.database import db
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
@@ -60,6 +61,7 @@ def register_blueprints(app):
     ''' Registers all blueprints with application '''
     app.register_blueprint(base)
     app.register_blueprint(auth)
+    app.register_blueprint(admin)
 
 
 def register_errorhandlers(app):
