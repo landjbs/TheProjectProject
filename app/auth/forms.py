@@ -105,9 +105,9 @@ class Apply(BaseForm):
                                      'with that email.')
             return False
         # unique github validation
-        if self.github.data=='':
-            self.github.data = None
-        if self.github.data:
+        if self.url.data=='':
+            self.url.data = None
+        if self.url.data:
             user = User.query.filter_by(github=self.github.data).first()
             if user:
                 self.url.errors.append('There is already an account '
