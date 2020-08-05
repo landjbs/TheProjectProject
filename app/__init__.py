@@ -62,7 +62,7 @@ def register_blueprints(app):
     app.register_blueprint(base)
     app.register_blueprint(auth)
     app.register_blueprint(admin)
-
+    
 
 def register_errorhandlers(app):
     ''' Registers handlers for all errors '''

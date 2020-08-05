@@ -97,3 +97,20 @@ class ReportView(AdminBaseView):
     def resolve_report(self):
         report = models.User_Report.query.get_or_404(int(request.args.get('id')))
         return redirect(request.referrer)
+
+
+
+def register_admin_views(admin):
+    # model views
+    admin.add_view(UserView(User, db.session))
+    admin.add_view(AdminBaseView(Project, db.session))
+    admin.add_view(AdminBaseView(Comment, db.session))
+    admin.add_view(AdminBaseView(Task, db.session))
+    admin.add_view(AdminBaseView(Subject, db.session))
+    admin.add_view(ReportView(User_Report, db.session))
+    admin.add_view(AdminBaseView(Project_Application, db.session))
+    admin.add_view(AdminBaseView(Notification, db.session))
+    # nav links
+    admin.add_link(MenuLink(name='Home', url='/home', category='Links'))
+    admin.add_link(MenuLink(name='Logout', url='/logout', category='Links'))
+    return admin
