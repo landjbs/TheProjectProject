@@ -98,8 +98,21 @@ class Apply(BaseForm):
         rv = BaseForm.validate(self)
         if not rv:
             return False
-        # unique validation
-        self.user = 
+        # unique email validation
+        user = User.query.filter_by(email=self.email.data).first()
+        if user:
+            self.email.errors.append('There is already an account registered '
+                                     'with that email.')
+            return False
+        # unique github validation
+        if self.github.data=='':
+            self.github.data = None
+        if self.github.data:
+            user = User.query.filter_by(github=self.github.data).first()
+            if user:
+                self.email.errors.append('There is already an account '
+                                         'registered with that github.')
+                return False
 
 
 class Login(BaseForm):
