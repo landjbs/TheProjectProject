@@ -80,7 +80,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
-        self.password = self.set_password(password)
+        self.set_password(password)
         self.github = str(github) if github!='' else None
         self.about = str(about)
         self.admin = admin
