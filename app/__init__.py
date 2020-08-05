@@ -24,7 +24,7 @@ def create_app(config=config.BaseConfig):
     # TODO: better secret key define in config
     # application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    application.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///test.db'
+    application.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://admin:jl245o234jDFalsdkjf;kl2j4508usdjilfka@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/dev_db'
     # print(application.config['DATABASE_URI'])
     register_extensions(application)
     register_blueprints(application)

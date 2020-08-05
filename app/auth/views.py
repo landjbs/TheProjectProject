@@ -33,11 +33,11 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
-    current_user.active = False
-    current_user.last_active = datetime.utcnow()
-    db.session.commit()
+    # current_user.active = False
+    # current_user.last_active = datetime.utcnow()
+    # db.session.commit()
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('base.index'))
 
 
 # FROMAPPLICATION
