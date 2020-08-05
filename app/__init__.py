@@ -7,7 +7,7 @@ from app.commands import create_db, drop_db, populate_db, recreate_db
 from app.utils import url_for_other_page
 
 
-def create_app(config=config.base_config):
+def create_app(config=config.BaseConfig):
     ''' '''
     app = Flask(__name__)
     app.config.from_object(config)

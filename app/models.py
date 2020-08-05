@@ -4,7 +4,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
-from sqlalchemy import (Table, Column, ForeignKey, Integer, String, Boolean,
+from sqlalchemy import (Table, ForeignKey, Integer, String, Boolean,
                         DateTime, Float)
 from sqlalchemy_utils import IntRangeType
 from sqlalchemy import desc
@@ -24,59 +24,59 @@ def generate_code(name, table):
 
 ## ASSOCIATION TABLES ##
 user_to_subject = Table('user_to_subject', db.Model.metadata,
-                      Column('user_id', Integer, ForeignKey('user.id')),
-                      Column('subject_id', Integer, ForeignKey('subject.id')))
+                      db.Column('user_id', Integer, ForeignKey('user.id')),
+                      db.Column('subject_id', Integer, ForeignKey('subject.id')))
 
 
 project_to_subject = Table('project_to_subject', db.Model.metadata,
-                        Column('project_id', Integer, ForeignKey('project.id')),
-                        Column('subject_id', Integer, ForeignKey('subject.id')))
+                        db.Column('project_id', Integer, ForeignKey('project.id')),
+                        db.Column('subject_id', Integer, ForeignKey('subject.id')))
 
 
 user_to_project = Table('user_to_project', db.Model.metadata,
-                        Column('user_id', Integer, ForeignKey('user.id')),
-                        Column('project_id', Integer, ForeignKey('project.id')))
+                        db.Column('user_id', Integer, ForeignKey('user.id')),
+                        db.Column('project_id', Integer, ForeignKey('project.id')))
 
 
 user_to_project_2 = Table('user_to_project_2', db.Model.metadata,
-                        Column('user_id', Integer, ForeignKey('user.id')),
-                        Column('project_id', Integer, ForeignKey('project.id')))
+                        db.Column('user_id', Integer, ForeignKey('user.id')),
+                        db.Column('project_id', Integer, ForeignKey('project.id')))
 
 
 user_to_task = Table('user_to_task', db.Model.metadata,
-                    Column('user_id', Integer, ForeignKey('user.id')),
-                    Column('task_id', Integer, ForeignKey('task.id')))
+                    db.Column('user_id', Integer, ForeignKey('user.id')),
+                    db.Column('task_id', Integer, ForeignKey('task.id')))
 
 
 # stores users and notifcations they have recieved
 user_to_notification = Table('user_to_notification', db.Model.metadata,
-            Column('user_id', Integer, ForeignKey('user.id')),
-            Column('notification_id', Integer, ForeignKey('notification.id')))
+            db.Column('user_id', Integer, ForeignKey('user.id')),
+            db.Column('notification_id', Integer, ForeignKey('notification.id')))
 
 
 # stores invitations of users to join projects
 project_invitation = Table('project_invitation', db.Model.metadata,
-            Column('user_id', Integer, ForeignKey('user.id')),
-            Column('project_id', Integer, ForeignKey('project.id')))
+            db.Column('user_id', Integer, ForeignKey('user.id')),
+            db.Column('project_id', Integer, ForeignKey('project.id')))
 
 
 # stores users/projects rejected from each other
 project_rejections = Table('project_rejections', db.Model.metadata,
-                Column('user_id', Integer, ForeignKey('user.id')),
-                Column('project_id', Integer, ForeignKey('project.id')))
+                db.Column('user_id', Integer, ForeignKey('user.id')),
+                db.Column('project_id', Integer, ForeignKey('project.id')))
 
 
 
 class User_Subjects(db.Model):
     __tablename__ = 'user_subjects'
     # user
-    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user_id = db.Column(Integer, ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='subjects')
     # subjects
-    subject_id = Column(Integer, ForeignKey('subject.id'), primary_key=True)
+    subject_id = db.Column(Integer, ForeignKey('subject.id'), primary_key=True)
     subject = relationship('Subject', back_populates='users')
     # count
-    number = Column(Integer, nullable=False, default=1)
+    number = db.Column(Integer, nullable=False, default=1)
 
     def __repr__(self):
         return f'<USER_SUBJECT u={self.user.name} s={self.subject.name} n={self.number}>'
@@ -85,15 +85,15 @@ class User_Subjects(db.Model):
 class User_Badge(db.Model):
     __tablename__ = 'user_badge'
     # user
-    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user_id = db.Column(Integer, ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='badges')
     # badges
-    badge_id = Column(Integer, ForeignKey('badge.id'), primary_key=True)
+    badge_id = db.Column(Integer, ForeignKey('badge.id'), primary_key=True)
     badge = relationship('Badge', back_populates='users')
     # progress
-    progress = Column(Float, nullable=False, default=float(0))
-    earned = Column(Boolean, nullable=False, default=False)
-    earn_stamp = Column(DateTime, nullable=True)
+    progress = db.Column(Float, nullable=False, default=float(0))
+    earned = db.Column(Boolean, nullable=False, default=False)
+    earn_stamp = db.Column(DateTime, nullable=True)
 
     def __repr__(self):
         if not self.earned:
@@ -104,11 +104,11 @@ class User_Badge(db.Model):
 
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
-    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user_id = db.Column(Integer, ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='pending')
-    project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
+    project_id = db.Column(Integer, ForeignKey('project.id'), primary_key=True)
     project = relationship('Project', back_populates='pending')
-    text = Column('text', String(250), nullable=True)
+    text = db.Column('text', String(250), nullable=True)
 
     def __repr__(self):
         return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
@@ -132,13 +132,13 @@ class Anonymous(AnonymousUserMixin):
 class Admin_User(db.Model, UserMixin):
     __tablename__ = 'admin_user'
     # id
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     # name
-    name = Column(String(128), unique=False)
+    name = db.Column(String(128), unique=False)
     # email
-    email = Column(String(254), unique=True, nullable=False)
+    email = db.Column(String(254), unique=True, nullable=False)
     # password
-    password = Column(String(254), nullable=False)
+    password = db.Column(String(254), nullable=False)
 
     def __init__(self, name, email, password):
         self.name = name
@@ -161,31 +161,31 @@ class Admin_User(db.Model, UserMixin):
 class User(db.Model, UserMixin):
     __tablename__ = 'user'
     # id primary key
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     # name
-    name = Column(String(128), unique=False)
+    name = db.Column(String(128), unique=False)
     # code
-    code = Column(String(128), nullable=False, unique=True)
+    code = db.Column(String(128), nullable=False, unique=True)
     # email
-    email = Column(String(254), unique=True, nullable=False)
+    email = db.Column(String(254), unique=True, nullable=False)
     # password
-    password = Column(String(254), nullable=False)
+    password = db.Column(String(254), nullable=False)
     # subject
     subjects = relationship('Subject', secondary='user_to_subject',
                             back_populates='users', lazy='dynamic')
     # github
-    github = Column(String(254), unique=True, nullable=True)
+    github = db.Column(String(254), unique=True, nullable=True)
     # about
-    about = Column(String(500), nullable=False)
+    about = db.Column(String(500), nullable=False)
     ## permissions and other bools ##
-    admin = Column(Boolean, nullable=False, default=False)
-    emailed = Column(Boolean, nullable=False, default=False)
-    confirmed = Column(Boolean, nullable=False, default=False)
-    accepted = Column(Boolean, nullable=False, default=False)
-    applied_on = Column(DateTime, nullable=False, default=datetime.utcnow)
-    accepted_on = Column(DateTime, nullable=True)
-    active = Column(Boolean, nullable=False, default=False)
-    last_active = Column(DateTime, nullable=True)
+    admin = db.Column(Boolean, nullable=False, default=False)
+    emailed = db.Column(Boolean, nullable=False, default=False)
+    confirmed = db.Column(Boolean, nullable=False, default=False)
+    accepted = db.Column(Boolean, nullable=False, default=False)
+    applied_on = db.Column(DateTime, nullable=False, default=datetime.utcnow)
+    accepted_on = db.Column(DateTime, nullable=True)
+    active = db.Column(Boolean, nullable=False, default=False)
+    last_active = db.Column(DateTime, nullable=True)
     ## projects ##
     owned = relationship('Project', back_populates='owner',
                          order_by='desc(Project.last_active)')
@@ -315,23 +315,23 @@ class User(db.Model, UserMixin):
 class Project(db.Model):
     __tablename__ = 'project'
     # id primary key
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     ## base info ##
     # name
-    name = Column(String(25), unique=False, nullable=False)
+    name = db.Column(String(25), unique=False, nullable=False)
     # code for url
-    code = Column(String(128), unique=True, nullable=False)
+    code = db.Column(String(128), unique=True, nullable=False)
     # oneliner
-    oneliner = Column(String(40))
+    oneliner = db.Column(String(40))
     # summary
-    summary = Column(String(400), nullable=False)
+    summary = db.Column(String(400), nullable=False)
     # url
-    url = Column(String(128), nullable=True)
+    url = db.Column(String(128), nullable=True)
     # subject
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects', lazy='dynamic')
     ## people ##
-    owner_id = Column(Integer, ForeignKey('user.id'))
+    owner_id = db.Column(Integer, ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
     members = relationship('User', secondary='user_to_project_2',
                            back_populates='projects', lazy='dynamic')
@@ -343,30 +343,30 @@ class Project(db.Model):
                               back_populates='rejections')
     ## join process ##
     # open (allows others to join)
-    open = Column(Boolean, nullable=False)
+    open = db.Column(Boolean, nullable=False)
     # requires application
-    requires_application = Column(Boolean, nullable=False)
+    requires_application = db.Column(Boolean, nullable=False)
     # applicaiton question
-    application_question = Column(String(128), nullable=True)
+    application_question = db.Column(String(128), nullable=True)
     # max team size
-    team_size = Column(Integer, nullable=False)
+    team_size = db.Column(Integer, nullable=False)
     ## timing ##
     # posted_on
-    posted_on = Column(DateTime, nullable=False)
+    posted_on = db.Column(DateTime, nullable=False)
     # complete_on
-    completed_on = Column(DateTime, nullable=True)
+    completed_on = db.Column(DateTime, nullable=True)
     # last activity
-    last_active = Column(DateTime, nullable=False, default=datetime.utcnow)
+    last_active = db.Column(DateTime, nullable=False, default=datetime.utcnow)
     # estimated time
-    estimated_time = Column(Integer, nullable=True)
+    estimated_time = db.Column(Integer, nullable=True)
     # complete
-    complete = Column(Boolean, nullable=False)
+    complete = db.Column(Boolean, nullable=False)
     ## popularity ##
     # stars
     stars = relationship('User', secondary='user_to_project',
                          back_populates='starred', lazy='dynamic')
     # buzz
-    buzz = Column(Integer, nullable=False)
+    buzz = db.Column(Integer, nullable=False)
     # comments
     comments = relationship('Comment', back_populates='project')
     # tasks
@@ -424,13 +424,13 @@ class Project(db.Model):
 class Subject(db.Model):
     __tablename__ = 'subject'
     # id primary key
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     # name
-    name = Column(String(128), unique=True, nullable=False)
+    name = db.Column(String(128), unique=True, nullable=False)
     # color
-    color = Column(String(7), unique=True, nullable=False)
+    color = db.Column(String(7), unique=True, nullable=False)
     # code
-    code = Column(String(128), unique=True, nullable=False)
+    code = db.Column(String(128), unique=True, nullable=False)
     # users
     users = relationship('User_Subjects', back_populates='subject',
                          order_by='desc(User_Subjects.number)')
@@ -452,22 +452,22 @@ class Subject(db.Model):
 class Task(db.Model):
     __tablename__ = 'task'
     # id
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     # text
-    text = Column(String(160), nullable=True)
+    text = db.Column(String(160), nullable=True)
     # author
-    author_id = Column(Integer, ForeignKey('user.id'), nullable=True)
+    author_id = db.Column(Integer, ForeignKey('user.id'), nullable=True)
     author = relationship('User', back_populates='tasks_authored')
     # project
-    project_id = Column(Integer, ForeignKey('project.id'))
+    project_id = db.Column(Integer, ForeignKey('project.id'))
     project = relationship('Project', back_populates='tasks')
     # workers
     workers = relationship('User', secondary=user_to_task,
                            back_populates='tasks_worked')
     # timing
-    post_stamp = Column(DateTime, default=datetime.utcnow, index=True)
-    complete_stamp = Column(DateTime, nullable=True)
-    complete = Column(Boolean, default=False)
+    post_stamp = db.Column(DateTime, default=datetime.utcnow, index=True)
+    complete_stamp = db.Column(DateTime, nullable=True)
+    complete = db.Column(Boolean, default=False)
 
     def mark_complete(self, worker):
         if not self.complete:
@@ -487,17 +487,17 @@ class Task(db.Model):
 class Comment(db.Model):
     __tablename__ = 'comment'
     # id
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     # text
-    text = Column(String(160), nullable=False)
+    text = db.Column(String(160), nullable=False)
     # author
-    author_id = Column(Integer, ForeignKey('user.id'))
+    author_id = db.Column(Integer, ForeignKey('user.id'))
     author = relationship('User', back_populates='comments')
     # project
-    project_id = Column(Integer, ForeignKey('project.id'))
+    project_id = db.Column(Integer, ForeignKey('project.id'))
     project = relationship('Project', back_populates='comments')
     # time
-    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
+    timestamp = db.Column(DateTime, default=datetime.utcnow, index=True)
 
     def __repr__(self):
         return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}; TEXT={self.text}>'
@@ -506,14 +506,14 @@ class Comment(db.Model):
 class Notification(db.Model):
     __tablename__ = 'notification'
     # id
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     # text
-    text = Column(String(160), nullable=False)
+    text = db.Column(String(160), nullable=False)
     # user
     users = relationship('User', secondary=user_to_notification,
                          back_populates='notifications')
     # timestamp
-    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
+    timestamp = db.Column(DateTime, default=datetime.utcnow, index=True)
 
     def __repr__(self):
         return f'<Notification to {self.users} at {self.timestamp}; TEXT={self.text}>'
@@ -522,13 +522,13 @@ class Notification(db.Model):
 class Badge(db.Model):
     __tablename__ = 'badge'
     # id
-    id = Column(Integer, primary_key=True)
+    id = db.Column(Integer, primary_key=True)
     # name
-    name = Column(String(60), nullable=False, unique=True)
+    name = db.Column(String(60), nullable=False, unique=True)
     # url for icon
-    icon_url = Column(String(250), nullable=False, unique=True)
+    icon_url = db.Column(String(250), nullable=False, unique=True)
     # color
-    color = Column(String(6), unique=True, nullable=False)
+    color = db.Column(String(6), unique=True, nullable=False)
     # users
     users = relationship('User_Badge', back_populates='badge', lazy='dynamic')
 
@@ -538,23 +538,23 @@ class Badge(db.Model):
 
 class User_Report(db.Model):
     __tablename__ = 'user_report'
-    id = Column(Integer, primary_key=True)
-    reporter_id = Column(Integer, ForeignKey(User.id))
-    reported_id = Column(Integer, ForeignKey(User.id))
+    id = db.Column(Integer, primary_key=True)
+    reporter_id = db.Column(Integer, ForeignKey(User.id))
+    reported_id = db.Column(Integer, ForeignKey(User.id))
     reporter = relationship('User', foreign_keys='User_Report.reporter_id')
     reported = relationship('User', foreign_keys='User_Report.reported_id')
     ## description ##
     # report description
-    text = Column('text', String(250), nullable=True)
+    text = db.Column('text', String(250), nullable=True)
     # report time
-    timestamp = Column(DateTime, nullable=False, default=datetime.utcnow)
+    timestamp = db.Column(DateTime, nullable=False, default=datetime.utcnow)
     ## administrative ##
     # has report been addressed
-    resolved = Column(Boolean, nullable=False, default=False)
+    resolved = db.Column(Boolean, nullable=False, default=False)
     # action: what action was taken {0:pass, 1:warning, 2:tempban, 3:permaban}
-    action = Column(Integer, nullable=True)
+    action = db.Column(Integer, nullable=True)
     # resolve_stamp: when action was taken
-    resolve_stamp = Column(DateTime, nullable=True)
+    resolve_stamp = db.Column(DateTime, nullable=True)
 
     def __repr__(self):
         base = (f'<Report of {self.reported} by {self.reporter} at {self.timestamp}; '
