@@ -1,3 +1,9 @@
+''' Ranking algorithms for project recommendations '''
+
+import numpy as np
+from operator import itemgetter
+from datetime import datetime
+
 from app.projects.models import Project
 
 def score_project(project, user_subjects):
