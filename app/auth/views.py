@@ -57,7 +57,7 @@ def apply():
     return render_template('apply.html', form=form, start_on=start_on)
 
 
-@auth.route('/verify/<token>', methods=['GET']):
+@auth.route('/verify/<token>', methods=['GET'])
 def verify(token):
     s = URLSafeSerializer(current_app.secret_key)
     try:
@@ -67,12 +67,11 @@ def verify(token):
     user = User.query.filter_by(id=id).first_or_404()
     if user.confirmed:
         abort(404)
-    else:
-        user.confirmed = True
-        user.update()
-        flash('You have confirmed your account! We will email you with '
-              'application updates as soon as possible.')
-        return redirect(url_for('base.index'))
+    user.confirmed = True
+    user.update()
+    flash('You have confirmed your account! We will email you with '
+          'application updates as soon as possible.')
+    return redirect(url_for('base.index'))
 
 
 

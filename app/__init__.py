@@ -25,6 +25,7 @@ def create_app(config=config.BaseConfig):
     # application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     application.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://admin:jl245o234jDFalsdkjf;kl2j4508usdjilfka@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/dev_db'
+    application.config['RQ_REDIS_URL'] = 'redis://localhost:6379'
     # print(application.config['DATABASE_URI'])
     register_extensions(application)
     register_blueprints(application)
@@ -39,6 +40,7 @@ def create_app(config=config.BaseConfig):
         g.request_start_time = time.time()
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
+
 
     return application
 
