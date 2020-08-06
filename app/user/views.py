@@ -1,18 +1,17 @@
-from flask import request, redirect, url_for, render_template, flash, g
+from flask import request, redirect, url_for, render_template, flash
 from flask_babel import gettext
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 
 from app.extensions import limiter
-from app.utils import tasks_to_daily_activity
+from app.utils import tasks_to_daily_activity, partition_query
 from app.user.models import User
 
 from ..user import user
 from .forms import Edit_User
 
 
-
-@application.route('/user=<code>', methods=['GET', 'POST'])
+@user.route('/user=<code>', methods=['GET', 'POST'])
 @limiter.limit('60 per minute')
 def user_page(code):
     user = User.query.filter_by(code=code).first_or_404()
@@ -34,10 +33,10 @@ def user_page(code):
     subject_data = user.subject_data()
     ## forms ##
     # application to projects
-    project_application = forms.Project_Application_Form()
+    project_application = None #forms.Project_Application_Form()
     # edit user account
     show_edit_modal = False
-    edit_form = forms.Edit_User() if (current_user==user) else False
+    edit_form = Edit_User() if (current_user==user) else False
     if request.method=='POST':
         if edit_form.validate_on_submit():
             edits_made = False
@@ -75,3 +74,10 @@ def user_page(code):
                             project_application=project_application,
                             edit_form=edit_form,
                             show_edit_modal=show_edit_modal)
+
+
+@user.route('/flash_encouragement', methods=['POST'])
+def flash_encouragement():
+    flash('Reminder: You are awesome and will do amazing '
+         'things if you believe in yourself.')
+    return redirect(request.referrer)

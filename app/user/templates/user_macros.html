@@ -1,0 +1,262 @@
+<!-- USER CARD FOR DISPLAY IN CAROUSEL -->
+{% macro render_user_card(current_user, user) -%}
+<div class="col-md-4">
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class='card-head tiny'>
+        <a class='project-name' href='user={{ user.code }}'>
+          <h5>
+            {{ user.name }}
+            {% if user.recently_active() %}
+              <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+            {% endif %}
+          </h5>
+        </a>
+      </div>
+      <div class='card-oneline' style=''>
+        <p class='oneliner'>
+          {{ user.about }}
+        </p>
+      </div>
+      <div class='card-foot float-left'>
+        {% for s in user.subjects[:5] %}
+          <a href='/subject={{ s.subject.code }}'>
+            {% if loop.index>1 %}
+            ,
+            {% endif %}
+            <p class='subject-tag' style='background:{{ s.subject.color }};'>
+              {{ s.subject.name }}
+            </p>
+          </a>
+        {% endfor %}
+      </div>
+      <br>
+      <hr class="my-2">
+      {{ render_user_action_bar(current_user, user) }}
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+<!-- USER ACTION BAR FOR RELATIONSHIP ACTIONS -->
+{% macro render_user_action_bar(current_user, target_user) -%}
+<div class='action-bar'>
+      {% if current_user!= target_user %}
+        <div class='hoverable'>
+          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+          <span class='tooltiptext'>
+            <a data-toggle='modal' data-target='#report_modal_{{ target_user.id }}'>
+              Report User
+            </a>
+          </span>
+        </div>
+      {% else %}
+        <form action="{{ url_for('user.flash_encouragement') }}" style='display:inline;' method='post'>
+          <button style='background:transparent; color: #F82B91; border:0;'>
+            <i class="fa fa-heart" aria-hidden="true"></i>
+          </button>
+        </form>
+      {% endif %}
+    &nbsp;
+    {{ render_collaborate_button(current_user, target_user) }}
+    &nbsp;
+    {{ render_user_share_button(target_user) }}
+</div>
+{% endmacro -%}
+
+<!-- SHARE BUTTON FOR USER PAGE -->
+{% macro render_user_share_button(user) -%}
+  <div class='hoverable'>
+    <i class="fa fa-share-alt" aria-hidden="false"></i>
+    <span class='tooltiptext'>
+      <a class="twitter-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.code }}"
+          data-size="large">
+          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+      </a>
+      <a class="linkedin-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/user={{ user.code }}"
+          data-size="large">
+        <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+      </a>
+      <a class="facebook-share-button"
+          href="https://twitter.com/share?url=https://theprojectproject.io/"
+          data-size="large">
+        <i class="fa fa-facebook-square" aria-hidden="true"></i>
+      </a>
+      <a class="email-share-button"
+          href="mailto:?subject={{ user.name }} on TheProjectProject&body=Check out {{ user.name }}'s profile on TheProjectProject:%0D%0Ahttps://theprojectproject.io/user={{ user.code }}!">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+      </a>
+    </span>
+  </div>
+{% endmacro -%}
+
+<!-- COLLABORATE MODAL FOR EXTENDING INVITATIONS TO USER -->
+{% macro render_collaborate_modal(current_user, target_user, target_project=None) -%}
+<div id="modal_user_{{ target_user.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <a href='user={{ target_user.code }}' style='color:black;'>
+          <h5>{{ target_user.name }}</h5>
+        </a>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      {% if (current_user.owned|length)>0 %}
+      <form action="{{ url_for('collaborate', target_user_id=target_user.id) }}" method='post'>
+        <div class="modal-body">
+          <label for="new_owner">Select project on which to collaborate with {{ target_user.name }}:</label>
+          <br>
+          <select name="selected_project" id="selected_project" class='select-clean'>
+            {% for project in current_user.owned %}
+              {% if (project.complete!=True) and (project.open==True) and (target_user not in project.members) and (target_user not in project.invitations )%}
+                {% if project==target_project %}
+                  <option value="{{ project.id }}" selected>{{ project.name }}</option>
+                {% else %}
+                  <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </select>
+          <br><br>
+          <p>{{ target_user.name }} will be sent an invitation
+            and will be able to join without applying.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>Collaborate</button>
+        </div>
+      </form>
+      {% else %}
+        <div class="modal-body">
+          <p>Cannot invite {{ target_user.name }} to collaborate because
+            you do not own any projects! Try <a href='/add_project'>adding a project</a> first.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href='/add_project'>
+            <button class='btn'>Add Project</button>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+<!-- MODAL FOR EDITING USER ACCOUNT -->
+{% macro render_edit_user_modal(user, edit_form) -%}
+<div id="edit_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Edit Your Account</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form id='editForm' method='post'>
+        <div class="modal-body">
+          <!-- token -->
+          {{ edit_form.csrf_token }}
+          <!-- ABOUT -->
+          <center>
+            <h6 style='text-decoration:underline;'>About</h6>
+          </center>
+          <!-- name -->
+          {{ edit_form.name.label }}:<br>
+          {{ edit_form.name(class='edit-input', value=user.name) }}
+          {% if edit_form.name.errors %}
+            <p class='warning'>{{ edit_form.name.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-2'><br>
+          <!-- email -->
+          <!-- github -->
+          {{ edit_form.github.label }}:<br>
+          {{ edit_form.github(class='edit-input', value=user.github) }}
+          {% if edit_form.github.errors %}
+            <p class='warning'>{{ edit_form.github.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-2'><br>
+          <!-- about -->
+          {{ edit_form.about.label }}:<br>
+          {{ edit_form.about(class='edit-input', value=user.about) }}
+          {% if edit_form.about.errors %}
+            <p class='warning'>{{ edit_form.about.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-4'>
+          <!-- PASSWORD -->
+          <center>
+            <h6 style='text-decoration:underline;'>Change Password</h6>
+          </center>
+          {% for password_field in [edit_form.password, edit_form.confirm] %}
+            {{ password_field.label }}:<br>
+            {{ password_field(class='edit-input') }}
+            {% if password_field.errors %}
+              <p class='warning'>{{ password_field.errors[0] }}</p>
+            {% endif %}
+            {% if loop.index==1 %}
+              <hr class='my-2'><br>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="modal-footer row m-3">
+          <button type='button' data-toggle='modal' data-target='#delete_account_modal' class='btn delete-btn col float-left'>
+            Delete Account
+          </button>
+          <button class='btn col'>Change</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+<!-- MODAL FOR DELETING USER ACCOUNT -->
+{% macro render_delete_account_modal(user) -%}
+<div id="delete_account_modal" class="modal fade" role="dialog" style='z-index:9999;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Delete Your Account</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('delete_user') }}" method='post'>
+        <div class="modal-body">
+          <p style='color: red;'>
+            WARNING: You are trying to delete your account. THIS CANNOT BE
+            UNDONE (and also it will make us very sad, but that's okay).
+          </p>
+          <p>
+            You will need to choose a new owner for all of your shared projects.
+            Your solo projects will be permanently deleted.
+          </p>
+          {% for project in user.owned %}
+            {% if project.members.all()|length > 1 %}
+            <label for="new_owner">Select new owner for {{ project.name }}:</label>
+            <br>
+            <select name="new_owner_{{ project.id }}"
+              id="new_owner_{{ project.id }}" class='select-clean'>
+              {% for member in project.members %}
+                {% if not member==project.owner %}
+                  <option value="{{ member.id }}">{{ member.name }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+            <br><br>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button class='btn delete-btn'>Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
