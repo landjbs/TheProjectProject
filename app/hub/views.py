@@ -1,13 +1,13 @@
 from flask import (current_app, request, redirect, url_for,
-                   render_template, flash, abort)
+                   render_template, flash)
 from flask_login import current_user, login_required
-from itsdangerous import URLSafeSerializer, BadSignature
 from datetime import datetime
 
 from ..hub import hub
 from app.utils import partition_query
-from app.recommendations.projects import (get_recommended_projects,
-                                    get_trending_projects, get_user_projects)
+from app.recommendations.projects import (
+                get_recommended_projects, get_trending_projects,
+                get_user_projects, search)
 
 
 @hub.route('/home', methods=['GET'])
