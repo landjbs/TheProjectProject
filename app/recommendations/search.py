@@ -12,6 +12,7 @@ def add_to_index(index, model):
 
 
 def remove_from_index(index, model):
+    ''' Removes model from index '''
     if not current_app.elasticsearch:
         return None
     current_app.elasticsearch.delete(index=index, id=model.id)
