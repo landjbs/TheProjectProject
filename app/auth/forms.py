@@ -94,26 +94,30 @@ class Apply(BaseForm):
 
     def validate(self):
         ''' Validates application '''
+        # error flag to check all errors at once
+        error_flag = False
         # stock validation
         rv = BaseForm.validate(self)
         if not rv:
-            return False
+            error_flag = True
         # unique email validation
         user = User.query.filter_by(email=self.email.data).first()
         if user:
             self.email.errors.append('There is already an account registered '
                                      'with that email.')
-            return False
+            error_flag = True
         # unique url validation
         if self.url.data=='':
             self.url.data = None
         if self.url.data:
-            user = User.query.filter_by(github=self.github.data).first()
+            user = User.query.filter_by(url=self.url.data).first()
             if user:
                 self.url.errors.append('There is already an account '
                                          'registered with that URL.')
-                return False
-        return False
+                error_flag = True
+        if error_flag:
+            return False
+        return True
 
 
 class Login(BaseForm):
