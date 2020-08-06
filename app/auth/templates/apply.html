@@ -1,4 +1,4 @@
-{% from 'components/form_macros.html' import render_field %}
+{% from 'components/form_macros.html' import render_multiselect %}
 {% extends "base.html" %}
 
 {% block title %}Apply{% endblock %}
@@ -44,7 +44,7 @@
           <span class="tooltiptext">{{ elt.description}}</span>
         </div>
         <br>
-        {{ form_macros.render_multiselect(elt) }}
+        {{ render_multiselect(elt) }}
       </div>
     {% else %}
       <div class="row input-segment tab">
