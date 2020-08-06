@@ -3,7 +3,9 @@ import arrow
 import requests
 from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
+from elasticsearch import Elasticsearch
 
+# config
 from app import config
 # blueprints
 from app.base import base
@@ -44,7 +46,6 @@ def create_app(config=config.BaseConfig):
         g.request_start_time = time.time()
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
-
 
     return application
 
@@ -99,3 +100,8 @@ def register_commands(app):
     """Register custom commands for the Flask CLI."""
     for command in [create_db, drop_db, populate_db, rebuild_db]:
         app.cli.command()(command)
+
+
+def register_elasticsearch(app):
+    app.elasticsearch = Elasticsearch(app.config['ELASTICSEARCH_URL']) \
+                            if app.config['ELASTICSEARCH_URL'] else None
