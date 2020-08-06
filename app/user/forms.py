@@ -12,3 +12,23 @@ from app.user.models import User
 
 
 BaseForm = model_form_factory(FlaskForm)
+
+
+class Edit_User(BaseForm):
+    # name
+    name = StringField('Name', validators=[DataRequired(), Length(1, 254)],
+                       render_kw={'max':254})
+    # url
+    url = StringField('url',
+                    validators=[Length(0, 254), Site_URL_Validator('url')],
+                    render_kw={'max':254})
+    about = TextField('About You', validators=[DataRequired(), Length(1, 500)],
+                      render_kw={'max':500})
+    # password
+    password = PasswordField('New Password',
+                             validators=[Length(0, 254),
+                                         EqualTo('confirm')],
+                             render_kw={'max':254})
+    # confirm
+    confirm = PasswordField('Confirm New Password',
+                            render_kw={'max':254})
