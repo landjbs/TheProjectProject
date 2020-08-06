@@ -3,11 +3,16 @@ Dear {{ user.name }},
 You have confirmed your application to TheProjectProject. We will begin reviewing
 your application immediately, and will email you as soon as we have come to a
 decision. For future, reference, we have attached a copy of your application:
+
 <br><br>
 Name: {{ user.name }}
 <br>
 Email: {{ user.email }}
 <br>
+{% if user.url %}
+  URL: {{ user.url }}
+  <br>
+{% endif %}
 About: {{ user.about }}
 <br>
 Subjects:
@@ -17,6 +22,7 @@ Subjects:
   {% endif %}
   {{ subject.name }}
 {% endfor %}
+<br><br>
 
 Please contact us at
 <a href='mailto:admin@theprojectproject.io'>admin@theprojectproject.io</a>
