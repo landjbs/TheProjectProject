@@ -10,6 +10,7 @@ from flask_admin.menu import MenuLink
 
 import app.models as models
 from app.user.models import User, User_Report
+from app.project.models import Project
 
 
 class AdminBaseView(ModelView):
@@ -27,7 +28,7 @@ class AdminBaseView(ModelView):
                 return redirect(url_for('login', next=request.url))
 
 
-class UserView(AdminBaseView):
+class UserModelView(AdminBaseView):
     ''' admin view for user model '''
     column_exclude_list = ['password']
     can_export = True
@@ -89,7 +90,7 @@ class UserView(AdminBaseView):
             flash(gettext('Failed to reject users. %(error)s', error=str(ex)), 'error')
 
 
-class ReportView(AdminBaseView):
+class ReportModelView(AdminBaseView):
     ''' admin view for user reports '''
     column_extra_row_actions = [
         EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'user_report.resolve_report')
@@ -103,12 +104,12 @@ class ReportView(AdminBaseView):
 
 def register_admin_views(admin, db):
     # model views
-    admin.add_view(UserView(User, db.session))
-    admin.add_view(AdminBaseView(models.Project, db.session))
+    admin.add_view(UserModelView(User, db.session, name='User', endpoint='AdminUser'))
+    admin.add_view(AdminBaseView(Project, db.session, endpoint='AdminProject'))
     admin.add_view(AdminBaseView(models.Comment, db.session))
     admin.add_view(AdminBaseView(models.Task, db.session))
     admin.add_view(AdminBaseView(models.Subject, db.session))
-    admin.add_view(ReportView(User_Report, db.session))
+    admin.add_view(ReportModelView(User_Report, db.session))
     admin.add_view(AdminBaseView(models.Project_Application, db.session))
     admin.add_view(AdminBaseView(models.Notification, db.session))
     # nav links

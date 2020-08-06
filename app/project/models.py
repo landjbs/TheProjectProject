@@ -1,4 +1,4 @@
-from db.DateTime import db.DateTime
+from datetime import datetime
 from sqlalchemy import desc
 from sqlalchemy.orm import relationship, backref
 
@@ -24,7 +24,7 @@ class Project(CRUDMixin, db.Model):
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects', lazy='dynamic')
     ## people ##
-    owner_id = db.Column(db.Integer, ForeignKey('user.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
     members = relationship('User', secondary='user_to_project_2',
                            back_populates='projects', lazy='dynamic')

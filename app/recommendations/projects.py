@@ -5,7 +5,7 @@ from operator import itemgetter
 from datetime import datetime
 from sqlalchemy import desc
 
-from app.models import Project
+from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
 
 def score_project(project, user_subjects):

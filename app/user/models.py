@@ -51,11 +51,11 @@ class User(CRUDMixin, UserMixin, db.Model):
                            back_populates='stars')
     comments = relationship('Comment', back_populates='author')
     tasks_authored = relationship('Task', back_populates='author')
-    tasks_worked = relationship('Task', secondary=user_to_task,
+    tasks_worked = relationship('Task', secondary='user_to_task',
                          back_populates='workers')
     badges = relationship('User_Badge', back_populates='user', lazy='dynamic')
     # notifications
-    notifications = relationship('Notification', secondary=user_to_notification,
+    notifications = relationship('Notification', secondary='user_to_notification',
                                 back_populates='users', lazy='dynamic',
                                 order_by='Notification.timestamp')
     # subjects
