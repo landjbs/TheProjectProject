@@ -96,6 +96,27 @@ def delete_user():
                 return redirect(request.referrer)
         else:
             manager.delete_project(project)
-    manager.delete_user(current_user)
+    current_user.delete()
     flash('Your account has been deleted. We are sorry to see you go!')
     return redirect(url_for('index'))
+
+
+@user.route('/report_user/<int:target_user_id>', methods=['POST'])
+@login_required
+@limiter.limit('2 per minute')
+def report_user(target_user_id):
+    target_user = User.query.get_or_404(int(target_user_id))
+    text = request.form.get('report_text')
+    if target_user is None:
+        flash('User does not exist.')
+    elif target_user==current_user:
+        flash('You cannot report yourself.')
+    elif not target_user.accepted:
+        flash('Cannot report user, as they are still pending acceptance.')
+    else:
+        flash(f'You have reported {target_user.name}. We are so sorry you have '
+            'experienced issues while using our platform and will begin '
+            'reviewing your report immediately. If necessary, we may contact '
+            'you for more information.')
+        manager.report_user(current_user, target_user, text=text)
+    return redirect(request.referrer)
