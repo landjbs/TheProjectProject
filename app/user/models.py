@@ -1,4 +1,3 @@
-import numpy as np
 from flask_login import UserMixin
 from datetime import datetime
 from sqlalchemy import desc
@@ -6,9 +5,6 @@ from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
 from app.extensions import bcrypt
-
-from app.models import (user_to_subject, user_to_project, user_to_project_2,
-                        user_to_task, user_to_notification)
 
 
 class User(CRUDMixin, UserMixin, db.Model):
