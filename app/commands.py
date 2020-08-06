@@ -19,7 +19,7 @@ def populate_db(num_users):
                 name=name,
                 email=fake.email(),
                 password=(fake.word()+fake.word()),
-                url=f'https://github.com/{"_".join(name.split(' ')).lower()}',
+                url=f'https://github.com/{"_".join(name.split(" ")).lower()}',
                 about=' '.join([fake.word() for _ in range(30)])
             )
         )

@@ -1,6 +1,6 @@
 from flask import (current_app, request, redirect, url_for,
                    render_template, flash, abort)
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from itsdangerous import URLSafeSerializer, BadSignature
 from datetime import datetime
 
