@@ -75,6 +75,7 @@ def user_page(code):
                             edit_form=edit_form,
                             show_edit_modal=show_edit_modal)
 
+
 ## user to self interactions ##
 @user.route('/flash_encouragement', methods=['POST'])
 def flash_encouragement():
