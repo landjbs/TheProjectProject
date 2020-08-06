@@ -5,6 +5,7 @@ from itsdangerous import URLSafeSerializer, BadSignature
 from datetime import datetime
 
 from ..hub import hub
+from app.utils import partition_query
 from app.recommendations.projects import (get_recommended_projects,
                                     get_trending_projects, get_user_projects)
 
