@@ -40,6 +40,10 @@ def apply():
                     url=form.data['url'],
                     about=form.data['about']
                 )
+        flash(f'Congratulations, {first_name}, your application to '
+               'TheProjectProject has been submitted! '
+               'A confirmation link has been sent to your email.')
+        return redirect(url_for('base.index'))
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:
