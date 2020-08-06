@@ -15,16 +15,14 @@ Email: {{ user.email }}
 {% endif %}
 About: {{ user.about }}
 <br>
-{% if user.subjects|length > 0 %}
-  Subjects:
-  {% for subject in user.subjects %}
-    {% if loop.index!=1 %}
-      ,
-    {% endif %}
-    {{ subject.name }}
-  {% endfor %}
-  <br>
-{% endif %}
+Subjects:
+{% for subject in user.subjects %}
+  {% if loop.index!=1 %}
+    ,
+  {% endif %}
+  {{ subject.name }}
+{% endfor %}
+<br>
 <br>
 
 Please contact us at
