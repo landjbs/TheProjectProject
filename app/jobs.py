@@ -1,8 +1,9 @@
 import os
 import boto3
 import sys
-from app.extensions import rq
+from flask import render_template
 
+from app.extensions import rq
 from app.user.models import User
 
 
@@ -30,6 +31,7 @@ ses = boto3.client('ses',
 
 @rq.job(result_ttl=1)
 def send_registration_email(user_id, token):
+    print('HERE')
     user = User.query.filter_by(id=user_id).first()
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
@@ -42,4 +44,5 @@ def send_registration_email(user_id, token):
             }
         }
     )
+    print('COMPLETE')
     return True

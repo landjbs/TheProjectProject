@@ -43,7 +43,7 @@ def apply():
         # generate token and send to user email
         s = URLSafeSerializer(current_app.secret_key)
         token = s.dumps(user.id)
-        send_registration_email.queue(user.id, token)
+        send_registration_email(user.id, token) #.queue(user.id, token)
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '
