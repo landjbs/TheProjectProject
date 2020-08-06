@@ -172,6 +172,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Gets dict mapping subject name to skill level for n top subjects '''
         return {s.subject.name : s.number for s in self.subjects[:n]}
 
+    def task_data(self):
+        ''' Gets dict '''
+        raise RuntimeError('Not yet implemented')
 
 
 class User_Report(db.Model):

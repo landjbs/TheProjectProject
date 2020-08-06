@@ -24,7 +24,7 @@
             <div class="sidebar-header">
                 <p class='float-right'>
                   <i class="fa fa-star"></i>
-                  {{ stars }}
+                  {{ user.total_stars() }}
                   <!-- edit button -->
                   {% if user == current_user %}
                       <br>
