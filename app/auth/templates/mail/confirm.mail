@@ -5,17 +5,28 @@ your application immediately, and will email you as soon as we have come to a
 decision. For future, reference, we have attached a copy of your application:
 
 <br><br>
-Name: {{ user.name }}
+<u>Name</u>:
 <br>
-Email: {{ user.email }}
+{{ user.name }}
+<br>
+<br>
+<u>Email</u>:
+<br>
+{{ user.email }}
+<br>
 <br>
 {% if user.url %}
-  URL: {{ user.url }}
+  <u>URL</u>:
+  {{ user.url }}
+  <br>
   <br>
 {% endif %}
-About: {{ user.about }}
+<u>About</u>:
 <br>
-Subjects:
+{{ user.about }}
+<br>
+<br>
+<u>Subjects</u>:<br>
 {% for subject in user.subjects %}
   {% if loop.index!=1 %}
     ,
