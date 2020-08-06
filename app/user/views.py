@@ -75,7 +75,7 @@ def user_page(code):
                             edit_form=edit_form,
                             show_edit_modal=show_edit_modal)
 
-## user interactions ##
+## user to self interactions ##
 @user.route('/flash_encouragement', methods=['POST'])
 def flash_encouragement():
     flash('Reminder: You are awesome and will do amazing '
@@ -100,7 +100,7 @@ def delete_user():
     flash('Your account has been deleted. We are sorry to see you go!')
     return redirect(url_for('index'))
 
-
+## user to user interactions ##
 @user.route('/report_user/<int:target_user_id>', methods=['POST'])
 @login_required
 @limiter.limit('2 per minute')
