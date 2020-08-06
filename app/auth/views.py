@@ -25,7 +25,7 @@ def login():
         user.active = True
         user.last_active = datetime.utcnow()
         user.update()
-        return redirect(request.args.get('next') or url_for('admin.index'))
+        return redirect(request.args.get('next') or url_for('hub.home'))
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:
