@@ -1,13 +1,11 @@
-import re
-import sys
-from flask_wtf import FlaskForm
-from wtforms_alchemy import model_form_factory
 from wtforms import (TextField, StringField, PasswordField)
 from wtforms.validators import (DataRequired, Length, EqualTo)
 
 from app.user.models import User
 from app.forms.base import BaseForm
 
+
+# TODO: ADD "AWAY" BOOL TO USERS
 
 class Edit_User(BaseForm):
     # name
@@ -19,8 +17,7 @@ class Edit_User(BaseForm):
                       render_kw={'max':500})
     # password
     password = PasswordField('New Password',
-                             validators=[Length(0, 254),
-                                         EqualTo('confirm')],
+                             validators=[Length(0, 254), EqualTo('confirm')],
                              render_kw={'max':254})
     # confirm
     confirm = PasswordField('Confirm New Password',
