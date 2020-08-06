@@ -31,10 +31,10 @@ def user_page(code):
                        if not project in owned]
     member_tabs = list(partition_query(member_projects))
     # subjects
-    subject_data = {s.subject.name : s.number for s in user.subjects[:10]}
+    subject_data = user.subject_data()
     ## forms ##
     # application to projects
-    project_application = forms.Project_Application_Form(request.form)
+    project_application = forms.Project_Application_Form()
     # edit user account
     show_edit_modal = False
     edit_form = forms.Edit_User(request.form) if (current_user==user) else False
@@ -46,11 +46,6 @@ def user_page(code):
             if new_name!=user.name:
                 user.name = new_name
                 edits_made = True
-            # email
-            # new_email = edit_form.email.data
-            # if new_email!=user.email:
-            #     user.email = new_email
-            #     edits_made = True
             # github
             new_github = edit_form.github.data
             if new_github!=user.github:
