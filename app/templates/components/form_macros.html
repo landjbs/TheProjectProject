@@ -1,5 +1,9 @@
 <!-- SELECTS -->
 {% macro render_multiselect(field) -%}
+  <!-- imports/ -->
+  <script src="select-pure/dist/bundle.min.js"></script>
+  <link type='text/css' href='css/select_styles.css' rel='stylesheet'>
+  <!-- ./imports -->
 
   {{ field(id=field.name, style='display:none;') }}
   <span class="select_subject" id='{{ field.name }}_select' name='{{ field.name }}'></span>
