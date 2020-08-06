@@ -70,7 +70,8 @@ def verify(token):
     else:
         user.confirmed = True
         user.update()
-        flash('You have confirmed your account!')
+        flash('You have confirmed your account! We will email you with '
+              'application updates as soon as possible.')
         return redirect(url_for('base.index'))
 
 
