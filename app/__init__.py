@@ -9,6 +9,8 @@ from app import config
 from app.base import base
 from app.auth import auth
 from app.hub import hub
+from app.user import user
+from app.project import project
 from app.admin import register_admin_views
 #
 from app.database import db
@@ -66,6 +68,8 @@ def register_blueprints(app):
     app.register_blueprint(base)
     app.register_blueprint(auth)
     app.register_blueprint(hub)
+    app.register_blueprint(user)
+    app.register_blueprint(project)
 
 
 def register_errorhandlers(app):
