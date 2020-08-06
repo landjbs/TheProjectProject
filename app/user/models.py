@@ -32,7 +32,6 @@ class User(CRUDMixin, UserMixin, db.Model):
     about = db.Column(db.String(500), nullable=False)
     ## permissions and other bools ##
     admin = db.Column(db.Boolean, nullable=False, default=False)
-    emailed = db.Column(db.Boolean, nullable=False, default=False)
     confirmed = db.Column(db.Boolean, nullable=False, default=False)
     accepted = db.Column(db.Boolean, nullable=False, default=False)
     applied_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -85,7 +84,6 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.about = str(about)
         self.admin = admin
         self.accepted = True if admin else False
-        self.emailed = True if admin else False
         self.confirmed = True if admin else False
 
 

@@ -45,3 +45,4 @@ def send_registration_email(user_id, token):
             }
         }
     )
+    return True
