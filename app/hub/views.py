@@ -19,7 +19,7 @@ def home():
     trending_projects = get_trending_projects()
     trending_tabs =  list(partition_query(trending_projects))
     # user projects
-    user_projs = rec.user_projects(current_user)
+    user_projs = get_user_projects(current_user)
     user_tabs = list(partition_query(user_projs))
     project_application = forms.Project_Application_Form(request.form)
     # notifcations
