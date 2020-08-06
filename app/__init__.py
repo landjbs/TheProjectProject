@@ -8,6 +8,7 @@ from app import config
 # blueprints
 from app.base import base
 from app.auth import auth
+from app.hub import hub
 from app.admin import register_admin_views
 #
 from app.database import db
@@ -64,6 +65,7 @@ def register_blueprints(app):
     ''' Registers all blueprints with application '''
     app.register_blueprint(base)
     app.register_blueprint(auth)
+    app.register_blueprint(hub)
 
 
 def register_errorhandlers(app):

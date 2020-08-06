@@ -101,7 +101,6 @@ class ReportView(AdminBaseView):
         return redirect(request.referrer)
 
 
-
 def register_admin_views(admin, db):
     # model views
     admin.add_view(UserView(User, db.session))
@@ -113,6 +112,6 @@ def register_admin_views(admin, db):
     admin.add_view(AdminBaseView(models.Project_Application, db.session))
     admin.add_view(AdminBaseView(models.Notification, db.session))
     # nav links
-    admin.add_link(MenuLink(name='Home', url='/home', category='Links'))
-    admin.add_link(MenuLink(name='Logout', url='/logout', category='Links'))
+    # admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
+    # admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
     return admin
