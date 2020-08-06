@@ -5,6 +5,7 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
 from app.user.models import User
+form app.forms.base import BaseForm
 from app.forms.validators import Site_URL_Validator, Select_Limit_Validator
 
 
