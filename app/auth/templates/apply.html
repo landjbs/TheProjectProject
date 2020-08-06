@@ -1,11 +1,13 @@
-{% from 'components/multiselect/form_macros.html' import render_multiselect %}
 {% extends "base.html" %}
+{% from 'components/form_macros.html' import render_multiselect %}
 
 {% block title %}Apply{% endblock %}
 
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="select-pure/dist/bundle.min.js"></script>
+  <link type='text/css' href='css/select_styles.css' rel='stylesheet'>
 {% endblock %}
 
 

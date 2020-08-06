@@ -124,7 +124,6 @@ class Login(BaseForm):
 
     def validate(self):
         ''' Validates login '''
-        print("VAL START")
         # stock validation
         rv = BaseForm.validate(self)
         if not rv:
@@ -149,5 +148,4 @@ class Login(BaseForm):
             self.email.errors.append('Your application is under review—'
                                      'check back soon!')
             return False
-        print("VAL END")
         return True
