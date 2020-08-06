@@ -76,14 +76,14 @@ def user_page(code):
                             show_edit_modal=show_edit_modal)
 
 ## user to self interactions ##
-@user.route('/flash_encouragement', methods=['POST'])
+@user.route('/flash_encouragement', methods=['GET', 'POST'])
 def flash_encouragement():
     flash('Reminder: You are awesome and will do amazing '
          'things if you believe in yourself.')
     return redirect(request.referrer)
 
 
-@user.route('/delete_user', methods=['POST'])
+@user.route('/delete_user', methods=['GET', 'POST'])
 @login_required
 @limiter.limit('2 per minute')
 def delete_user():
@@ -95,10 +95,10 @@ def delete_user():
                 flash(f'Owner transfer unsuccessful of {project.name}.')
                 return redirect(request.referrer)
         else:
-            manager.delete_project(project)
+            project.delete()
     current_user.delete()
     flash('Your account has been deleted. We are sorry to see you go!')
-    return redirect(url_for('index'))
+    return redirect(url_for('base.index'))
 
 ## user to user interactions ##
 @user.route('/report_user/<int:target_user_id>', methods=['POST'])
