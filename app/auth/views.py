@@ -2,6 +2,7 @@ from flask import (current_app, request, redirect, url_for,
                    render_template, flash, abort)
 from flask_login import login_user, login_required, logout_user
 from itsdangerous import URLSafeSerializer, BadSignature
+from datetime.datetime import utcnow
 
 from app.extensions import lm
 from app.jobs import send_registration_email
@@ -20,6 +21,9 @@ def login():
     form = Login()
     if form.validate_on_submit():
         login_user(form.user)
+        user.active = True
+        user.last_active = utcnow()
+        user.update()
         return redirect(request.args.get('next') or url_for('admin.index'))
     start_on = 0
     for i, elt in enumerate(form):
@@ -43,7 +47,8 @@ def apply():
         # generate token and send to user email
         s = URLSafeSerializer(current_app.secret_key)
         token = s.dumps(user.id)
-        send_registration_email(user.id, token) #.queue(user.id, token)
+        url = url_for('auth.verify', token=token, _external=True)
+        send_registration_email.queue(user.id, url)
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '

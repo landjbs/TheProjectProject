@@ -1,12 +1,10 @@
 Dear {{ user.name }},
 <br><br>
-Thank you for applying to TheProjectProject! We can't wait to review your application
-and will get back to you as soon as possible. Please click the link below to confirm
-your email:
+Thank you for applying to TheProjectProject—we can't wait to review your application!
+Please click <a href='{{ url }}'>here</a> to confirm your email.
 <br><br>
-&nbsp;{{ url_for('auth.verify', token=token, _external=True) }}
-<br><br>
-This token will expire in one hour, please click <a href='/'>here</a> to generate a new link.
+This token will expire in one week—if you have not confirmed by then, you will
+have to reapply.
 <br><br>
 
 Best,<br>

@@ -29,20 +29,18 @@ ses = boto3.client('ses',
 #     db.session.close()
 
 
-@rq.job(result_ttl=1)
-def send_registration_email(user_id, token):
-    print('HERE')
+@rq.job
+def send_registration_email(user_id, url):
     user = User.query.filter_by(id=user_id).first()
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [user.email]},
         Message={
-            'Subject': {'Data': 'Confirm Your Account'},
+            'Subject': {'Data': 'Confirm Your Application'},
             'Body': {
                 'Html': {'Data': render_template('mail/register.mail',
-                                                 user=user, token=token)}
+                                                 user=user, url=url)}
             }
         }
     )
-    print('COMPLETE')
     return True
