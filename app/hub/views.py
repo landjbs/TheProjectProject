@@ -14,15 +14,15 @@ from app.recommendations.projects import (get_recommended_projects,
 @login_required
 def home():
     # recommended projects
-    recommended_projects = recommend_projects(current_user)
+    recommended_projects = get_recommended_projects(current_user)
     recommended_tabs = list(partition_query(recommended_projects))
     # top projects
     trending_projects = get_trending_projects()
     trending_tabs =  list(partition_query(trending_projects))
     # user projects
-    user_projs = get_user_projects(current_user)
-    user_tabs = list(partition_query(user_projs))
-    project_application = forms.Project_Application_Form(request.form)
+    user_projects = get_user_projects(current_user)
+    user_tabs = list(partition_query(user_projects))
+    project_application = None #forms.Project_Application_Form(request.form)
     # notifcations
     # if (current_user.notifications.count())>0:
     #     for notification in current_user.notifications:
@@ -32,8 +32,10 @@ def home():
     #         db.session.commit()
     #     except:
     #         db.session.rollback()
-    return render_template('home.html', recommended_tabs=recommended_tabs,
-                            top_tabs=top_tabs, user_tabs=user_tabs,
-                            user_project_count=len(user_projs),
+    return render_template('home.html',
+                            recommended_tabs=recommended_tabs,
+                            top_tabs=trending_tabs,
+                            user_tabs=user_tabs,
+                            user_project_count=len(user_projects),
                             current_user=current_user,
                             project_application=project_application)

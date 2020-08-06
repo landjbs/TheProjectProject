@@ -3,8 +3,10 @@
 import numpy as np
 from operator import itemgetter
 from datetime import datetime
+from sqlalchemy import desc
 
 from app.models import Project
+from app.recommendations.utils import get_normed_user_subjects
 
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
@@ -70,5 +72,5 @@ def get_trending_projects():
     return Project.query.order_by(desc(Project.buzz)).limit(9)
 
 
-def get_user_projects():
+def get_user_projects(user):
     return user.projects
