@@ -100,6 +100,7 @@ def delete_user():
     flash('Your account has been deleted. We are sorry to see you go!')
     return redirect(url_for('base.index'))
 
+
 ## user to user interactions ##
 @user.route('/report_user/<int:target_user_id>', methods=['POST'])
 @login_required
