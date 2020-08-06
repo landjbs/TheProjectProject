@@ -13,12 +13,13 @@ def populate_db(num_users):
     users = []
     # fake users
     for _ in range(num_users):
+        name = fake.name()
         users.append(
             User(
-                name=fake.name(),
+                name=name,
                 email=fake.email(),
                 password=(fake.word()+fake.word()),
-                github=f'https://github.com/{fake.name()}',
+                url=f'https://github.com/{"_".join(name).lower()}',
                 about=' '.join([fake.word() for _ in range(30)])
             )
         )
@@ -27,7 +28,7 @@ def populate_db(num_users):
             name='Landon Smith',
             email='landonsmith@college.harvard.edu',
             password='boop',
-            github='https://github.com/landjbs',
+            url='https://github.com/landjbs',
             about=('I love AI and NLP. Founder of Strada Routing and '
                    'TheProjectProject!'),
             admin=True

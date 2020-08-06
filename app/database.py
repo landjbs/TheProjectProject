@@ -1,3 +1,4 @@
+from numpy.random import randint
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 
@@ -41,7 +42,7 @@ class CRUDMixin(object):
 def generate_code(name, table):
     ''' Generate unique code for url to access name in table '''
     code = str(name).replace('/', '_').replace(' ', '_').lower()
-    temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
+    temp_code = f'{code}_{str(randint(0, 1000))}'
     while table.query.filter_by(code=temp_code).first() is not None:
-        temp_code = f'{code}_{str(np.random.randint(0, 1000))}'
+        temp_code = f'{code}_{str(randint(0, 1000))}'
     return temp_code

@@ -31,7 +31,7 @@ def login():
 
 @auth.route('/apply', methods=['GET', 'POST'])
 def apply():
-    form = Apply(request.form)
+    form = Apply()
     if form.validate_on_submit():
         user = User.create(
                     name=form.data['name'],
