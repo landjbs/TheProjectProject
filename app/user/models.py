@@ -156,6 +156,11 @@ class User(CRUDMixin, UserMixin, db.Model):
     def has_starred(self, project):
         return (project in self.starred)
 
+    # applications
+    def has_applied(self, project):
+        return ((self.pending.filter_by(project=project).first()) is not None)
+
+    ## public analytics ##
     def total_stars(self):
         ''' Gets total stars earned by user '''
         stars = 0
@@ -166,10 +171,6 @@ class User(CRUDMixin, UserMixin, db.Model):
     def subject_data(self, n=10):
         ''' Gets dict mapping subject name to skill level for n top subjects '''
         return {s.subject.name : s.number for s in self.subjects[:n]}
-
-    # applications
-    def has_applied(self, project):
-        return ((self.pending.filter_by(project=project).first()) is not None)
 
 
 

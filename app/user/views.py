@@ -37,7 +37,7 @@ def user_page(code):
     project_application = forms.Project_Application_Form()
     # edit user account
     show_edit_modal = False
-    edit_form = forms.Edit_User(request.form) if (current_user==user) else False
+    edit_form = forms.Edit_User() if (current_user==user) else False
     if request.method=='POST':
         if edit_form.validate_on_submit():
             edits_made = False
@@ -66,9 +66,12 @@ def user_page(code):
                 user.update()
         else:
             show_edit_modal = True
-    return render_template('user.html', user=user,
-                            task_data=task_data, subject_data=subject_data,
-                            owned_tabs=owned_tabs, member_tabs=member_tabs,
+    return render_template('user.html',
+                            user=user,
+                            task_data=task_data,
+                            subject_data=subject_data,
+                            owned_tabs=owned_tabs,
+                            member_tabs=member_tabs,
                             project_application=project_application,
                             edit_form=edit_form,
                             show_edit_modal=show_edit_modal)
