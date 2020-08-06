@@ -2,7 +2,7 @@ from flask import (current_app, request, redirect, url_for,
                    render_template, flash, abort)
 from flask_login import login_user, login_required, logout_user
 from itsdangerous import URLSafeSerializer, BadSignature
-from datetime.datetime import utcnow
+from datetime import datetime
 
 from app.extensions import lm
 from app.jobs import send_registration_email
@@ -20,9 +20,10 @@ def load_user(id):
 def login():
     form = Login()
     if form.validate_on_submit():
-        login_user(form.user)
+        user = form.user
+        login_user(user)
         user.active = True
-        user.last_active = utcnow()
+        user.last_active = datetime.utcnow()
         user.update()
         return redirect(request.args.get('next') or url_for('admin.index'))
     start_on = 0
@@ -83,9 +84,9 @@ def verify(token):
 @auth.route('/logout')
 @login_required
 def logout():
-    # current_user.active = False
-    # current_user.last_active = datetime.utcnow()
-    # db.session.commit()
+    current_user.active = False
+    current_user.last_active = datetime.utcnow()
+    current_user.update()
     logout_user()
     return redirect(url_for('base.index'))
 
