@@ -173,12 +173,11 @@
             <p class='warning'>{{ edit_form.name.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
-          <!-- email -->
-          <!-- github -->
-          {{ edit_form.github.label }}:<br>
-          {{ edit_form.github(class='edit-input', value=user.github) }}
-          {% if edit_form.github.errors %}
-            <p class='warning'>{{ edit_form.github.errors[0] }}</p>
+          <!-- user -->
+          {{ edit_form.url.label }}:<br>
+          {{ edit_form.url(class='edit-input', value=user.url) }}
+          {% if edit_form.url.errors %}
+            <p class='warning'>{{ edit_form.url.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
           <!-- about -->
