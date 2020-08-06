@@ -59,13 +59,11 @@ def user_page(code):
             # new password
             if edit_form.password.data!='':
                 if not user.check_password(edit_form.password.data):
-                    user.password = user.set_password(edit_form.password.data)
+                    user.set_password(edit_form.password.data)
                     edits_made = True
             if edits_made:
                 flash('You have successfully edited your acount.')
-                db.session.add(user)
-                db.session.commit()
-                db.session.close()
+                user.update()
         else:
             show_edit_modal = True
     return render_template('user.html', user=user,
