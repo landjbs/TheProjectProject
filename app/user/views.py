@@ -75,9 +75,27 @@ def user_page(code):
                             edit_form=edit_form,
                             show_edit_modal=show_edit_modal)
 
-
+## user interactions ##
 @user.route('/flash_encouragement', methods=['POST'])
 def flash_encouragement():
     flash('Reminder: You are awesome and will do amazing '
          'things if you believe in yourself.')
     return redirect(request.referrer)
+
+
+@user.route('/delete_user', methods=['POST'])
+@login_required
+@limiter.limit('2 per minute')
+def delete_user():
+    for project in current_user.owned:
+        if len(project.members.all())>1:
+            new_owner = User.query.get_or_404(request.form.get(f'new_owner_{project.id}'))
+            success = transfer_ownership(project, new_owner)
+            if not success:
+                flash(f'Owner transfer unsuccessful of {project.name}.')
+                return redirect(request.referrer)
+        else:
+            manager.delete_project(project)
+    manager.delete_user(current_user)
+    flash('Your account has been deleted. We are sorry to see you go!')
+    return redirect(url_for('index'))

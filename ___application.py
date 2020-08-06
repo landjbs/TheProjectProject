@@ -929,24 +929,6 @@ def report_user(target_user_id):
     return redirect(request.referrer)
 
 
-@application.route('/delete_user', methods=['POST'])
-@login_required
-@limiter.limit('2 per minute')
-def delete_user():
-    for project in current_user.owned:
-        if len(project.members.all())>1:
-            new_owner = User.query.get_or_404(request.form.get(f'new_owner_{project.id}'))
-            success = transfer_ownership(project, new_owner)
-            if not success:
-                flash(f'Owner transfer unsuccessful of {project.name}.')
-                return redirect(request.referrer)
-        else:
-            manager.delete_project(project)
-    manager.delete_user(current_user)
-    flash('Your account has been deleted. We are sorry to see you go!')
-    return redirect(url_for('index'))
-
-
 @application.route('/complete_project/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('3 per minute')
@@ -1014,13 +996,6 @@ def remove_application_requirement(project_id):
     else:
         project.update_last_active()
         manager.remove_application_requirement(project)
-    return redirect(request.referrer)
-
-
-@application.route('/flash_encouragement', methods=['POST'])
-def flash_encouragement():
-    flash('Reminder: You are awesome and will do amazing '
-         'things if you believe in yourself.')
     return redirect(request.referrer)
 
 
