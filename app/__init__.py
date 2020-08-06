@@ -19,7 +19,7 @@ from app.utils import url_for_other_page
 
 def create_app(config=config.BaseConfig):
     ''' '''
-    application = Flask(__name__, static_folder='static')
+    application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())
     # TODO: better secret key define in config
     # application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
