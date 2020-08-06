@@ -1,9 +1,10 @@
 <!-- SELECTS -->
 {% macro render_multiselect(field) -%}
-<!-- import select js -->
+  <!-- import select-pure js -->
   <script src="select-pure/dist/bundle.min.js"></script>
+  <!-- import custom styles -->
+  <link type='text/css' href='css/select_styles.css' rel='stylesheet'>
 
-  
   {{ field(id=field.name, style='display:none;') }}
   <span class="select_subject" id='{{ field.name }}_select' name='{{ field.name }}'></span>
   {% if field.errors %}
