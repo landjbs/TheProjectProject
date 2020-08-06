@@ -30,10 +30,6 @@ def user_page(code):
     member_projects = [project for project in user.projects
                        if not project in owned]
     member_tabs = list(partition_query(member_projects))
-    # sum stars
-    stars = 0
-    for project in user.projects:
-        stars += project.stars.count()
     # subjects
     subject_data = {s.subject.name : s.number for s in user.subjects[:10]}
     ## forms ##
@@ -77,7 +73,7 @@ def user_page(code):
                 db.session.close()
         else:
             show_edit_modal = True
-    return render_template('user.html', user=user, stars=stars,
+    return render_template('user.html', user=user,
                             task_data=task_data, subject_data=subject_data,
                             owned_tabs=owned_tabs, member_tabs=member_tabs,
                             project_application=project_application,

@@ -157,10 +157,15 @@ class User(CRUDMixin, UserMixin, db.Model):
         return (project in self.starred)
 
     def total_stars(self):
+        ''' Gets total stars earned by user '''
         stars = 0
         for project in self.projects:
             stars += project.stars.count()
         return stars
+
+    def subject_data(self, n=10):
+        ''' Gets dict mapping subject name to skill level for n top subjects '''
+        return {s.subject.name : s.number for s in self.subjects[:n]}
 
     # applications
     def has_applied(self, project):
