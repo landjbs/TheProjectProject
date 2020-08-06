@@ -1,10 +1,10 @@
-from flask import (
-    current_app, request, redirect, url_for, render_template, flash, abort,
-)
+from flask import (current_app, request, redirect, url_for,
+                   render_template, flash, abort)
 from flask_login import login_user, login_required, logout_user
 from itsdangerous import URLSafeSerializer, BadSignature
+
 from app.extensions import lm
-# from app.jobs import send_registration_email
+from app.jobs import send_registration_email
 from app.user.models import User
 from .forms import Login, Apply
 from ..auth import auth
@@ -40,6 +40,11 @@ def apply():
                     url=form.data['url'],
                     about=form.data['about']
                 )
+        # generate token and send to user email
+        s = URLSafeSerializer(current_app.secret_key)
+        token = s.dumps(user.id)
+        send_registration_email.queue(user.id, token)
+        # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '
                'A confirmation link has been sent to your email.')
