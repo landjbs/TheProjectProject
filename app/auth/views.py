@@ -40,7 +40,7 @@ def apply():
                     url=form.data['url'],
                     about=form.data['about']
                 )
-        flash(f'Congratulations, {first_name}, your application to '
+        flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '
                'A confirmation link has been sent to your email.')
         return redirect(url_for('base.index'))
