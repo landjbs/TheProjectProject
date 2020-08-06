@@ -4,6 +4,7 @@ from flask_login import login_required
 
 
 from app.extensions import limiter
+from app.utils import tasks_to_daily_activity
 from app.user.models import User
 # from .forms import EditUserForm
 
