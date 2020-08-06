@@ -28,7 +28,7 @@ ses = boto3.client('ses',
 #     db.session.close()
 
 
-@rq.job
+@rq.job(result_ttl=1)
 def send_registration_email(user_id, token):
     user = User.query.filter_by(id=user_id).first()
     ses.send_email(
