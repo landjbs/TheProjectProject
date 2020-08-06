@@ -33,8 +33,8 @@ class UserModelView(AdminBaseView):
     column_exclude_list = ['password']
     can_export = True
     column_extra_row_actions = [
-        EndpointLinkRowAction('glyphicon glyphicon-ok', 'user.accept_single'),
-        EndpointLinkRowAction('glyphicon glyphicon-remove', 'user.reject_single')
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminUser.accept_single'),
+        EndpointLinkRowAction('glyphicon glyphicon-remove', 'AdminUser.reject_single')
     ]
 
     @expose('/action/accept_single', methods=('GET',))
