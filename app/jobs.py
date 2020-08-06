@@ -3,10 +3,7 @@ import boto3
 import sys
 from app.extensions import rq
 
-sys.path.append('.')
-
-from app import db
-from app.models import User
+from app.user.models import User
 
 
 SES_REGION = 'us-east-1'
@@ -20,15 +17,15 @@ ses = boto3.client('ses',
                    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
                 )
 
-def send_email(user_email, body):
-    ses.send_email(Source=SES_EMAIL_SOURCE,
-                   Destination={'ToAddresses':[user_email]},
-                   Message= {'Subject':{'Data': 'Confirm Your Account'},
-                             'Body': {'Html': {'Data': body}}})
-    user = User.query.filter_by(email=user_email).first()
-    user.emailed = True
-    db.session.commit()
-    db.session.close()
+# def send_email(user_email, body):
+#     ses.send_email(Source=SES_EMAIL_SOURCE,
+#                    Destination={'ToAddresses':[user_email]},
+#                    Message= {'Subject':{'Data': 'Confirm Your Account'},
+#                              'Body': {'Html': {'Data': body}}})
+#     user = User.query.filter_by(email=user_email).first()
+#     user.emailed = True
+#     db.session.commit()
+#     db.session.close()
 
 
 @rq.job
