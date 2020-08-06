@@ -47,15 +47,15 @@ def send_registration_email(user_id, url):
 
 
 @rq.job
-def send_confirmation_email(user_id):
+def send_confirmation_email(user):
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [user.email]},
         Message={
-            'Subject': {'Data': 'Confirm Your Application'},
+            'Subject': {'Data': 'Thanks For Applying!'},
             'Body': {
-                'Html': {'Data': render_template('mail/register.mail',
-                                                 user=user, url=url)}
+                'Html': {'Data': render_template('mail/confirm.mail',
+                                                 user=user)}
             }
         }
     )

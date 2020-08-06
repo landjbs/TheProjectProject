@@ -1,0 +1,9 @@
+Dear {{ user.name }},
+<br><br>
+You have confirmed your application to TheProjectProject. We will begin reviewing
+your application immediately, and will email you as soon as we have come to a
+decision. 
+<br><br>
+
+Best,<br>
+TheProjectProject Team

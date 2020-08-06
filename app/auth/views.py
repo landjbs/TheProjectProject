@@ -76,7 +76,7 @@ def verify(token):
     user.confirmed = True
     send_confirmation_email.queue(user)
     user.update()
-    flash('You have confirmed your account! We will email you with '
+    flash('You have confirmed your application! We will email you with '
           'application updates as soon as possible.')
     return redirect(url_for('base.index'))
 
