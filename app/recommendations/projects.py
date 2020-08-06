@@ -68,3 +68,7 @@ def get_recommended_projects(user):
 
 def get_trending_projects():
     return Project.query.order_by(desc(Project.buzz)).limit(9)
+
+
+def get_user_projects():
+    return user.projects
