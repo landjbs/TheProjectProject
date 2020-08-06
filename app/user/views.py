@@ -76,14 +76,14 @@ def user_page(code):
                             show_edit_modal=show_edit_modal)
 
 ## user to self interactions ##
-@user.route('/flash_encouragement', methods=['GET', 'POST'])
+@user.route('/flash_encouragement', methods=['POST'])
 def flash_encouragement():
     flash('Reminder: You are awesome and will do amazing '
          'things if you believe in yourself.')
     return redirect(request.referrer)
 
 
-@user.route('/delete_user', methods=['GET', 'POST'])
+@user.route('/delete_user', methods=['POST'])
 @login_required
 @limiter.limit('2 per minute')
 def delete_user():
