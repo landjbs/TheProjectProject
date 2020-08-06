@@ -2,8 +2,26 @@ Dear {{ user.name }},
 <br><br>
 You have confirmed your application to TheProjectProject. We will begin reviewing
 your application immediately, and will email you as soon as we have come to a
-decision. 
+decision. For future, reference, we have attached a copy of your application:
 <br><br>
+Name: {{ user.name }}
+<br>
+Email: {{ user.email }}
+<br>
+About: {{ user.about }}
+<br>
+Subjects:
+{% for subject in user.subjects %}
+  {% if loop.index!=1 %}
+    ,
+  {% endif %}
+  {{ subject.name }}
+{% endfor %}
 
+Please contact us at
+<a href='mailto:admin@theprojectproject.io'>admin@theprojectproject.io</a>
+if you have any questions or concerns!
+
+<br><br>
 Best,<br>
 TheProjectProject Team
