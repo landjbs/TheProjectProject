@@ -41,7 +41,7 @@ def score_project(project, user_subjects):
     return score
 
 
-def recommend_projects(user):
+def get_recommended_projects(user):
     ## get initial candidates ##
     member_projects = [p.id for p in user.projects]
     pending_projects = [p.project.id for p in user.pending]
@@ -64,3 +64,7 @@ def recommend_projects(user):
     if len(results)==0:
         results = user.projects
     return results
+
+
+def get_trending_projects():
+    return Project.query.order_by(desc(Project.buzz)).limit(9)

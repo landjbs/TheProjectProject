@@ -5,19 +5,19 @@ from itsdangerous import URLSafeSerializer, BadSignature
 from datetime import datetime
 
 from ..hub import hub
-from app.recommendations.projects import recommend_projects
+from app.recommendations.projects import (
+            get_recommended_projects, get_trending_projects)
 
 
 @hub.route('/home', methods=['GET'])
 @login_required
 def home():
     # recommended projects
-    recs = recommend_projects(current_user)
-    # recs = db.session.query(Project).limit(30)
-    recommended_tabs = list(partition_query(recs))
+    recommended_projects = recommend_projects(current_user)
+    recommended_tabs = list(partition_query(recommended_projects))
     # top projects
-    tops = db.session.query(Project).order_by(desc(Project.buzz)).limit(9)
-    top_tabs =  list(partition_query(tops))
+    trending_projects = get_trending_projects()
+    trending_tabs =  list(partition_query(trending_projects))
     # user projects
     user_projs = rec.user_projects(current_user)
     user_tabs = list(partition_query(user_projs))
