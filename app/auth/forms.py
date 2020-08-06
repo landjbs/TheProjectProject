@@ -1,8 +1,7 @@
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
                     SelectMultipleField, SelectField, FloatField, IntegerField,
                     TextAreaField, validators)
-from wtforms.validators import (DataRequired, Length, EqualTo, Email,
-                                InputRequired, ValidationError, NumberRange)
+from wtforms.validators import (DataRequired, Length, EqualTo, Email)
 
 from app.user.models import User
 form app.forms.base import BaseForm
