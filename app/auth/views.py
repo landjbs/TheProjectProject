@@ -5,7 +5,7 @@ from itsdangerous import URLSafeSerializer, BadSignature
 from datetime import datetime
 
 from app.extensions import lm
-from app.jobs import send_registration_email
+from app.jobs import send_registration_email, send_confirmation_email
 from app.user.models import User
 from .forms import Login, Apply
 from ..auth import auth
@@ -74,6 +74,7 @@ def verify(token):
     if user.confirmed:
         abort(404)
     user.confirmed = True
+    send_confirmation_email.queue(user)
     user.update()
     flash('You have confirmed your account! We will email you with '
           'application updates as soon as possible.')
