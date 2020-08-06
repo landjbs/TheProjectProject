@@ -1,4 +1,3 @@
-
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
                     SelectMultipleField, SelectField, FloatField, IntegerField,
                     TextAreaField, validators)
@@ -6,6 +5,8 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
 from app.user.models import User
+from app.forms.validators import Site_URL_Validator, Select_Limit_Validator
+
 
 ## FORMS ##
 class Apply(BaseForm):
@@ -20,8 +21,7 @@ class Apply(BaseForm):
                                    'like your school to be added.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
     url = StringField('URL',
-                    validators=[Length(0, 254),
-                                  Site_URL_Validator('github')],
+                    validators=[Length(0, 254)],
                     description=('Tell us about yourself with a Github or '
                                  'personal website!'),
                     render_kw={'placeholder': 'https://www.github.com/example'})

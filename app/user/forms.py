@@ -9,9 +9,8 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
 from app.user.models import User
-
-
-BaseForm = model_form_factory(FlaskForm)
+from app.forms.base import BaseForm
+from app.forms.validators import
 
 
 class Edit_User(BaseForm):
@@ -20,7 +19,7 @@ class Edit_User(BaseForm):
                        render_kw={'max':254})
     # url
     url = StringField('url',
-                    validators=[Length(0, 254), Site_URL_Validator('url')],
+                    validators=[Length(0, 254)],
                     render_kw={'max':254})
     about = TextField('About You', validators=[DataRequired(), Length(1, 500)],
                       render_kw={'max':500})
