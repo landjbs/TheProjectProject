@@ -150,7 +150,6 @@ def like_action(project_id, action):
     return redirect(request.referrer)
 
 
-
 @project.route('/project/<int:project_id>/task', methods=['POST'])
 @login_required
 @limiter.limit('10 per minute')
@@ -159,7 +158,7 @@ def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     if not is_project_member(current_user, project):
         return redirect(request.referrer)
-    form = Task_Form(request.form)
+    form = Task_Form()
     if form.validate_on_submit():
         task = Task(text=form.text.data, author=current_user)
         manager.add_task(project, current_user, task)

@@ -183,6 +183,14 @@ class Project(CRUDMixin, db.Model):
         ''' Returns active tasks on project that have been completed '''
         return self.tasks.filter_by(complete=True)
 
+    def add_task(self, text, author):
+        if not self.is_member(author):
+            return False
+        self.tasks.append(Task(text=text, author=author))
+        self.update_last_active()
+        self.update()
+        return True
+
     ## public analytics ##
     def subject_data(self):
         ''' Get dict mapping project subject names to member skill levels '''

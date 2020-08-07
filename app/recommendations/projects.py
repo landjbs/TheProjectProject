@@ -66,7 +66,7 @@ def get_recommended_projects(user):
     print('SORTING')
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = (invited + results)
-    results = results[:30]
+    results = results[:9]
     print('DONE')
     if len(results)==0:
         results = user.projects
