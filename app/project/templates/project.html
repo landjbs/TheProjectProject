@@ -382,7 +382,7 @@
                                 <i class="fa fa-circle" style='color:#FF5D00;'></i>
                                 <span class='tooltiptext'>Owner</span>
                               </div>
-                            {% elif is_project_member(comment.author, project) %}
+                            {% elif project.is_member(comment.author) %}
                               <div class='hoverable'>
                                 <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
                                 <span class='tooltiptext'>Member</span>

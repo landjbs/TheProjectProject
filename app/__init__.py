@@ -4,6 +4,7 @@ import requests
 from flask import Flask, g, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from elasticsearch import Elasticsearch
+from dateutil import tz
 
 # config
 from app import config
@@ -69,12 +70,6 @@ def create_app(config=config.BaseConfig):
             time = f"{time.strftime('%B %d')}"
             time = time.lstrip("0").replace(" 0", " ")
             return time
-        # def complete(tasks):
-        #     return tasks.filter_by(complete=True)
-        # def not_complete(tasks):
-        #     return tasks.filter_by(complete=False)
-        # def is_project_member_(user, project):
-        #     return is_project_member(user, project)
         def now():
             return datetime.utcnow()
         return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
