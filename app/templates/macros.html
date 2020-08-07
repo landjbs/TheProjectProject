@@ -311,18 +311,18 @@
       <div class="modal-footer">
         <a class='delete-btn task-btn float-left'
         style='background: transparent;'
-        href="{{ url_for('reject_collaboration', project_id=project.id) }}">
+        href="{{ url_for('user.reject_collaboration', project_id=project.id) }}">
           <button class='btn'>Decline</button>
         </a>
         <a class='complete-btn task-btn float-right'
             style='background: transparent;'
-            href="{{ url_for('accept_collaboration', project_id=project.id) }}">
+            href="{{ url_for('user.accept_collaboration', project_id=project.id) }}">
           <button class='btn'>Accept</button>
         </a>
 
       </div>
     {% elif not current_user in project.members %}
-      <form action="{{ url_for('join_project', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('project.join_project', project_id=project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
           {% if project.requires_application %}
@@ -338,7 +338,7 @@
         </div>
       </form>
     {% else %}
-      <form action="{{ url_for('leave_project', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('project.leave_project', project_id=project.id) }}" method='post'>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <div class="modal-body">
             {% if project.owner==current_user %}
@@ -405,7 +405,7 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('report_user', target_user_id=target_user.id) }}" method="post">
+      <form action="{{ url_for('user.report_user', target_user_id=target_user.id) }}" method="post">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
             <p>
@@ -540,7 +540,7 @@
           </div>
         </form>
       {% else %}
-        <form action="{{ url_for('uncomplete_project', project_id=project.id) }}" method='post'>
+        <form action="{{ url_for('project.uncomplete_project', project_id=project.id) }}" method='post'>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <div class="modal-body">
             <button class='btn col'>
@@ -564,7 +564,7 @@
         <h5>Complete {{ project.name }}</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('complete_project', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('project.complete_project', project_id=project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
           <p>
@@ -601,7 +601,7 @@
         {% endif %}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('change_project_open', project_id=project.id, action=action) }}" method='post'>
+      <form action="{{ url_for('project.change_project_open', project_id=project.id, action=action) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
           <p>
@@ -647,7 +647,7 @@
         {% endif %}
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('add_application', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('project.add_application', project_id=project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
             {% if action=='add' %}
@@ -665,7 +665,7 @@
         </div>
         <div class="modal-footer">
           {% if action!='add' %}
-            <button type='submit' formaction="{{ url_for('remove_application_requirement', project_id=project.id) }}" class='btn delete-btn col'>
+            <button type='submit' formaction="{{ url_for('project.remove_application_requirement', project_id=project.id) }}" class='btn delete-btn col'>
               Remove Application
             </button>
           {% endif %}
