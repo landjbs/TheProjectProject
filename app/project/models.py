@@ -192,6 +192,7 @@ class Project(CRUDMixin, db.Model):
         return True
 
     def change_task_status(self, task_id, user, action):
+        ''' Changes status of task in project '''
         task = self.tasks.filter_by(id=task_id).first()
         if not task or not self.is_member(user):
             return False
@@ -201,8 +202,11 @@ class Project(CRUDMixin, db.Model):
             else:
                 task.add_worker(user)
         elif action=='back':
-            if user in task.workers:
-                task.remove_worker(user)
+            task.remove_worker(user)
+            if (task.worker_num()==0):
+                task.mark_incomplete()
+        elif action=='delete':
+            task.delete(user)
         else:
             raise ValueError(f'Invalid action {action} for change_task_status.')
 
@@ -281,6 +285,7 @@ class Task(CRUDMixin, db.Model):
     complete = db.Column(db.Boolean, default=False)
 
     def mark_complete(self, worker):
+        ''' Marks incomplete task as complete '''
         if not self.complete:
             self.add_worker(worker)
             self.complete = True
@@ -313,6 +318,11 @@ class Task(CRUDMixin, db.Model):
             self.update()
             return True
         return False
+
+    ## public analytics ##
+    def worker_num(self):
+        ''' Gets number of workers on task '''
+        return len(self.workers)
 
 
 class Comment(CRUDMixin, db.Model):
