@@ -229,7 +229,7 @@ def transfer_ownership(project, user):
 
 @project.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
-@limiter.limit('20 per minute')
+@limiter.limit('20/minute')
 def change_user_status(project_id, user_id, action):
     ''' Change status of user with repsect to project '''
     project = Project.query.get_or_404(project_id)
@@ -263,6 +263,7 @@ def change_user_status(project_id, user_id, action):
     return redirect(request.referrer)
 
 @project.route('/remove_member/<int:project_id>/<int:user_id>')
+@limiter.limit('30/minute')
 def remove_member(project_id, user_id):
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
@@ -272,6 +273,12 @@ def remove_member(project_id, user_id):
             flash('Could not remove user.')
         flash(f'User removed from {project.name}.')
     return redirect(request.referrer)
+
+
+@project.route('/make_owner/<int:project_id>/<int:user_id>')
+@limiter.limit('30/minute')
+
+
 
 
 def make_owner():

@@ -5,7 +5,7 @@ from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
 from app.models import User_Subjects
-from app.notifications.models import Notification
+from app.notification.models import Notification
 from app.extensions import bcrypt
 
 

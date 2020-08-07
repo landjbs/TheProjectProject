@@ -203,15 +203,6 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
-
-    def change_user_status(self, user, action:str):
-        if action=='accept':
-            if not user in self.members:
-                return False
-            self.add_member(user)
-        elif action=='reject':
-
-
     ## tasks ##
     def todo(self):
         ''' Returns active tasks on project that haven't been completed '''
