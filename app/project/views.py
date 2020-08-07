@@ -43,14 +43,8 @@ def project_page(project_code):
         authored[n] = user_author_count if user_author_count else 0
         completed[n] = user_completed_count if user_completed_count else 0
     ## subject visualization ##
-    project_subjects = {s.name:0 for s in project.subjects}
-    if project_subjects!={}:
-        for member in project.members:
-            for user_subject in member.subjects:
-                name = user_subject.subject.name
-                if name in project_subjects:
-                    # -1 to account for skills gained via project association
-                    project_subjects[name] += (user_subject.number)
+    project_subjects = project.subject_data()
+    
     ## recommended members ##
     recommended_tabs = False
     edit_form = False

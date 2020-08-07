@@ -124,3 +124,4 @@ class Project(CRUDMixin, db.Model):
                     if name in project_subjects:
                         # -1 to account for skills gained via project association
                         project_subjects[name] += (user_subject.number)
+        return project_subjects
