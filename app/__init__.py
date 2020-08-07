@@ -49,6 +49,37 @@ def create_app(config=config.BaseConfig):
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
 
+    # TODO: SIMPLIFY CONTEXT PROCESSOR: MOSTLY INTEGRATE INTO AJAX ACCORDING TO FLASK TUTORIAL
+    from datetime import datetime
+    @application.context_processor
+    def utility_processor():
+        def calc_days_since(now, start):
+            return int((now - start).days)
+        def calc_days_left(elapsed, estimated_time):
+            return int((estimated_time - elapsed))
+        def elapsed_style(elapsed, estimated_time):
+            return f'width: {100*float(elapsed/estimated_time)}%;'
+        def time_to_str(time):
+            from_zone = tz.tzutc()
+            to_zone = tz.tzlocal()
+            time = time.replace(tzinfo=from_zone)
+            time = time.astimezone(to_zone)
+            # time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
+            time = f"{time.strftime('%B %d')}"
+            time = time.lstrip("0").replace(" 0", " ")
+            return time
+        # def complete(tasks):
+        #     return tasks.filter_by(complete=True)
+        # def not_complete(tasks):
+        #     return tasks.filter_by(complete=False)
+        # def is_project_member_(user, project):
+        #     return is_project_member(user, project)
+        def now():
+            return datetime.utcnow()
+        return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
+                    elapsed_style=elapsed_style, time_to_str=time_to_str, now=now)
+
+
     return application
 
 
