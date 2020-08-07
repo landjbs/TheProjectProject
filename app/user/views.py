@@ -132,34 +132,4 @@ def collaborate(target_user_id):
     target_user = User.query.get_or_404(target_user_id)
     message, category = target_user.collaborate(project):
     flash(message, category)
-    return
-
-
-
-    if not current_user==project.owner:
-        flash()
-    elif current_user==target_user:
-        flash("You don't need to send an invitation to collaborate with "
-              "yourself!")
-    elif not target_user.accepted:
-        flash(f'{target_user.name} user has not been accepted to TheProjectProject yet.')
-    elif target_user in project.members:
-        flash(f'{target_user.name} is already a member of {project.name}.')
-    elif target_user.has_applied(project):
-        flash(f'{target_user.name} has already applied to {project.name}. '
-            'Go to the project page to accept their application.')
-    elif target_user in project.invitations:
-        flash(f'You have already invited {target_user.name} to join '
-              f'{project.name}. You will be notified when they respond.')
-    else:
-        target_user.invitations.append(project)
-        notifcation = Notification(text=f'{current_user.name} has invited you '
-                                        f'to collaborate on {project.name}! '
-                                        'Visit your profile page to reply.')
-        target_user.notifications.append(notifcation)
-        flash(f'You have sent {target_user.name} an invitation to collaborate '
-              f'on {project.name}. You will be notified when they respond.')
-        project.update_last_active()
-        db.session.commit()
-        db.session.close()
     return redirect(request.referrer)
