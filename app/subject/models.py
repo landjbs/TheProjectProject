@@ -1,5 +1,3 @@
-from datetime import datetime
-from sqlalchemy import desc
 from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
