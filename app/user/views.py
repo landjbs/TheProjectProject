@@ -123,7 +123,7 @@ def report_user(target_user_id):
     return redirect(request.referrer)
 
 
-@application.route('/collaborate/<int:target_user_id>', methods=['POST'])
+@user.route('/collaborate/<int:target_user_id>', methods=['POST'])
 @login_required
 @limiter.limit('10/minute; 100/hour')
 def collaborate(target_user_id):

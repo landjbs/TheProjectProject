@@ -52,7 +52,7 @@ def search():
     search_text = request.form.get('search')
     project_tabs, user_tabs, subject_tabs = text_search(search_text)
     # forms
-    project_application = None #forms.Project_Application_Form(request.form)
+    project_application = Project_Application_Form()
     return render_template('search.html',
                         project_tabs=project_tabs,
                         user_tabs=user_tabs,

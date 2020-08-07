@@ -61,7 +61,9 @@ def add_project():
         else:
             flash('Post some comments to tell people what your project '
                   'is all about!')
-        return project_page(project.code)
+        return redirect(
+            url_for('project.project_page', project_code=project.code)
+        )
     return render_template('add_project.html', form=form)
 
 
@@ -177,6 +179,9 @@ def join_project(project_id):
         if not project.requires_application:
             flash(f'You have been added to {project.name}!')
             project.add_member(current_user, notify_owner=True)
+            return redirect(
+                url_for('project.project_page', project_code=project.code)
+            )
         else:
             form = Project_Application_Form()
             if form.validate_on_submit():
