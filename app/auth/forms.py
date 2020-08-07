@@ -71,9 +71,7 @@ class Apply(BaseForm):
                 self.url.errors.append('There is already an account '
                                          'registered with that URL.')
                 error_flag = True
-        if error_flag:
-            return False
-        return True
+        return (not error_flag)
 
 
 class Login(BaseForm):
