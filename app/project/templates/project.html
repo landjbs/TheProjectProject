@@ -18,7 +18,7 @@
 
 {% block content %}
     <!-- GLOBALS -->
-    {% set is_member = is_project_member(current_user, project) %}
+    {% set is_member = current_user in project.members %}
     {% set is_owner = (project.owner==current_user) %}
     <!-- PAGE -->
     <div class="wrapper">
