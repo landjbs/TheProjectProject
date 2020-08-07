@@ -6,6 +6,7 @@ from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
 from app.recommendations.users import recommend_users
 from app.subject.models import Subject
+from app.user.models import User
 # package imports
 from .models import Project
 from .forms import (Add_Project, Comment_Form, Task_Form,
@@ -306,21 +307,21 @@ def make_owner(project_id, user_id):
 
 @project.route('/accept_application/<int:project_id>/<int:user_id>')
 @limiter.limit('60/minute')
-def accept_application():
+def accept_application(project_id, user_id):
     ''' Accept pending application '''
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
     if current_user!=project.owner:
         flash('Must be project owner to accept applications.')
     else:
-        if not project.accept_application(user_id):
+        if not project.accept_application(user):
             flash('Could not accept applicant.', 'error')
     return redirect(request.referrer)
 
 
 @project.route('/reject_application/<int:project_id>/<int:user_id>')
 @limiter.limit('60/minute')
-def reject_application():
+def reject_application(project_id, user_id):
     ''' Reject pending application '''
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)

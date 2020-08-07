@@ -132,7 +132,7 @@ class Project(CRUDMixin, db.Model):
     def accept_application(self, user):
         ''' Accpets pending application of user_id to project '''
         # validate that user has applied
-        application = self.pending.filter(user=user).first()
+        application = self.get_application(user)
         if not application:
             return False
         # add user to project
