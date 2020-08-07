@@ -158,19 +158,21 @@ def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     form = Task_Form()
     if form.validate_on_submit():
-        project.add_task(text=form.text.data, author=current_user)
+        if not project.add_task(text=form.text.data, author=current_user):
+            flash('Could not add task.', 'error')
     return redirect(request.referrer)
 
 
 @project.route('/project/<int:project_id>/comment', methods=['POST'])
 @login_required
-@limiter.limit('10 per minute')
+@limiter.limit('30 per minute')
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
     form = Comment_Form(request.form)
     if form.validate_on_submit():
-        project.add_comment(text=form.text.data, author=current_user):
+        if not project.add_comment(text=form.text.data, author=current_user):
+            flash('Could not add comment.', 'error')
     return redirect(request.referrer)
 
 
@@ -179,12 +181,7 @@ def add_comment(project_id):
 def delete_comment(project_id, comment_id):
     ''' Delete comment from project '''
     project = Project.query.get_or_404(project_id)
-    comment = Comment.query.get_or_404(comment_id)
-    if current_user in [project.owner, comment.author]:
-        db.session.delete(comment)
-        db.session.commit()
-        db.session.close()
-    else:
+    if not project.delete_comment(comment_id=comment_id, user=current_user):
         flash('Cannot delete comment.')
     return redirect(request.referrer)
 

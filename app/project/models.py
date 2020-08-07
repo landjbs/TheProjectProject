@@ -196,6 +196,13 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
+    def delete_comment(self, comment_id, user):
+        comment = self.comments.filter_by(id=comment_id).first_or_404()
+        if not user in [self.owner, comment.author]:
+            return False
+        self.comments.remove(comment)
+        self.update()
+
     ## public analytics ##
     def subject_data(self):
         ''' Get dict mapping project subject names to member skill levels '''
