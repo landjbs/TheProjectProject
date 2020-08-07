@@ -14,6 +14,7 @@ from app.hub import hub
 from app.user import user
 from app.project import project
 from app.subject import subject
+from app.notification import notification
 from app.admin import register_admin_views
 #
 from app.database import db
@@ -106,6 +107,7 @@ def register_blueprints(app):
     app.register_blueprint(user)
     app.register_blueprint(project)
     app.register_blueprint(subject)
+    app.register_blueprint(notification)
 
 
 def register_errorhandlers(app):
