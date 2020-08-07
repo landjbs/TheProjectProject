@@ -125,7 +125,7 @@ def join_project(project_id):
         else:
             form = Project_Application_Form()
             if form.validate_on_submit():
-                application = project.pending.filter_by(user=current_user).first()
+                application = project.get_application(current_user)
                 if application is not None:
                     flash(f'You have already applied to {project.name}!')
                 else:
