@@ -168,6 +168,13 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.update()
         return True
 
+    ## notifications ##
+    def notify(self, text, category):
+        raise ValueError('notify not implemented')
+
+    def add_notification(self, notification):
+        self.notifications.append(notification)
+
     ## starring ##
     def star_project(self, project):
         if not self.has_starred(project):
