@@ -74,16 +74,16 @@ class Add_Project(BaseForm):
         rv = BaseForm.validate(self)
         if not rv:
             error_flag = True
-        if (len(form.subjects.data)>5):
-            form.subjects.errors = ['Can only choose up to 5 subjects.']
+        if (len(self.subjects.data)>5):
+            self.subjects.errors = ['Can only choose up to 5 subjects.']
             error_flag = True
         # TODO: BETTER
         # team size defaults to 1 if None
-        if form.team_size.data is None:
-            form.team_size.data = 1
+        if self.team_size.data is None:
+            self.team_size.data = 1
         # url to none
-        if form.url.data=='':
-            form.url.data=None
+        if self.url.data=='':
+            self.url.data=None
         return (not error_flag)
 
 

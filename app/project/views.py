@@ -19,48 +19,47 @@ def add_project():
     form = Add_Project()
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
-        with db.session.no_autoflush:
-            project = Project.create(
-                name = form.name.data,
-                oneliner=form.oneliner.data,
-                summary = form.summary.data,
-                url = form.url.data,
-                subjects = subjects,
-                owner = current_user,
-                open = form.open.data,
-                requires_application = form.requires_application.data,
-                application_question = form.application_question.data,
-                estimated_time = form.estimated_time.data,
-                team_size = form.team_size.data,
-                complete = form.complete.data
-            )
-            # successful message
-            flash(f'Congratulations—your project, {form.name.data}, '
-                   'has been added!')
-            task_message = True
-            if form.complete.data==True:
-                flash(f'As a completed project, {form.name.data} will be '
-                    'visible, but not joinable or editable.')
-                task_message = False
-            elif form.open.data==False:
-                flash(f'As a closed project, {form.name.data} will be '
-                      'visible and editable, but not joinable.')
-            elif form.requires_application.data==False:
-                 flash(f'As an open project with no application, '
-                       f'{form.name.data} will be available for others to '
-                       'join at any time.')
-            elif form.requires_application.data==True:
-                flash(f'As an open project with an application, '
-                      f'{form.name.data} can be joined by users you accept. '
-                      'Check back soon to manage applicants.')
-            if task_message:
-                flash('Try adding some tasks to show what needs to '
-                      'be done on your project and posting some comments '
-                      "to tell people what it's all about!")
-            else:
-                flash('Post some comments to tell people what your project '
-                      'is all about!')
-            return project_page(project.code)
+        project = Project.create(
+            name = form.name.data,
+            oneliner=form.oneliner.data,
+            summary = form.summary.data,
+            url = form.url.data,
+            subjects = subjects,
+            owner = current_user,
+            open = form.open.data,
+            requires_application = form.requires_application.data,
+            application_question = form.application_question.data,
+            estimated_time = form.estimated_time.data,
+            team_size = form.team_size.data,
+            complete = form.complete.data
+        )
+        # successful message
+        flash(f'Congratulations—your project, {form.name.data}, '
+               'has been added!')
+        task_message = True
+        if form.complete.data==True:
+            flash(f'As a completed project, {form.name.data} will be '
+                'visible, but not joinable or editable.')
+            task_message = False
+        elif form.open.data==False:
+            flash(f'As a closed project, {form.name.data} will be '
+                  'visible and editable, but not joinable.')
+        elif form.requires_application.data==False:
+             flash(f'As an open project with no application, '
+                   f'{form.name.data} will be available for others to '
+                   'join at any time.')
+        elif form.requires_application.data==True:
+            flash(f'As an open project with an application, '
+                  f'{form.name.data} can be joined by users you accept. '
+                  'Check back soon to manage applicants.')
+        if task_message:
+            flash('Try adding some tasks to show what needs to '
+                  'be done on your project and posting some comments '
+                  "to tell people what it's all about!")
+        else:
+            flash('Post some comments to tell people what your project '
+                  'is all about!')
+        return project_page(project.code)
     return render_template('add_project.html', form=form)
 
 

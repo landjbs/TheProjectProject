@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 # absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
+from app.project.forms import Project_Application_Form
 # package imports
 from .models import User
 from .forms import Edit_User
@@ -31,7 +32,7 @@ def user_page(code):
     subject_data = user.subject_data()
     ## forms ##
     # application to projects
-    project_application = None #forms.Project_Application_Form()
+    project_application = Project_Application_Form()
     # edit user account
     show_edit_modal = False
     edit_form = Edit_User() if (current_user==user) else False
