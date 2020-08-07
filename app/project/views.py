@@ -315,7 +315,9 @@ def accept_application(project_id, user_id):
         flash('Must be project owner to accept applications.')
     else:
         if not project.accept_application(user):
-            flash('Could not accept applicant.', 'error')
+            flash(f'Could not accept {user.name}.', 'error')
+        else:
+            flash(f'You have accepted {user.name}!', 'success')
     return redirect(request.referrer)
 
 
