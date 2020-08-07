@@ -292,6 +292,7 @@ def make_owner(project_id, user_id):
 @project.route('/accept_application/<int:project_id>/<int:user_id>')
 @limiter.limit('60/minute')
 def accept_application():
+    ''' Accept pending application '''
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
         flash('Must be project owner to accept applications.')
@@ -303,6 +304,7 @@ def accept_application():
 @project.route('/reject_application/<int:project_id>/<int:user_id>')
 @limiter.limit('60/minute')
 def reject_application():
+    ''' Reject pending application '''
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
         flash('Must be project owner to reject applications.')
