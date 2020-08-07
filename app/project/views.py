@@ -316,3 +316,64 @@ def complete_project(project_id):
         project.update_last_active()
         manager.complete_project(project)
     return redirect(request.referrer)
+
+
+@application.route('/uncomplete_project/<int:project_id>', methods=['POST'])
+@login_required
+@limiter.limit('3 per minute')
+def uncomplete_project(project_id):
+    ''' Mark project as not complete '''
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can mark a project as incomplete.')
+    else:
+        project.update_last_active()
+        manager.uncomplete_project(project)
+    return redirect(request.referrer)
+
+
+@application.route('/change_project_open/<int:project_id>/<action>', methods=['POST'])
+@login_required
+@limiter.limit('5 per minute')
+def change_project_open(project_id, action):
+    ''' Change open status of project '''
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can change join settings.')
+    elif action=='open':
+        project.update_last_active()
+        manager.open_project(project)
+    elif action=='close':
+        project.update_last_active()
+        manager.close_project(project)
+    return redirect(request.referrer)
+
+
+@application.route('/add_application/<int:project_id>', methods=['POST'])
+@login_required
+@limiter.limit('10 per minute')
+def add_application(project_id):
+    ''' Add applicaiton to project '''
+    project = Project.query.get_or_404(project_id)
+    form = forms.Edit_Project_Application(request.form)
+    if current_user!=project.owner:
+        flash('Only the owner can change application settings.')
+    elif form.validate_on_submit():
+        project.update_last_active()
+        manager.add_application(project, form.application_question.data)
+    else:
+        flash(f'Could not add application: {form.errors[0]}.')
+    return redirect(request.referrer)
+
+
+@application.route('/remove_application_requirement/<int:project_id>', methods=['POST'])
+@login_required
+def remove_application_requirement(project_id):
+    ''' Remove application from project '''
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can change application settings.')
+    else:
+        project.update_last_active()
+        manager.remove_application_requirement(project)
+    return redirect(request.referrer)
