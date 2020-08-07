@@ -8,6 +8,7 @@ from app import db
 from app.user.models import User
 from app.project.models import Project
 from app.subject.create_subjects import create_subjects
+from app.subject.models import Subject
 
 
 def create_db():
@@ -33,6 +34,19 @@ def rebuild_db():
 def add_statics():
     ''' Adds statics (Subjects, Badges, Admins) to database '''
     create_subjects(db)
+    # admins
+    db.session.add(
+        User(
+            name='Landon Smith',
+            email='landonsmith@college.harvard.edu',
+            password='boop',
+            url='https://github.com/landjbs',
+            about=('I love AI and NLP. Founder of Strada Routing and '
+                   'TheProjectProject!'),
+            admin=True
+        )
+    )
+    db.session.commit()
 
 
 @click.option('--num_users', default=50, help='Number of users.')
@@ -40,11 +54,16 @@ def add_statics():
 def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
     fake = Faker()
-    # helpers for selection
+    # helpers for selection /
     def rand_words(n):
         return ' '.join([fake.word() for _ in range(n)])
     def rand_bool(p_true):
         return np.random.choice([True, False], p=[p_true, (1-p_true)])
+    subject_num = Subject.query.count()
+    def rand_subjects(n):
+        return [User.get_by_id(id)
+                for id in np.random.randint(1, subject_num+1, size=n)]
+    # ./helpers
     # fake users
     users = []
     for _ in trange(num_users, desc='Populating Users'):
@@ -59,17 +78,6 @@ def populate_db(num_users, num_projects):
             )
         )
     # real users
-    users.append(
-        User(
-            name='Landon Smith',
-            email='landonsmith@college.harvard.edu',
-            password='boop',
-            url='https://github.com/landjbs',
-            about=('I love AI and NLP. Founder of Strada Routing and '
-                   'TheProjectProject!'),
-            admin=True
-        )
-    )
     for user in users:
         db.session.add(user)
     # fake projects
@@ -79,6 +87,7 @@ def populate_db(num_users, num_projects):
         requires_application = rand_bool(0.5)
         complete = rand_bool(0.05)
         owner = User.get_by_id(np.random.randint(1, user_num+1))
+        subjects = rand_subjects(np.random.randint(0,5))
         projects.append(
             Project(
                 owner=owner,
@@ -88,7 +97,7 @@ def populate_db(num_users, num_projects):
                 url=f'https://{fake.word()}.com',
                 complete=complete,
                 open=rand_bool(0.8) if not complete else None,
-                subjects=[], # TODO:
+                subjects=subjects,
                 requires_application=requires_application if not complete else None,
                 application_question=rand_words(6) if requires_application else None,
                 estimated_time=max(2, int(np.random.normal(10,4))) if not complete else None,
