@@ -63,6 +63,7 @@ def get_recommended_projects(user):
     print('RANKING')
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
+    print('SORTING')
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = (invited + results)
     results = results[:30]
