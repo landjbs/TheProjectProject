@@ -201,6 +201,30 @@ class User(CRUDMixin, UserMixin, db.Model):
     def has_applied(self, project):
         return ((self.pending.filter_by(project=project).first()) is not None)
 
+    ## invitations ##
+    def collaborate(project, current_user):
+        ''' Invites user to collaborate on project if not already affiliated '''
+        if not current_user==project.owner:
+            return 'Cannot invite collaborator to project you do not own.'
+        elif current_user==target_user:
+            return ("You don't need to send an invitation to collaborate with "
+                    "yourself!")
+        elif self in project.members:
+            return f'{self.name} is already a member of {project.name}.'
+        elif self.has_applied(project):
+            return (f'{self.name} has already applied to {project.name}! '
+                    'Go to the project page to accept their application.')
+        elif self in project.invitations:
+            return (f'You have already invited {target_user.name} to join '
+                    f'{project.name}. You will be notified when they respond.')
+        # notify user
+        # add invitation
+        self.invitations.append(project)
+        # update project activity
+        project.update_last_active()
+        self.update()
+        return None
+
     ## rejections ##
     def add_rejection(self, project):
         self.rejections.append(project)
