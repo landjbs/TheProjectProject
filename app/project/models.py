@@ -118,6 +118,14 @@ class Project(CRUDMixin, db.Model):
         ''' Gets application of user to project if exists else returns None '''
         return self.pending.filter_by(user=current_user).first()
 
+    def apply(self, user, text):
+        self.pending.append(
+            Project_Application(
+                user=user,
+                text=text
+            )
+        )
+
     def notify_owner(self, text, category):
         ''' Notify owner with text and category '''
         self.owner.notifications.append(
