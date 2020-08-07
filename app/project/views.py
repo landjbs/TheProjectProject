@@ -156,12 +156,9 @@ def like_action(project_id, action):
 def add_task(project_id):
     ''' Add task to project '''
     project = Project.query.get_or_404(project_id)
-    if not is_project_member(current_user, project):
-        return redirect(request.referrer)
     form = Task_Form()
     if form.validate_on_submit():
-        task = Task(text=form.text.data, author=current_user)
-        manager.add_task(project, current_user, task)
+        project.add_task(text=form.text.data, author=current_user)
     return redirect(request.referrer)
 
 
