@@ -206,7 +206,8 @@ class Project(CRUDMixin, db.Model):
             if (task.worker_num()==0):
                 task.mark_incomplete()
         elif action=='delete':
-            task.delete(user)
+            if user==task.author:
+                task.delete()
         else:
             raise ValueError(f'Invalid action {action} for change_task_status.')
 
