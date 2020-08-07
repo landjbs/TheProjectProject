@@ -325,7 +325,19 @@ class Project(CRUDMixin, db.Model):
         return True
 
     ## status ##
-    def complete():
+    def complete(self):
+        if not self.complete:
+            self.complete = True
+            self.notify_members(
+                text=(f'Congratulations—{project.name} has been marked as '
+                       'complete by the owner!'),
+                category=1,
+                include_owner=False
+            )
+            self.update_last_active()
+            self.update()
+            return True
+        return False
 
     ## public analytics ##
     def subject_data(self):
