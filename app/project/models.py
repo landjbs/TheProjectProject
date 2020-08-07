@@ -112,3 +112,15 @@ class Project(CRUDMixin, db.Model):
 
     def update_last_active(self):
         self.last_active = datetime.utcnow()
+
+    ## public analytics ##
+    def subject_data(self):
+        ''' Get dict mapping project subject names to member skill levels '''
+        project_subjects = {s.name:0 for s in self.subjects}
+        if project_subjects!={}:
+            for member in self.members:
+                for user_subject in member.subjects:
+                    name = user_subject.subject.name
+                    if name in project_subjects:
+                        # -1 to account for skills gained via project association
+                        project_subjects[name] += (user_subject.number)
