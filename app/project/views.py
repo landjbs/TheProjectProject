@@ -301,3 +301,18 @@ def change_project_status(project_id, user_id, action):
         db.session.commit()
         db.session.close()
     return redirect(request.referrer)
+
+
+
+@application.route('/complete_project/<int:project_id>', methods=['POST'])
+@login_required
+@limiter.limit('3 per minute')
+def complete_project(project_id):
+    ''' Mark project as complete '''
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can mark a project as complete.')
+    else:
+        project.update_last_active()
+        manager.complete_project(project)
+    return redirect(request.referrer)
