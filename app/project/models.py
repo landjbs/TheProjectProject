@@ -61,7 +61,7 @@ class Project(CRUDMixin, db.Model):
     # buzz
     buzz = db.Column(db.Integer, nullable=False)
     # comments
-    comments = relationship('Comment', back_populates='project')
+    comments = relationship('Comment', back_populates='project', lazy='dynamic')
     # tasks
     tasks = relationship('Task', back_populates='project', lazy='dynamic')
 
@@ -192,13 +192,15 @@ class Project(CRUDMixin, db.Model):
 
     ## comments ##
     def add_comment(self, text, author):
+        ''' Adds comment to project '''
         self.comments.append(Comment(text=text, author=author))
         self.update()
         return True
 
     def delete_comment(self, comment_id, user):
-        comment = self.comments.filter_by(id=comment_id).first_or_404()
-        if not user in [self.owner, comment.author]:
+        ''' Deletes comment from project '''
+        comment = self.comments.filter_by(id=comment_id).first()
+        if not comment or not user in [self.owner, comment.author]:
             return False
         self.comments.remove(comment)
         self.update()
