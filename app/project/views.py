@@ -4,11 +4,13 @@ from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED
 # absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
+from app.recommendations.users import recommend_users
 from app.subject.models import Subject
 # package imports
 from .models import Project
 from .forms import (Add_Project, Comment_Form, Task_Form,
-                    Project_Application_Form)
+                    Project_Application_Form, Edit_Project,
+                    Edit_Project_Application)
 from ..project import project
 
 
@@ -108,11 +110,11 @@ def project_page(project_code):
     show_edit_modal = False
     if current_user==project.owner:
         if project.open and not project.complete:
-            recommended_members = rec.recommend_users(project)
+            recommended_members = recommend_users(project)
             recommended_tabs = list(partition_query(recommended_members))
         ## edit project form ##
-        edit_form = Edit_Project(request.form)
-        edit_application_form = Edit_Project_Application(request.form)
+        edit_form = Edit_Project()
+        edit_application_form = Edit_Project_Application()
         if request.method=='POST':
             if edit_form.validate_on_submit():
                 edits_made = False
