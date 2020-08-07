@@ -134,57 +134,6 @@ def query_user_by_email(email):
 
 
 
-@application.route('/apply', methods=['GET', 'POST'])
-def apply():
-    form = forms.Apply(request.form)
-    if request.method=='POST' and form.validate():
-        ## unique validation ##
-        error_flag = False
-        # unique email
-        u_query = User.query.filter_by(email=form.email.data).first()
-        if u_query is not None:
-            form.email.errors = ['An account with that email is already registered.']
-            error_flag = True
-        # unique github
-        if User.query.filter_by(github=form.github.data).first() is not None:
-            form.github.errors = ['An account with that Github is already registered.']
-            error_flag = True
-        if not error_flag:
-            user = User(name        =       form.data['name'],
-                        email       =       form.data['email'],
-                        password    =       form.data['password'],
-                        github      =       form.data['github'],
-                        about       =       form.data['about'])
-            # try to get user's first name
-            first_name = user.name.split(' ')[0]
-            try:
-                manager.create_user(user, form.data['subjects'])
-                # generate email token
-                # token = encode_token(user.email)
-                # confirm_url = generate_url('confirm_email', token=token)
-                # body = render_template('emails/confirm_email.html',
-                #                        confirm_url=confirm_url,
-                #                        first_name=first_name)
-                # TODO: complete emailing after auth
-                # tasks.send_email(user.email, body)
-                # notify user
-                flash(f'Congratulations, {first_name}, your application to '
-                       'TheProjectProject has been submitted! '
-                       'A confirmation link has been sent to your email.')
-                # teardown
-                db.session.close()
-            except Exception as e:
-                flash('Could not add application.')
-                db.session.rollback()
-            return render_template('index.html')
-    start_on = 0
-    for i, elt in enumerate(form):
-        if elt.errors:
-            start_on = i
-            break
-    return render_template('apply.html', form=form, start_on=start_on)
-
-
 @application.route('/confirm/<token>')
 def confirm_email(token):
     email = decode_token(token)
@@ -221,7 +170,6 @@ def reset():
     if form.validate_on_submit():
         pass
     return redirect(request.referrer)
-
 
 
 ## HOME ##
