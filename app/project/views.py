@@ -13,9 +13,9 @@ from .forms import CommentForm, Task_Form, Project_Application_Form
 def project_page(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # forms
-    comment_form = Comment_Form(request.form)
-    task_form = Task_Form(request.form)
-    project_application = Project_Application_Form(request.form)
+    comment_form = Comment_Form()
+    task_form = Task_Form()
+    project_application = Project_Application_Form()
     ## task data visualization ##
     # vis activity
     activity_data = {} if project.tasks.count()>0 else False
