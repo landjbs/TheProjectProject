@@ -140,8 +140,11 @@ class Project(CRUDMixin, db.Model):
     def notify_members(self, text, category, include_owner=True):
         ''' Notify project members with text and category '''
         notification = Notification(text=text, category=category)
+        if include_owner:
+            owner = self.owner
         for member in self.members:
-            
+            if not include_owner:
+                if member==self.owner
 
     def add_member(self, user):
         ''' Adds member to project '''
