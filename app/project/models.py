@@ -128,7 +128,8 @@ class Project(CRUDMixin, db.Model):
             self.rejections.remove(user)
         # add member to project
         self.members.append(user)
-
+        # update project data and activity
+        self.update_last_active()
         self.update()
 
 
