@@ -124,9 +124,11 @@ class Project(CRUDMixin, db.Model):
                 text=text
             )
         )
+        project.notify_owner(text=f'{user.name} has applied to {self.name}!',
+                             category=0)
         self.update()
 
-    def notify_owner(self, text, category):
+    def notify_owner(self, text, category=0):
         ''' Notify owner with text and category '''
         self.owner.notifications.append(
             Notification(

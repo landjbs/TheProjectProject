@@ -129,7 +129,6 @@ def join_project(project_id):
                     flash(f'You have already applied to {project.name}!')
                 else:
                     project.apply(user=current_user, text=form.response.data)
-                    project.notify_owner(text=f'{current_user.name} has applied')
                     flash(f'Your application to {project.name} been submitted.')
             else:
                 flash(f'Invalid application.')
