@@ -39,12 +39,13 @@ def score_project(project, user_subjects):
     n_members = 0
     for m in project.members:
         n_members += 1
-    score += (1 - (n_members / project.team_size))
+    score += (1 - (n_members / (project.team_size+0.0000001)))
     return score
 
 
 def get_recommended_projects(user):
     ## get initial candidates ##
+    print('GETTING CANDIDATES')
     member_projects = [p.id for p in user.projects]
     pending_projects = [p.project.id for p in user.pending]
     invited_projects = [p.id for p in user.invitations]
@@ -59,10 +60,13 @@ def get_recommended_projects(user):
     invited = [project for project in user.invitations]
     ## format user preferences ##
     user_subjects = get_normed_user_subjects(user, temp=2)
+    print('RANKING')
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = (invited + results)
+    results = results[:30]
+    print('DONE')
     if len(results)==0:
         results = user.projects
     return results
