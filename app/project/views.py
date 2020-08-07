@@ -204,3 +204,33 @@ def delete_comment(project_id, comment_id):
     else:
         flash('Cannot delete comment.')
     return redirect(request.referrer)
+
+
+@application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
+@login_required
+@limiter.limit('5 per minute')
+def mark_task_complete(project_id, task_id, action):
+    ''' Mark project as '''
+    project = Project.query.get_or_404(project_id)
+    # screen non-members
+    if not is_project_member(current_user, project):
+        return redirect(request.referrer)
+    # get task
+    task = Task.query.get_or_404(task_id)
+    if (action=='complete'):
+        if not task.complete:
+            task.mark_complete(current_user)
+        else:
+            task.add_worker(current_user)
+    elif (action=='back'):
+        if current_user in task.workers:
+            task.workers.remove(current_user)
+        if (len(task.workers)==0):
+            task.mark_incomplete()
+    elif (action=='delete'):
+        if (current_user==task.author):
+            db.session.delete(task)
+    project.update_last_active()
+    db.session.commit()
+    db.session.close()
+    return redirect(request.referrer)
