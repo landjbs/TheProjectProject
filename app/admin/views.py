@@ -10,7 +10,7 @@ from flask_admin.menu import MenuLink
 
 import app.models as models
 from app.user.models import User, User_Report
-from app.project.models import Project
+from app.project.models import Project, Project_Application
 from app.subject.models import Subject
 from app.notification.models import Notification
 
@@ -112,7 +112,7 @@ def register_admin_views(admin, db):
     admin.add_view(AdminBaseView(models.Task, db.session))
     admin.add_view(AdminBaseView(Subject, db.session, endpoint='AdminSubject'))
     admin.add_view(ReportModelView(User_Report, db.session))
-    admin.add_view(AdminBaseView(models.Project_Application, db.session))
+    admin.add_view(AdminBaseView(Project_Application, db.session, endpoint='AdminApplication'))
     admin.add_view(AdminBaseView(Notification, db.session, endpoint='AdminNotification'))
     # nav links
     # admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))

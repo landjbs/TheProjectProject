@@ -155,7 +155,7 @@ class Project(CRUDMixin, db.Model):
         if user in self.rejections:
             self.rejections.remove(user)
         # notify other project members
-        self.notify_members(text=f'{user.name} has joined {project.name}.')
+        self.notify_members(text=f'{user.name} has joined {self.name}.')
         # add member to project
         self.members.append(user)
         # update project data and activity
@@ -200,7 +200,7 @@ class Project_Application(db.Model):
     user = relationship('User', back_populates='pending')
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), primary_key=True)
     project = relationship('Project', back_populates='pending')
-    text = db.Column('text', String(250), nullable=True)
+    text = db.Column('text', db.String(250), nullable=True)
 
     def __repr__(self):
         return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
