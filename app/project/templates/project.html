@@ -255,7 +255,7 @@
                 <div class='row'>
                   <div class='col'>
                     <h5>To Do</h5>
-                    {% set todo_tasks = project.todo() %}
+                    {% set todo_tasks = project.todo_tasks() %}
                     <div class="list-group">
                       {% if (todo_tasks.all()|length)==0 %}
                         <p class='empty-text'>No tasks to do yet.</p>
@@ -307,7 +307,7 @@
 
                   <div class='col'>
                     <h5>Completed Tasks</h5>
-                    {% set completed_tasks = project.completed() %}
+                    {% set completed_tasks = project.completed_tasks() %}
                     <div class="list-group">
                       {% if completed_tasks.all()|length==0 %}
                         <p class='empty-text'>No tasks completed yet.</p>

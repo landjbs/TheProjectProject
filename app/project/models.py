@@ -268,11 +268,11 @@ class Project(CRUDMixin, db.Model):
         return True
 
     ## tasks ##
-    def todo(self):
+    def todo_tasks(self):
         ''' Returns active tasks on project that haven't been completed '''
         return self.tasks.filter_by(complete=False)
 
-    def completed(self):
+    def completed_tasks(self):
         ''' Returns active tasks on project that have been completed '''
         return self.tasks.filter_by(complete=True)
 
@@ -323,6 +323,9 @@ class Project(CRUDMixin, db.Model):
         comment.delete()
         self.update()
         return True
+
+    ## status ##
+    def complete():
 
     ## public analytics ##
     def subject_data(self):
