@@ -10,6 +10,9 @@ from app.project.models import Project
 
 
 # helpers for selection
+def rand_words(n, fake):
+    return ' '.join([fake.word() for _ in range(n)])
+
 def rand_bool(p_true):
     return np.random.choice([True, False], p=[p_true, (1-p_true)])
 
@@ -29,7 +32,7 @@ def populate_db(num_users):
                 email=fake.email(),
                 password=(fake.word()+fake.word()),
                 url=f'https://github.com/{"_".join(name.split(" ")).lower()}',
-                about=' '.join([fake.word() for _ in range(30)])
+                about=
             )
         )
     # real users
@@ -47,15 +50,20 @@ def populate_db(num_users):
     # fake projects
     projects = []
     for _ in trange(num_projects):
+        requires_application = rand_bool(0.5)
+        complete = rand_bool(0.05)
         projects.append(
             Project(
-                name=f'{fake.word()} {fake.word()}',
-                oneliner=' '.join([fake.word() for _ in range(6)]),
-                summary=' '.join([fake.word() for _ in range(60)]),
+                name=rand_words(2),
+                oneliner=rand_words(6),
+                summary=rand_words(60),
                 url=f'https://{fake.word()}.com',
-                open=np.random.choice([True, False], p=[0.8,0.2]),
+                open=rand_bool(0.8) if not complete else None,
                 subjects=None, # TODO:
-                requires_application=
+                requires_application=requires_application if not complete else None,
+                application_question=rand_words(6) if requires_application else None,
+                estimated_time=max(2, int(np.random.normal(10,4))) if not complete else None,
+                team_size=np.random.randint(0,30)
             )
         )
     # add all objects
