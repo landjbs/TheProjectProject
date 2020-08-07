@@ -281,8 +281,10 @@ def complete_project(project_id):
     if current_user!=project.owner:
         flash('Only the owner can mark a project as complete.')
     else:
-        project.update_last_active()
-        manager.complete_project(project)
+        if not project.complete():
+            flash(f'Could not mark {project.name} as complete.', 'error')
+        else:
+            flash(f'Congratulations on completing {project.name}!!')
     return redirect(request.referrer)
 
 
