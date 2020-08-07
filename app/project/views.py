@@ -284,6 +284,7 @@ def make_owner(project_id, user_id):
     else:
         if not project.transfer_ownership(user_id):
             flash('Could not transfer ownership', 'error')
+    return redirect(request.referrer)
 
 def reject_application():
     pass
