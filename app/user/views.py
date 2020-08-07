@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
 from app.project.forms import Project_Application_Form
+from app.project.models import Project
 # package imports
 from .models import User
 from .forms import Edit_User
@@ -130,6 +131,6 @@ def collaborate(target_user_id):
     error_flag = False
     project = Project.query.get_or_404(request.form.get('selected_project'))
     target_user = User.query.get_or_404(target_user_id)
-    message, category = target_user.collaborate(project):
+    message, category = target_user.collaborate(project, current_user)
     flash(message, category)
     return redirect(request.referrer)

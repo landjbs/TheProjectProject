@@ -202,12 +202,12 @@ class User(CRUDMixin, UserMixin, db.Model):
         return ((self.pending.filter_by(project=project).first()) is not None)
 
     ## invitations ##
-    def collaborate(project, current_user):
+    def collaborate(self, project, current_user):
         ''' Invites user to collaborate on project if not already affiliated '''
         if not current_user==project.owner:
             return ('Cannot invite collaborator to project you do not own.',
                     'error')
-        elif current_user==target_user:
+        elif current_user==self:
             return ("You don't need to send an invitation to collaborate with "
                     "yourself!", 'error')
         elif self in project.members:
@@ -232,9 +232,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         # update project activity
         project.update_last_active()
         self.update()
-        message = (f'You have sent {target_user.name} an invitation to collaborate '
+        message = (f'You have sent {self.name} an invitation to collaborate '
                    f'on {project.name}. You will be notified when they respond.')
-        return (message, 1)
+        return (message, 'success')
 
     ## rejections ##
     def add_rejection(self, project):
