@@ -213,12 +213,19 @@ class Project(CRUDMixin, db.Model):
             return False
         # change owners
         self.owner = user
+        # notify new owner
+        self.notify_owner(
+            text=f'You have been promoted to owner of {self.name}!',
+            category=1
+        )
         # notify members
         self.notify_members(
             text=f'Ownership of {self.name} has been transferred to {self.user}.',
             include_owner=False
         )
-
+        self.update_last_active()
+        self.update()
+        return True
 
     ## tasks ##
     def todo(self):
