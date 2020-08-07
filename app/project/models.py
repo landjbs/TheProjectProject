@@ -127,9 +127,12 @@ class Project(CRUDMixin, db.Model):
         self.notify_owner(text=f'{user.name} has applied to {self.name}!',
                              category=0)
         self.update()
+        return True
 
-    def accept_application(self, application_id):
-        
+    def accept_application(self, user_id):
+        ''' Accpets pending application of user_id to project '''
+        user = self.pending.filter().first()
+        return True
 
     def notify_owner(self, text, category=0):
         ''' Notify owner with text and category '''
@@ -140,6 +143,7 @@ class Project(CRUDMixin, db.Model):
             )
         )
         self.update()
+        return True
 
     def notify_members(self, text, category=0, include_owner=True):
         ''' Notify project members with text and category '''
@@ -151,6 +155,7 @@ class Project(CRUDMixin, db.Model):
                 if member==self.owner:
                     continue
             member.add_notification(notification)
+        return True
 
     def add_member(self, user):
         ''' Adds member to project '''
