@@ -157,7 +157,8 @@ def accept_collaboration(project_id):
 @login_required
 def reject_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
-    manager.reject_project_invitation(current_user, project, admin=False)
+    message, category = current_user.reject_collaboration(project)
+    flash(message, category)
     return redirect(request.referrer)
 
 

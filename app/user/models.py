@@ -236,12 +236,25 @@ class User(CRUDMixin, UserMixin, db.Model):
                    f'on {project.name}. You will be notified when they respond.')
         return (message, 'success')
 
+    def reject_collaboration(self, project):
+        if not self in project.invitations:
+            message = (f'Cannot withdraw invitation, as {self.name} has never '
+                       f'been invited to {project.name}.')
+            return (message, 'error')
+        self.invitations.remove(project)
+        self.add_rejection(project)
+        self.update()
+        message = f'You have rejected the offer to collaborate on {project.name}.'
+        return (message, 'success')
+
+
     def withdraw_collaboration(self, project):
         if not self in project.invitations:
             message = (f'Cannot withdraw invitation, as {self.name} has never '
                        f'been invited to {project.name}.')
             return (message, 'error')
         self.invitations.remove(project)
+        self.add_rejection(project)
         self.update()
         # TODO: CLEAR NotificationS POTENTIALLy
         message = ('You have withdrawn the offer to collaborate on '
