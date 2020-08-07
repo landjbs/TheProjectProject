@@ -1,4 +1,11 @@
-class Subject(db.Model):
+from datetime import datetime
+from sqlalchemy import desc
+from sqlalchemy.orm import relationship, backref
+
+from app.database import db, CRUDMixin, generate_code
+
+
+class Subject(CRUDMixin, db.Model):
     __tablename__ = 'subject'
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
@@ -18,7 +25,7 @@ class Subject(db.Model):
     def __init__(self, name, color):
         self.name = str(name)
         self.color = str(color)
-        self.code = str(name).replace('/', '_').replace(' ', '_').lower()
+        self.code = generate_code(name, Subject)
         self.users = []
         self.projects = []
 
