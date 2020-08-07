@@ -1,13 +1,12 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
-
-
+# absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
-from app.user.models import User
-
-from ..user import user
+# package imports
+from .models import User
 from .forms import Edit_User
+from ..user import user
 
 
 @user.route('/user=<code>', methods=['GET', 'POST'])
