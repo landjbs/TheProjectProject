@@ -128,6 +128,9 @@ class Project(CRUDMixin, db.Model):
                              category=0)
         self.update()
 
+    def accept_application(self, application_id):
+        
+
     def notify_owner(self, text, category=0):
         ''' Notify owner with text and category '''
         self.owner.notifications.append(
