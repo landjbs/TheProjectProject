@@ -125,13 +125,12 @@ def join_project(project_id):
         else:
             form = Project_Application_Form()
             if form.validate_on_submit():
-                application = project.get_application(current_user)
-                if application is not None:
+                if project.get_application(current_user) is not None:
                     flash(f'You have already applied to {project.name}!')
                 else:
                     project.apply(user=current_user, text=form.response.data)
-                    flash(f'Your application to {project.name} been submitted.')
                     project.notify_owner(text=f'{current_user.name} has applied')
+                    flash(f'Your application to {project.name} been submitted.')
             else:
                 flash(f'Invalid application.')
         db.session.add(project)
