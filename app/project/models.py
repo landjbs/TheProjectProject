@@ -113,6 +113,15 @@ class Project(CRUDMixin, db.Model):
     def update_last_active(self):
         self.last_active = datetime.utcnow()
 
+    ## tasks ##
+    def todo(self):
+        ''' Returns active tasks on project that haven't been completed '''
+        return self.tasks.filter_by(complete=False)
+
+    def completed(self):
+        ''' Returns active tasks on project that have been completed '''
+        return self.tasks.filter_by(complete=True)
+
     ## public analytics ##
     def subject_data(self):
         ''' Get dict mapping project subject names to member skill levels '''
