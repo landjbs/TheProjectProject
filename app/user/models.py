@@ -155,16 +155,17 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.update()
         return True
 
-    def remove_subject_from_user(self, subject):
-        prev = self.subjects.filter_by(subject=subject).first()
-        if prev:
-            new_number = (prev.number - 1)
-            if (new_number < 1):
-                db.session.delete(prev)
+    def remove_subjects_from_user(self, subjects):
+        for subject in subjects:
+            prev = self.subjects.filter_by(subject=subject).first()
+            if prev:
+                new_number = (prev.number - 1)
+                if (new_number < 1):
+                    db.session.delete(prev)
+                else:
+                    prev.number = new_number
             else:
-                prev.number = new_number
-        else:
-            return False
+                return False
         self.update()
         return True
 
