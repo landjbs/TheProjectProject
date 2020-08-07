@@ -205,7 +205,7 @@
                             <div class='hoverable'>
                               <a class='delete-btn task-btn float-right'
                               style='background: transparent;'
-                              href="{{ url_for('project.withdraw_collaboration', user_id=user.id, project_id=project.id) }}">
+                              href="{{ url_for('user.withdraw_collaboration', user_id=user.id, project_id=project.id) }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Withdraw Invitation</span>
