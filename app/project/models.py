@@ -113,8 +113,9 @@ class Project(CRUDMixin, db.Model):
         ''' Checks if user is a member of project '''
         return (user in self.members)
 
-    def get_notification(self, user):
-        '''  '''
+    def get_application(self, user):
+        ''' Gets application of user to project if exists else returns None '''
+        return self.pending.filter_by(user=current_user).first()
 
     def notify_members(self, text):
         raise ValueError('todo imp notify_members')
