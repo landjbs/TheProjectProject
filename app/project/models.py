@@ -193,6 +193,11 @@ class Project(CRUDMixin, db.Model):
                              "it's nothing personal! Please contact us "
                              'if you think something is wrong or have '
                              'any questions.')
+        else:
+            self.notify_members(
+                text=(f'{user.name} has been left {self.name}.')
+            )
+        # add rejection from project to user
 
 
     def change_user_status(self, user, action:str):

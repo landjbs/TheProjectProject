@@ -197,9 +197,14 @@ class User(CRUDMixin, UserMixin, db.Model):
     def has_starred(self, project):
         return (project in self.starred)
 
-    # applications
+    ## applications ##
     def has_applied(self, project):
         return ((self.pending.filter_by(project=project).first()) is not None)
+
+    ## rejections ##
+    def add_rejection(self, project):
+        self.rejections.append(project)
+        return True
 
     ## public analytics ##
     def total_stars(self):
