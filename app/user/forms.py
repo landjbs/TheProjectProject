@@ -1,8 +1,9 @@
 from wtforms import (TextField, StringField, PasswordField)
 from wtforms.validators import (DataRequired, Length, EqualTo)
-
-from app.user.models import User
+# absolute imports
 from app.forms.base import BaseForm
+# package imports
+from .models import User
 
 
 # TODO: ADD "AWAY" BOOL TO USERS
