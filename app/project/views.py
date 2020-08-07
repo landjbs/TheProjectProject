@@ -137,6 +137,26 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
+@project.route('/leave_project/<int:project_id>', methods=['POST'])
+@login_required
+def leave_project(project_id):
+    ''' Leave project, transferring or deleting as necessary '''
+    project = Project.query.get_or_404(project_id)
+    # transfer ownership
+    if (current_user==project.owner):
+        if (project.members.count()>1):
+            new_owner = User.query.get_or_404(request.form.get('new_owner'))
+            if not project.transfer_ownership(new_owner):
+                flash('Could not transfer ownership.')
+                return redirect(request.referrer)
+        else:
+            project.delete()
+            return user_page(current_user.code)
+    project.remove_member(current_user.id, by_owner=False)
+    flash(f'You have left {project.name}.')
+    return redirect(request.referrer)
+
+
 @project.route('/like/<int:project_id>/<action>')
 @login_required
 @limiter.limit('45 per minute')
@@ -324,25 +344,4 @@ def remove_application_requirement(project_id):
     else:
         project.update_last_active()
         manager.remove_application_requirement(project)
-    return redirect(request.referrer)
-
-
-
-@project.route('/leave_project/<int:project_id>', methods=['POST'])
-@login_required
-def leave_project(project_id):
-    ''' Leave project, transferring or deleting as necessary '''
-    project = Project.query.get_or_404(project_id)
-    # transfer ownership
-    if (current_user==project.owner):
-        if (project.members.count()>1):
-            new_owner = User.query.get_or_404(request.form.get('new_owner'))
-            if not project.transfer_ownership(new_owner):
-                flash('Could not transfer ownership.')
-                return redirect(request.referrer)
-        else:
-            project.delete()
-            return user_page(current_user.code)
-    project.remove_member(current_user.id, by_owner=False)
-    flash(f'You have left {project.name}.')
     return redirect(request.referrer)
