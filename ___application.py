@@ -36,26 +36,6 @@ login_manager.login_view = 'login'
 login_manager.anonymous_user = Anonymous
 
 
-# limiting
-limiter = Limiter(application, key_func=get_remote_address)
-
-
-# admin
-admin = Admin(application, template_mode='bootstrap3')
-# model views
-admin.add_view(UserView(User, db.session))
-admin.add_view(AdminBaseView(Project, db.session))
-admin.add_view(AdminBaseView(Comment, db.session))
-admin.add_view(AdminBaseView(Task, db.session))
-admin.add_view(AdminBaseView(Subject, db.session))
-admin.add_view(ReportView(User_Report, db.session))
-admin.add_view(AdminBaseView(Project_Application, db.session))
-admin.add_view(AdminBaseView(Notification, db.session))
-# nav links
-admin.add_link(MenuLink(name='Home', url='/home', category='Links'))
-admin.add_link(MenuLink(name='Logout', url='/logout', category='Links'))
-
-
 @login_manager.user_loader
 def user_loader(id):
     return User.query.get_or_404(id)
@@ -152,43 +132,6 @@ def query_user_by_id(id):
 def query_user_by_email(email):
     return db.session.query(User).filter_by(email=email).first()
 
-
-## error handling ##
-# @application.errorhandler(404)
-# def page_not_found(e):
-#     return (render_template('404.html'), 404)
-#
-#
-# @application.errorhandler(500)
-# def page_mistake(e):
-#     return (render_template('500.html'), 500)
-#
-#
-# @application.errorhandler(403)
-# def page_unauthorized(e):
-#     return (render_template('403.html'), 403)
-
-
-## index routes ##
-# @application.route('/', methods=['GET', 'POST'])
-# @application.route('/index', methods=['GET', 'POST'])
-# def index():
-    # return render_template('index.html')
-
-
-@application.route('/about', methods=['GET', 'POST'])
-def about():
-    return render_template('about.html')
-
-
-@application.route('/contact', methods=['GET', 'POST'])
-def contact():
-    return render_template('contact.html')
-
-
-@application.route('/terms', methods=['GET', 'POST'])
-def terms():
-    return render_template('terms.html')
 
 
 @application.route('/apply', methods=['GET', 'POST'])
