@@ -109,6 +109,9 @@ class Project(CRUDMixin, db.Model):
         self.last_active = datetime.utcnow()
 
     ## members ##
+    def is_member(self, user):
+        return (user in self.members)
+
     def notify_members(self, text):
         raise ValueError('todo imp notify_members')
 
