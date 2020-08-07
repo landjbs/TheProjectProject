@@ -125,6 +125,7 @@ class Project(CRUDMixin, db.Model):
                 text=text
             )
         )
+        self.update()
 
     def notify_owner(self, text, category):
         ''' Notify owner with text and category '''
