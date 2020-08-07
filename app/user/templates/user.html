@@ -89,7 +89,7 @@
                             <div class='hoverable'>
                               <a class='delete-btn task-btn float-left'
                               style='background: transparent;'
-                              href="{{ url_for('reject_collaboration', project_id=invitation.id) }}">
+                              href="{{ url_for('user.reject_collaboration', project_id=invitation.id) }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                             <span class='tooltiptext'>Decline</span>
@@ -97,7 +97,7 @@
                             <div class='hoverable'>
                               <a class='complete-btn task-btn float-right'
                               style='background: transparent;'
-                              href="{{ url_for('accept_collaboration', project_id=invitation.id) }}">
+                              href="{{ url_for('user.accept_collaboration', project_id=invitation.id) }}">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Accept</span>
