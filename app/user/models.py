@@ -165,6 +165,7 @@ class User(CRUDMixin, UserMixin, db.Model):
                 prev.number = new_number
         else:
             return False
+        self.update()
         return True
 
     ## starring ##
