@@ -105,7 +105,6 @@ class Project(CRUDMixin, db.Model):
             return False
         return True
 
-
     def update_last_active(self):
         self.last_active = datetime.utcnow()
 

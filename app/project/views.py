@@ -133,9 +133,6 @@ def join_project(project_id):
                     flash(f'Your application to {project.name} been submitted.')
             else:
                 flash(f'Invalid application.')
-        db.session.add(project)
-        db.session.commit()
-        db.session.close()
     else:
         flash('The project owner has closed this project.')
     return redirect(request.referrer)
