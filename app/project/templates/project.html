@@ -110,7 +110,7 @@
                                 <div class='hoverable'>
                                   <a class='delete-btn task-btn member-hovers'
                                   style='display: inline;'
-                                  href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
+                                  href="{{ url_for('project.change_project_status', project_id=project.id, user_id=member.id, action='reject') }}">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                                   </a>
                                   <span class='tooltiptext'>Remove from project</span>
@@ -118,7 +118,7 @@
                                 <div class='hoverable'>
                                   <a class='task-btn member-hovers'
                                   style='display: inline; color: gold;'
-                                  href="{{ url_for('change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
+                                  href="{{ url_for('project.change_project_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
                                     <i class='fas fa-crown'></i>
                                   </a>
                                   <span class='tooltiptext'>Make owner</span>
@@ -168,7 +168,7 @@
                             <div class='hoverable'>
                               <a class='delete-btn task-btn float-left'
                               style='background: transparent;'
-                              href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
+                              href="{{ url_for('project.change_project_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Reject Applicant</span>
@@ -176,7 +176,7 @@
                             <div class='hoverable'>
                               <a class='complete-btn task-btn float-right'
                               style='background: transparent;'
-                              href="{{ url_for('change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                              href="{{ url_for('project.change_project_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Accept Applicant</span>
@@ -205,7 +205,7 @@
                             <div class='hoverable'>
                               <a class='delete-btn task-btn float-right'
                               style='background: transparent;'
-                              href="{{ url_for('withdraw_collaboration', user_id=user.id, project_id=project.id) }}">
+                              href="{{ url_for('project.withdraw_collaboration', user_id=user.id, project_id=project.id) }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Withdraw Invitation</span>
@@ -255,7 +255,7 @@
                 <div class='row'>
                   <div class='col'>
                     <h5>To Do</h5>
-                    {% set todo_tasks = not_complete(project.tasks) %}
+                    {% set todo_tasks = project.todo() %}
                     <div class="list-group">
                       {% if (todo_tasks.all()|length)==0 %}
                         <p class='empty-text'>No tasks to do yet.</p>
@@ -281,13 +281,13 @@
                             <div class='action-bar'>
                               {% if current_user==task.author %}
                                 <div class='hoverable'>
-                                  <a class='delete-btn task-btn float-left' href="{{ url_for('mark_task_complete', project_id=project.id, task_id=task.id, action='delete') }}">
+                                  <a class='delete-btn task-btn float-left' href="{{ url_for('project.mark_task_complete', project_id=project.id, task_id=task.id, action='delete') }}">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                                   </a>
                                   <span class='tooltiptext'>Delete Task</span>
                                 </div>
                               {% endif %}
-                              <a class='complete-btn task-btn float-right' href="{{ url_for('mark_task_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                              <a class='complete-btn task-btn float-right' href="{{ url_for('project.mark_task_complete', project_id=project.id, task_id=task.id, action='complete') }}">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                               </a>
                             </div>
@@ -297,7 +297,7 @@
                     </div>
                     {% if is_member and not project.complete %}
                       <form class='post_form' id='task_form' method='post'
-                        action="{{url_for('add_task', project_id=project.id)}}">
+                        action="{{url_for('project.add_task', project_id=project.id)}}">
                         {{ task_form.hidden_tag() }}
                         {{ task_form.text(class='post-input', placeholder='Task') }}
                         <button>Add</button>
@@ -307,7 +307,7 @@
 
                   <div class='col'>
                     <h5>Completed Tasks</h5>
-                    {% set completed_tasks = complete(project.tasks) %}
+                    {% set completed_tasks = project.completed() %}
                     <div class="list-group">
                       {% if completed_tasks.all()|length==0 %}
                         <p class='empty-text'>No tasks completed yet.</p>
@@ -342,13 +342,13 @@
                             <div class='action-bar'>
                               {% if current_user in task.workers %}
                                 <div class='hoverable'>
-                                  <a class='back-btn task-btn float-left' href="{{ url_for('mark_task_complete', project_id=project.id, task_id=task.id, action='back') }}">
+                                  <a class='back-btn task-btn float-left' href="{{ url_for('project.mark_task_complete', project_id=project.id, task_id=task.id, action='back') }}">
                                     <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                                   </a>
                                   <span class='tooltiptext'>Actually, I Didn't Help</span>
                                 </div>
                               {% else %}
-                                <a class='complete-btn task-btn float-right' href="{{ url_for('mark_task_complete', project_id=project.id, task_id=task.id, action='complete') }}">
+                                <a class='complete-btn task-btn float-right' href="{{ url_for('project.mark_task_complete', project_id=project.id, task_id=task.id, action='complete') }}">
                                   <i class="fa fa-check-circle" aria-hidden="true"></i>
                                 </a>
                               {% endif %}
@@ -394,7 +394,7 @@
                       <p class="mb-1">{{ comment.text }}
                         {% if current_user in [comment.author, project.owner] %}
                           <div class='hoverable'>
-                            <a class='delete-btn task-btn float-right' href="{{ url_for('delete_comment', project_id=project.id, comment_id=comment.id) }}">
+                            <a class='delete-btn task-btn float-right' href="{{ url_for('project.delete_comment', project_id=project.id, comment_id=comment.id) }}">
                               <i class="fa fa-times-circle" aria-hidden="true"></i>
                             </a>
                             <span class='tooltiptext'>Delete Comment</span>
@@ -406,7 +406,7 @@
                 </div>
                 {% if current_user.is_authenticated %}
                   <form class='post_form' id='comment_form' method='post'
-                    action="{{ url_for('add_comment', project_id=project.id) }}">
+                    action="{{ url_for('project.add_comment', project_id=project.id) }}">
                     {{ comment_form.hidden_tag() }}
                     {{ comment_form.text(class='post-input', placeholder='Comment') }}
                     <button>Add</button>
