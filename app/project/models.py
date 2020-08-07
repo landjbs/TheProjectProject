@@ -115,7 +115,17 @@ class Project(CRUDMixin, db.Model):
     def add_member(self, user):
         ''' Adds member to project '''
         # add project subjects to user
-        user.add_subjects(project.subjects)
+        user.add_subjects(self.subjects)
+        # delete user application if it exists
+        application = self.pending.filter_by(user=user).first()
+        if application is not None:
+            db.session.delete(application)
+        # delete user invitation if it exists
+        if user in self.invitations:
+            self.invitations.remove(user)
+        # delete user rejection if it exists
+        if user in self.rejections:
+            self.rejections.remove(user)
         # add member to project
         self.members.append(user)
 
