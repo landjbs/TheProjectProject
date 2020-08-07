@@ -203,7 +203,9 @@ class Project(CRUDMixin, db.Model):
         if not comment or not user in [self.owner, comment.author]:
             return False
         self.comments.remove(comment)
+        comment.delete()
         self.update()
+        return True
 
     ## public analytics ##
     def subject_data(self):
@@ -226,7 +228,7 @@ class Project(CRUDMixin, db.Model):
         return n
 
 
-class Project_Application(db.Model):
+class Project_Application(CRUDMixin, db.Model):
     __tablename__ = 'project_application'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='pending')
@@ -238,7 +240,7 @@ class Project_Application(db.Model):
         return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
 
 
-class Task(db.Model):
+class Task(CRUDMixin, db.Model):
     __tablename__ = 'task'
     # id
     id = db.Column(db.Integer, primary_key=True)
@@ -273,7 +275,7 @@ class Task(db.Model):
         self.workers.append(worker)
 
 
-class Comment(db.Model):
+class Comment(CRUDMixin, db.Model):
     __tablename__ = 'comment'
     # id
     id = db.Column(db.Integer, primary_key=True)
