@@ -91,18 +91,6 @@ class User_Badge(db.Model):
             return f'<USER_BADGE u={self.user.name} b={self.badge.name} e={self.earn_stamp}>'
 
 
-class Project_Application(db.Model):
-    __tablename__ = 'project_application'
-    user_id = db.Column(Integer, ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='pending')
-    project_id = db.Column(Integer, ForeignKey('project.id'), primary_key=True)
-    project = relationship('Project', back_populates='pending')
-    text = db.Column('text', String(250), nullable=True)
-
-    def __repr__(self):
-        return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
-
-
 ## BASE CLASSES ##
 class Anonymous(AnonymousUserMixin):
     def __init__(self):
@@ -171,7 +159,7 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}; TEXT={self.text}>'
-        
+
 
 class Badge(db.Model):
     __tablename__ = 'badge'

@@ -183,3 +183,15 @@ class Project(CRUDMixin, db.Model):
         for task in self.tasks:
             n += 1
         return n
+
+
+class Project_Application(db.Model):
+    __tablename__ = 'project_application'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    user = relationship('User', back_populates='pending')
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), primary_key=True)
+    project = relationship('Project', back_populates='pending')
+    text = db.Column('text', String(250), nullable=True)
+
+    def __repr__(self):
+        return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
