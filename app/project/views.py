@@ -163,7 +163,7 @@ def like_action(project_id, action):
 
 
 
-@application.route('/project/<int:project_id>/task', methods=['POST'])
+@project.route('/project/<int:project_id>/task', methods=['POST'])
 @login_required
 @limiter.limit('10 per minute')
 def add_task(project_id):
@@ -178,7 +178,7 @@ def add_task(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/project/<int:project_id>/comment', methods=['POST'])
+@project.route('/project/<int:project_id>/comment', methods=['POST'])
 @login_required
 @limiter.limit('10 per minute')
 def add_comment(project_id):
@@ -191,7 +191,7 @@ def add_comment(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/project/<int:project_id>/<int:comment_id>')
+@project.route('/project/<int:project_id>/<int:comment_id>')
 @login_required
 def delete_comment(project_id, comment_id):
     ''' Delete comment from project '''
@@ -206,7 +206,7 @@ def delete_comment(project_id, comment_id):
     return redirect(request.referrer)
 
 
-@application.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
+@project.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
 @login_required
 @limiter.limit('5 per minute')
 def mark_task_complete(project_id, task_id, action):
@@ -267,7 +267,7 @@ def transfer_ownership(project, user):
 
 
 
-@application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
+@project.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
 @limiter.limit('20 per minute')
 def change_project_status(project_id, user_id, action):
@@ -304,7 +304,7 @@ def change_project_status(project_id, user_id, action):
 
 
 
-@application.route('/complete_project/<int:project_id>', methods=['POST'])
+@project.route('/complete_project/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('3 per minute')
 def complete_project(project_id):
@@ -318,7 +318,7 @@ def complete_project(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/uncomplete_project/<int:project_id>', methods=['POST'])
+@project.route('/uncomplete_project/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('3 per minute')
 def uncomplete_project(project_id):
@@ -332,7 +332,7 @@ def uncomplete_project(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/change_project_open/<int:project_id>/<action>', methods=['POST'])
+@project.route('/change_project_open/<int:project_id>/<action>', methods=['POST'])
 @login_required
 @limiter.limit('5 per minute')
 def change_project_open(project_id, action):
@@ -349,7 +349,7 @@ def change_project_open(project_id, action):
     return redirect(request.referrer)
 
 
-@application.route('/add_application/<int:project_id>', methods=['POST'])
+@project.route('/add_application/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('10 per minute')
 def add_application(project_id):
@@ -366,7 +366,7 @@ def add_application(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/remove_application_requirement/<int:project_id>', methods=['POST'])
+@project.route('/remove_application_requirement/<int:project_id>', methods=['POST'])
 @login_required
 def remove_application_requirement(project_id):
     ''' Remove application from project '''

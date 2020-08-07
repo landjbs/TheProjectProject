@@ -241,11 +241,11 @@
 {% macro render_project_action_bar(current_user, project) -%}
 <div class='action-bar'>
   {% if current_user in project.stars %}
-    <a href="{{ url_for('like_action', project_id=project.id, action='unlike') }}">
+    <a href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}">
       <i class="fa fa-star"></i>
     </a>
   {% else %}
-    <a href="{{ url_for('like_action', project_id=project.id, action='like') }}">
+    <a href="{{ url_for('project.like_action', project_id=project.id, action='like') }}">
       <i class="fa fa-star-o"></i>
     </a>
   {% endif %}
