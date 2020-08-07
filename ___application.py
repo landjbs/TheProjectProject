@@ -388,43 +388,7 @@ def subject(subject_name):
                         project_application=project_application)
 
 
-@application.route('/join_project/<int:project_id>', methods=['POST'])
-@login_required
-@limiter.limit('5 per minute')
-def join_project(project_id):
-    project = Project.query.get_or_404(project_id)
-    if is_project_member(current_user, project):
-        flash(f'Could not join {project.name} because you are '
-                'already a member.')
-        return redirect(request.referrer)
-    if project.open:
-        if not project.requires_application:
-            flash(f'You have been added to {project.name}!')
-            manager.add_user_to_project(current_user, project)
-        else:
-            form = forms.Project_Application_Form(request.form)
-            if form.validate_on_submit():
-                application = project.pending.filter_by(user=current_user).first()
-                if application is not None:
-                    flash(f'You have already applied to {project.name}!')
-                else:
-                    application = Project_Application(project=project,
-                                                    user=current_user,
-                                                    text=form.response.data)
-                    project.pending.append(application)
-                    flash(f'Your application to {project.name} been submitted.')
-                    # notify project owner
-                    notification = Notification(text=f'{current_user.name} has '
-                                                     f'applied to {project.name}.')
-                    project.owner.notifications.append(notification)
-            else:
-                flash(f'Invalid application.')
-        db.session.add(project)
-        db.session.commit()
-        db.session.close()
-    else:
-        flash('The project owner has closed this project.')
-    return redirect(request.referrer)
+
 
 
 @application.route('/leave_project/<int:project_id>', methods=['POST'])
@@ -453,42 +417,6 @@ def leave_project(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/like/<int:project_id>/<action>')
-@login_required
-@limiter.limit('45 per minute')
-def like_action(project_id, action):
-    project = Project.query.get_or_404(project_id)
-    if action == 'like':
-        current_user.star_project(project)
-    if action == 'unlike':
-        current_user.unstar_project(project)
-    return redirect(request.referrer)
-
-
-@application.route('/project/<int:project_id>/task', methods=['POST'])
-@login_required
-@limiter.limit('10 per minute')
-def add_task(project_id):
-    project = Project.query.get_or_404(project_id)
-    if not is_project_member(current_user, project):
-        return redirect(request.referrer)
-    form = forms.Task_Form(request.form)
-    if form.validate_on_submit():
-        task = Task(text=form.text.data, author=current_user)
-        manager.add_task(project, current_user, task)
-    return redirect(request.referrer)
-
-
-@application.route('/project/<int:project_id>/comment', methods=['POST'])
-@login_required
-@limiter.limit('10 per minute')
-def add_comment(project_id):
-    project = Project.query.get_or_404(project_id)
-    form = forms.Comment_Form(request.form)
-    if form.validate_on_submit():
-        comment = Comment(text=form.text.data, author=current_user)
-        manager.add_comment(project=project, user=current_user, comment=comment)
-    return redirect(request.referrer)
 
 
 @application.route('/project/<int:project_id>/<int:comment_id>')

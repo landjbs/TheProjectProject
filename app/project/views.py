@@ -149,13 +149,58 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
-@application.route('/like/<int:project_id>/<action>')
+@project.route('/like/<int:project_id>/<action>')
 @login_required
 @limiter.limit('45 per minute')
 def like_action(project_id, action):
+    ''' Star or unstar project '''
     project = Project.query.get_or_404(project_id)
     if action == 'like':
         current_user.star_project(project)
     if action == 'unlike':
         current_user.unstar_project(project)
+    return redirect(request.referrer)
+
+
+
+@application.route('/project/<int:project_id>/task', methods=['POST'])
+@login_required
+@limiter.limit('10 per minute')
+def add_task(project_id):
+    ''' Add task to project '''
+    project = Project.query.get_or_404(project_id)
+    if not is_project_member(current_user, project):
+        return redirect(request.referrer)
+    form = forms.Task_Form(request.form)
+    if form.validate_on_submit():
+        task = Task(text=form.text.data, author=current_user)
+        manager.add_task(project, current_user, task)
+    return redirect(request.referrer)
+
+
+@application.route('/project/<int:project_id>/comment', methods=['POST'])
+@login_required
+@limiter.limit('10 per minute')
+def add_comment(project_id):
+    ''' Add comment to project '''
+    project = Project.query.get_or_404(project_id)
+    form = forms.Comment_Form(request.form)
+    if form.validate_on_submit():
+        comment = Comment(text=form.text.data, author=current_user)
+        manager.add_comment(project=project, user=current_user, comment=comment)
+    return redirect(request.referrer)
+
+
+@application.route('/project/<int:project_id>/<int:comment_id>')
+@login_required
+def delete_comment(project_id, comment_id):
+    ''' Delete comment from project '''
+    project = Project.query.get_or_404(project_id)
+    comment = Comment.query.get_or_404(comment_id)
+    if current_user in [project.owner, comment.author]:
+        db.session.delete(comment)
+        db.session.commit()
+        db.session.close()
+    else:
+        flash('Cannot delete comment.')
     return redirect(request.referrer)
