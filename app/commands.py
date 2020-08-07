@@ -9,21 +9,18 @@ from app.user.models import User
 from app.project.models import Project
 
 
-# helpers for selection
-def rand_words(n, fake):
-    return ' '.join([fake.word() for _ in range(n)])
-
-def rand_bool(p_true):
-    return np.random.choice([True, False], p=[p_true, (1-p_true)])
-
-
 @click.option('--num_users', default=5, help='Number of users.')
 @click.option('--num_projects', default=5, help='Number of projects.')
-def populate_db(num_users):
+def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
     fake = Faker()
-    users = []
+    # helpers for selection
+    def rand_words(n):
+        return ' '.join([fake.word() for _ in range(n)])
+    def rand_bool(p_true):
+        return np.random.choice([True, False], p=[p_true, (1-p_true)])
     # fake users
+    users = []
     for _ in trange(num_users, desc='Populating Users'):
         name = fake.name()
         users.append(
@@ -32,7 +29,7 @@ def populate_db(num_users):
                 email=fake.email(),
                 password=(fake.word()+fake.word()),
                 url=f'https://github.com/{"_".join(name.split(" ")).lower()}',
-                about=
+                about=rand_words(10)
             )
         )
     # real users
@@ -47,28 +44,33 @@ def populate_db(num_users):
             admin=True
         )
     )
+    for user in users:
+        db.session.add(user)
     # fake projects
     projects = []
+    user_num = User.query.count()
     for _ in trange(num_projects):
         requires_application = rand_bool(0.5)
         complete = rand_bool(0.05)
+        owner = User.get_by_id(np.random.randint(1, user_num))
         projects.append(
             Project(
+                owner=owner,
                 name=rand_words(2),
                 oneliner=rand_words(6),
                 summary=rand_words(60),
                 url=f'https://{fake.word()}.com',
+                complete=complete,
                 open=rand_bool(0.8) if not complete else None,
-                subjects=None, # TODO:
+                subjects=[], # TODO:
                 requires_application=requires_application if not complete else None,
                 application_question=rand_words(6) if requires_application else None,
                 estimated_time=max(2, int(np.random.normal(10,4))) if not complete else None,
                 team_size=np.random.randint(0,30)
             )
         )
-    # add all objects
-    for user in users:
-        db.session.add(user)
+    for project in projects:
+        db.session.add(project)
     db.session.commit()
 
 

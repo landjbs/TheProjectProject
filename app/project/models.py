@@ -68,7 +68,7 @@ class Project(CRUDMixin, db.Model):
                 requires_application, application_question, estimated_time,
                 team_size, complete, owner):
         self.name = str(name)
-        self.code = generate_code(name, User)
+        self.code = generate_code(name, Project)
         self.oneliner = str(oneliner)
         self.summary = str(summary)
         self.url = str(url) if url else None

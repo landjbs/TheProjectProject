@@ -15,7 +15,7 @@ def score_project(project, user_subjects):
     for subject, subject_score in user_subjects.items():
         if subject in project.subjects:
             score += subject_score
-    score /= (len(user_subjects) * 0.25)
+    score /= (len(user_subjects)+0.0000001 * 0.25)
     # recently active scoring [0,2]
     if project.recently_active():
         score += 2
