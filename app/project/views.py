@@ -1,14 +1,16 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
+from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED
 # absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
 # package imports
 from .models import Project
-from .forms import CommentForm, Task_Form, Project_Application_Form
+from .forms import Comment_Form, Task_Form, Project_Application_Form
+from ..project import project
 
 
-@application.route('/project=<project_code>', methods=['GET', 'POST'])
+@project.route('/project=<project_code>', methods=['GET', 'POST'])
 @limiter.limit('60 per minute')
 def project_page(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
@@ -44,7 +46,7 @@ def project_page(project_code):
         completed[n] = user_completed_count if user_completed_count else 0
     ## subject visualization ##
     project_subjects = project.subject_data()
-    
+
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
