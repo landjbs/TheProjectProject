@@ -126,6 +126,8 @@ class Project(CRUDMixin, db.Model):
         # delete user rejection if it exists
         if user in self.rejections:
             self.rejections.remove(user)
+        # notify other project members
+        self.notify_members()
         # add member to project
         self.members.append(user)
         # update project data and activity
