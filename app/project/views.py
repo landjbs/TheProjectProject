@@ -144,10 +144,9 @@ def project_page(project_code):
                     project.team_size = new_size
                     edits_made = True
                 if edits_made:
-                    flash(f'You have successfully edited {project.name}.')
-                    db.session.add(project)
-                    db.session.commit()
-                    db.session.close()
+                    flash(f'You have successfully edited {project.name}.',
+                          'success')
+                    project.update()
             else:
                 show_edit_modal = True
     return render_template('project.html', project=project,

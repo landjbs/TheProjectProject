@@ -210,7 +210,7 @@ def home():
                             user_project_count=len(user_projs),
                             current_user=current_user,
                             project_application=project_application)
-                            
+
 
 @application.route('/user=<code>', methods=['GET', 'POST'])
 @limiter.limit('60 per minute')
@@ -306,45 +306,6 @@ def subject(subject_name):
                         search_text=subject.name,
                         project_application=project_application)
 
-
-
-
-
-
-@application.route('/collaborate/<int:target_user_id>', methods=['POST'])
-@login_required
-@limiter.limit('10/minute; 100/hour')
-def collaborate(target_user_id):
-    error_flag = False
-    project = Project.query.get_or_404(request.form.get('selected_project'))
-    target_user = User.query.get_or_404(target_user_id)
-    if not current_user==project.owner:
-        flash('Cannot invite collaborator to project you do not own.')
-    elif current_user==target_user:
-        flash("You don't need to send an invitation to collaborate with "
-              "yourself!")
-    elif not target_user.accepted:
-        flash(f'{target_user.name} user has not been accepted to TheProjectProject yet.')
-    elif target_user in project.members:
-        flash(f'{target_user.name} is already a member of {project.name}.')
-    elif target_user.has_applied(project):
-        flash(f'{target_user.name} has already applied to {project.name}. '
-            'Go to the project page to accept their application.')
-    elif target_user in project.invitations:
-        flash(f'You have already invited {target_user.name} to join '
-              f'{project.name}. You will be notified when they respond.')
-    else:
-        target_user.invitations.append(project)
-        notifcation = Notification(text=f'{current_user.name} has invited you '
-                                        f'to collaborate on {project.name}! '
-                                        'Visit your profile page to reply.')
-        target_user.notifications.append(notifcation)
-        flash(f'You have sent {target_user.name} an invitation to collaborate '
-              f'on {project.name}. You will be notified when they respond.')
-        project.update_last_active()
-        db.session.commit()
-        db.session.close()
-    return redirect(request.referrer)
 
 
 @application.route('/accept_collaboration/<int:project_id>')
