@@ -9,8 +9,8 @@ from app.user.models import User
 from app.project.models import Project
 
 
-@click.option('--num_users', default=5, help='Number of users.')
-@click.option('--num_projects', default=5, help='Number of projects.')
+@click.option('--num_users', default=50, help='Number of users.')
+@click.option('--num_projects', default=100, help='Number of projects.')
 def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
     fake = Faker()

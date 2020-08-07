@@ -9,6 +9,7 @@ from app.extensions import limiter
 from app.recommendations.projects import (get_recommended_projects,
                                     get_trending_projects, get_user_projects)
 from app.recommendations.search import text_search
+from app.project.forms import Project_Application_Form
 
 
 @hub.route('/home', methods=['GET'])
@@ -23,7 +24,7 @@ def home():
     # user projects
     user_projects = get_user_projects(current_user)
     user_tabs = list(partition_query(user_projects))
-    project_application = None #forms.Project_Application_Form(request.form)
+    project_application = Project_Application_Form()
     # notifcations
     # if (current_user.notifications.count())>0:
     #     for notification in current_user.notifications:
