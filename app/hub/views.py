@@ -5,9 +5,9 @@ from datetime import datetime
 
 from ..hub import hub
 from app.utils import partition_query
-from app.recommendations.projects import (
-                get_recommended_projects, get_trending_projects,
-                get_user_projects, search)
+from app.recommendations.projects import (get_recommended_projects,
+                                    get_trending_projects, get_user_projects)
+from app.recommendations.search import search
 
 
 @hub.route('/home', methods=['GET'])

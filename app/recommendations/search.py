@@ -1,29 +1,8 @@
-from flask import current_app
+from app.user.models import User
+from app.project.models import Project
+from app.subject.models import Subject
 
 
-def add_to_index(index, model):
-    ''' Adds model to index '''
-    if not current_app.elasticsearch:
-        return None
-    payload = {}
-    for field in model.__searchable__:
-        payload[field] = getattr(model, field)
-    current_app.elasticsearch.index(index=index, id=model.id, body=payload)
+# TODO: replace with better elastic_search
 
-
-def remove_from_index(index, model):
-    ''' Removes model from index '''
-    if not current_app.elasticsearch:
-        return None
-    current_app.elasticsearch.delete(index=index, id=model.id)
-
-
-def query_index(index, query, page, per_page):
-    if not current_app.elasticsearch:
-        return [], 0
-    search = current_app.elasticsearch.search(
-        index=index,
-        body={'query': {'multi_match': {'query': query, 'fields': ['*']}},
-              'from': (page - 1) * per_page, 'size': per_page})
-    ids = [int(hit['_id']) for hit in search['hits']['hits']]
-    return ids, search['hits']['total']['value']
+def

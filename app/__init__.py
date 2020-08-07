@@ -13,6 +13,7 @@ from app.auth import auth
 from app.hub import hub
 from app.user import user
 from app.project import project
+from app.subject import subject
 from app.admin import register_admin_views
 #
 from app.database import db
