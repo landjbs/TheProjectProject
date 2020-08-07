@@ -203,6 +203,14 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
+    def make_owner(self, user_id):
+        ''' Makes user_id owner of the project '''
+        user = self.members.filter_by(id=user_id).first()
+        if not user:
+            return False
+        if user==project.owner:
+            return False
+
     ## tasks ##
     def todo(self):
         ''' Returns active tasks on project that haven't been completed '''

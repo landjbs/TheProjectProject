@@ -277,13 +277,8 @@ def remove_member(project_id, user_id):
 
 @project.route('/make_owner/<int:project_id>/<int:user_id>')
 @limiter.limit('30/minute')
-
-
-
-
-def make_owner():
+def make_owner(project_id, user_id):
     pass
-
 
 def reject_application():
     pass
