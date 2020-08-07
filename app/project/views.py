@@ -337,3 +337,30 @@ def remove_application_requirement(project_id):
         project.update_last_active()
         manager.remove_application_requirement(project)
     return redirect(request.referrer)
+
+
+
+@project.route('/leave_project/<int:project_id>', methods=['POST'])
+@login_required
+def leave_project(project_id):
+    project = Project.query.get_or_404(project_id)
+    # validate that user is member
+    if not current_user in project.members:
+        flash(f'Cannot leave {project.name} without being a member.')
+        return redirect(request.referrer)
+    # transfer ownership
+    if (current_user==project.owner):
+        if (project.members.count()>1):
+            new_owner = User.query.get_or_404(request.form.get('new_owner'))
+            success = transfer_ownership(project, new_owner)
+            if not success:
+                flash('Owner transfer unsuccessful.')
+                return redirect(request.referrer)
+        else:
+            user_code = current_user.code
+            manager.delete_project(project)
+            flash(f'{project.name} deleted.')
+            return user_page(user_code)
+    manager.remove_user_from_project(current_user, project, admin=False)
+    flash(f'You have left {project.name}.')
+    return redirect(request.referrer)

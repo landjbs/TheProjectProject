@@ -124,7 +124,7 @@ class Project(CRUDMixin, db.Model):
                 text=text
             )
         )
-        project.notify_owner(text=f'{user.name} has applied to {self.name}!',
+        self.notify_owner(text=f'{user.name} has applied to {self.name}!',
                              category=0)
         self.update()
 
@@ -210,9 +210,8 @@ class Project(CRUDMixin, db.Model):
                 task.delete()
         else:
             raise ValueError(f'Invalid action {action} for change_task_status.')
-
         task.mark_complete(user)
-        project.update_last_active()
+        self.update_last_active()
         return True
 
     ## comments ##
