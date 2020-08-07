@@ -109,9 +109,16 @@ class Project(CRUDMixin, db.Model):
         self.last_active = datetime.utcnow()
 
     ## members ##
+    def notify_members(self, text):
+        raise ValueError('todo imp notify_members')
+
     def add_member(self, user):
+        ''' Adds member to project '''
+        # add project subjects to user
+        user.add_subjects(project.subjects)
+        # add member to project
         self.members.append(user)
-        
+
         self.update()
 
 
