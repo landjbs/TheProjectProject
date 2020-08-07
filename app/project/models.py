@@ -135,6 +135,7 @@ class Project(CRUDMixin, db.Model):
         user = self.pending.filter(user_id=user_id).first()
         if not user:
             return False
+        # add user to project
         self.add_member(user, notify_owner=False)
         return True
 
