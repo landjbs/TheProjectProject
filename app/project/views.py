@@ -269,9 +269,8 @@ def remove_member(project_id, user_id):
         flash('Must be project owner to remove member.')
     else:
         if not project.remove_member(user_id=user_id, by_owner=True):
-            flash('Could not remove member.')
-        else:
-            flash('')
+            flash('Could not remove user.')
+        flash(f'User removed from {project.name}.')
     return redirect(request.referrer)
 
 
