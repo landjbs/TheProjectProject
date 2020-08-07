@@ -135,9 +135,7 @@ def join_project(project_id):
                     project.pending.append(application)
                     flash(f'Your application to {project.name} been submitted.')
                     # notify project owner
-                    notification = Notification(text=f'{current_user.name} has '
-                                                     f'applied to {project.name}.')
-                    project.owner.notifications.append(notification)
+                    project.notify_owner(text=f'{current_user.name} has applied')
             else:
                 flash(f'Invalid application.')
         db.session.add(project)

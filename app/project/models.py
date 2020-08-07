@@ -128,7 +128,6 @@ class Project(CRUDMixin, db.Model):
         )
         self.update()
 
-
     def notify_members(self, text):
         raise ValueError('todo imp notify_members')
 
