@@ -10,7 +10,8 @@ from app.project.models import Project
 
 
 # helpers for selection
-
+def rand_bool(p_true):
+    return np.random.choice([True, False], p=[p_true, (1-p_true)])
 
 
 @click.option('--num_users', default=5, help='Number of users.')
