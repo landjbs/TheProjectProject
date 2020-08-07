@@ -1,4 +1,4 @@
-from app.subjects.models import Subject
+from .models import Subject
 
 
 def create_subjects(db):
