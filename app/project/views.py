@@ -121,7 +121,7 @@ def join_project(project_id):
     if project.open:
         if not project.requires_application:
             flash(f'You have been added to {project.name}!')
-            project.add_member(current_user)
+            project.add_member(current_user, notify_owner=True)
         else:
             form = Project_Application_Form()
             if form.validate_on_submit():
@@ -196,71 +196,6 @@ def change_task_status(project_id, task_id, action):
         flash('Could not update task.')
     return redirect(request.referrer)
 
-
-## owner to project actions ##
-def transfer_ownership(project, user):
-    ''' Transfer ownership of project from current_user to user '''
-    raise ValueError('Move to project class')
-    if current_user!=project.owner:
-        flash('Only the owner can transfer project ownership.')
-        return False
-    if user==project.owner:
-        flash(f'{user.name} is already the project owner.')
-        return False
-    if not user in project.members:
-        flash('Cannot make non-member a project owner.')
-        return False
-    # notifications
-    project.update_last_active()
-    notification = Notification(text=f'{project.owner.name} has '
-            f'transferred ownership of {project.name} to {user.name}.')
-    for member in project.members:
-        if not member in [user, current_user]:
-            member.notifications.append(notification)
-    project.owner = user
-    notification = Notification(text='You have been promoted to owner '
-                                     f'of {project.name}!')
-    user.notifications.append(notification)
-    flash(f'You have transferred ownership of {project.name} to '
-          f'{user.name}.')
-    return True
-
-
-
-@project.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
-@login_required
-@limiter.limit('20/minute')
-def change_user_status(project_id, user_id, action):
-    ''' Change status of user with repsect to project '''
-    project = Project.query.get_or_404(project_id)
-    user = User.query.get_or_404(user_id)
-    error_flag = False
-    ## ACCEPT ##
-    if action=='accept':
-        if user in project.members:
-            flash('Cannot accept user already in project.')
-            error_flag = True
-        else:
-            manager.add_user_to_project(user, project)
-    ## REJECT ##
-    elif action=='reject':
-        # remove user from project
-        if user in project.members:
-            manager.remove_user_from_project(user, project, admin=True)
-        # remove user from pending
-        else:
-            error_flag = (not manager.reject_user_from_pending(user, project, admin=True))
-    ## MAKE OWNER ##
-    elif action=='make_owner':
-        error_flag = (not transfer_ownership(project, user))
-    else:
-        flash('Invalid action.')
-        error_flag = True
-    if not error_flag:
-        project.update_last_active()
-        db.session.commit()
-        db.session.close()
-    return redirect(request.referrer)
 
 @project.route('/remove_member/<int:project_id>/<int:user_id>')
 @limiter.limit('30/minute')
@@ -396,24 +331,18 @@ def remove_application_requirement(project_id):
 @project.route('/leave_project/<int:project_id>', methods=['POST'])
 @login_required
 def leave_project(project_id):
+    ''' Leave project, transferring or deleting as necessary '''
     project = Project.query.get_or_404(project_id)
-    # validate that user is member
-    if not current_user in project.members:
-        flash(f'Cannot leave {project.name} without being a member.')
-        return redirect(request.referrer)
     # transfer ownership
     if (current_user==project.owner):
         if (project.members.count()>1):
             new_owner = User.query.get_or_404(request.form.get('new_owner'))
-            success = transfer_ownership(project, new_owner)
-            if not success:
-                flash('Owner transfer unsuccessful.')
+            if not project.transfer_ownership(new_owner):
+                flash('Could not transfer ownership.')
                 return redirect(request.referrer)
         else:
-            user_code = current_user.code
-            manager.delete_project(project)
-            flash(f'{project.name} deleted.')
-            return user_page(user_code)
-    manager.remove_user_from_project(current_user, project, admin=False)
+            project.delete()
+            return user_page(current_user.code)
+    project.remove_member(current_user.id, by_owner=False)
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
