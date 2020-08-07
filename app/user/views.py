@@ -124,6 +124,7 @@ def report_user(target_user_id):
     return redirect(request.referrer)
 
 
+## collaboration ##
 @user.route('/collaborate/<int:target_user_id>', methods=['POST'])
 @login_required
 @limiter.limit('10/minute; 100/hour')
@@ -133,4 +134,35 @@ def collaborate(target_user_id):
     target_user = User.query.get_or_404(target_user_id)
     message, category = target_user.collaborate(project, current_user)
     flash(message, category)
+    return redirect(request.referrer)
+
+
+@user.route('/accept_collaboration/<int:project_id>')
+@login_required
+@limiter.limit('60 per minute')
+def accept_collaboration(project_id):
+    project = Project.query.get_or_404(project_id)
+    if current_user in project.invitations:
+        flash(f'You have accepted the invitation to {project.name}.')
+        manager.add_user_to_project(current_user, project)
+    else:
+        flash(f'Could not join {current_user.name} as you have not been invited.')
+    return redirect(request.referrer)
+
+
+@user.route('/reject_collaboration/<int:project_id>')
+@login_required
+def reject_collaboration(project_id):
+    project = Project.query.get_or_404(project_id)
+    manager.reject_project_invitation(current_user, project, admin=False)
+    return redirect(request.referrer)
+
+
+@user.route('/withdraw_collaboration/<int:user_id>/<int:project_id>')
+@login_required
+def withdraw_collaboration(user_id, project_id):
+    user = User.query.get_or_404(user_id)
+    project = Project.query.get_or_404(project_id)
+    project.update_last_active()
+    manager.reject_project_invitation(user, project, admin=True)
     return redirect(request.referrer)
