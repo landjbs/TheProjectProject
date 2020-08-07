@@ -210,7 +210,8 @@ def delete_comment(project_id, comment_id):
 @login_required
 @limiter.limit('5 per minute')
 def mark_task_complete(project_id, task_id, action):
-    ''' Mark project as '''
+    ''' Mark task as complete, delete task, or remove help '''
+    raise ValueError('Move most of functionality to task class')
     project = Project.query.get_or_404(project_id)
     # screen non-members
     if not is_project_member(current_user, project):
@@ -234,3 +235,32 @@ def mark_task_complete(project_id, task_id, action):
     db.session.commit()
     db.session.close()
     return redirect(request.referrer)
+
+
+## owner to project actions ##
+def transfer_ownership(project, user):
+    ''' Transfer ownership of project from current_user to user '''
+    raise ValueError('Move to project class')
+    if current_user!=project.owner:
+        flash('Only the owner can transfer project ownership.')
+        return False
+    if user==project.owner:
+        flash(f'{user.name} is already the project owner.')
+        return False
+    if not user in project.members:
+        flash('Cannot make non-member a project owner.')
+        return False
+    # notifications
+    project.update_last_active()
+    notification = Notification(text=f'{project.owner.name} has '
+            f'transferred ownership of {project.name} to {user.name}.')
+    for member in project.members:
+        if not member in [user, current_user]:
+            member.notifications.append(notification)
+    project.owner = user
+    notification = Notification(text='You have been promoted to owner '
+                                     f'of {project.name}!')
+    user.notifications.append(notification)
+    flash(f'You have transferred ownership of {project.name} to '
+          f'{user.name}.')
+    return True

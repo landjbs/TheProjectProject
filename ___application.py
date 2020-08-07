@@ -423,32 +423,6 @@ def leave_project(project_id):
 
 
 
-def transfer_ownership(project, user):
-    if current_user!=project.owner:
-        flash('Only the owner can transfer project ownership.')
-        return False
-    if user==project.owner:
-        flash(f'{user.name} is already the project owner.')
-        return False
-    if not user in project.members:
-        flash('Cannot make non-member a project owner.')
-        return False
-    # notifications
-    project.update_last_active()
-    notification = Notification(text=f'{project.owner.name} has '
-            f'transferred ownership of {project.name} to {user.name}.')
-    for member in project.members:
-        if not member in [user, current_user]:
-            member.notifications.append(notification)
-    project.owner = user
-    notification = Notification(text='You have been promoted to owner '
-                                     f'of {project.name}!')
-    user.notifications.append(notification)
-    flash(f'You have transferred ownership of {project.name} to '
-          f'{user.name}.')
-    return True
-
-
 @application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
 @limiter.limit('20 per minute')
