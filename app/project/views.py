@@ -262,6 +262,20 @@ def change_user_status(project_id, user_id, action):
         db.session.close()
     return redirect(request.referrer)
 
+def reject_user():
+    pass
+    
+
+def make_owner():
+    pass
+
+
+def reject_application():
+    pass
+
+
+def accept_application():
+    pass
 
 
 @project.route('/complete_project/<int:project_id>', methods=['POST'])

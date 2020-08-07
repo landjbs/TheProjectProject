@@ -110,7 +110,7 @@
                                 <div class='hoverable'>
                                   <a class='delete-btn task-btn member-hovers'
                                   style='display: inline;'
-                                  href="{{ url_for('project.chang_user_status', project_id=project.id, user_id=member.id, action='reject') }}">
+                                  href="{{ url_for('project.reject_user', project_id=project.id, user_id=member.id) }}">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                                   </a>
                                   <span class='tooltiptext'>Remove from project</span>
@@ -118,7 +118,7 @@
                                 <div class='hoverable'>
                                   <a class='task-btn member-hovers'
                                   style='display: inline; color: gold;'
-                                  href="{{ url_for('project.chang_user_status', project_id=project.id, user_id=member.id, action='make_owner') }}">
+                                  href="{{ url_for('project.make_owner', project_id=project.id, user_id=member.id) }}">
                                     <i class='fas fa-crown'></i>
                                   </a>
                                   <span class='tooltiptext'>Make owner</span>
@@ -168,7 +168,7 @@
                             <div class='hoverable'>
                               <a class='delete-btn task-btn float-left'
                               style='background: transparent;'
-                              href="{{ url_for('project.chang_user_status', project_id=project.id, user_id=application.user.id, action='reject') }}">
+                              href="{{ url_for('project.reject_user_application', project_id=project.id, user_id=application.user.id) }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Reject Applicant</span>
@@ -176,7 +176,7 @@
                             <div class='hoverable'>
                               <a class='complete-btn task-btn float-right'
                               style='background: transparent;'
-                              href="{{ url_for('project.chang_user_status', project_id=project.id, user_id=application.user.id, action='accept') }}">
+                              href="{{ url_for('project.accept_application', project_id=project.id, user_id=application.user.id) }}">
                                 <i class="fa fa-check-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Accept Applicant</span>
