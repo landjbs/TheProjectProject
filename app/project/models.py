@@ -200,6 +200,7 @@ class Project(CRUDMixin, db.Model):
             )
         # add rejection from project to user
         user.add_rejection(self)
+        self.update_last_active()
         self.update()
         return True
 
@@ -210,6 +211,14 @@ class Project(CRUDMixin, db.Model):
             return False
         if user==project.owner:
             return False
+        # change owners
+        self.owner = user
+        # notify members
+        self.notify_members(
+            text=f'Ownership of {self.name} has been transferred to {self.user}.',
+            include_owner=False
+        )
+
 
     ## tasks ##
     def todo(self):
