@@ -326,7 +326,7 @@ class Project(CRUDMixin, db.Model):
 
     ## status ##
     def mark_complete(self):
-        ''' Marks project as complete '''
+        ''' Mark project as complete '''
         if not self.complete:
             self.complete = True
             self.notify_members(
@@ -341,7 +341,7 @@ class Project(CRUDMixin, db.Model):
         return False
 
     def mark_incomplete(self):
-        ''' Marks project as incomplete '''
+        ''' Mark project as incomplete '''
         if self.complete:
             self.complete = False
             self.notify_members(
