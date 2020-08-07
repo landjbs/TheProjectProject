@@ -48,20 +48,12 @@ def search():
     if request.method=='GET':
         return redirect(url_for('hub.home'))
     search_text = request.form.get('search')
-    # project results
-    project_results = Project.query.filter(Project.name.contains(search_text) |
-                                   Project.oneliner.contains(search_text))
-    project_tabs = list(partition_query(project_results.limit(30)))
-    # user results
-    user_results = User.query.filter(User.name.contains(search_text) |
-                                     User.about.contains(search_text))
-    user_tabs = list(partition_query(user_results.limit(30)))
-    # subject results
-    subject_results = Subject.query.filter(Subject.name.contains(search_text))
-    subject_tabs = list(partition_query(subject_results.limit(30)))
+    project_tabs, user_tabs, subject_tabs = text_search(search_text)
     # forms
     project_application = forms.Project_Application_Form(request.form)
-    return render_template('search.html', project_tabs=project_tabs,
-                        user_tabs=user_tabs, subject_tabs=subject_tabs,
+    return render_template('search.html',
+                        project_tabs=project_tabs,
+                        user_tabs=user_tabs,
+                        subject_tabs=subject_tabs,
                         search_text=search_text,
                         project_application=project_application)
