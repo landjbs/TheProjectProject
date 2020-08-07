@@ -129,23 +129,23 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
-    def accept_application(self, user_id):
+    def accept_application(self, user):
         ''' Accpets pending application of user_id to project '''
         # validate that user has applied
-        user = self.pending.filter(user_id=user_id).first()
+        user = self.pending.filter(user_id=user).first()
         if not user:
             return False
         # add user to project
         self.add_member(user, notify_owner=False)
         return True
 
-    def reject_application(self, user_id):
+    def reject_application(self, user):
         # validate that user has applied
         user = self.pending.filter(user_id=user_id).first()
         if not user:
             return False
         # remove application
-        
+
         # add rejection to user
         user.add_rejection(self)
         # notify user

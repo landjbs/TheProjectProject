@@ -294,6 +294,7 @@ def make_owner(project_id, user_id):
 def accept_application():
     ''' Accept pending application '''
     project = Project.query.get_or_404(project_id)
+    user = User.query.get_or_404(user_id)
     if current_user!=project.owner:
         flash('Must be project owner to accept applications.')
     else:
@@ -301,11 +302,13 @@ def accept_application():
             flash('Could not accept applicant.', 'error')
     return redirect(request.referrer)
 
+
 @project.route('/reject_application/<int:project_id>/<int:user_id>')
 @limiter.limit('60/minute')
 def reject_application():
     ''' Reject pending application '''
     project = Project.query.get_or_404(project_id)
+    user = User.query.get_or_404(user_id)
     if current_user!=project.owner:
         flash('Must be project owner to reject applications.')
     else:
