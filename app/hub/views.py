@@ -5,9 +5,10 @@ from datetime import datetime
 
 from ..hub import hub
 from app.utils import partition_query
+from app.extensions import limiter
 from app.recommendations.projects import (get_recommended_projects,
                                     get_trending_projects, get_user_projects)
-from app.recommendations.search import search_text
+from app.recommendations.search import text_search
 
 
 @hub.route('/home', methods=['GET'])
@@ -41,7 +42,7 @@ def home():
                             project_application=project_application)
 
 
-@application.route('/search', methods=['GET', 'POST'])
+@hub.route('/search', methods=['GET', 'POST'])
 @login_required
 @limiter.limit('60 per minute')
 def search():
@@ -50,7 +51,7 @@ def search():
     search_text = request.form.get('search')
     project_tabs, user_tabs, subject_tabs = text_search(search_text)
     # forms
-    project_application = forms.Project_Application_Form(request.form)
+    project_application = None #forms.Project_Application_Form(request.form)
     return render_template('search.html',
                         project_tabs=project_tabs,
                         user_tabs=user_tabs,
