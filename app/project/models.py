@@ -173,6 +173,10 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
+    def remove_member(self, user_id, by_owner):
+        ''' Removes member from project '''
+
+
     def change_user_status(self, user, action):
         if action=='accept':
             if not user in self.members:

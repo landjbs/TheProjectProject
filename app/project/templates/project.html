@@ -110,7 +110,7 @@
                                 <div class='hoverable'>
                                   <a class='delete-btn task-btn member-hovers'
                                   style='display: inline;'
-                                  href="{{ url_for('project.reject_user', project_id=project.id, user_id=member.id) }}">
+                                  href="{{ url_for('project.remove_member', project_id=project.id, user_id=member.id) }}">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                                   </a>
                                   <span class='tooltiptext'>Remove from project</span>
@@ -168,7 +168,7 @@
                             <div class='hoverable'>
                               <a class='delete-btn task-btn float-left'
                               style='background: transparent;'
-                              href="{{ url_for('project.reject_user_application', project_id=project.id, user_id=application.user.id) }}">
+                              href="{{ url_for('project.reject_application', project_id=project.id, user_id=application.user.id) }}">
                                 <i class="fa fa-times-circle" aria-hidden="true"></i>
                               </a>
                               <span class='tooltiptext'>Reject Applicant</span>

@@ -262,9 +262,15 @@ def change_user_status(project_id, user_id, action):
         db.session.close()
     return redirect(request.referrer)
 
-def reject_user():
-    pass
-    
+@project.route('/remove_member/<int:project_id>/<int:user_id>')
+def remove_member(project_id, user_id):
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Must be project owner to remove member.')
+    else:
+        project.remove_member(user_id=user_id, by_owner=True)
+    return redirect(request.referrer)
+
 
 def make_owner():
     pass
