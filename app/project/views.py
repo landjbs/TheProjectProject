@@ -270,7 +270,7 @@ def remove_member(project_id, user_id):
         flash('Must be project owner to remove member.')
     else:
         if not project.remove_member(user_id=user_id, by_owner=True):
-            flash('Could not remove user.')
+            flash('Could not remove user.', 'error')
         flash(f'User removed from {project.name}.')
     return redirect(request.referrer)
 
@@ -278,7 +278,12 @@ def remove_member(project_id, user_id):
 @project.route('/make_owner/<int:project_id>/<int:user_id>')
 @limiter.limit('30/minute')
 def make_owner(project_id, user_id):
-    pass
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Must be project owner to transfer ownership.')
+    else:
+        if not project.transfer_ownership(user_id):
+            flash('Could not transfer ownership', 'error')
 
 def reject_application():
     pass
