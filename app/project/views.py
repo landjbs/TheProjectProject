@@ -206,7 +206,7 @@ def leave_project(project_id):
     if (current_user==project.owner):
         if (project.members.count()>1):
             new_owner = User.query.get_or_404(request.form.get('new_owner'))
-            if not project.transfer_ownership(new_owner):
+            if not project.make_owner(new_owner):
                 flash('Could not transfer ownership.')
                 return redirect(request.referrer)
         else:
@@ -299,7 +299,7 @@ def make_owner(project_id, user_id):
     if current_user!=project.owner:
         flash('Must be project owner to transfer ownership.')
     else:
-        if not project.transfer_ownership(user_id):
+        if not project.make_owner(user_id):
             flash('Could not transfer ownership', 'error')
     return redirect(request.referrer)
 

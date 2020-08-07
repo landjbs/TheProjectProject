@@ -152,16 +152,16 @@ class Project(CRUDMixin, db.Model):
         # notify user
         if by_owner:
             user.notify(
-                text=(f'The owner of {project.name} decided not '
+                text=(f'The owner of {self.name} decided not '
                        'to add you to the project right now. '
                        "We promise it's nothing personal! "
                        'Please contact us if you think something'
                        ' is wrong or have any questions.')
             )
         else:
-            for note in project.owner.notifications:
-                if (user.name in note.text) and (project.name in note.text):
-                    project.owner.notifications.remove(note)
+            for note in self.owner.notifications:
+                if (user.name in note.text) and (self.name in note.text):
+                    self.owner.notifications.remove(note)
         self.update()
         return True
 
@@ -230,7 +230,7 @@ class Project(CRUDMixin, db.Model):
                 include_owner=False
             )
             user.notify(text=f'You have been removed from '
-                             f'{project.name} by the owner. We promise '
+                             f'{self.name} by the owner. We promise '
                              "it's nothing personal! Please contact us "
                              'if you think something is wrong or have '
                              'any questions.')
@@ -249,7 +249,7 @@ class Project(CRUDMixin, db.Model):
         user = self.members.filter_by(id=user_id).first()
         if not user:
             return False
-        if user==project.owner:
+        if user==self.owner:
             return False
         # change owners
         self.owner = user
@@ -330,7 +330,7 @@ class Project(CRUDMixin, db.Model):
         if not self.complete:
             self.complete = True
             self.notify_members(
-                text=(f'Congratulations—{project.name} has been marked as '
+                text=(f'Congratulations—{self.name} has been marked as '
                        'complete by the owner!'),
                 category=1,
                 include_owner=False
@@ -345,7 +345,7 @@ class Project(CRUDMixin, db.Model):
         if self.complete:
             self.complete = False
             self.notify_members(
-                text=(f'{project.name} has been marked as incomplete by the '
+                text=(f'{self.name} has been marked as incomplete by the '
                        'owner. You can now post and complete tasks!'),
                 category=0,
                 include_owner=False
