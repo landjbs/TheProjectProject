@@ -139,6 +139,8 @@ class Project(CRUDMixin, db.Model):
         self.add_member(user, notify_owner=False)
         return True
 
+    def reject_application(self, ):
+
     def notify_owner(self, text, category=0):
         ''' Notify owner with text and category '''
         self.owner.notifications.append(
