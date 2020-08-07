@@ -172,10 +172,12 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     ## notifications ##
     def notify(self, text, category=0):
+        ''' Notify user with text and category '''
         self.notifications.append(Notification(text=text, category=category))
         self.update()
 
     def add_notification(self, notification):
+        ''' Notify user with prebuilt notification '''
         self.notifications.append(notification)
         self.update()
 
