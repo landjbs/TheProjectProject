@@ -286,14 +286,20 @@ class Task(CRUDMixin, db.Model):
             self.complete = True
             self.complete_stamp = datetime.utcnow()
             self.update()
+            return True
+        return False
 
     def mark_incomplete(self):
+        ''' Marks completed task as incomplete '''
         if self.complete:
             self.complete = False
             self.complete_stamp = None
             self.update()
+            return True
+        return False
 
     def add_worker(self, worker):
+        ''' Adds worker to task '''
         if not worker in self.workers:
             self.workers.append(worker)
             self.update()
@@ -301,11 +307,13 @@ class Task(CRUDMixin, db.Model):
         return False
 
     def remove_worker(self, worker):
+        ''' Removes worker from task '''
         if worker in self.workers:
             self.workers.remove(worker)
             self.update()
             return True
         return False
+
 
 class Comment(CRUDMixin, db.Model):
     __tablename__ = 'comment'
