@@ -10,6 +10,8 @@ class Notification(CRUDMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # text
     text = db.Column(db.String(160), nullable=False)
+    # category {0:neutral, 1:success, 2:warning: 3:important}
+    cateogry = db.Column(db.Integer, nullable=True)
     # user
     users = relationship('User', secondary='user_to_notification',
                          back_populates='notifications')
