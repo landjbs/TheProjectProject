@@ -57,8 +57,8 @@ def project_page(project_code):
             recommended_members = rec.recommend_users(project)
             recommended_tabs = list(partition_query(recommended_members))
         ## edit project form ##
-        edit_form = forms.Edit_Project(request.form)
-        edit_application_form = forms.Edit_Project_Application(request.form)
+        edit_form = Edit_Project(request.form)
+        edit_application_form = Edit_Project_Application(request.form)
         if request.method=='POST':
             if edit_form.validate_on_submit():
                 edits_made = False
@@ -124,7 +124,7 @@ def join_project(project_id):
             flash(f'You have been added to {project.name}!')
             manager.add_user_to_project(current_user, project)
         else:
-            form = forms.Project_Application_Form(request.form)
+            form = Project_Application_Form(request.form)
             if form.validate_on_submit():
                 application = project.pending.filter_by(user=current_user).first()
                 if application is not None:
@@ -171,7 +171,7 @@ def add_task(project_id):
     project = Project.query.get_or_404(project_id)
     if not is_project_member(current_user, project):
         return redirect(request.referrer)
-    form = forms.Task_Form(request.form)
+    form = Task_Form(request.form)
     if form.validate_on_submit():
         task = Task(text=form.text.data, author=current_user)
         manager.add_task(project, current_user, task)
@@ -184,7 +184,7 @@ def add_task(project_id):
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
-    form = forms.Comment_Form(request.form)
+    form = Comment_Form(request.form)
     if form.validate_on_submit():
         comment = Comment(text=form.text.data, author=current_user)
         manager.add_comment(project=project, user=current_user, comment=comment)
@@ -355,7 +355,7 @@ def change_project_open(project_id, action):
 def add_application(project_id):
     ''' Add applicaiton to project '''
     project = Project.query.get_or_404(project_id)
-    form = forms.Edit_Project_Application(request.form)
+    form = Edit_Project_Application(request.form)
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')
     elif form.validate_on_submit():

@@ -91,6 +91,7 @@ class Project(CRUDMixin, db.Model):
     def __repr__(self):
         return f'<Project {self.name}>'
 
+    ## activity ##
     def recently_active(self, second_window=302400):
         ''' second_window: number of seconds to count as recent.
             currently half a week.
@@ -103,15 +104,13 @@ class Project(CRUDMixin, db.Model):
             return False
         return True
 
-    def task_number(self):
-        # TODO: make efficient
-        n = 0
-        for task in self.tasks:
-            n += 1
-        return n
 
     def update_last_active(self):
         self.last_active = datetime.utcnow()
+
+    ## members ##
+    def add_user()
+
 
     ## tasks ##
     def todo(self):
@@ -134,3 +133,10 @@ class Project(CRUDMixin, db.Model):
                         # -1 to account for skills gained via project association
                         project_subjects[name] += (user_subject.number)
         return project_subjects
+
+    def task_number(self):
+        # TODO: make efficient
+        n = 0
+        for task in self.tasks:
+            n += 1
+        return n
