@@ -163,7 +163,8 @@ class Project(CRUDMixin, db.Model):
         if user in self.rejections:
             self.rejections.remove(user)
         # notify other project members
-        self.notify_members(text=f'{user.name} has joined {self.name}.')
+        self.notify_members(text=f'{user.name} has joined {self.name}.',
+                            category=0)
         # add member to project
         self.members.append(user)
         # update project data and activity
