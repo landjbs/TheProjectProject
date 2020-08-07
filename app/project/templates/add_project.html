@@ -1,5 +1,5 @@
 {% extends "home_base.html" %}
-{% import 'form_macros.html' as form_macros %}
+{% from 'components/form_macros.html' import render_multiselect %}
 
 {% block title %}Add Project{% endblock %}
 
@@ -108,7 +108,7 @@
               </div>
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              {{ form_macros.render_multiselect(elt) }}
+              {{ render_multiselect(elt) }}
             {% elif elt.type=='IntegerField' %}
               <div class="slidecontainer">
                 <input type="range" min="2" max="20" value="10" class="slider"

@@ -4,6 +4,7 @@ from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED
 # absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
+from app.subject.models import Subject
 # package imports
 from .models import Project
 from .forms import (Add_Project, Comment_Form, Task_Form,
@@ -11,7 +12,7 @@ from .forms import (Add_Project, Comment_Form, Task_Form,
 from ..project import project
 
 
-@application.route('/add_project', methods=['GET', 'POST'])
+@project.route('/add_project', methods=['GET', 'POST'])
 @login_required
 @limiter.limit('10 per minute')
 def add_project():
@@ -42,21 +43,20 @@ def add_project():
             # subjects
             subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
             with db.session.no_autoflush:
-                try:
-                    project = Project.create(
-                        name = form.name.data,
-                        oneliner=form.oneliner.data,
-                        summary = form.summary.data,
-                        url = form.url.data,
-                        subjects = subjects,
-                        owner = current_user,
-                        open = form.open.data,
-                        requires_application = form.requires_application.data,
-                        application_question = form.application_question.data,
-                        estimated_time = form.estimated_time.data,
-                        team_size = form.team_size.data,
-                        complete = form.complete.data
-                    )
+                project = Project.create(
+                    name = form.name.data,
+                    oneliner=form.oneliner.data,
+                    summary = form.summary.data,
+                    url = form.url.data,
+                    subjects = subjects,
+                    owner = current_user,
+                    open = form.open.data,
+                    requires_application = form.requires_application.data,
+                    application_question = form.application_question.data,
+                    estimated_time = form.estimated_time.data,
+                    team_size = form.team_size.data,
+                    complete = form.complete.data
+                )
                 # successful message
                 flash(f'Congratulations—your project, {form.name.data}, '
                        'has been added!')
