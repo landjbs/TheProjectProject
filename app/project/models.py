@@ -173,7 +173,6 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
-
     ## tasks ##
     def todo(self):
         ''' Returns active tasks on project that haven't been completed '''
@@ -188,6 +187,12 @@ class Project(CRUDMixin, db.Model):
             return False
         self.tasks.append(Task(text=text, author=author))
         self.update_last_active()
+        self.update()
+        return True
+
+    ## comments ##
+    def add_comment(self, text, author):
+        self.comments.append(Comment(text=text, author=author))
         self.update()
         return True
 
@@ -266,10 +271,10 @@ class Comment(db.Model):
     # text
     text = db.Column(db.String(160), nullable=False)
     # author
-    author_id = db.Column(db.Integer, ForeignKey('user.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = relationship('User', back_populates='comments')
     # project
-    project_id = db.Column(db.Integer, ForeignKey('project.id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
     project = relationship('Project', back_populates='comments')
     # time
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
