@@ -1,3 +1,4 @@
+from app.database import db
 from app.subjects.models import Subject
 
 
@@ -43,4 +44,6 @@ def create_subjects():
                 Subject('Startup',                  '#FFC100'),
                 Subject('Research',                 '#FF8000')
             ]
-    for subject in subjects
+    for subject in subjects:
+        db.session.add(subject)
+    db.session.commit()
