@@ -196,6 +196,7 @@ class Project(CRUDMixin, db.Model):
         if not task or not self.is_member(user):
             return False
         task.mark_complete(user)
+        return True
 
     ## comments ##
     def add_comment(self, text, author):

@@ -191,11 +191,7 @@ def delete_comment(project_id, comment_id):
 @limiter.limit('5 per minute')
 def mark_task_complete(project_id, task_id, action):
     ''' Mark task as complete, delete task, or remove help '''
-    raise ValueError('Move most of functionality to task class')
     project = Project.query.get_or_404(project_id)
-    # screen non-members
-    if not is_project_member(current_user, project):
-        return redirect(request.referrer)
     # get task
     task = Task.query.get_or_404(task_id)
     if (action=='complete'):
