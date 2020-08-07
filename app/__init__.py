@@ -74,6 +74,7 @@ def register_blueprints(app):
     app.register_blueprint(hub)
     app.register_blueprint(user)
     app.register_blueprint(project)
+    app.register_blueprint(subject)
 
 
 def register_errorhandlers(app):

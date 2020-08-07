@@ -5,4 +5,4 @@ from app.subject.models import Subject
 
 # TODO: replace with better elastic_search
 
-def
+def 
