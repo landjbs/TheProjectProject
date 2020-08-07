@@ -118,7 +118,7 @@ class Project(CRUDMixin, db.Model):
         return self.pending.filter_by(user=current_user).first()
 
     def notify_owner(self, text):
-        ''' Notify owner '''
+        ''' Notify owner with text'''
 
     def notify_members(self, text):
         raise ValueError('todo imp notify_members')
