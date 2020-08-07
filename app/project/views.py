@@ -192,25 +192,8 @@ def delete_comment(project_id, comment_id):
 def mark_task_complete(project_id, task_id, action):
     ''' Mark task as complete, delete task, or remove help '''
     project = Project.query.get_or_404(project_id)
-    project.change_task_status(task_id, current_user, action)
-    # get task
-    task = Task.query.get_or_404(task_id)
-    if (action=='complete'):
-        if not task.complete:
-            task.mark_complete(current_user)
-        else:
-            task.add_worker(current_user)
-    elif (action=='back'):
-        if current_user in task.workers:
-            task.workers.remove(current_user)
-        if (len(task.workers)==0):
-            task.mark_incomplete()
-    elif (action=='delete'):
-        if (current_user==task.author):
-            db.session.delete(task)
-    project.update_last_active()
-    db.session.commit()
-    db.session.close()
+    if not project.change_task_status(task_id, current_user, action):
+        flash('Could not update task.')
     return redirect(request.referrer)
 
 
