@@ -183,12 +183,19 @@ class Project(CRUDMixin, db.Model):
         return self.tasks.filter_by(complete=True)
 
     def add_task(self, text, author):
+        ''' Adds task to project from author, checks permissions '''
         if not self.is_member(author):
             return False
         self.tasks.append(Task(text=text, author=author))
         self.update_last_active()
         self.update()
         return True
+
+    def complete_task(self, task_id, user):
+        task = self.tasks.filter_by(id=task_id).first()
+        if not task or not self.is_member(user):
+            return False
+        task.mark_complete(user)
 
     ## comments ##
     def add_comment(self, text, author):
