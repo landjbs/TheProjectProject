@@ -143,14 +143,16 @@ class User(CRUDMixin, UserMixin, db.Model):
         return bcrypt.check_password_hash(self.password, password)
 
     ## subjects ##
-    def add_subject(self, subject):
-        ''' Adds subject to user subjects '''
-        prev = self.subjects.filter_by(subject=subject).first()
-        if prev is not None:
-            prev.number += 1
-        else:
-            new = User_Subjects(user=user, subject=subject)
-            self.subjects.append(new)
+    def add_subjects(self, subjects):
+        ''' Adds subjects to user subjects '''
+        for subject in subjects:
+            prev = self.subjects.filter_by(subject=subject).first()
+            if prev is not None:
+                prev.number += 1
+            else:
+                new = User_Subjects(user=user, subject=subject)
+                self.subjects.append(new)
+        self.update()
         return True
 
     def remove_subject_from_user(self, subject):
@@ -165,7 +167,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             return False
         return True
 
-    # starring
+    ## starring ##
     def star_project(self, project):
         if not self.has_starred(project):
             self.starred.append(project)
