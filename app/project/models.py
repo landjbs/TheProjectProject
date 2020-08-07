@@ -110,7 +110,11 @@ class Project(CRUDMixin, db.Model):
 
     ## members ##
     def is_member(self, user):
+        ''' Checks if user is a member of project '''
         return (user in self.members)
+
+    def get_notification(self, user):
+        '''  '''
 
     def notify_members(self, text):
         raise ValueError('todo imp notify_members')

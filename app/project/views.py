@@ -112,11 +112,11 @@ def project_page(project_code):
 @login_required
 @limiter.limit('5 per minute')
 def join_project(project_id):
-    ''' Join project according to application and open status'''
+    ''' Apply to or join project according to application and open status '''
     project = Project.query.get_or_404(project_id)
-    if is_project_member(current_user, project):
+    if project.is_member(current_user):
         flash(f'Could not join {project.name} because you are '
-                'already a member.')
+               'already a member.')
         return redirect(request.referrer)
     if project.open:
         if not project.requires_application:
