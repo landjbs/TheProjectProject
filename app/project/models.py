@@ -115,7 +115,7 @@ class Project(CRUDMixin, db.Model):
 
     def get_application(self, user):
         ''' Gets application of user to project if exists else returns None '''
-        return self.pending.filter_by(user=current_user).first()
+        return self.pending.filter_by(user=user).first()
 
     def apply(self, user, text):
         self.pending.append(
