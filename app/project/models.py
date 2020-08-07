@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
-from app.notifcation.models import Notifcation
+from app.notification.models import Notifcation
 
 
 class Project(CRUDMixin, db.Model):
