@@ -4,6 +4,7 @@ from sqlalchemy import desc
 from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
+from app.models import User_Subjects
 from app.extensions import bcrypt
 
 
@@ -123,19 +124,20 @@ class User(CRUDMixin, UserMixin, db.Model):
             # raise RuntimeError(f'{self} has already been accepted.')
         self.accepted = True
         self.accepted_on = datetime.utcnow()
-        db.session.commit()
+        self.update()
         return True
 
     def reject(self):
         self.accepted = False
         self.accepted_on = None
-        db.session.commit()
+        self.update()
         return True
 
     # password
     def set_password(self, password):
         hash_ = bcrypt.generate_password_hash(password, 10).decode('utf-8')
         self.password = hash_
+        return True
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
