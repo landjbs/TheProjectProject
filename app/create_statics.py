@@ -30,7 +30,6 @@ def create_subjects():
     for subject in subjects:
         db.session.add(subject)
     db.session.commit()
-    db.session.close()
     return True
 
 

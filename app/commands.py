@@ -7,6 +7,32 @@ from tqdm import trange
 from app import db
 from app.user.models import User
 from app.project.models import Project
+from app.subject.create_subjects import create_subjects
+
+
+def create_db():
+    ''' Creates database '''
+    db.create_all()
+    return True
+
+
+def drop_db():
+    if click.confirm('Are you sure you want to drop the database?', abort=True):
+        db.drop_all()
+    return True
+
+
+def rebuild_db():
+    ''' Drops database and then creates '''
+    print(colored('Dropping...'))
+    drop_db()
+    create_db()
+
+
+
+def add_statics():
+    ''' Adds statics (Subjects, Badges, Admins) to database '''
+    create_subjects(db)
 
 
 @click.option('--num_users', default=50, help='Number of users.')
@@ -72,22 +98,3 @@ def populate_db(num_users, num_projects):
     for project in projects:
         db.session.add(project)
     db.session.commit()
-
-
-def create_db():
-    ''' Creates database '''
-    db.create_all()
-    return True
-
-
-def drop_db():
-    if click.confirm('Are you sure you want to drop the database?', abort=True):
-        db.drop_all()
-    return True
-
-
-def rebuild_db():
-    ''' Drops database and then creates '''
-    print(colored('Dropping...'))
-    drop_db()
-    create_db()

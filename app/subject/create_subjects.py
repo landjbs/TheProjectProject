@@ -1,8 +1,7 @@
-from app.database import db
 from app.subjects.models import Subject
 
 
-def create_subjects():
+def create_subjects(db):
     subjects = [# data/math/ai:    red
                 Subject('AI/ML',                    '#FF0000'),
                 Subject('Data Science',             '#FF2A00'),
