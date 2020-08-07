@@ -242,6 +242,7 @@ class User(CRUDMixin, UserMixin, db.Model):
                        f'been invited to {project.name}.')
             return (message, 'error')
         self.invitations.remove(project)
+        self.update()
         # TODO: CLEAR NotificationS POTENTIALLy
         message = ('You have withdrawn the offer to collaborate on '
                    f'{project.name} with {self.name}.')
