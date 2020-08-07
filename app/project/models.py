@@ -260,7 +260,7 @@ class Project(CRUDMixin, db.Model):
         )
         # notify members
         self.notify_members(
-            text=f'Ownership of {self.name} has been transferred to {self.user}.',
+            text=f'Ownership of {self.name} has been transferred to {user.name}.',
             include_owner=False
         )
         self.update_last_active()
