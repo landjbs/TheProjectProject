@@ -125,7 +125,7 @@ class Project(CRUDMixin, db.Model):
             )
         )
         self.notify_owner(text=f'{user.name} has applied to {self.name}!',
-                             category=0)
+                          category=0)
         self.update()
         return True
 
