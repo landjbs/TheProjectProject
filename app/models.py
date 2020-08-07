@@ -106,61 +106,6 @@ class Anonymous(AnonymousUserMixin):
         return False
 
 
-
-class Task(db.Model):
-    __tablename__ = 'task'
-    # id
-    id = db.Column(Integer, primary_key=True)
-    # text
-    text = db.Column(String(160), nullable=True)
-    # author
-    author_id = db.Column(Integer, ForeignKey('user.id'), nullable=True)
-    author = relationship('User', back_populates='tasks_authored')
-    # project
-    project_id = db.Column(Integer, ForeignKey('project.id'))
-    project = relationship('Project', back_populates='tasks')
-    # workers
-    workers = relationship('User', secondary=user_to_task,
-                           back_populates='tasks_worked')
-    # timing
-    post_stamp = db.Column(DateTime, default=datetime.utcnow, index=True)
-    complete_stamp = db.Column(DateTime, nullable=True)
-    complete = db.Column(Boolean, default=False)
-
-    def mark_complete(self, worker):
-        if not self.complete:
-            self.add_worker(worker)
-            self.complete = True
-            self.complete_stamp = datetime.utcnow()
-
-    def mark_incomplete(self):
-        if self.complete:
-            self.complete = False
-            self.complete_stamp = None
-
-    def add_worker(self, worker):
-        self.workers.append(worker)
-
-
-class Comment(db.Model):
-    __tablename__ = 'comment'
-    # id
-    id = db.Column(Integer, primary_key=True)
-    # text
-    text = db.Column(String(160), nullable=False)
-    # author
-    author_id = db.Column(Integer, ForeignKey('user.id'))
-    author = relationship('User', back_populates='comments')
-    # project
-    project_id = db.Column(Integer, ForeignKey('project.id'))
-    project = relationship('Project', back_populates='comments')
-    # time
-    timestamp = db.Column(DateTime, default=datetime.utcnow, index=True)
-
-    def __repr__(self):
-        return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}; TEXT={self.text}>'
-
-
 class Badge(db.Model):
     __tablename__ = 'badge'
     # id

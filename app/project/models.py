@@ -222,3 +222,57 @@ class Project_Application(db.Model):
 
     def __repr__(self):
         return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
+
+
+class Task(db.Model):
+    __tablename__ = 'task'
+    # id
+    id = db.Column(db.Integer, primary_key=True)
+    # text
+    text = db.Column(db.String(160), nullable=True)
+    # author
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    author = relationship('User', back_populates='tasks_authored')
+    # project
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    project = relationship('Project', back_populates='tasks')
+    # workers
+    workers = relationship('User', secondary='user_to_task',
+                           back_populates='tasks_worked')
+    # timing
+    post_stamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    complete_stamp = db.Column(db.DateTime, nullable=True)
+    complete = db.Column(db.Boolean, default=False)
+
+    def mark_complete(self, worker):
+        if not self.complete:
+            self.add_worker(worker)
+            self.complete = True
+            self.complete_stamp = datetime.utcnow()
+
+    def mark_incomplete(self):
+        if self.complete:
+            self.complete = False
+            self.complete_stamp = None
+
+    def add_worker(self, worker):
+        self.workers.append(worker)
+
+
+class Comment(db.Model):
+    __tablename__ = 'comment'
+    # id
+    id = db.Column(db.Integer, primary_key=True)
+    # text
+    text = db.Column(db.String(160), nullable=False)
+    # author
+    author_id = db.Column(db.Integer, ForeignKey('user.id'))
+    author = relationship('User', back_populates='comments')
+    # project
+    project_id = db.Column(db.Integer, ForeignKey('project.id'))
+    project = relationship('Project', back_populates='comments')
+    # time
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
+    def __repr__(self):
+        return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}; TEXT={self.text}>'
