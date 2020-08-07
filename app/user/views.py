@@ -166,6 +166,9 @@ def reject_collaboration(project_id):
 def withdraw_collaboration(user_id, project_id):
     user = User.query.get_or_404(user_id)
     project = Project.query.get_or_404(project_id)
-    project.update_last_active()
-    manager.reject_project_invitation(user, project, admin=True)
+    if not current_user==project.owner:
+        flash('Only the project owner can withdraw collaborations.', 'error')
+    else:
+        message, category = user.withdraw_collaboration(project)
+        flash(message, category)
     return redirect(request.referrer)
