@@ -281,7 +281,7 @@ def complete_project(project_id):
     if current_user!=project.owner:
         flash('Only the owner can mark a project as complete.')
     else:
-        if not project.complete():
+        if not project.mark_complete():
             flash(f'Could not mark {project.name} as complete.', 'error')
         else:
             flash(f'Congratulations on completing {project.name}!!')

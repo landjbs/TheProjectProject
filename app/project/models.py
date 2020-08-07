@@ -325,7 +325,8 @@ class Project(CRUDMixin, db.Model):
         return True
 
     ## status ##
-    def complete(self):
+    def mark_complete(self):
+        ''' '''
         if not self.complete:
             self.complete = True
             self.notify_members(
@@ -336,6 +337,18 @@ class Project(CRUDMixin, db.Model):
             )
             self.update_last_active()
             self.update()
+            return True
+        return False
+
+    def mark_incomplete(self):
+        if self.complete:
+            self.complete = False
+            self.notify_members(
+                text=(f'{project.name} has been marked as incomplete by the '
+                       'owner. You can now post and complete tasks!'),
+                category=0,
+                include_owner=False
+            )
             return True
         return False
 
