@@ -228,7 +228,7 @@ class Project(CRUDMixin, db.Model):
         return n
 
 
-class Project_Application(CRUDMixin, db.Model):
+class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='pending')
