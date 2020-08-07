@@ -174,19 +174,20 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     def add_notification(self, notification):
         self.notifications.append(notification)
+        self.update()
 
     ## starring ##
     def star_project(self, project):
         if not self.has_starred(project):
             self.starred.append(project)
             project.buzz += 1
-            db.session.commit()
+            self.update()
 
     def unstar_project(self, project):
         if self.has_starred(project):
             self.starred.remove(project)
             project.buzz -= 1
-            db.session.commit()
+            self.update()
 
     def has_starred(self, project):
         return (project in self.starred)

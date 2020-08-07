@@ -146,7 +146,7 @@ class Project(CRUDMixin, db.Model):
             if not include_owner:
                 if member==self.owner:
                     continue
-            member.notify()
+            member.add_notification(notification)
 
     def add_member(self, user):
         ''' Adds member to project '''
