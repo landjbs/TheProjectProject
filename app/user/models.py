@@ -205,25 +205,36 @@ class User(CRUDMixin, UserMixin, db.Model):
     def collaborate(project, current_user):
         ''' Invites user to collaborate on project if not already affiliated '''
         if not current_user==project.owner:
-            return 'Cannot invite collaborator to project you do not own.'
+            return ('Cannot invite collaborator to project you do not own.',
+                    'error')
         elif current_user==target_user:
             return ("You don't need to send an invitation to collaborate with "
-                    "yourself!")
+                    "yourself!", 'error')
         elif self in project.members:
-            return f'{self.name} is already a member of {project.name}.'
+            return (f'{self.name} is already a member of {project.name}.',
+                    'error')
         elif self.has_applied(project):
             return (f'{self.name} has already applied to {project.name}! '
-                    'Go to the project page to accept their application.')
+                    'Go to the project page to accept their application.',
+                    'error')
         elif self in project.invitations:
             return (f'You have already invited {target_user.name} to join '
-                    f'{project.name}. You will be notified when they respond.')
+                    f'{project.name}. You will be notified when they respond.',
+                    'error')
         # notify user
+        self.notify(text=(f'{current_user.name} has invited you '
+                          f'to collaborate on {project.name}! '
+                           'Visit your profile page to reply.'),
+                    category=1
+        )
         # add invitation
         self.invitations.append(project)
         # update project activity
         project.update_last_active()
         self.update()
-        return None
+        message = (f'You have sent {target_user.name} an invitation to collaborate '
+                   f'on {project.name}. You will be notified when they respond.')
+        return (message, 1)
 
     ## rejections ##
     def add_rejection(self, project):

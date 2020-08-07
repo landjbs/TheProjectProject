@@ -130,15 +130,14 @@ def collaborate(target_user_id):
     error_flag = False
     project = Project.query.get_or_404(request.form.get('selected_project'))
     target_user = User.query.get_or_404(target_user_id)
-    message = target_user.collaborate(project):
-    if message:
-        flash(message, 'error')
-    else:
+    message, category = target_user.collaborate(project):
+    flash(message, category)
+    return
 
 
 
     if not current_user==project.owner:
-        flash('Cannot invite collaborator to project you do not own.')
+        flash()
     elif current_user==target_user:
         flash("You don't need to send an invitation to collaborate with "
               "yourself!")
