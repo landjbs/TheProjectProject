@@ -7,7 +7,7 @@ from ..hub import hub
 from app.utils import partition_query
 from app.recommendations.projects import (get_recommended_projects,
                                     get_trending_projects, get_user_projects)
-from app.recommendations.search import search
+from app.recommendations.search import search_text
 
 
 @hub.route('/home', methods=['GET'])
