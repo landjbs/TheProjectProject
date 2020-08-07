@@ -113,7 +113,6 @@ def project_page(project_code):
 @limiter.limit('5 per minute')
 def join_project(project_id):
     ''' Join project according to application and open status'''
-    raise ValueError('not reconfigured!')
     project = Project.query.get_or_404(project_id)
     if is_project_member(current_user, project):
         flash(f'Could not join {project.name} because you are '
