@@ -131,6 +131,7 @@ class Project(CRUDMixin, db.Model):
         # update project data and activity
         self.update_last_active()
         self.update()
+        return True
 
 
     ## tasks ##
