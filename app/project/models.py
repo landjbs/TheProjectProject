@@ -137,8 +137,11 @@ class Project(CRUDMixin, db.Model):
         )
         self.update()
 
-    def notify_members(self, text):
-        raise ValueError('todo imp notify_members')
+    def notify_members(self, text, category, include_owner=True):
+        ''' Notify project members with text and category '''
+        notification = Notification(text=text, category=category)
+        for member in self.members:
+            
 
     def add_member(self, user):
         ''' Adds member to project '''
