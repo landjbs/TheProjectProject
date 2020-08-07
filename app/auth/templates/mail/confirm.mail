@@ -16,7 +16,7 @@ decision. For future, reference, we have attached a copy of your application:
 <br>
 <br>
 {% if user.url %}
-  <u>URL</u>:
+  <u>URL</u>:<br>
   {{ user.url }}
   <br>
   <br>

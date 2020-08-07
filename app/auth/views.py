@@ -49,7 +49,7 @@ def apply():
         s = URLSafeSerializer(current_app.secret_key)
         token = s.dumps(user.id)
         url = url_for('auth.verify', token=token, _external=True)
-        send_registration_email.queue(user.id, url)
+        send_registration_email.queue(user, url)
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '

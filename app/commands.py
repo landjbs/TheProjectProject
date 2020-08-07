@@ -52,7 +52,7 @@ def populate_db(num_users, num_projects):
     for _ in trange(num_projects):
         requires_application = rand_bool(0.5)
         complete = rand_bool(0.05)
-        owner = User.get_by_id(np.random.randint(1, user_num))
+        owner = User.get_by_id(np.random.randint(1, user_num+1))
         projects.append(
             Project(
                 owner=owner,
