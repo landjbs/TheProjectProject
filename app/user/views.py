@@ -143,10 +143,11 @@ def collaborate(target_user_id):
 def accept_collaboration(project_id):
     project = Project.query.get_or_404(project_id)
     if current_user in project.invitations:
-        flash(f'You have accepted the invitation to {project.name}.')
-        manager.add_user_to_project(current_user, project)
+        flash(f'You have accepted the invitation to {project.name}.', 'success')
+        project.add_member(current_user)
     else:
-        flash(f'Could not join {current_user.name} as you have not been invited.')
+        flash(f'Could not join {current_user.name} as you have not been invited.',
+               'error')
     return redirect(request.referrer)
 
 
