@@ -11,6 +11,7 @@ from flask_admin.menu import MenuLink
 import app.models as models
 from app.user.models import User, User_Report
 from app.project.models import Project
+from app.subject.models import Subject
 
 
 class AdminBaseView(ModelView):
@@ -104,11 +105,11 @@ class ReportModelView(AdminBaseView):
 
 def register_admin_views(admin, db):
     # model views
-    admin.add_view(UserModelView(User, db.session, name='User', endpoint='AdminUser'))
+    admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
     admin.add_view(AdminBaseView(Project, db.session, endpoint='AdminProject'))
     admin.add_view(AdminBaseView(models.Comment, db.session))
     admin.add_view(AdminBaseView(models.Task, db.session))
-    admin.add_view(AdminBaseView(models.Subject, db.session))
+    admin.add_view(AdminBaseView(Subject, db.session, endpoint='AdminSubject'))
     admin.add_view(ReportModelView(User_Report, db.session))
     admin.add_view(AdminBaseView(models.Project_Application, db.session))
     admin.add_view(AdminBaseView(models.Notification, db.session))
