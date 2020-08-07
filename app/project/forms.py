@@ -66,6 +66,23 @@ class Add_Project(BaseForm):
 
     print('WARNING: TEAM_SIZE AND ESTIMATE_TIME INTEGER RENDER BUG!!!')
 
+    def validate(self):
+        ''' Validates project '''
+        # error flag to check all errors at once
+        error_flag = False
+        # stock validation
+        rv = BaseForm.validate(self)
+        if not rv:
+            error_flag = True
+        if (len(form.subjects.data)>5):
+            form.subjects.errors = ['Can only choose up to 5 subjects.']
+            error_flag = True
+        # team size defaults to 1 if None
+        if form.team_size.data is None:
+            form.team_size.data = 1
+        # url to none
+        if form.url.data=='':
+            form.url.data=None
 
 
 class Edit_Project(BaseForm):

@@ -16,8 +16,8 @@ from ..project import project
 @login_required
 @limiter.limit('10 per minute')
 def add_project():
-    form = Add_Project(request.form)
-    if request.method=='POST' and form.validate_on_submit():
+    form = Add_Project()
+    if form.validate_on_submit():
         # url to none
         if form.url.data=='':
             form.url.data=None
