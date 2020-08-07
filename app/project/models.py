@@ -191,11 +191,23 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
-    def complete_task(self, task_id, user):
+    def change_task_status(self, task_id, user, action):
         task = self.tasks.filter_by(id=task_id).first()
         if not task or not self.is_member(user):
             return False
+        if action=='complete':
+            if not task.complete:
+                task.mark_complete(user)
+            else:
+                task.add_worker(user)
+        elif action=='back':
+            if user in task.workers:
+                task.remove_worker(user)
+        else:
+            raise ValueError(f'Invalid action {action} for change_task_status.')
+
         task.mark_complete(user)
+        project.update_last_active()
         return True
 
     ## comments ##

@@ -192,6 +192,7 @@ def delete_comment(project_id, comment_id):
 def mark_task_complete(project_id, task_id, action):
     ''' Mark task as complete, delete task, or remove help '''
     project = Project.query.get_or_404(project_id)
+    project.change_task_status(task_id, current_user, action)
     # get task
     task = Task.query.get_or_404(task_id)
     if (action=='complete'):
