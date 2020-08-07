@@ -173,6 +173,11 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
+    def change_user_status(self, user, action):
+        if action=='accept':
+            if not user in self.members:
+                return False
+
     ## tasks ##
     def todo(self):
         ''' Returns active tasks on project that haven't been completed '''
@@ -210,7 +215,6 @@ class Project(CRUDMixin, db.Model):
                 task.delete()
         else:
             raise ValueError(f'Invalid action {action} for change_task_status.')
-        task.mark_complete(user)
         self.update_last_active()
         return True
 

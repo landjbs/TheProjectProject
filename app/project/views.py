@@ -230,7 +230,7 @@ def transfer_ownership(project, user):
 @project.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
 @login_required
 @limiter.limit('20 per minute')
-def change_project_status(project_id, user_id, action):
+def change_user_status(project_id, user_id, action):
     ''' Change status of user with repsect to project '''
     project = Project.query.get_or_404(project_id)
     user = User.query.get_or_404(user_id)
