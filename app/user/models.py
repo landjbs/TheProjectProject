@@ -151,7 +151,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             if prev is not None:
                 prev.number += 1
             else:
-                new = User_Subjects(user=user, subject=subject)
+                new = User_Subjects(user=self, subject=subject)
                 self.subjects.append(new)
         self.update()
         return True

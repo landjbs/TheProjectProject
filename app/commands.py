@@ -24,10 +24,11 @@ def drop_db():
 
 
 def rebuild_db():
-    ''' Drops database and then creates '''
+    ''' Drops database, creates, and adds statics '''
     print(colored('Dropping...'))
     drop_db()
     create_db()
+    add_statics()
 
 
 
@@ -49,8 +50,8 @@ def add_statics():
     db.session.commit()
 
 
-@click.option('--num_users', default=50, help='Number of users.')
-@click.option('--num_projects', default=100, help='Number of projects.')
+@click.option('--num_users', default=400, help='Number of users.')
+@click.option('--num_projects', default=1000, help='Number of projects.')
 def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
     fake = Faker()
@@ -61,25 +62,25 @@ def populate_db(num_users, num_projects):
         return np.random.choice([True, False], p=[p_true, (1-p_true)])
     subject_num = Subject.query.count()
     def rand_subjects(n):
-        return [User.get_by_id(id)
+        return [Subject.get_by_id(int(id))
                 for id in np.random.randint(1, subject_num+1, size=n)]
     # ./helpers
     # fake users
     users = []
     for _ in trange(num_users, desc='Populating Users'):
         name = fake.name()
-        users.append(
-            User(
+        user = User(
                 name=name,
                 email=fake.email(),
                 password=(fake.word()+fake.word()),
                 url=f'https://github.com/{"_".join(name.split(" ")).lower()}',
                 about=rand_words(10)
             )
-        )
+        users.append(user)
     # real users
     for user in users:
         db.session.add(user)
+        user.add_subjects(rand_subjects(np.random.randint(0,5)))
     # fake projects
     projects = []
     user_num = User.query.count()
