@@ -264,3 +264,40 @@ def transfer_ownership(project, user):
     flash(f'You have transferred ownership of {project.name} to '
           f'{user.name}.')
     return True
+
+
+
+@application.route('/change_project_status/<int:project_id>/<int:user_id>/<action>')
+@login_required
+@limiter.limit('20 per minute')
+def change_project_status(project_id, user_id, action):
+    ''' Change status of user with repsect to project '''
+    project = Project.query.get_or_404(project_id)
+    user = User.query.get_or_404(user_id)
+    error_flag = False
+    ## ACCEPT ##
+    if action=='accept':
+        if user in project.members:
+            flash('Cannot accept user already in project.')
+            error_flag = True
+        else:
+            manager.add_user_to_project(user, project)
+    ## REJECT ##
+    elif action=='reject':
+        # remove user from project
+        if user in project.members:
+            manager.remove_user_from_project(user, project, admin=True)
+        # remove user from pending
+        else:
+            error_flag = (not manager.reject_user_from_pending(user, project, admin=True))
+    ## MAKE OWNER ##
+    elif action=='make_owner':
+        error_flag = (not transfer_ownership(project, user))
+    else:
+        flash('Invalid action.')
+        error_flag = True
+    if not error_flag:
+        project.update_last_active()
+        db.session.commit()
+        db.session.close()
+    return redirect(request.referrer)
