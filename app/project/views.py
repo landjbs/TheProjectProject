@@ -292,14 +292,16 @@ def make_owner(project_id, user_id):
 @project.route('/make_owner/<int:project_id>/<int:user_id>')
 @limiter.limit('60/minute')
 def accept_application():
-
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Must be project owner to accept applications.')
+    else:
+        if not project.accept_application(user_id):
+            flash('Could not transfer ownership', 'error')
+    return redirect(request.referrer)
 
 
 def reject_application():
-    pass
-
-
-def accept_application():
     pass
 
 

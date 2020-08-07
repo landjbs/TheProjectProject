@@ -131,7 +131,11 @@ class Project(CRUDMixin, db.Model):
 
     def accept_application(self, user_id):
         ''' Accpets pending application of user_id to project '''
-        user = self.pending.filter().first()
+        # validate that user has applied
+        user = self.pending.filter(user_id=user_id).first()
+        if not user:
+            return False
+        self.add_member(user, notify_owner=False)
         return True
 
     def notify_owner(self, text, category=0):
@@ -157,7 +161,7 @@ class Project(CRUDMixin, db.Model):
             member.add_notification(notification)
         return True
 
-    def add_member(self, user):
+    def add_member(self, user, notify_owner):
         ''' Adds member to project '''
         # add project subjects to user
         user.add_subjects(self.subjects)
@@ -173,7 +177,7 @@ class Project(CRUDMixin, db.Model):
             self.rejections.remove(user)
         # notify other project members
         self.notify_members(text=f'{user.name} has joined {self.name}.',
-                            category=0)
+                            category=0, include_owner=notify_owner)
         # add member to project
         self.members.append(user)
         # update project data and activity
