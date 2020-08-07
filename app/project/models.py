@@ -2,6 +2,7 @@ from datetime import datetime
 from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
+from app.notifcation.models import Notifcation
 
 
 class Project(CRUDMixin, db.Model):
@@ -117,8 +118,10 @@ class Project(CRUDMixin, db.Model):
         ''' Gets application of user to project if exists else returns None '''
         return self.pending.filter_by(user=current_user).first()
 
-    def notify_owner(self, text):
-        ''' Notify owner with text'''
+    def notify_owner(self, text, category):
+        ''' Notify owner with text and category '''
+
+
 
     def notify_members(self, text):
         raise ValueError('todo imp notify_members')

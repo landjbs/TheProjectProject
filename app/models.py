@@ -171,23 +171,7 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}; TEXT={self.text}>'
-
-
-class Notification(db.Model):
-    __tablename__ = 'notification'
-    # id
-    id = db.Column(Integer, primary_key=True)
-    # text
-    text = db.Column(String(160), nullable=False)
-    # user
-    users = relationship('User', secondary=user_to_notification,
-                         back_populates='notifications')
-    # timestamp
-    timestamp = db.Column(DateTime, default=datetime.utcnow, index=True)
-
-    def __repr__(self):
-        return f'<Notification to {self.users} at {self.timestamp}; TEXT={self.text}>'
-
+        
 
 class Badge(db.Model):
     __tablename__ = 'badge'
