@@ -292,6 +292,23 @@ def complete_project(project_id):
 @login_required
 @limiter.limit('3 per minute')
 def uncomplete_project(project_id):
+    ''' Mark project as incomplete '''
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can mark a project as incomplete.')
+    else:
+        if not project.mark_incomplete():
+            flash(f'Could not mark {project.name} as incomplete.', 'error')
+        else:
+            flash(f'You have marked {project.name} as incomplete. We are '
+                   'excited to see where you will take it!')
+    return redirect(request.referrer)
+
+
+@project.route('/uncomplete_project/<int:project_id>', methods=['POST'])
+@login_required
+@limiter.limit('3 per minute')
+def uncomplete_project(project_id):
     ''' Mark project as not complete '''
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
