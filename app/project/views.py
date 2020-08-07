@@ -312,7 +312,7 @@ def reject_application():
     if current_user!=project.owner:
         flash('Must be project owner to reject applications.')
     else:
-        if not project.reject_application(user_id):
+        if not project.reject_application(user, by_owner=True):
             flash('Could not reject applicant.', 'error')
     return redirect(request.referrer)
 

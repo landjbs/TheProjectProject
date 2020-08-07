@@ -132,23 +132,37 @@ class Project(CRUDMixin, db.Model):
     def accept_application(self, user):
         ''' Accpets pending application of user_id to project '''
         # validate that user has applied
-        user = self.pending.filter(user_id=user).first()
-        if not user:
+        application = self.pending.filter(user=user).first()
+        if not application:
             return False
         # add user to project
         self.add_member(user, notify_owner=False)
         return True
 
-    def reject_application(self, user):
+    def reject_application(self, user, by_owner):
         # validate that user has applied
-        user = self.pending.filter(user_id=user_id).first()
-        if not user:
+        application = self.pending.filter(user=user).first()
+        if not application:
             return False
         # remove application
-
+        db.session.remove(application)
         # add rejection to user
         user.add_rejection(self)
         # notify user
+        if by_owner:
+            user.notify(
+                text=f'The owner of {project.name} decided not '
+                     'to add you to the project right now. '
+                     "We promise it's nothing personal! "
+                     'Please contact us if you think something'
+                     ' is wrong or have any questions.')
+            )
+        else:
+            for note in project.owner.notifications:
+                if (user.name in note.text) and (project.name in note.text):
+                    project.owner.notifications.remove(note)
+        self.update()
+
 
     def notify_owner(self, text, category=0):
         ''' Notify owner with text and category '''
