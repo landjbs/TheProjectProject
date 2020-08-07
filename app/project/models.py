@@ -109,8 +109,10 @@ class Project(CRUDMixin, db.Model):
         self.last_active = datetime.utcnow()
 
     ## members ##
-    def add_member(user):
+    def add_member(self, user):
+        self.members.append(user)
         
+        self.update()
 
 
     ## tasks ##

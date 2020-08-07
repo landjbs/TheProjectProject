@@ -124,7 +124,7 @@ def join_project(project_id):
             flash(f'You have been added to {project.name}!')
             project.add(current_user)
         else:
-            form = Project_Application_Form(request.form)
+            form = Project_Application_Form()
             if form.validate_on_submit():
                 application = project.pending.filter_by(user=current_user).first()
                 if application is not None:
