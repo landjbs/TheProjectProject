@@ -186,7 +186,8 @@ class Project(CRUDMixin, db.Model):
         # notifications
         if by_owner:
             self.notify_members(
-                text=(f'{user.name} has been removed from {self.name}.')
+                text=(f'{user.name} has been removed from {self.name}.'),
+                include_owner=False
             )
             user.notify(text=f'You have been removed from '
                              f'{project.name} by the owner. We promise '
@@ -198,6 +199,9 @@ class Project(CRUDMixin, db.Model):
                 text=(f'{user.name} has been left {self.name}.')
             )
         # add rejection from project to user
+        user.add_rejection(self)
+        self.update()
+        return True
 
 
     def change_user_status(self, user, action:str):

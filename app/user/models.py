@@ -204,6 +204,7 @@ class User(CRUDMixin, UserMixin, db.Model):
     ## rejections ##
     def add_rejection(self, project):
         self.rejections.append(project)
+        self.update()
         return True
 
     ## public analytics ##
