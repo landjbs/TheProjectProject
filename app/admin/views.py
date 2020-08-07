@@ -12,7 +12,7 @@ import app.models as models
 from app.user.models import User, User_Report
 from app.project.models import Project
 from app.subject.models import Subject
-from app.notifications.models import Notification
+from app.notification.models import Notification
 
 
 class AdminBaseView(ModelView):

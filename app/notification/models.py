@@ -11,7 +11,7 @@ class Notification(CRUDMixin, db.Model):
     # text
     text = db.Column(db.String(160), nullable=False)
     # user
-    users = relationship('User', secondary=user_to_notification,
+    users = relationship('User', secondary='user_to_notification',
                          back_populates='notifications')
     # timestamp
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
