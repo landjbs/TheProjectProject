@@ -138,7 +138,7 @@ class Project(CRUDMixin, db.Model):
         )
         self.update()
 
-    def notify_members(self, text, category, include_owner=True):
+    def notify_members(self, text, category=0, include_owner=True):
         ''' Notify project members with text and category '''
         notification = Notification(text=text, category=category)
         if include_owner:
@@ -175,10 +175,24 @@ class Project(CRUDMixin, db.Model):
 
     def remove_member(self, user_id:int, by_owner:bool):
         ''' Removes member from project '''
+        # verify that user is a member
         user = self.members.filter_by(id=user_id).first()
-        if not user or user==self.owner:
+        if not user:
             return False
-        
+        # remove project subjects from user
+        user.remove_subjects(self.subjects)
+        # remove user from project
+        self.members.remove(user)
+        # notifications
+        if by_owner:
+            self.notify_members(
+                text=(f'{user.name} has been removed from {self.name}.')
+            )
+            user.notify(text=f'You have been removed from '
+                             f'{project.name} by the owner. We promise '
+                             "it's nothing personal! Please contact us "
+                             'if you think something is wrong or have '
+                             'any questions.')
 
 
     def change_user_status(self, user, action:str):

@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
 from app.models import User_Subjects
+from app.notifications.models import Notification
 from app.extensions import bcrypt
 
 
@@ -155,7 +156,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.update()
         return True
 
-    def remove_subjects_from_user(self, subjects):
+    def remove_subjects(self, subjects):
         for subject in subjects:
             prev = self.subjects.filter_by(subject=subject).first()
             if prev:
@@ -170,8 +171,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         return True
 
     ## notifications ##
-    def notify(self, text, category):
-        raise ValueError('notify not implemented')
+    def notify(self, text, category=0):
+        self.notifications.append(Notification(text=text, category=category))
+        self.update()
 
     def add_notification(self, notification):
         self.notifications.append(notification)
