@@ -1,10 +1,11 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
-
-
+# absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
-from ..models import Project
+# package imports
+from .models import Project
+from .forms import CommentForm, Task_Form, Project_Application_Form
 
 
 @application.route('/project=<project_code>', methods=['GET', 'POST'])
@@ -12,9 +13,9 @@ from ..models import Project
 def project_page(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # forms
-    comment_form = forms.Comment_Form(request.form)
-    task_form = forms.Task_Form(request.form)
-    project_application = forms.Project_Application_Form(request.form)
+    comment_form = Comment_Form(request.form)
+    task_form = Task_Form(request.form)
+    project_application = Project_Application_Form(request.form)
     ## task data visualization ##
     # vis activity
     activity_data = {} if project.tasks.count()>0 else False
