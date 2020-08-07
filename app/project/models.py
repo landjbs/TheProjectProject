@@ -140,7 +140,15 @@ class Project(CRUDMixin, db.Model):
         return True
 
     def reject_application(self, user_id):
+        # validate that user has applied
+        user = self.pending.filter(user_id=user_id).first()
+        if not user:
+            return False
+        # remove application
         
+        # add rejection to user
+        user.add_rejection(self)
+        # notify user
 
     def notify_owner(self, text, category=0):
         ''' Notify owner with text and category '''
