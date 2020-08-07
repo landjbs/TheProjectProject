@@ -62,5 +62,48 @@ class Add_Project(BaseForm):
     complete = BooleanField('Completed',
                             description=('Whether the project has been '
                             'completed.'))
-                            
+
     print('WARNING: TEAM_SIZE AND ESTIMATE_TIME INTEGER RENDER BUG!!!')
+
+
+
+class Edit_Project(BaseForm):
+    ''' Form to edit existing project '''
+    name = StringField(label='Project Name',
+                       validators=[DataRequired(), Length(1, 25)],
+                       render_kw={'max': 25})
+    oneliner = StringField(label='One-Liner',
+                           validators=[DataRequired(), Length(1, 40)],
+                           render_kw={'max': 40})
+    summary = TextField(label='Summary',
+                        validators=[DataRequired(), Length(1, 400)],
+                        render_kw={'max':400})
+    estimated_time = FloatField('Estimated Time', render_kw={'min':0, 'max':30, 'start':7})
+    team_size = IntegerField('Target Team Size',
+                            render_kw={'min':1, 'max':30, 'start':7})
+
+
+class Edit_Project_Application(BaseForm):
+    ''' Form to edit application question of existing project '''
+    application_question = TextField('Application Question',
+                                    validators=[Length(0, 128)],
+                                    render_kw={'max':128})
+
+
+
+class Project_Application_Form(BaseForm):
+    ''' Form to respond to question on existing project application '''
+    response = TextField('Response', validators=[Length(0,250)],
+                         render_kw={'max':250})
+
+
+class Task_Form(BaseForm):
+    ''' Form to add task to project '''
+    text = TextField('Task', validators=[DataRequired(), Length(1,160)],
+                     render_kw={'max':160})
+
+
+class Comment_Form(BaseForm):
+    ''' Form to add comment to project '''
+    text = TextField('Comment', validators=[DataRequired(), Length(1,160)],
+                     render_kw={'max':160})
