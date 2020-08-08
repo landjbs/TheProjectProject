@@ -25,6 +25,8 @@ from app.commands import (create_db, drop_db, populate_db, rebuild_db,
     add_statics)
 from app.utils import url_for_other_page
 
+from app.user.models import Anonymous
+
 
 def create_app(config=config.BaseConfig):
     ''' '''
@@ -85,14 +87,21 @@ def register_extensions(app):
     admin.init_app(app)
     travis.init_app(app)
     db.init_app(app)
+    ######### LOGIN MANAGER #########
     lm.init_app(app)
-    # mail.init_app(app)
+    lm.login_view = 'auth.login'
+    lm.anonymous_user = Anonymous
+    ################################
+    ########## BCRYPT ##############
     bcrypt.init_app(app)
+    ################################
     assets.init_app(app)
     # babel.init_app(app)
     rq.init_app(app)
     migrate.init_app(app, db)
+    ########## LIMITER ##############
     limiter.init_app(app)
+    ################################
 
 
 def register_blueprints(app):
