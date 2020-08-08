@@ -88,21 +88,3 @@ class User_Badge(db.Model):
             return f'<USER_BADGE u={self.user.name} b={self.badge.name} p={self.progress}>'
         else:
             return f'<USER_BADGE u={self.user.name} b={self.badge.name} e={self.earn_stamp}>'
-
-
-## BASE CLASSES ##
-class Badge(db.Model):
-    __tablename__ = 'badge'
-    # id
-    id = db.Column(Integer, primary_key=True)
-    # name
-    name = db.Column(String(60), nullable=False, unique=True)
-    # url for icon
-    icon_url = db.Column(String(250), nullable=False, unique=True)
-    # color
-    color = db.Column(String(6), unique=True, nullable=False)
-    # users
-    users = relationship('User_Badge', back_populates='badge', lazy='dynamic')
-
-    def __repr__(self):
-        return f'<Badge {self.name}>'
