@@ -25,26 +25,10 @@ from auth import UserView, ReportView, AdminBaseView
 import manager as manager
 import recommendation as rec
 
-# Elastic Beanstalk initalization
-application = create_app()
-
-
-# initalization
-login_manager = LoginManager(app=application)
-login_manager.init_app(app=application)
-login_manager.login_view = 'login'
-login_manager.anonymous_user = Anonymous
-
 
 @login_manager.user_loader
 def user_loader(id):
     return User.query.get_or_404(id)
-
-
-def is_project_member(user, project):
-    if user==None:
-        return False
-    return (user in project.members)
 
 
 # TEMP: MAILING HERE FOR NOW
