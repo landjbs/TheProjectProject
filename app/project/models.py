@@ -391,6 +391,9 @@ class Project(CRUDMixin, db.Model):
     def remove_application(self):
         ''' Turns off applicaiton requirement '''
         self.requires_application = False
+        self.notify_members(text=(f'An application requirement has been added '
+                                  f'to {self.name} by the owner.'),
+                            category=0, include_owner=False)
         self.update_last_active()
         self.update()
         return True
