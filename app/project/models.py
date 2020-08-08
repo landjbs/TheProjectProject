@@ -350,6 +350,7 @@ class Project(CRUDMixin, db.Model):
                 category=0,
                 include_owner=False
             )
+            self.update()
             return True
         return False
 
