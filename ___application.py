@@ -173,8 +173,6 @@ def reset():
 
 
 
-
-
 @application.route('/withdraw_application/<int:project_id>')
 @login_required
 def withdraw_application(project_id):

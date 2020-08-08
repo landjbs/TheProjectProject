@@ -2,6 +2,7 @@ from .models import Subject
 
 
 def create_subjects(db):
+    # NOTE: THIS LOOKS BETTER WHEN SUBJECT NUM % 3 = 0
     subjects = [# data/math/ai:    red
                 Subject('AI/ML',                    '#FF0000'),
                 Subject('Data Science',             '#FF2A00'),

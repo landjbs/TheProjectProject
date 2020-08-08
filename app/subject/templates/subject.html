@@ -9,11 +9,12 @@
 
 {% block content %}
 <div class='container my-2' style='min-width: 90%'>
-  <h4 style='text-align:left;'>{{ subject.name }}</h4>
+  <h4 style='text-align:left;'>Subject: {{ subject.name }}</h4>
   <hr class="my-2">
   {% if project_tabs!=[] %}
     <h4 style='text-align:left;'>
       Projects
+      <i class="fa fa-circle" style='color:#FF5D00;'></i>
       {{ project_count }}
     </h4>
     <hr class="my-2">
@@ -48,6 +49,7 @@
     <div id="user-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <h4 style='text-align:left;'>
         Users
+        <i class='far fa-user-circle'></i>
         {{ user_count }}
       </h4>
       <hr class="my-2">
@@ -94,7 +96,6 @@
       {% endif %}
     {% endfor %}
   {% endfor %}
-
 </div>
 
 
