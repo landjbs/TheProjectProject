@@ -393,9 +393,15 @@ def change_project_open(project_id, action):
     if current_user!=project.owner:
         flash('Only the owner can change join settings.')
     elif action=='open':
-        project.mark_open()
+        if not project.mark_open():
+            flash(f'Could not open {project.name}.', 'error')
+        else:
+            flash(f'You have opened {projecnt.name}.', 'success')
     elif action=='close':
-        project.mark_closed()
+        if not project.mark_closed():
+            flash(f'Could not close {project.name}.', 'error')
+        else:
+            flash(f'You have closed {projecnt.name}.', 'success')
     return redirect(request.referrer)
 
 
