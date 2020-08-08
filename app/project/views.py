@@ -432,5 +432,8 @@ def remove_application_requirement(project_id):
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')
     else:
-        project.remove_application()
+        if not project.remove_application():
+            flash(f'Could not remove application.', 'error')
+        else:
+            flash('Application requirement removed!', 'success')
     return redirect(request.referrer)
