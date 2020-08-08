@@ -4,51 +4,6 @@ from app import db
 from app.models import (Project, User, Subject, User_Subjects,
                         User_Report, Notification)
 
-## USER ##
-def create_user(user, subject_ids):
-    db.session.add(user)
-    for id in subject_ids:
-        subject = Subject.query.get(id)
-        if subject:
-            add_subject_to_user(user, subject)
-    db.session.add(user)
-    db.session.commit()
-    db.session.close()
-    return True
-
-
-def report_user(reporter, reported, text):
-    report = User_Report(reporter=reporter, text=text)
-    reported.reports.append(report)
-    db.session.add(report)
-    db.session.commit()
-    db.session.close()
-    return True
-
-
-## USER SUBJECTS ##
-def add_subject_to_user(user, subject):
-    prev = user.subjects.filter_by(subject=subject).first()
-    if prev is not None:
-        prev.number += 1
-    else:
-        new = User_Subjects(user=user, subject=subject)
-        user.subjects.append(new)
-    return True
-
-
-def remove_subject_from_user(user, subject):
-    prev = user.subjects.filter_by(subject=subject).first()
-    if prev:
-        new_number = (prev.number - 1)
-        if (new_number < 1):
-            db.session.delete(prev)
-        else:
-            prev.number = new_number
-    else:
-        return False
-    return True
-
 
 def delete_user(user):
     # delete user/subject associations
@@ -77,32 +32,6 @@ def delete_user(user):
     db.session.close()
 
 
-## USER TO PROJECTS ##
-def add_user_to_project(user, project):
-    # add project subjects to user
-    for subject in project.subjects:
-        add_subject_to_user(user, subject)
-    # notify all members
-    notification = Notification(text=f'{user.name} has joined {project.name}.')
-    for member in project.members:
-        member.notifications.append(notification)
-    # delete possible application
-    application = project.pending.filter_by(user=user).first()
-    if application is not None:
-        db.session.delete(application)
-    # delete possible invitation
-    if user in project.invitations:
-        project.invitations.remove(user)
-    # delete possible rejection
-    if user in project.rejections:
-        project.rejections.remove(user)
-    # add to session
-    user.projects.append(project)
-    project.update_last_active()
-    db.session.add(project)
-    db.session.commit()
-    db.session.close()
-    return True
 
 
 def remove_user_from_project(user, project, admin=False):
