@@ -78,7 +78,7 @@ class User(CRUDMixin, UserMixin, db.Model):
     subjects = relationship('User_Subjects',
                             back_populates='user',
                             lazy='dynamic',
-                            cascade='all, delete, delete-orphan'
+                            cascade='all, delete, delete-orphan',
                             order_by='desc(User_Subjects.number)')
     ## reporting ##
     # reports posted by user
