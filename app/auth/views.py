@@ -41,7 +41,8 @@ def apply():
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '
-               'Please confirm your email by following the link we just sent you.')
+               'Please confirm your email by following the link we just sent you.',
+               category='success')
         return redirect(url_for('base.index'))
     start_on = 0
     for i, elt in enumerate(form):
