@@ -65,7 +65,7 @@ def verify(token):
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         current_user.active = True
         current_user.update()
         return redirect(request.args.get('next') or url_for('hub.home'))
