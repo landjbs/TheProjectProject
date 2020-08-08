@@ -7,6 +7,7 @@ from app.database import db, CRUDMixin, generate_code
 from app.models import User_Subjects
 from app.notification.models import Notification
 from app.extensions import bcrypt
+from app.jobs import send_acceptance_email
 
 
 
@@ -122,13 +123,14 @@ class User(CRUDMixin, UserMixin, db.Model):
         return self.admin
 
     def accept(self):
-        # if not self.confirmed:
-            # raise RuntimeError(f'{self} email has not been confirmed.')
-        # elif self.accepted:
-            # raise RuntimeError(f'{self} has already been accepted.')
+        if not self.confirmed:
+            raise RuntimeError(f'{self} email has not been confirmed.')
+        elif self.accepted:
+            raise RuntimeError(f'{self} has already been accepted.')
         self.accepted = True
         self.accepted_on = datetime.utcnow()
         self.update()
+        send_acceptance_email.queue(self)
         return True
 
     def reject(self):
