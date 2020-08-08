@@ -13,7 +13,11 @@ class Badge(CRUDMixin, db.Model):
     # color
     color = db.Column(db.String(6), unique=True, nullable=False)
     # users
-    users = relationship('User_Badge', back_populates='badge', lazy='dynamic')
+    users = relationship('User_Badge',
+                        back_populates='badge',
+                        cascade='all, delete, delete-orphan',
+                        lazy='dynamic',
+                        order_by='earn_stamp')
 
     def __repr__(self):
         return f'<Badge {self.name}>'
@@ -22,15 +26,15 @@ class Badge(CRUDMixin, db.Model):
 class User_Badge(db.Model):
     __tablename__ = 'user_badge'
     # user
-    user_id = db.Column(Integer, ForeignKey('user.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     user = relationship('User', back_populates='badges')
     # badges
-    badge_id = db.Column(Integer, ForeignKey('badge.id'), primary_key=True)
+    badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=True)
     badge = relationship('Badge', back_populates='users')
     # progress
-    progress = db.Column(Float, nullable=False, default=float(0))
-    earned = db.Column(Boolean, nullable=False, default=False)
-    earn_stamp = db.Column(DateTime, nullable=True)
+    progress = db.Column(db.Float, nullable=False, default=float(0))
+    earned = db.Column(db.Boolean, nullable=False, default=False)
+    earn_stamp = db.Column(db.DateTime, nullable=True)
 
     def __repr__(self):
         if not self.earned:
