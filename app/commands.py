@@ -2,7 +2,7 @@ import click
 import numpy as np
 from faker import Faker
 from termcolor import colored
-from tqdm import trange
+from tqdm import trange, tqdm
 
 from app import db
 from app.user.models import User
@@ -79,13 +79,13 @@ def populate_db(num_users, num_projects):
             )
         users.append(user)
     # real users
-    for user in users:
+    for user in tqdm(users, desc='Adding Users'):
         db.session.add(user)
         user.add_subjects(rand_subjects(np.random.randint(0,6)))
     # fake projects
     projects = []
     user_num = User.query.count()
-    for _ in trange(num_projects):
+    for _ in trange(num_projects, desc='Populating Projects'):
         requires_application = rand_bool(0.5)
         complete = rand_bool(0.05)
         owner = User.get_by_id(np.random.randint(1, user_num+1))
@@ -106,6 +106,6 @@ def populate_db(num_users, num_projects):
                 team_size=np.random.randint(0,30)
             )
         )
-    for project in projects:
+    for project in tqdm(projects, desc='Adding Projects'):
         db.session.add(project)
     db.session.commit()
