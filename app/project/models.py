@@ -356,7 +356,16 @@ class Project(CRUDMixin, db.Model):
 
     def mark_closed(self):
         ''' Mark project as closed '''
-        
+        if self.open:
+            self.open = False
+            self.notify_members(
+                    text=f'{self.name} has been closed by the owner.'
+                    category=0,
+                    include_owner=False)
+            self.update_last_active()
+            self.update()
+            return True
+        return False
 
     ## public analytics ##
     def subject_data(self):
