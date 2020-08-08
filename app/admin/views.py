@@ -15,6 +15,7 @@ from app.user.models import User, User_Report
 from app.project.models import Project, Project_Application, Task, Comment
 from app.subject.models import Subject
 from app.notification.models import Notification
+from app.badge.models import Badge, User_Badge
 
 
 class AdminBaseView(ModelView):
