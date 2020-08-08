@@ -418,7 +418,7 @@ def add_application(project_id):
         if not project.add_application(form.application_question.data):
             flash(f'Could not add application.', 'error')
         else:
-            flash('Application requirement added!', 'success')
+            flash('Application requirement modified!', 'success')
     else:
         flash(f'Could not add application: {form.errors[0]}.', 'error')
     return redirect(request.referrer)
