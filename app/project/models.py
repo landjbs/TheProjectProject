@@ -143,11 +143,11 @@ class Project(CRUDMixin, db.Model):
     def reject_application(self, user, by_owner:bool):
         ''' Remove application of user to project '''
         # validate that user has applied
-        application = self.pending.filter(user=user).first()
+        application = self.get_application(user)
         if not application:
             return False
         # remove application
-        db.session.remove(application)
+        db.session.delete(application)
         # add rejection to user
         user.add_rejection(self)
         # notify user

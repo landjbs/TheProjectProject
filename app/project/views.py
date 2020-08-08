@@ -202,9 +202,7 @@ def join_project(project_id):
 @login_required
 def withdraw_application(project_id):
     ''' Withdraws current users application to project '''
-    print('HERE')
     project = Project.query.get_or_404(project_id)
-    print(f'PROJECT: {project}')
     if not project.reject_application(current_user, by_owner=False):
         flash('Could not withdraw application.', 'error')
     else:
