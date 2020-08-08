@@ -367,6 +367,20 @@ class Project(CRUDMixin, db.Model):
             return True
         return False
 
+    def mark_open(self):
+        ''' Mark project as open '''
+        if not self.open:
+            self.open = True
+            self.open = False
+            self.notify_members(
+                    text=f'{self.name} has been opened by the owner.'
+                    category=0,
+                    include_owner=False)
+            self.update_last_active()
+            self.update()
+            return True
+        return False
+
     ## public analytics ##
     def subject_data(self):
         ''' Get dict mapping project subject names to member skill levels '''
