@@ -9,6 +9,7 @@ from app.notification.models import Notification
 from app.extensions import bcrypt
 
 
+
 class User(CRUDMixin, UserMixin, db.Model):
     __tablename__ = 'user'
     # id primary key
@@ -318,3 +319,18 @@ class User_Report(db.Model):
         self.resolved = True
         self.action = int(action)
         self.resolve_stamp = datetime.utcnow()
+
+
+class Anonymous(AnonymousUserMixin):
+    ''' Anonymous user '''
+    def __init__(self):
+        super(Anonymous, self).__init__()
+
+    def is_admin(self):
+        return False
+
+    def has_starred(self, project):
+        return False
+
+    def has_applied(self, project):
+        return False

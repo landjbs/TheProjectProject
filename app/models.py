@@ -92,20 +92,6 @@ class User_Badge(db.Model):
 
 
 ## BASE CLASSES ##
-class Anonymous(AnonymousUserMixin):
-    def __init__(self):
-        super(Anonymous, self).__init__()
-
-    def is_admin(self):
-        return False
-
-    def has_starred(self, project):
-        return False
-
-    def has_applied(self, project):
-        return False
-
-
 class Badge(db.Model):
     __tablename__ = 'badge'
     # id

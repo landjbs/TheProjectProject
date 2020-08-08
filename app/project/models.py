@@ -59,7 +59,7 @@ class Project(CRUDMixin, db.Model):
     stars = relationship('User', secondary='user_to_project',
                          back_populates='starred', lazy='dynamic')
     # buzz
-    buzz = db.Column(db.Integer, nullable=False)
+    buzz = db.Column(db.Integer, nullable=False, default=0)
     # comments
     comments = relationship('Comment', back_populates='project', lazy='dynamic')
     # tasks
@@ -76,7 +76,6 @@ class Project(CRUDMixin, db.Model):
         self.subjects = subjects
         # members
         self.owner = owner
-        self.add_member(owner, notify_owner=False)
         self.team_size = team_size
         # application
         self.open = bool(open)
@@ -88,7 +87,7 @@ class Project(CRUDMixin, db.Model):
         self.completed_on = cur_time if complete else None
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
-        self.buzz = 0
+        self.add_member(owner, notify_owner=False)
 
     def __repr__(self):
         return f'<Project {self.name}>'
@@ -375,6 +374,7 @@ class Project(CRUDMixin, db.Model):
         return n
 
 
+
 class Project_Application(db.Model):
     __tablename__ = 'project_application'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
@@ -385,6 +385,7 @@ class Project_Application(db.Model):
 
     def __repr__(self):
         return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'
+
 
 
 class Task(CRUDMixin, db.Model):
@@ -446,6 +447,7 @@ class Task(CRUDMixin, db.Model):
     def worker_num(self):
         ''' Gets number of workers on task '''
         return len(self.workers)
+
 
 
 class Comment(CRUDMixin, db.Model):
