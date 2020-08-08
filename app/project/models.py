@@ -367,13 +367,6 @@ class Project(CRUDMixin, db.Model):
             return True
         return False
 
-    def add_application(self, question):
-        self.requires_application = True
-        self.application_question = question
-        self.update_last_active()
-        self.update()
-        return True
-
     def mark_open(self):
         ''' Mark project as open '''
         if not self.open:
@@ -386,6 +379,18 @@ class Project(CRUDMixin, db.Model):
             self.update()
             return True
         return False
+
+    def add_application(self, question:str):
+        ''' Turns on application requirement with question '''
+        self.requires_application = True
+        self.application_question = question
+        self.update_last_active()
+        self.update()
+        return True
+
+    def remove_application(self):
+        ''' Turns off applicaiton requirement '''
+        
 
     ## public analytics ##
     def subject_data(self):
