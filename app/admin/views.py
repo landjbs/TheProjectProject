@@ -8,6 +8,8 @@ from flask_admin.model.template import EndpointLinkRowAction
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.menu import MenuLink
 
+from app.jobs import send_acceptance_email
+
 import app.models as models
 from app.user.models import User, User_Report
 from app.project.models import Project, Project_Application, Task, Comment
@@ -43,6 +45,7 @@ class UserModelView(AdminBaseView):
     def accept_single(self):
         user = User.query.get_or_404(int(request.args.get('id')))
         user.accept()
+        send_acceptance_email.queue(user)
         flash(f'You have accepted {user.name}.')
         return redirect(request.referrer)
 

@@ -7,8 +7,6 @@ from app.database import db, CRUDMixin, generate_code
 from app.models import User_Subjects
 from app.notification.models import Notification
 from app.extensions import bcrypt
-from app.jobs import send_acceptance_email
-
 
 
 class User(CRUDMixin, UserMixin, db.Model):
@@ -76,7 +74,7 @@ class User(CRUDMixin, UserMixin, db.Model):
 
 
     def __init__(self, name, email, password, url, about, accepted=False,
-                 subjects=[], admin=False):
+                 admin=False):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
@@ -87,7 +85,6 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.accepted = True if admin else False
         self.accepted = accepted if not admin else True
         self.confirmed = True if admin or accepted else False
-        self.add_subjects(subjects)
 
     def __repr__(self):
         return f'<User {self.name}>'
@@ -130,7 +127,6 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.accepted = True
         self.accepted_on = datetime.utcnow()
         self.update()
-        send_acceptance_email.queue(self)
         return True
 
     def reject(self):

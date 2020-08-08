@@ -54,6 +54,7 @@ def send_confirmation_email(user):
 
 @rq.job
 def send_acceptance_email(user):
+    urls = {'login':  url_for('admin.login'),}
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [user.email]},

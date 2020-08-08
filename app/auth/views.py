@@ -24,13 +24,16 @@ def apply():
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
     # form validation
     if form.validate_on_submit():
+        subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
         user = User.create(
                     name=form.data['name'],
                     email=form.data['email'],
                     password=form.data['password'],
                     url=form.data['url'],
-                    about=form.data['about']
+                    about=form.data['about'],
                 )
+        print(f'SUBJECTS: {subjects}')
+        user.add_subjects(subjects)
         # generate token and send to user email
         s = URLSafeSerializer(current_app.secret_key)
         token = s.dumps(user.id)
