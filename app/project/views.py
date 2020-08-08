@@ -22,7 +22,7 @@ def add_project():
     # form preprocessing
     form = Add_Project()
     # if request.method=='GET':
-    form.subjects.choices = [(str(s.id), s.name) for s in Subject.query.all()]
+    form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
         # form.process()
     # form validation
     if form.validate_on_submit():
