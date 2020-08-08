@@ -64,6 +64,7 @@ def verify(token, expiration=604800):
     try:
         id = s.loads(token, salt='email-confirm-salt', max_age=1)
     except SignatureExpired:
+        # NOTE: RACE CONDITION IF DELETION AND CONFIRMATION HAPPEND SIMULTANEOUSLY
         # notify user and redirect to application page
         flash(('Oops! Your email confirmation expired so we removed your ' \
                'application. Please apply again.'), category='error')
