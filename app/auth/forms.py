@@ -7,7 +7,6 @@ from app.forms.base import BaseForm
 from app.forms.validators import Site_URL_Validator, Select_Limit_Validator
 
 from app.user.models import User
-from app.subject.models import Subject
 
 
 ## FORMS ##
@@ -37,7 +36,7 @@ class Apply(BaseForm):
                                     description=('What subjects are you '
                                                 'interested in?'),
                                     validators=[Select_Limit_Validator(5)],
-                                    choices=Subject.get_choice_list(),
+                                    choices=get_subject_choices(),
                                     render_kw={'max':5})
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),
