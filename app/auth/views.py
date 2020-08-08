@@ -62,7 +62,7 @@ def verify(token, expiration=604800):
     '''
     s = URLSafeTimedSerializer(current_app.secret_key)
     try:
-        id = s.loads(token, salt='email-confirm-salt', max_age=1)
+        id = s.loads(token, salt='email-confirm-salt', max_age=expiration)
     except SignatureExpired:
         # NOTE: RACE CONDITION IF DELETION AND CONFIRMATION HAPPEND SIMULTANEOUSLY
         # notify user and redirect to application page
