@@ -38,8 +38,7 @@ def apply():
         token = s.dumps(user.id, salt='email-confirm-salt')
         url = url_for('auth.verify', token=token, _external=True)
         print('HERE')
-        # send_registration_email.queue(user, url)
-        send_registration_email(user,url)
+        send_registration_email.queue(user, url)
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '
