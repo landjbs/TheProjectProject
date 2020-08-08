@@ -662,6 +662,13 @@
             <p>Application Question</p>
             {{ edit_application_form.csrf_token()  }}
             {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
+            <br>
+            {% if action=='edit' %}
+              <small style='color:red;'>
+                WARNING: If you remove the application, pending users will
+                automatically be accepted.
+              </small>
+            {% endif %}
         </div>
         <div class="modal-footer">
           {% if action!='add' %}
