@@ -389,7 +389,7 @@ class Project(CRUDMixin, db.Model):
         return True
 
     def remove_application(self):
-        ''' Turns off applicaiton requirement '''
+        ''' Turns off applicaiton requirement and accepts all pending members '''
         self.requires_application = False
         self.notify_members(text=(f'An application requirement has been added '
                                   f'to {self.name} by the owner.'),
