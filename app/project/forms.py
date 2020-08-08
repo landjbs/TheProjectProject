@@ -64,22 +64,17 @@ class Add_Project(BaseForm):
                             description=('Whether the project has been '
                             'completed.'))
 
-    print('WARNING: TEAM_SIZE AND ESTIMATE_TIME INTEGER RENDER BUG!!!')
-
     def validate(self):
         ''' Validates project '''
-        print(f'DATA:A {self.subjects.data}')
         # error flag to check all errors at once
         error_flag = False
         # stock validation
         rv = BaseForm.validate(self)
         if not rv:
             error_flag = True
-        print('HERE')
         if (len(self.subjects.data)>5):
             self.subjects.errors = ['Can only choose up to 5 subjects.']
             error_flag = True
-        print('THERE')
         # TODO: BETTER
         # team size defaults to 1 if None
         if self.team_size.data is None:
