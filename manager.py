@@ -32,58 +32,6 @@ def delete_user(user):
     db.session.close()
 
 
-
-def reject_project_invitation(user, project, admin):
-    ''' admin: true if rejected by project owner '''
-    if not user in project.invitations:
-        return False
-    # remove invitation
-    project.invitations.remove(user)
-    # add rejection to user and project
-    user.rejections.append(project)
-    # notify project owner
-    if not admin:
-        notification = Notification(text=(f'{user.name} has decided '
-                                    f'not to collaborate on {project.name}. '
-                                    "We promise it's nothing personal! Please "
-                                    'contact us if you think a mistake was made.'))
-        project.owner.notifications.append(notification)
-        flash(f'You have declined the offer to collaborate on {project.name}.')
-    else:
-        flash(f'You have withdrawn your invitation of {user.name} to {project.name}.')
-        # remove invitation from user notifcations
-        for note in user.notifications:
-            if project.name in note.text:
-                user.notifications.remove(note)
-    db.session.commit()
-    db.session.close()
-    return True
-
-
-def delete_project(project):
-    for member in project.members:
-        for subject in project.subjects:
-            remove_subject_from_user(member, subject)
-    db.session.delete(project)
-    db.session.commit()
-    db.session.close()
-    return True
-
-
-def create_project(project, user=None, batch=False):
-    if not user:
-        user = project.owner
-    # add project subjects to user
-    for subject in project.subjects:
-        add_subject_to_user(user, subject)
-    # add project to user projects
-    user.projects.append(project)
-    db.session.add(project)
-    db.session.commit()
-    if not batch:
-        db.session.close()
-
-
 def complete_project(project):
     if not project.complete:
         project.complete = True
