@@ -393,8 +393,8 @@ class Project(CRUDMixin, db.Model):
         self.requires_application = False
         for application in self.pending:
             self.add_member(application.user, notify_owner=False)
-        self.notify_members(text=(f'An application requirement has been added '
-                                  f'to {self.name} by the owner.'),
+        self.notify_members(text=(f'The application requirement has been '
+                                  f'removed from {self.name} by the owner.'),
                             category=0, include_owner=False)
         self.update_last_active()
         self.update()
