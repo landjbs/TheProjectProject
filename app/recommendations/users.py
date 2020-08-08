@@ -60,5 +60,6 @@ def recommend_users(project):
                                     ).limit(200)
     ## rank candidates ##
     results = [(user, score_user(user, project)) for user in candidates]
-    results = [x[0] for x in sorted(results, key=itemgetter(1)[:15], reverse=True)]
+    results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
+    results = results[:15]
     return results
