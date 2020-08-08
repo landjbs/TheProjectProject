@@ -19,7 +19,11 @@ from ..project import project
 @login_required
 @limiter.limit('10 per minute')
 def add_project():
+    # form preprocessing
     form = Add_Project()
+    form.subjects = [(str(s.id), s.name) for s in Subject.query.all()]
+    form.process()
+    # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
         project = Project.create(

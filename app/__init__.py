@@ -78,7 +78,6 @@ def create_app(config=config.BaseConfig):
         return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
                     elapsed_style=elapsed_style, time_to_str=time_to_str, now=now)
 
-
     return application
 
 

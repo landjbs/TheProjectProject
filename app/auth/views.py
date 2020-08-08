@@ -18,7 +18,11 @@ def load_user(id):
 
 @auth.route('/apply', methods=['GET', 'POST'])
 def apply():
+    # form preprocessing
     form = Apply()
+    form.subjects = [(str(s.id), s.name) for s in Subject.query.all()]
+    form.process()
+    # form validation
     if form.validate_on_submit():
         user = User.create(
                     name=form.data['name'],
