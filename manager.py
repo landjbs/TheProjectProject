@@ -4,14 +4,6 @@ from app import db
 from app.models import (Project, User, Subject, User_Subjects,
                         User_Report, Notification)
 
-
-def create_subject(name, color):
-    subject = Subject(name, color)
-    db.session.add(subject)
-    db.session.commit()
-    db.session.close()
-
-
 ## USER ##
 def create_user(user, subject_ids):
     db.session.add(user)
