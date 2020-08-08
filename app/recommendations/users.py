@@ -61,4 +61,5 @@ def recommend_users(project):
     ## rank candidates ##
     results = [(user, score_user(user, project)) for user in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
+    print(results)
     return results

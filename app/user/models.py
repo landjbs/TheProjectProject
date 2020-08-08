@@ -73,7 +73,8 @@ class User(CRUDMixin, UserMixin, db.Model):
                            lazy='dynamic')
 
 
-    def __init__(self, name, email, password, url, about, admin=False):
+    def __init__(self, name, email, password, url, about, accepted=False,
+                 admin=False):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
@@ -82,8 +83,8 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.about = str(about)
         self.admin = admin
         self.accepted = True if admin else False
-        self.confirmed = True if admin else False
-
+        self.accepted = accepted if not admin
+        self.confirmed = True if admin or accepted else False
 
     def __repr__(self):
         return f'<User {self.name}>'
