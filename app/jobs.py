@@ -58,9 +58,9 @@ def send_acceptance_email(user):
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [user.email]},
         Message={
-            'Subject': {'Data': 'Thanks For Applying!'},
+            'Subject': {'Data': 'Congratulations!'},
             'Body': {
-                'Html': {'Data': render_template('mail/confirm.mail',
+                'Html': {'Data': render_template('mail/accept.mail',
                                                  user=user)}
             }
         }
