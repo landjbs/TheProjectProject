@@ -20,11 +20,10 @@ def subject(subject_name):
     # users
     subject_users = [s.user for s in subject.users[:30]]
     user_tabs = partition_query(subject_users)
-    #
-    subject_tabs = []
     # application
     project_application = Project_Application_Form()
-    return render_template('hub.search.html', project_tabs=project_tabs,
-                        user_tabs=user_tabs, subject_tabs=subject_tabs,
-                        search_text=subject.name,
-                        project_application=project_application)
+    return render_template('subject.html',
+                           project_tabs=project_tabs,
+                           user_tabs=user_tabs,
+                           subject_name=subject.name,
+                           project_application=project_application)
