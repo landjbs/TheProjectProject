@@ -32,8 +32,6 @@ def delete_user(user):
     db.session.close()
 
 
-
-
 def remove_user_from_project(user, project, admin=False):
     ''' admin: true if owner removed false if user '''
     # remove project subjects from user
