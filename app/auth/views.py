@@ -41,7 +41,7 @@ def apply():
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '
-               'A confirmation link has been sent to your email.')
+               'Please confirm your email by following the link we just sent you.')
         return redirect(url_for('base.index'))
     start_on = 0
     for i, elt in enumerate(form):
@@ -64,7 +64,7 @@ def verify(token, expiration=604800):
         id = s.loads(token, salt='email-confirm-salt', max_age=1)
     except SignatureExpired:
         # make sure user account has been deleted
-        
+
         # notify user and redirect to application page
         flash(('Oops! Your email confirmation expired so we removed your ' \
                'application. Please apply again.'),
