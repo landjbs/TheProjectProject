@@ -32,66 +32,6 @@ def delete_user(user):
     db.session.close()
 
 
-def remove_user_from_project(user, project, admin=False):
-    ''' admin: true if owner removed false if user '''
-    # remove project subjects from user
-    for subject in project.subjects:
-        remove_subject_from_user(user, subject)
-    # remove project from user projects
-    user.projects.remove(project)
-    # notify all members depending on manner of removal
-    if admin:
-        member_note = Notification(text=f'{user.name} has been removed from '
-                                         f'{project.name} by the owner.')
-        rem_note = Notification(text=f'You have been removed from '
-                                     f'{project.name} by the owner. We promise '
-                                     "it's nothing personal! Please contact us "
-                                     'if you think something is wrong or have '
-                                     'any questions.')
-        user.notifications.append(rem_note)
-        flash(f'You have removed {user.name} from {project.name}.')
-    else:
-        member_note = Notification(text=f'{user.name} has left '
-                                        f'{project.name}.')
-    for member in project.members:
-        if not member in [user, project.owner]:
-            member.notifications.append(member_note)
-    # add rejection to user and project
-    user.rejections.append(project)
-    # add to session
-    db.session.commit()
-    db.session.close()
-    return True
-
-
-def reject_user_from_pending(user, project, admin=True):
-    ''' Rejects user with pending application to project '''
-    application = project.pending.filter_by(user=user).first()
-    if application is None:
-        flash(f'Cannot reject {user.name} application to {project.name} '
-               "because they haven't applied.")
-        return False
-    db.session.delete(application)
-    # notify rejected user if admin rejected
-    if admin:
-        notifcation = Notification(text=f'The owner of {project.name} decided not '
-                                         'to add you to the project right now. '
-                                         "We promise it's nothing personal! "
-                                         'Please contact us if you think something'
-                                         ' is wrong or have any questions.')
-        user.notifications.append(notifcation)
-        flash(f'You have rejected {user.name} from {project.name}.')
-    # remove all unseen pertinent notifications from owner
-    else:
-        for note in project.owner.notifications:
-            if (user.name in note.text) and (project.name in note.text):
-                project.owner.notifications.remove(note)
-    # add rejection to user and project
-    user.rejections.append(project)
-    db.session.commit()
-    db.session.close()
-    return True
-
 
 def reject_project_invitation(user, project, admin):
     ''' admin: true if rejected by project owner '''
