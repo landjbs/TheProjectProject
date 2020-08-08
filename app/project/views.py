@@ -198,7 +198,7 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
-@project.route('/withdraw_application/<int:project_id>', methods=['POST'])
+@project.route('/withdraw_application/<int:project_id>')
 @login_required
 def withdraw_application(project_id):
     ''' Withdraws current users application to project '''
