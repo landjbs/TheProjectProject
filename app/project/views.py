@@ -411,12 +411,11 @@ def change_project_open(project_id, action):
 def add_application(project_id):
     ''' Add applicaiton to project '''
     project = Project.query.get_or_404(project_id)
-    form = Edit_Project_Application(request.form)
+    form = Edit_Project_Application()
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')
     elif form.validate_on_submit():
-        project.update_last_active()
-        manager.add_application(project, form.application_question.data)
+        project.add_application(form.application_question.data)
     else:
         flash(f'Could not add application: {form.errors[0]}.')
     return redirect(request.referrer)
@@ -430,6 +429,5 @@ def remove_application_requirement(project_id):
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')
     else:
-        project.update_last_active()
-        manager.remove_application_requirement(project)
+        project.remove_application()
     return redirect(request.referrer)
