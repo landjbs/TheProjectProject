@@ -198,10 +198,17 @@ def join_project(project_id):
     return redirect(request.referrer)
 
 
-@project.route('/leave_project/<int:project_id>', methods=['POST'])
+@project.route('/withdraw_application/<int:project_id>', methods=['POST'])
 @login_required
 def withdraw_application(project_id):
+    ''' Withdraws current users application to project '''
     project = Project.query.get_or_404(project_id)
+    if not project.reject_application(current_user, by_owner=False):
+        flash('Could not withdraw application.', 'error')
+    else:
+        flash(f'You have withdrawn your application to {project.name}.',
+              category='success')
+    return redirect(request.referrer)
 
 
 @project.route('/leave_project/<int:project_id>', methods=['POST'])
