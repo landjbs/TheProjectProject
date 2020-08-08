@@ -354,6 +354,10 @@ class Project(CRUDMixin, db.Model):
             return True
         return False
 
+    def mark_closed(self):
+        ''' Mark project as closed '''
+        
+
     ## public analytics ##
     def subject_data(self):
         ''' Get dict mapping project subject names to member skill levels '''

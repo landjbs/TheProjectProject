@@ -393,11 +393,9 @@ def change_project_open(project_id, action):
     if current_user!=project.owner:
         flash('Only the owner can change join settings.')
     elif action=='open':
-        project.update_last_active()
-        manager.open_project(project)
+        project.mark_open()
     elif action=='close':
-        project.update_last_active()
-        manager.close_project(project)
+        project.mark_closed()
     return redirect(request.referrer)
 
 
