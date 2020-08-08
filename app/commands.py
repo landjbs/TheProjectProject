@@ -80,7 +80,7 @@ def populate_db(num_users, num_projects):
     # real users
     for user in users:
         db.session.add(user)
-        user.add_subjects(rand_subjects(np.random.randint(0,5)))
+        user.add_subjects(rand_subjects(np.random.randint(0,6)))
     # fake projects
     projects = []
     user_num = User.query.count()
@@ -88,7 +88,7 @@ def populate_db(num_users, num_projects):
         requires_application = rand_bool(0.5)
         complete = rand_bool(0.05)
         owner = User.get_by_id(np.random.randint(1, user_num+1))
-        subjects = rand_subjects(np.random.randint(0,5))
+        subjects = rand_subjects(np.random.randint(0,6))
         projects.append(
             Project(
                 owner=owner,
