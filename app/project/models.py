@@ -390,7 +390,10 @@ class Project(CRUDMixin, db.Model):
 
     def remove_application(self):
         ''' Turns off applicaiton requirement '''
-        
+        self.requires_application = False
+        self.update_last_active()
+        self.update()
+        return True
 
     ## public analytics ##
     def subject_data(self):
