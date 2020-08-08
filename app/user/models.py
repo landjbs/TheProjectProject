@@ -75,7 +75,7 @@ class User(CRUDMixin, UserMixin, db.Model):
 
 
     def __init__(self, name, email, password, url, about, accepted=False,
-                 admin=False):
+                 subjects=[], admin=False):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
@@ -86,6 +86,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.accepted = True if admin else False
         self.accepted = accepted if not admin else True
         self.confirmed = True if admin or accepted else False
+        self.add_subjects(subjects)
 
     def __repr__(self):
         return f'<User {self.name}>'

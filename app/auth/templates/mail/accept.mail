@@ -1,0 +1,13 @@
+Dear {{ user.name }},
+<br><br>
+Congratulations—your application to TheProjectProject has been accepted. We are
+so excited to welcome you to our community of 
+
+
+Please contact us at
+<a href='mailto:admin@theprojectproject.io'>admin@theprojectproject.io</a>
+if you have any questions or concerns!
+
+<br><br>
+Best,<br>
+TheProjectProject Team
