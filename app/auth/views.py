@@ -16,24 +16,6 @@ def load_user(id):
     return User.get_by_id(int(id))
 
 
-@auth.route('/login', methods=['GET', 'POST'])
-def login():
-    form = Login()
-    if form.validate_on_submit():
-        user = form.user
-        login_user(user)
-        user.active = True
-        user.last_active = datetime.utcnow()
-        user.update()
-        return redirect(request.args.get('next') or url_for('hub.home'))
-    start_on = 0
-    for i, elt in enumerate(form):
-        if elt.errors:
-            start_on = i
-            break
-    return render_template('login.html', form=form, start_on=start_on)
-
-
 @auth.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = Apply()
@@ -81,6 +63,28 @@ def verify(token):
     return redirect(url_for('base.index'))
 
 
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated():
+        current_user.active = True
+        current_user.update()
+        return redirect(request.args.get('next') or url_for('hub.home'))
+    form = Login()
+    if form.validate_on_submit():
+        user = form.user
+        login_user(user)
+        user.active = True
+        user.last_active = datetime.utcnow()
+        user.update()
+        return redirect(request.args.get('next') or url_for('hub.home'))
+    start_on = 0
+    for i, elt in enumerate(form):
+        if elt.errors:
+            start_on = i
+            break
+    return render_template('login.html', form=form, start_on=start_on)
+
+
 
 @auth.route('/logout')
 @login_required
@@ -122,14 +126,3 @@ def logout():
 #             start_on = i
 #             break
 #     return render_template('login.html', form=form, start_on=start_on)
-
-
-# @application.route('/logout')
-# @login_required
-# def logout():
-#     current_user.active = False
-#     current_user.last_active = datetime.utcnow()
-#     db.session.commit()
-#     db.session.close()
-#     logout_user()
-#     return redirect(url_for('index'))
