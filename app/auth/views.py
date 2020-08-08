@@ -101,35 +101,3 @@ def logout():
     current_user.update()
     logout_user()
     return redirect(url_for('base.index'))
-
-
-
-# FROMAPPLICATION
-# @application.route('/login', methods=['GET', 'POST'])
-# def login():
-#     if current_user.is_authenticated:
-#         current_user.active = True
-#         db.session.commit()
-#         return redirect(url_for('home'))
-#     form = forms.Login(request.form)
-#     if request.method=='POST' and form.validate():
-#         user = User.query.filter_by(email=form.email.data).first()
-#         if user is None:
-#             form.email.errors.append('Email not found.')
-#         elif not user.check_password(form.password.data):
-#             form.password.errors.append('Invalid password.')
-#         elif user.accepted==False:
-#                 form.email.errors.append('Your application is under review—'
-#                                          'check back soon!')
-#         else:
-#             login_user(user)
-#             user.active = True
-#             user.last_active = datetime.utcnow()
-#             db.session.commit()
-#             return home()
-#     start_on = 0
-#     for i, elt in enumerate(form):
-#         if elt.errors:
-#             start_on = i
-#             break
-#     return render_template('login.html', form=form, start_on=start_on)

@@ -12,7 +12,7 @@ We TODO: ADD SUBJECTS
 <br><br>
 Login Here (using the email and password from your application):
 <br>
-<a href="urls['login']"/>
+urls['login']
 
 
 Please contact us at
