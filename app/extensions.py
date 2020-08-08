@@ -17,21 +17,11 @@ assets = Environment()
 admin = Admin(template_mode='bootstrap3')
 # babel = Babel()
 csrf = CSRFProtect()
-########## BCRYPT ##############
 bcrypt = Bcrypt()
-################################
 # cache = SimpleCache()
-########## LIMITER ##############
 limiter = Limiter(key_func=get_remote_address)
-################################
-
-######### LOGIN MANAGER #########
 lm = LoginManager()
-################################
-
-########### MIGRATION ##########
 migrate = Migrate()
-################################
 # mail = Mail()
 rq = RQ()
 travis = Travis()
