@@ -61,31 +61,6 @@ def uncomplete_project(project):
     return False
 
 
-def open_project(project):
-    if not project.open:
-        project.open = True
-        note = Notification(text=f'{project.name} has been opened by the owner.')
-        for member in project.members:
-            if not member==project.owner:
-                member.notifications.append(note)
-    db.session.commit()
-    db.session.close()
-    flash(f'You have opened {project.name}.')
-    return True
-
-
-def close_project(project):
-    if project.open:
-        project.open = False
-        note = Notification(text=f'{project.name} has been closed by the owner.')
-        for member in project.members:
-            if not member==project.owner:
-                member.notifications.append(note)
-    db.session.commit()
-    db.session.close()
-    flash(f'You have closed {project.name}.')
-    return True
-
 
 def remove_application_requirement(project):
     if project.requires_application:

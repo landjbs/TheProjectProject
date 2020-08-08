@@ -359,7 +359,7 @@ class Project(CRUDMixin, db.Model):
         if self.open:
             self.open = False
             self.notify_members(
-                    text=f'{self.name} has been closed by the owner.'
+                    text=f'{self.name} has been closed by the owner.',
                     category=0,
                     include_owner=False)
             self.update_last_active()
@@ -371,9 +371,8 @@ class Project(CRUDMixin, db.Model):
         ''' Mark project as open '''
         if not self.open:
             self.open = True
-            self.open = False
             self.notify_members(
-                    text=f'{self.name} has been opened by the owner.'
+                    text=f'{self.name} has been opened by the owner.',
                     category=0,
                     include_owner=False)
             self.update_last_active()

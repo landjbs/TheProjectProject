@@ -396,12 +396,12 @@ def change_project_open(project_id, action):
         if not project.mark_open():
             flash(f'Could not open {project.name}.', 'error')
         else:
-            flash(f'You have opened {projecnt.name}.', 'success')
+            flash(f'You have opened {project.name}.', 'success')
     elif action=='close':
         if not project.mark_closed():
             flash(f'Could not close {project.name}.', 'error')
         else:
-            flash(f'You have closed {projecnt.name}.', 'success')
+            flash(f'You have closed {project.name}.', 'success')
     return redirect(request.referrer)
 
 
