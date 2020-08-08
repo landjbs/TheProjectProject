@@ -3,9 +3,11 @@ from wtforms import (TextField, StringField, PasswordField, BooleanField,
                     TextAreaField, validators)
 from wtforms.validators import (DataRequired, Length, EqualTo, Email)
 
-from app.user.models import User
 from app.forms.base import BaseForm
 from app.forms.validators import Site_URL_Validator, Select_Limit_Validator
+
+from app.user.models import User
+from app.subject.models import Subject
 
 
 ## FORMS ##
@@ -35,7 +37,7 @@ class Apply(BaseForm):
                                     description=('What subjects are you '
                                                 'interested in?'),
                                     validators=[Select_Limit_Validator(5)],
-                                    choices=[], #list(subjects),
+                                    choices=Subject.get_choice_list(),
                                     render_kw={'max':5})
     password = PasswordField('Create Password',
                              validators=[DataRequired(), Length(1, 254),

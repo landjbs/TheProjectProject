@@ -29,3 +29,7 @@ class Subject(CRUDMixin, db.Model):
 
     def __repr__(self):
         return f'<Subject {self.name}>'
+
+    @classmethod
+    def get_choice_list(self):
+        

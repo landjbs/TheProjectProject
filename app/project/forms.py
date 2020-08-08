@@ -6,6 +6,7 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
 # absolute imports
 from app.forms.base import BaseForm
 from app.forms.validators import Select_Limit_Validator
+from app.subjects.models import Subject
 # package imports
 from .models import Project
 
@@ -37,7 +38,7 @@ class Add_Project(BaseForm):
                                     description=('What subjects might this '
                                                 'project involve?'),
                                     validators=[Select_Limit_Validator(5)],
-                                    choices=[], #list(subjects),
+                                    choices=Subject.get_choice_list(),
                                     render_kw={'max':5})
     open = BooleanField('Open',
                         validators=[],
