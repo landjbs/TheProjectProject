@@ -83,7 +83,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.about = str(about)
         self.admin = admin
         self.accepted = True if admin else False
-        self.accepted = accepted if not admin
+        self.accepted = accepted if not admin else True
         self.confirmed = True if admin or accepted else False
 
     def __repr__(self):

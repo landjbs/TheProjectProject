@@ -73,8 +73,9 @@ def populate_db(num_users, num_projects):
                 name=name,
                 email=fake.email(),
                 password=(fake.word()+fake.word()),
-                url=f'https://github.com/{"_".join(name.split(" ")).lower()}',
-                about=rand_words(10)
+                url=f'https://github.com/{"_".join(name.split(" ")+[str(i) for i in np.random.randint(0,300,size=10)]).lower()}',
+                about=rand_words(10),
+                accepted=True
             )
         users.append(user)
     # real users

@@ -200,6 +200,12 @@ def join_project(project_id):
 
 @project.route('/leave_project/<int:project_id>', methods=['POST'])
 @login_required
+def withdraw_application(project_id):
+    project = Project.query.get_or_404(project_id)
+
+
+@project.route('/leave_project/<int:project_id>', methods=['POST'])
+@login_required
 def leave_project(project_id):
     ''' Leave project, transferring or deleting as necessary '''
     project = Project.query.get_or_404(project_id)

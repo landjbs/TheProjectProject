@@ -76,6 +76,7 @@ class Project(CRUDMixin, db.Model):
         self.subjects = subjects
         # members
         self.owner = owner
+        self.add_member(owner, notify_owner=False)
         self.team_size = team_size
         # application
         self.open = bool(open)
