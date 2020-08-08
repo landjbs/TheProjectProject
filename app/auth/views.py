@@ -7,6 +7,7 @@ from datetime import datetime
 from app.extensions import lm
 from app.jobs import send_registration_email, send_confirmation_email
 from app.user.models import User
+from app.subject.models import Subject
 from .forms import Login, Apply
 from ..auth import auth
 
@@ -20,7 +21,7 @@ def load_user(id):
 def apply():
     # form preprocessing
     form = Apply()
-    form.subjects = [(str(s.id), s.name) for s in Subject.query.all()]
+    form.subjects.choices = [(str(s.id), s.name) for s in Subject.query.all()]
     form.process()
     # form validation
     if form.validate_on_submit():
