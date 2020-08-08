@@ -45,7 +45,6 @@ def score_project(project, user_subjects):
 
 def get_recommended_projects(user):
     ## get initial candidates ##
-    print('GETTING CANDIDATES')
     member_projects = [p.id for p in user.projects]
     pending_projects = [p.project.id for p in user.pending]
     invited_projects = [p.id for p in user.invitations]
@@ -60,14 +59,12 @@ def get_recommended_projects(user):
     invited = [project for project in user.invitations]
     ## format user preferences ##
     user_subjects = get_normed_user_subjects(user, temp=2)
-    print('RANKING')
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
-    print('SORTING')
+    # TODO: USE BOOGLE RANKING ALGORITHM RATHER THAN TIMSORT 
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = (invited + results)
     results = results[:9]
-    print('DONE')
     if len(results)==0:
         results = user.projects
     return results
