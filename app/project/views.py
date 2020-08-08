@@ -415,9 +415,12 @@ def add_application(project_id):
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')
     elif form.validate_on_submit():
-        project.add_application(form.application_question.data)
+        if not project.add_application(form.application_question.data):
+            flash(f'Could not add application.', 'error')
+        else:
+            flash('Application requirement added!', 'success')
     else:
-        flash(f'Could not add application: {form.errors[0]}.')
+        flash(f'Could not add application: {form.errors[0]}.', 'error')
     return redirect(request.referrer)
 
 
