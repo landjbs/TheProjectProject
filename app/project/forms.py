@@ -37,7 +37,7 @@ class Add_Project(BaseForm):
                                     description=('What subjects might this '
                                                 'project involve?'),
                                     validators=[Select_Limit_Validator(5)],
-                                    choices=[],
+                                    choices=[], coerce=int,
                                     render_kw={'max':5})
     open = BooleanField('Needs Team',
                         validators=[],
@@ -68,6 +68,7 @@ class Add_Project(BaseForm):
 
     def validate(self):
         ''' Validates project '''
+        print(f'DATA:A {self.subjects.data}')
         # error flag to check all errors at once
         error_flag = False
         # stock validation

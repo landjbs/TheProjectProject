@@ -21,8 +21,9 @@ def load_user(id):
 def apply():
     # form preprocessing
     form = Apply()
-    form.subjects.choices = [(str(s.id), s.name) for s in Subject.query.all()]
-    form.process()
+    if request.method=='GET':
+        form.subjects.choices = [(str(s.id), s.name) for s in Subject.query.all()]
+        form.process()
     # form validation
     if form.validate_on_submit():
         user = User.create(
