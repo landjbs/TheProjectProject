@@ -68,8 +68,7 @@ def verify(token, expiration=604800):
 
         # notify user and redirect to application page
         flash(('Oops! Your email confirmation expired so we removed your ' \
-               'application. Please apply again.'),
-              'error')
+               'application. Please apply again.'), category='error')
         return redirect(url_for('auth.apply'))
     except BadSignature:
         abort(404)
@@ -80,7 +79,7 @@ def verify(token, expiration=604800):
     send_confirmation_email.queue(user)
     user.update()
     flash('You have confirmed your application! We will email you with '
-          'application updates as soon as possible.')
+          'application updates as soon as possible.', category='success')
     return redirect(url_for('base.index'))
 
 
