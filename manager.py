@@ -89,25 +89,3 @@ def add_application(project, question):
     db.session.commit()
     db.session.close()
     return True
-
-
-def add_comment(project, user, comment):
-    project.comments.append(comment)
-    db.session.add(comment)
-    db.session.commit()
-    db.session.close()
-
-
-def add_task(project, user, task):
-    project.tasks.append(task)
-    project.update_last_active()
-    db.session.add(task)
-    db.session.commit()
-    db.session.close()
-
-
-def delete_application(application):
-    db.session.delete(application)
-    db.session.commit()
-    db.session.close()
-    # TODO: rem notification from project owner
