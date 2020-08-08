@@ -50,3 +50,19 @@ def send_confirmation_email(user):
         }
     )
     return True
+
+
+@rq.job
+def send_acceptance_email(user):
+    ses.send_email(
+        Source=SES_EMAIL_SOURCE,
+        Destination={'ToAddresses': [user.email]},
+        Message={
+            'Subject': {'Data': 'Thanks For Applying!'},
+            'Body': {
+                'Html': {'Data': render_template('mail/confirm.mail',
+                                                 user=user)}
+            }
+        }
+    )
+    return True
