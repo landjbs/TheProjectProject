@@ -9,10 +9,13 @@
 
 {% block content %}
 <div class='container my-2' style='min-width: 90%'>
-  <h4 style='text-align:left;'>Results for "{{ search_text }}"</h4>
+  <h4 style='text-align:left;'>{{ subject.name }}</h4>
   <hr class="my-2">
   {% if project_tabs!=[] %}
-    <h4 style='text-align:left;'>Projects</h4>
+    <h4 style='text-align:left;'>
+      Projects
+      {{ project_count }}
+    </h4>
     <hr class="my-2">
     <div id="project-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
@@ -43,7 +46,10 @@
 
   {% if user_tabs!=[] %}
     <div id="user-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-      <h4 style='text-align:left;'>Users</h4>
+      <h4 style='text-align:left;'>
+        Users
+        {{ user_count }}
+      </h4>
       <hr class="my-2">
       <div class="carousel-inner" role="listbox">
         {% for tab in user_tabs %}
