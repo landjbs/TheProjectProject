@@ -17,7 +17,7 @@ class Badge(CRUDMixin, db.Model):
                         back_populates='badge',
                         cascade='all, delete, delete-orphan',
                         lazy='dynamic',
-                        order_by='earn_stamp')
+                        order_by='User_Badge.earn_stamp')
 
     def __repr__(self):
         return f'<Badge {self.name}>'
