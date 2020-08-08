@@ -1,4 +1,4 @@
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from datetime import datetime
 from sqlalchemy import desc
 from sqlalchemy.orm import relationship, backref

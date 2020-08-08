@@ -1,4 +1,3 @@
-from flask_login import UserMixin, AnonymousUserMixin
 from sqlalchemy.orm import relationship, backref
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
