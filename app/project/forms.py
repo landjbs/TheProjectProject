@@ -68,7 +68,6 @@ class Add_Project(BaseForm):
 
     def validate(self):
         ''' Validates project '''
-        print(self.subjects.data)
         # error flag to check all errors at once
         error_flag = False
         # stock validation
