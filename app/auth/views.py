@@ -35,8 +35,8 @@ def apply():
         print(f'SUBJECTS: {subjects}')
         user.add_subjects(subjects)
         # generate token and send to user email
-        s = URLSafeSerializer(current_app.secret_key)
-        token = s.dumps(user.id)
+        s = URLSafeTimedSerializer(current_app.secret_key)
+        token = s.dumps(user.id, salt='email-confirm-salt')
         url = url_for('auth.verify', token=token, _external=True)
         send_registration_email.queue(user, url)
         # notify user and redirect to index
@@ -53,10 +53,21 @@ def apply():
 
 
 @auth.route('/verify/<token>', methods=['GET'])
-def verify(token):
-    s = URLSafeSerializer(current_app.secret_key)
+def verify(token, expiration=604800):
+    '''
+    Verifies token from confirmation application
+    Args:
+        token:      URLSafeTimedSerializer token from apply()
+        expiration: Seconds until expiration
+    '''
+    s = URLSafeTimedSerializer(current_app.secret_key)
     try:
-        id = s.loads(token)
+        id = s.loads(token, salt='email-confirm-salt', max_age=1)
+    except SignatureExpired:
+        flash(('Oops! Your email confirmation expired so we removed your ' \
+               'application. Please apply again.'),
+              'error')
+        return redirect(url_for('auth.apply'))
     except BadSignature:
         abort(404)
     user = User.query.filter_by(id=id).first_or_404()

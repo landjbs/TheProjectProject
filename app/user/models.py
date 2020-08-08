@@ -48,21 +48,38 @@ class User(CRUDMixin, UserMixin, db.Model):
                                back_populates='invitations', lazy='dynamic')
     rejections = relationship('Project', secondary='project_rejections',
                             back_populates='rejections')
-    # interactions
-    starred = relationship('Project', secondary='user_to_project',
-                           back_populates='stars')
-    comments = relationship('Comment', back_populates='author')
+    ## interactions ##
+    # starred projects
+    starred = relationship('Project',
+                        secondary='user_to_project',
+                        back_populates='stars')
+    # comments
+    comments = relationship('Comment',
+                            back_populates='author',
+                            cascade='all, delete, delete-orphan')
+    # authored tasks # TODO: figure out task deletion on user/project deletion
     tasks_authored = relationship('Task', back_populates='author')
+    # worked tasks # TODO: figure out what to if user deletes and is only worker
     tasks_worked = relationship('Task', secondary='user_to_task',
                          back_populates='workers')
-    badges = relationship('User_Badge', back_populates='user', lazy='dynamic')
     # notifications
-    notifications = relationship('Notification', secondary='user_to_notification',
-                                back_populates='users', lazy='dynamic',
+    notifications = relationship('Notification',
+                                secondary='user_to_notification',
+                                back_populates='users',
+                                lazy='dynamic',
                                 order_by='Notification.timestamp')
+    ## honors ##
+    # badges
+    badges = relationship('User_Badge',
+                          back_populates='user',
+                          lazy='dynamic',
+                          cascade='all, delete, delete-orphan')
     # subjects
-    subjects = relationship('User_Subjects', back_populates='user',
-                            lazy='dynamic', order_by='desc(User_Subjects.number)')
+    subjects = relationship('User_Subjects',
+                            back_populates='user',
+                            lazy='dynamic',
+                            cascade='all, delete, delete-orphan'
+                            order_by='desc(User_Subjects.number)')
     ## reporting ##
     # reports posted by user
     # reports_posted = relationship('User_Report', back_populates='reporter')
@@ -70,8 +87,8 @@ class User(CRUDMixin, UserMixin, db.Model):
     reports = relationship('User_Report',
                            back_populates='reported',
                            primaryjoin='User.id==User_Report.reported_id',
-                           lazy='dynamic')
-
+                           lazy='dynamic',
+                           cascade='all, delete, delete-orphan')
 
     def __init__(self, name, email, password, url, about, accepted=False,
                  admin=False):
@@ -285,6 +302,21 @@ class User(CRUDMixin, UserMixin, db.Model):
         raise RuntimeError('Not yet implemented')
 
 
+class Anonymous(AnonymousUserMixin):
+    ''' Anonymous user '''
+    def __init__(self):
+        super(Anonymous, self).__init__()
+
+    def is_admin(self):
+        return False
+
+    def has_starred(self, project):
+        return False
+
+    def has_applied(self, project):
+        return False
+
+
 class User_Report(db.Model):
     __tablename__ = 'user_report'
     id = db.Column(db.Integer, primary_key=True)
@@ -318,18 +350,3 @@ class User_Report(db.Model):
         self.resolved = True
         self.action = int(action)
         self.resolve_stamp = datetime.utcnow()
-
-
-class Anonymous(AnonymousUserMixin):
-    ''' Anonymous user '''
-    def __init__(self):
-        super(Anonymous, self).__init__()
-
-    def is_admin(self):
-        return False
-
-    def has_starred(self, project):
-        return False
-
-    def has_applied(self, project):
-        return False
