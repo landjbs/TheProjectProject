@@ -285,6 +285,13 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.update()
         return True
 
+    ## badges ##
+    def add_badge(user_badge):
+        ''' Adds user_badge object to user '''
+        self.badges.append(user_badge)
+        self.update()
+        return True
+
     ## public analytics ##
     def total_stars(self):
         ''' Gets total stars earned by user '''
