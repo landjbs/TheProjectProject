@@ -204,12 +204,14 @@ class User(CRUDMixin, UserMixin, db.Model):
         if not self.has_starred(project):
             self.starred.append(project)
             project.buzz += 1
+            self.xp += 1
             self.update()
 
     def unstar_project(self, project):
         if self.has_starred(project):
             self.starred.remove(project)
             project.buzz -= 1
+            self.xp -= 1
             self.update()
 
     def has_starred(self, project):
