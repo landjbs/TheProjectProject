@@ -48,7 +48,6 @@ class User_Badge(db.Model):
     badge = relationship('Badge', back_populates='users')
     # progress
     progress = db.Column(db.Integer, nullable=False, default=0)
-    total = db.Column(db.Integer, nullable=False)
     # earn
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
@@ -65,20 +64,20 @@ class User_Badge(db.Model):
     def __repr__(self):
         if not self.earned:
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
-                    f'p={self.progress}>')
+                    f'progress={self.progress}/{self.badge.total}>')
         else:
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
-                    f'e={self.earn_stamp}>')
+                    f'earned={self.earn_stamp}>')
 
     def fraction_complete(self):
         ''' Get fraction of badge completedness '''
-        return float(self.progress / self.total)
+        return float(self.progress / self.badge.total)
 
     def get_progressbar_width(self):
         ''' Gets width of progressbar for badge display '''
         return f'width: {100*min(1, self.fraction_complete())}%;'
 
-    def update_progress(self, progress, total):
+    def update_progress(self, user):
         ''' Updates progress on badge by inc '''
         self.progress = progress
         self.total = total
