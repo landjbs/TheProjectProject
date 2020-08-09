@@ -49,8 +49,9 @@ class User_Badge(db.Model):
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
 
-    def __init__(self):
-        
+    def __init__(self, badge, progress, total):
+
+
 
     def __repr__(self):
         if not self.earned:
@@ -63,6 +64,10 @@ class User_Badge(db.Model):
     def fraction_complete(self):
         ''' Get fraction of badge completedness '''
         return float(self.progress / self.total)
+
+    def get_progressbar_width(self):
+        ''' Gets width of progressbar for badge display '''
+        return f'width: {100*min(1, self.fraction_complete())}%;'
 
     def update_progress(self, inc=1):
         ''' Updates progress on badge by inc '''
