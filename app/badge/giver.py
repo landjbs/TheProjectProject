@@ -4,11 +4,17 @@ from .models import Badge, User_Badge
 from .badge_criteria import badge_criteria
 
 
-def abstract_badge_allocation(user, badge_name):
+def abstract_badge_allocation(user, name):
+    '''
+    Base function for allocating badge to user
+    Args:
+        user    User object that might deserve badge
+        name    Name of badge to examine
+    '''
     # get association between user and badge
-    user_badge = user.get_badge(badge_name)
+    user_badge = user.get_badge(name)
     # get actual badge from association
-    badge = user_badge.get_badge
+    badge = user_badge.get_badge if user_badge else Badge.get_by_name(name)
 
 
 def update_superowner(user):
