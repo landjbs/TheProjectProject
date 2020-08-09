@@ -207,6 +207,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             self.starred.append(project)
             project.buzz += 1
             self.action_xp('star_project')
+            project.action_xp_all_members('earn_star')
             self.update()
 
     def unstar_project(self, project):
@@ -214,6 +215,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             self.starred.remove(project)
             project.buzz -= 1
             self.action_xp('star_project', positive=False)
+            project.action_xp_all_members('earn_star', positive=False)
             self.update()
 
     def has_starred(self, project):
@@ -295,6 +297,8 @@ class User(CRUDMixin, UserMixin, db.Model):
             self.xp += xp_constants.action_xp(action)
         else:
             self.xp -= xp_constants.action_xp(action)
+        if self.xp<0:
+            self.xp = 0
         self.update()
         return True
 

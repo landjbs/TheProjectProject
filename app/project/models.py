@@ -400,6 +400,12 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
+    ## xp and badges ##
+    def action_xp_all_members(self, action:str, positive:bool=True):
+        for member in self.members:
+            member.action_xp(action, positive)
+        return True
+
     ## public analytics ##
     def subject_data(self):
         ''' Get dict mapping project subject names to member skill levels '''

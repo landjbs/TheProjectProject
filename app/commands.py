@@ -43,6 +43,7 @@ def add_badges():
 def add_statics():
     ''' Adds statics (Subjects, Badges, Admins) to database '''
     create_subjects(db)
+    add_badges()
     # admins
     db.session.add(
         User(
