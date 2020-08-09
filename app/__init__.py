@@ -22,8 +22,7 @@ from app.admin import register_admin_views
 from app.database import db
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
                             lm, migrate, rq, travis)
-from app.commands import (create_db, drop_db, populate_db, rebuild_db,
-    add_statics)
+from app.commands import command_list
 from app.utils import url_for_other_page
 
 from app.user.models import Anonymous
@@ -141,7 +140,7 @@ def register_jinja_env(app):
 
 def register_commands(app):
     """Register custom commands for the Flask CLI."""
-    for command in [create_db, drop_db, populate_db, rebuild_db, add_statics]:
+    for command in command_list:
         app.cli.command()(command)
 
 

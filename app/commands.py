@@ -36,6 +36,7 @@ def rebuild_db():
 def create_badges():
     ''' Drops and creates all badges '''
     create_badges(db)
+    return True
 
 
 def add_statics():
@@ -115,3 +116,10 @@ def populate_db(num_users, num_projects):
     for project in tqdm(projects, desc='Adding Projects'):
         db.session.add(project)
     db.session.commit()
+
+
+
+
+### list of commands to register ###
+command_list = [create_db, drop_db, rebuild_db, create_badges, add_statics,
+                populate_db]
