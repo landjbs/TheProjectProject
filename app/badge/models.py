@@ -95,7 +95,9 @@ class User_Badge(db.Model):
             if self.earned:
                 # remove earned (which autoupdates)
                 self.remove_earned_marking()
+            # and hasn't been awarded it...
             else:
+                # just update progress
                 self.update()
         return True
 
