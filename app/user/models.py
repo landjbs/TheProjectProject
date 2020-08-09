@@ -4,9 +4,11 @@ from sqlalchemy import desc
 from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
+from app.extensions import bcrypt
+
 from app.models import User_Subjects
 from app.notification.models import Notification
-from app.extensions import bcrypt
+from app.badge.models import Badge, User_Badge
 
 from .xp_constants import xp_constants
 
@@ -317,19 +319,15 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Whether the user has started (/completed) progress on a badge '''
         return (not self.badges.filter_by(badge=badge).first() is None)
 
-    def has_badge(self, badge):
-        ''' Whether the user has earned badge '''
-        badge = self.badges.filter_by(badge=badge).first()
-        if not badge:
-            return False
-        else:
-            return badge.earned
-
     def add_badge(self, user_badge):
         ''' Adds user_badge object to user '''
         self.badges.append(user_badge)
         self.update()
         return True
+
+    def update_badge(self, badge_name):
+        ''' Updates badge, adding user_badge or updating progress as necessary '''
+        badge =
 
     ## badge allocation evaluators ##
     def n_owned_complete(self):
