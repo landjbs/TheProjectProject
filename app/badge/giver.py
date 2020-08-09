@@ -10,8 +10,8 @@ def update_superowner(user):
 
 
 
-def give_badges(user):
+def update_badges(user):
     ''' Gives badges to user as necessary '''
     ## superowner ##
-    if user.started_badge(Badge.get_by_name('SuperOwner')):
-        
+    badge = user.get_badge('SuperOwner')
+    
