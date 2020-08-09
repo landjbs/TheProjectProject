@@ -20,9 +20,10 @@ def abstract_badge_allocation(user, name):
     # get user progress using evaluator
     progress = getattr(user, evaluator)()
     ## allocate ##
-    # if progress has been started
+    # if progress has been started...
     if user_badge:
-
+        # if user has earned badge but doesn't deserve it
+        if user_badge.earned and 
 
 
 
