@@ -79,17 +79,39 @@ class User_Badge(db.Model):
 
     def update_progress(self):
         ''' Updates progress on badge '''
+        # get user progress using evaluator
         self.progress = int(getattr(self.user, self.badge.evaluator)())
+        # get total from badge
         self.total = self.badge.criteria
-        if self.progress>=self.total:
-            self.mark_earned()
+        # if user deserves badge...
+        if (self.progress>=self.total):
+            # and hasn't been awarded it...
+            if not self.earned:
+                # mark as earned (which autoupdates)
+                self.mark_earned()
+        # if user doesn't deserve badge...
         else:
+            # and has been awarded it...
+            if self.earned:
+                # remove earned
+
             self.update()
         return True
 
     def mark_earned(self):
         ''' Marks badge as earned and tracks time of earning '''
-        self.earn_stamp = datetime.utcnow()
-        self.earned = True
-        self.update()
-        return True
+        if not self.earned:
+            # stamp time of earning
+            self.earn_stamp = datetime.utcnow()
+            # set earned to true
+            self.earned = True
+            # notify user
+            self.user.notify(text=('Congratulations—you have won the '
+                                   f'{self.badge} badge! '),
+                             category=1)
+            self.update()
+            return True
+        return False
+
+    def remove_earned_marking(self):
+        ''' Removes badge '''
