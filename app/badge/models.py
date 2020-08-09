@@ -34,7 +34,9 @@ class User_Badge(db.Model):
     badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=True)
     badge = relationship('Badge', back_populates='users')
     # progress
-    progress = db.Column(db.Float, nullable=False, default=float(0))
+    current = db.Column(db.Float, nullable=False, default=float(0))
+    total = db.Column(db.Integer, nullable=False)
+    # earn
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
 
@@ -51,3 +53,7 @@ class User_Badge(db.Model):
         self.earn_stamp = datetime.utcnow()
         self.earned = True
         self.update()
+
+    def update_progress(self):
+        ''' Updates progress on badge '''
+        
