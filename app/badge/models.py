@@ -93,9 +93,10 @@ class User_Badge(db.Model):
         else:
             # and has been awarded it...
             if self.earned:
-                # remove earned
-
-            self.update()
+                # remove earned (which autoupdates)
+                self.remove_earned_marking()
+            else:
+                self.update()
         return True
 
     def mark_earned(self):
@@ -124,7 +125,7 @@ class User_Badge(db.Model):
                                    'projects or deleted tasks), you no longer '
                                    'meet the threshold for the '
                                    f'{self.badge.name} badge.'),
-                                   category=0)
+                            category=0)
             self.update()
             return True
         return False
