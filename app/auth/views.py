@@ -95,7 +95,7 @@ def login():
         login_user(user)
         user.active = True
         user.last_active = datetime.utcnow()
-        current_user.update_badges(['SuperOwner', 'Verified'])
+        user.update_badges(['SuperOwner', 'Verified'])
         user.update()
         return redirect(request.args.get('next') or url_for('hub.home'))
     start_on = 0
