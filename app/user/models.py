@@ -325,7 +325,8 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Updates badge, adding user_badge or updating progress as necessary '''
         badge = Badge.get_by_name(badge_name)
         user_badge = self.get_user_badge(badge)
-
+        if not user_badge:
+            user_badge = User_Badge(badge)
 
     ## badge allocation evaluators ##
     def n_owned_complete(self):
