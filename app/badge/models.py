@@ -34,7 +34,7 @@ class User_Badge(db.Model):
     badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=True)
     badge = relationship('Badge', back_populates='users')
     # progress
-    current = db.Column(db.Float, nullable=False, default=float(0))
+    progress = db.Column(db.Float, nullable=False, default=float(0))
     total = db.Column(db.Integer, nullable=False)
     # earn
     earned = db.Column(db.Boolean, nullable=False, default=False)
@@ -48,20 +48,23 @@ class User_Badge(db.Model):
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
                     f'e={self.earn_stamp}>')
 
+    def fraction_complete(self):
+        return float(self.progress / self.total)
+
+    def update_progress(self, inc=1):
+        ''' Updates progress on badge by inc '''
+        if self.earned:
+            return False
+        self.progress += inc
+        if self.progress==self.total:
+            self.mark_earned()
+        else:
+            self.update()
+        return True
+
     def mark_earned(self):
         ''' Marks badge as earned and tracks time of earning '''
         self.earn_stamp = datetime.utcnow()
         self.earned = True
         self.update()
-        return True
-
-    def update_progress(self, inc=1):
-        ''' Updates progress on badge '''
-        if self.earned:
-            return False
-        self.current += inc
-        if self.current==self.total:
-            self.mark_earned()
-        else:
-            self.update()
         return True
