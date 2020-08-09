@@ -347,6 +347,10 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Gets dict '''
         raise RuntimeError('Not yet implemented')
 
+    def n_owned_complete(self):
+        ''' Number of owned projects user has completed '''
+        return self.owned.filter_by(complete=True).count()
+
 
 class Anonymous(AnonymousUserMixin):
     ''' Anonymous user '''

@@ -14,4 +14,6 @@ def update_badges(user):
     ''' Gives badges to user as necessary '''
     ## superowner ##
     badge = user.get_badge('SuperOwner')
-    
+    n_owned_complete = user.n_owned_complete()
+    if n_owned_complete>0:
+        
