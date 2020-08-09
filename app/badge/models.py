@@ -47,4 +47,7 @@ class User_Badge(db.Model):
                     f'e={self.earn_stamp}>')
 
     def mark_earned(self):
-        self.
+        ''' Marks badge as earned and tracks time of earning '''
+        self.earn_stamp = datetime.utcnow()
+        self.earned = True
+        self.update()
