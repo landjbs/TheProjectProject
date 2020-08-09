@@ -11,9 +11,7 @@ class Badge(CRUDMixin, db.Model):
     # name
     name = db.Column(db.String(60), nullable=False, unique=True)
     # url for icon
-    icon_url = db.Column(db.String(250), nullable=False, unique=True)
-    # color
-    color = db.Column(db.String(6), unique=True, nullable=False)
+    icon = db.Column(db.String(250), nullable=False, unique=True)
     # users
     users = relationship('User_Badge',
                         back_populates='badge',
