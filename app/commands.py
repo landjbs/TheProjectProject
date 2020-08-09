@@ -35,7 +35,7 @@ def rebuild_db():
 
 def create_badges():
     ''' Drops and creates all badges '''
-
+    create_badges(db)
 
 
 def add_statics():
