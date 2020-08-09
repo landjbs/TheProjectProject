@@ -7,7 +7,7 @@ def create_badges(db):
     ''' Creates all static badges '''
     badges = [
             # own and complete many projects
-            Badge(name='Super-Owner',
+            Badge(name='SuperOwner',
                 icon='static/BadgeIcons/superowner/apple-touch-icon.png')
             # work on many projects
             # Badge(name='Super-Member',
