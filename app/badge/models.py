@@ -33,10 +33,6 @@ class Badge(CRUDMixin, db.Model):
     def get_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
 
-    def get_criteria(self):
-        ''' Gets criteria and evaluator for badge from badge_criteria '''
-        return badge_criteria.get_criteria(self.name)
-
 
 class User_Badge(db.Model):
     __tablename__ = 'user_badge'

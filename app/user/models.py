@@ -315,12 +315,6 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Gets user badge assoc for badge '''
         return self.badges.filter_by(badge=badge).first()
 
-    def add_badge(self, user_badge):
-        ''' Adds user_badge object to user '''
-        self.badges.append(user_badge)
-        self.update()
-        return True
-
     def update_badge(self, badge_name:str):
         ''' Updates badge, adding user_badge or updating progress as necessary '''
         badge = Badge.get_by_name(badge_name)
