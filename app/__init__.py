@@ -21,7 +21,7 @@ from app.admin import register_admin_views
 #
 from app.database import db
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
-                            lm, migrate, rq, travis)
+                            lm, migrate, rq, travis, babel)
 from app.commands import command_list
 from app.utils import url_for_other_page
 
@@ -87,6 +87,7 @@ def register_extensions(app):
     admin.init_app(app)
     travis.init_app(app)
     db.init_app(app)
+    babel.init_app(app)
     ######### LOGIN MANAGER #########
     lm.init_app(app)
     lm.login_view = 'auth.login'

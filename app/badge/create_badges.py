@@ -1,5 +1,7 @@
 from .models import Badge
 
+from tqdm import tqdm
+
 
 def create_badges(db):
     ''' Creates all static badges '''
@@ -24,6 +26,6 @@ def create_badges(db):
             # # complete many tasks
             # Badge('Knock Em Down',)
     ]
-    for badge in badges:
+    for badge in tqdm(badges):
         db.session.add(badge)
     db.session.commit()

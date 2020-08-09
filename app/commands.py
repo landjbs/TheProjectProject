@@ -8,6 +8,7 @@ from app import db
 from app.user.models import User
 from app.project.models import Project
 from app.subject.models import Subject
+from app.badge.models import Badge
 
 from app.subject.create_subjects import create_subjects
 from app.badge.create_badges import create_badges
@@ -33,7 +34,7 @@ def rebuild_db():
     add_statics()
 
 
-def create_badges():
+def add_badges():
     ''' Drops and creates all badges '''
     create_badges(db)
     return True
@@ -120,5 +121,5 @@ def populate_db(num_users, num_projects):
 
 
 ### list of commands to register ###
-command_list = [create_db, drop_db, rebuild_db, create_badges, add_statics,
+command_list = [create_db, drop_db, rebuild_db, add_badges, add_statics,
                 populate_db]
