@@ -16,7 +16,7 @@ def update_superowner(user):
     ## allocate ##
     # remove badge if criteria aren't met
     if badge.complete and (n_owned_complete<criteria['projects']):
-
+        user.notify('')
 
 
 
