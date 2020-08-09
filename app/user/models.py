@@ -324,6 +324,8 @@ class User(CRUDMixin, UserMixin, db.Model):
     def update_badge(self, badge_name:str):
         ''' Updates badge, adding user_badge or updating progress as necessary '''
         badge = Badge.get_by_name(badge_name)
+        if not badge:
+            raise ValueError(f'Could not locate badge "{badge_name}".')
         user_badge = self.get_user_badge(badge)
         if not user_badge:
             user_badge = User_Badge(badge)
