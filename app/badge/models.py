@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin
@@ -44,3 +45,6 @@ class User_Badge(db.Model):
         else:
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
                     f'e={self.earn_stamp}>')
+
+    def mark_earned(self):
+        self.
