@@ -468,6 +468,13 @@ class Task(CRUDMixin, db.Model):
     complete_stamp = db.Column(db.DateTime, nullable=True)
     complete = db.Column(db.Boolean, default=False)
 
+    def delete(self, commit=True):
+        # remove xp from members
+        self.author.action_xp('add_task', postive=False)
+        for worker in self.workers:
+            worker.action_xp('complete_task', postive=False)
+        
+
     def mark_complete(self, worker):
         ''' Marks incomplete task as complete '''
         if not self.complete:
