@@ -7,7 +7,7 @@ class Badge_Criteria(object):
     def __init__(self):
         self.criteria = {
             ## SuperOwner: own 50 completed projects ##
-            'SuperOwner'        :       {'projects':50},
+            'SuperOwner'        :       (50, 'n_owned_complete'),
             ## SuperMember: be a member (not owner) of 50 completed projects ##
             'SuperMember'       :       {'projects':50},
             ## WellStudied: have total skill_level>=100 across all subjects ##

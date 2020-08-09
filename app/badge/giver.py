@@ -13,8 +13,17 @@ def abstract_badge_allocation(user, name):
     '''
     # get association between user and badge
     user_badge = user.get_badge(name)
-    # get actual badge from association
-    badge = user_badge.get_badge if user_badge else Badge.get_by_name(name)
+    # get actual badge from association or db query
+    badge = user_badge.badge if user_badge else Badge.get_by_name(name)
+    # get criteria from badge
+    criteria, evaluator = badge.get_criteria()
+    # get user progress using evaluator
+    progress = getattr(user, evaluator)()
+    ## allocate ##
+    # if progress has been started
+    if user_badge:
+
+
 
 
 def update_superowner(user):

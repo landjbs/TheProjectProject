@@ -331,6 +331,13 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.update()
         return True
 
+    ## badge allocation evaluators ##
+    def n_owned_complete(self):
+        ''' Number of owned projects user has completed '''
+        return self.owned.filter_by(complete=True).count()
+
+    
+
     ## public analytics ##
     def total_stars(self):
         ''' Gets total stars earned by user '''
@@ -346,10 +353,6 @@ class User(CRUDMixin, UserMixin, db.Model):
     def task_data(self):
         ''' Gets dict '''
         raise RuntimeError('Not yet implemented')
-
-    def n_owned_complete(self):
-        ''' Number of owned projects user has completed '''
-        return self.owned.filter_by(complete=True).count()
 
 
 class Anonymous(AnonymousUserMixin):

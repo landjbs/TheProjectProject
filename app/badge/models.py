@@ -30,7 +30,7 @@ class Badge(CRUDMixin, db.Model):
         return cls.query.filter_by(name=name).first()
 
     def get_criteria(self):
-        ''' Gets dict of criteria for badge from badge_criteria '''
+        ''' Gets criteria and evaluator for badge from badge_criteria '''
         return badge_criteria.get_criteria(self.name)
 
 
