@@ -50,7 +50,12 @@ class User_Badge(db.Model):
     earn_stamp = db.Column(db.DateTime, nullable=True)
 
     def __init__(self, badge, progress, total):
-
+        self.badge = badge
+        self.progress = progress
+        self.total = total
+        #
+        if progress>=total:
+            self.mark_earned()
 
 
     def __repr__(self):
