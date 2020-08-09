@@ -8,6 +8,8 @@ from app.models import User_Subjects
 from app.notification.models import Notification
 from app.extensions import bcrypt
 
+from .xp_constants import xp_constants
+
 
 class User(CRUDMixin, UserMixin, db.Model):
     __tablename__ = 'user'
