@@ -309,6 +309,10 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Gets width of xp progressbar on user page as css style '''
         return f'width: {100*float(self.xp/xp_constants.verified_xp)}%;'
 
+    def get_user_badge(self, badge):
+        ''' Get user_badge object associated with user and badge '''
+        return self.badges.filter_by(badge=badge).first()
+
     def started_badge(self, badge):
         ''' Whether the user has started (/completed) progress on a badge '''
         return (not self.badges.filter_by(badge=badge).first() is None)
