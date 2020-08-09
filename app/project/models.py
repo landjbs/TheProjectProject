@@ -473,7 +473,8 @@ class Task(CRUDMixin, db.Model):
         self.author.action_xp('add_task', postive=False)
         for worker in self.workers:
             worker.action_xp('complete_task', postive=False)
-        
+        db.session.delete(self)
+        return commit and db.session.commit()
 
     def mark_complete(self, worker):
         ''' Marks incomplete task as complete '''
