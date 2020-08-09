@@ -261,6 +261,9 @@ def add_task(project_id):
     if form.validate_on_submit():
         if not project.add_task(text=form.text.data, author=current_user):
             flash('Could not add task.', 'error')
+        else:
+            flash('Task added!', 'success')
+            current_user.action_xp('add_task')
     return redirect(request.referrer)
 
 
