@@ -6,12 +6,18 @@ from tqdm import tqdm
 def create_badges(db):
     ''' Creates all static badges '''
     badges = [
-            # own and complete many projects
+            ########### SuperOwner: own 50 completed projects ##################
             Badge(name='SuperOwner',
-                icon='static/BadgeIcons/superowner/apple-touch-icon.png')
-            # work on many projects
-            # Badge(name='Super-Member',
-            #     icon=),
+                icon='static/BadgeIcons/superowner/apple-touch-icon.png',
+                criteria=50,
+                evaluator='n_owned_complete'),
+            ####################################################################
+            ## SuperMember: be a member (not owner) of 50 completed projects ##
+            Badge(name='SuperOwner',
+                icon='static/BadgeIcons/superowner/apple-touch-icon.png',
+                criteria=50,
+                evaluator='n_owned_complete')
+            ####################################################################
             # have many subject skills
             # Badge('Well-Studied',
             #     icon),
