@@ -336,7 +336,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Number of owned projects user has completed '''
         return self.owned.filter_by(complete=True).count()
 
-    
+    def get_xp(self):
+        ''' Wraps xp property for badge allocation '''
+        return self.xp
 
     ## public analytics ##
     def total_stars(self):
