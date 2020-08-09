@@ -107,11 +107,22 @@ class User_Badge(db.Model):
             self.earned = True
             # notify user
             self.user.notify(text=('Congratulations—you have won the '
-                                   f'{self.badge} badge! '),
+                                   f'{self.badge} badge!'),
                              category=1)
             self.update()
             return True
         return False
 
     def remove_earned_marking(self):
-        ''' Removes badge '''
+        ''' Removes badge if earned'''
+        if self.earned:
+            # remove earn stamp and set earned to false
+            self.earn_stamp = None
+            self.earned = False
+            # notify the user
+            self.user.notify(text=('Due to changes to your account (eg. left '
+                                   'projects or deleted tasks), you no longer '
+                                   'meet the threshold for the '
+                                   f'{self.badge.name} badge.'))
+            self.update()
+            
