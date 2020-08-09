@@ -299,7 +299,6 @@ class Project(CRUDMixin, db.Model):
                 task.mark_complete(user)
             else:
                 task.add_worker(user)
-            user.action_xp('complete_task')
         elif action=='back':
             task.remove_worker(user)
             if (task.worker_num()==0):
