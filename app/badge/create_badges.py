@@ -13,24 +13,12 @@ def create_badges(db):
                 evaluator='n_owned_complete'),
             ####################################################################
             ## SuperMember: be a member (not owner) of 50 completed projects ##
-            Badge(name='SuperOwner',
-                icon='static/BadgeIcons/superowner/apple-touch-icon.png',
+            Badge(name='SuperMember',
+                icon='static/BadgeIcons/supermember/apple-touch-icon.png',
                 criteria=50,
                 evaluator='n_owned_complete')
             ####################################################################
-            # have many subject skills
-            # Badge('Well-Studied',
-            #     icon),
-            # # have many points in one subject
-            # Badge('Specialist'),
-            # # have many stars
-            # Badge('Star Struck'),
-            # # work with many different users
-            # Badge('Well-Connected'),
-            # # create many tasks
-            # Badge('Set Em Up',),
-            # # complete many tasks
-            # Badge('Knock Em Down',)
+            ## Verified: be a member (not owner) of 50 completed projects ##
     ]
     for badge in tqdm(badges):
         db.session.add(badge)
