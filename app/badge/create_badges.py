@@ -18,7 +18,11 @@ def create_badges(db):
                 criteria=50,
                 evaluator='n_owned_complete')
             ####################################################################
-            ## Verified: be a member (not owner) of 50 completed projects ##
+            ## Verified: have xp>=10000 ##
+            Badge(name='Verified',
+                icon='todo',
+                criteria=100000,
+                evaluator='get_xp')
     ]
     for badge in tqdm(badges):
         db.session.add(badge)
