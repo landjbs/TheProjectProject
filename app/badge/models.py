@@ -49,6 +49,7 @@ class User_Badge(db.Model):
                     f'e={self.earn_stamp}>')
 
     def fraction_complete(self):
+        ''' Get fraction of badge completedness '''
         return float(self.progress / self.total)
 
     def update_progress(self, inc=1):
