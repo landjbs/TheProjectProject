@@ -49,6 +49,9 @@ class User_Badge(db.Model):
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
 
+    def __init__(self):
+        
+
     def __repr__(self):
         if not self.earned:
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
