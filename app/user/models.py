@@ -206,7 +206,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         if not self.has_starred(project):
             self.starred.append(project)
             project.buzz += 1
-            self.xp += 1
+            self.action_xp('start_project')
             self.update()
 
     def unstar_project(self, project):
@@ -290,9 +290,13 @@ class User(CRUDMixin, UserMixin, db.Model):
         return True
 
     ## badges and xp ##
-    def action_xp(self, action:str):
-        self.xp += xp_constants.action_xp(action)
+    def action_xp(self, action:str, positive:bool=True):
+        if positive:
+            self.xp += xp_constants.action_xp(action)
+        else:
+            self.xp -= xp_constants.action_xp(action)
         self.update()
+        return True
 
     def started_badge(self, badge):
         ''' Whether the user has started (/completed) progress on a badge '''
