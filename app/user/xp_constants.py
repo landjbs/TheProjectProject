@@ -5,7 +5,7 @@ Constants defining xp allocated for each action
 
 class XP_Constants(object):
     def __init__(self):
-        self.xps = {
+        self.action_xps = {
             ## stars ##
             'star_project'      :   1,
             'earn_star'         :   50,
@@ -20,9 +20,10 @@ class XP_Constants(object):
             'join_project'      :   100,
             'own_project'       :   200
         }
+        self.verified_xp = 1000;
 
     def action_xp(self, action:str):
-        xp = self.xps.get(action)
+        xp = self.action_xps.get(action)
         if not xp:
             print(f'WARNING: User action "{action}" is not associated with xp.')
             xp = 0
