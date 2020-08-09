@@ -123,6 +123,8 @@ class User_Badge(db.Model):
             self.user.notify(text=('Due to changes to your account (eg. left '
                                    'projects or deleted tasks), you no longer '
                                    'meet the threshold for the '
-                                   f'{self.badge.name} badge.'))
+                                   f'{self.badge.name} badge.'),
+                                   category=0)
             self.update()
-            
+            return True
+        return False
