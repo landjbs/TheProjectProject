@@ -311,13 +311,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Gets width of xp progressbar on user page as css style '''
         return f'width: {100*float(self.xp/xp_constants.verified_xp)}%;'
 
-    def get_badge(self, name):
-        ''' Get user_badge object associated with user and badge of name '''
-        return self.badges.filter(badge.name==name).first()
-
-    def started_badge(self, badge):
-        ''' Whether the user has started (/completed) progress on a badge '''
-        return (not self.badges.filter_by(badge=badge).first() is None)
+    def get_user_badge(self, badge):
+        ''' Gets user badge assoc for badge '''
+        return self.badges.filter_by(badge=badge).first()
 
     def add_badge(self, user_badge):
         ''' Adds user_badge object to user '''
@@ -325,9 +321,11 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.update()
         return True
 
-    def update_badge(self, badge_name):
+    def update_badge(self, badge_name:str):
         ''' Updates badge, adding user_badge or updating progress as necessary '''
-        badge =
+        badge = Badge.get_by_name(badge_name)
+        user_badge = self.get_user_badge(badge)
+
 
     ## badge allocation evaluators ##
     def n_owned_complete(self):
