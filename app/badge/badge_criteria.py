@@ -27,8 +27,7 @@ class Badge_Criteria(object):
     def get_criteria(self, name:str):
         criteria = self.action_xps.get(action)
         if not criteria:
-            print(f'WARNING: Could not find badge {name}.')
-            return None
+            raise ValueError(f'Invalid badge {name}.')
         return criteria
 
 
