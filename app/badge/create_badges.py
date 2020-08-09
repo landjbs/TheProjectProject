@@ -24,3 +24,6 @@ def create_badges(db):
             # # complete many tasks
             # Badge('Knock Em Down',)
     ]
+    for badge in badges:
+        db.session.add(badge)
+    db.session.commit()

@@ -7,8 +7,10 @@ from tqdm import trange, tqdm
 from app import db
 from app.user.models import User
 from app.project.models import Project
-from app.subject.create_subjects import create_subjects
 from app.subject.models import Subject
+
+from app.subject.create_subjects import create_subjects
+from app.badges.create_badges import create_badges
 
 
 def create_db():
@@ -29,6 +31,10 @@ def rebuild_db():
     drop_db()
     create_db()
     add_statics()
+
+
+def create_badges():
+    ''' Drops and creates all badges '''
 
 
 
