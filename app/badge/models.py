@@ -1,9 +1,9 @@
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin
 
 
-## BASE CLASSES ##
+
 class Badge(CRUDMixin, db.Model):
     __tablename__ = 'badge'
     # id
@@ -23,6 +23,7 @@ class Badge(CRUDMixin, db.Model):
 
     def __repr__(self):
         return f'<Badge {self.name}>'
+
 
 
 class User_Badge(db.Model):
