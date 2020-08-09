@@ -37,7 +37,6 @@ def apply():
         s = URLSafeTimedSerializer(current_app.secret_key)
         token = s.dumps(user.id, salt='email-confirm-salt')
         url = url_for('auth.verify', token=token, _external=True)
-        print('HERE')
         send_registration_email.queue(user, url)
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
@@ -88,6 +87,7 @@ def login():
     if current_user.is_authenticated:
         current_user.active = True
         current_user.update()
+        currnet_user.update_badges(['SuperOwner', 'Verified'])
         return redirect(request.args.get('next') or url_for('hub.home'))
     form = Login()
     if form.validate_on_submit():
