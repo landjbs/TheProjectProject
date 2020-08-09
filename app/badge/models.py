@@ -3,6 +3,8 @@ from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin
 
+from .badge_criteria import badge_criteria
+
 
 
 class Badge(CRUDMixin, db.Model):
@@ -26,6 +28,10 @@ class Badge(CRUDMixin, db.Model):
     @classmethod
     def get_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
+
+    def get_criteria(self):
+        ''' Gets dict of criteria for badge from badge_criteria '''
+        return badge_criteria.get_criteria(self.name)
 
 
 class User_Badge(db.Model):

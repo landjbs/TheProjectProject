@@ -25,11 +25,11 @@ class Badge_Criteria(object):
         }
 
     def get_criteria(self, name:str):
-        xp = self.action_xps.get(action)
-        if not xp:
-            print(f'WARNING: User action "{action}" is not associated with xp.')
-            xp = 0
-        return xp
+        criteria = self.action_xps.get(action)
+        if not criteria:
+            print(f'WARNING: Could not find badge {name}.')
+            return None
+        return criteria
 
 
 badge_criteria = Badge_Criteria()
