@@ -18,8 +18,7 @@ class XP_Constants(object):
             'complete_task'     :   50,
             ## projects ##
             'complete_project'  :   500,
-            'join_project'      :   100,
-            'own_project'       :   200
+            'join_project'      :   100
         }
 
     def action_xp(self, action:str):

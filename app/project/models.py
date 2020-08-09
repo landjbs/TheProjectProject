@@ -208,6 +208,8 @@ class Project(CRUDMixin, db.Model):
                             category=0, include_owner=notify_owner)
         # add member to project
         self.members.append(user)
+        # add xp to user
+        user.action_xp('join_project')
         # update project data and activity
         self.update_last_active()
         self.update()
@@ -238,6 +240,8 @@ class Project(CRUDMixin, db.Model):
             self.notify_members(
                 text=(f'{user.name} has been left {self.name}.')
             )
+        # remove xp from user
+        user.action_xp('join_project', positive=False)
         # add rejection from project to user
         user.add_rejection(self)
         self.update_last_active()
