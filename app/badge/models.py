@@ -52,12 +52,6 @@ class User_Badge(db.Model):
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
 
-    def __init__(self, user, badge):
-        self.user = user
-        self.badge = badge
-        # updates progress once to initialize
-        self.update_progress()
-
     def __repr__(self):
         if not self.earned:
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
