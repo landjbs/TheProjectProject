@@ -14,7 +14,7 @@ class XP_Constants(object):
             'send_collab'       :   5,
             'recieve_collab'    :   10,
             ## tasks ##
-            'post_task'         :   30,
+            'add_task'         :   30,
             'complete_task'     :   50,
             ## projects ##
             'complete_project'  :   500,

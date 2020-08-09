@@ -299,13 +299,16 @@ class Project(CRUDMixin, db.Model):
                 task.mark_complete(user)
             else:
                 task.add_worker(user)
+            user.action_xp('complete_task')
         elif action=='back':
             task.remove_worker(user)
             if (task.worker_num()==0):
                 task.mark_incomplete()
+                user.action_xp('complete_task', positive=False)
         elif action=='delete':
-            if user==task.author:
+            if (not task.complete) and (user in [task.author, self.owner]):
                 task.delete()
+                task.author.action_xp('add_task', positive=False)
         else:
             raise ValueError(f'Invalid action {action} for change_task_status.')
         self.update_last_active()

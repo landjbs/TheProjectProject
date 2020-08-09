@@ -253,6 +253,8 @@ class User(CRUDMixin, UserMixin, db.Model):
         )
         # add invitation
         self.invitations.append(project)
+        # add xp to inviter and invitee
+        current_user.action_xp('recieve_collab')
         # update project activity
         project.update_last_active()
         self.update()
