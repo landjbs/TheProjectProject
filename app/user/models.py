@@ -327,6 +327,12 @@ class User(CRUDMixin, UserMixin, db.Model):
         user_badge.update_progress()
         return True
 
+    def update_badges(self, badge_list:list):
+        ''' Performs update_badge on list of badge_names '''
+        for badge_name in badge_list:
+            self.update_badge(badge_name)
+        return True
+
     ## badge allocation evaluators ##
     def n_owned_complete(self):
         ''' Number of owned projects user has completed '''
