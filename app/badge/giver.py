@@ -21,7 +21,8 @@ def update_superowner(user):
         #
     # if progress hasn't been started, but n_owned_complete>0
     elif (n_owned_complete>0):
-        if n_owned_complete<project_criteria
+        if n_owned_complete<project_criteria:
+
 
     # if badge.complete and (n_owned_complete<criteria['projects']):
     #     user.notify('')
