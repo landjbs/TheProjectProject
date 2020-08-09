@@ -53,7 +53,15 @@ class User_Badge(db.Model):
         self.earn_stamp = datetime.utcnow()
         self.earned = True
         self.update()
+        return True
 
-    def update_progress(self):
+    def update_progress(self, inc=1):
         ''' Updates progress on badge '''
-        
+        if self.earned:
+            return False
+        self.current += inc
+        if self.current==self.total:
+            self.mark_earned()
+        else:
+            self.update()
+        return True
