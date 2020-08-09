@@ -5,7 +5,7 @@ Constants defining criteria for each badge
 
 class Badge_Criteria(object):
     def __init__(self):
-        self.action_xps = {
+        self.criteria = {
             ## SuperOwner: own 50 completed projects ##
             'SuperOwner'        :       {'projects':50},
             ## SuperMember: be a member (and not owner of 50 completed projects) ##
@@ -25,7 +25,7 @@ class Badge_Criteria(object):
         }
 
     def get_criteria(self, name:str):
-        criteria = self.action_xps.get(action)
+        criteria = self.criteria.get(action)
         if not criteria:
             raise ValueError(f'Invalid badge {name}.')
         return criteria
