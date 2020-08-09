@@ -15,6 +15,8 @@ class Badge(CRUDMixin, db.Model):
     name = db.Column(db.String(60), nullable=False, unique=True)
     # url for icon
     icon = db.Column(db.String(250), nullable=False, unique=True)
+    # criteria
+    criteria = db.Column(db.Integer, nullable=False)
     # users
     users = relationship('User_Badge',
                         back_populates='badge',
@@ -76,13 +78,10 @@ class User_Badge(db.Model):
 
     def update_progress(self, progress, total):
         ''' Updates progress on badge by inc '''
-        if self.earned:
-            return False
-        self.progress += inc
-        if self.progress==self.total:
-            self.mark_earned()
-        else:
-            self.update()
+        self.progress = progress
+        self.total = total
+
+        self.update()
         return True
 
     def mark_earned(self):
