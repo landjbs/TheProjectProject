@@ -467,9 +467,9 @@ class Task(CRUDMixin, db.Model):
 
     def delete(self, commit=True):
         # remove xp from members
-        self.author.action_xp('add_task', postive=False)
+        self.author.action_xp('add_task', positive=False)
         for worker in self.workers:
-            worker.action_xp('complete_task', postive=False)
+            worker.action_xp('complete_task', positive=False)
         db.session.delete(self)
         return commit and db.session.commit()
 
@@ -507,7 +507,7 @@ class Task(CRUDMixin, db.Model):
         ''' Removes worker from task '''
         if worker in self.workers:
             # add xp
-            worker.action_xp('complete_task', postive=False)
+            worker.action_xp('complete_task', positive=False)
             # remove from task
             self.workers.remove(worker)
             self.update()
