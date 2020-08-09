@@ -53,7 +53,7 @@ class User_Badge(db.Model):
         self.badge = badge
         self.progress = progress
         self.total = total
-        #
+        # mark earned if deserved
         if progress>=total:
             self.mark_earned()
 
