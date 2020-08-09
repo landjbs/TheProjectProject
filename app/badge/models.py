@@ -40,6 +40,8 @@ class User_Badge(db.Model):
 
     def __repr__(self):
         if not self.earned:
-            return f'<User_Badge u={self.user.name} b={self.badge.name} p={self.progress}>'
+            return (f'<User_Badge u={self.user.name} b={self.badge.name}'
+                    f'p={self.progress}>')
         else:
-            return f'<User_Badge u={self.user.name} b={self.badge.name} e={self.earn_stamp}>'
+            return (f'<User_Badge u={self.user.name} b={self.badge.name}'
+                    f'e={self.earn_stamp}>')
