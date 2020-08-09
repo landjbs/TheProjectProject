@@ -23,7 +23,8 @@ def abstract_badge_allocation(user, name):
     # if progress has been started...
     if user_badge:
         # if user has earned badge but doesn't deserve it
-        if user_badge.earned and 
+        if user_badge.earned and progress<criteria:
+            
 
 
 

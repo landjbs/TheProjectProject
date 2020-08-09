@@ -74,7 +74,7 @@ class User_Badge(db.Model):
         ''' Gets width of progressbar for badge display '''
         return f'width: {100*min(1, self.fraction_complete())}%;'
 
-    def update_progress(self, inc=1):
+    def update_progress(self, progress, total):
         ''' Updates progress on badge by inc '''
         if self.earned:
             return False
