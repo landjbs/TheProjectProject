@@ -228,7 +228,7 @@ def leave_project(project_id):
                 return redirect(request.referrer)
         else:
             project.remove_member(current_user.id, by_owner=False)
-            # delete all tasks to reset scores
+            # delete all tasks to remove xps
             for task in project.tasks:
                 task.delete()
             project.delete()
