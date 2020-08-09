@@ -304,11 +304,9 @@ class Project(CRUDMixin, db.Model):
             task.remove_worker(user)
             if (task.worker_num()==0):
                 task.mark_incomplete()
-                user.action_xp('complete_task', positive=False)
         elif action=='delete':
             if (not task.complete) and (user in [task.author, self.owner]):
                 task.delete()
-                task.author.action_xp('add_task', positive=False)
         else:
             raise ValueError(f'Invalid action {action} for change_task_status.')
         self.update_last_active()
@@ -498,6 +496,9 @@ class Task(CRUDMixin, db.Model):
     def add_worker(self, worker):
         ''' Adds worker to task '''
         if not worker in self.workers:
+            # add xp
+            worker.action_xp('complete_task')
+            # add to task
             self.workers.append(worker)
             self.update()
             return True
@@ -506,6 +507,9 @@ class Task(CRUDMixin, db.Model):
     def remove_worker(self, worker):
         ''' Removes worker from task '''
         if worker in self.workers:
+            # add xp
+            worker.action_xp('complete_task', postive=False)
+            # remove from task
             self.workers.remove(worker)
             self.update()
             return True
