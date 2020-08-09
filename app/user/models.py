@@ -80,9 +80,9 @@ class User(CRUDMixin, UserMixin, db.Model):
                             lazy='dynamic',
                             cascade='all, delete, delete-orphan',
                             order_by='desc(User_Subjects.number)')
+    # xp
+    xp = db.Column(db.Integer, nullable=False, default=0)
     ## reporting ##
-    # reports posted by user
-    # reports_posted = relationship('User_Report', back_populates='reporter')
     # reports targeting user
     reports = relationship('User_Report',
                            back_populates='reported',
