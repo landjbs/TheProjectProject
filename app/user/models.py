@@ -290,6 +290,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Whether the user has started (/completed) progress on a badge '''
         return (not self.badges.filter_by(badge=badge).first() is None)
 
+    def has_badge(badge):
+        ''' Whether the user has earned badge '''
+
     def add_badge(user_badge):
         ''' Adds user_badge object to user '''
         self.badges.append(user_badge)
