@@ -5,6 +5,7 @@ Constants defining xp allocated for each action
 
 class XP_Constants(object):
     def __init__(self):
+        self.verified_xp = 1000
         self.action_xps = {
             ## stars ##
             'star_project'      :   1,
@@ -20,7 +21,6 @@ class XP_Constants(object):
             'join_project'      :   100,
             'own_project'       :   200
         }
-        self.verified_xp = 1000;
 
     def action_xp(self, action:str):
         xp = self.action_xps.get(action)
