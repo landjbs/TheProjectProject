@@ -3,9 +3,9 @@
 from .models import Badge, User_Badge
 
 
-def give_superowner(user):
+def update_superowner(user):
     ''' Allocates superowner user_badge to user as necessary '''
-    if 
+    superowner = Badge.get_by_name('SuperOwner')
 
 
 def give_badges(user):

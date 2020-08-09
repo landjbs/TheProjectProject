@@ -23,6 +23,9 @@ class Badge(CRUDMixin, db.Model):
     def __repr__(self):
         return f'<Badge {self.name}>'
 
+    @classmethod
+    def get_by_name(cls, name):
+        return cls.query.filter_by(name=name).first()
 
 
 class User_Badge(db.Model):
@@ -34,7 +37,7 @@ class User_Badge(db.Model):
     badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=True)
     badge = relationship('Badge', back_populates='users')
     # progress
-    progress = db.Column(db.Float, nullable=False, default=float(0))
+    progress = db.Column(db.Integer, nullable=False, default=0)
     total = db.Column(db.Integer, nullable=False)
     # earn
     earned = db.Column(db.Boolean, nullable=False, default=False)
