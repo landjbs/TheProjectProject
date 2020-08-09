@@ -10,8 +10,8 @@ class Badge_Criteria(object):
             'SuperOwner'        :       {'projects':50},
             ## SuperMember: be a member (and not owner of 50 completed projects) ##
             'SuperMember'       :       {'projects':50},
-            ## WellStudied: have skill_level>=5 across 10 subjects ##
-            'WellStudied'       :       {'skill':5, 'subjects':10},
+            ## WellStudied: have cumulative skill_level>=100 across all subjects ##
+            'WellStudied'       :       {'skill':100},
             ## Specialist: have skill_level>=30 on any subject ##
             'Specialist'        :       {'skill':30},
             ## StarStruck: have earned>=200 cumulative stars ##
