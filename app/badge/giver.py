@@ -27,7 +27,7 @@ def abstract_badge_allocation(user, name):
 
 
 
-def update_superowner(user):
+def update_badge(user):
     ''' Allocates superowner user_badge to user as necessary '''
     # get association between user and badge
     user_badge = user.get_badge('SuperOwner')
@@ -56,10 +56,3 @@ def update_superowner(user):
 
     # if badge.complete and (n_owned_complete<criteria['projects']):
     #     user.notify('')
-
-
-
-
-def update_badges(user):
-    ''' Gives badges to user as necessary '''
-    ## superowner ##
