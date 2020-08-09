@@ -8,9 +8,9 @@ class Badge_Criteria(object):
         self.criteria = {
             ## SuperOwner: own 50 completed projects ##
             'SuperOwner'        :       {'projects':50},
-            ## SuperMember: be a member (and not owner of 50 completed projects) ##
+            ## SuperMember: be a member (not owner) of 50 completed projects ##
             'SuperMember'       :       {'projects':50},
-            ## WellStudied: have cumulative skill_level>=100 across all subjects ##
+            ## WellStudied: have total skill_level>=100 across all subjects ##
             'WellStudied'       :       {'skill':100},
             ## Specialist: have skill_level>=30 on any subject ##
             'Specialist'        :       {'skill':30},
