@@ -227,8 +227,12 @@ def leave_project(project_id):
                 flash('Could not transfer ownership.')
                 return redirect(request.referrer)
         else:
+            project.remove_member(current_user.id, by_owner=False)
             project.delete()
-            return user_page(current_user.code)
+            flash(f'You have deleted {project.name}.')
+            return redirect(
+                url_for('user.user_page', code=current_user.code)
+            )
     project.remove_member(current_user.id, by_owner=False)
     flash(f'You have left {project.name}.')
     return redirect(request.referrer)
