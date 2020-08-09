@@ -10,7 +10,7 @@ from app.project.models import Project
 from app.subject.models import Subject
 
 from app.subject.create_subjects import create_subjects
-from app.badges.create_badges import create_badges
+from app.badge.create_badges import create_badges
 
 
 def create_db():
@@ -116,7 +116,6 @@ def populate_db(num_users, num_projects):
     for project in tqdm(projects, desc='Adding Projects'):
         db.session.add(project)
     db.session.commit()
-
 
 
 
