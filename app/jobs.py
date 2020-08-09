@@ -13,11 +13,11 @@ AWS_ACCESS_KEY_ID = 'AKIAQVSLC6YU44B3L5FB'
 AWS_SECRET_ACCESS_KEY= '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'
 
 
-ses = boto3.client('ses',
-                   region_name=SES_REGION,
-                   aws_access_key_id=AWS_ACCESS_KEY_ID,
-                   aws_secret_access_key=AWS_SECRET_ACCESS_KEY
-                )
+# ses = boto3.client('ses',
+#                    region_name=SES_REGION,
+#                    aws_access_key_id=AWS_ACCESS_KEY_ID,
+#                    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+#                 )
 
 
 @rq.job
