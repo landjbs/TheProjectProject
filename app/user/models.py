@@ -315,6 +315,11 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     def has_badge(self, badge):
         ''' Whether the user has earned badge '''
+        badge = self.badges.filter_by(badge=badge).first()
+        if not badge:
+            return False
+        else:
+            return badge.earned
 
     def add_badge(self, user_badge):
         ''' Adds user_badge object to user '''
