@@ -6,8 +6,6 @@ Constants defining criteria for each badge
 class Badge_Criteria(object):
     def __init__(self):
         self.criteria = {
-            ## StarStruck: have earned>=200 cumulative stars ##
-            'StarStruck'        :       {'stars':200},
             ## WellConnected: work with >=30 different people ##
             'WellConnected'     :       {'users':30},
             ## SetEmUp: create >=100 tasks ##

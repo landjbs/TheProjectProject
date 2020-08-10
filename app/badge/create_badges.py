@@ -48,13 +48,22 @@ def create_badges(db):
                        'We will review your profile and connect you with experts in your field'],
                 criteria=50,
                 evaluator='n_member_complete'),
+            ####################################################################
             ########## StarStruck: have earned>=200 cumulative stars ###########
             Badge(name='StarStruck',
                 icon='BadgeIcons/starstruck/apple-touch-icon.png',
-                description='Earn a total of 300 stars and cement your stardom within the community!',
+                description='Earn a total of 300 stars and cement your superstar-status within the community!',
                 perks=[f'{badge_xp} XP',
                     'StarStruck badge next to your name',
                    'We will review your projects and profile our favorite in TheProjectProject social media'],
+                criteria=50,
+                evaluator='n_member_complete'),
+            ####################################################################
+            ########## WellConnected: work with >=100 different people ##########
+            Badge(name='WellConnected',
+                icon='BadgeIcons/wellconnected/apple-touch-icon.png',
+                description='Work with 100 different people to showcase your friendly and sociable nature!',
+                perks=[f'{badge_xp} XP', 'WellConnected badge next to your name'],
                 criteria=50,
                 evaluator='n_member_complete'),
             ####################################################################
