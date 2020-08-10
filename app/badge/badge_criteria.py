@@ -6,12 +6,6 @@ Constants defining criteria for each badge
 class Badge_Criteria(object):
     def __init__(self):
         self.criteria = {
-            ## SuperOwner: own 50 completed projects ##
-            'SuperOwner'        :       (50, 'n_owned_complete'),
-            ## SuperMember: be a member (not owner) of 50 completed projects ##
-            'SuperMember'       :       {'projects':50},
-            ## WellStudied: have total skill_level>=100 across all subjects ##
-            'WellStudied'       :       {'skill':100},
             ## Specialist: have skill_level>=30 on any subject ##
             'Specialist'        :       {'skill':30},
             ## StarStruck: have earned>=200 cumulative stars ##

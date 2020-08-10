@@ -16,7 +16,7 @@ class Badge(CRUDMixin, db.Model):
     # url for icon
     icon = db.Column(db.String(250), nullable=False, unique=True)
     # description
-    description = db.Column(db.String(250), nullable=False)
+    description = db.Column(db.String(100), nullable=False)
     # perks
     perks = relationship('Badge_Perk',
                          back_populates='badge',
@@ -157,4 +157,4 @@ class User_Badge(CRUDMixin, db.Model):
 class Badge_Perk(CRUDMixin, db.Model):
     __tablename__ = 'badge_perk'
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(60), nullable=False, unique=True)
+    text = db.Column(db.String(100), nullable=False, unique=True)
