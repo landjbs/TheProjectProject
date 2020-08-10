@@ -50,11 +50,11 @@ def create_badges(db):
                 evaluator='n_member_complete'),
             ########## StarStruck: have earned>=200 cumulative stars ###########
             Badge(name='StarStruck',
-                icon='BadgeIcons/specialist/apple-touch-icon.png',
-                description='Have a total skill level of 500 across all subjects to showcase your expertise!',
-                perks=[f'{badge_xp} XP', 'Recommendation Boost for projects within your top subject',
-                       'StarStruck badge next to your name in all member cards',
-                       'We will review your profile and connect you with experts in your field'],
+                icon='BadgeIcons/starstruck/apple-touch-icon.png',
+                description='Earn a total of 300 stars and cement your stardom within the community!',
+                perks=[f'{badge_xp} XP',
+                    'StarStruck badge next to your name',
+                   'We will review your projects and profile our favorite in TheProjectProject social media'],
                 criteria=50,
                 evaluator='n_member_complete'),
             ####################################################################
