@@ -375,7 +375,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Get number of unique users user has worked with '''
         members = set()
         for project in self.projects:
-            for member in project:
+            for member in project.members:
                 if not member==self:
                     members.add(member)
         return len(members)
