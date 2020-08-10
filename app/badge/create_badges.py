@@ -17,7 +17,7 @@ def create_badges(db):
                 perks=[f'{badge_xp} XP', 'Recommendation Boost in Recommended Project stack',
                        'We will review your projects and connect you with funding/compute if possible',
                        'SuperOwner icon next to your name in all project cards'],
-                criteria=50,
+                criteria=1,
                 evaluator='n_owned_complete'),
             ####################################################################
             ## SuperMember: be a member (not owner) of 50 completed projects ##
