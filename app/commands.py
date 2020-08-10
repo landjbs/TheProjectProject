@@ -77,16 +77,19 @@ def populate_db(num_users, num_projects):
     # fake users
     users = []
     for _ in trange(num_users, desc='Populating Users'):
-        name = fake.name()
-        user = User(
-                name=name,
-                email=fake.email(),
-                password='boop',#(fake.word()+fake.word()),
-                url=f'https://github.com/{"_".join(name.split(" ")+[str(i) for i in np.random.randint(0,300,size=10)]).lower()}',
-                about=rand_words(10),
-                accepted=True
-            )
-        users.append(user)
+        try:
+            name = fake.name()
+            user = User(
+                    name=name,
+                    email=fake.email(),
+                    password='boop',#(fake.word()+fake.word()),
+                    url=f'https://github.com/{"_".join(name.split(" ")+[str(i) for i in np.random.randint(0,300,size=10)]).lower()}',
+                    about=rand_words(10),
+                    accepted=True
+                )
+            users.append(user)
+        except Exception as e:
+            print(f'Could not add: {e}')
     # real users
     for user in tqdm(users, desc='Adding Users'):
         db.session.add(user)
