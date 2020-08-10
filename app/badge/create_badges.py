@@ -64,12 +64,16 @@ def create_badges(db):
                 icon='BadgeIcons/wellconnected/apple-touch-icon.png',
                 description='Work with 100 different people to showcase your friendly and sociable nature!',
                 perks=[f'{badge_xp} XP', 'WellConnected badge next to your name'],
-                criteria=50,
+                criteria=100,
                 evaluator='n_unique_members'),
             ####################################################################
             ############ SetEmUp: create >=100 different tasks #################
-            
-            ####################################################################
+            Badge(name='SetEmUp',
+                icon='BadgeIcons/setemup/apple-touch-icon.png',
+                description='Create 300 tasks to showcase your delegation skills!',
+                perks=[f'{badge_xp} XP', 'SetEmUp badge next to your name'],
+                criteria=100,
+                evaluator='n_unique_members'),
             ####################################################################
             ## Verified: have xp>=10000 ##
             Badge(name='Verified',
