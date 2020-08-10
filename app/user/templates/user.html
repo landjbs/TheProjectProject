@@ -38,6 +38,10 @@
                 <a href='/user={{ user.code }}'>
                   <h3>
                     {{ user.name }}
+                    {% set badge = user.choose_badge('search') %}
+                    {% if badge %}
+                      {{ macros.render_badge_icon(badge) }}
+                    {% endif %}
                     {% if user.recently_active() %}
                       <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
                     {% endif %}
