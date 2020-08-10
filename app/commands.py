@@ -98,11 +98,14 @@ def populate_db(num_users, num_projects):
             print(f'Could not add: {e}')
     # real users
     for user in tqdm(users, desc='Adding Users'):
-        db.session.add(user)
-        user.add_subjects(rand_subjects(np.random.randint(0,6)))
-        badges = rand_badges(np.random.randint(0,4))
-        for badge in badges:
-            user.badges.append(User_Badge(badge=badge, earned=True))
+        try:
+            db.session.add(user)
+            user.add_subjects(rand_subjects(np.random.randint(0,6)))
+            badges = rand_badges(np.random.randint(0,4))
+            for badge in badges:
+                user.badges.append(User_Badge(badge=badge, earned=True))
+        except Exception as e:
+            print(f'Could not add: {e}')
     # fake projects
     projects = []
     user_num = User.query.count()
