@@ -16,7 +16,7 @@ def create_badges(db):
             Badge(name='SuperMember',
                 icon='static/BadgeIcons/supermember/apple-touch-icon.png',
                 criteria=50,
-                evaluator='n_owned_complete')
+                evaluator='n_owned_complete'),
             ####################################################################
             ## Verified: have xp>=10000 ##
             Badge(name='Verified',

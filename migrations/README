@@ -1,1 +1,5 @@
 Generic single-database configuration.
+
+Commands:
+flask db migrate -m "message"  # prepare migration
+flask db upgrade                # enact migration

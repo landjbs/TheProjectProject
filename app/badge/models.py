@@ -18,7 +18,7 @@ class Badge(CRUDMixin, db.Model):
     # criteria
     criteria = db.Column(db.Integer, nullable=False)
     # evaluator: user attr to call for progress
-    evaluator = db.String(db.String(50), nullable=False)
+    evaluator = db.Column(db.String(50), nullable=False)
     # users
     users = relationship('User_Badge',
                         back_populates='badge',
