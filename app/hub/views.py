@@ -87,7 +87,7 @@ def search_mobile():
     search_text = request.form.get('search')
     project_results, user_results, subject_results = text_search(search_text)
     project_application = Project_Application_Form()
-    return render_template('search.html',
+    return render_template('search_mobile.html',
                         project_results=project_results,
                         user_results=user_results,
                         subject_results=subject_results,
