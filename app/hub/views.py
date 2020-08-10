@@ -1,7 +1,7 @@
 from flask import (current_app, request, redirect, url_for,
                    render_template, flash)
 from flask_login import current_user, login_required
-from flask.ext.mobility.decorators import mobile_template
+from flask_mobility.decorators import mobilized, mobile_template
 from datetime import datetime
 
 from ..hub import hub

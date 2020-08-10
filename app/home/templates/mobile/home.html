@@ -10,23 +10,11 @@
 <div class='container my-2' style='min-width: 99%'>
   <h4 style='text-align:left;'>Recommended Projects</h4>
   <hr class="my-2">
-  <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-      {% for tab in recommended_tabs %}
-        {% if loop.index==1 %}
-        <div class="carousel-item active">
-        {% else %}
-        <div class="carousel-item">
-        {% endif %}
-          <div class='row'>
-            {% for project in tab %}
-              {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
-            {% endfor %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
+    {% for project in tab %}
+      <div class='row'>
+        {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+      </div>
+    {% endfor %}
   </div>
 
 <div>
