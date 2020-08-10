@@ -42,7 +42,13 @@
       <div class='card-head'>
         {{ render_project_name(project, current_user) }}
         <a href='user={{ project.owner.code }}'>
-          <p class='owner'>{{ project.owner.name }}</p>
+          <p class='owner'>
+            {{ project.owner.name }}
+            {% set badge = project.owner.choose_badge('project') %}
+            {% if badge %}
+              {{ render_badge_icon(badge) }}
+            {% endif %}
+          </p>
         </a>
       </div>
       <hr class="my-4">
