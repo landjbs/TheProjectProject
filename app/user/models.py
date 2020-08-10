@@ -352,19 +352,31 @@ class User(CRUDMixin, UserMixin, db.Model):
             self.update_badge(badge_name)
         return True
 
+    def check_name_return_badge(self, badge_name:str):
+        ''' choose_badge helper to see if user has badge '''
+        badge = Badge.get_by_name(badge_name)
+        if badge:
+            return self.get_user_badge(badge)
+        else:
+            raise ValueError(f'Invalid badge name "{badge_name}".')
+
     def choose_badge(self, card_type:str):
         ''' Chooses best badge to display based on card type '''
         # first is always verified
-        verified = self.get_user_badge(Badge.get_by_name('Verified'))
+        verified = self.check_name_return_badge('Verified')
         if verified:
             return verified
-        #
+        # otherwise go through ordered list of possible badges
         if card_type=='project':
-            # superowner
-            superowner = self.get_user_bdage(Badge.get_by_name('SuperOwner'))
-            if superowner:
-                return superowner
-            # 
+            for badge_name in ['SuperOwner', 'StarStruck', 'SetEmUp', 'WellConnected', 'Specialist', 'WellStudied', 'KnockEmDown']:
+                badge = self.check_name_return_badge(badge_name)
+                if badge:
+                    return badge
+            return None
+        elif card_type=='member':
+
+        elif card_type=='search':
+            if
         else:
             raise ValueError(f'choose_badge got invalid card_type {card_type}.')
 
