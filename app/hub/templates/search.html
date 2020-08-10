@@ -12,13 +12,13 @@
 <div class='container my-2' style='min-width: 90%'>
   <h4 style='text-align:left;'>Results for "{{ search_text }}"</h4>
   <hr class="my-2">
-  {% if project_tabs!=[] %}
+  {% if results['project'][1]!=0 %}
     <h4 style='text-align:left;'>Projects</h4>
     <hr class="my-2">
     <div id="project-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
-        {% for tab in project_tabs %}
+        {% for tab in results['project'][0] %}
           {% if loop.index==1 %}
           <div class="carousel-item active">
           {% else %}
@@ -46,12 +46,12 @@
     </div>
   {% endif %}
 
-  {% if user_tabs!=[] %}
+  {% if results['user'][1]!=0 %}
     <div id="user-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <h4 style='text-align:left;'>Users</h4>
       <hr class="my-2">
       <div class="carousel-inner" role="listbox">
-        {% for tab in user_tabs %}
+        {% for tab in results['user'][0] %}
           {% if loop.index==1 %}
           <div class="carousel-item active">
           {% else %}
@@ -79,13 +79,13 @@
     <!--/.Controls-->
   {% endif %}
 
-  {% if subject_tabs!=[] %}
+  {% if results['subject'][1]!=0 %}
       <h4 style='text-align:left;'>Subjects</h4>
       <hr class="my-2">
       <div id="subject-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
-          {% for tab in subject_tabs %}
+          {% for tab in results['subject'][0] %}
             {% if loop.index==1 %}
             <div class="carousel-item active">
             {% else %}
@@ -114,16 +114,16 @@
     <!--/.Controls-->
   {% endif %}
 
-<!-- modals -->
+<!-- modals/ -->
 <div>
   <!-- project modals -->
-  {% for tab in project_tabs %}
+  {% for tab in results['project'][0] %}
     {% for project in tab %}
       {{ macros.render_join_modal(current_user, project, project_application) }}
     {% endfor %}
   {% endfor %}
   <!-- user modals -->
-  {% for tab in user_tabs %}
+  {% for tab in results['user'][0] %}
     {% for user in tab %}
       {{ macros.render_collaborate_modal(current_user, user) }}
       {% if not user==current_user %}
@@ -131,8 +131,8 @@
       {% endif %}
     {% endfor %}
   {% endfor %}
-
 </div>
+<!-- /modals -->
 
 
 

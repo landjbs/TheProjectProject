@@ -13,6 +13,8 @@ def text_search(search_text, partition=True):
     user_results = User.query.filter(User.name.contains(search_text) |
                                      User.about.contains(search_text))
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
+    ## partition ##
+
     ## analytics ##
     project_count = project_results.count()
     user_count = user_results.count()
@@ -23,4 +25,4 @@ def text_search(search_text, partition=True):
     ## return dict of results and analytics
     return {'project'       :   (project_results, project_count),
             'user'          :   (user_results, user_count),
-            'subject_count' :   (subject_results, subject_count)}
+            'subject'       :   (subject_results, subject_count)}
