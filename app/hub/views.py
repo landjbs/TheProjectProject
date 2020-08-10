@@ -13,8 +13,6 @@ from app.recommendations.search import text_search
 from app.project.forms import Project_Application_Form
 
 
-@hub.route('/home')
-@login_required
 def home():
     # recommended projects
     recommended_projects = get_recommended_projects(current_user)
@@ -42,9 +40,10 @@ def home():
                             user_project_count=user_projects.count(),
                             project_application=project_application)
 
-
+@hub.route('/home')
+@login_required
 @mobilized(home)
-def home_mobile():
+def home():
     ''' Mobile optimized route for home page '''
     print('MOBILIZED')
     # only load recommended projects and dont tab
@@ -56,6 +55,10 @@ def home_mobile():
                            project_application=project_application)
 
 
+@hub.route('/search', methods=['GET', 'POST'])
+# @mobilized(search)
+@login_required
+@limiter.limit('60 per minute')
 def search():
     if request.method=='GET':
         return redirect(url_for('hub.home'))
@@ -71,9 +74,6 @@ def search():
                         project_application=project_application)
 
 
-@hub.route('/search', methods=['GET', 'POST'])
-@mobilized(search)
-@login_required
-@limiter.limit('60 per minute')
-def search_mobile():
-    ''' Mobile optimized search page '''
+
+# def search_mobile():
+#     ''' Mobile optimized search page '''
