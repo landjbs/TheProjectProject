@@ -73,8 +73,9 @@ def search():
 
 ### SEARCH ###
 @hub.route('/search', methods=['GET', 'POST'])
-# @mobilized(search)
+@mobilized(search)
 @login_required
 @limiter.limit('60 per minute')
-# def search_mobile():
-#     ''' Mobile optimized search page '''
+def search_mobile():
+    ''' Mobile optimized search page '''
+    
