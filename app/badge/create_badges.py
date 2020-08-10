@@ -83,8 +83,7 @@ def create_badges(db):
                 criteria=300,
                 evaluator='n_tasks_worked'),
             ####################################################################
-            
-            ## Verified: have xp>=10000 ##
+            ################## Verified: have >=25000 xp #######################
             Badge(name='Verified',
                 icon='todo',
                 description='The highest honor any social media user can achieve—the coveted Verified badge!',
@@ -93,6 +92,7 @@ def create_badges(db):
                        'Recommendation Boost in all Recommendation Stacks'],
                 criteria=100000,
                 evaluator='get_xp')
+            ####################################################################
     ]
     for badge in tqdm(badges):
         db.session.add(badge)
