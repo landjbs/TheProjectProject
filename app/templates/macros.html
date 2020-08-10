@@ -800,7 +800,7 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      {% if (current_user.owned|length)>0 %}
+      {% if (current_user.owned.count())>0 %}
       <form action="{{ url_for('user.collaborate', target_user_id=target_user.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">

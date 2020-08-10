@@ -65,7 +65,8 @@
                   </div>
                 </center>
                 {% for badge in user.badges %}
-                  {{ badge.badge.name }}{{ badge.badge.icon }}{{ badge.progress }}
+                  {{ badge.badge.name }}<br>{{ badge.progress }}
+                  <br><br>
                 {% endfor %}
                 <br>
               </div>
