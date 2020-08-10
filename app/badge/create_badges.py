@@ -3,6 +3,9 @@ from .models import Badge
 from tqdm import tqdm
 
 
+badge_name_list ['SuperOwner', 'SuperMember', 'Verified']
+
+
 def create_badges(db):
     ''' Creates all static badges '''
     badges = [

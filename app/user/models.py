@@ -9,6 +9,7 @@ from app.extensions import bcrypt
 from app.models import User_Subjects
 from app.notification.models import Notification
 from app.badge.models import Badge, User_Badge
+from app.badge.create_badges import badge_name_list
 
 from .xp_constants import xp_constants
 
@@ -332,14 +333,16 @@ class User(CRUDMixin, UserMixin, db.Model):
         badge = Badge.get_by_name(badge_name)
         if not badge:
             raise ValueError(f'Could not locate badge "{badge_name}".')
-        user_badge = self.get_user_badge(badge)
-        if not user_badge:
-            user_badge = User_Badge(badge)
-            self.badges.append(user_badge)
-        user_badge.update_progress()
+        # if user merits start of badge
+        if getattr(user, badge.criteria)()>0:
+            user_badge = self.get_user_badge(badge)
+            if not user_badge:
+                user_badge = User_Badge(badge)
+                self.badges.append(user_badge)
+            user_badge.update_progress()
         return True
 
-    def update_badges(self, badge_list:list):
+    def update_badges(self, badge_list:list=badge_name_list):
         ''' Performs update_badge on list of badge_names '''
         for badge_name in badge_list:
             self.update_badge(badge_name)
