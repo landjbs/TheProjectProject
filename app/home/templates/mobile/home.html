@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-2' style='min-width: 90%'>
+<div class='container my-2' style='min-width: 99%'>
   <h4 style='text-align:left;'>Recommended Projects</h4>
   <hr class="my-2">
   <div id="rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
@@ -27,90 +27,11 @@
         </div>
       {% endfor %}
     </div>
-    {% if recommended_tabs|length > 1 %}
-      <!--Controls-->
-      <div class="controls-top">
-        <a class="btn-floating" href="#rec-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-        <p id='rec-count' class='counter'>0</p>
-        <a class="btn-floating" href="#rec-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-      </div>
-      <!--/.Controls-->
-    {% endif %}
   </div>
-
-  <div id="trending-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-    <h4 style='text-align:left;'>Trending Projects</h4>
-    <hr class="my-2">
-    <div class="carousel-inner" role="listbox">
-      {% for tab in top_tabs %}
-        {% if loop.index==1 %}
-        <div class="carousel-item active">
-        {% else %}
-        <div class="carousel-item">
-        {% endif %}
-          <div class='row'>
-            {% for project in tab %}
-              {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
-            {% endfor %}
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-  {% if top_tabs|length > 1 %}
-    <!--Controls-->
-    <div class="controls-top">
-      <a class="btn-floating" href="#trending-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-      <p id='trending-count' class='counter'>0</p>
-      <a class="btn-floating" href="#trending-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-    </div>
-    <!--/.Controls-->
-  {% endif %}
-
-  <h4 style='text-align:left;'>My Projects</h4>
-  <hr class="my-2">
-  {% if user_project_count>0 %}
-    <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-      <!--Slides-->
-      <div class="carousel-inner" role="listbox">
-        {% for tab in user_tabs %}
-          {% if loop.index==1 %}
-          <div class="carousel-item active">
-          {% else %}
-          <div class="carousel-item">
-          {% endif %}
-            <div class='row'>
-              {% for project in tab %}
-                {{ macros.render_small_project_card(current_user, project, now, calc_days_since) }}
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% if user_tabs|length > 1 %}
-      <!--Controls-->
-      <div class="controls-top">
-        <a class="btn-floating" href="#my-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-        <p id='my-count' class='counter'>0</p>
-        <a class="btn-floating" href="#my-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-      </div>
-      <!--/.Controls-->
-    {% endif %}
-  {% else %}
-  <div style='text-align:center;'>
-    <a type="button" href="/add_project">
-      <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
-    </a>
-  </div>
-  {% endif %}
-</div>
 
 <div>
-  {% for tab in recommended_tabs %}
-    {% for project in tab %}
-      {{ macros.render_join_modal(current_user, project, project_application) }}
-    {% endfor %}
+  {% for project in recommended_projects %}
+    {{ macros.render_join_modal(current_user, project, project_application) }}
   {% endfor %}
 </div>
 
