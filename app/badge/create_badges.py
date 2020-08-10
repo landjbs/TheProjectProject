@@ -41,10 +41,19 @@ def create_badges(db):
             ####################################################################
             ########## Specialist: have skill_level>=50 on any subject #########
             Badge(name='Specialist',
-                icon='BadgeIcons/wellstudied/apple-touch-icon.png',
+                icon='BadgeIcons/specialist/apple-touch-icon.png',
                 description='Have a total skill level of 500 across all subjects to showcase your expertise!',
                 perks=[f'{badge_xp} XP', 'Recommendation Boost for projects within your top subject',
                        'Specialist badge next to your name in all member cards',
+                       'We will review your profile and connect you with experts in your field'],
+                criteria=50,
+                evaluator='n_member_complete'),
+            ########## StarStruck: have earned>=200 cumulative stars ###########
+            Badge(name='StarStruck',
+                icon='BadgeIcons/specialist/apple-touch-icon.png',
+                description='Have a total skill level of 500 across all subjects to showcase your expertise!',
+                perks=[f'{badge_xp} XP', 'Recommendation Boost for projects within your top subject',
+                       'StarStruck badge next to your name in all member cards',
                        'We will review your profile and connect you with experts in your field'],
                 criteria=50,
                 evaluator='n_member_complete'),
