@@ -78,11 +78,11 @@
 <script>
 // log tabs
 $('#progress-carousel').on('slid.bs.carousel', function () {
-  $('#progress-count').html(cur);
+  $('#progress-count').html($('#progress-carousel div.active').index());
   });
 
 $('#all-carousel').on('slid.bs.carousel', function () {
-  $('#all-count').html(cur);
+  $('#all-count').html($('#all-carousel div.active').index());
   });
 
 // rescroll carousels doesnt do it rn because no need // WARNING: may want to later
