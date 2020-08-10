@@ -60,8 +60,6 @@
 {%- endmacro %}
 
 
-{% macro render_best_badge(user, card_type) -%}
-  {% if user. %}
-    
-  {% endif %}
+{% macro render_badge_icon(badge) -%}
+  <img class='big-badge' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
 {% endmacro -%}
