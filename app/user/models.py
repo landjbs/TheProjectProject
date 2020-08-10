@@ -373,7 +373,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' Get skill level of top subject for user '''
         return max(user_subject.number for user_subject in self.subjects)
 
-    def unique_members(self):
+    def n_unique_members(self):
         ''' Get number of unique users user has worked with '''
         members = set()
         for project in self.projects:
