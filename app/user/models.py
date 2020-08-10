@@ -382,11 +382,17 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     def n_tasks_authored(self):
         ''' Get number of task authored by user '''
-        return self.tasks_authored.count()
+        n = 0
+        for _ in self.tasks_authored:
+            n += 1
+        return n
 
     def n_tasks_worked(self):
         ''' Get number of tasks worked by user '''
-        return self.tasks_worked.count()
+        n = 0
+        for _ in self.tasks_worked:
+            n += 1
+        return n
 
     def get_xp(self):
         ''' Wraps xp property for badge allocation '''
