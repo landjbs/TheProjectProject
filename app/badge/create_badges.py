@@ -73,7 +73,7 @@ def create_badges(db):
                 description='Create 300 tasks to showcase your delegation skills!',
                 perks=[f'{badge_xp} XP', 'SetEmUp badge next to your name'],
                 criteria=100,
-                evaluator='n_unique_members'),
+                evaluator='n_tasks_authored'),
             ####################################################################
             ## Verified: have xp>=10000 ##
             Badge(name='Verified',
