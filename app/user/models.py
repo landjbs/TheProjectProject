@@ -335,12 +335,16 @@ class User(CRUDMixin, UserMixin, db.Model):
         if not badge:
             raise ValueError(f'Could not locate badge "{badge_name}".')
         user_badge = self.get_user_badge(badge)
+        progress = getattr(self, badge.evaluator)()
+        print(progress)
         # if user merits start of badge or has already started
-        if (getattr(self, badge.evaluator)()>0) or (user_badge is not None):
+        if (progress>0):
             if not user_badge:
                 user_badge = User_Badge(badge)
                 self.badges.append(user_badge)
             user_badge.update_progress()
+        elif (user_badge is not None):
+            user_badge.delete()
         return True
 
     def update_badges(self, badge_list:list=badge_name_list):
