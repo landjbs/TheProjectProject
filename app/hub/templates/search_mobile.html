@@ -10,13 +10,15 @@
 
 {% block content %}
 <div class='container my-2' style='min-width: 99%'>
-  <h4 style='text-align:left;'>Projects</h4>
-  <hr class="my-2">
-  {% for project in project_results %}
-    <div class='row'>
-      {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
-    </div>
-  {% endfor %}
+  <ul class="list-unstyled components">
+    <h4 style='text-align:left;'>Projects</h4>
+    <hr class="my-2">
+    {% for project in project_results %}
+      <div class='row'>
+        {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+      </div>
+    {% endfor %}
+  </ul>
 </div>
 
 <div>
