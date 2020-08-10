@@ -16,3 +16,15 @@
   vertical-align: top;
   display: inline-block;
 }
+
+
+@media only screen and (max-width: 600px) {
+  .badge-icon {
+    width:  2.5vh;
+    height: 2.5vh;
+  }
+  .badge-icon-bigger {
+    width:  3.6vh;
+    height: 3.6vh;
+  }
+}
