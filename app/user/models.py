@@ -90,7 +90,8 @@ class User(CRUDMixin, UserMixin, db.Model):
     badges = relationship('User_Badge',
                           back_populates='user',
                           lazy='dynamic',
-                          cascade='all, delete, delete-orphan')
+                          cascade='all, delete, delete-orphan',
+                          order_by('User_Badge.fraction_complete()'))
     # subjects
     subjects = relationship('User_Subjects',
                             back_populates='user',
