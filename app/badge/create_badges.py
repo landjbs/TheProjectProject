@@ -72,7 +72,7 @@ def create_badges(db):
                 icon='BadgeIcons/setemup/apple-touch-icon.png',
                 description='Create 300 tasks to showcase your delegation skills!',
                 perks=[f'{badge_xp} XP', 'SetEmUp badge next to your name'],
-                criteria=100,
+                criteria=300,
                 evaluator='n_tasks_authored'),
             ####################################################################
             ############ KnockEmDown: complete >=300 different tasks ###########
@@ -80,9 +80,10 @@ def create_badges(db):
                 icon='BadgeIcons/knockemdown/apple-touch-icon.png',
                 description='Completion 300 tasks to showcase your follow-through!',
                 perks=[f'{badge_xp} XP', 'KnockEmDown badge next to your name'],
-                criteria=100,
+                criteria=300,
                 evaluator='n_tasks_worked'),
             ####################################################################
+            
             ## Verified: have xp>=10000 ##
             Badge(name='Verified',
                 icon='todo',
