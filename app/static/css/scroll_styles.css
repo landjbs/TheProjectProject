@@ -19,11 +19,20 @@
 }
 
 .card-text {
-    min-height: 10vh;
-    max-height: 10vh;
-    overflow: scroll;
-    text-align: left;
+  min-height: 10vh;
+  max-height: 10vh;
+  overflow: scroll;
+  text-align: left;
 }
+
+
+@media only screen and (max-width: 600px) {
+  .card-text {
+    min-height: 30vh;
+    max-height: 30vh;
+  }
+}
+
 
 .card-oneline {
   min-height: 5vh;
