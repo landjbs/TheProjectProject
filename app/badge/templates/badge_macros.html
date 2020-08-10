@@ -30,18 +30,22 @@
     <div class="card-body">
       <div class='card-head' style='text-align:center;'>
         <img scr='{{ user_badge.badge.icon }}'/>
-        <h4>boop</h4>
+        <h5>{{ user_badge.badge.name }}</h5>
+        <br>
+        <center>
+          <p style="margin:0px;">
+              {{ user_badge.progress }} / {{ user_badge.badge.criteria }}
+            </p>
+            <div class="progress" style='width:80%;'>
+              <div class="progress-bar" role="progressbar"
+                  style='{{ user_badge.get_progressbar_width() }}'></div>
+            </div>
+        <center>
       </div>
       <hr class="my-4">
-      <!-- summary -->
       <div class='card-text'>
         <p class='oneliner'>
-          bapp
-        </p>
-      </div>
-      <div class='card-foot float-left'>
-        <p style="padding-bottom:0px; margin-bottom:0px;">
-          beep
+          {{ user_badge.badge.description }}
         </p>
       </div>
     </div>

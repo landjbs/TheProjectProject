@@ -11,13 +11,13 @@ def create_badges(db):
     badges = [
             ########### SuperOwner: own 50 completed projects ##################
             Badge(name='SuperOwner',
-                icon='static/BadgeIcons/superowner/apple-touch-icon.png',
+                icon='BadgeIcons/superowner/apple-touch-icon.png',
                 criteria=50,
                 evaluator='n_owned_complete'),
             ####################################################################
             ## SuperMember: be a member (not owner) of 50 completed projects ##
             Badge(name='SuperMember',
-                icon='static/BadgeIcons/supermember/apple-touch-icon.png',
+                icon='BadgeIcons/supermember/apple-touch-icon.png',
                 criteria=50,
                 evaluator='n_owned_complete'),
             ####################################################################
