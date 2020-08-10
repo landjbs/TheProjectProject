@@ -16,7 +16,7 @@ def create_badges(db):
                 description='Own 50 completed projects to showcase your SuperOwner skills!',
                 perks=[f'{badge_xp} XP', 'Recommendation Boost in Recommended Project stack',
                        'We will review your projects and connect you with funding/compute if possible',
-                       'SuperOwner icon next to your name in all project cards']
+                       'SuperOwner icon next to your name in all project cards'],
                 criteria=50,
                 evaluator='n_owned_complete'),
             ####################################################################
@@ -25,8 +25,7 @@ def create_badges(db):
                 icon='BadgeIcons/supermember/apple-touch-icon.png',
                 description='Work on 50 completed projects to showcase your SuperMember skills!',
                 perks=[f'{badge_xp} XP', 'Recommendation Boost in Recommended Member stack',
-                       'SuperMember badge next to your name in all member cards',
-                       'We will '],
+                       'SuperMember badge next to your name in all member cards'],
                 criteria=50,
                 evaluator='n_member_complete'),
             ####################################################################
