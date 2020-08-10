@@ -370,8 +370,8 @@ class User(CRUDMixin, UserMixin, db.Model):
         return skill
 
     def max_skill_level(self):
-        ''' Get skill level of max subject for user '''
-        
+        ''' Get skill level of top subject for user '''
+        return max(user_subject.number for user_subject in self.subjects)
 
     def get_xp(self):
         ''' Wraps xp property for badge allocation '''
