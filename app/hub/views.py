@@ -60,7 +60,11 @@ def search():
     if request.method=='GET':
         return redirect(url_for('hub.home'))
     search_text = request.form.get('search')
-    project_tabs, user_tabs, subject_tabs = text_search(search_text)
+    project_results, user_results, subject_results = text_search(search_text)
+    # tabs
+    project_tabs = partition_query(project_results)
+    user_tabs = partition_query(user_results)
+    subject_tabs = partition_query(subject_results)
     # forms
     project_application = Project_Application_Form()
     return render_template('search.html',
@@ -78,4 +82,3 @@ def search():
 @limiter.limit('60 per minute')
 def search_mobile():
     ''' Mobile optimized search page '''
-    
