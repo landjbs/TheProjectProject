@@ -40,8 +40,10 @@ class Badge(CRUDMixin, db.Model):
         self.description = description
         self.criteria = criteria
         self.evaluator = evaluator
+        self.perks = []
         # add perks
         for perk in perks:
+            self.perks.append(Badge_Perk(text=perks))
 
 
     def __repr__(self):
