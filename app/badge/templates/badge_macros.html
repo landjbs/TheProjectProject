@@ -40,6 +40,10 @@
   <div class="card mb-2">
     <div class="card-body">
       <div class='card-head' style='text-align:center;'>
+        <p class="float-right">
+          {{ badge.users.count()  }}
+          <i class='fa fa-user-circle'></i>
+        </p>
         <img class='big-badge' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
         <h5>{{ badge.name }}</h5>
       </div>

@@ -53,11 +53,14 @@
               <input style='display:inline;' class="mr-sm-2 search-bar" name='search' type="search" placeholder="search..." aria-label="Search">
             </form>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/add_project">add project</a>
+              <a class="nav-link" href="/add_project">add project</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('badge.badge_page') }}">perks</a>
             </li>
             {% if current_user.admin %}
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/admin">admin</a>
+              <a class="nav-link" href="/admin">admin</a>
             </li>
             {% endif %}
           </ul>
@@ -69,7 +72,6 @@
                   </button>
                   <div class="dropdown-content">
                     <a href="/user={{ current_user.code }}">Profile</a>
-                    <a href="{{ url_for('badge.badge_page') }}">Perks</a>
                     <a href="/logout">Log Out</a>
                   </div>
                 </div>
