@@ -386,7 +386,10 @@ class User(CRUDMixin, UserMixin, db.Model):
                 'Specialist', 'StarStruck', 'SetEmUp']
             )
         elif card_type=='search':
-            if
+            return choose_badge_from_ordered_list(
+                ['SuperMember', 'KnockEmDown', 'WellStudied', 'WellConnected',
+                'Specialist', 'StarStruck', 'SetEmUp']
+            )
         else:
             raise ValueError(f'choose_badge got invalid card_type {card_type}.')
 
