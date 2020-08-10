@@ -82,3 +82,14 @@ def search():
 @limiter.limit('60 per minute')
 def search_mobile():
     ''' Mobile optimized search page '''
+    if request.method=='GET':
+        return redirect(url_for('hub.home'))
+    search_text = request.form.get('search')
+    project_results, user_results, subject_results = text_search(search_text)
+    project_application = Project_Application_Form()
+    return render_template('search.html',
+                        project_results=project_results,
+                        user_results=user_results,
+                        subject_results=subject_results,
+                        search_text=search_text,
+                        project_application=project_application)
