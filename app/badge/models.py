@@ -125,11 +125,9 @@ class User_Badge(CRUDMixin, db.Model):
                 self.remove_earned_marking()
             # and hasn't been awarded it...
             else:
-                print('HERE')
                 self.update_last_active()
                 # just update progress
                 self.update()
-        print(f'{self.badge.name}: {self.progress}')
         return True
 
     def mark_earned(self):
