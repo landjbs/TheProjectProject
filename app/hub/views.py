@@ -60,18 +60,11 @@ def search():
     if request.method=='GET':
         return redirect(url_for('hub.home'))
     search_text = request.form.get('search')
-    project_results, user_results, subject_results = text_search(search_text)
-    # tabs
-    project_tabs = partition_query(project_results)
-    user_tabs = partition_query(user_results)
-    subject_tabs = partition_query(subject_results)
+    results = text_search(search_text)
     # forms
     project_application = Project_Application_Form()
     return render_template('search.html',
-                        project_tabs=project_tabs,
-                        user_tabs=user_tabs,
-                        subject_tabs=subject_tabs,
-                        search_text=search_text,
+                        results=results,
                         project_application=project_application)
 
 
