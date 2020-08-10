@@ -87,7 +87,7 @@ def login():
     if current_user.is_authenticated:
         current_user.active = True
         current_user.update()
-        current_user.update_badges(['SuperOwner', 'Verified'])
+        current_user.update_badges()
         return redirect(request.args.get('next') or url_for('hub.home'))
     form = Login()
     if form.validate_on_submit():
@@ -95,7 +95,7 @@ def login():
         login_user(user)
         user.active = True
         user.last_active = datetime.utcnow()
-        user.update_badges(['SuperOwner', 'Verified'])
+        user.update_badges()
         user.update()
         return redirect(request.args.get('next') or url_for('hub.home'))
     start_on = 0

@@ -9,7 +9,7 @@ from ..badge import badge
 @limiter.limit('60 per minute')
 def badge_page():
     # update badges
-    current_user.update_badges(['SuperOwner', 'Verified'])
+    current_user.update_badges()
     # badges in progress
     # all badges
     return render_template('badge.html')
