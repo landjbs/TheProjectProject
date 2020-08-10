@@ -78,11 +78,8 @@ def search_mobile():
     if request.method=='GET':
         return redirect(url_for('hub.home'))
     search_text = request.form.get('search')
-    project_results, user_results, subject_results = text_search(search_text)
+    results = text_search(search_text, partition=False)
     project_application = Project_Application_Form()
     return render_template('search_mobile.html',
-                        project_results=project_results,
-                        user_results=user_results,
-                        subject_results=subject_results,
-                        search_text=search_text,
+                        results=results,
                         project_application=project_application)
