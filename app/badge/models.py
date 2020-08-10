@@ -6,9 +6,6 @@ from app.database import db, CRUDMixin
 from .badge_criteria import badge_criteria
 
 
-class Badge_Perks(CRUDMixin, db.Model):
-
-
 class Badge(CRUDMixin, db.Model):
     __tablename__ = 'badge'
     # id
@@ -21,8 +18,10 @@ class Badge(CRUDMixin, db.Model):
     # description
     description = db.Column(db.String(250), nullable=False)
     # perks
-    perks = relationship('Badge_Perks',
-                         back_populates='badge',)
+    perks = relationship('Badge_Perk',
+                         back_populates='badge',
+                         cascade='all, delete, delete-orphan',
+                         lazy='dynamic')
     ## evaluation ##
     # criteria
     criteria = db.Column(db.Integer, nullable=False)
@@ -34,6 +33,16 @@ class Badge(CRUDMixin, db.Model):
                         cascade='all, delete, delete-orphan',
                         lazy='dynamic',
                         order_by='User_Badge.earn_stamp')
+
+    def __init__(self, name, icon, description, perks, criteria, evaluator):
+        self.name = name
+        self.icon = icon
+        self.description = description
+        self.criteria = criteria
+        self.evaluator = evaluator
+        # add perks
+        for perk in perks:
+
 
     def __repr__(self):
         return f'<Badge {self.name}>'
@@ -141,3 +150,9 @@ class User_Badge(CRUDMixin, db.Model):
             self.update()
             return True
         return False
+
+
+class Badge_Perk(CRUDMixin, db.Model):
+    __tablename__ = 'badge_perk'
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(60), nullable=False, unique=True)
