@@ -76,14 +76,10 @@
 <script>
 // log tabs
 $('#progress-carousel').on('slid.bs.carousel', function () {
-  var cur = $('#progress-carousel div.active').index();
-  sessionStorage.setItem('recSlide', cur);
   $('#progress-count').html(cur);
   });
 
 $('#all-carousel').on('slid.bs.carousel', function () {
-  var cur = $('#all-carousel div.active').index();
-  sessionStorage.setItem('trendingSlide', cur);
   $('#all-count').html(cur);
   });
 

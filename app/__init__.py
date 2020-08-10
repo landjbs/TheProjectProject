@@ -21,7 +21,7 @@ from app.admin import register_admin_views
 #
 from app.database import db
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
-                            lm, migrate, rq, travis, babel)
+                            lm, migrate, rq, travis, babel, mobility)
 from app.commands import command_list
 from app.utils import url_for_other_page
 
@@ -39,7 +39,6 @@ def create_app(config=config.BaseConfig):
     application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' # f'mysql+pymysql://admin:sk90jal;skdjn,235#adsfjalasdf#%n2sdf@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/theprojectproject_production'
     # application.config['RQ_REDIS_URL'] = 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379'
     application.config['ELASTICSEARCH_URL'] = None #'http://localhost:9200'
-    # print(application.config['DATABASE_URI'])
     register_extensions(application)
     register_blueprints(application)
     register_errorhandlers(application)
@@ -90,20 +89,16 @@ def register_extensions(app):
     travis.init_app(app)
     db.init_app(app)
     babel.init_app(app)
+    bcrypt.init_app(app)
+    assets.init_app(app)
+    rq.init_app(app)
+    migrate.init_app(app, db)
+    mobility.init_app(app)
+    limiter.init_app(app)
     ######### LOGIN MANAGER #########
     lm.init_app(app)
     lm.login_view = 'auth.login'
     lm.anonymous_user = Anonymous
-    ################################
-    ########## BCRYPT ##############
-    bcrypt.init_app(app)
-    ################################
-    assets.init_app(app)
-    # babel.init_app(app)
-    rq.init_app(app)
-    migrate.init_app(app, db)
-    ########## LIMITER ##############
-    limiter.init_app(app)
     ################################
 
 
