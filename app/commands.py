@@ -98,6 +98,8 @@ def populate_db(num_users, num_projects):
     for user in tqdm(users, desc='Adding Users'):
         db.session.add(user)
         user.add_subjects(rand_subjects(np.random.randint(0,6)))
+        badges = rand_badges(rand_badges(np.random.randint(0,4)))
+        
     # fake projects
     projects = []
     user_num = User.query.count()
