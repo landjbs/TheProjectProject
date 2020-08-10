@@ -67,13 +67,21 @@ def create_badges(db):
                 criteria=100,
                 evaluator='n_unique_members'),
             ####################################################################
-            ############ SetEmUp: create >=100 different tasks #################
+            ############ SetEmUp: create >=300 different tasks #################
             Badge(name='SetEmUp',
                 icon='BadgeIcons/setemup/apple-touch-icon.png',
                 description='Create 300 tasks to showcase your delegation skills!',
                 perks=[f'{badge_xp} XP', 'SetEmUp badge next to your name'],
                 criteria=100,
                 evaluator='n_tasks_authored'),
+            ####################################################################
+            ############ KnockEmDown: complete >=300 different tasks ###########
+            Badge(name='KnockEmDown',
+                icon='BadgeIcons/knockemdown/apple-touch-icon.png',
+                description='Completion 300 tasks to showcase your follow-through!',
+                perks=[f'{badge_xp} XP', 'KnockEmDown badge next to your name'],
+                criteria=100,
+                evaluator='n_tasks_worked'),
             ####################################################################
             ## Verified: have xp>=10000 ##
             Badge(name='Verified',
