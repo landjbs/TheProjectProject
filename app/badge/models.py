@@ -60,6 +60,9 @@ class Badge(CRUDMixin, db.Model):
         self.update()
         return True
 
+    def get_icon_url(self):
+        return f'img/BadgeIcons/{self.name.lower()}/apple-touch-icon.png'
+
 
 
 class User_Badge(CRUDMixin, db.Model):

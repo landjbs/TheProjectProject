@@ -4,7 +4,7 @@
   <div class="card mb-2">
     <div class="card-body">
       <div class='card-head' style='text-align:center;'>
-        <img scr='{{ user_badge.badge.icon }}'/>
+        <img class='big-badge' src="{{ url_for('badge.static', filename=user_badge.badge.get_icon_url()) }}"/>
         <h5>{{ user_badge.badge.name }}</h5>
         <br>
         <center>
@@ -12,7 +12,7 @@
               {{ user_badge.progress }} / {{ user_badge.badge.criteria }}
             </p>
             <div class="progress" style='width:80%;'>
-              <div class="progress-bar" role="progressbar"
+              <div class="progress-bar" role="progressbar" style='background:orange;'
                   style='{{ user_badge.get_progressbar_width() }}'></div>
             </div>
         <center>
@@ -40,7 +40,7 @@
   <div class="card mb-2">
     <div class="card-body">
       <div class='card-head' style='text-align:center;'>
-        <img src="{{ url_for('badge.static', filename='img/BadgeIcons/knockemdown/apple-touch-icon.png') }}"/>
+        <img class='big-badge' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
         <h5>{{ badge.name }}</h5>
       </div>
       <hr class="my-4">
