@@ -51,7 +51,7 @@ class User_Badge(CRUDMixin, db.Model):
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
     # last active: last time progress was made on the badge
-    last_active = db.Column(db.DateTime, nullable=True)
+    last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(self, badge):
         self.badge = badge
@@ -72,6 +72,11 @@ class User_Badge(CRUDMixin, db.Model):
         ''' Gets width of progressbar for badge display '''
         return f'width: {100*min(1, self.fraction_complete())}%;'
 
+    def update_last_active(self):
+        ''' Doesnt commit '''
+        self.last_active = datetime.utcnow()
+        return True
+
     def update_progress(self):
         ''' Updates progress on badge '''
         # get user progress using evaluator
@@ -82,6 +87,7 @@ class User_Badge(CRUDMixin, db.Model):
         if (self.progress>=self.total):
             # and hasn't been awarded it...
             if not self.earned:
+                self.update_last_active()
                 # mark as earned (which autoupdates)
                 self.mark_earned()
         # if user doesn't deserve badge...
