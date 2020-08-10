@@ -39,9 +39,8 @@ class Badge(CRUDMixin, db.Model):
         self.criteria = criteria
         self.evaluator = evaluator
         self.perks = []
-        # add perks
         for perk in perks:
-            self.perks.append(Badge_Perk(text=perks))
+            self.add_perks(commit=False)
 
 
     def __repr__(self):
@@ -50,6 +49,13 @@ class Badge(CRUDMixin, db.Model):
     @classmethod
     def get_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
+
+    def add_perk(self, text, commit=True):
+        ''' Adds perk from text efficiently to Badge '''
+        perk = Badge_Perk.filter_by(text=text).first()
+        if perk:
+            self.perks.append(perk)
+
 
 
 class User_Badge(CRUDMixin, db.Model):
@@ -158,4 +164,4 @@ class Badge_Perk(CRUDMixin, db.Model):
     text = db.Column(db.String(100), nullable=False, unique=True)
     # badge link
     badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=False)
-    badge = relationship('Badge', back_populates='users')
+    badge = relationship('Badge', back_populates='perks')
