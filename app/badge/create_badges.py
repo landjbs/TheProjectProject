@@ -65,7 +65,11 @@ def create_badges(db):
                 description='Work with 100 different people to showcase your friendly and sociable nature!',
                 perks=[f'{badge_xp} XP', 'WellConnected badge next to your name'],
                 criteria=50,
-                evaluator='n_member_complete'),
+                evaluator='n_unique_members'),
+            ####################################################################
+            ############ SetEmUp: create >=100 different tasks #################
+            
+            ####################################################################
             ####################################################################
             ## Verified: have xp>=10000 ##
             Badge(name='Verified',
