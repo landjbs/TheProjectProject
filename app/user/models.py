@@ -352,6 +352,22 @@ class User(CRUDMixin, UserMixin, db.Model):
             self.update_badge(badge_name)
         return True
 
+    def choose_badge(self, card_type:str):
+        ''' Chooses best badge to display based on card type '''
+        # first is always verified
+        verified = self.get_user_badge(Badge.get_by_name('Verified'))
+        if verified:
+            return verified
+        #
+        if card_type=='project':
+            # superowner
+            superowner = self.get_user_bdage(Badge.get_by_name('SuperOwner'))
+            if superowner:
+                return superowner
+            # 
+        else:
+            raise ValueError(f'choose_badge got invalid card_type {card_type}.')
+
     ## badge allocation evaluators ##
     def n_owned_complete(self):
         ''' Number of owned projects user has completed '''
