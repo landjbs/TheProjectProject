@@ -16,7 +16,7 @@ class Badge(CRUDMixin, db.Model):
     # perks
     perks = relationship('Badge_Perk',
                          back_populates='badge',
-                         cascade='all, delete, delete-orphan',
+                         secondary='badge_to_perk',
                          lazy='dynamic')
     ## evaluation ##
     # criteria
@@ -169,7 +169,7 @@ class Badge_Perk(CRUDMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(100), nullable=False, unique=True)
     # badge link
-    badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=False)
     badge = relationship('Badge',
                         secondary='badge_to_perk',
-                        back_populates='perks')
+                        back_populates='perks',
+                        lazy='dynamic')

@@ -57,7 +57,7 @@ project_rejections = Table('project_rejections', db.Model.metadata,
 # badge to perks
 badge_to_perk = Table('badge_to_perk', db.Model.metadata,
                     db.Column('badge_id', Integer, ForeignKey('badge.id')),
-                    db.Column('perk_id', Integer, ForeignKey('Badge_Perk.id')))
+                    db.Column('perk_id', Integer, ForeignKey('badge_perk.id')))
 
 
 class User_Subjects(db.Model):
