@@ -35,45 +35,4 @@
   {% endfor %}
 </div>
 
-
-
-<script>
-// log tabs
-$('#rec-carousel').carousel({
-  interval: 50000
-})
-
-$('#rec-carousel').on('slid.bs.carousel', function () {
-  var cur = $('#rec-carousel div.active').index()
-  sessionStorage.setItem('recSlide', cur);
-  $('#rec-count').html(cur);
-  });
-
-$('#trending-carousel').on('slid.bs.carousel', function () {
-  var cur = $('#trending-carousel div.active').index()
-  sessionStorage.setItem('trendingSlide', cur);
-  $('#trending-count').html(cur);
-  });
-
-$('#my-carousel').on('slid.bs.carousel', function () {
-  var cur = $('#my-carousel div.active').index()
-  sessionStorage.setItem('mySlide', cur);
-  $('#my-count').html(cur);
-  });
-
-// rescroll carousels
-if(sessionStorage.recSlide){
-    $("#rec-carousel").carousel(sessionStorage.recSlide*1);
-  }
-
-if(sessionStorage.trendingSlide){
-    $("#trending-carousel").carousel(sessionStorage.trendingSlide*1);
-  }
-
-if(sessionStorage.mySlide){
-    $("#my-carousel").carousel(sessionStorage.mySlide*1);
-  }
-</script>
-
-
 {% endblock %}
