@@ -33,11 +33,13 @@
         {% endfor %}
       </div>
       <!--Controls-->
-      <div class="controls-top">
-        <a class="btn-floating" href="#project-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-        <p id='project-count' class='counter'>0</p>
-        <a class="btn-floating" href="#project-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-      </div>
+      {% if not request.MOBILE %}
+        <div class="controls-top">
+          <a class="btn-floating" href="#project-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+          <p id='project-count' class='counter'>0</p>
+          <a class="btn-floating" href="#project-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+        </div>
+      {% endif %}
       <!--/.Controls-->
     </div>
   {% endif %}
@@ -63,11 +65,13 @@
       </div>
     </div>
     <!--Controls-->
-    <div class="controls-top">
-      <a class="btn-floating" href="#user-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-      <p id='user-count' class='counter'>0</p>
-      <a class="btn-floating" href="#user-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-    </div>
+    {% if not request.MOBILE %}
+      <div class="controls-top">
+        <a class="btn-floating" href="#user-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+        <p id='user-count' class='counter'>0</p>
+        <a class="btn-floating" href="#user-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+      </div>
+    {% endif %}
     <!--/.Controls-->
   {% endif %}
 
@@ -94,11 +98,13 @@
       </div>
     </div>
     <!--Controls-->
-    <div class="controls-top">
-      <a class="btn-floating" href="#subject-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-      <p id='subject-count' class='counter'>0</p>
-      <a class="btn-floating" href="#subject-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-    </div>
+    {% if not request.MOBILE %}
+      <div class="controls-top">
+        <a class="btn-floating" href="#subject-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+        <p id='subject-count' class='counter'>0</p>
+        <a class="btn-floating" href="#subject-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+      </div>
+    {% endif %}
     <!--/.Controls-->
   {% endif %}
 
