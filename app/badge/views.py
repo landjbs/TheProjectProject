@@ -1,6 +1,7 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
 
+from app.extensions import limiter
 from app.utils import partition_query
 
 from .models import Badge
@@ -8,7 +9,7 @@ from ..badge import badge
 
 
 
-@user.route('/badge', methods=['GET', 'POST'])
+@badge.route('/badge', methods=['GET', 'POST'])
 @limiter.limit('60 per minute')
 def badge_page():
     # update badges

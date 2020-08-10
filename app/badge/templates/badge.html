@@ -76,7 +76,7 @@
 $('#progress-carousel').on('slid.bs.carousel', function () {
   var cur = $('#progress-carousel div.active').index();
   sessionStorage.setItem('recSlide', cur);
-  $('#project-count').html(cur);
+  $('#progress-count').html(cur);
   });
 
 $('#all-carousel').on('slid.bs.carousel', function () {

@@ -46,9 +46,12 @@ class User_Badge(CRUDMixin, db.Model):
     badge = relationship('Badge', back_populates='users')
     # progress
     progress = db.Column(db.Integer, nullable=False, default=0)
+    fraction = db.Column(db.Float, nullable=False, default=0)
     # earn
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
+    # last active: last time progress was made on the badge
+    last_active = db.Column(db.DateTime, nullable=True)
 
     def __init__(self, badge):
         self.badge = badge
