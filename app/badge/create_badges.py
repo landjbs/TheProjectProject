@@ -37,7 +37,7 @@ def create_badges(db):
                 perks=[f'{badge_xp} XP', 'Recommendation Boost for projects with diverse subjects',
                        'WellStudied badge next to your name in all member cards'],
                 criteria=50,
-                evaluator='skill_level'),
+                evaluator='total_skill_level'),
             ####################################################################
             ########## Specialist: have skill_level>=50 on any subject #########
             Badge(name='Specialist',
@@ -47,7 +47,7 @@ def create_badges(db):
                        'Specialist badge next to your name in all member cards',
                        'We will review your profile and connect you with experts in your field'],
                 criteria=50,
-                evaluator='n_member_complete'),
+                evaluator='max_skill_level'),
             ####################################################################
             ########## StarStruck: have earned>=200 cumulative stars ###########
             Badge(name='StarStruck',
@@ -56,8 +56,8 @@ def create_badges(db):
                 perks=[f'{badge_xp} XP',
                     'StarStruck badge next to your name',
                    'We will review your projects and profile our favorite in TheProjectProject social media'],
-                criteria=50,
-                evaluator='n_member_complete'),
+                criteria=300,
+                evaluator='total_stars'),
             ####################################################################
             ########## WellConnected: work with >=100 different people ##########
             Badge(name='WellConnected',

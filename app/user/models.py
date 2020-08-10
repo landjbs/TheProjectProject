@@ -362,12 +362,16 @@ class User(CRUDMixin, UserMixin, db.Model):
                     ~Project.id._in(owned_ids)
                 ).count()
 
-    def skill_level(self):
+    def total_skill_level(self):
         ''' Get cumulative skill level of user '''
         skill = 0
         for user_subject in self.subjects:
             skill += user_subject.number
         return skill
+
+    def max_skill_level(self):
+        ''' Get skill level of max subject for user '''
+        
 
     def get_xp(self):
         ''' Wraps xp property for badge allocation '''
