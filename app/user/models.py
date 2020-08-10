@@ -336,7 +336,6 @@ class User(CRUDMixin, UserMixin, db.Model):
             raise ValueError(f'Could not locate badge "{badge_name}".')
         user_badge = self.get_user_badge(badge)
         progress = getattr(self, badge.evaluator)()
-        print(progress)
         # if user merits start of badge or has already started
         if (progress>0):
             if not user_badge:
