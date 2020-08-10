@@ -356,7 +356,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         ''' choose_badge helper to see if user has badge '''
         badge = Badge.get_by_name(badge_name)
         if badge:
-            return self.get_user_badge(badge)
+            user_badge = self.get_user_badge(badge)
+            if user_badge and user_badge.earned:
+                return badge
         else:
             raise ValueError(f'Invalid badge name "{badge_name}".')
 
@@ -389,7 +391,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             )
         elif card_type=='search':
             return self.choose_badge_from_ordered_list(
-                ['StarStruck', 'Specialist', 'WellStudied', 'SuperOwner'
+                ['StarStruck', 'Specialist', 'WellStudied', 'SuperOwner',
                 'SuperMember', 'KnockEmDown', 'SetEmUp', 'WellConnected']
             )
         else:
