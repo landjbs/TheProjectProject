@@ -73,6 +73,10 @@ def populate_db(num_users, num_projects):
     def rand_subjects(n):
         return [Subject.get_by_id(int(id))
                 for id in np.random.randint(1, subject_num+1, size=n)]
+    badge_num = Badge.query.count()
+    def rand_badges(n):
+        return [Badge.get_by_id(int(id))
+                for id in np.random.randint(1, badge_num+1, size=n)]
     # ./helpers
     # fake users
     users = []
