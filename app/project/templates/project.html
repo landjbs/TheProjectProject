@@ -103,6 +103,10 @@
                             <div class='col'>
                             <a class='member-hovers' href="user={{ member.code }}" style='padding-bottom:5px; display: inline;'>
                               {{ member.name }}
+                              {% set badge = member.choose_badge('member') %}
+                              {% if badge %}
+                                {{ macros.render_badge_icon(badge) }}
+                              {% endif %}
                             </a>
                           </div>
                             {% if is_owner and member!=project.owner %}
@@ -430,7 +434,7 @@
                         {% endif %}
                           <div class='row'>
                             {% for user in tab %}
-                              {{ macros.render_user_card(current_user, user) }}
+                              {{ macros.render_user_card(current_user, user, carousel_type='member') }}
                             {% endfor %}
                           </div>
                         </div>
