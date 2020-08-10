@@ -57,6 +57,8 @@ class Badge(CRUDMixin, db.Model):
             self.perks.append(perk)
         else:
             self.perks.append(Badge_Perk(text=text))
+        if commit:
+            self.update()
         return True
 
 
