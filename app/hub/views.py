@@ -1,6 +1,7 @@
 from flask import (current_app, request, redirect, url_for,
                    render_template, flash)
 from flask_login import current_user, login_required
+from flask.ext.mobility.decorators import mobile_template
 from datetime import datetime
 
 from ..hub import hub
@@ -39,8 +40,19 @@ def home():
                             top_tabs=trending_tabs,
                             user_tabs=user_tabs,
                             user_project_count=user_projects.count(),
-                            current_user=current_user,
                             project_application=project_application)
+
+
+@mobilized(home)
+def home():
+    ''' Mobile optimized route for home page '''
+    # only load recommended projects and dont tab
+    recommended_projects = get_recommended_projects(current_user)
+    # get forms
+    project_application = Project_Application_Form()
+    return render_template('mobile/home.html',
+                           recommended_projects=recommended_projects,
+                           project_application=project_application)
 
 
 @hub.route('/search', methods=['GET', 'POST'])
