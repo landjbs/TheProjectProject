@@ -2,6 +2,7 @@
 {% block title %}Home{% endblock %}
 
 {% block head %}
+  {{ super() }}
   <link type="text/css" href="css/scroll_styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
@@ -10,7 +11,7 @@
 <div class='container my-2' style='min-width: 99%'>
   <h4 style='text-align:left;'>Recommended Projects</h4>
   <hr class="my-2">
-    {% for project in tab %}
+    {% for project in recommended_projects %}
       <div class='row'>
         {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
       </div>
