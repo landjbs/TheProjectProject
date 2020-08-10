@@ -195,10 +195,10 @@
               <h4 style='text-align:left;'>
                 Owned Projects
                 <i class="fa fa-circle" style='color:#FF5D00;'></i>
-                {{ user.owned|length }}
+                {{ user.owned.count() }}
               </h4>
               <hr class="my-2">
-              {% if (user.owned|length) > 0 %}
+              {% if user.owned.count() > 0 %}
                 <div id="owned-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                   <!--Slides-->
                   <div class="carousel-inner" role="listbox">
@@ -242,10 +242,10 @@
               <h4 style='text-align:left;'>
                 Member Projects
                 <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
-                {{ (user.projects|length) - (user.owned|length) }}
+                {{ (user.projects.count()) - (user.owned.count()) }}
               </h4>
               <hr class="my-2">
-              {% if ((user.projects|length) - (user.owned|length)) > 0 %}
+              {% if ((user.projects.count()) - (user.owned.count())) > 0 %}
                 <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
                       {% for tab in member_tabs %}

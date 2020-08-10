@@ -38,7 +38,7 @@ def home():
                             recommended_tabs=recommended_tabs,
                             top_tabs=trending_tabs,
                             user_tabs=user_tabs,
-                            user_project_count=len(user_projects),
+                            user_project_count=user_projects.count(),
                             current_user=current_user,
                             project_application=project_application)
 

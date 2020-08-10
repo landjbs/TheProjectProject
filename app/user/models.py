@@ -43,7 +43,7 @@ class User(CRUDMixin, UserMixin, db.Model):
     ## projects ##
     owned = relationship('Project',
                         back_populates='owner',
-                        lazy='dynamic'
+                        lazy='dynamic',
                         order_by='desc(Project.last_active)')
     projects = relationship('Project',
                             secondary='user_to_project_2',
@@ -75,8 +75,9 @@ class User(CRUDMixin, UserMixin, db.Model):
     # authored tasks # TODO: figure out task deletion on user/project deletion
     tasks_authored = relationship('Task', back_populates='author')
     # worked tasks # TODO: figure out what to if user deletes and is only worker
-    tasks_worked = relationship('Task', secondary='user_to_task',
-                         back_populates='workers')
+    tasks_worked = relationship('Task',
+                                secondary='user_to_task',
+                                back_populates='workers')
     # notifications
     notifications = relationship('Notification',
                                 secondary='user_to_notification',
