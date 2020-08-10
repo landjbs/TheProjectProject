@@ -15,7 +15,11 @@ def text_search(search_text):
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
     ## analytics ##
     project_count = project_results.count()
-    user_results = user_results.count()
-    subject_results = subject_results.count()
+    user_count = user_results.count()
+    subject_count = subject_results.count()
     ## limits ##
-    return (project_results, user_results, subject_results)
+    project_results = project_results.limit(30)
+    user_results = user_results.limit(30)
+    ## return dict of results and analytics
+    return {'project'   : (project_results, project_count),
+            'user'      : (user_results, user_)}
