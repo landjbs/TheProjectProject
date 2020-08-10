@@ -13,6 +13,8 @@ from app.recommendations.search import text_search
 from app.project.forms import Project_Application_Form
 
 
+@hub.route('/home')
+@login_required
 def home():
     # recommended projects
     recommended_projects = get_recommended_projects(current_user)
@@ -41,9 +43,7 @@ def home():
                             project_application=project_application)
 
 
-@hub.route('/home')
 @mobilized(home)
-@login_required
 def home_mobile():
     ''' Mobile optimized route for home page '''
     print('MOBILIZED')
