@@ -69,10 +69,6 @@
                         style='{{ user.xp_progressbar_width() }}'></div>
                   </div>
                 </center>
-                {% for badge in user.badges %}
-                  {{ badge.badge.name }}<br>{{ badge.progress }}
-                  <br><br>
-                {% endfor %}
                 <br>
               </div>
               {% if current_user==user %}
