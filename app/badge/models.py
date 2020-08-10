@@ -80,8 +80,12 @@ class User_Badge(CRUDMixin, db.Model):
     # last active: last time progress was made on the badge
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
-    def __init__(self, badge):
+    def __init__(self, badge, earned=False):
         self.badge = badge
+        if earned:
+            self.progress = badge.criteria
+            self.earned = True
+            self.earn_stamp = datetime.utcnow()
 
     def __repr__(self):
         if not self.earned:
