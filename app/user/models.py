@@ -360,6 +360,14 @@ class User(CRUDMixin, UserMixin, db.Model):
         else:
             raise ValueError(f'Invalid badge name "{badge_name}".')
 
+    def choose_badge_from_ordered_list(self, badge_list):
+        ''' Helper for choose badge, chooses first available badge in list '''
+        for badge_name in badge_list:
+            badge = self.check_name_return_badge(badge_name)
+            if badge:
+                return badge
+        return None
+
     def choose_badge(self, card_type:str):
         ''' Chooses best badge to display based on card type '''
         # first is always verified
@@ -368,11 +376,10 @@ class User(CRUDMixin, UserMixin, db.Model):
             return verified
         # otherwise go through ordered list of possible badges
         if card_type=='project':
-            for badge_name in ['SuperOwner', 'StarStruck', 'SetEmUp', 'WellConnected', 'Specialist', 'WellStudied', 'KnockEmDown']:
-                badge = self.check_name_return_badge(badge_name)
-                if badge:
-                    return badge
-            return None
+            return choose_badge_from_ordered_list(
+                ['SuperOwner', 'StarStruck', 'SetEmUp', 'WellConnected',
+                'Specialist', 'WellStudied', 'KnockEmDown']
+            )
         elif card_type=='member':
 
         elif card_type=='search':
