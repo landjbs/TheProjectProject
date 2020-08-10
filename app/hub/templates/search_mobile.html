@@ -12,12 +12,12 @@
 <div class='container my-2' style='min-width: 99%'>
   <ul class="list-unstyled components">
     <!-- PROJECT -->
-    {% if results['project'][1]==0 %}
+    {% if results['project'][1]!=0 %}
       <li>
         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
           <h4 style='text-align:left;'>
             Projects
-            <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
+            <i class="fa fa-circle" style='color:#FF5D00;'></i>
             {{ results['project'][1] }}
           </h4>
         </a>
