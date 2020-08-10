@@ -50,7 +50,7 @@ class User_Badge(CRUDMixin, db.Model):
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
     # last active: last time progress was made on the badge
-    last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, badge):
         self.badge = badge
@@ -58,14 +58,14 @@ class User_Badge(CRUDMixin, db.Model):
     def __repr__(self):
         if not self.earned:
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
-                    f'progress={self.progress}/{self.badge.total}>')
+                    f'progress={self.progress}/{self.badge.criteria}>')
         else:
             return (f'<User_Badge u={self.user.name} b={self.badge.name}'
                     f'earned={self.earn_stamp}>')
 
     def fraction_complete(self):
         ''' Get fraction of badge completedness '''
-        return float(self.progress / self.badge.total)
+        return float(self.progress / self.badge.criteria)
 
     def get_progressbar_width(self):
         ''' Gets width of progressbar for badge display '''

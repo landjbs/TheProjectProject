@@ -335,7 +335,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         if not badge:
             raise ValueError(f'Could not locate badge "{badge_name}".')
         # if user merits start of badge
-        if getattr(user, badge.criteria)()>0:
+        if getattr(self, badge.evaluator)()>0:
             user_badge = self.get_user_badge(badge)
             if not user_badge:
                 user_badge = User_Badge(badge)
