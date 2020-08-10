@@ -52,13 +52,16 @@ class User(CRUDMixin, UserMixin, db.Model):
                             order_by='desc(Project.last_active)')
     pending = relationship('Project_Application',
                             back_populates='user',
-                            lazy='dynamic')
+                            lazy='dynamic',
+                            order_by='desc(Project_Application.apply_stamp)')
     invitations = relationship('Project',
                             secondary='project_invitation',
                             back_populates='invitations',
-                            lazy='dynamic')
+                            lazy='dynamic',
+                            order_by='desc(Project.last_active)')
     rejections = relationship('Project',
                             secondary='project_rejections',
+                            lazy='dynamic',
                             back_populates='rejections')
     ## interactions ##
     # starred projects
