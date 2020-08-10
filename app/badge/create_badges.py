@@ -15,7 +15,7 @@ def create_badges(db):
                 icon='BadgeIcons/superowner/apple-touch-icon.png',
                 description='Own 50 completed projects to showcase your SuperOwner skills!',
                 perks=[f'{badge_xp} XP', 'Recommendation Boost in Recommended Project stack',
-                       'We will review your projects and connect you with relevant experts',
+                       'We will review your projects and connect you with funding/compute if possible',
                        'SuperOwner icon next to your name in all project cards']
                 criteria=50,
                 evaluator='n_owned_complete'),
@@ -37,14 +37,15 @@ def create_badges(db):
                 perks=[f'{badge_xp} XP', 'Recommendation Boost for projects with diverse subjects',
                        'WellStudied badge next to your name in all member cards'],
                 criteria=50,
-                evaluator='n_member_complete'),
+                evaluator='skill_level'),
             ####################################################################
-            ########## Specialist: have skill_level>=30 on any subject #########
-            Badge(name='WellStudied',
+            ########## Specialist: have skill_level>=50 on any subject #########
+            Badge(name='Specialist',
                 icon='BadgeIcons/wellstudied/apple-touch-icon.png',
-                description='Have a total skill level of 500 across all subjects to showcase your diverse experience!',
-                perks=[f'{badge_xp} XP', 'Recommendation Boost for projects with diverse subjects',
-                       'WellStudied badge next to your name in all member cards'],
+                description='Have a total skill level of 500 across all subjects to showcase your expertise!',
+                perks=[f'{badge_xp} XP', 'Recommendation Boost for projects within your top subject',
+                       'Specialist badge next to your name in all member cards',
+                       'We will review your profile and connect you with experts in your field'],
                 criteria=50,
                 evaluator='n_member_complete'),
             ####################################################################
