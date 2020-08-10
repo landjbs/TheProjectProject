@@ -7,15 +7,13 @@
         <img class='big-badge' src="{{ url_for('badge.static', filename=user_badge.badge.get_icon_url()) }}"/>
         <h5>{{ user_badge.badge.name }}</h5>
         <br>
-        <center>
-          <p style="margin:0px;">
-              {{ user_badge.progress }} / {{ user_badge.badge.criteria }}
-            </p>
-            <div class="progress" style='width:80%;'>
-              <div class="progress-bar" role="progressbar"
-                  style='{{ user_badge.get_progressbar_width() }}'></div>
-            </div>
-        <center>
+        <p style="margin:0px;">
+            {{ user_badge.progress }} / {{ user_badge.badge.criteria }}
+        </p>
+        <div class="progress" style='width:80%;'>
+          <div class="progress-bar" role="progressbar"
+              style='{{ user_badge.get_progressbar_width() }}'></div>
+        </div>
       </div>
       <hr class="my-4">
       <div class='card-text'>
@@ -44,6 +42,7 @@
           {{ badge.users.count()  }}
           <i class='fa fa-user-circle'></i>
         </p>
+        <br>
         <img class='big-badge' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
         <h5>{{ badge.name }}</h5>
       </div>

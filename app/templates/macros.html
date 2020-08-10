@@ -4,6 +4,10 @@
   <img class='badge-icon' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
 {% endmacro -%}
 
+{% macro render_badge_icon_bigger(badge) -%}
+  <img class='badge-icon-bigger' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
+{% endmacro -%}
+
 
 
 <!-- CARD COMPONENTS -->

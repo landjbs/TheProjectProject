@@ -8,7 +8,7 @@ from app import db
 from app.user.models import User
 from app.project.models import Project
 from app.subject.models import Subject
-from app.badge.models import Badge
+from app.badge.models import Badge, User_Badge
 
 from app.subject.create_subjects import create_subjects
 from app.badge.create_badges import create_badges
@@ -75,6 +75,8 @@ def populate_db(num_users, num_projects):
                 for id in np.random.randint(1, subject_num+1, size=n)]
     badge_num = Badge.query.count()
     def rand_badges(n):
+        if n==0:
+            return []
         return [Badge.get_by_id(int(id))
                 for id in np.random.randint(1, badge_num+1, size=n)]
     # ./helpers
@@ -98,8 +100,9 @@ def populate_db(num_users, num_projects):
     for user in tqdm(users, desc='Adding Users'):
         db.session.add(user)
         user.add_subjects(rand_subjects(np.random.randint(0,6)))
-        badges = rand_badges(rand_badges(np.random.randint(0,4)))
-        
+        badges = rand_badges(np.random.randint(0,4))
+        for badge in badges:
+            user.badges.append(User_Badge(badge=badge, earned=True))
     # fake projects
     projects = []
     user_num = User.query.count()
@@ -129,7 +132,20 @@ def populate_db(num_users, num_projects):
     db.session.commit()
 
 
+def add_test():
+    # admins
+    user = User.create(
+            name='Test User',
+            email='test@college.harvard.edu',
+            password='boop',
+            url='https://github.com/test',
+            about=('I am a test user for TheProjectProject. Excited to be here.'),
+            admin=False
+    )
+    user.add_subjects(set(Subject.get_by_id(int(id)) for id in np.random.randint(1, 10+1, size=4)))
+    return True
+
 
 ### list of commands to register ###
 command_list = [create_db, drop_db, rebuild_db, add_badges, add_statics,
-                populate_db]
+                populate_db, add_test]

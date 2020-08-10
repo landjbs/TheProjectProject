@@ -4,8 +4,15 @@
 }
 
 .badge-icon {
-  width:  1.5vh;
-  height: 1.5vh;
+  width:  1.6vh;
+  height: 1.6vh;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.badge-icon-bigger {
+  width:  2.3vh;
+  height: 2.3vh;
   vertical-align: top;
   display: inline-block;
 }
