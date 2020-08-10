@@ -6,6 +6,8 @@ from app.database import db, CRUDMixin
 from .badge_criteria import badge_criteria
 
 
+class Badge_Perks(CRUDMixin, db.Model):
+
 
 class Badge(CRUDMixin, db.Model):
     __tablename__ = 'badge'
@@ -18,6 +20,9 @@ class Badge(CRUDMixin, db.Model):
     icon = db.Column(db.String(250), nullable=False, unique=True)
     # description
     description = db.Column(db.String(250), nullable=False)
+    # perks
+    perks = relationship('Badge_Perks',
+                         back_populates='badge',)
     ## evaluation ##
     # criteria
     criteria = db.Column(db.Integer, nullable=False)
