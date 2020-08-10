@@ -370,6 +370,8 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     def choose_badge(self, card_type:str):
         ''' Chooses best badge to display based on card type '''
+        if self.badges.count()<1:
+            return None
         # first is always verified
         verified = self.check_name_return_badge('Verified')
         if verified:
