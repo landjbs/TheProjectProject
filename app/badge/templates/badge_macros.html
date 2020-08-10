@@ -1,29 +1,4 @@
-{% macro render_user_badge_card(user_badge) -%}
-<div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body">
-      <div class='card-head small'>
-        <h5>
-          {{ user_badge.badge.name }}
-        </h5>
-        <div class="progress" style='width:80%;'>
-            <div class="progress-bar" role="progressbar"
-                style='{{ user_badge.get_progressbar_width() }}'/>
-        </div>
-      </div>
-      <div class='card-oneline' style=''>
-        <p class='oneliner'>
-          boop
-        </p>
-      </div>
-      <hr class="my-2">
-        bap
-    </div>
-  </div>
-</div>
-{% endmacro -%}
-
-
+<!-- renders badge card that user has started work on -->
 {% macro render_user_badge_card(user_badge) -%}
 <div class="col-md-4">
   <div class="card mb-2">

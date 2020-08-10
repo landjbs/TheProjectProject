@@ -356,11 +356,8 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     def n_member_complete(self):
         ''' Number of member projects user has completed '''
-        owned_ids = [p.id for p in self.owned]
-        return self.projects.filter(
-                    Project.complete==True,
-                    ~Project.id._in(owned_ids)
-                ).count()
+        completed_projects = self.projects.filter_by(complete=True).count()
+        return (completed_projects-self.n_owned_complete())
 
     def total_skill_level(self):
         ''' Get cumulative skill level of user '''
