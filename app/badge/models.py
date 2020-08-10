@@ -55,6 +55,9 @@ class Badge(CRUDMixin, db.Model):
         perk = Badge_Perk.filter_by(text=text).first()
         if perk:
             self.perks.append(perk)
+        else:
+            self.perks.append(Badge_Perk(text=text))
+        return True
 
 
 
