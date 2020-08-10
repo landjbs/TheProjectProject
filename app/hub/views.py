@@ -40,12 +40,12 @@ def home():
                             user_project_count=user_projects.count(),
                             project_application=project_application)
 
+
 @hub.route('/home')
 @login_required
 @mobilized(home)
 def home():
     ''' Mobile optimized route for home page '''
-    print('MOBILIZED')
     # only load recommended projects and dont tab
     recommended_projects = get_recommended_projects(current_user)
     # get forms
@@ -55,10 +55,7 @@ def home():
                            project_application=project_application)
 
 
-@hub.route('/search', methods=['GET', 'POST'])
-# @mobilized(search)
-@login_required
-@limiter.limit('60 per minute')
+### SEARCH ###
 def search():
     if request.method=='GET':
         return redirect(url_for('hub.home'))
@@ -74,6 +71,10 @@ def search():
                         project_application=project_application)
 
 
-
+### SEARCH ###
+@hub.route('/search', methods=['GET', 'POST'])
+# @mobilized(search)
+@login_required
+@limiter.limit('60 per minute')
 # def search_mobile():
 #     ''' Mobile optimized search page '''
