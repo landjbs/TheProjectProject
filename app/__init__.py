@@ -35,8 +35,8 @@ def create_app(config=config.BaseConfig):
     # TODO: better secret key define in config
     # application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    # 'sqlite:///test.db'
-    application.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://admin:jl245o234jDFalsdkjf;kl2j4508usdjilfka@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/dev_db'
+    #
+    application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' #f'mysql+pymysql://admin:jl245o234jDFalsdkjf;kl2j4508usdjilfka@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/dev_db'
     # application.config['RQ_REDIS_URL'] = 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379'
     application.config['ELASTICSEARCH_URL'] = None #'http://localhost:9200'
     # print(application.config['DATABASE_URI'])
