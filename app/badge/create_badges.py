@@ -3,7 +3,9 @@ from .models import Badge
 from tqdm import tqdm
 
 
-badge_name_list = ['SuperOwner', 'SuperMember', 'Verified']
+badge_name_list = ['SuperOwner', 'SuperMember', 'WellStudied', 'Specialist',
+                   'StarStruck', 'WellConnected', 'SetEmUp', 'KnockEmDown',
+                    'Verified']
 badge_xp = 1000
 
 def create_badges(db):
