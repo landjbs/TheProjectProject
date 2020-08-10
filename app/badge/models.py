@@ -11,10 +11,14 @@ class Badge(CRUDMixin, db.Model):
     __tablename__ = 'badge'
     # id
     id = db.Column(db.Integer, primary_key=True)
+    ## display ##
     # name
     name = db.Column(db.String(60), nullable=False, unique=True)
     # url for icon
     icon = db.Column(db.String(250), nullable=False, unique=True)
+    # description
+    description = db.Column(db.String(250), nullable=False)
+    ## evaluation ##
     # criteria
     criteria = db.Column(db.Integer, nullable=False)
     # evaluator: user attr to call for progress
