@@ -1,6 +1,8 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
 
+from .models import Badge
+
 from ..badge import badge
 
 
@@ -10,6 +12,6 @@ from ..badge import badge
 def badge_page():
     # update badges
     current_user.update_badges()
-    # badges in progress
     # all badges
-    return render_template('badge.html')
+    all_badges = Badge.query.all()
+    return render_template('badge.html', all_badges)
