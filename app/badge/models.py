@@ -11,8 +11,6 @@ class Badge(CRUDMixin, db.Model):
     ## display ##
     # name
     name = db.Column(db.String(60), nullable=False, unique=True)
-    # url for icon
-    icon = db.Column(db.String(250), nullable=False, unique=True)
     # description
     description = db.Column(db.String(100), nullable=False)
     # perks
@@ -61,7 +59,7 @@ class Badge(CRUDMixin, db.Model):
         return True
 
     def get_icon_url(self):
-        return f'img/BadgeIcons/{self.name.lower()}/apple-touch-icon.png'
+        return f'img/badgeicons/{self.name.lower()}.png'
 
 
 
