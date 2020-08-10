@@ -14,6 +14,8 @@ def text_search(search_text):
                                      User.about.contains(search_text))
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
     ## analytics ##
-    
+    project_count = project_results.count()
+    user_results = user_results.count()
+    subject_results = subject_results.count()
     ## limits ##
     return (project_results, user_results, subject_results)
