@@ -381,7 +381,10 @@ class User(CRUDMixin, UserMixin, db.Model):
                 'Specialist', 'WellStudied', 'KnockEmDown']
             )
         elif card_type=='member':
-
+            return choose_badge_from_ordered_list(
+                ['SuperMember', 'KnockEmDown', 'WellStudied', 'WellConnected',
+                'Specialist', 'StarStruck', 'SetEmUp']
+            )
         elif card_type=='search':
             if
         else:
