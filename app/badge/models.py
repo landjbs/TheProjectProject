@@ -30,9 +30,8 @@ class Badge(CRUDMixin, db.Model):
                         lazy='dynamic',
                         order_by='User_Badge.earn_stamp')
 
-    def __init__(self, name, icon, description, perks, criteria, evaluator):
+    def __init__(self, name, description, perks, criteria, evaluator):
         self.name = name
-        self.icon = icon
         self.description = description
         self.criteria = criteria
         self.evaluator = evaluator
@@ -171,4 +170,6 @@ class Badge_Perk(CRUDMixin, db.Model):
     text = db.Column(db.String(100), nullable=False, unique=True)
     # badge link
     badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=False)
-    badge = relationship('Badge', back_populates='perks')
+    badge = relationship('Badge',
+                        secondary='badge_to_perk',
+                        back_populates='perks')
