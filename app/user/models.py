@@ -376,19 +376,20 @@ class User(CRUDMixin, UserMixin, db.Model):
             return verified
         # otherwise go through ordered list of possible badges
         if card_type=='project':
-            return choose_badge_from_ordered_list(
+            return self.choose_badge_from_ordered_list(
                 ['SuperOwner', 'StarStruck', 'SetEmUp', 'WellConnected',
                 'Specialist', 'WellStudied', 'KnockEmDown']
             )
         elif card_type=='member':
-            return choose_badge_from_ordered_list(
+            return self.choose_badge_from_ordered_list(
                 ['SuperMember', 'KnockEmDown', 'WellStudied', 'WellConnected',
                 'Specialist', 'StarStruck', 'SetEmUp']
             )
         elif card_type=='search':
-            return choose_badge_from_ordered_list(
-                ['SuperMember', 'KnockEmDown', 'WellStudied', 'WellConnected',
-                'Specialist', 'StarStruck', 'SetEmUp']
+            return self.choose_badge_from_ordered_list(
+                ['StarStruck', 'Specialist', 
+                'SuperMember', 'KnockEmDown', 'WellStudied',
+                'WellConnected',  'SetEmUp']
             )
         else:
             raise ValueError(f'choose_badge got invalid card_type {card_type}.')
