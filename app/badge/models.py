@@ -3,8 +3,6 @@ from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin
 
-from .badge_criteria import badge_criteria
-
 
 class Badge(CRUDMixin, db.Model):
     __tablename__ = 'badge'
@@ -158,3 +156,6 @@ class Badge_Perk(CRUDMixin, db.Model):
     __tablename__ = 'badge_perk'
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(100), nullable=False, unique=True)
+    # badge link
+    badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=False)
+    badge = relationship('Badge', back_populates='users')

@@ -4,7 +4,6 @@ from tqdm import tqdm
 
 
 badge_name_list = ['SuperOwner', 'SuperMember', 'Verified']
-
 badge_xp = 1000
 
 def create_badges(db):
