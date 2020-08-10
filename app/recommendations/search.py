@@ -7,12 +7,13 @@ from app.utils import partition_query
 # TODO: replace with better elastic_search
 
 def text_search(search_text):
-    # project results
+    ## results ##
     project_results = Project.query.filter(Project.name.contains(search_text) |
-                                   Project.oneliner.contains(search_text)).limit(30)
-    # user results
+                                   Project.oneliner.contains(search_text))
     user_results = User.query.filter(User.name.contains(search_text) |
-                                     User.about.contains(search_text)).limit(30)
-    # subject results
+                                     User.about.contains(search_text))
     subject_results = Subject.query.filter(Subject.name.contains(search_text))
+    ## analytics ##
+    
+    ## limits ##
     return (project_results, user_results, subject_results)
