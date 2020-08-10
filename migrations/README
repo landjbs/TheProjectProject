@@ -3,3 +3,9 @@ Generic single-database configuration.
 Commands:
 flask db migrate -m "message"  # prepare migration
 flask db upgrade                # enact migration
+
+
+## if not working ##
+flask db stamp head
+flask db migrate
+flask db upgrade

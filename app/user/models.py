@@ -41,16 +41,24 @@ class User(CRUDMixin, UserMixin, db.Model):
     active = db.Column(db.Boolean, nullable=False, default=False)
     last_active = db.Column(db.DateTime, nullable=True)
     ## projects ##
-    owned = relationship('Project', back_populates='owner',
-                         order_by='desc(Project.last_active)')
-    projects = relationship('Project', secondary='user_to_project_2',
+    owned = relationship('Project',
+                        back_populates='owner',
+                        lazy='dynamic'
+                        order_by='desc(Project.last_active)')
+    projects = relationship('Project',
+                            secondary='user_to_project_2',
                             back_populates='members',
+                            lazy='dynamic',
                             order_by='desc(Project.last_active)')
     pending = relationship('Project_Application',
-                            back_populates='user', lazy='dynamic')
-    invitations = relationship('Project', secondary='project_invitation',
-                               back_populates='invitations', lazy='dynamic')
-    rejections = relationship('Project', secondary='project_rejections',
+                            back_populates='user',
+                            lazy='dynamic')
+    invitations = relationship('Project',
+                            secondary='project_invitation',
+                            back_populates='invitations',
+                            lazy='dynamic')
+    rejections = relationship('Project',
+                            secondary='project_rejections',
                             back_populates='rejections')
     ## interactions ##
     # starred projects

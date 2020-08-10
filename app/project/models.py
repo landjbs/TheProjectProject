@@ -439,6 +439,7 @@ class Project_Application(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), primary_key=True)
     project = relationship('Project', back_populates='pending')
     text = db.Column('text', db.String(250), nullable=True)
+    apply_stamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<Application of {self.user.name} to {self.project.name}; Text={self.text}>'

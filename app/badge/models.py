@@ -34,19 +34,24 @@ class Badge(CRUDMixin, db.Model):
         return cls.query.filter_by(name=name).first()
 
 
-class User_Badge(db.Model):
+class User_Badge(CRUDMixin, db.Model):
     __tablename__ = 'user_badge'
+    # id
+    id = db.Column(db.Integer, primary_key=True)
     # user
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=False)
     user = relationship('User', back_populates='badges')
     # badges
-    badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=True)
+    badge_id = db.Column(db.Integer, db.ForeignKey('badge.id'), primary_key=False)
     badge = relationship('Badge', back_populates='users')
     # progress
     progress = db.Column(db.Integer, nullable=False, default=0)
     # earn
     earned = db.Column(db.Boolean, nullable=False, default=False)
     earn_stamp = db.Column(db.DateTime, nullable=True)
+
+    def __init__(self, badge):
+        self.badge = badge
 
     def __repr__(self):
         if not self.earned:
