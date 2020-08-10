@@ -33,12 +33,12 @@ def create_badges(db):
                 description='Have a total skill level of 500 across all subjects to showcase your diverse experience!',
                 perks=[f'{badge_xp} XP', 'Recommendation Boost for projects with diverse subjects',
                        'WellStudied badge next to your name in all member cards'],
-                criteria=50,
+                criteria=500,
                 evaluator='total_skill_level'),
             ####################################################################
             ########## Specialist: have skill_level>=50 on any subject #########
             Badge(name='Specialist',
-                description='Have a total skill level of 500 across all subjects to showcase your expertise!',
+                description='Have a skill level of 50 on one subject to showcase your expertise!',
                 perks=[f'{badge_xp} XP', 'Recommendation Boost for projects within your top subject',
                        'Specialist badge next to your name in all member cards',
                        'We will review your profile and connect you with experts in your field'],
