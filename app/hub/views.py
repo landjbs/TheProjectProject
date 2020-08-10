@@ -56,9 +56,6 @@ def home_mobile():
                            project_application=project_application)
 
 
-@hub.route('/search', methods=['GET', 'POST'])
-@login_required
-@limiter.limit('60 per minute')
 def search():
     if request.method=='GET':
         return redirect(url_for('hub.home'))
@@ -72,3 +69,11 @@ def search():
                         subject_tabs=subject_tabs,
                         search_text=search_text,
                         project_application=project_application)
+
+
+@hub.route('/search', methods=['GET', 'POST'])
+@mobilized(search)
+@login_required
+@limiter.limit('60 per minute')
+def search_mobile():
+    ''' Mobile optimized search page '''
