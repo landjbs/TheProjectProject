@@ -345,6 +345,7 @@ class User(CRUDMixin, UserMixin, db.Model):
 
     def update_badges(self, badge_list:list=badge_name_list):
         ''' Performs update_badge on list of badge_names '''
+        print('UPDATING')
         for badge_name in badge_list:
             self.update_badge(badge_name)
         return True
@@ -352,7 +353,8 @@ class User(CRUDMixin, UserMixin, db.Model):
     ## badge allocation evaluators ##
     def n_owned_complete(self):
         ''' Number of owned projects user has completed '''
-        return self.owned.filter_by(complete=True).count()
+        n = self.owned.filter_by(complete=True).count()
+        return n
 
     def n_member_complete(self):
         ''' Number of member projects user has completed '''
