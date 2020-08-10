@@ -64,6 +64,8 @@ def create_app(config=config.BaseConfig):
         def calc_days_left(elapsed, estimated_time):
             return int((estimated_time - elapsed))
         def elapsed_style(elapsed, estimated_time):
+            if not estimated_time:
+                estimated_time=0.0001
             return f'width: {100*float(elapsed/estimated_time)}%;'
         def time_to_str(time):
             from_zone = tz.tzutc()

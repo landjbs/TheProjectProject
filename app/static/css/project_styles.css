@@ -43,7 +43,7 @@ a, a:hover, a:focus {
 }
 
 #sidebar.active {
-    margin-left: -250px;
+    margin-left: -50vh;
     transform: rotateY(100deg);
 }
 
