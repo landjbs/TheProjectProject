@@ -55,7 +55,7 @@
           {% endif %}
             <div class='row'>
               {% for badge in tab %}
-                {{ badge.name }}
+                {{ badge_macros.render_badge_card(badge) }}
               {% endfor %}
             </div>
           </div>
