@@ -2,3 +2,8 @@
   width: 5vh;
   height: 5vh;
 }
+
+.badge-icon {
+  max-width:  1vh;
+  max-height: 1vh;
+}

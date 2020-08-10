@@ -1,3 +1,11 @@
+<!-- BADGE MACROS -->
+<!-- TODO: MOVE -->
+{% macro render_badge_icon(badge) -%}
+  <img class='badge-icon' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
+{% endmacro -%}
+
+
+
 <!-- CARD COMPONENTS -->
 {% macro render_project_name(project, user) -%}
 {% if user.is_authenticated %}
@@ -703,7 +711,7 @@
             {{ user.name }}
             {% set badge = user.choose_badge(carousel_type) %}
             {% if badge %}
-              {{ badge.name }}
+              {{ render_badge_icon(badge) }}
             {% endif %}
             {% if user.recently_active() %}
               <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
