@@ -16,5 +16,7 @@ def badge_page():
     # progress tabs
     progress_tabs = partition_query(current_user.badges)
     # all badges
-    all_badges = partition_query(Badge.query.all())
-    return render_template('badge.html', progress_tabs, all_tabs)
+    all_tabs = partition_query(Badge.query.all())
+    return render_template('badge.html',
+                            progress_tabs=progress_tabs,
+                            all_tabs=all_tabs)

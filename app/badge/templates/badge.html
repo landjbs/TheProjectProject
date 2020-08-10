@@ -11,21 +11,21 @@
 <div class='container my-2' style='min-width: 90%'>
   <h4 style='text-align:left;'>My Badges</h4>
   <hr class="my-2">
-  {% if project_tabs!=[] %}
+  {% if progress_tabs!=[] %}
     <h4 style='text-align:left;'>In Progress</h4>
     <hr class="my-2">
-    <div id="project-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+    <div id="progress-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
-        {% for tab in project_tabs %}
+        {% for tab in progress_tabs %}
           {% if loop.index==1 %}
           <div class="carousel-item active">
           {% else %}
           <div class="carousel-item">
           {% endif %}
             <div class='row'>
-              {% for project in tab %}
-                {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+              {% for badge in tab %}
+                {{ badge.name }}
               {% endfor %}
             </div>
           </div>
@@ -33,9 +33,9 @@
       </div>
       <!--Controls-->
       <div class="controls-top">
-        <a class="btn-floating" href="#project-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+        <a class="btn-floating" href="#progress-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
         <p id='project-count' class='counter'>0</p>
-        <a class="btn-floating" href="#project-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+        <a class="btn-floating" href="#progress-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
       </div>
       <!--/.Controls-->
     </div>
@@ -125,8 +125,8 @@
 
 <script>
 // log tabs
-$('#project-carousel').on('slid.bs.carousel', function () {
-  var cur = $('#project-carousel div.active').index();
+$('#progress-carousel').on('slid.bs.carousel', function () {
+  var cur = $('#progress-carousel div.active').index();
   sessionStorage.setItem('recSlide', cur);
   $('#project-count').html(cur);
   });
@@ -145,7 +145,7 @@ $('#subject-carousel').on('slid.bs.carousel', function () {
 
 // rescroll carousels
 if(sessionStorage.recSlide){
-    $("#project-carousel").carousel(sessionStorage.recSlide*1);
+    $("#progress-carousel").carousel(sessionStorage.recSlide*1);
   }
 
 if(sessionStorage.trendingSlide){
