@@ -168,6 +168,11 @@ def project_page(project_code):
                             edit_application_form=edit_application_form)
 
 
+
+
+
+
+
 ## user to project interactions ##
 @project.route('/join_project/<int:project_id>', methods=['POST'])
 @login_required
