@@ -198,6 +198,18 @@
       </div>
 
 
+      <div id="Members" class="tabcontent">
+        <h4 class='tabname-big'>
+          Applications
+          <i class="fa fa-bell" aria-hidden="true"></i>
+          {{ project.pending.all()|length }}
+        </h4>
+        {% for member in project.members %}
+          {{ macros.render_user_card(current_user, member, carousel_type='member') }}
+        {% endfor %}
+      </div>
+
+
       <div id="Subjects" class="tabcontent">
         <h4 class='tabname-big'>
           Subjects
