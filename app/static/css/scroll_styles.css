@@ -57,14 +57,14 @@
   max-height: 3vh;
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .tiny {
     min-height: 5vh;
     max-height: 5vh;
   }
   .card-text {
-    min-height: 5vh;
-    max-height: 5vh;
+    min-height: 25vh;
+    max-height: 25vh;
   }
   .card-oneline {
     min-height: 12vh;
