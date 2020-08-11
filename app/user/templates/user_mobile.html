@@ -70,7 +70,7 @@
       </nav>
 
       <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Owned')">Owned</button>
+        <button class="tablinks" onclick="openCity(event, 'Owned')" id="defaultOpen">Owned</button>
         <button class="tablinks" onclick="openCity(event, 'Member')">Member</button>
         <button class="tablinks" onclick="openCity(event, 'Subjects')">Subjects</button>
       </div>
@@ -149,6 +149,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <script>
+      document.getElementById("defaultOpen").click();
       function openCity(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -174,7 +175,7 @@
         if (disp=='block') {
           var h = $('#nav-expanded').height();
           document.getElementById("nav-expanded").style.display = 'none';
-          window.scrollBy(0, h-30);
+          window.scrollBy(0, h+10);
         } else {
             document.getElementById("nav-expanded").style.display = 'none';
         }
@@ -184,7 +185,7 @@
         if (disp=='none') {
           document.getElementById("nav-expanded").style.display = 'block';
           var h = $('#nav-expanded').height();
-          window.scrollBy(0, -h-30);
+          window.scrollBy(0, -h-10);
         } else {
           document.getElementById("nav-expanded").style.display = 'block';
         }
