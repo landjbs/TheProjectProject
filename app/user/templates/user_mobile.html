@@ -19,8 +19,9 @@
 
 {% block content %}
     <!-- PAGE -->
-    <div class='container' style='min-width:100%;color:white;background:#5D00FF;'>
-        <nav class='sidebar-header'>
+    <div class='container' style="min-width:100%;padding:0px;">
+        <nav class='sidebar-header sticky-top' style='min-width:100%;color:white;background:#5D00FF;padding-left:10px;padding-right:10px;'>
+          <br>
           <p class='float-right'>
             <i class="fa fa-star"></i>
             {{ user.total_stars() }}
@@ -50,9 +51,8 @@
               {{ user.email }}
             </a>
           {% endif %}
-        </div>
-        <br>
-        <div class='bio'>
+        <br><br>
+        <div>
           <p>{{ user.about }}</p>
           <center>
             <p style="margin:0px;">
@@ -63,9 +63,10 @@
                   style='{{ user.xp_progressbar_width() }}'></div>
             </div>
           </center>
-          <br>
         </div>
         <br>
+      </nav>
+
         <div class='container' style='background:white;border-radius:5px;max-height:37vh;overflow:scroll;'>
           <h4 style='text-align:left;color:black;'>
             Owned Projects
@@ -113,7 +114,7 @@
             </div>
           {% endif %}
         </div>
-    </nav>
+    </div>
 
     <!-- modals -->
     <div>
