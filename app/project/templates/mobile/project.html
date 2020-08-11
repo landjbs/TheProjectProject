@@ -76,7 +76,7 @@
 
       <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Tasks')" id="defaultOpen">Tasks</button>
-        <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
+        <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
         {% if current_user==project.owner %}
           <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
           <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
@@ -184,6 +184,19 @@
             {{ task_form.text(class='post-input', placeholder='Task') }}
             <button>Add</button>
           </form>
+        {% endif %}
+      </div>
+
+      <div id="Owned" class="tabcontent">
+        <h4 class='tabname-big'>
+          Owned Projects
+          <i class="fa fa-circle" style='color:#FF5D00;'></i>
+          {{ user.owned.count() }}
+        </h4>
+        {% if user.owned.count() > 0 %}
+          {% for project in user.owned %}
+            {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+          {% endfor %}
         {% endif %}
       </div>
 
