@@ -4,6 +4,7 @@
 
 .tab {
   max-width: 100%;
+  white-space: nowrap;
   overflow: scroll;
   background-color: #f1f1f1;
 }
