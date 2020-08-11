@@ -423,6 +423,41 @@
             </div>
           </div>
 
+          <!-- pending members -->
+          <div class='row'>
+            <div class='container my-2' style='min-width: 99%;'>
+              <h4 class='tabname-big'>
+                Applications
+                <i class='far fa-bell'></i>
+                {{ project.members.all()|length }} / {{ project.team_size }}
+              </h4>
+              <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                  {% for tab in member_tabs%}
+                    {% if loop.index==1 %}
+                    <div class="carousel-item active">
+                    {% else %}
+                    <div class="carousel-item">
+                    {% endif %}
+                      <div class='row'>
+                        {% for user in tab %}
+                          {{ macros.render_user_card(current_user, user, carousel_type='member') }}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <!--Controls-->
+              <div class="controls-top">
+                <a class="btn-floating" href="#member-rec-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                <p id='member-count' class='counter'>0</p>
+                <a class="btn-floating" href="#member-rec-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+              </div>
+              <!--/.Controls-->
+            </div>
+          </div>
+
           {% if project.applications|length > 0 %}
             <div class='row'>
               <div class='container my-2' style='min-width: 99%;'>
