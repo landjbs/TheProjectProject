@@ -84,10 +84,14 @@
       </div>
 
       <div id="Tasks" class="tabcontent">
+        {% set todo_tasks = project.todo_tasks() %}
+        {% set completed_tasks = project.completed_tasks() %}
         <h4 class='tabname-big'>
-          Tasks 
-          <i class="fa fa-flask" style='color:#FF5D00;'></i>
-          {{ user.total_skill_level() }}
+          Tasks
+          <i class="fa fa-clock-o" style='color:#FF5D00;'></i>
+          {{ todo_tasks.all()|length }}
+          <i class="fa fa-check-circle" style='color:#FF5D00;'></i>
+          {{ completed_tasks.all()|length }}
         </h4>
         {% for user_subject in user.subjects %}
           {{ macros.render_user_subject(user_subject) }}
