@@ -113,9 +113,8 @@
 
     function scrollFunction() {
       if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        // document.getElementById("nav-expanded").style.display = 'none';
-        document.getElementById("nav-expanded").style.color = 'transparent';
-        document.getElementById("nav-expanded").style.background = 'transparent';
+        document.getElementById("nav-expanded").style.display = 'none';
+        document.getElementById("nav-expanded").style.background = 'transparent !important';
       } else if (document.body.scrollTop == 0) {
         document.getElementById("nav-expanded").style.display = 'block';
       }
