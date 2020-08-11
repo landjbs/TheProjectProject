@@ -104,8 +104,15 @@
       </div>
 
       <div id="Subjects" class="tabcontent">
-        <h3>Subjects</h3>
-        <p>Tokyo is the capital of Japan.</p>
+        <h4 style='text-align:left;'>
+          Subjects
+          <i class="fa fa-flask" style='color:#FF5D00;'></i>
+          {{ user.total_skill_level() }}
+        </h4>
+        {% for user_subject in user.subjects %}
+          {{ macros.render_subject_card(user_subject.subject) }}
+        {% endfor %}
+
       </div>
 
 
