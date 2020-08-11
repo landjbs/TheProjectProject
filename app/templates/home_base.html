@@ -91,18 +91,16 @@
     </nav>
 
     <!-- TODO: flash class doesn't work yet -->
-    {% if not request.MOBILE %}
-      {% with messages = get_flashed_messages() %}
-  	    {% if messages %}
-  	      {% for message in messages %}
-  		      <div class="{{ message.category }}" style='margin:0px;' role="alert">
-  		          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-  	          {{message}}
-             </div>
-          {% endfor %}
-  	    {% endif %}
-  	  {% endwith %}
-    {% endif %}
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+	      {% for message in messages %}
+		      <div class="{{ message.category }}" style='margin:0px;' role="alert">
+		          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+	          {{message}}
+           </div>
+        {% endfor %}
+	    {% endif %}
+	  {% endwith %}
 
     <!-- add padding below navbar for mobile -->
     {% if request.MOBILE %}
