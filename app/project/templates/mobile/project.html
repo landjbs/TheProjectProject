@@ -1,7 +1,7 @@
 {% extends "home_base.html" %}
 {% import 'macros.html' as macros %}
 
-{% block title %}{{ user.name }}{% endblock %}
+{% block title %}{{ project.name }}{% endblock %}
 
 {% block head %}
   {{ super() }}
@@ -19,42 +19,51 @@
 {% endblock %}
 
 {% block content %}
+    <!-- GLOBALS -->
+    {% set is_member = current_user in project.members %}
+    {% set is_owner = (project.owner==current_user) %}
     <!-- PAGE -->
     <div class='container' style="min-width:100%;padding:0px;">
         <nav class='sidebar-header sticky-top' id='nameNav'>
         <div class='nav-keep' style='padding-bottom:2vh; padding-top:2vh;'>
           <p class='float-right'>
             <i class="fa fa-star"></i>
-            {{ user.total_stars() }}
+            {{ project.stars.all()|length }}
             <!-- edit button -->
-            {% if user == current_user %}
-                <br>
-                <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  Edit
-                </button>
+            {% if is_owner %}
+              <br>
+              <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                Edit
+              </button>
             {% endif %}
           </p>
           <a onclick="scrollToTop()">
             <h3>
-              {{ user.name }}
-              {% set badge = user.choose_badge('search') %}
-              {% if badge %}
-                {{ macros.render_badge_icon_bigger(badge) }}
-              {% elif user.recently_active() %}
-                <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+              {{ project.name }}
+              {% if project.complete %}
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+              {% elif not project.open %}
+                <i class="fa fa-lock" aria-hidden="true"></i>
               {% endif %}
             </h3>
           </a>
-          {% if current_user.is_authenticated %}
-            <a id='hide-mail' href='mailto:{{ user.email }}'>
-              {{ user.email }}
-            </a>
-          {% endif %}
+          <p>
+            by
+            {% if current_user.is_authenticated %}
+              <a class='user-name' href='user={{ project.owner.code }}'>
+            {% else %}
+              <a class='user-name' href='/login'>
+            {% endif %}
+                {{ project.owner.name }}
+              </a>
+          </p>
+          {{ macros.render_project_action_bar(current_user, project) }}
         </div>
+        <!-- extra project info -->
         <div id='nav-expanded'>
           <hr class='my-2'>
-          <p>{{ user.about }}</p>
+          <p>{{ .about }}</p>
           {% if current_user.is_authenticated and current_user!=user %}
             <center>
               {{ macros.render_user_action_bar(current_user, user) }}
