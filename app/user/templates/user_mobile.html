@@ -1,0 +1,327 @@
+{% extends "home_base.html" %}
+{% import 'macros.html' as macros %}
+
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/scroll_styles.css">
+    <link rel="stylesheet" href="css/project_styles.css">
+    <link rel='stylesheet' href="css/badge_styles.css">
+{% endblock %}
+
+{% block content %}
+    <!-- PAGE -->
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <p class='float-right'>
+                  <i class="fa fa-star"></i>
+                  {{ user.total_stars() }}
+                  <!-- edit button -->
+                  {% if user == current_user %}
+                      <br>
+                      <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        Edit
+                      </button>
+                  {% endif %}
+                </p>
+                <a href='/user={{ user.code }}'>
+                  <h3>
+                    {{ user.name }}
+                    {% set badge = user.choose_badge('search') %}
+                    {% if badge %}
+                      {{ macros.render_badge_icon_bigger(badge) }}
+                    {% endif %}
+                    {% if user.recently_active() %}
+                      <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+                    {% endif %}
+                  </h3>
+                </a>
+                {% if current_user.is_authenticated %}
+                  <a href='mailto:{{ user.email }}'>
+                    {{ user.email }}
+                  </a>
+                {% endif %}
+            </div>
+            {% if current_user.is_authenticated %}
+              {{ macros.render_user_action_bar(current_user, user) }}
+            {% endif %}
+            <br>
+            <ul class="list-unstyled components">
+              <div class='bio'>
+                <p class='oneliner'>{{ user.about }}</p>
+                <center>
+                  <p style="margin:0px;">
+                    {{ user.xp }} XP
+                  </p>
+                  <div class="progress" style='width:80%;'>
+                    <div class="progress-bar" role="progressbar"
+                        style='{{ user.xp_progressbar_width() }}'></div>
+                  </div>
+                </center>
+                <br>
+              </div>
+              {% if current_user==user %}
+                <li>
+                  <a href="#invitationSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Invitations
+                    &nbsp;
+                    <i class="fa fa-bell" aria-hidden="true"></i>
+                    {{ user.invitations.all()|length }}
+                  </a>
+                  <ul class="collapse list-unstyled" id="invitationSubmenu">
+                      {% for invitation in user.invitations %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
+                          <a href='project={{ invitation.code }}' class="mb-1 user-name"
+                          style='background: transparent; color: white; padding:0px;'>
+                            {{ invitation.name }}
+                          </a>
+                          <p class="mb-1">
+                              {{ invitation.oneliner }}
+                            <div class='hoverable'>
+                              <a class='delete-btn task-btn float-left'
+                              style='background: transparent;'
+                              href="{{ url_for('user.reject_collaboration', project_id=invitation.id) }}">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                            <span class='tooltiptext'>Decline</span>
+                            </div>
+                            <div class='hoverable'>
+                              <a class='complete-btn task-btn float-right'
+                              style='background: transparent;'
+                              href="{{ url_for('user.accept_collaboration', project_id=invitation.id) }}">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                              </a>
+                              <span class='tooltiptext'>Accept</span>
+                            </div>
+                          </p>
+                        </div>
+                      {% endfor %}
+                  </ul>
+                </li>
+                <li>
+                  <a href="#applicationSubmenu" data-toggle="collapse" aria-expanded="false">
+                    Applications
+                    &nbsp;
+                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    {{ user.pending.all()|length }}
+                  </a>
+                  <ul class="collapse list-unstyled" id="applicationSubmenu">
+                      {% for application in user.pending %}
+                        <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
+                          <a href='project={{ application.project.code }}' class="mb-1 user-name"
+                          style='background: transparent; color: white; padding:0px;'>
+                            {{ application.project.name }}
+                          </a>
+                          <p class="mb-1">
+                              {{ application.project.oneliner }}
+                            <div class='hoverable'>
+                              <a class='delete-btn task-btn float-right'
+                              style='background: transparent;'
+                              href="{{ url_for('project.withdraw_application', project_id=application.project.id) }}">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                              </a>
+                              <span class='tooltiptext'>Withdraw Application</span>
+                            </div>
+                          </p>
+                        </div>
+                      {% endfor %}
+                  </ul>
+                </li>
+              {% endif %}
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+          {% if not request.MOBILE %}
+            <div class="row">
+              <div class="col-sm-4">
+                <h6>Daily Activity</h6>
+                {% if task_data %}
+                  <canvas id="activity_chart"></canvas>
+                {% else %}
+                  <p class='empty-text'>No activity yet.</p>
+                {% endif %}
+              </div>
+
+              <div class="col-sm-4">
+                <h6>Completed Tasks</h6>
+                  {% set completed_tasks = user.tasks_worked %}
+                  <div class="list-group list-small">
+                    {% if completed_tasks|length==0 %}
+                      <p class='empty-text'>No tasks completed yet.</p>
+                    {% endif %}
+                    {% for task in completed_tasks|reverse %}
+                      <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <h6 class="mb-1">{{ task.text }}</h6>
+                        <div class="d-flex w-100 justify-content-between">
+                          <small>Completed
+                          on {{ time_to_str(task.complete_stamp) }}
+                        for
+                        {% if current_user.is_authenticated %}
+                          <a href='project={{ task.project.code }}' class='user-name'>
+                        {% else %}
+                          <a href='/login' class='user-name'>
+                        {% endif %}
+                          {{ task.project.name }}
+                        </a></small>
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+              </div>
+
+              <div class="col-sm-4">
+                <h6>Subject Breakdown</h6>
+                {% if subject_data %}
+                  <canvas id="role_breakdown"></canvas>
+                {% else %}
+                  <p class='empty-text'>No subjects yet.</p>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+
+            <!-- PROJECTS -->
+            <div class='container my-2' style='min-width: 100%'>
+              <!-- owned projects -->
+              <h4 style='text-align:left;'>
+                Owned Projects
+                <i class="fa fa-circle" style='color:#FF5D00;'></i>
+                {{ user.owned.count() }}
+              </h4>
+              <hr class="my-2">
+              {% if user.owned.count() > 0 %}
+                <div id="owned-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                  <!--Slides-->
+                  <div class="carousel-inner" role="listbox">
+                    {% for tab in owned_tabs %}
+                      {% if loop.index==1 %}
+                      <div class="carousel-item active">
+                      {% else %}
+                      <div class="carousel-item">
+                      {% endif %}
+                            <div class='row'>
+                              {% for project in tab %}
+                                {% if current_user.is_authenticated %}
+                                  {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+                                {% else %}
+                                  {{ macros.render_anon_project_card(project, current_user) }}
+                                {% endif %}
+                              {% endfor %}
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                  {% if (owned_tabs|length) > 1 %}
+                    <!--Controls-->
+                    <div class="controls-top">
+                      <a class="btn-floating" href="#owned-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                      <p id='owned-count' class='counter'>0</p>
+                      <a class="btn-floating" href="#owned-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+                    </div>
+                    <!--/.Controls-->
+                  {% else %}
+                    <br>
+                  {% endif %}
+                </div>
+              {% elif current_user==user %}
+              <div style='text-align:center;'>
+                <a type="button" href="/add_project">
+                  <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+                </a>
+              </div>
+              {% endif %}
+
+
+              <h4 style='text-align:left;'>
+                Member Projects
+                <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
+                {{ (user.projects.count()) - (user.owned.count()) }}
+              </h4>
+              <hr class="my-2">
+              {% if ((user.projects.count()) - (user.owned.count())) > 0 %}
+                <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                      {% for tab in member_tabs %}
+                        {% if loop.index==1 %}
+                        <div class="carousel-item active">
+                        {% else %}
+                        <div class="carousel-item">
+                        {% endif %}
+                          <div class='row'>
+                            {% for project in tab %}
+                              {% if current_user.is_authenticated %}
+                                {{ macros.render_mid_project_card(current_user, project, now, calc_days_since) }}
+                              {% else %}
+                                {{ macros.render_anon_project_card(project, current_user) }}
+                              {% endif %}
+                            {% endfor %}
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
+                </div>
+                {% if ((member_tabs|length) > 1) and not request.MOBILE %}
+                  <!--Controls-->
+                  <div class="controls-top">
+                    <a class="btn-floating" href="#member-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                    <p id='member-count' class='counter'>0</p>
+                    <a class="btn-floating" href="#member-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+                  </div>
+                {% endif %}
+              {% elif current_user==user %}
+                <div style='text-align:center;'>
+                  <a type="button" href="/home">
+                    <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- modals -->
+    <div>
+      {% if current_user.is_authenticated %}
+        <!-- user modal -->
+        {% if current_user!=user %}
+          <!-- collaborate -->
+          {{ macros.render_collaborate_modal(current_user, user) }}
+          {{ macros.render_report_modal(user) }}
+        {% else %}
+          <!-- edit and delete modals -->
+          {{ macros.render_edit_user_modal(user, edit_form) }}
+          {{ macros.render_delete_account_modal(user) }}
+        {% endif %}
+        <!-- project modals -->
+        {% for tab in owned_tabs %}
+          {% for project in tab %}
+            {{ macros.render_join_modal(current_user, project, project_application) }}
+          {% endfor %}
+        {% endfor %}
+      {% endif %}
+    </div>
+    <!-- /modals -->
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
+  {% endblock %}
