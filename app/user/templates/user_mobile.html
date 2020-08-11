@@ -70,7 +70,11 @@
       </nav>
 
       <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Owned')">Owned</button>
+        <button class="tablinks" onclick="openCity(event, 'Owned')">
+          Owned
+          <i class="fa fa-circle" style='color:#FF5D00;'></i>
+          {{ user.owned.count() }}
+        </button>
         <button class="tablinks" onclick="openCity(event, 'Member')">Member</button>
         <button class="tablinks" onclick="openCity(event, 'Subjects')">Subjects</button>
       </div>
