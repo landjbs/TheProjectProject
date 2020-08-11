@@ -108,6 +108,7 @@ def project_page(project_code):
     ## subject visualization ##
     project_subjects = project.subject_data()
     ## partition members ##
+    member_tabs = partition_query(project.members)
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
@@ -156,6 +157,7 @@ def project_page(project_code):
                 show_edit_modal = True
     return render_template('project.html',
                             project=project,
+                            member_tabs=member_tabs,
                             comment_form=comment_form,
                             project_application=project_application,
                             task_form=task_form,
