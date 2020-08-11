@@ -365,7 +365,7 @@ def delete_comment(project_id, comment_id):
 
 @project.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
 @login_required
-@limiter.limit('5 per minute')
+@limiter.limit('45 per minute')
 def change_task_status(project_id, task_id, action):
     ''' Mark task as complete, delete task, or remove help '''
     project = Project.query.get_or_404(project_id)
