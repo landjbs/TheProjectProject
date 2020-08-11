@@ -73,7 +73,7 @@
       </nav>
 
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Owned')" id="defaultOpen">Tasks</button>
+        <button class="tablinks" onclick="openTab(event, 'Tasks')" id="defaultOpen">Tasks</button>
         <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
         {% if current_user==project.owner %}
           <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
@@ -94,6 +94,7 @@
           {{ completed_tasks.all()|length }}
         </h4>
         <div class="list-group">
+          <!-- todo tasks -->
           {% for task in todo_tasks %}
             <div class="list-group-item list-group-item-action flex-column align-items-start">
               <h6 class="mb-1">{{ task.text }}</h6>
@@ -128,6 +129,8 @@
               {% endif %}
             </div>
           {% endfor %}
+          <!-- completed tasks -->
+          
         </div>
       </div>
 
