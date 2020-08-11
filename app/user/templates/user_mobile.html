@@ -53,7 +53,7 @@
           {% endif %}
         <br>
         <hr class='my-2' style='background:white;'>
-        <div>
+        <div id='nav-expanded'>
           <p>{{ user.about }}</p>
           <center>
             <p style="margin:0px;">
@@ -64,8 +64,8 @@
                   style='{{ user.xp_progressbar_width() }}'></div>
             </div>
           </center>
+          <br>
         </div>
-        <br>
       </nav>
     </div>
 
@@ -105,11 +105,9 @@
 
     function scrollFunction() {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        document.getElementById("navbar").style.padding = "30px 10px";
-        document.getElementById("logo").style.fontSize = "25px";
+        document.getElementById("nav-expanded").style.display = "hidden";
       } else {
-        document.getElementById("navbar").style.padding = "80px 10px";
-        document.getElementById("logo").style.fontSize = "35px";
+        document.getElementById("navbar").style.display = "block";
       }
     }
     </script>
