@@ -52,6 +52,7 @@
               {{ user.email }}
             </a>
           {% endif %}
+        <br><br>
         <div id='nav-expanded'>
           <hr class='my-2' style='background:white;'>
           <p>{{ user.about }}</p>
@@ -113,10 +114,15 @@
     function scrollFunction() {
       if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         document.getElementById("nav-expanded").style.display = 'none';
-      } else {
-        document.getElementById("nav-expanded").style.display = "block";
+      } else if (document.body.scrollTop < 2 || document.documentElement.scrollTop < 2) {
+        document.getElementById("nav-expanded").style.display = 'block';
       }
     }
     </script>
 
   {% endblock %}
+
+
+  else {
+    document.getElementById("nav-expanded").style.display = "block";
+  }
