@@ -445,8 +445,18 @@
               </h4>
               <hr class="my-2">
               <div class="carousel-inner" role="listbox">
-                {% for user in member_tabs %}
-                  {{ macros.render_user_card(current_user, user, 'member') }}
+                {% for tab in member_tabs %}
+                  {% if loop.index==1 %}
+                    <div class="carousel-item active">
+                    {% else %}
+                    <div class="carousel-item">
+                    {% endif %}
+                      <div class='row'>
+                        {% for user in tab %}
+                          {{ macros.render_user_card(current_user, user, 'member') }}
+                        {% endfor %}
+                      </div>
+                    </div>
                 {% endfor %}
               </div>
             </div>
