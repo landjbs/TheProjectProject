@@ -93,9 +93,13 @@
           <i class="fa fa-check-circle" style='color:#FF5D00;'></i>
           {{ completed_tasks.all()|length }}
         </h4>
-        {% for user_subject in user.subjects %}
-          {{ macros.render_user_subject(user_subject) }}
-        {% endfor %}
+        <div class="list-group">
+          {% for task in todo_tasks %}
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+              {{ macros.render_user_subject(user_subject) }}
+            </div>
+          {% endfor %}
+        </div>
       </div>
 
     </div>
