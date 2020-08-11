@@ -1,5 +1,6 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
+from flask_mobility.decorators import mobilized
 # absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
@@ -11,8 +12,6 @@ from .forms import Edit_User
 from ..user import user
 
 
-@user.route('/user=<code>', methods=['GET', 'POST'])
-@limiter.limit('60 per minute')
 def user_page(code):
     user = User.query.filter_by(code=code).first_or_404()
     # worked tasks
@@ -74,6 +73,20 @@ def user_page(code):
                             project_application=project_application,
                             edit_form=edit_form,
                             show_edit_modal=show_edit_modal)
+
+
+
+@user.route('/user=<code>', methods=['GET', 'POST'])
+@limiter.limit('60 per minute')
+@mobilized(user_page)
+def user_page(code):
+    project_application = Project_Application_Form()
+    return render_template('user_mobile.html',
+                        user=user,
+                        project_application=project_application,
+                        edit_form=edit_form,
+                        show_edit_modal=show_edit_modal)
+
 
 
 ## user to self interactions ##
