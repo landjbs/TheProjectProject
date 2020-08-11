@@ -163,7 +163,8 @@ def project_page(project_code):
                             project_subjects=project_subjects,
                             recommended_tabs=recommended_tabs,
                             edit_form=edit_form,
-                            edit_application_form=edit_application_form)
+                            edit_application_form=edit_application_form,
+                            show_edit_modal=show_edit_modal)
 
 
 @project.route('/project=<project_code>', methods=['GET', 'POST'])
@@ -227,10 +228,8 @@ def project_page(project_code):
                                 comment_form=comment_form,
                                 project_application=project_application,
                                 task_form=task_form,
-                                authored=authored,
-                                completed=completed,
                                 project_subjects=project_subjects,
-                                recommended_tabs=recommended_tabs,
+                                recommended_members=recommended_members,
                                 edit_form=edit_form,
                                 edit_application_form=edit_application_form)
 

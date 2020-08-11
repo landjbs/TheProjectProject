@@ -662,5 +662,13 @@
     {% endif %}
     </script>
 
+    {% if show_edit_modal %}
+    <script>
+      $(document).ready(function(){
+        $('#edit_modal').modal({show : true});
+      });
+    </script>
+    {% endif %}
+
 
   {% endblock %}
