@@ -69,14 +69,27 @@
         </div>
       </nav>
 
-      <div class='content'>
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Menu 1</a></li>
-          <li><a href="#">Menu 2</a></li>
-          <li><a href="#">Menu 3</a></li>
-        </ul>
+      <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'London')">Owned</button>
+        <button class="tablinks" onclick="openCity(event, 'Member')">Member</button>
+        <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
       </div>
+
+      <div id="Owned" class="tabcontent">
+        <h3>Owned</h3>
+        <p>London is the capital city of England.</p>
+      </div>
+
+      <div id="Member" class="tabcontent">
+        <h3>Member</h3>
+        <p>Paris is the capital of France.</p>
+      </div>
+
+      <div id="Tokyo" class="tabcontent">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+      </div>
+
 
     </div>
 
