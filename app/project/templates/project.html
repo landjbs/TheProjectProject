@@ -435,6 +435,11 @@
 
         <!-- MEMBER TAB -->
         <div id='Members' class='tabcontent'>
+          <!-- current members -->
+          {% for member in project.members %}
+            {{ macros.render_user_card() }}
+          {% endfor %}
+
           <!-- recommended members -->
           {% if recommended_tabs %}
             <hr class='my-2'>
