@@ -391,7 +391,11 @@
           <!-- current members -->
           <div class='row'>
             <div class='container my-2' style='min-width: 99%;'>
-              <h4 style='text-align:left;'>Members</h4>
+              <h4 class='tabname-big'>
+                Members
+                <i class='far fa-user-circle'></i>
+                {{ project.members.all()|length }} / {{ project.team_size }}
+              </h4>
               <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
                   {% for tab in member_tabs%}
