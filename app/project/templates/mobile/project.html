@@ -175,6 +175,19 @@
             </div>
           {% endfor %}
         </div>
+        <!-- task post footer -->
+        <footer id="sticky-footer" style='flex-shrink: none;'>
+          <div class="container">
+            {% if is_member and not project.complete %}
+              <form class='post_form' id='task_form' method='post'
+                action="{{url_for('project.add_task', project_id=project.id)}}">
+                {{ task_form.hidden_tag() }}
+                {{ task_form.text(class='post-input', placeholder='Task') }}
+                <button>Add</button>
+              </form>
+            {% endif %}
+          </div>
+        </footer>
       </div>
 
     </div>
