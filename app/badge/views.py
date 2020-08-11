@@ -34,7 +34,6 @@ def badge_page():
     # all badges
     other_badges = list(Badge.query.filter(~Badge.id.in_(progress_ids)))
     del progress_ids
-    # combine lists
-    badges = (progress_badges + other_badges)
     return render_template('badge_mobile.html',
-                           badges=badges)
+                           progress_badges=progress_badges,
+                           other_badges=other_badges)

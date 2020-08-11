@@ -15,27 +15,17 @@
 {% block content %}
 <div class='container my-2' style='min-width: 90%'>
   <!-- PROGRESS BADGES -->
-  {% if progress_badges!=[] %}
-    <h4 style='text-align:left;'>My Badges</h4>
-    <hr class="my-2">
-    {% for user_badge in progress_badges %}
-      <div class='row'>
-        {{ badge_macros.render_user_badge_card(user_badge) }}
-      </div>
-    {% endfor %}
-  {% endif %}
-  <br>
+  <h4 style='text-align:left;'>Badges</h4>
   <hr class="my-2">
-  <br>
-  <!-- ALL BADGES -->
-  {% if progress_badges!=[] %}
-    <h4 style='text-align:left;'>All Badges</h4>
-    <hr class="my-2">
-    {% for badge in all_badges %}
-      <div class='row'>
-        {{ badge_macros.render_badge_card(badge) }}
-      </div>
-    {% endfor %}
-  {% endif %}
-
+  {% for user_badge in progress_badges %}
+    <div class='row'>
+      {{ badge_macros.render_user_badge_card(user_badge) }}
+    </div>
+  {% endfor %}
+  {% for badge in other_badges %}
+    <div class='row'>
+      {{ badge_macros.render_badge_card(badge) }}
+    </div>
+  {% endfor %}
+</div>
 {% endblock %}
