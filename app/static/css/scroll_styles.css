@@ -26,14 +26,6 @@
 }
 
 
-@media only screen and (max-width: 600px) {
-  .card-text {
-    min-height: 35vh;
-    max-height: 35vh;
-  }
-}
-
-
 .card-oneline {
   min-height: 5vh;
   max-height: 5vh;
@@ -63,6 +55,21 @@
 .tiny {
   min-height: 3vh;
   max-height: 3vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .tiny {
+    min-height: 5vh;
+    max-height: 5vh;
+  }
+  .card-text {
+    min-height: 5vh;
+    max-height: 5vh;
+  }
+  .card-oneline {
+    min-height: 10vh;
+    max-height: 10vh;
+  }
 }
 
 a {
