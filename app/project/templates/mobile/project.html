@@ -205,7 +205,7 @@
           {{ project.pending.all()|length }}
         </h4>
         {% for application in project.pending %}
-          {{ macros.render_application_card(current_user, member, carousel_type='member') }}
+          {{ macros.render_application_card(application, project) }}
         {% endfor %}
       </div>
 
