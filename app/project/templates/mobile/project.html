@@ -96,7 +96,7 @@
       <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Owned')" id="defaultOpen">Owned</button>
         <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
-        {% if current_user==user %}
+        {% if current_user==project.owner %}
           <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
           <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
         {% endif %}
@@ -117,139 +117,30 @@
         {% endif %}
       </div>
 
-      <div id="Member" class="tabcontent">
-        <h4 class='tabname-big'>
-          Member Projects
-          <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
-          {{ (user.projects.count()) - (user.owned.count()) }}
-        </h4>
-        {% if ((user.projects.count()) - (user.owned.count())) > 0 %}
-          {% for project in user.projects %}
-            {% if user!=project.owner %}
-              {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-      </div>
-
-      <div id="Subjects" class="tabcontent">
-        <h4 class='tabname-big'>
-          Subjects
-          <i class="fa fa-flask" style='color:#FF5D00;'></i>
-          {{ user.total_skill_level() }}
-        </h4>
-        {% for user_subject in user.subjects %}
-          {{ macros.render_user_subject(user_subject) }}
-        {% endfor %}
-      </div>
-
-      <div id="Invitations" class="tabcontent">
-        <h4 class='tabname-big'>
-          Invitations
-          <i class="fa fa-bell" aria-hidden="true" style='color:#FF5D00;'></i>
-          {{ user.invitations.all()|length }}
-        </h4>
-        {% for invitation in user.invitations %}
-          <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-            <a href='project={{ invitation.code }}' class="mb-1 user-name"
-            style='background: transparent; color: white; padding:0px;'>
-              {{ invitation.name }}
-            </a>
-            <p class="mb-1">
-                {{ invitation.oneliner }}
-              <div class='hoverable'>
-                <a class='delete-btn task-btn float-left'
-                style='background: transparent;'
-                href="{{ url_for('user.reject_collaboration', project_id=invitation.id) }}">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </a>
-              <span class='tooltiptext'>Decline</span>
-              </div>
-              <div class='hoverable'>
-                <a class='complete-btn task-btn float-right'
-                style='background: transparent;'
-                href="{{ url_for('user.accept_collaboration', project_id=invitation.id) }}">
-                  <i class="fa fa-check-circle" aria-hidden="true"></i>
-                </a>
-                <span class='tooltiptext'>Accept</span>
-              </div>
-            </p>
-          </div>
-        {% endfor %}
-      </div>
-
-      <div id="Applications" class="tabcontent">
-        <h4 class='tabname-big'>
-          Applications
-          <i class="fa fa-paper-plane" aria-hidden="true" style='color:#FF5D00;'></i>
-          {{ user.pending.all()|length }}
-        </h4>
-        {% for application in user.pending %}
-          <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
-            <a href='project={{ application.project.code }}' class="mb-1 user-name"
-            style='background: transparent; color: white; padding:0px;'>
-              {{ application.project.name }}
-            </a>
-            <p class="mb-1" style='color:white;'>
-                {{ application.project.oneliner }}
-              <div class='hoverable'>
-                <a class='task-btn float-right'
-                style='background: transparent; color:white;'
-                href="{{ url_for('project.withdraw_application', project_id=application.project.id) }}">
-                  <i class="fa fa-times-circle" aria-hidden="true"></i>
-                </a>
-                <span class='tooltiptext'>Withdraw Application</span>
-              </div>
-            </p>
-          </div>
-        {% endfor %}
-      </div>
-
-      <div id="Tasks" class="tabcontent">
-        {% set completed_tasks = user.tasks_worked %}
-        <h4 class='tabname-big'>
-          Completed Tasks
-          <i class="fa fa-check-circle" style='color:#FF5D00;'></i>
-          {{ completed_tasks|length }}
-        </h4>
-        {% for task in completed_tasks|reverse %}
-          <div class="list-group-item list-group-item-action flex-column align-items-start">
-            <h6 class="mb-1">{{ task.text }}</h6>
-            <div class="d-flex w-100 justify-content-between">
-              <small>Completed
-              on {{ time_to_str(task.complete_stamp) }}
-            for
-            {% if current_user.is_authenticated %}
-              <a href='project={{ task.project.code }}' class='user-name'>
-            {% else %}
-              <a href='/login' class='user-name'>
-            {% endif %}
-              {{ task.project.name }}
-            </a></small>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
 
     </div>
 
     <!-- modals -->
-    <div>
-      {% if current_user.is_authenticated %}
-        <!-- user modal -->
-        {% if current_user!=user %}
-          <!-- collaborate -->
-          {{ macros.render_collaborate_modal(current_user, user) }}
-          {{ macros.render_report_modal(user) }}
-        {% else %}
-          <!-- edit and delete modals -->
-          {{ macros.render_edit_user_modal(user, edit_form) }}
-          {{ macros.render_delete_account_modal(user) }}
-        {% endif %}
-        <!-- project modals -->
-        {% for project in user.projects %}
-            {{ macros.render_join_modal(current_user, project, project_application) }}
+    <div style='display:hidden;'>
+      <!-- join/leave modal -->
+      {{ macros.render_join_modal(current_user, project, project_application) }}
+      <!-- collaborate modals -->
+      {% if recommended_tabs != False %}
+        {% for tab in recommended_tabs %}
+          {% for user in tab %}
+            {{ macros.render_collaborate_modal(current_user, user, project) }}
+          {% endfor %}
         {% endfor %}
+      {% endif %}
+      {% if current_user == project.owner %}
+        <!-- edit modal -->
+        {{ macros.render_edit_project_modal(project, edit_form, {'elapsed':elapsed, 'est':est, 'elapsed_style':elapsed_style}) }}
+        <!-- complete modal -->
+        {{ macros.render_complete_modal(project) }}
+        <!-- open/closed modal -->
+        {{ macros.render_open_modal(project) }}
+        <!-- requires application modal -->
+        {{ macros.render_requires_application_modal(project, edit_application_form) }}
       {% endif %}
     </div>
     <!-- /modals -->
