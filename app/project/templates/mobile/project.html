@@ -193,11 +193,9 @@
           <i class="fa fa-user-circle" style='color:#FF5D00;'></i>
           {{ project.members.count() }}
         </h4>
-        {% if user.owned.count() > 0 %}
-          {% for project in user.owned %}
-            {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
-          {% endfor %}
-        {% endif %}
+        {% for member in project.members %}
+          {{ macros.render_user_card(current_user, member, carousel_type='member') }}
+        {% endfor %}
       </div>
 
     </div>
