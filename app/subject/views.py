@@ -45,8 +45,8 @@ def subject_page(subject_name):
     user_count = len(subject.users)
     subject_users = [s.user for s in subject.users[:30]]
     # format result data
-    results = {'project'    :   (subject_projects, project_count),
-               'user'       :   (subject_users, user_count)}
+    results = {'project'    :   (list(subject_projects), project_count),
+               'user'       :   (list(subject_users), user_count)}
     # form
     project_application = Project_Application_Form()
     return render_template('subject_mobile.html',
