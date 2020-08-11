@@ -34,24 +34,43 @@
     <!-- USER -->
     {% if results['user'][1]!=0 %}
       <li>
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+        <a href="#userScroll" data-toggle="collapse" aria-expanded="false">
           <h4 style='text-align:left;'>
             Users
             <i class="fa fa-circle" style='color:#FF5D00;'></i>
             {{ results['user'][1] }}
           </h4>
         </a>
-        <ul class="collapse list-unstyled" id="homeSubmenu">
+        <ul class="collapse list-unstyled" id="userScroll">
           <hr class="my-2">
-          {% for project in results['user'][0] %}
+          {% for user in results['user'][0] %}
             <li>
-              {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+              {{ macros.render_user_card(current_user, user) }}
             </li>
           {% endfor %}
         </ul>
       </li>
     {% endif %}
     <!-- SUBJECT -->
+    {% if results['subject'][1]!=0 %}
+      <li>
+        <a href="#subjectScroll" data-toggle="collapse" aria-expanded="false">
+          <h4 style='text-align:left;'>
+            Subject
+            <i class="fa fa-circle" style='color:#FF5D00;'></i>
+            {{ results['subject'][1] }}
+          </h4>
+        </a>
+        <ul class="collapse list-unstyled" id="subjectScroll">
+          <hr class="my-2">
+          {% for subject in results['subject'][0] %}
+            <li>
+              {{ macros.render_subject_card(subject) }}
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endif %}
   </ul>
 </div>
 
