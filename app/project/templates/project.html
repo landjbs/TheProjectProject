@@ -436,13 +436,14 @@
         <!-- MEMBER TAB -->
         <div id='Members' class='tabcontent'>
           <!-- current members -->
-          {% for member in project.members %}
-            {{ macros.render_user_card() }}
-          {% endfor %}
+          <div class='row'>
+            {% for user in project.members %}
+              {{ macros.render_user_card(current_user, user, 'member') }}
+            {% endfor %}
+          </div>
 
           <!-- recommended members -->
           {% if recommended_tabs %}
-            <hr class='my-2'>
             <div class='row'>
               <div class='container my-2' style='min-width: 99%;'>
                 <h4 style='text-align:left;'>Recommended Members</h4>
