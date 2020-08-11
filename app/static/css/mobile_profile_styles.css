@@ -3,7 +3,8 @@
 }
 
 .tab {
-  overflow: hidden;
+  max-width: 100%;
+  overflow: scroll;
   background-color: #f1f1f1;
 }
 
