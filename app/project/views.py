@@ -173,11 +173,11 @@ def project_page(project_code):
 def project_page(project_code):
     ''' Mobile optimized project page '''
     project = Project.query.filter_by(code=project_code).first_or_404()
+    
     # forms
     comment_form = Comment_Form()
     task_form = Task_Form()
     project_application = Project_Application_Form()
-    
 
 
 
