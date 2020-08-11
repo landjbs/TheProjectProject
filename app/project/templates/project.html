@@ -437,9 +437,15 @@
         <div id='Members' class='tabcontent'>
           <!-- current members -->
           <div class='row'>
-            {% for user in project.members %}
-              {{ macros.render_user_card(current_user, user, 'member') }}
-            {% endfor %}
+            <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+              <h4 style='text-align:left;'>Members</h4>
+              <hr class="my-2">
+              <div class="carousel-inner" role="listbox">
+                {% for user in project.members %}
+                  {{ macros.render_user_card(current_user, user, 'member') }}
+                {% endfor %}
+              </div>
+            </div>
           </div>
 
           <!-- recommended members -->
