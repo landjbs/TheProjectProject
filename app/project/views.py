@@ -107,6 +107,7 @@ def project_page(project_code):
         completed[n] = user_completed_count if user_completed_count else 0
     ## subject visualization ##
     project_subjects = project.subject_data()
+    ## partition members ##
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
