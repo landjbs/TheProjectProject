@@ -52,3 +52,12 @@
 .my-2 {
   color: white;
 }
+
+body {
+  flex: 1 0 auto;
+}
+
+.about-text {
+  max-height: 10vh;
+  overflow-y: scroll;
+}

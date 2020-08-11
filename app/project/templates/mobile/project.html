@@ -61,8 +61,10 @@
         </div>
         <!-- extra project info -->
         <div id='nav-expanded'>
-          <p>{{ project.oneliner }}</p>
-          <p>{{ project.summary }}</p>
+          <div class='about-text'>
+            <p>{{ project.oneliner }}</p>
+            <p>{{ project.summary }}</p>
+          </div>
           {% if current_user.is_authenticated %}
             <center>
               {{ macros.render_project_action_bar(current_user, project) }}
@@ -175,20 +177,21 @@
             </div>
           {% endfor %}
         </div>
-        <!-- task post footer -->
-        <footer id="sticky-footer" style='flex-shrink: none;'>
-          <div class="container">
-            {% if is_member and not project.complete %}
-              <form class='post_form' id='task_form' method='post'
-                action="{{url_for('project.add_task', project_id=project.id)}}">
-                {{ task_form.hidden_tag() }}
-                {{ task_form.text(class='post-input', placeholder='Task') }}
-                <button>Add</button>
-              </form>
-            {% endif %}
-          </div>
-        </footer>
       </div>
+
+      <!-- task post footer -->
+      <footer id="sticky-footer" style='flex-shrink: none;'>
+        <div class="container">
+          {% if is_member and not project.complete %}
+            <form class='post_form' id='task_form' method='post'
+              action="{{url_for('project.add_task', project_id=project.id)}}">
+              {{ task_form.hidden_tag() }}
+              {{ task_form.text(class='post-input', placeholder='Task') }}
+              <button>Add</button>
+            </form>
+          {% endif %}
+        </div>
+      </footer>
 
     </div>
 
