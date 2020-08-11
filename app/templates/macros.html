@@ -839,27 +839,29 @@
 <!-- USER ACTION BAR FOR RELATIONSHIP ACTIONS -->
 {% macro render_user_action_bar(current_user, target_user) -%}
 <div class='action-bar'>
-      {% if current_user!= target_user %}
-        <div class='hoverable'>
-          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-          <span class='tooltiptext'>
-            <a data-toggle='modal' data-target='#report_modal_{{ target_user.id }}'>
-              Report User
-            </a>
-          </span>
-        </div>
-      {% else %}
-        <form action="{{ url_for('user.flash_encouragement') }}" style='display:inline;' method='post'>
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-          <button style='background:transparent; color: #F82B91; border:0;'>
-            <i class="fa fa-heart" aria-hidden="true"></i>
-          </button>
-        </form>
-      {% endif %}
+  <center>
+    {% if current_user!= target_user %}
+      <div class='hoverable'>
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        <span class='tooltiptext'>
+          <a data-toggle='modal' data-target='#report_modal_{{ target_user.id }}'>
+            Report User
+          </a>
+        </span>
+      </div>
+    {% else %}
+      <form action="{{ url_for('user.flash_encouragement') }}" style='display:inline;' method='post'>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <button style='background:transparent; color: #F82B91; border:0;'>
+          <i class="fa fa-heart" aria-hidden="true"></i>
+        </button>
+      </form>
+    {% endif %}
     &nbsp;
     {{ render_collaborate_button(current_user, target_user) }}
     &nbsp;
     {{ render_user_share_button(target_user) }}
+  </center>
 </div>
 {% endmacro -%}
 
