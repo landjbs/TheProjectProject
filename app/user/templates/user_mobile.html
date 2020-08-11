@@ -89,8 +89,18 @@
       </div>
 
       <div id="Member" class="tabcontent">
-        <h3>Member</h3>
-        <p>Paris is the capital of France.</p>
+        <h4 style='text-align:left;'>
+          Member Projects
+          <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
+          {{ (user.projects.count()) - (user.owned.count()) }}
+        </h4>
+        {% if ((user.projects.count()) - (user.owned.count())) > 0 %}
+          {% for project in user.projects %}
+            {% if user!=project.owner %}
+              {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
       </div>
 
       <div id="Subjects" class="tabcontent">
