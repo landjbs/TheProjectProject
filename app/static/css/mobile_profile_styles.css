@@ -37,3 +37,8 @@
   border: 1px solid #ccc;
   border-top: none;
 }
+
+.tabname-big {
+  text-align: left;
+  text-decoration: underline;
+}

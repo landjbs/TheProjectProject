@@ -76,7 +76,7 @@
       </div>
 
       <div id="Owned" class="tabcontent">
-        <h4 style='text-align:left;'>
+        <h4 class='tabname-big'>
           Owned Projects
           <i class="fa fa-circle" style='color:#FF5D00;'></i>
           {{ user.owned.count() }}
@@ -89,7 +89,7 @@
       </div>
 
       <div id="Member" class="tabcontent">
-        <h4 style='text-align:left;'>
+        <h4 class='tabname-big'>
           Member Projects
           <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
           {{ (user.projects.count()) - (user.owned.count()) }}
@@ -104,7 +104,7 @@
       </div>
 
       <div id="Subjects" class="tabcontent">
-        <h4 style='text-align:left;'>
+        <h4 class='tabname-big'>
           Subjects
           <i class="fa fa-flask" style='color:#FF5D00;'></i>
           {{ user.total_skill_level() }}
@@ -169,7 +169,7 @@
     window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
-      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
         var disp = $('#nav-expanded').css('display');
         if (disp=='block') {
           var h = $('#nav-expanded').height();
@@ -178,8 +178,16 @@
         } else {
             document.getElementById("nav-expanded").style.display = 'none';
         }
+      // show
       } else if (document.body.scrollTop == 0) {
-        document.getElementById("nav-expanded").style.display = 'block';
+        var disp = $('#nav-expanded').css('display');
+        if (disp=='none') {
+          document.getElementById("nav-expanded").style.display = 'block';
+          var h = $('#nav-expanded').height();
+          window.scrollBy(0, -h);
+        } else {
+          document.getElementById("nav-expanded").style.display = 'block';
+        }
       }
     }
     </script>
