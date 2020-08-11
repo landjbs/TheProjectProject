@@ -225,9 +225,15 @@
 
         <!-- Page Content Holder -->
         <div id="content">
+          <div class="tab">
             <button type="button" id="sidebarCollapse" class="btn btn-info">
               <i class="fas fa-align-left" style='color:black;'></i>
             </button>
+            <button class="tablinks" onclick="openTab(event, 'Activity')">Activity</button>
+            <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
+            {% if current_user==project.owner %}
+            {% endif %}
+          </div>
 
             {% if not request.MOBILE %}
               <div class="row">
