@@ -110,7 +110,7 @@
           {{ user.total_skill_level() }}
         </h4>
         {% for user_subject in user.subjects %}
-          {{ macros.render_subject_card(user_subject.subject) }}
+          {{ macros.render_user_subject(user_subject) }}
         {% endfor %}
 
       </div>
