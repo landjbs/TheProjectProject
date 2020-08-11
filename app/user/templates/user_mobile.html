@@ -47,7 +47,7 @@
             </h3>
           </a>
           {% if current_user.is_authenticated %}
-            <a href='mailto:{{ user.email }}'>
+            <a id='hide-mail' href='mailto:{{ user.email }}'>
               {{ user.email }}
             </a>
           {% endif %}
@@ -259,7 +259,7 @@
         if (disp=='block') {
           var h = $('#nav-expanded').height();
           document.getElementById("nav-expanded").style.display = 'none';
-          window.scrollBy(0, h+20);
+          window.scrollBy(0, h+100);
         } else {
             document.getElementById("nav-expanded").style.display = 'none';
         }
@@ -269,7 +269,7 @@
         if (disp=='none') {
           document.getElementById("nav-expanded").style.display = 'block';
           var h = $('#nav-expanded').height();
-          window.scrollBy(0, -h-20);
+          window.scrollBy(0, -h-100);
         } else {
           document.getElementById("nav-expanded").style.display = 'block';
         }
