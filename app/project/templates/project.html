@@ -99,6 +99,7 @@
               <i class="fas fa-align-left" style='color:black;'></i>
             </button>
             <button class="tablinks" onclick="openTab(event, 'Activity')" id="defaultOpen">Activity</button>
+            <button class="tablinks" onclick="openTab(event, 'Documentation')">Documentation</button>
             <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
             {% if project.is_member(current_user) %}
               <button class="tablinks" onclick="openTab(event, 'Private')">Private</button>
