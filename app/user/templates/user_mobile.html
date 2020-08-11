@@ -15,17 +15,12 @@
     <link rel="stylesheet" href="css/scroll_styles.css">
     <link rel="stylesheet" href="css/project_styles.css">
     <link rel='stylesheet' href="css/badge_styles.css">
-    <style>
-      body {
-        background: #5D00FF;
-      }
-    </style>
 {% endblock %}
 
 {% block content %}
     <!-- PAGE -->
-    <div class='container' style='min-width:100%;color:white;'>
-        <div class='sidebar-header'>
+    <div class='container' style='min-width:100%;color:white;background:#5D00FF;'>
+        <nav class='sidebar-header'>
           <p class='float-right'>
             <i class="fa fa-star"></i>
             {{ user.total_stars() }}
@@ -118,7 +113,7 @@
             </div>
           {% endif %}
         </div>
-    </div>
+    </nav>
 
     <!-- modals -->
     <div>
