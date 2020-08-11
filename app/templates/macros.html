@@ -820,6 +820,16 @@
       </div>
       <br>
       <hr class="my-2">
+      <a class='delete-btn task-btn float-left'
+      style='background: transparent;'
+      href="{{ url_for('user.reject_collaboration', project_id=project.id) }}">
+        <button class='btn'>Decline</button>
+      </a>
+      <a class='complete-btn task-btn float-right'
+          style='background: transparent;'
+          href="{{ url_for('user.accept_collaboration', project_id=project.id) }}">
+        <button class='btn'>Accept</button>
+      </a>
     </div>
   </div>
 </div>
