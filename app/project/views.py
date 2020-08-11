@@ -1,5 +1,6 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
+from flask_mobility.decorators import mobilized
 from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED
 # absolute imports
 from app.extensions import limiter
@@ -72,8 +73,6 @@ def add_project():
 
 
 
-@project.route('/project=<project_code>', methods=['GET', 'POST'])
-@limiter.limit('60 per minute')
 def project_page(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # forms
@@ -168,7 +167,17 @@ def project_page(project_code):
                             edit_application_form=edit_application_form)
 
 
-
+@project.route('/project=<project_code>', methods=['GET', 'POST'])
+@limiter.limit('60 per minute')
+@mobilized(project_page)
+def project_page(project_code):
+    ''' Mobile optimized project page '''
+    project = Project.query.filter_by(code=project_code).first_or_404()
+    # forms
+    comment_form = Comment_Form()
+    task_form = Task_Form()
+    project_application = Project_Application_Form()
+    
 
 
 
