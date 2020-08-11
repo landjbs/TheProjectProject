@@ -110,6 +110,7 @@ def project_page(project_code):
     ## partition member stuff ##
     member_tabs = list(partition_query(project.members))
     application_tabs = list(partition_query(project.pending))
+    invitation_tabs = list(partition_query(project.invitations))
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
