@@ -107,7 +107,6 @@ def project_page(project_code):
         completed[n] = user_completed_count if user_completed_count else 0
     ## subject visualization ##
     project_subjects = project.subject_data()
-
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
@@ -173,7 +172,7 @@ def project_page(project_code):
 def project_page(project_code):
     ''' Mobile optimized project page '''
     project = Project.query.filter_by(code=project_code).first_or_404()
-    
+
     # forms
     comment_form = Comment_Form()
     task_form = Task_Form()
