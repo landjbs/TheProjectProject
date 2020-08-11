@@ -153,7 +153,8 @@ def project_page(project_code):
                     project.update()
             else:
                 show_edit_modal = True
-    return render_template('project.html', project=project,
+    return render_template('project_mobile.html',
+                            project=project,
                             comment_form=comment_form,
                             project_application=project_application,
                             task_form=task_form,
