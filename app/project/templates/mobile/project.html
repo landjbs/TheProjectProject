@@ -58,15 +58,15 @@
                 {{ project.owner.name }}
               </a>
           </p>
-          {{ macros.render_project_action_bar(current_user, project) }}
         </div>
         <!-- extra project info -->
         <div id='nav-expanded'>
           <hr class='my-2'>
-          <p>{{ .about }}</p>
+          <p>{{ project.oneliner }}</p>
+          <p>{{ project.summary }}</p>
           {% if current_user.is_authenticated and current_user!=user %}
             <center>
-              {{ macros.render_user_action_bar(current_user, user) }}
+              {{ macros.render_project_action_bar(current_user, project) }}
             </center>
           {% endif %}
           <br>
