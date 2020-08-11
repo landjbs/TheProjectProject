@@ -781,7 +781,7 @@
 {% endmacro -%}
 
 
-{% macro render_application_card(application) -%}
+{% macro render_application_card(application, project) -%}
 {% set user = application.user %}
 <div class="col-md-4">
   <div class="card mb-2">
@@ -801,7 +801,7 @@
       </div>
       <div class='card-oneline' style=''>
         <p class='oneliner'>
-          {{ user.about }}
+          {{ application.about }}
         </p>
       </div>
       <div class='card-foot float-left'>
