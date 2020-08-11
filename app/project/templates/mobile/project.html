@@ -78,7 +78,9 @@
         <button class="tablinks" onclick="openTab(event, 'Tasks')" id="defaultOpen">Tasks</button>
         <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
         {% if current_user==project.owner %}
-        <button class="tablinks" onclick="openTab(event, 'Recommended')">Recommended</button>
+        {% if recommended_members!=False %}
+          <button class="tablinks" onclick="openTab(event, 'Recommended')">Recommended</button>
+        {% endif %}
         <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
           <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
         {% endif %}
