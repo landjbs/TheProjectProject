@@ -78,11 +78,11 @@
         <button class="tablinks" onclick="openTab(event, 'Tasks')" id="defaultOpen">Tasks</button>
         <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
         {% if current_user==project.owner %}
-        {% if recommended_members!=False %}
-          <button class="tablinks" onclick="openTab(event, 'Recommended')">Recommended</button>
-        {% endif %}
-        <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
-          <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
+          {% if recommended_members!=False %}
+            <button class="tablinks" onclick="openTab(event, 'Recommended')">Recommended</button>
+            <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
+            <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
+          {% endif %}
         {% endif %}
         <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
       </div>
