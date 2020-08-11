@@ -801,7 +801,9 @@
       </div>
       <div class='card-oneline' style=''>
         <p class='oneliner'>
-          {{ application.about }}
+          Question: {{ project.application_question }}
+          <br>
+          Response: {{ application.text }}
         </p>
       </div>
       <div class='card-foot float-left'>
@@ -818,7 +820,6 @@
       </div>
       <br>
       <hr class="my-2">
-      {{ render_user_action_bar(current_user, user) }}
     </div>
   </div>
 </div>
