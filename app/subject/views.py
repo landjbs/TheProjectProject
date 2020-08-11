@@ -11,7 +11,7 @@ from .models import Subject
 from ..subject import subject
 
 
-def subject(subject_name):
+def subject_page(subject_name):
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
     # project tabs
     subject_projects = Project.query.filter(Project.subjects.contains(subject))
@@ -35,7 +35,7 @@ def subject(subject_name):
 @subject.route('/subject=<subject_name>')
 @login_required
 @mobilized(subject)
-def subject(subject_name):
+def subject_page(subject_name):
     ''' Mobile optimized route for subject page '''
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
     # projects
