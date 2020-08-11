@@ -187,11 +187,11 @@
         {% endif %}
       </div>
 
-      <div id="Owned" class="tabcontent">
+      <div id="Members" class="tabcontent">
         <h4 class='tabname-big'>
-          Owned Projects
-          <i class="fa fa-circle" style='color:#FF5D00;'></i>
-          {{ user.owned.count() }}
+          Members
+          <i class="fa fa-user-circle" style='color:#FF5D00;'></i>
+          {{ project.members.count() }}
         </h4>
         {% if user.owned.count() > 0 %}
           {% for project in user.owned %}
