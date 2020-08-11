@@ -22,7 +22,6 @@
           </h4>
         </a>
         <ul class="collapse list-unstyled" id="projectScroll">
-          <hr class="my-2">
           {% for project in results['project'][0] %}
             <li>
               {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
@@ -31,18 +30,18 @@
         </ul>
       </li>
     {% endif %}
+    <hr class="my-2">
     <!-- USER -->
     {% if results['user'][1]!=0 %}
       <li>
         <a href="#userScroll" data-toggle="collapse" aria-expanded="false">
           <h4 style='text-align:left;'>
             Users
-            <i class="fa fa-circle" style='color:#FF5D00;'></i>
+            <i class="fa fa-user-circle" style='color:#FF5D00;'></i>
             {{ results['user'][1] }}
           </h4>
         </a>
         <ul class="collapse list-unstyled" id="userScroll">
-          <hr class="my-2">
           {% for user in results['user'][0] %}
             <li>
               {{ macros.render_user_card(current_user, user) }}
@@ -51,18 +50,18 @@
         </ul>
       </li>
     {% endif %}
+    <hr class="my-2">
     <!-- SUBJECT -->
     {% if results['subject'][1]!=0 %}
       <li>
         <a href="#subjectScroll" data-toggle="collapse" aria-expanded="false">
           <h4 style='text-align:left;'>
             Subject
-            <i class="fa fa-circle" style='color:#FF5D00;'></i>
+            <i class="fa fa-flask" style='color:#FF5D00;'></i>
             {{ results['subject'][1] }}
           </h4>
         </a>
         <ul class="collapse list-unstyled" id="subjectScroll">
-          <hr class="my-2">
           {% for subject in results['subject'][0] %}
             <li>
               {{ macros.render_subject_card(subject) }}
