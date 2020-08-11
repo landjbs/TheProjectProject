@@ -108,7 +108,7 @@ def project_page(project_code):
     ## subject visualization ##
     project_subjects = project.subject_data()
     ## partition members ##
-    member_tabs = partition_query(project.members)
+    member_tabs = list(partition_query(project.members))
     ## recommended members ##
     recommended_tabs = False
     edit_form = False
