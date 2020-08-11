@@ -159,6 +159,7 @@ def project_page(project_code):
     return render_template('project.html',
                             project=project,
                             member_tabs=member_tabs,
+                            application_tabs=application_tabs,
                             comment_form=comment_form,
                             project_application=project_application,
                             task_form=task_form,
