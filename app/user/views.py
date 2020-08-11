@@ -80,7 +80,13 @@ def user_page(code):
 @limiter.limit('60 per minute')
 @mobilized(user_page)
 def user_page(code):
+    # get user
+    user = User.query.filter_by(code=code).first_or_404()
+    # forms
     project_application = Project_Application_Form()
+    edit_form = Edit_User() if (current_user==user) else False
+    # editing
+    show_edit_modal = False
     return render_template('user_mobile.html',
                         user=user,
                         project_application=project_application,
