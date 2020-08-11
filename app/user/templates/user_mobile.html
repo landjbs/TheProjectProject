@@ -51,9 +51,8 @@
               {{ user.email }}
             </a>
           {% endif %}
-        <br>
-        <hr class='my-2' style='background:white;'>
         <div id='nav-expanded'>
+          <hr class='my-2' style='background:white;'>
           <p>{{ user.about }}</p>
           <center>
             <p style="margin:0px;">
@@ -67,6 +66,13 @@
           <br>
         </div>
       </nav>
+
+      <div class='content'>
+        {% for _ in range(1000) %}
+          <br>p<br>
+        {% endfor %}
+      </div>
+
     </div>
 
     <!-- modals -->
