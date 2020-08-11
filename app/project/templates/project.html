@@ -529,7 +529,7 @@
           {% endif %}
 
           <!-- recommended members -->
-          {% if project.invitations.all()|length > 0 %}
+          {% if (project.invitations.all()|length > 0) and current_user==project.owner %}
             <div class='row'>
               <div class='container my-2' style='min-width: 99%;'>
                 <h4 class='tabname-big'>
