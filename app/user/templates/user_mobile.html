@@ -35,7 +35,7 @@
                 </button>
             {% endif %}
           </p>
-          <a href='/user={{ user.code }}'>
+          <a onclick="scrollToTop()">
             <h3>
               {{ user.name }}
               {% set badge = user.choose_badge('search') %}
@@ -264,7 +264,7 @@
             document.getElementById("nav-expanded").style.display = 'none';
         }
       // show
-      } else if (document.body.scrollTop == 0) {
+    } else if (document.body.scrollTop==0 || document.documentElement.scrollTop==0) {
         var disp = $('#nav-expanded').css('display');
         if (disp=='none') {
           document.getElementById("nav-expanded").style.display = 'block';
@@ -274,6 +274,11 @@
           document.getElementById("nav-expanded").style.display = 'block';
         }
       }
+    }
+
+    function scrollToTop() {
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
     </script>
 
