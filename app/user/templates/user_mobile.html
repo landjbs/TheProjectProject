@@ -58,7 +58,7 @@
         </div>
         <br>
         <div class='bio'>
-          <p class='oneliner'>{{ user.about }}</p>
+          <p>{{ user.about }}</p>
           <center>
             <p style="margin:0px;">
               {{ user.xp }} XP
@@ -69,6 +69,54 @@
             </div>
           </center>
           <br>
+        </div>
+        <br>
+        <div class='container' style='background:white;border-radius:5px;max-height:37vh;overflow:scroll;'>
+          <h4 style='text-align:left;color:black;'>
+            Owned Projects
+            <i class="fa fa-circle" style='color:#FF5D00;'></i>
+            {{ user.owned.count() }}
+          </h4>
+          {% if user.owned.count() > 0 %}
+            {% for project in user.owned %}
+              {% if current_user.is_authenticated %}
+                {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+              {% else %}
+                {{ macros.render_anon_project_card(project, current_user) }}
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div style='text-align:center;'>
+              <a type="button" href="/add_project">
+                <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+        <br>
+        <div class='container' style='background:white;border-radius:5px;max-height:37vh;overflow:scroll;'>
+          <h4 style='text-align:left;color:black;'>
+            Member Projects
+            <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
+            {{ (user.projects.count()) - (user.owned.count()) }}
+          </h4>
+          {% if ((user.projects.count()) - (user.owned.count())) > 0 %}
+            {% for project in user.owned %}
+              {% if not project.owner==user %}
+                {% if current_user.is_authenticated %}
+                  {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
+                {% else %}
+                  {{ macros.render_anon_project_card(project, current_user) }}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            <div style='text-align:center;'>
+              <a type="button" href="/add_project">
+                <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+              </a>
+            </div>
+          {% endif %}
         </div>
     </div>
 
