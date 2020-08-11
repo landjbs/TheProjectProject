@@ -1,6 +1,6 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
-from flask_mobility import mobilized
+from flask_mobility.decorators import mobilized
 
 from app.extensions import limiter
 from app.utils import partition_query
@@ -29,7 +29,7 @@ def badge_page():
     # update badges
     current_user.update_badges()
     # progress tabs
-    progress_badges = partition_query(current_user.badges)
+    progress_badges = list(current_user.badges)
     # all badges
     all_badges = list(Badge.query.all())
     return render_template('badge_mobile.html',
