@@ -67,30 +67,13 @@
       <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Owned')" id="defaultOpen">Owned</button>
         <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
-        <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
         {% if current_user==user %}
-          <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
-          <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
+          <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
+          <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
         {% endif %}
+        <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
+        <button class="tablinks" onclick="openTab(event, 'Tasks')">Tasks</button>
       </div>
-
-      <!-- <div class="tab">
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Home</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>News</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Contact</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>About</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Support</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Home</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>News</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Contact</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>About</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Support</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Home</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>News</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Contact</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>About</button>
-        <button  class="tablinks" onclick='openTab(event, "Owned")'>Support</button>
-      </div> -->
 
       <div id="Owned" class="tabcontent">
         <h4 class='tabname-big'>
@@ -129,8 +112,43 @@
         {% for user_subject in user.subjects %}
           {{ macros.render_user_subject(user_subject) }}
         {% endfor %}
-
       </div>
+
+      <div id="Invitations" class="tabcontent">
+        <h4 class='tabname-big'>
+          Invitations
+          <i class="fa fa-bell" aria-hidden="true" style='color:#FF5D00;'></i>
+          {{ user.invitations.all()|length }}
+        </h4>
+        {% for invitation in user.invitations %}
+          <div class="list-group-item list-group-item-action flex-column align-items-start pending-item">
+            <a href='project={{ invitation.code }}' class="mb-1 user-name"
+            style='background: transparent; color: white; padding:0px;'>
+              {{ invitation.name }}
+            </a>
+            <p class="mb-1">
+                {{ invitation.oneliner }}
+              <div class='hoverable'>
+                <a class='delete-btn task-btn float-left'
+                style='background: transparent;'
+                href="{{ url_for('user.reject_collaboration', project_id=invitation.id) }}">
+                  <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </a>
+              <span class='tooltiptext'>Decline</span>
+              </div>
+              <div class='hoverable'>
+                <a class='complete-btn task-btn float-right'
+                style='background: transparent;'
+                href="{{ url_for('user.accept_collaboration', project_id=invitation.id) }}">
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                </a>
+                <span class='tooltiptext'>Accept</span>
+              </div>
+            </p>
+          </div>
+        {% endfor %}
+      </div>
+
     </div>
 
     <!-- modals -->
