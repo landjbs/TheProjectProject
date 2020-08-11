@@ -70,9 +70,9 @@
       </nav>
 
       <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Owned')" id="defaultOpen">Owned</button>
-        <button class="tablinks" onclick="openCity(event, 'Member')">Member</button>
-        <button class="tablinks" onclick="openCity(event, 'Subjects')">Subjects</button>
+        <button class="tablinks" onclick="openTab(event, 'Owned')" id="defaultOpen">Owned</button>
+        <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
+        <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
       </div>
 
       <div id="Owned" class="tabcontent">
@@ -150,7 +150,7 @@
 
     <script>
       document.getElementById("defaultOpen").click();
-      function openCity(evt, cityName) {
+      function openTab(evt, cityName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
