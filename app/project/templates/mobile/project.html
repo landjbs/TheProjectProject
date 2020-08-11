@@ -78,6 +78,7 @@
         <button class="tablinks" onclick="openTab(event, 'Tasks')" id="defaultOpen">Tasks</button>
         <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
         {% if current_user==project.owner %}
+        <button class="tablinks" onclick="openTab(event, 'Recommended')">Recommended</button>
         <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
           <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
         {% endif %}
@@ -197,6 +198,16 @@
         {% endfor %}
       </div>
 
+      {% if recommended_members!=False %}
+        <div id="Recommended" class="tabcontent">
+          <h4 class='tabname-big'>
+            Recommended
+          </h4>
+          {% for member in recommended_members %}
+            {{ macros.render_user_card(current_user, member, carousel_type='member') }}
+          {% endfor %}
+        </div>
+      {% endif %}
 
       <div id="Applications" class="tabcontent">
         <h4 class='tabname-big'>
