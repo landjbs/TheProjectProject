@@ -87,6 +87,34 @@ def user_page(code):
     edit_form = Edit_User() if (current_user==user) else False
     # editing
     show_edit_modal = False
+    if request.method=='POST':
+        if edit_form.validate_on_submit():
+            edits_made = False
+            # name
+            new_name = edit_form.name.data
+            if new_name!=user.name:
+                user.name = new_name
+                edits_made = True
+            # url
+            new_url = edit_form.url.data
+            if new_url!=user.url:
+                user.url = new_url
+                edits_made = True
+            # about
+            new_about = edit_form.about.data
+            if new_about!=user.about:
+                user.about = new_about
+                edits_made = True
+            # new password
+            if edit_form.password.data!='':
+                if not user.check_password(edit_form.password.data):
+                    user.set_password(edit_form.password.data)
+                    edits_made = True
+            if edits_made:
+                flash('You have successfully edited your acount.')
+                user.update()
+        else:
+            show_edit_modal = True
     return render_template('user_mobile.html',
                         user=user,
                         project_application=project_application,
