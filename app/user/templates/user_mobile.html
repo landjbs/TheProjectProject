@@ -21,8 +21,8 @@
 {% block content %}
     <!-- PAGE -->
     <div class='container' style="min-width:100%;padding:0px;">
-        <nav class='sidebar-header sticky-top' style='min-width:100%;color:white;background:#5D00FF;padding-left:10px;padding-right:10px;'>
-          <br>
+        <nav class='sidebar-header sticky-top' style='min-width:100%;color:white;background:#5D00FF;padding-left:20px;padding-right:20px;'>
+        <div class='nav-keep' style='padding-bottom:2vh; padding-top:2vh;'>
           <p class='float-right'>
             <i class="fa fa-star"></i>
             {{ user.total_stars() }}
@@ -52,19 +52,14 @@
               {{ user.email }}
             </a>
           {% endif %}
-        <br><br>
+        </div>
         <div id='nav-expanded'>
           <hr class='my-2' style='background:white;'>
           <p>{{ user.about }}</p>
-          <center>
-            <p style="margin:0px;">
-              {{ user.xp }} XP
-            </p>
-            <div class="progress" style='width:80%;'>
-              <div class="progress-bar" role="progressbar"
-                  style='{{ user.xp_progressbar_width() }}'></div>
-            </div>
-          </center>
+          {% if current_user.is_authenticated %}
+              {{ macros.render_user_action_bar(current_user, user) }}
+            </a>
+          {% endif %}
           <br>
         </div>
       </nav>
@@ -114,8 +109,6 @@
         {% endfor %}
 
       </div>
-
-
     </div>
 
     <!-- modals -->
@@ -132,10 +125,8 @@
           {{ macros.render_delete_account_modal(user) }}
         {% endif %}
         <!-- project modals -->
-        {% for tab in owned_tabs %}
-          {% for project in tab %}
+        {% for project in user.projects %}
             {{ macros.render_join_modal(current_user, project, project_application) }}
-          {% endfor %}
         {% endfor %}
       {% endif %}
     </div>
