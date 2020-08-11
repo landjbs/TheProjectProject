@@ -64,6 +64,26 @@
           <hr class='my-2'>
           <p>{{ project.oneliner }}</p>
           <p>{{ project.summary }}</p>
+          <center>
+            {% if not project.complete %}
+              {% set elapsed = calc_days_since(now(), project.posted_on) %}
+              {% set est = project.estimated_time %}
+              {% set elapsed_style = elapsed_style(elapsed, est) %}
+              <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+              <div class="progress" style='width:80%;'>
+                <div class="progress-bar" role="progressbar"
+                    style='{{ elapsed_style }}'
+                    aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                    aria-valuemax="{{ est }}"></div>
+              </div>
+            {% else %}
+              <p style="margin:0px;">Project Complete!</p>
+              <div class="progress" style='width:80%;'>
+                <div class="progress-bar" role="progressbar"
+                    style='width: 100%;'/>
+              </div>
+            {% endif %}
+          </center>
           {% if current_user.is_authenticated %}
             <center>
               {{ macros.render_project_action_bar(current_user, project) }}
