@@ -145,6 +145,9 @@
       {% endif %}
       {% if current_user == project.owner %}
         <!-- edit modal -->
+        {% set elapsed = calc_days_since(now(), project.posted_on) %}
+        {% set est = project.estimated_time %}
+        {% set elapsed_style = elapsed_style(elapsed, est) %}
         {{ macros.render_edit_project_modal(project, edit_form, {'elapsed':elapsed, 'est':est, 'elapsed_style':elapsed_style}) }}
         <!-- complete modal -->
         {{ macros.render_complete_modal(project) }}
