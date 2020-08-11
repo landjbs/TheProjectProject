@@ -88,53 +88,6 @@
                 </center>
                 <br>
               </div>
-              <li class="active">
-                  <a href="#memberSubmenu" data-toggle="collapse" aria-expanded="false" class='dropdown-toggle'>
-                    Members
-                    &nbsp;
-                    <i class='far fa-user-circle'></i>
-                    {{ project.members.all()|length }} / {{ project.team_size }}
-                  </a>
-                  {% if current_user.is_authenticated %}
-                    <ul class="collapse in list-unstyled" id="memberSubmenu">
-                      {% for member in project.members %}
-                        <li>
-                          <div class='row' style='margin-left: 0.2vh; margin-bottom: 1vh;'>
-                            <div class='col'>
-                            <a class='member-hovers' href="user={{ member.code }}" style='padding-bottom:5px; display: inline;'>
-                              {{ member.name }}
-                              {% set badge = member.choose_badge('member') %}
-                              {% if badge %}
-                                {{ macros.render_badge_icon(badge) }}
-                              {% endif %}
-                            </a>
-                          </div>
-                            {% if is_owner and member!=project.owner %}
-                              <div class='col float-right' style='display: inline; text-align: right'>
-                                <div class='hoverable'>
-                                  <a class='delete-btn task-btn member-hovers'
-                                  style='display: inline;'
-                                  href="{{ url_for('project.remove_member', project_id=project.id, user_id=member.id) }}">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                  </a>
-                                  <span class='tooltiptext'>Remove from project</span>
-                                </div>
-                                <div class='hoverable'>
-                                  <a class='task-btn member-hovers'
-                                  style='display: inline; color: gold;'
-                                  href="{{ url_for('project.make_owner', project_id=project.id, user_id=member.id) }}">
-                                    <i class='fas fa-crown'></i>
-                                  </a>
-                                  <span class='tooltiptext'>Make owner</span>
-                                </div>
-                              </div>
-                            {% endif %}
-                          </div>
-                        </li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-              </li>
               <li class='active'>
                   <a href="#mediaSubmenu" data-toggle="collapse" aria-expanded="" class='dropdown-toggle'>
                     Media
@@ -465,6 +418,38 @@
               <!--/.Controls-->
             </div>
           </div>
+
+          {% if project.applications|length > 0 %}
+            <div class='row'>
+              <div class='container my-2' style='min-width: 99%;'>
+                <h4 style='text-align:left;'>Members</h4>
+                <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                  <div class="carousel-inner" role="listbox">
+                    {% for tab in member_tabs%}
+                      {% if loop.index==1 %}
+                      <div class="carousel-item active">
+                      {% else %}
+                      <div class="carousel-item">
+                      {% endif %}
+                        <div class='row'>
+                          {% for user in tab %}
+                            {{ macros.render_user_card(current_user, user, carousel_type='member') }}
+                          {% endfor %}
+                        </div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+                <!--Controls-->
+                <div class="controls-top">
+                  <a class="btn-floating" href="#member-rec-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+                  <p id='member-count' class='counter'>0</p>
+                  <a class="btn-floating" href="#member-rec-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+                </div>
+                <!--/.Controls-->
+              </div>
+            </div>
+          {% endif %}
 
           <!-- recommended members -->
           {% if recommended_tabs %}
