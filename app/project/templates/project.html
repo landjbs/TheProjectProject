@@ -438,7 +438,11 @@
           <!-- current members -->
           <div class='row'>
             <div id="member-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-              <h4 style='text-align:left;'>Members</h4>
+              <h4 style='text-align:left;'>
+                Members
+                <i class='far fa-user-circle'></i>
+                {{ project.members.all()|length }} / {{ project.team_size }}
+              </h4>
               <hr class="my-2">
               <div class="carousel-inner" role="listbox">
                 {% for user in project.members %}
