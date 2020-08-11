@@ -153,7 +153,7 @@ def project_page(project_code):
                     project.update()
             else:
                 show_edit_modal = True
-    return render_template('mobile/project.html',
+    return render_template('project.html',
                             project=project,
                             comment_form=comment_form,
                             project_application=project_application,
@@ -175,12 +175,14 @@ def project_page(project_code):
     ''' Mobile optimized project page '''
     # get project object
     project = Project.query.filter_by(code=project_code).first_or_404()
+    # get relevant data
+    project_subjects = project.subject_data()
     # forms
     comment_form = Comment_Form()
     task_form = Task_Form()
     project_application = Project_Application_Form()
     # editing
-    recommended_tabs = False
+    recommended_members = False
     edit_form = False
     edit_application_form = False
     show_edit_modal = False
@@ -224,7 +226,7 @@ def project_page(project_code):
                     project.update()
             else:
                 show_edit_modal = True
-        return render_template('project.html',
+        return render_template('mobile/project.html',
                                 project=project,
                                 comment_form=comment_form,
                                 project_application=project_application,

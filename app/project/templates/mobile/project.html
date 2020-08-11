@@ -64,26 +64,6 @@
           <hr class='my-2'>
           <p>{{ project.oneliner }}</p>
           <p>{{ project.summary }}</p>
-          <center>
-            {% if not project.complete %}
-              {% set elapsed = calc_days_since(now(), project.posted_on) %}
-              {% set est = project.estimated_time %}
-              {% set elapsed_style = elapsed_style(elapsed, est) %}
-              <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
-              <div class="progress" style='width:80%;'>
-                <div class="progress-bar" role="progressbar"
-                    style='{{ elapsed_style }}'
-                    aria-valuenow="{{ elapsed }}" aria-valuemin="0"
-                    aria-valuemax="{{ est }}"></div>
-              </div>
-            {% else %}
-              <p style="margin:0px;">Project Complete!</p>
-              <div class="progress" style='width:80%;'>
-                <div class="progress-bar" role="progressbar"
-                    style='width: 100%;'/>
-              </div>
-            {% endif %}
-          </center>
           {% if current_user.is_authenticated %}
             <center>
               {{ macros.render_project_action_bar(current_user, project) }}
@@ -104,20 +84,6 @@
         <button class="tablinks" onclick="openTab(event, 'Tasks')">Tasks</button>
       </div>
 
-      <div id="Owned" class="tabcontent">
-        <h4 class='tabname-big'>
-          Owned Projects
-          <i class="fa fa-circle" style='color:#FF5D00;'></i>
-          {{ user.owned.count() }}
-        </h4>
-        {% if user.owned.count() > 0 %}
-          {% for project in user.owned %}
-            {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
-          {% endfor %}
-        {% endif %}
-      </div>
-
-
     </div>
 
     <!-- modals -->
@@ -125,11 +91,9 @@
       <!-- join/leave modal -->
       {{ macros.render_join_modal(current_user, project, project_application) }}
       <!-- collaborate modals -->
-      {% if recommended_tabs != False %}
-        {% for tab in recommended_tabs %}
-          {% for user in tab %}
-            {{ macros.render_collaborate_modal(current_user, user, project) }}
-          {% endfor %}
+      {% if recommended_members != False %}
+        {% for user in recommended_members %}
+          {{ macros.render_collaborate_modal(current_user, user, project) }}
         {% endfor %}
       {% endif %}
       {% if current_user == project.owner %}
@@ -207,8 +171,3 @@
     </script>
 
   {% endblock %}
-
-
-  else {
-    document.getElementById("nav-expanded").style.display = "block";
-  }
