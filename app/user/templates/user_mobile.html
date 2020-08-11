@@ -55,9 +55,11 @@
         <div id='nav-expanded'>
           <hr class='my-2' style='background:white;'>
           <p>{{ user.about }}</p>
+          <center>
             {% if current_user.is_authenticated %}
                 {{ macros.render_user_action_bar(current_user, user) }}
             {% endif %}
+          </center>
           <br>
         </div>
       </nav>
