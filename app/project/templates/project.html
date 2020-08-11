@@ -537,7 +537,7 @@
                   <i class="fa fa-paper-plane" aria-hidden="true"></i>
                   {{ project.invitations.all()|length }}
                 </h4>
-                <div id="user-rec-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
+                <div id="invitation-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
                   <div class="carousel-inner" role="listbox">
                     {% for tab in recommended_tabs%}
                       {% if loop.index==1 %}
