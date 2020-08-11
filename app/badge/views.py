@@ -30,8 +30,11 @@ def badge_page():
     current_user.update_badges()
     # progress tabs
     progress_badges = list(current_user.badges)
+    progress_ids = [u.badge.id for u in progress_badges]
     # all badges
-    all_badges = list(Badge.query.all())
+    other_badges = list(Badge.query.filter(~Badge.id.in_(progress_ids)))
+    del progress_ids
+    # combine lists
+    badges = (progress_badges + other_badges)
     return render_template('badge_mobile.html',
-                        progress_badges=progress_badges,
-                        all_badges=all_badges)
+                           badges=badges)
