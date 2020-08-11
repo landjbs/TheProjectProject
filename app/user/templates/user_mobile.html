@@ -19,7 +19,39 @@
 
 {% block content %}
     <!-- PAGE -->
-    <div>
+    <div class='container' style='min-width:100%;background:#5D00FF;color:white;'>
+        <div class='sidebar-header'>
+          <p class='float-right'>
+            <i class="fa fa-star"></i>
+            {{ user.total_stars() }}
+            <!-- edit button -->
+            {% if user == current_user %}
+                <br>
+                <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  Edit
+                </button>
+            {% endif %}
+          </p>
+          <a href='/user={{ user.code }}'>
+            <h3>
+              {{ user.name }}
+              {% set badge = user.choose_badge('search') %}
+              {% if badge %}
+                {{ macros.render_badge_icon_bigger(badge) }}
+              {% endif %}
+              {% if user.recently_active() %}
+                <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+              {% endif %}
+            </h3>
+          </a>
+          {% if current_user.is_authenticated %}
+            <a href='mailto:{{ user.email }}'>
+              {{ user.email }}
+            </a>
+          {% endif %}
+        </div>
+      </nav>
     </div>
 
     <!-- modals -->
