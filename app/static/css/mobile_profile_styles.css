@@ -2,6 +2,14 @@
   position: absolute;
 }
 
+#name-nav {
+  min-width:100%;
+  color:white;
+  background:#5D00FF;
+  padding-left:20px;
+  padding-right:20px;
+}
+
 .tab {
   overflow: auto;
   white-space: nowrap;
