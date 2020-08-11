@@ -78,8 +78,8 @@
         <button class="tablinks" onclick="openTab(event, 'Tasks')" id="defaultOpen">Tasks</button>
         <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
         {% if current_user==project.owner %}
+        <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
           <button class="tablinks" onclick="openTab(event, 'Invitations')">Invitations</button>
-          <button class="tablinks" onclick="openTab(event, 'Applications')">Applications</button>
         {% endif %}
         <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
       </div>
@@ -198,7 +198,7 @@
       </div>
 
 
-      <div id="Members" class="tabcontent">
+      <div id="Applications" class="tabcontent">
         <h4 class='tabname-big'>
           Applications
           <i class="fa fa-bell" aria-hidden="true"></i>
