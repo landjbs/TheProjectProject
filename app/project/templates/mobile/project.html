@@ -83,7 +83,16 @@
         <button class="tablinks" onclick="openTab(event, 'Tasks')">Tasks</button>
       </div>
 
-
+      <div id="Tasks" class="tabcontent">
+        <h4 class='tabname-big'>
+          Tasks 
+          <i class="fa fa-flask" style='color:#FF5D00;'></i>
+          {{ user.total_skill_level() }}
+        </h4>
+        {% for user_subject in user.subjects %}
+          {{ macros.render_user_subject(user_subject) }}
+        {% endfor %}
+      </div>
 
     </div>
 
