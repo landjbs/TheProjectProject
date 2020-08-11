@@ -93,13 +93,15 @@
 
         <!-- Page Content Holder -->
         <div id="content">
+          <!-- TAB BUTTONS -->
           <div class="tab">
             <button type="button" id="sidebarCollapse" class="btn btn-info">
               <i class="fas fa-align-left" style='color:black;'></i>
             </button>
             <button class="tablinks" onclick="openTab(event, 'Activity')" id="defaultOpen">Activity</button>
             <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
-            {% if current_user==project.owner %}
+            {% if project.is_member(current_user) %}
+              <button class="tablinks" onclick="openTab(event, 'Private')">Private</button>
             {% endif %}
           </div>
 
