@@ -2,24 +2,6 @@
   position: absolute;
 }
 
-.tab {
-  overflow: hidden;
-  background-color: #f1f1f1;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
 
 /* Change background color of buttons on hover */
 .tab button:hover {
@@ -41,4 +23,21 @@
 .tabname-big {
   text-align: left;
   text-decoration: underline;
+}
+
+
+div.tab {
+  background-color: #f1f1f1;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.tab button {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
 }
