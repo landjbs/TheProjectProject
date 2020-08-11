@@ -56,7 +56,20 @@
             </a>
           {% endif %}
         </div>
-      </nav>
+        <br>
+        <div class='bio'>
+          <p class='oneliner'>{{ user.about }}</p>
+          <center>
+            <p style="margin:0px;">
+              {{ user.xp }} XP
+            </p>
+            <div class="progress" style='width:80%;'>
+              <div class="progress-bar" role="progressbar"
+                  style='{{ user.xp_progressbar_width() }}'></div>
+            </div>
+          </center>
+          <br>
+        </div>
     </div>
 
     <!-- modals -->
