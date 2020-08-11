@@ -174,7 +174,7 @@
         if (disp=='block') {
           var h = $('#nav-expanded').height();
           document.getElementById("nav-expanded").style.display = 'none';
-          window.scrollBy(0, h);
+          window.scrollBy(0, h-30);
         } else {
             document.getElementById("nav-expanded").style.display = 'none';
         }
@@ -184,7 +184,7 @@
         if (disp=='none') {
           document.getElementById("nav-expanded").style.display = 'block';
           var h = $('#nav-expanded').height();
-          window.scrollBy(0, -h);
+          window.scrollBy(0, -h-30);
         } else {
           document.getElementById("nav-expanded").style.display = 'block';
         }
