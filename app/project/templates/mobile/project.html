@@ -204,8 +204,8 @@
           <i class="fa fa-bell" aria-hidden="true"></i>
           {{ project.pending.all()|length }}
         </h4>
-        {% for member in project.members %}
-          {{ macros.render_user_card(current_user, member, carousel_type='member') }}
+        {% for application in project.pending %}
+          {{ macros.render_application_card(current_user, member, carousel_type='member') }}
         {% endfor %}
       </div>
 
