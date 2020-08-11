@@ -64,14 +64,16 @@
         </div>
       </nav>
 
-      <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Owned')" id="defaultOpen">Owned</button>
-        <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
-        <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
-        {% if current_user==user %}
+      <div class='tabs'>
+        <div class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Owned')" id="defaultOpen">Owned</button>
           <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
           <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
-        {% endif %}
+          {% if current_user==user %}
+            <button class="tablinks" onclick="openTab(event, 'Member')">Member</button>
+            <button class="tablinks" onclick="openTab(event, 'Subjects')">Subjects</button>
+          {% endif %}
+        </div>
       </div>
 
       <div id="Owned" class="tabcontent">
