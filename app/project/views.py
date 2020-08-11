@@ -226,15 +226,15 @@ def project_page(project_code):
                     project.update()
             else:
                 show_edit_modal = True
-        return render_template('mobile/project.html',
-                                project=project,
-                                comment_form=comment_form,
-                                project_application=project_application,
-                                task_form=task_form,
-                                project_subjects=project_subjects,
-                                recommended_members=recommended_members,
-                                edit_form=edit_form,
-                                edit_application_form=edit_application_form)
+    return render_template('mobile/project.html',
+                            project=project,
+                            comment_form=comment_form,
+                            project_application=project_application,
+                            task_form=task_form,
+                            project_subjects=project_subjects,
+                            recommended_members=recommended_members,
+                            edit_form=edit_form,
+                            edit_application_form=edit_application_form)
 
 
 
