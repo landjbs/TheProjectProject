@@ -781,14 +781,14 @@
 {% endmacro -%}
 
 
-{% macro render_ask_question_modal(question, user) -%}
-<div id="modal_question" class="modal fade" role="dialog">
+{% macro render_ask_question_modal(project, user) -%}
+<div id="modal_ask_question" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <a href='user={{ target_user.code }}' style='color:black;'>
-          <h5>{{ target_user.name }}</h5>
+          <h5>Ask </h5>
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
