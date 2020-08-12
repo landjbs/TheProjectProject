@@ -344,6 +344,9 @@ class Project(CRUDMixin, db.Model):
     def add_question(self, question, answer=None):
         self.questions.append(Question(question=question, answer=answer))
         self.update()
+        return True
+
+    def remove_question(self, ):
 
     ## status ##
     def mark_complete(self):
