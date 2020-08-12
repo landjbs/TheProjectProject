@@ -4,31 +4,17 @@ from sqlalchemy.orm import relationship
 from app.database import db, CRUDMixin
 
 
-class Question(CRUDMixin, db.Model):
-    __tablename__ = 'question'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
-    # question
-    question = db.Column(db.String(100), nullable=True, unique=True)
-    # answers
-    answers = relationship('Question_Answer', back_populates='question')
-
-    def __repr__(self):
-        return f'<Question {self.question}>'
-
-
 class Question_Answer(CRUDMixin, db.Model):
     __tablename__ = 'answer'
     # id
     id = db.Column(db.Integer, primary_key=True)
-    # question
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
-    question = relationship('Question', back_populates='answers')
-    # answer
-    answer = db.Column(db.String(500), nullable=True, unique=False)
     # project
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
     project = relationship('Project', back_populates='answers')
+    # question
+    answer = db.Column(db.String(500), nullable=False, unique=False)
+    # answer
+    answer = db.Column(db.String(500), nullable=True, unique=False)
 
     def __repr__(self):
         return f'<Question_Answer q={self.question} a={self.answer} p={self.project.name}>'
