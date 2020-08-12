@@ -781,26 +781,24 @@
 {% endmacro -%}
 
 
-{% macro render_question() -%}
-<tr>
-  <div class='card mb-2' style='border:1px solid green'>
-    <div class='card-body'>
-      <div class='card-head tiny' contenteditable='true'>
-        <p style='text-decoration:underline;'>
-          How did you get the idea?
-        </p>
-      </div>
-      <p contenteditable="">
-        Last summer I realized that, though I used Google every day,
-        I didn't understand how it worked at all. I immediately set
-        out to replicate its graph-ranking algorithms on a series
-        of dummy webpages. This eventually grew into a self-built
-        widecolumn store and novel ranking and NLP algorithms!
+{% macro render_question_card() -%}
+<div class='card mb-2' style='border:1px solid green'>
+  <div class='card-body'>
+    <div class='card-head tiny' contenteditable='true'>
+      <p style='text-decoration:underline;'>
+        How did you get the idea?
       </p>
     </div>
+    <p contenteditable="">
+      Last summer I realized that, though I used Google every day,
+      I didn't understand how it worked at all. I immediately set
+      out to replicate its graph-ranking algorithms on a series
+      of dummy webpages. This eventually grew into a self-built
+      widecolumn store and novel ranking and NLP algorithms!
+    </p>
   </div>
-  <!-- card end -->
-<tr>
+</div>
+<!-- card end -->
 {% endmacro -%}
 
 

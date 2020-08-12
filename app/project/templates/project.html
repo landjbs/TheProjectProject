@@ -759,7 +759,8 @@
 
     <script>
       function addQuestion() {
-        $('#questionTable').append({{ macros.render_project_name(project, current_user) }});
+        var html = {{ macros.render_question_card()|tojson|safe }};
+        $('#questionTable').append(html);
       }
     </script>
 
