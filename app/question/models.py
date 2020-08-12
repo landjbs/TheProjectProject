@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from app.database import db, CRUDMixin
 
 
-class Question(CRUDMixin, db):
+class Question(CRUDMixin, db.Model):
     __tablename__ = 'question'
     # id
     id = db.Column(db.Integer, primary_key=True)
@@ -17,7 +17,7 @@ class Question(CRUDMixin, db):
         return f'<Question {self.question}>'
 
 
-class Question_Answer(CRUDMixin, db):
+class Question_Answer(CRUDMixin, db.Model):
     __tablename__ = 'answer'
     # id
     id = db.Column(db.Integer, primary_key=True)
