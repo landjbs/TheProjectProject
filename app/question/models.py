@@ -21,3 +21,4 @@ class Question_Answer(CRUDMixin, db.Model):
 
     def answer(self, answer):
         self.answer = answer
+        self.update()
