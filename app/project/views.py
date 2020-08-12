@@ -545,7 +545,7 @@ def add_question(project_id):
     return redirect(request.referrer)
 
 
-@project.route('/delete_question/<int:project_id>/<int:question_id>', methods=['POST'])
+@project.route('/delete_question/<int:project_id>/<int:question_id>')
 @login_required
 def delete_question(project_id, question_id):
     ''' Adds question (and maybe answer) to project '''
