@@ -837,16 +837,22 @@
       </p>
     </div>
     {% if not project.is_member(user) %}
-      <p style='margin-bottom:0px;'>{{ question.answer }}</p>
+      <p style='margin-bottom:0px;'>
+        {% if question.answer %}
+          {{ question.answer }}
+        {% else %}
+          Project members haven't answered this yet.
+        {% endif %}
+      </p>
     {% else %}
-      <form >
+      <form action='{{ url_for }}' method='post'>
       {% if question.answer %}
         <p style='margin-bottom:0px;'>{{ question.answer }}</p>
       {% elif project.is_member(user) %}
         Click to answer.
       {% else %}
         Members haven't answered this yet.
-      {% endif %}
+    {% endif %}
     </p>
   </div>
 </div>
