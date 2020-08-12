@@ -353,7 +353,7 @@ input:checked + .slider:before {
 /* right border for big screen  */
 @media (min-width: 992px) {
   .right-border {
-    border-right: 2px solid black;
+    border-right: 1px solid grey;
   }
 }
 
@@ -364,7 +364,7 @@ input:checked + .slider:before {
 }
 
 .bottom-border {
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid grey;
   vertical-align:middle;
   padding-left: 10px;
 }

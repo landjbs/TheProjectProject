@@ -101,14 +101,16 @@
     </div>
 
     <!-- add padding below navbar for mobile -->
-      <p id='nav-pad' style='padding:0px!important;margin:0px!important;'/>
-
-      <script>
-        var h = $('#mainNav').height();
-        $('#nav-pad').height(h);
-      </script>
+    <p id='nav-pad' style='padding:0px!important;margin:0px!important;'/>
 
     {% block content %} {% endblock %}
+
+    <script>
+      var h = $('#mainNav').height();
+      $('#nav-pad').height(h);
+      // document.body.scrollHeight = '1' + 'px';
+      document.body.style.overflow = 'hidden';
+    </script>
 
   </body>
 </html>
