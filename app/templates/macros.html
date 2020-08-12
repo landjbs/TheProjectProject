@@ -825,11 +825,13 @@
 <div class='card mb-2' style='border:1px solid black'>
   <div class='card-body'>
     <div class='card-head tiny' contenteditable='true'>
-      <a class='delete-btn task-btn float-left'
-          style='background: transparent;'
-          href="{{ url_for('project.delete_question', project_id=invitation.id) }}">
-          <i class="fa fa-times-circle" aria-hidden="true"></i>
-      </a>
+      {% if project.is_member(user) %}
+        <a class='delete-btn task-btn float-right'
+            style='background: transparent;'
+            href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+        </a>
+      {% endif %}
       <p>
         {{ question.question }}
       </p>

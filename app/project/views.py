@@ -539,3 +539,17 @@ def add_question(project_id):
         project.add_question(request.form.get('question'))
     flash('Question added!', 'success')
     return redirect(request.referrer)
+
+
+@project.route('/delete_question/<int:project_id>/<int:question_id>', methods=['POST'])
+@login_required
+def delete_question(project_id, question_id):
+    ''' Adds question (and maybe answer) to project '''
+    project = Project.query.get_or_404(project_id)
+    if project.is_member(current_user):
+        project.add_question(request.form.get('question'),
+                             request.form.get('answer'))
+    else:
+        project.add_question(request.form.get('question'))
+    flash('Question added!', 'success')
+    return redirect(request.referrer)
