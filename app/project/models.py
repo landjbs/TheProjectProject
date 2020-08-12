@@ -26,7 +26,11 @@ class Project(CRUDMixin, db.Model):
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects', lazy='dynamic')
     # question
-    questions = relationship('Question', back_populates='project')
+    questions = relationship('Question',
+                             back_populates='project',
+                             cascade='all, delete, delete-orphan',
+                             lazy='dynamic',
+                             order_by='Question.posted_on')
     ## people ##
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')

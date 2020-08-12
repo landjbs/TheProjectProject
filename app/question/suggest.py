@@ -17,4 +17,5 @@ question_suggestions = [
 
 
 def suggest_questions(project):
-    return question_suggestions
+    return [question for question in question_suggestions
+            if not project.questions.query.filter_by(question=question)]
