@@ -31,4 +31,4 @@ class Question_Answer(CRUDMixin, db.Model):
     project = relationship('Project', back_populates='answers')
 
     def __repr__(self):
-        return f'<{self.question}<Answer {self.text}>>'
+        return f'<Question_Answer q={self.question} a={self.answer} p={self.project.name}>'
