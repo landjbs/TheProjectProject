@@ -793,17 +793,18 @@
       <form action="" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
-          <label for="new_owner">Question:</label>
-          <input type="text" name="city" list="cityname">
-          <datalist id="cityname">
+          <label for="question">Question:</label>
+          <input type="text" name="question" list="question_suggestions" class='select-clean'>
+          <datalist id="question_suggestions">
             <option value="Boston">
             <option value="Cambridge">
           </datalist>
-
-          {% if project.is_member(user) %}
-            here
-          {% endif %}
           <br><br>
+          {% if project.is_member(user) %}
+            <label for="answer">Answer:</label>
+            <textarea name='answer' class='select-clean'>
+            </textarea>
+          {% endif %}
         </div>
         <div class="modal-footer">
           <button class='btn'>Ask</button>
