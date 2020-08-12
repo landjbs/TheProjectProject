@@ -533,12 +533,15 @@ def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     question = filter_string(request.form.get('question'))
-    answer = filter_string(request.form.get('answer'))
-    if project.is_member(current_user):
-        project.add_question(question, answer)
+    if not question:
+        flash('Invalid question.')
     else:
-        project.add_question(question)
-    flash('Question added!', 'success')
+        answer = filter_string(request.form.get('answer'))
+        if project.is_member(current_user):
+            project.add_question(question, answer)
+        else:
+            project.add_question(question)
+        flash('Question added!', 'success')
     return redirect(request.referrer)
 
 
