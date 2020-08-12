@@ -527,7 +527,7 @@ def remove_application_requirement(project_id):
 
 
 
-@project.route('/add_question', methods=['POST'])
+@project.route('/add_question/<int:project_id>', methods=['POST'])
 @login_required
 def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
@@ -536,6 +536,6 @@ def add_question(project_id):
         project.add_question(request.form.get('question'),
                              request.form.get('answer'))
     else:
-
+        project.add_question(request.form.get('question'))
     flash('Question added!', 'success')
     return redirect(request.referrer)

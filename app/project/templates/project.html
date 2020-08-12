@@ -491,7 +491,7 @@
 
               <table id='questionTable'>
                 {% for question in project.questions %}
-                  here
+                  {{ macros.render_question_card(question, current_user) }}
                 {% endfor %}
               </table>
 
