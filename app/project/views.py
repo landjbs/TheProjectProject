@@ -532,11 +532,9 @@ def remove_application_requirement(project_id):
 def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
-    if current_user!=project.owner:
+    if project.is_member(current_user):
         flash('Only the owner can change application settings.')
     else:
-        if not project.remove_application():
-            flash(f'Could not remove application.', 'error')
-        else:
-            flash('Application requirement removed!', 'success')
+        
+    flash('Question added!', 'success')
     return redirect(request.referrer)
