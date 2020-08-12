@@ -4,7 +4,7 @@ from flask_mobility.decorators import mobilized
 from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED
 # absolute imports
 from app.extensions import limiter
-from app.utils import tasks_to_daily_activity, partition_query
+from app.utils import tasks_to_daily_activity, partition_query, filter_string
 from app.recommendations.users import recommend_users
 from app.subject.models import Subject
 from app.user.models import User
@@ -533,10 +533,9 @@ def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     question = request.form.get('question')
-    answer = request.form.get('answer')
+    answer = filter_string(request.form.get('answer'))
     if project.is_member(current_user):
-        project.add_question(,
-                             request.form.get('answer'))
+        project.add_question(question, answer)
     else:
         project.add_question(question)
     flash('Question added!', 'success')
