@@ -8,19 +8,22 @@ class Question(CRUDMixin, db):
     __tablename__ = 'question'
     # id
     id = db.Column(db.Integer, primary_key=True)
-    # text
-    text = db.Column(db.String(100), nullable=True, unique=True)
+    # question
+    question = db.Column(db.String(100), nullable=True, unique=True)
+    # answers
+    answers = relationship('Question_Answer', )
 
     def __repr__(self):
-        return f'<Question {self.text}>'
+        return f'<Question {self.question}>'
 
 
-class Answer(CRUDMixin, db):
+class Question_Answer(CRUDMixin, db):
     __tablename__ = 'answer'
     # id
     id = db.Column(db.Integer, primary_key=True)
+    #
     # answer
-    text = db.Column(db.String(500), nullable=True)
+    answer = db.Column(db.String(500), nullable=True)
 
     def __repr__(self):
-        return f'<Answer {self.text}>'
+        return f'<{self.question}<Answer {self.text}>>'
