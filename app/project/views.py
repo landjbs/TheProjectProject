@@ -533,8 +533,9 @@ def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     if project.is_member(current_user):
-        flash('Only the owner can change application settings.')
+        project.add_question(request.form.get('question'),
+                             request.form.get('answer'))
     else:
-        
+
     flash('Question added!', 'success')
     return redirect(request.referrer)
