@@ -20,8 +20,6 @@ class Question(CRUDMixin, db.Model):
         return(f'<Question_Answer q={self.question} a={self.answer} '
             f'p={self.project.name}>')
 
-    def is_answered(self):
-
     def add_answer(self, answer):
         self.answer = answer
         self.update()

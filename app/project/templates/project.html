@@ -488,10 +488,10 @@
         <div id='About' class='tabcontent'>
           <div class='row'>
             <div class='col'>
-
+              
               <table id='questionTable'>
                 {% for question in project.questions %}
-                  {{ macros.render_question_card(question, current_user) }}
+                  here
                 {% endfor %}
               </table>
 
@@ -740,12 +740,16 @@
     </script>
     {% endif %}
 
-    <script>
-      function addQuestion() {
-        var html = {{ macros.render_question_card()|tojson|safe }};
-        $('#questionTable').append(html);
-      }
-    </script>
-
 
   {% endblock %}
+
+
+<!-- {{ macros.render_question_card(question, current_user) }} -->
+
+
+<script>
+  // function addQuestion() {
+  //   var html = {{ macros.render_question_card()|tojson|safe }};
+  //   $('#questionTable').append(html);
+  // }
+</script>
