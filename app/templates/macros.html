@@ -817,10 +817,10 @@
 
 
 {% macro render_question_card(question, project, user) -%}
-<div class='card mb-2' style='border:1px solid green'>
+<div class='card mb-2' style='border:1px solid black'>
   <div class='card-body'>
     <div class='card-head tiny' contenteditable='true'>
-      <p style='text-decoration:underline;'>
+      <p>
         {{ question.question }}
       </p>
     </div>
@@ -828,8 +828,6 @@
       <p>{{ question.answer }}</p>
     {% elif project.is_member(user) %}
       <p contenteditable="">Click to answer</p>
-    {% else %}
-      <p style='text-align:center;'>Not answered yet.</p>
     {% endif %}
   </div>
 </div>
