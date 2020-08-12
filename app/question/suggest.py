@@ -17,4 +17,4 @@ question_suggestions = [
 
 
 def suggest_questions(project):
-    
+    return question_suggestions

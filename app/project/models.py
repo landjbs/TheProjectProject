@@ -333,7 +333,7 @@ class Project(CRUDMixin, db.Model):
         return True
 
     ## questions ##
-    def suggested_questions(self):
+    def suggest_questions(self):
         ''' Generates list of suggested questions based on project stats '''
         return suggest_questions(self)
 
