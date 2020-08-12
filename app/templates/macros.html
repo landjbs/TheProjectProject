@@ -822,9 +822,9 @@
 
 
 {% macro render_question_card(question, project, user) -%}
-<div class='card mb-2' style='border:1px solid black'>
+<div class='card mb-2'>
   <div class='card-body'>
-    <div class='card-head tiny' contenteditable='true'>
+    <div class='card-head tiny'>
       {% if project.is_member(user) %}
         <a class='delete-btn task-btn float-right'
             style='background: transparent;'

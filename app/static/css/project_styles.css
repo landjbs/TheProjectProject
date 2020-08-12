@@ -349,3 +349,21 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+/* right border for big screen  */
+@media (min-width: 992px) {
+  .right-border {
+    border-right: 1px solid black;
+  }
+}
+
+@media (max-width: 992px) {
+  .right-border {
+    border-right: 0px;
+  }
+}
+
+.bottom-border {
+  border-bottom: 1px solid black;
+  vertical-align:middle;
+}

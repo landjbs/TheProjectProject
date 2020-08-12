@@ -487,9 +487,9 @@
         <!-- About -->
         <div id='About' class='tabcontent'>
           <div class='row'>
-            <div class='col' style='border-right:1px solid black;'>
+            <div class='col right-border'>
               <!-- title -->
-              <div class='row' style='vertical-align:middle; border-bottom:1px solid black;'>
+              <div class='row bottom-border'>
                 <h4>
                   Questions
                   &nbsp;
@@ -510,7 +510,18 @@
 
             </div>
 
-            <div class='col'>
+            <!-- LINKS -->
+            <div class='col right-border'>
+              <h4>
+                Questions
+                &nbsp;
+                {% if project.is_member(current_user) %}
+                  <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
+                    <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
+                  </button>
+                {% endif %}
+              </h4>
+
               <blockquote class="embedly-card"><h4><a href="https://github.com/landjbs/Boogle">landjbs/Boogle</a></h4>
                 <p>Web search-engine capable of crawling, indexing, and searching millions of webpages almost exclusively in native Python. Uses hash-based wide-column database, multithreaded crawling, token scoring, autocorrection, posting list ranking, and intersectional search algorithms to achieve an empirical upper bound of ~3 sec. raw-text searches across Boogle index of Wikipedia. - landjbs/Boogle</p></blockquote>
               <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
