@@ -99,7 +99,7 @@
               <i class="fas fa-align-left" style='color:black;'></i>
             </button>
             <button class="tablinks" onclick="openTab(event, 'Activity')" id="defaultOpen">Activity</button>
-            <button class="tablinks" onclick="openTab(event, 'Documentation')">Documentation</button>
+            <button class="tablinks" onclick="openTab(event, 'About')">About</button>
             <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
             {% if project.is_member(current_user) %}
               <button class="tablinks" onclick="openTab(event, 'Private')">Private</button>
@@ -484,11 +484,12 @@
           {% endif %}
         </div>
 
-        <!-- DOCUMENTATION -->
-        <div id='Documentation' class='tabcontent'>
-          <blockquote class="embedly-card"><h4><a href="https://github.com/landjbs/Boogle">landjbs/Boogle</a></h4>
-            <p>Web search-engine capable of crawling, indexing, and searching millions of webpages almost exclusively in native Python. Uses hash-based wide-column database, multithreaded crawling, token scoring, autocorrection, posting list ranking, and intersectional search algorithms to achieve an empirical upper bound of ~3 sec. raw-text searches across Boogle index of Wikipedia. - landjbs/Boogle</p></blockquote>
-          <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+        <!-- About -->
+        <div id='About' class='tabcontent'>
+
+          <!-- <blockquote class="embedly-card"><h4><a href="https://github.com/landjbs/Boogle">landjbs/Boogle</a></h4> -->
+            <!-- <p>Web search-engine capable of crawling, indexing, and searching millions of webpages almost exclusively in native Python. Uses hash-based wide-column database, multithreaded crawling, token scoring, autocorrection, posting list ranking, and intersectional search algorithms to achieve an empirical upper bound of ~3 sec. raw-text searches across Boogle index of Wikipedia. - landjbs/Boogle</p></blockquote> -->
+          <!-- <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script> -->
         </div>
 
       </div>
