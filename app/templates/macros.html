@@ -781,7 +781,7 @@
 {% endmacro -%}
 
 
-{% macro render_question_card(question) -%}
+{% macro render_question_card(question, user) -%}
 <div class='card mb-2' style='border:1px solid green'>
   <div class='card-body'>
     <div class='card-head tiny' contenteditable='true'>
@@ -789,6 +789,12 @@
         question.question
       </p>
     </div>
+    {% if question.answer %}
+      <p></p>
+    {% elif is %}
+
+    {% else %}
+    {% endif %}
     <p contenteditable="">
       Last summer I realized that, though I used Google every day,
       I didn't understand how it worked at all. I immediately set
