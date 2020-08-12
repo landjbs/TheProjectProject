@@ -25,7 +25,10 @@ class Question_Answer(CRUDMixin, db):
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
     question = relationship('Question', back_populates='answers')
     # answer
-    answer = db.Column(db.String(500), nullable=True)
+    answer = db.Column(db.String(500), nullable=True, unique=False)
+    # project
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    project = relationship('Project', back_populates='answers')
 
     def __repr__(self):
         return f'<{self.question}<Answer {self.text}>>'
