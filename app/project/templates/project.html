@@ -489,7 +489,7 @@
           <div class='row'>
             <div class='col'>
 
-              <table>
+              <table id='questionTable'>
                 <tr>
                   <!-- card start -->
                   <div class="card mb-2" style='border:1px solid green'>
@@ -512,11 +512,9 @@
                 <tr>
               </table>
 
-
-
               <!-- TEMP: plus button should open modal TODO: fix -->
               <center>
-                <a type="button" href="/add_project">
+                <a type="button" onclick='addQuestion()'>
                   <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
                 </a>
               </center>
@@ -758,6 +756,9 @@
       });
     </script>
     {% endif %}
+
+    <script>
+    </script>
 
 
   {% endblock %}
