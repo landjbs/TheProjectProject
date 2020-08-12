@@ -488,7 +488,18 @@
         <div id='About' class='tabcontent'>
           <div class='row'>
             <div class='col'>
-
+              <!-- title -->
+              <div class='row' style='vertical-align:middle;'>
+                <h4>
+                  <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
+                    <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
+                  </button>
+                  &nbsp;
+                  Questions
+                </h4>
+              </div>
+              <br><br>
+              <!-- question table -->
               <table id='questionTable'>
                 {% for question in project.questions %}
                   {{ macros.render_question_card(question, project, current_user) }}
@@ -496,11 +507,6 @@
               </table>
 
               <!-- TEMP: plus button should open modal TODO: fix -->
-              <center>
-                <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
-                  <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
-                </button>
-              </center>
 
             </div>
 
