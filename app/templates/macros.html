@@ -824,7 +824,7 @@
 {% macro render_question_card(question, project, user) -%}
 <div class='card mb-2'>
   <div class='card-body'>
-    <div class='card-head tiny'>
+    <div class='card-head'>
       {% if project.is_member(user) %}
         <a class='delete-btn task-btn float-right'
             style='background: transparent;'
@@ -832,17 +832,19 @@
             <i class="fa fa-times-circle" aria-hidden="true"></i>
         </a>
       {% endif %}
-      <p>
+      <p style='padding-bottom:1px; text-decoration:underline;'>
         {{ question.question }}
       </p>
     </div>
-    {% if question.answer %}
-      <p>{{ question.answer }}</p>
-    {% elif project.is_member(user) %}
-      <p contenteditable="">Click to answer</p>
-    {% else %}
-      <p>Project Members haven't answered this yet.</p>
-    {% endif %}
+    <p style='margin-bottom:0px;'>
+      {% if question.answer %}
+        {{ question.answer }}
+      {% elif project.is_member(user) %}
+        Click to answer
+      {% else %}
+        Members haven't answered this yet.
+      {% endif %}
+    </p>
   </div>
 </div>
 {% endmacro -%}
