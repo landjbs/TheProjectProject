@@ -24,4 +24,5 @@ class Question(CRUDMixin, db.Model):
 
     def add_answer(self, answer):
         self.answer = answer
+        self.answered_on = datetime.utcnow()
         self.update()
