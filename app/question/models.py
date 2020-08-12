@@ -17,8 +17,11 @@ class Question(CRUDMixin, db.Model):
     answer = db.Column(db.String(500), nullable=True, unique=False)
 
     def __repr__(self):
-        return f'<Question_Answer q={self.question} a={self.answer} p={self.project.name}>'
+        return(f'<Question_Answer q={self.question} a={self.answer} '
+            f'p={self.project.name}>')
 
-    def answer(self, answer):
+    def is_answered(self):
+
+    def add_answer(self, answer):
         self.answer = answer
         self.update()
