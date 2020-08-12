@@ -596,6 +596,11 @@
                 $('#sidebar').toggleClass('active');
                 $(this).toggleClass('active');
             });
+            if (sessionStorage.openTab) {
+              document.getElementById(sessionStorage.openTab).click();
+            } else {
+              document.getElementById("defaultOpen").click();
+            }
         });
 
         $('#user-rec-carousel').on('slid.bs.carousel', function () {
@@ -611,11 +616,6 @@
 
     <script>
       // if there was a tab open before refresh, click else open default
-      if (sessionStorage.openTab) {
-        document.getElementById(sessionStorage.openTab).click();
-      } else {
-        document.getElementById("defaultOpen").click();
-      }
       function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
