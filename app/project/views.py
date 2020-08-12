@@ -530,7 +530,7 @@ def remove_application_requirement(project_id):
 @project.route('/add_question', methods=['POST'])
 @login_required
 def add_question(project_id):
-    ''' Remove application from project '''
+    ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     if current_user!=project.owner:
         flash('Only the owner can change application settings.')

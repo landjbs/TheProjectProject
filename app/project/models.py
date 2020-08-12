@@ -332,8 +332,8 @@ class Project(CRUDMixin, db.Model):
         return True
 
     ## questions ##
-    def add_question(self, question):
-        self.questions.append(Question(question=question))
+    def add_question(self, question, answer=None):
+        self.questions.append(Question(question=question, answer=answer))
         self.update()
 
     ## status ##
