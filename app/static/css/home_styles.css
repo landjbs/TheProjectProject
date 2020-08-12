@@ -94,6 +94,10 @@ body {
   background-color: #ccc;
 }
 
+.tab button:focus {
+  outline: none;
+}
+
 /* Style the tab content */
 .tabcontent {
   display: none;
