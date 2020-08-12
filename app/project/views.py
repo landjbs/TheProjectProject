@@ -526,7 +526,7 @@ def remove_application_requirement(project_id):
     return redirect(request.referrer)
 
 
-
+## questions ##
 @project.route('/add_question/<int:project_id>', methods=['POST'])
 @login_required
 def add_question(project_id):
