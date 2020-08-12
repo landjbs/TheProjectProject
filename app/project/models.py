@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
 from app.notification.models import Notification
+from app.question.models import Question_Answer
 
 
 class Project(CRUDMixin, db.Model):
@@ -24,7 +25,7 @@ class Project(CRUDMixin, db.Model):
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects', lazy='dynamic')
     # question/answers
-    question_answers = relationship('Question_Answer', back_populates='project')
+    questions = relationship('Question_Answer', back_populates='project')
     ## people ##
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
@@ -329,6 +330,11 @@ class Project(CRUDMixin, db.Model):
         comment.delete()
         self.update()
         return True
+
+    ## questions ##
+    def add_question(self, question):
+        self.questions.append(Question_Answer(question=question))
+        self.update()
 
     ## status ##
     def mark_complete(self):
