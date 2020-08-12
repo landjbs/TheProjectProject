@@ -836,11 +836,14 @@
         {{ question.question }}
       </p>
     </div>
-    <p style='margin-bottom:0px;'>
+    {% if not project.is_member(user) %}
+      <p style='margin-bottom:0px;'>{{ question.answer }}</p>
+    {% else %}
+      <form >
       {% if question.answer %}
-        {{ question.answer }}
+        <p style='margin-bottom:0px;'>{{ question.answer }}</p>
       {% elif project.is_member(user) %}
-        Click to answer
+        Click to answer.
       {% else %}
         Members haven't answered this yet.
       {% endif %}
