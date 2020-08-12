@@ -846,13 +846,13 @@
       </p>
     {% else %}
       <form action='{{ url_for }}' method='post' style='margin-bottom:0px;'>
-        <textarea>
+        <p style='margin-bottom:0px;' contenteditable="">
           {% if question.answer %}
             {{ question.answer }}
           {% else %}
             Click to answer.
           {% endif %}
-        </textarea>
+        </p>
       </form>
     {% endif %}
     </p>
