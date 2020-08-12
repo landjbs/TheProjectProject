@@ -590,7 +590,6 @@
     });
     </script>
 
-
     <script type="text/javascript">
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
@@ -612,6 +611,7 @@
 
     <script>
       document.getElementById("defaultOpen").click();
+      sessionStorage.defaultOpen = 
       function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
@@ -763,14 +763,3 @@
 
 
   {% endblock %}
-
-
-<!-- {{ macros.render_question_card(question, current_user) }} -->
-
-
-<script>
-  // function addQuestion() {
-  //   var html = {{ macros.render_question_card()|tojson|safe }};
-  //   $('#questionTable').append(html);
-  // }
-</script>
