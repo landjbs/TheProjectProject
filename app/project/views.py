@@ -556,5 +556,6 @@ def delete_question(project_id, question_id):
         else:
             flash('Could not remove question.', 'error')
     else:
-        flash('Cannot delete question because you are not a project member.')
+        flash('Cannot delete question because you are not a project member.',
+              category='error')
     return redirect(request.referrer)
