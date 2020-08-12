@@ -487,18 +487,18 @@
         <!-- About -->
         <div id='About' class='tabcontent'>
           <div class='row'>
-            <div class='col'>
+            <div class='col' style='border-right:1px solid black;'>
               <!-- title -->
-              <div class='row' style='vertical-align:middle;'>
+              <div class='row' style='vertical-align:middle; border-bottom:1px solid black;'>
                 <h4>
+                  Questions
+                  &nbsp;
                   <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
                     <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
                   </button>
-                  &nbsp;
-                  Questions
                 </h4>
               </div>
-              <br><br>
+              <br>
               <!-- question table -->
               <table id='questionTable'>
                 {% for question in project.questions %}
