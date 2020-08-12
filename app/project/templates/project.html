@@ -488,7 +488,7 @@
         <div id='About' class='tabcontent'>
           <div class='row'>
             <div class='col'>
-              
+
               <table id='questionTable'>
                 {% for question in project.questions %}
                   here
@@ -497,9 +497,9 @@
 
               <!-- TEMP: plus button should open modal TODO: fix -->
               <center>
-                <a type="button" onclick='addQuestion()'>
+                <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
                   <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
-                </a>
+                </button>
               </center>
 
             </div>
@@ -539,6 +539,8 @@
         <!-- requires application modal -->
         {{ macros.render_requires_application_modal(project, edit_application_form) }}
       {% endif %}
+      <!-- question modals -->
+      {{ macros.render_ask_question_modal(project, current_user) }}
     </div>
     <!-- /modals -->
 

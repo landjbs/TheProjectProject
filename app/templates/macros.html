@@ -787,47 +787,28 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h5>Ask {{ project.name }} Members a Question</h5>
+        <h5>Ask a Question</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      {% if (current_user.owned.count())>0 %}
-      <form action="{{ url_for('project.ask_question') }}" method='post'>
+      <form action="" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
-          <label for="new_owner">Select project on which to collaborate with {{ target_user.name }}:</label>
-          <br>
-          <select name="selected_project" id="selected_project" class='select-clean'>
-            {% for project in current_user.owned %}
-              {% if (project.complete!=True) and (project.open==True) and (target_user not in project.members) and (target_user not in project.invitations )%}
-                {% if project==target_project %}
-                  <option value="{{ project.id }}" selected>{{ project.name }}</option>
-                {% else %}
-                  <option value="{{ project.id }}">{{ project.name }}</option>
-                {% endif %}
-              {% endif %}
-            {% endfor %}
-          </select>
+          <label for="new_owner">Question:</label>
+          <input type="text" name="city" list="cityname">
+          <datalist id="cityname">
+            <option value="Boston">
+            <option value="Cambridge">
+          </datalist>
+
+          {% if project.is_member(user) %}
+            here
+          {% endif %}
           <br><br>
-          <p>{{ target_user.name }} will be sent an invitation
-            and will be able to join without applying.
-          </p>
         </div>
         <div class="modal-footer">
-          <button class='btn'>Collaborate</button>
+          <button class='btn'>Ask</button>
         </div>
       </form>
-      {% else %}
-        <div class="modal-body">
-          <p>Cannot invite {{ target_user.name }} to collaborate because
-            you do not own any projects! Try <a href='/add_project'>adding a project</a> first.
-          </p>
-        </div>
-        <div class="modal-footer">
-          <a href='/add_project'>
-            <button class='btn'>Add Project</button>
-          </a>
-        </div>
-      {% endif %}
     </div>
   </div>
 </div>
