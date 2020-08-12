@@ -18,3 +18,6 @@ class Question_Answer(CRUDMixin, db.Model):
 
     def __repr__(self):
         return f'<Question_Answer q={self.question} a={self.answer} p={self.project.name}>'
+
+    def answer(self, answer):
+        self.answer = answer

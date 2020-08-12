@@ -10,6 +10,6 @@ question_suggestions = [
     ############################################################################
     ############## SO FAR: How the process is going ############################
     'What is the most difficult challenge you have faced?',
-    'What have you learned through your work on this project?',
+    'What have you learned through your work on this project?'
     ############################################################################
 ]
