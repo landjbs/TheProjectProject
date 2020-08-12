@@ -13,3 +13,8 @@ question_suggestions = [
     'What have you learned through your work on this project?'
     ############################################################################
 ]
+
+
+
+def suggest_questions(project):
+    

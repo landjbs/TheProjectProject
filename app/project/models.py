@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship, backref
 from app.database import db, CRUDMixin, generate_code
 from app.notification.models import Notification
 from app.question.models import Question
+from app.question.suggest import suggest_questions
 
 
 class Project(CRUDMixin, db.Model):
@@ -332,6 +333,10 @@ class Project(CRUDMixin, db.Model):
         return True
 
     ## questions ##
+    def suggested_questions(self):
+        ''' Generates list of suggested questions based on project stats '''
+        return suggest_questions(self)
+
     def add_question(self, question, answer=None):
         self.questions.append(Question(question=question, answer=answer))
         self.update()
