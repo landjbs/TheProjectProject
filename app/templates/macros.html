@@ -790,10 +790,11 @@
       </p>
     </div>
     {% if question.answer %}
-      <p></p>
-    {% elif is %}
-
+      <p>{{ question.answer }}</p>
+    {% elif project.is_member(user) %}
+      <p contenteditable="">Click to answer</p>
     {% else %}
+
     {% endif %}
     <p contenteditable="">
       Last summer I realized that, though I used Google every day,
