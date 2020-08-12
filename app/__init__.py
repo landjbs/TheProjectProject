@@ -17,6 +17,7 @@ from app.project import project
 from app.subject import subject
 from app.notification import notification
 from app.badge import badge
+from app.question import question
 from app.admin import register_admin_views
 #
 from app.database import db
