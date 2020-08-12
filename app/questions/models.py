@@ -11,10 +11,16 @@ class Question(CRUDMixin, db):
     # text
     text = db.Column(db.String(100), nullable=True, unique=True)
 
+    def __repr__(self):
+        return f'<Question {self.text}>'
+
 
 class Answer(CRUDMixin, db):
     __tablename__ = 'answer'
     # id
     id = db.Column(db.Integer, primary_key=True)
     # answer
-    answer = db.Column(db.String(500), nullable=True)
+    text = db.Column(db.String(500), nullable=True)
+
+    def __repr__(self):
+        return f'<Answer {self.text}>'
