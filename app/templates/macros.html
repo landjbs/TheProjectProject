@@ -840,6 +840,8 @@
       <p>{{ question.answer }}</p>
     {% elif project.is_member(user) %}
       <p contenteditable="">Click to answer</p>
+    {% else %}
+      <p>Project Members haven't answered this yet.</p>
     {% endif %}
   </div>
 </div>

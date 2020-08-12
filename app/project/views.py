@@ -532,11 +532,13 @@ def remove_application_requirement(project_id):
 def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
+    question = request.form.get('question')
+    answer = request.form.get('answer')
     if project.is_member(current_user):
-        project.add_question(request.form.get('question'),
+        project.add_question(,
                              request.form.get('answer'))
     else:
-        project.add_question(request.form.get('question'))
+        project.add_question(question)
     flash('Question added!', 'success')
     return redirect(request.referrer)
 
