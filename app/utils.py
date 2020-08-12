@@ -46,3 +46,11 @@ def partition_query(l):
         c = len(l)
     for i in range(0, c, n):
         yield l[i:i+n]
+
+
+def filter_string(s):
+    '''
+    Cleans and filters out strings with whitespace. Returns None if string
+    has no substance.
+    '''
+    return (s if s!='' else None)
