@@ -18,4 +18,4 @@ question_suggestions = [
 
 def suggest_questions(project):
     return [question for question in question_suggestions
-            if not project.questions.query.filter_by(question=question)]
+            if not project.questions.filter_by(question=question).first()]
