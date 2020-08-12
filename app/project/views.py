@@ -551,8 +551,10 @@ def delete_question(project_id, question_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     if project.is_member(current_user):
-        project.remove_question(question_id)
-        flash('Question added!', 'success')
+        if project.remove_question(question_id):
+            flash('Question removed.', 'success')
+        else:
+            flash('Could not remove question.', 'error')
     else:
         flash('Cannot delete question because you are not a project member.')
     return redirect(request.referrer)

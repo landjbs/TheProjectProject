@@ -346,7 +346,12 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
-    def remove_question(self, ):
+    def remove_question(self, question_id):
+        question = self.questions.filter_by(id=question_id).first()
+        if not question:
+            return False
+        question.delete()
+        return True
 
     ## status ##
     def mark_complete(self):
