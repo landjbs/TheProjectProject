@@ -848,10 +848,9 @@
       <form action='{{ url_for }}' method='post'>
       {% if question.answer %}
         <p style='margin-bottom:0px;'>{{ question.answer }}</p>
-      {% elif project.is_member(user) %}
-        Click to answer.
       {% else %}
-        Members haven't answered this yet.
+        Click to answer.
+      {% endif %}
     {% endif %}
     </p>
   </div>
