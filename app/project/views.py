@@ -524,3 +524,19 @@ def remove_application_requirement(project_id):
         else:
             flash('Application requirement removed!', 'success')
     return redirect(request.referrer)
+
+
+
+@project.route('/add_question', methods=['POST'])
+@login_required
+def remove_application_requirement(project_id):
+    ''' Remove application from project '''
+    project = Project.query.get_or_404(project_id)
+    if current_user!=project.owner:
+        flash('Only the owner can change application settings.')
+    else:
+        if not project.remove_application():
+            flash(f'Could not remove application.', 'error')
+        else:
+            flash('Application requirement removed!', 'success')
+    return redirect(request.referrer)
