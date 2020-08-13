@@ -589,7 +589,6 @@ def add_link(project_id):
         flash('Could not add link because you are not a project member.',
             category='error')
     else:
-        print(request.form.get('link'))
         link = filter_string(request.form.get('link'))
         if link:
             project.add_link(link)
