@@ -1,6 +1,7 @@
 ''' Custom validators for WTF_Forms '''
 
 import re
+from urllib.parse import urlparse
 
 
 class Email_Ext_Validator(object):
@@ -9,7 +10,6 @@ class Email_Ext_Validator(object):
         self.allowed = set(allowed)
 
     def __call__(self, form, field):
-        # return True
         email = str(field.data)
         ending = email.split('@')[-1]
         if not ending in self.allowed:
@@ -17,18 +17,13 @@ class Email_Ext_Validator(object):
                                   'are allowed.')
 
 
-class Site_URL_Validator(object):
-    ''' Validator for http or https URLs from site '''
-    def __init__(self, site):
-        self.site = site
-        matcher = (r'(www\.|http://|https://|http://www\.|https://\.)'
-                   f'{site}.com/'
-                   r'.+')
-        self.matcher = re.compile(matcher)
+class Link_Validator(object):
+    ''' Validator for link format '''
+    def __init__(self):
+        pass
 
     def __call__(self, form, field):
-        if not re.match(self.matcher, field.data):
-            raise ValidationError(f"Invalid URL for {self.site}.")
+        
 
 
 class Select_Limit_Validator(object):
@@ -38,3 +33,18 @@ class Select_Limit_Validator(object):
     def __call__(self, form, field):
         if len(field.data)>self.max:
             raise ValidationError(f'Must select no more than {self.max} options.')
+
+
+## DEPRECATED (for now) ##
+# class Site_URL_Validator(object):
+#     ''' Validator for http or https URLs from site '''
+#     def __init__(self, site):
+#         self.site = site
+#         matcher = (r'(www\.|http://|https://|http://www\.|https://\.)'
+#                    f'{site}.com/'
+#                    r'.+')
+#         self.matcher = re.compile(matcher)
+#
+#     def __call__(self, form, field):
+#         if not re.match(self.matcher, field.data):
+#             raise ValidationError(f"Invalid URL for {self.site}.")
