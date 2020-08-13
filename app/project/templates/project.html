@@ -527,9 +527,8 @@
                   {{ macros.render_link_card(link, is_owner) }}
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
-              {% else %}
-                {{ macros.render_link_card_fake() }}
               {% endif %}
+              {{ macros.render_link_card_fake() }}
             </div>
           </div>
         </div>
