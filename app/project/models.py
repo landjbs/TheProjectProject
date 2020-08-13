@@ -376,7 +376,11 @@ class Project(CRUDMixin, db.Model):
         return False
 
     def remove_link(self, link_id):
-        raise NotImplementedError('remove_link')
+        link = self.links.filter_by(id=link_id).first()
+        if not link:
+            return False
+        link.delete()
+        return True
 
     ## status ##
     def mark_complete(self):
