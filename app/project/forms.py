@@ -125,3 +125,9 @@ class Comment_Form(BaseForm):
     ''' Form to add comment to project '''
     text = TextField('Comment', validators=[DataRequired(), Length(1,160)],
                      render_kw={'max':160})
+
+
+class URL_Form(BaseForm):
+    ''' Form to add url to project '''
+    text = StringField('URL', validators=[DataRequired(), Length(1, 500],
+                       render_kw={'max':500})
