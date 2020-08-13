@@ -793,9 +793,9 @@
       <form action="{{ url_for('project.add_link', project_id=project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
-          <label for="question">URL:</label>
+          <label for="link">URL:</label>
           <br>
-          <input type='text' class='select-clean' placeholder="https://www.github.com/example" max='550'/>
+          <input type='text' name='link' class='select-clean' placeholder="https://www.github.com/example" max='550'/>
         </div>
         <div class="modal-footer">
           <button class='btn'>Add</button>

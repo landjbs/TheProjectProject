@@ -585,8 +585,12 @@ def delete_question(project_id, question_id):
 def add_link(link):
     ''' Adds link to project '''
     project = Project.query.get_or_404(project_id)
-    # else:
-    #     answer = filter_string(request.form.get('answer'))
+    if not project.is_member(current_user):
+        flash('Could not add link because you are not a project member.',
+            category='error')
+    else:
+       link = filter_string(request.form.get('link'))
+       if 
     #     if project.is_member(current_user):
     #         project.add_question(question, answer)
     #     else:
