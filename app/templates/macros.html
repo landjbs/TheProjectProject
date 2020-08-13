@@ -843,6 +843,11 @@
         {% else %}
           Project members haven't answered this yet.
         {% endif %}
+        <a class='delete-btn task-btn float-right'
+            style='background: transparent;'
+            href="{{ url_for('project.update_question', project_id=project.id, question_id=question.id) }}">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+        </a>
       </p>
     {% else %}
       <form action='{{ url_for }}' method='post' style='margin-bottom:0px;'>
