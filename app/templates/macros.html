@@ -782,6 +782,42 @@
 
 
 {% macro render_url_modal(projet, user) %}
+<div id="modal_add_url" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Add A URL</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('project.add_question', project_id=project.id) }}" method='post'>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="modal-body">
+          <label for="question">Question:</label>
+          <input type="text" name="question" list="question_suggestions" class='select-clean'
+            required>
+          <datalist id="question_suggestions">
+            {% for question in project.suggest_questions() %}
+              {% if loop.index==1 %}
+                <option value='{{ question }}' selected>
+              {% else %}
+                <option value='{{ question }}'>
+              {% endif %}
+            {% endfor %}
+          </datalist>
+          <br><br>
+          {% if project.is_member(user) %}
+            <label for="answer">Answer:</label>
+            <textarea name='answer' class='select-clean'></textarea>
+          {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>Ask</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endmacro -%}
 
 
