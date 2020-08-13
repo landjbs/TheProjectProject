@@ -11,7 +11,7 @@ class Link(CRUDMixin, db.Model):
     # url
     url = db.Column(db.String(500), nullable=False, unique=False)
     # project
-    project_id = Column(db.Integer, ForeignKey('project.id'), nullable=True)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
     project = relationship('Project', back_populates='links')
 
     def __repr__(self):
