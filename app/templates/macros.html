@@ -808,7 +808,7 @@
           <br><br>
           {% if project.is_member(user) %}
             <label for="answer">Answer:</label>
-            <textarea name='answer' class='select-clean' required></textarea>
+            <textarea name='answer' class='select-clean'></textarea>
           {% endif %}
         </div>
         <div class="modal-footer">
@@ -846,11 +846,11 @@
       </p>
     {% else %}
       <form action='{{ url_for }}' method='post' style='margin-bottom:0px;'>
-        <p style='margin-bottom:0px;' contenteditable="">
+        <p style='margin-bottom:0px; border:1px solid grey; width:80%;' contenteditable="">
           {% if question.answer %}
             {{ question.answer }}
           {% else %}
-            Click to answer.
+            Write your answer here...
           {% endif %}
         </p>
       </form>
