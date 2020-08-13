@@ -13,3 +13,6 @@ class Link(CRUDMixin, db.Model):
     # project
     project_id = Column(db.Integer, ForeignKey('project.id'), nullable=True)
     project = relationship('Project', back_populates='links')
+
+    def __repr__(self):
+        return f'<Link {self.url}>'
