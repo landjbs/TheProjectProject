@@ -524,20 +524,7 @@
               <br>
               {% if project.links.all()|length > 0 %}
                 {% for link in project.links %}
-                  <style class="embedly-css">
-                      .card .title {
-                        margin-bottom:5px;
-                      }
-                      .card .action {
-                        color: #fa4b2a;
-                      }
-                    </style>
-                    <blockquote class="embedly-card" data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b">
-                      <h4>
-                        <a href="{{ link.url }}"></a>
-                      </h4>
-                      <p>{{ link.description }}.</p>
-                    </blockquote>
+                  {{ macros.render_link_card(link) }}
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
               {% else %}

@@ -807,6 +807,30 @@
 {% endmacro -%}
 
 
+{% macro render_link_card_fake() -%}
+<div class='card mb-2'>
+  <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
+    <i class="fas fa-link fa-2x"></i>
+    <h5>Add A Link</h5>
+  </div>
+</div>
+{% endmacro -%}
+
+
+{% macro render_link_card(link) -%}
+<div class='card mb-2'>
+  <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='text-align:center;'>
+    <blockquote class="embedly-card" data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b">
+      <h4>
+        <a href="{{ link.url }}"></a>
+      </h4>
+      <p>{{ link.description }}.</p>
+    </blockquote>
+  </div>
+</div>
+{% endmacro -%}
+
+
 {% macro render_ask_question_modal(project, user) -%}
 <div id="modal_ask_question" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -842,16 +866,6 @@
         </div>
       </form>
     </div>
-  </div>
-</div>
-{% endmacro -%}
-
-
-{% macro render_link_card_fake() -%}
-<div class='card mb-2'>
-  <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
-    <i class="fas fa-link fa-2x"></i>
-    <h5>Add A Link</h5>
   </div>
 </div>
 {% endmacro -%}
