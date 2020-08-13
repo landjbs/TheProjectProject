@@ -826,13 +826,6 @@
   <div class='card-body'>
     <div class='card-head'>
       <p style='padding-bottom:1px;'>
-        {% if project.is_member(user) %}
-          <a class='delete-btn task-btn float-right'
-              style='background: transparent;'
-              href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
-              <i class="fa fa-times-circle" aria-hidden="true"></i>
-          </a>
-        {% endif %}
         {{ question.question }}
       </p>
     </div>
@@ -854,12 +847,16 @@
             <input style='margin-bottom:0px;' name='answer' class='select-clean' placeholder='Write your answer here...'>
           {% endif %}
         </input>
-        <button class='complete-btn task-btn float-right' style='background:transparent;border:0px;'>
+        <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
             <i class="fa fa-check-circle" aria-hidden="true"></i>
         </button>
+        <a class='delete-btn task-btn float-right'
+            style='background: transparent;'
+            href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+        </a>
       </form>
     {% endif %}
-    </p>
   </div>
 </div>
 {% endmacro -%}

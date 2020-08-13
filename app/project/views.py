@@ -549,8 +549,10 @@ def add_question(project_id):
 @limiter.limit('30/min')
 @login_required
 def edit_answer(project_id, question_id):
+    print('HERE')
     project = Project.query.get_or_404(project_id)
-    question = Project.questions.filter_by(id=question_id).first()
+    print(project)
+    question = project.questions.filter_by(id=question_id).first()
     if not question:
         flash('Could not find question.', category='error')
     elif not project.is_member(current_user):

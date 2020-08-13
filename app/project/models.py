@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship, backref
 from app.database import db, CRUDMixin, generate_code
 from app.notification.models import Notification
 from app.question.models import Question
-from app.question.suggest import suggest_questions
+from app.question.suggest import suggest_questions, choose_init_questions
 
 
 class Project(CRUDMixin, db.Model):
@@ -96,6 +96,9 @@ class Project(CRUDMixin, db.Model):
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
         self.add_member(owner, notify_owner=False)
+        ### choose questions and add them to project ###
+        for question in choose_init_questions(self):
+            self.add_question(question=question)
 
     def __repr__(self):
         return f'<Project {self.name}>'
