@@ -28,5 +28,5 @@ def suggest_questions(project):
 def choose_init_questions(project, n=3):
     if n>question_num:
         raise ValueError(f'n {n} is greater than max questions {question_num}.')
-    q_ids = np.random.randint(0, question_num+1, size=n)
-    return set()
+    q_ids = np.random.choice(range(question_num), size=n, replace=False)
+    return [questions[id] for id in q_ids]
