@@ -371,6 +371,7 @@ class Project(CRUDMixin, db.Model):
         link = self.links.filter_by(url=link).first()
         if link is None:
             self.links.append(Link(url=link))
+            self.update()
             return True
         return False
 

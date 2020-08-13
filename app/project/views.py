@@ -582,14 +582,18 @@ def delete_question(project_id, question_id):
 ## urls ##
 @project.route('/add_link/<int:project_id>', methods=['POST'])
 @login_required
-def add_link(link):
+def add_link(project_id):
     ''' Adds link to project '''
     project = Project.query.get_or_404(project_id)
     if not project.is_member(current_user):
         flash('Could not add link because you are not a project member.',
             category='error')
     else:
+        print(request.form.get('link'))
         link = filter_string(request.form.get('link'))
-        project.add_link(link)
-        flash('Link added!', 'success')
+        if link:
+            project.add_link(link)
+            flash('Link added!', 'success')
+        else:
+            flash('Invalid link.', 'error')
     return redirect(request.referrer)
