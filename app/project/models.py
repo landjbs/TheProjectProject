@@ -23,7 +23,8 @@ class Project(CRUDMixin, db.Model):
     # links
     links = relationship('Link',
                          back_populates='project',
-                         lazy='dynamic',)
+                         lazy='dynamic',
+                         cascade='all, delete, delete-orphan')
     # subject
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects', lazy='dynamic')
