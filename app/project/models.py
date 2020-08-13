@@ -367,7 +367,12 @@ class Project(CRUDMixin, db.Model):
 
     ## links ##
     def add_link(self, link):
-        self.links.append(Link(url=link))
+        # check if link is already in project
+        link = self.links.filter_by(url=link).first()
+        if link is None:
+            self.links.append(Link(url=link))
+            return True
+        return False
 
     def remove_link(self, link_id):
         raise NotImplementedError('remove_link')
