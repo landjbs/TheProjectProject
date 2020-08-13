@@ -847,6 +847,7 @@
     {% else %}
       <form action="{{ url_for('project.edit_answer', project_id=project.id, question_id=question.id) }}"
         method='post' style='margin-bottom:0px;'>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           {% if question.answer %}
             <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}'>
           {% else %}

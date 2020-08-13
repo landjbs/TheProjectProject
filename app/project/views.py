@@ -545,7 +545,7 @@ def add_question(project_id):
     return redirect(request.referrer)
 
 
-@project.route('/edit_answer/<int:project_id>/<int:question_id>')
+@project.route('/edit_answer/<int:project_id>/<int:question_id>', methods=['POST'])
 @limiter.limit('30/min')
 @login_required
 def edit_answer(project_id, question_id):
