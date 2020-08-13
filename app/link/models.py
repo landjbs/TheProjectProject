@@ -13,6 +13,13 @@ class Link(CRUDMixin, db.Model):
     # project
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
     project = relationship('Project', back_populates='links')
+    ## render data (potentially should be moved somewhere more efficient) ##
+    title = db.Column(db.String(500), nullable=True, unique=False)
+    description = db.Column(db.Text(), nullable=True, unique=False)
+    is_rendered = db.Column(db.Boolean, nullable=False, default=False)
+
+    def __init__(self, url):
+        
 
     def __repr__(self):
         return f'<Link {self.url}>'

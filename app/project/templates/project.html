@@ -524,21 +524,24 @@
               <br>
               {% if project.links.all()|length > 0 %}
                 {% for link in project.links %}
-                <style class="embedly-css">
-                    @import url(https://fonts.googleapis.com/css?family=Merriweather);
-                    .card {
-                      font-family: 'Merriweather', serif;
-                    }
-                    .card .title {
-                      margin-bottom:5px;
-                    }
-                    .card .action {
-                      color: #fa4b2a;
-                    }
-                  </style>
+                  <style class="embedly-css">
+                      .card .title {
+                        margin-bottom:5px;
+                      }
+                      .card .action {
+                        color: #fa4b2a;
+                      }
+                    </style>
 
-                  <blockquote class="embedly-card" data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b"><h4><a href="http://www.theverge.com/2016/3/17/11250246/aston-martin-red-bull-car-project-nebula-announced-formula-1-partnership">Aston Martin teams up with Red Bull to create the world's fastest hypercar</a></h4><p>Right on the heels of the release of the DB11, the follow-up to the stalwart DB9 coupe, we have an exclusive preview into a secret project that Aston Martin has been working on for the last three months: it is aiming to build the fastest hypercar in the world.</p></blockquote>
-                <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                    <blockquote class="embedly-card" data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b">
+                      <h4>
+                        <a href="http://stradarouting.com/">
+                          Strada
+                        </a>
+                      </h4>
+                      <p>Strada Routing builds AI systems to automate load bundling and bidding for truck shipments across many customers with respect to a wide variety of costs and constraints. By considering all implications of a load/lane choice we minimize deadhead in both full- and less-than-truckload shipments.</p>
+                    </blockquote>
+                  <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
               {% else %}
                 {{ macros.render_link_card_fake() }}
