@@ -498,13 +498,12 @@
                 </h4>
               </div>
               <br>
-              <!-- question table -->
+              <!-- question column -->
               <div class='about-col'>
-                <table id='questionTable'>
-                  {% for question in project.questions %}
-                    {{ macros.render_question_card(question, project, current_user) }}
-                  {% endfor %}
-                </table>
+                {% for question in project.questions %}
+                  {{ macros.render_question_card(question, project, current_user) }}
+                {% endfor %}
+                {{ macros.render_add_question_card() }}
               </div>
             </div>
 
@@ -528,7 +527,7 @@
                     <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                   {% endfor %}
                 {% endif %}
-                {{ macros.render_link_card_fake() }}
+                {{ macros.render_add_link_card() }}
               </div>
             </div>
           </div>
