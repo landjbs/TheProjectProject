@@ -825,14 +825,14 @@
 <div class='card mb-2'>
   <div class='card-body'>
     <div class='card-head'>
-      {% if project.is_member(user) %}
-        <a class='delete-btn task-btn float-right'
-            style='background: transparent;'
-            href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-        </a>
-      {% endif %}
       <p style='padding-bottom:1px;'>
+        {% if project.is_member(user) %}
+          <a class='delete-btn task-btn float-right'
+              style='background: transparent;'
+              href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+          </a>
+        {% endif %}
         {{ question.question }}
       </p>
     </div>
@@ -843,11 +843,6 @@
         {% else %}
           Project members haven't answered this yet.
         {% endif %}
-        <a class='delete-btn task-btn float-right'
-            style='background: transparent;'
-            href="{{ url_for('project.update_question', project_id=project.id, question_id=question.id) }}">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-        </a>
       </p>
     {% else %}
       <form action='{{ url_for }}' method='post' style='margin-bottom:0px;'>
@@ -858,6 +853,9 @@
             Write your answer here...
           {% endif %}
         </p>
+        <button class='complete-btn task-btn float-right' style='background: transparent;'>
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
+        </button>
       </form>
     {% endif %}
     </p>
