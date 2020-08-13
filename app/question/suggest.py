@@ -12,7 +12,7 @@ question_suggestions = [
     "What is your team's experience in this field?",
     ############################################################################
     ############## SO FAR: How the process is going ############################
-    'What is the most difficult challenge you have faced?',
+    'What is the most difficult challenge you have faced so far?',
     'What have you learned through your work on this project?',
     'What have you completed so far?'
     ############################################################################
@@ -35,8 +35,9 @@ def suggest_questions(project):
 
 
 
-def choose_init_questions(project, n=3):
+def choose_init_questions(project, n=8):
     if n>question_num:
-        raise ValueError(f'n {n} is greater than max questions {question_num}.')
+        print(f'WARNING: n {n} is greater than max questions {question_num}.')
+        n = question_num
     q_ids = np.random.choice(range(question_num), size=n, replace=False)
-    return [questions[id] for id in q_ids]
+    return [question_suggestions[id] for id in q_ids]
