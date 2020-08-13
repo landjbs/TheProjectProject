@@ -591,5 +591,5 @@ def add_link(link):
     #         project.add_question(question, answer)
     #     else:
     #         project.add_question(question)
-    flash('Question added!', 'success')
+    flash('Link added!', 'success')
     return redirect(request.referrer)

@@ -790,12 +790,12 @@
         <h5>Add A URL</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('project.add_url', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('project.add_link', project_id=project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <label for="question">URL:</label>
-          <input type='text' placeholder="https://www.github.com/example" max='550'/>
+          <br>
+          <input type='text' class='select-clean' placeholder="https://www.github.com/example" max='550'/>
         </div>
         <div class="modal-footer">
           <button class='btn'>Add</button>

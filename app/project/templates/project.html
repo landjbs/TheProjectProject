@@ -493,7 +493,7 @@
                 <h4>
                   Questions
                   &nbsp;
-                  <button type='button' data-toggle='modal' data-target='#modal_add_link' class='edit-button'>
+                  <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
                     <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
                   </button>
                 </h4>
@@ -517,13 +517,14 @@
                   Links
                   &nbsp;
                   {% if project.is_member(current_user) %}
-                    <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
+                    <button type='button' data-toggle='modal' data-target='#modal_add_link' class='edit-button'>
                       <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
                     </button>
                   {% endif %}
                 </h4>
               </div>
-
+              <blockquote class="embedly-card"><h4><a href="https://www.linkedin.com/in/landon-jb-smith/">Landon S. - Hanover, New Hampshire | Professional Profile | LinkedIn</a></h4><p>View Landon S.'s professional profile on LinkedIn. LinkedIn is the world's largest business network, helping professionals like Landon S. discover inside connections to recommended job candidates, industry experts, and business partners.</p></blockquote>
+              <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
               <blockquote class="embedly-card"><h4><a href="https://github.com/landjbs/Boogle">landjbs/Boogle</a></h4>
                 <p>Web search-engine capable of crawling, indexing, and searching millions of webpages almost exclusively in native Python. Uses hash-based wide-column database, multithreaded crawling, token scoring, autocorrection, posting list ranking, and intersectional search algorithms to achieve an empirical upper bound of ~3 sec. raw-text searches across Boogle index of Wikipedia. - landjbs/Boogle</p></blockquote>
               <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
