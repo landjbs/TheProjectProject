@@ -590,10 +590,6 @@ def add_link(link):
             category='error')
     else:
        link = filter_string(request.form.get('link'))
-       if 
-    #     if project.is_member(current_user):
-    #         project.add_question(question, answer)
-    #     else:
-    #         project.add_question(question)
-    flash('Link added!', 'success')
+       project.add_link(link)
+        flash('Link added!', 'success')
     return redirect(request.referrer)

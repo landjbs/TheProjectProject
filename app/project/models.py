@@ -356,6 +356,10 @@ class Project(CRUDMixin, db.Model):
         question.delete()
         return True
 
+    ## links ##
+    def add_link(self, link):
+        self.add
+
     ## status ##
     def mark_complete(self):
         ''' Mark project as complete '''
