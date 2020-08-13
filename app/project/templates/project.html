@@ -524,7 +524,7 @@
               <br>
               {% if project.links.all()|length > 0 %}
                 {% for link in project.links %}
-                  {{ macros.render_link_card(link) }}
+                  {{ macros.render_link_card(link, is_owner) }}
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
               {% else %}
