@@ -2,10 +2,16 @@ from datetime import datetime
 from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
+############################# notifications ####################################
 from app.notification.models import Notification
+################################################################################
+############################# questions ########################################
 from app.question.models import Question
 from app.question.suggest import suggest_questions, choose_init_questions
-
+################################################################################
+############################## links ###########################################
+from app.link.models import Link
+################################################################################
 
 class Project(CRUDMixin, db.Model):
     __tablename__ = 'project'
@@ -361,7 +367,7 @@ class Project(CRUDMixin, db.Model):
 
     ## links ##
     def add_link(self, link):
-        self.add
+        self.links.append(Link(url=link))
 
     ## status ##
     def mark_complete(self):
