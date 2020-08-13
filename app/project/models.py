@@ -21,7 +21,9 @@ class Project(CRUDMixin, db.Model):
     # summary
     summary = db.Column(db.String(400), nullable=False)
     # links
-    links = db.Column(db.String(128), nullable=True)
+    links = relationship('Link',
+                         back_populates='project',
+                         lazy='dynamic',)
     # subject
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects', lazy='dynamic')
