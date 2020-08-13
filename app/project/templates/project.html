@@ -532,14 +532,11 @@
                         color: #fa4b2a;
                       }
                     </style>
-
                     <blockquote class="embedly-card" data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b">
                       <h4>
-                        <a href="http://stradarouting.com/">
-                          Strada
-                        </a>
+                        <a href="{{ link.url }}"></a>
                       </h4>
-                      <p>Strada Routing builds AI systems to automate load bundling and bidding for truck shipments across many customers with respect to a wide variety of costs and constraints. By considering all implications of a load/lane choice we minimize deadhead in both full- and less-than-truckload shipments.</p>
+                      <p>{{ link.description }}.</p>
                     </blockquote>
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
