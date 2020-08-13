@@ -608,7 +608,7 @@ def remove_link(project_id, link_id):
         flash('Could not remove link because you are not a project member.',
             category='error')
     else:
-        if project.remove_link(link_id)
+        if project.remove_link(link_id):
             flash('Link removed.', 'success')
         else:
             flash('Could not remove link.', 'error')
