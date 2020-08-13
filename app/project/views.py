@@ -599,7 +599,7 @@ def add_link(project_id):
     return redirect(request.referrer)
 
 
-@project.route('/remove_link/<int:project_id>/<int:link_id>', methods=['POST'])
+@project.route('/remove_link/<int:project_id>/<int:link_id>', methods=['GET'])
 @login_required
 def remove_link(project_id, link_id):
     ''' Adds link to project '''
