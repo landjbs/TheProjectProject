@@ -499,14 +499,13 @@
               </div>
               <br>
               <!-- question table -->
-              <table id='questionTable'>
-                {% for question in project.questions %}
-                  {{ macros.render_question_card(question, project, current_user) }}
-                {% endfor %}
-              </table>
-
-              <!-- TEMP: plus button should open modal TODO: fix -->
-
+              <div class='about-col'>
+                <table id='questionTable'>
+                  {% for question in project.questions %}
+                    {{ macros.render_question_card(question, project, current_user) }}
+                  {% endfor %}
+                </table>
+              </div>
             </div>
 
             <!-- LINKS -->
@@ -522,13 +521,15 @@
                 </h4>
               </div>
               <br>
-              {% if project.links.all()|length > 0 %}
-                {% for link in project.links %}
-                  {{ macros.render_project_link_card(link, project, is_owner) }}
-                  <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-                {% endfor %}
-              {% endif %}
-              {{ macros.render_link_card_fake() }}
+              <div class='about-col'>
+                {% if project.links.all()|length > 0 %}
+                  {% for link in project.links %}
+                    {{ macros.render_project_link_card(link, project, is_owner) }}
+                    <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                  {% endfor %}
+                {% endif %}
+                {{ macros.render_link_card_fake() }}
+              </div>
             </div>
           </div>
         </div>
