@@ -848,9 +848,9 @@
       <form action="{{ url_for('project.edit_answer', project_id=project.id, question_id=question.id) }}"
         method='post' style='margin-bottom:0px;'>
           {% if question.answer %}
-            <input style='margin-bottom:0px;' class='select-clean' value='{{ question.answer }}'>
+            <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}'>
           {% else %}
-            <input style='margin-bottom:0px;' class='select-clean' placeholder='Write your answer here...'>
+            <input style='margin-bottom:0px;' name='answer' class='select-clean' placeholder='Write your answer here...'>
           {% endif %}
         </input>
         <button class='complete-btn task-btn float-right' style='background:transparent;border:0px;'>

@@ -550,11 +550,15 @@ def add_question(project_id):
 @login_required
 def edit_answer(project_id, question_id):
     project = Project.query.get_or_404(project_id)
-    question =
-    if not project.is_member(current_user):
-        question.add_answer(answer=request.form.get('answer'))
-    else:
+    question = Project.questions.filter_by(id=question_id).first()
+    if not question:
+        flash('Could not find question.', category='error')
+    elif not project.is_member(current_user):
         flash('Only project members can answer questions.', category='error')
+    else:
+        question.add_answer(answer=request.form.get('answer'))
+        flash('Question answered.', category='success')
+    return redirect(request.referrer)
 
 
 @project.route('/delete_question/<int:project_id>/<int:question_id>')
