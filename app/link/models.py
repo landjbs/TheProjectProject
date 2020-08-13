@@ -1,6 +1,8 @@
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
+import .embedder
+
 from app.database import db, CRUDMixin
 
 
@@ -19,7 +21,12 @@ class Link(CRUDMixin, db.Model):
     is_rendered = db.Column(db.Boolean, nullable=False, default=False)
 
     def __init__(self, url):
-        
+        self.url = url
+        scape_data = embedder.scrape(url)
+        ## load page data ##
+        self.title = scape_data['title']
+        self.description = scape_data['description']
+        self.is_rendered = True
 
     def __repr__(self):
         return f'<Link {self.url}>'
