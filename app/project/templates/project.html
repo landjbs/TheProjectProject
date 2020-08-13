@@ -523,13 +523,9 @@
                   {% endif %}
                 </h4>
               </div>
-              <blockquote class="embedly-card"><h4><a href="https://www.linkedin.com/in/landon-jb-smith/">Landon S. - Hanover, New Hampshire | Professional Profile | LinkedIn</a></h4><p>View Landon S.'s professional profile on LinkedIn. LinkedIn is the world's largest business network, helping professionals like Landon S. discover inside connections to recommended job candidates, industry experts, and business partners.</p></blockquote>
-              <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-              <blockquote class="embedly-card"><h4><a href="https://github.com/landjbs/Boogle">landjbs/Boogle</a></h4>
-                <p>Web search-engine capable of crawling, indexing, and searching millions of webpages almost exclusively in native Python. Uses hash-based wide-column database, multithreaded crawling, token scoring, autocorrection, posting list ranking, and intersectional search algorithms to achieve an empirical upper bound of ~3 sec. raw-text searches across Boogle index of Wikipedia. - landjbs/Boogle</p></blockquote>
-              <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-              <blockquote class="embedly-card"><h4><a href="https://www.quora.com/Can-you-embed-Slack-within-a-website">Can you embed Slack within a website?</a></h4><p>Answer (1 of 7): Yes, You can embed a Slack channel onto a website. I use a solution called Hybrid.Chat to connect all live chats from website, facebook page and business SMS and answer them from my Slack that I share with my team (so, anyone can respond).</p></blockquote>
-              <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+              {% for link in project.links %}
+                {{ link.url }}
+              {% endfor %}
             </div>
           </div>
         </div>
