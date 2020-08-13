@@ -20,8 +20,8 @@ class Project(CRUDMixin, db.Model):
     oneliner = db.Column(db.String(40))
     # summary
     summary = db.Column(db.String(400), nullable=False)
-    # url
-    url = db.Column(db.String(128), nullable=True)
+    # links
+    links = db.Column(db.String(128), nullable=True)
     # subject
     subjects = relationship('Subject', secondary='project_to_subject',
                             back_populates='projects', lazy='dynamic')
