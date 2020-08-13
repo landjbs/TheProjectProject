@@ -493,7 +493,7 @@
                 <h4>
                   Questions
                   &nbsp;
-                  <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
+                  <button type='button' data-toggle='modal' data-target='#modal_add_link' class='edit-button'>
                     <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
                   </button>
                 </h4>
@@ -560,6 +560,7 @@
       {% endif %}
       <!-- question modals -->
       {{ macros.render_ask_question_modal(project, current_user) }}
+      {{ macros.render_link_modal(project) }}
     </div>
     <!-- /modals -->
 

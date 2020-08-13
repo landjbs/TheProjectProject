@@ -577,3 +577,19 @@ def delete_question(project_id, question_id):
         flash('Cannot delete question because you are not a project member.',
               category='error')
     return redirect(request.referrer)
+
+
+## urls ##
+@project.route('/add_link/<int:project_id>', methods=['POST'])
+@login_required
+def add_link(link):
+    ''' Adds link to project '''
+    project = Project.query.get_or_404(project_id)
+    # else:
+    #     answer = filter_string(request.form.get('answer'))
+    #     if project.is_member(current_user):
+    #         project.add_question(question, answer)
+    #     else:
+    #         project.add_question(question)
+    flash('Question added!', 'success')
+    return redirect(request.referrer)
