@@ -582,6 +582,7 @@ def delete_question(project_id, question_id):
 ## urls ##
 @project.route('/add_link/<int:project_id>', methods=['POST'])
 @login_required
+@limiter.limit('20/minute')
 def add_link(project_id):
     ''' Adds link to project '''
     project = Project.query.get_or_404(project_id)
@@ -595,4 +596,20 @@ def add_link(project_id):
             flash('Link added!', 'success')
         else:
             flash('Invalid link.', 'error')
+    return redirect(request.referrer)
+
+
+@project.route('/add_link/<int:project_id>/<int:link_id>', methods=['POST'])
+@login_required
+def remove_link(project_id, link_id):
+    ''' Adds link to project '''
+    project = Project.query.get_or_404(project_id)
+    if not project.is_member(current_user):
+        flash('Could not remove link because you are not a project member.',
+            category='error')
+    else:
+        if project.remove_link(link_id)
+            flash('Link removed.', 'success')
+        else:
+            flash('Could not remove link.', 'error')
     return redirect(request.referrer)
