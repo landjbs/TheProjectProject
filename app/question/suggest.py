@@ -35,7 +35,7 @@ def suggest_questions(project):
 
 
 
-def choose_init_questions(project, n=8):
+def choose_init_questions(project, n=4):
     if n>question_num:
         print(f'WARNING: n {n} is greater than max questions {question_num}.')
         n = question_num
