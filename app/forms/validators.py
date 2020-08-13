@@ -23,7 +23,12 @@ class Link_Validator(object):
         pass
 
     def __call__(self, form, field):
-        
+        url = field.data
+        try:
+            result = urlparse(url)
+            return all([result.scheme, result.netloc, result.path])
+        except:
+            return False
 
 
 class Select_Limit_Validator(object):
