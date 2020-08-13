@@ -832,7 +832,7 @@
             <i class="fa fa-times-circle" aria-hidden="true"></i>
         </a>
       {% endif %}
-      <p style='padding-bottom:1px; text-decoration:underline;'>
+      <p style='padding-bottom:1px;'>
         {{ question.question }}
       </p>
     </div>
@@ -846,7 +846,7 @@
       </p>
     {% else %}
       <form action='{{ url_for }}' method='post' style='margin-bottom:0px;'>
-        <p style='margin-bottom:0px; border:1px solid grey; width:80%;' contenteditable="">
+        <p style='margin-bottom:0px;' contenteditable="">
           {% if question.answer %}
             {{ question.answer }}
           {% else %}
