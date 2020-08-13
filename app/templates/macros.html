@@ -793,26 +793,12 @@
       <form action="{{ url_for('project.add_url', project_id=project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
-          <label for="question">Question:</label>
-          <input type="text" name="question" list="question_suggestions" class='select-clean'
-            required>
-          <datalist id="question_suggestions">
-            {% for question in project.suggest_questions() %}
-              {% if loop.index==1 %}
-                <option value='{{ question }}' selected>
-              {% else %}
-                <option value='{{ question }}'>
-              {% endif %}
-            {% endfor %}
-          </datalist>
-          <br><br>
-          {% if project.is_member(user) %}
-            <label for="answer">Answer:</label>
-            <textarea name='answer' class='select-clean'></textarea>
-          {% endif %}
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <label for="question">URL:</label>
+          <
         </div>
         <div class="modal-footer">
-          <button class='btn'>Ask</button>
+          <button class='btn'>Add</button>
         </div>
       </form>
     </div>
