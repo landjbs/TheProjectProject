@@ -545,6 +545,18 @@ def add_question(project_id):
     return redirect(request.referrer)
 
 
+@project.route('/edit_answer/<int:project_id>/<int:question_id>')
+@limiter.limit('30/min')
+@login_required
+def edit_answer(project_id, question_id):
+    project = Project.query.get_or_404(project_id)
+    question =
+    if not project.is_member(current_user):
+        question.add_answer(answer=request.form.get('answer'))
+    else:
+        flash('Only project members can answer questions.', category='error')
+
+
 @project.route('/delete_question/<int:project_id>/<int:question_id>')
 @login_required
 def delete_question(project_id, question_id):
