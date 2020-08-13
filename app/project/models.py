@@ -369,6 +369,9 @@ class Project(CRUDMixin, db.Model):
     def add_link(self, link):
         self.links.append(Link(url=link))
 
+    def remove_link(self, link_id):
+        raise NotImplementedError('remove_link')
+
     ## status ##
     def mark_complete(self):
         ''' Mark project as complete '''
