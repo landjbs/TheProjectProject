@@ -589,7 +589,7 @@ def add_link(link):
         flash('Could not add link because you are not a project member.',
             category='error')
     else:
-       link = filter_string(request.form.get('link'))
-       project.add_link(link)
+        link = filter_string(request.form.get('link'))
+        project.add_link(link)
         flash('Link added!', 'success')
     return redirect(request.referrer)

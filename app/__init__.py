@@ -18,6 +18,7 @@ from app.subject import subject
 from app.notification import notification
 from app.badge import badge
 from app.question import question
+from app.link import link
 from app.admin import register_admin_views
 #
 from app.database import db
@@ -117,6 +118,7 @@ def register_blueprints(app):
     app.register_blueprint(subject)
     app.register_blueprint(notification)
     app.register_blueprint(badge)
+    app.register_blueprint(link)
 
 
 def register_errorhandlers(app):

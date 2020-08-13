@@ -4,7 +4,7 @@ from wtforms import (TextField, StringField, PasswordField, BooleanField,
 from wtforms.validators import (DataRequired, Length, EqualTo, Email)
 
 from app.forms.base import BaseForm
-from app.forms.validators import Site_URL_Validator, Select_Limit_Validator
+from app.forms.validators import Select_Limit_Validator
 
 from app.user.models import User
 
