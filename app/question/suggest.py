@@ -9,10 +9,20 @@ import numpy as np
 question_suggestions = [
     ########### INSPIRATION: How you came up with idea #########################
     'How did you come up with this idea?',
+    "What is your team's experience in this field?",
     ############################################################################
     ############## SO FAR: How the process is going ############################
     'What is the most difficult challenge you have faced?',
-    'What have you learned through your work on this project?'
+    'What have you learned through your work on this project?',
+    'What have you completed so far?'
+    ############################################################################
+    ############## GOING FOWARD: What is left to do ############################
+    'What is left to do?',
+    'What is your end goal for this project?',
+    ############################################################################
+    ######## TEAM DESIRES: What are you looking for in a team ##################
+    'What are you looking for in a team?',
+    'How much time should members expect to commit each day?'
     ############################################################################
 ]
 
