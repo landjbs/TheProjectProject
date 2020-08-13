@@ -847,6 +847,16 @@
 {% endmacro -%}
 
 
+{% macro render_link_card_fake() -%}
+<div class='card mb-2'>
+  <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
+    <i class="fas fa-link fa-2x"></i>
+    <h5>Add A Link</h5>
+  </div>
+</div>
+{% endmacro -%}
+
+
 {% macro render_question_card(question, project, user) -%}
 <div class='card mb-2'>
   <div class='card-body'>
@@ -873,14 +883,16 @@
             <input style='margin-bottom:0px;' name='answer' class='select-clean' placeholder='Write your answer here...'>
           {% endif %}
         </input>
-        <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
-            <i class="fa fa-check-circle" aria-hidden="true"></i>
-        </button>
-        <a class='delete-btn task-btn float-right'
-            style='background: transparent;'
-            href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-        </a>
+        <div class='row float-right' style='vertical-align: middle;'>
+          <a class='delete-btn task-btn'
+              style='background: transparent;'
+              href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+          </a>
+          <button class='complete-btn task-btn' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </button>
+        </div>
       </form>
     {% endif %}
   </div>

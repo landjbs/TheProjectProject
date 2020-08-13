@@ -1,7 +1,7 @@
 import requests
 
 query = {
-  "url": "https://www.youtube.com/watch?v=jofNR_WkoCE",
+  "url": "https://github.com/landjbs",
   "key": ":9c2832d99ae44fbeb67f5a74439af297"
 }
 

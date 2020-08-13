@@ -95,8 +95,8 @@
         <div id="content">
           <!-- TAB BUTTONS -->
           <div class="tab" style='margin-bottom:10px;'>
-            <button type="button" id="sidebarCollapse" class="btn btn-info">
-              <i class="fas fa-align-left" style='color:black;'></i>
+            <button type="button" id="sidebarCollapse" style='background:transparent;'>
+              <i class="fa fa-crosshairs" style='color:black; vertical-align: middle;'></i>
             </button>
             <button class="tablinks" onclick="openTab(event, 'Activity')" id="defaultOpen">Activity</button>
             <button class="tablinks" onclick="openTab(event, 'About')">About</button>
@@ -492,9 +492,8 @@
               <div class='row bottom-border'>
                 <h4>
                   Questions
-                  &nbsp;
                   <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
-                    <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
+                    <i class="fa fa-plus-circle add_button" style='color:black;' aria-hidden="true"></i>
                   </button>
                 </h4>
               </div>
@@ -515,17 +514,35 @@
               <div class='row bottom-border'>
                 <h4>
                   Links
-                  &nbsp;
                   {% if project.is_member(current_user) %}
                     <button type='button' data-toggle='modal' data-target='#modal_add_link' class='edit-button'>
-                      <i class="fa fa-plus-circle add_button" aria-hidden="true"></i>
+                      <i class="fa fa-plus-circle add_button" style='color:black;' aria-hidden="true"></i>
                     </button>
                   {% endif %}
                 </h4>
               </div>
-              {% for link in project.links %}
-                here
-              {% endfor %}
+              <br>
+              {% if project.links.all()|length > 0 %}
+                {% for link in project.links %}
+                <style class="embedly-css">
+                    @import url(https://fonts.googleapis.com/css?family=Merriweather);
+                    .card {
+                      font-family: 'Merriweather', serif;
+                    }
+                    .card .title {
+                      margin-bottom:5px;
+                    }
+                    .card .action {
+                      color: #fa4b2a;
+                    }
+                  </style>
+
+                  <blockquote class="embedly-card" data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b"><h4><a href="http://www.theverge.com/2016/3/17/11250246/aston-martin-red-bull-car-project-nebula-announced-formula-1-partnership">Aston Martin teams up with Red Bull to create the world's fastest hypercar</a></h4><p>Right on the heels of the release of the DB11, the follow-up to the stalwart DB9 coupe, we have an exclusive preview into a secret project that Aston Martin has been working on for the last three months: it is aiming to build the fastest hypercar in the world.</p></blockquote>
+                <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                {% endfor %}
+              {% else %}
+                {{ macros.render_link_card_fake() }}
+              {% endif %}
             </div>
           </div>
         </div>
