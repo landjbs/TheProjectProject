@@ -498,7 +498,7 @@
             </div>
             <!-- LINKS -->
             <div class='col'>
-              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com') }}
+              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project) }}
               <div class='about-col'>
                 {% if project.links.all()|length > 0 %}
                   {% for link in project.links %}
