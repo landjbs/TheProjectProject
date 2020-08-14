@@ -793,7 +793,7 @@
     <center><i class="{{ icon }}" style='display:inline;'></i></center>
     <form action="{{ url_for('project.add_link', project_id=project.id, public=public, category=category) }}" method='post'>
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <input type='text' class='select-clean' placeholder="{{ placeholder }}"></input>
+      <input type='text' name='link' class='select-clean' placeholder="{{ placeholder }}"></input>
       <!-- action bar row -->
       {% if name!='Link' %}
         <div class='float-left'>

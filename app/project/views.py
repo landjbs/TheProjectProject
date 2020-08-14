@@ -586,6 +586,7 @@ def delete_question(project_id, question_id):
 def add_link(project_id, public, category):
     ''' Adds link to project '''
     project = Project.query.get_or_404(project_id)
+    public = bool(public)
     if not project.is_member(current_user):
         flash('Could not add link because you are not a project member.',
             category='error')
@@ -593,7 +594,6 @@ def add_link(project_id, public, category):
         flash('Only the project owner can add private links.', 'error')
     else:
         url = filter_string(request.form.get('link'))
-        print(url)
         if url:
             project.add_link(url, public=public, category=category)
             flash('Link added!', 'success')
