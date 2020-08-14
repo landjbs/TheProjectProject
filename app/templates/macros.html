@@ -817,22 +817,26 @@
   </div>
   <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
     <center><i class="{{ icon }}" style='display:inline;'></i></center>
-    <input type='text' class='select-clean' placeholder="{{ placeholder }}"></input>
-    {% if name!='Link' %}
-      <div class='float-left'>
-        <button class='delete-btn task-btn' style='border:0px; background:transparent;'>
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
+    <form action="{{ url_for('project.add_link', project_id=project.id, public=True, category=0) }}" method='post'>
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <input type='text' class='select-clean' placeholder="{{ placeholder }}"></input>
+      <!-- action bar row -->
+      {% if name!='Link' %}
+        <div class='float-left'>
+          <button class='delete-btn task-btn' style='border:0px; background:transparent;'>
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+          </button>
+        </div>
+      {% endif %}
+      <div class='float-right'>
+        <button class='back-btn task-btn' style='border:0px; background:transparent;' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')">
+          <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+        </button>
+        <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
+            <i class="fa fa-check-circle" aria-hidden="true"></i>
         </button>
       </div>
-    {% endif %}
-    <div class='float-right'>
-      <button class='back-btn task-btn' style='border:0px; background:transparent;' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')">
-        <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-      </button>
-      <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
-          <i class="fa fa-check-circle" aria-hidden="true"></i>
-      </button>
-    </div>
+    </form>
   </div>
 </div>
 {% endmacro -%}
