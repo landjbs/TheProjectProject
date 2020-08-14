@@ -807,16 +807,6 @@
 {% endmacro -%}
 
 
-{% macro render_add_link_card() -%}
-<div class='card mb-2'>
-  <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
-    <i class="fas fa-link fa-2x"></i>
-    <h5>Add A Link</h5>
-  </div>
-</div>
-{% endmacro -%}
-
-
 {% macro render_add_link_card(name, icon, placeholder) -%}
 {% set cover_id = '{fname}_Cover'.format(fname=name) %}
 {% set input_id = '{fname}_Input'.format(fname=name) %}
