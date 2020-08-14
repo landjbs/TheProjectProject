@@ -513,22 +513,37 @@
 
         <div id='Private' class='tabcontent'>
           <div class='row' style='vertical-align: middle;'>
-            <h3>Private | </h3>
-            <p>Content posted here will only be visible to project members</p>
+            <h5><u>Private</u>: Content posted here will be visible only to project members.</h5>
           </div>
           <div class='row'>
             <!-- QUESTIONS -->
             <div class='col'>
-              {{ macros.render_add_question_card() }}
-              <div class='about-col'>
-                {% for question in project.questions %}
-                  {{ macros.render_question_card(question, project, current_user) }}
-                {% endfor %}
-              </div>
+              <textarea style='width:100%; height:70vh;'></textarea>
             </div>
             <!-- LINKS -->
             <div class='col'>
-              {{ macros.render_add_link_card() }}
+              <!-- github -->
+              <div class='card mb-2'>
+                <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
+                  <i class="fa fa-github fa-2x"></i>
+                  <h5>Github</h5>
+                </div>
+              </div>
+              <!-- slack -->
+              <div class='card mb-2'>
+                <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
+                  <i class="fab fa-slack fa-2x"></i>
+                  <h5>Slack</h5>
+                </div>
+              </div>
+              <!-- slack -->
+              <div class='card mb-2'>
+                <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
+                  <i class="fab fa-slack fa-2x"></i>
+                  <h5>Slack</h5>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
