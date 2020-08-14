@@ -857,6 +857,7 @@
   3:['Drive', "fab fa-google", 'https://drive.google.com/drive/example'],
   4:['Management', "fas fa-tasks", 'https://app.asana.com/example']}
 %}
+
 {% macro render_private_link(category, project, is_owner) -%}
   {% set link = project.get_link_category(1) %}
   {% if link %}
@@ -864,7 +865,7 @@
   {% elif is_owner %}
     {% set name, icon, placeholder = category_maps[category] %}
     {{ macros.render_add_link_card(name, icon, placeholder, project, False, category) }}
-  {% else %}
+  {% endif %}
 {% endmacro -%}
 
 

@@ -532,11 +532,13 @@
                 </h4>
               </div>
               <br>
+              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, False, 0) }}
               {% for category in range(1,5) %}
                 {{ macros.render_private_link(category, project, is_owner) }}
               {% endfor %}
-              <!-- any link -->
-              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, False, 0) }}
+              {% for link in project.get_other_private_links() %}
+                {{ macros.render_project_link_card(link, project, is_owner) }}
+              {% endfor %}
             </div>
           </div>
         </div>
