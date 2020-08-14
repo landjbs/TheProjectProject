@@ -500,9 +500,8 @@
             <div class='col'>
               {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project) }}
               <div class='about-col'>
-                {% set public_links = project.public_links() %}
-                {% for link in public_links %}
-                  {{ macros.render_project_link_card(link, project, is_owner) }}
+                {% for link in project.public_links() %}
+                  {{ macros.render_project_link_card(link, project, is_owner, True, 0) }}
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
               </div>
@@ -533,7 +532,7 @@
                 </h4>
               </div>
               <br>
-              {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, True, ) }}
+              {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, False, ) }}
               <!-- Communications -->
               {{ macros.render_add_link_card('Communications', "fab fa-slack", 'https://example.slack.com/messages/channel') }}
               <!-- Drive -->
