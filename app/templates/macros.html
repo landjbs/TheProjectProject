@@ -820,7 +820,7 @@
 {% macro render_add_question_card() -%}
 <div class='card mb-2'>
   <div class='card-body' data-toggle='modal' data-target='#modal_ask_question' style='color:black; text-align:center;'>
-    <i class="fas fa-plus-circle fa-2x"></i>
+    <i class="fas fa-question-circle fa-2x"></i>
     <h5>Add A Question</h5>
   </div>
 </div>
@@ -829,17 +829,19 @@
 
 {% macro render_project_link_card(link, project, is_owner) -%}
 <div class='card mb-2'>
-  <div class='card-body' style='text-align:center;'>
+  <div style='padding-right:20px; padding-top:5px; margin-bottom:0px; padding-bottom:0px;'>
     <a class='delete-btn task-btn float-right' style='background: transparent;'
       href="{{ url_for('project.remove_link', project_id=project.id, link_id=link.id) }}">
         <i class="fa fa-times-circle" aria-hidden="true"></i>
     </a>
+  </div>
+  <div class='card-body' style='text-align:center; padding-top:0px;'>
     <style class="embedly-css">
       .card .action {
         color: #fa4b2a;
       }
     </style>
-    <blockquote class="embedly-card" data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b">
+    <blockquote class="embedly-card" data-card-controls='0' data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b">
       <h4>
         <a href="{{ link.url }}"></a>
       </h4>
@@ -892,7 +894,8 @@
 
 
 {% macro render_question_card(question, project, user) -%}
-<div class='card mb-2'>
+{% set border_style = 'red' if not question.answer else 'green' %}
+<div class='card mb-2' style='border-color: {{ border_style }};'>
   <div class='card-body'>
     <div class='card-head'>
       <p style='padding-bottom:1px;'>
@@ -917,13 +920,13 @@
             <input style='margin-bottom:0px;' name='answer' class='select-clean' placeholder='Write your answer here...'>
           {% endif %}
         </input>
-        <div class='row float-right' style='vertical-align: middle;'>
+        <div class='float-right'>
           <a class='delete-btn task-btn'
               style='background: transparent;'
               href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
               <i class="fa fa-times-circle" aria-hidden="true"></i>
           </a>
-          <button class='complete-btn task-btn' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
+          <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
               <i class="fa fa-check-circle" aria-hidden="true"></i>
           </button>
         </div>

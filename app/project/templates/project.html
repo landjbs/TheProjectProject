@@ -487,39 +487,18 @@
         <!-- About -->
         <div id='About' class='tabcontent'>
           <div class='row'>
-            <div class='col right-border'>
-              <!-- title -->
-              <div class='row bottom-border'>
-                <h4>
-                  Questions
-                  <button type='button' data-toggle='modal' data-target='#modal_ask_question' class='edit-button'>
-                    <i class="fa fa-plus-circle add_button" style='color:black;' aria-hidden="true"></i>
-                  </button>
-                </h4>
-              </div>
-              <br>
-              <!-- question column -->
+            <!-- QUESTIONS -->
+            <div class='col'>
+              {{ macros.render_add_question_card() }}
               <div class='about-col'>
                 {% for question in project.questions %}
                   {{ macros.render_question_card(question, project, current_user) }}
                 {% endfor %}
-                {{ macros.render_add_question_card() }}
               </div>
             </div>
-
             <!-- LINKS -->
             <div class='col'>
-              <div class='row bottom-border'>
-                <h4>
-                  Links
-                  {% if project.is_member(current_user) %}
-                    <button type='button' data-toggle='modal' data-target='#modal_add_link' class='edit-button'>
-                      <i class="fa fa-plus-circle add_button" style='color:black;' aria-hidden="true"></i>
-                    </button>
-                  {% endif %}
-                </h4>
-              </div>
-              <br>
+              {{ macros.render_add_link_card() }}
               <div class='about-col'>
                 {% if project.links.all()|length > 0 %}
                   {% for link in project.links %}
@@ -527,8 +506,29 @@
                     <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                   {% endfor %}
                 {% endif %}
-                {{ macros.render_add_link_card() }}
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div id='Private' class='tabcontent'>
+          <div class='row' style='vertical-align: middle;'>
+            <h3>Private | </h3>
+            <p>Content posted here will only be visible to project members</p>
+          </div>
+          <div class='row'>
+            <!-- QUESTIONS -->
+            <div class='col'>
+              {{ macros.render_add_question_card() }}
+              <div class='about-col'>
+                {% for question in project.questions %}
+                  {{ macros.render_question_card(question, project, current_user) }}
+                {% endfor %}
+              </div>
+            </div>
+            <!-- LINKS -->
+            <div class='col'>
+              {{ macros.render_add_link_card() }}
             </div>
           </div>
         </div>
