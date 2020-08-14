@@ -532,14 +532,14 @@
                 </h4>
               </div>
               <br>
-              {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, False, ) }}
+              {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, False, 1) }}
               <!-- Communications -->
-              {{ macros.render_add_link_card('Communications', "fab fa-slack", 'https://example.slack.com/messages/channel') }}
+              {{ macros.render_add_link_card('Communications', "fab fa-slack", 'https://example.slack.com/messages/channel', project, False, 2) }}
               <!-- Drive -->
-              {{ macros.render_add_link_card('Drive', "fab fa-google", 'https://drive.google.com/drive/example') }}
+              {{ macros.render_add_link_card('Drive', "fab fa-google", 'https://drive.google.com/drive/example', project, False, 3) }}
               <!-- Management -->
-              {{ macros.render_add_link_card('Management', "fas fa-tasks", 'https://app.asana.com/example') }}
-              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com') }}
+              {{ macros.render_add_link_card('Management', "fas fa-tasks", 'https://app.asana.com/example', project, False, 4) }}
+              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, False, 0) }}
             </div>
           </div>
         </div>
