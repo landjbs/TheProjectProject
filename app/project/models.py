@@ -400,7 +400,7 @@ class Project(CRUDMixin, db.Model):
 
     def get_link_category(self, category):
         ''' Gets private link of category '''
-        return self.links.filter_by(category=int(category))
+        return self.links.filter_by(category=int(category)).first()
 
     ## status ##
     def mark_complete(self):

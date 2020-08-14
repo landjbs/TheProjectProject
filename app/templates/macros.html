@@ -864,7 +864,7 @@
     {{ render_project_link_card(link, project, is_owner) }}
   {% elif is_owner %}
     {% set name, icon, placeholder = category_maps[category] %}
-    {{ macros.render_add_link_card(name, icon, placeholder, project, False, category) }}
+    {{ render_add_link_card(name, icon, placeholder, project, False, category) }}
   {% endif %}
 {% endmacro -%}
 
