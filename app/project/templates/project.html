@@ -533,9 +533,11 @@
               </div>
               <br>
               <!-- Repository -->
-              {% set repo_link = project.get_link_category() %}
-              {% %}
-              {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, False, 1) }}
+              {% set repo_link = project.get_link_category(1) %}
+              {% if repo_link %}
+              {% elif is_owner %}
+                {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, False, 1) }}
+              {% endif %}
               <!-- Communications -->
               {{ macros.render_add_link_card('Communications', "fab fa-slack", 'https://example.slack.com/messages/channel', project, False, 2) }}
               <!-- Drive -->
