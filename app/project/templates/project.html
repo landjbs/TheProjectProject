@@ -501,12 +501,10 @@
               {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project) }}
               <div class='about-col'>
                 {% set public_links = project.public_links() %}
-                {% if public_links|length > 0 %}
-                  {% for link in public_links %}
-                    {{ macros.render_project_link_card(link, project, is_owner) }}
-                    <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
-                  {% endfor %}
-                {% endif %}
+                {% for link in public_links %}
+                  {{ macros.render_project_link_card(link, project, is_owner) }}
+                  <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                {% endfor %}
               </div>
             </div>
           </div>
