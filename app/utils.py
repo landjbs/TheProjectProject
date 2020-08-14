@@ -53,5 +53,6 @@ def filter_string(s):
     Cleans and filters out strings with whitespace. Returns None if string
     has no substance.
     '''
-    s = s.strip()
+    if s:
+        s = s.strip()
     return (s if s!='' else None)

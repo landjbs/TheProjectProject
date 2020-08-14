@@ -593,7 +593,8 @@ def add_link(project_id, public, category):
         flash('Only the project owner can add private links.', 'error')
     else:
         url = filter_string(request.form.get('link'))
-        if link:
+        print(url)
+        if url:
             project.add_link(url, public=public, category=category)
             flash('Link added!', 'success')
         else:

@@ -781,33 +781,7 @@
 {% endmacro -%}
 
 
-{% macro render_link_modal(project) %}
-<div id="modal_add_link" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5>Add A URL</h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <form action="{{ url_for('project.add_link', project_id=project.id, public=True, category=0) }}" method='post'>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        <div class="modal-body">
-          <label for="link">URL:</label>
-          <br>
-          <input type='text' name='link' class='select-clean' placeholder="https://www.github.com/example" max='550'/>
-        </div>
-        <div class="modal-footer">
-          <button class='btn'>Add</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-{% endmacro -%}
-
-
-{% macro render_add_link_card(name, icon, placeholder, project, public, category) -%}
+{% macro render_add_link_card(name, icon, placeholder, project, public, category=0) -%}
 {% set cover_id = '{fname}_Cover'.format(fname=name) %}
 {% set input_id = '{fname}_Input'.format(fname=name) %}
 <div class='card mb-2'>
@@ -817,7 +791,7 @@
   </div>
   <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
     <center><i class="{{ icon }}" style='display:inline;'></i></center>
-    <form action="{{ url_for('project.add_link', project_id=project.id, public={{ public }}, category={{ category }}) }}" method='post'>
+    <form action="{{ url_for('project.add_link', project_id=project.id, public=public, category=category) }}" method='post'>
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
       <input type='text' class='select-clean' placeholder="{{ placeholder }}"></input>
       <!-- action bar row -->
