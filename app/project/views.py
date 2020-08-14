@@ -580,7 +580,7 @@ def delete_question(project_id, question_id):
 
 
 ## urls ##
-@project.route('/add_link/<int:project_id>/<bool:public>/<int:category>', methods=['POST'])
+@project.route('/add_link/<int:project_id>/<public>/<int:category>', methods=['POST'])
 @login_required
 @limiter.limit('20/minute')
 def add_link(project_id, public, category):

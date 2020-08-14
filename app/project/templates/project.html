@@ -536,20 +536,20 @@
               <br>
               <!-- github -->
               <div class='card mb-2'>
-                <div class='card-body' id='repoasdf' onclick="toggleRepo()" style='color:black; text-align:center;'>
+                <div class='card-body' id='repoCard' onclick="toggleInput('repoCard','repoInput')" style='color:black; text-align:center;'>
                   <i class="fa fa-github fa-2x"></i>
                   <h5>Add Repository</h5>
                 </div>
-                <div class='card-body' id='repobasdasdff' style='color:black; text-align:center; display:none;'>
+                <div class='card-body' id='repoInput' style='color:black; text-align:center; display:none;'>
                   <center><i class="fa fa-github" style='display:inline;'></i></center>
                   <input type='text' class='select-clean' placeholder="https://github.com/example"></input>
                   <div class='float-left'>
-                    <button class='delete-btn task-btn' style='border:0px; background:transparent;' onclick="toggleRepoOff()">
+                    <button class='delete-btn task-btn' style='border:0px; background:transparent;'>
                         <i class="fa fa-times-circle" aria-hidden="true"></i>
                     </button>
                   </div>
                   <div class='float-right'>
-                    <button class='back-btn task-btn' style='border:0px; background:transparent;' onclick="toggleRepoOff()">
+                    <button class='back-btn task-btn' style='border:0px; background:transparent;' onclick="toggleInput('repoCard','repoInput')">
                       <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
                     </button>
                     <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
@@ -558,13 +558,14 @@
                   </div>
                 </div>
                 <script>
-                  function toggleRepo() {
-                    document.getElementById('repoasdf').style.display = 'none';
-                    document.getElementById('repobasdasdff').style.display = 'block';
-                  }
-                  function toggleRepoOff() {
-                    document.getElementById('repoasdf').style.display = 'block';
-                    document.getElementById('repobasdasdff').style.display = 'none';
+                  function toggleInput(cover, input) {
+                    if (document.getElementById(cover).style.display!='none') {
+                      document.getElementById(cover).style.display = 'none';
+                      document.getElementById(input).style.display = 'block';
+                    } else {
+                      document.getElementById(cover).style.display = 'block';
+                      document.getElementById(input).style.display = 'none';
+                    }
                   }
                 </script>
               </div>

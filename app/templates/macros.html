@@ -790,7 +790,7 @@
         <h5>Add A URL</h5>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      <form action="{{ url_for('project.add_link', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('project.add_link', project_id=project.id, public=True, category=0) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
           <label for="link">URL:</label>
@@ -815,9 +815,6 @@
   </div>
 </div>
 {% endmacro -%}
-
-
-{% render %}
 
 
 {% macro render_add_question_card() -%}
