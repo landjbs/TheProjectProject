@@ -98,11 +98,11 @@
             <button type="button" id="sidebarCollapse" style='background:transparent;'>
               <i class="fa fa-crosshairs" style='color:black; vertical-align: middle;'></i>
             </button>
-            <button class="tablinks" onclick="openTab(event, 'Activity')" id="defaultOpen">Activity</button>
-            <button class="tablinks" onclick="openTab(event, 'About')">About</button>
-            <button class="tablinks" onclick="openTab(event, 'Members')">Members</button>
+            <button class="tablinks" onclick="openTab(event, 'Activity')" id="Activity_Button">Activity</button>
+            <button class="tablinks" onclick="openTab(event, 'About')" id='About_Button'>About</button>
+            <button class="tablinks" onclick="openTab(event, 'Members')" id='Members_Button'>Members</button>
             {% if project.is_member(current_user) %}
-              <button class="tablinks" onclick="openTab(event, 'Private')">Private</button>
+              <button class="tablinks" onclick="openTab(event, 'Private')" id='Private_Button'>Private</button>
             {% endif %}
           </div>
 
@@ -607,11 +607,9 @@
                 $(this).toggleClass('active');
             });
             if (sessionStorage.openTab) {
-              alert(document.getElementsByClassName(sessionStorage.openTab)[0]);
-              document.getElementsByClassName(sessionStorage.openTab)[0].click();
-              // document.getElementsByClassName(sessionStorage.openTab).click();
+              document.getElementById(sessionStorage.openTab).click();
             } else {
-              document.getElementById("defaultOpen").click();
+              document.getElementById("Activity").click();
             }
         });
 
@@ -640,7 +638,7 @@
         }
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
-        sessionStorage.openTab = tabName;
+        sessionStorage.openTab = tabName + '_Button';
       }
     </script>
 
