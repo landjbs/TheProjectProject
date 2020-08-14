@@ -532,13 +532,19 @@
                 </h4>
               </div>
               <br>
+              {% macro render_private_link(project, is_owner) -%}
+
               <!-- Repository -->
+              {% set no_show_links = [] %}
               {% set repo_link = project.get_link_category(1) %}
               {% if repo_link %}
+                {{ macros.render_project_link_card(repo_link) }}
+                {{ set no_show_links = no_show_links + [repo_link] }}
               {% elif is_owner %}
                 {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, False, 1) }}
               {% endif %}
               <!-- Communications -->
+              {% set repo_link = project.get_link_category(1) %}
               {{ macros.render_add_link_card('Communications', "fab fa-slack", 'https://example.slack.com/messages/channel', project, False, 2) }}
               <!-- Drive -->
               {{ macros.render_add_link_card('Drive', "fab fa-google", 'https://drive.google.com/drive/example', project, False, 3) }}
