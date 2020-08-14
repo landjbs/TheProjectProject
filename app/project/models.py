@@ -111,6 +111,7 @@ class Project(CRUDMixin, db.Model):
             self.add_link(url=url, public=True, category=0)
         ### choose questions and add them to project ###
         for question in choose_init_questions(self):
+            print(question)
             self.add_question(question=question)
 
 

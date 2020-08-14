@@ -59,8 +59,8 @@ def add_statics():
     db.session.commit()
 
 
-@click.option('--num_users', default=400, help='Number of users.')
-@click.option('--num_projects', default=100, help='Number of projects.')
+@click.option('--num_users', default=4, help='Number of users.')
+@click.option('--num_projects', default=10, help='Number of projects.')
 def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
     fake = Faker()
@@ -120,7 +120,7 @@ def populate_db(num_users, num_projects):
                 name=rand_words(2),
                 oneliner=rand_words(6),
                 summary=rand_words(60),
-                url=f'https://{fake.word()}.com',
+                url=None,
                 complete=complete,
                 open=rand_bool(0.8) if not complete else None,
                 subjects=subjects,

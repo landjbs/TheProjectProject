@@ -21,9 +21,3 @@ def contact():
 @base.route('/terms', methods=['GET'])
 def terms():
     return render_template('terms.html')
-
-
-@base.route('/robots.txt')
-@base.route('/sitemap.xml')
-def static_from_root():
-    return send_from_directory(current_app.static_folder, request.path[1:])

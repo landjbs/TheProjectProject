@@ -34,7 +34,7 @@ def subject_page(subject_name):
 
 @subject.route('/subject=<subject_name>')
 @login_required
-@mobilized(subject)
+@mobilized(subject_page)
 def subject_page(subject_name):
     ''' Mobile optimized route for subject page '''
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
