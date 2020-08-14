@@ -16,7 +16,7 @@ class Link(CRUDMixin, db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
     project = relationship('Project', back_populates='links')
     # is link public
-    # public = db.Column(db.Boolean, nullable=False, default=True)
+    public = db.Column(db.Boolean, nullable=False, default=True)
     # category within project: {1:repo, 2:communication, 3:drive: 4:management, 5:other}
     # category = db.Column(db.Integer, nullable=False, default=0)
     ## render data (potentially should be moved somewhere more efficient) ##

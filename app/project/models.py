@@ -382,6 +382,14 @@ class Project(CRUDMixin, db.Model):
         link.delete()
         return True
 
+    def public_links(self):
+        ''' Gets all public links affiliated with project '''
+        return self.links.filter_by(public=True)
+
+    def private_links(self):
+        ''' Gets all public links affiliated with project '''
+        return self.links.filter_by(public=False)
+
     ## status ##
     def mark_complete(self):
         ''' Mark project as complete '''
