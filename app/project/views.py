@@ -616,3 +616,21 @@ def remove_link(project_id, link_id):
         else:
             flash('Could not remove link.', 'error')
     return redirect(request.referrer)
+
+
+@project.route('/save_instructions/<int:project_id>', methods=['GET'])
+def save_instructions(project_id):
+    ''' Saves project instructions '''
+    project = Project.query.get_or_404(project_id)
+    if not project.is_owner(current_user):
+        flash('Could not edit instructions because you are not a project member.',
+            category='error')
+    else:
+        instructions = request.form.get('instructions')
+        if instructions:
+            project.instructions = instructions
+            project.update()
+            flash('Instructions edited.', 'success')
+        else:
+            flash('Could not edit instructions.', 'error')
+    return redirect(request.referrer)

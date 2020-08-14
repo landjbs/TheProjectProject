@@ -26,6 +26,8 @@ class Project(CRUDMixin, db.Model):
     oneliner = db.Column(db.String(40))
     # summary
     summary = db.Column(db.String(400), nullable=False)
+    # instructions
+    instructions = db.Column(db.Text(3000), nullable=True)
     # links
     links = relationship('Link',
                          back_populates='project',

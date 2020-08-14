@@ -514,15 +514,20 @@
             <u><p>Private: Content posted here will be visible only to project members.</p></u>
           </div>
           <div class='row'>
-            <div class='col right-border'>
+            <form action="{{ url_for('project.save_instructions', project_id=project.id) }}" class='col right-border'>
               <div class='row bottom-border'>
                 <h4>
                   Instructions
                 </h4>
+                <div class='float-right'>
+                  <button class='complete-btn task-btn float-right' type='submit' id='saveInstructions' style='background:transparent;border:0px;margin-bottom:0px; display:none;'>
+                      <i class="fa fa-check-circle" aria-hidden="true"></i>
+                  </button>
+                </div>
               </div>
               <br>
-              <textarea style='width:100%; height:70vh;'></textarea>
-            </div>
+              <textarea name='instructions' tyle='width:100%; height:70vh;' oninput="showSaveButton('saveInstructions')" maxlength="3000">{% if project.instructions%}{{ project.instructions }}{% endif %}</textarea>
+            </form>
 
             <!-- LINKS -->
             <div class='col'>
@@ -777,6 +782,10 @@
           document.getElementById(cover).style.display = 'block';
           document.getElementById(input).style.display = 'none';
         }
+      }
+
+      function showSaveButton(id) {
+        document.getElementById(id).style.display = 'inline-block';
       }
     </script>
 
