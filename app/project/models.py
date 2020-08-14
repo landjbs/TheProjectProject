@@ -396,7 +396,7 @@ class Project(CRUDMixin, db.Model):
 
     def get_other_private_links(self):
         ''' Gets all private links of category other '''
-        return self.links.filter_by(private=True, category=0)
+        return self.links.filter_by(public=False, category=0)
 
     def get_link_category(self, category):
         ''' Gets private link of category '''
