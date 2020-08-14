@@ -11,10 +11,10 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-2' style='min-width: 90%'>
+<div class='container my-1' style='min-width: 90%'>
   {% if progress_tabs!=[] %}
     <h4 style='text-align:left;'>My Badges</h4>
-    <hr class="my-2">
+    <hr class="my-1">
     <div id="progress-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
@@ -45,7 +45,7 @@
   {% if all_tabs!=[] %}
       <div id="all-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <h4 style='text-align:left;'>All Badges</h4>
-      <hr class="my-2">
+      <hr class="my-1">
       <div class="carousel-inner" role="listbox">
         {% for tab in all_tabs %}
           {% if loop.index==1 %}

@@ -536,8 +536,8 @@ def add_question(project_id):
     if not question:
         flash('Invalid question.')
     else:
-        answer = filter_string(request.form.get('answer'))
         if project.is_member(current_user):
+            answer = filter_string(request.form.get('answer'))
             project.add_question(question, answer)
         else:
             project.add_question(question)
@@ -549,7 +549,6 @@ def add_question(project_id):
 @limiter.limit('30/min')
 @login_required
 def edit_answer(project_id, question_id):
-    print('HERE')
     project = Project.query.get_or_404(project_id)
     print(project)
     question = project.questions.filter_by(id=question_id).first()

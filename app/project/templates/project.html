@@ -498,7 +498,9 @@
             </div>
             <!-- LINKS -->
             <div class='col'>
-              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, 1, 0) }}
+              {% if project.is_member(current_user) %}
+                {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, 1, 0) }}
+              {% endif %}
               <div class='about-col'>
                 {% for link in project.public_links() %}
                   {{ macros.render_project_link_card(link, project, is_owner) }}
