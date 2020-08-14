@@ -532,7 +532,7 @@
                 </h4>
               </div>
               <br>
-              {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, 0, 0) }}
+              {{ macros.render_add_link_card('Private Link', "fas fa-link", 'https://developmentwebsite.com', project, 0, 0) }}
               {% for category in range(1,5) %}
                 {{ macros.render_private_link(category, project, is_owner) }}
               {% endfor %}
@@ -607,7 +607,9 @@
                 $(this).toggleClass('active');
             });
             if (sessionStorage.openTab) {
-              document.getElementById(sessionStorage.openTab).click();
+              alert(document.getElementsByClassName(sessionStorage.openTab)[0]);
+              document.getElementsByClassName(sessionStorage.openTab)[0].click();
+              // document.getElementsByClassName(sessionStorage.openTab).click();
             } else {
               document.getElementById("defaultOpen").click();
             }
