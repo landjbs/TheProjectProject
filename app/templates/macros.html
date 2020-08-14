@@ -851,6 +851,22 @@
 </div>
 {% endmacro -%}
 
+{% set category_maps = {
+  1:['Repository', "fab fa-github", 'https://github.com/me/example'],
+  2:['Communications', "fab fa-slack", 'https://example.slack.com/messages/channel'],
+  3:['Drive', "fab fa-google", 'https://drive.google.com/drive/example'],
+  4:['Management', "fas fa-tasks", 'https://app.asana.com/example']}
+%}
+{% macro render_private_link(category, project, is_owner) -%}
+  {% set link = project.get_link_category(1) %}
+  {% if link %}
+    {{ render_project_link_card(link, project, is_owner) }}
+  {% elif is_owner %}
+    {% set name, icon, placeholder = category_maps[category] %}
+    {{ macros.render_add_link_card(name, icon, placeholder, project, False, category) }}
+  {% else %}
+{% endmacro -%}
+
 
 {% macro render_ask_question_modal(project, user) -%}
 <div id="modal_ask_question" class="modal fade" role="dialog">

@@ -532,38 +532,10 @@
                 </h4>
               </div>
               <br>
-              {% set category_maps = {
-                1:['Repository', "fab fa-github", 'https://github.com/me/example'],
-                2:['Communications', "fab fa-slack", 'https://example.slack.com/messages/channel'],
-                3:['Drive', "fab fa-google", 'https://drive.google.com/drive/example'],
-                4:['Management', "fas fa-tasks", 'https://app.asana.com/example']}
-              %}
-              {% macro render_private_link(category, project, is_owner) -%}
-                {% set link = project.get_link_category(1) %}
-                {% if link %}
-                  {{ render_project_link_card(link, project, is_owner) }}
-                {% elif is_owner %}
-                  {% set name, icon, placeholder = category_maps[category] %}
-                  {{ macros.render_add_link_card(name, icon, placeholder, project, False, category) }}
-                {% else %}
-              {% endmacro -%}
-
-              <!-- Repository -->
-              {% set no_show_links = [] %}
-
-              {% if repo_link %}
-                {{ macros.render_project_link_card(repo_link) }}
-                {{ set no_show_links = no_show_links + [repo_link] }}
-              {% elif is_owner %}
-                {{ macros.render_add_link_card('Repository', "fab fa-github", 'https://github.com/me/example', project, False, 1) }}
-              {% endif %}
-              <!-- Communications -->
-              {% set repo_link = project.get_link_category(1) %}
-              {{ macros.render_add_link_card('Communications', "fab fa-slack", 'https://example.slack.com/messages/channel', project, False, 2) }}
-              <!-- Drive -->
-              {{ macros.render_add_link_card(, project, False, 3) }}
-              <!-- Management -->
-              {{ macros.render_add_link_card(, project, False, 4) }}
+              {% for category in range(1,5) %}
+                {{ macros.render_private_link(category, project, is_owner) }}
+              {% endfor %}
+              <!-- any link -->
               {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, False, 0) }}
             </div>
           </div>
