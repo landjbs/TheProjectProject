@@ -366,7 +366,7 @@ class Project(CRUDMixin, db.Model):
         return True
 
     ## links ##
-    def add_link(self, link):
+    def add_link(self, url):
         # check if link is already in project
         prev = self.links.filter_by(url=link).first()
         if prev is None:
