@@ -569,28 +569,13 @@
                   }
                 </script>
               </div>
-              <!-- slack -->
-              <div class='card mb-2'>
-                <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
-                  <i class="fab fa-slack fa-2x"></i>
-                  <h5>Add Communications</h5>
-                </div>
-              </div>
-              <!-- google -->
-              <div class='card mb-2'>
-                <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
-                  <i class="fab fa-google fa-2x"></i>
-                  <h5>Add Drive</h5>
-                </div>
-              </div>
-              <!-- google -->
-              <div class='card mb-2'>
-                <div class='card-body' data-toggle='modal' data-target='#modal_add_link' style='color:black; text-align:center;'>
-                  <i class="fas fa-tasks fa-2x"></i>
-                  <h5>Add Management</h5>
-                </div>
-              </div>
-              {{ macros.render_add_link_card() }}
+              <!-- Communications -->
+              {{ macros.render_add_link_card('Communications', "fab fa-slack") }}
+              <!-- Drive -->
+              {{ macros.render_add_link_card('Drive', "fab fa-google") }}
+              <!-- Management -->
+              {{ macros.render_add_link_card('Management', "fas fa-tasks") }}
+              {{ macros.render_add_link_card('Link', "fas fa-link") }}
             </div>
           </div>
         </div>
