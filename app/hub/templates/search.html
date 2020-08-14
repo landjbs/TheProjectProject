@@ -9,12 +9,12 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-2' style='min-width: 90%'>
+<div class='container my-1' style='min-width: 90%'>
   <h4 style='text-align:left;'>Results for "{{ search_text }}"</h4>
-  <hr class="my-2">
+  <hr class="my-1">
   {% if results['project'][1]!=0 %}
     <h4 style='text-align:left;'>Projects</h4>
-    <hr class="my-2">
+    <hr class="my-1">
     <div id="project-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <!--Slides-->
       <div class="carousel-inner" role="listbox">
@@ -49,7 +49,7 @@
   {% if results['user'][1]!=0 %}
     <div id="user-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
       <h4 style='text-align:left;'>Users</h4>
-      <hr class="my-2">
+      <hr class="my-1">
       <div class="carousel-inner" role="listbox">
         {% for tab in results['user'][0] %}
           {% if loop.index==1 %}
@@ -81,7 +81,7 @@
 
   {% if results['subject'][1]!=0 %}
       <h4 style='text-align:left;'>Subjects</h4>
-      <hr class="my-2">
+      <hr class="my-1">
       <div id="subject-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
         <!--Slides-->
         <div class="carousel-inner" role="listbox">

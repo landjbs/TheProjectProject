@@ -618,7 +618,7 @@ def remove_link(project_id, link_id):
     return redirect(request.referrer)
 
 
-@project.route('/save_instructions/<int:project_id>', methods=['GET'])
+@project.route('/save_instructions/<int:project_id>', methods=['POST'])
 def save_instructions(project_id):
     ''' Saves project instructions '''
     project = Project.query.get_or_404(project_id)
@@ -626,8 +626,10 @@ def save_instructions(project_id):
         flash('Could not edit instructions because you are not a project member.',
             category='error')
     else:
+        print(request.form)
         instructions = request.form.get('instructions')
-        if instructions:
+        print(instructions)
+        if instructions is not None:
             project.instructions = instructions
             project.update()
             flash('Instructions edited.', 'success')

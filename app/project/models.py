@@ -91,7 +91,6 @@ class Project(CRUDMixin, db.Model):
         self.code = generate_code(name, Project)
         self.oneliner = str(oneliner)
         self.summary = str(summary)
-        self.url = str(url) if url else None
         self.subjects = subjects
         # members
         self.owner = owner
@@ -107,9 +106,13 @@ class Project(CRUDMixin, db.Model):
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
         self.add_member(owner, notify_owner=False)
+        ### if url, add it to project ###
+        if url is not None:
+            self.add_link(url=url, public=True, category=0)
         ### choose questions and add them to project ###
         for question in choose_init_questions(self):
             self.add_question(question=question)
+
 
     def __repr__(self):
         return f'<Project {self.name}>'
