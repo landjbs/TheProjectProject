@@ -501,7 +501,7 @@
               {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, False, 0) }}
               <div class='about-col'>
                 {% for link in project.public_links() %}
-                  {{ macros.render_project_link_card(link, project, is_owner, True, 0) }}
+                  {{ macros.render_project_link_card(link, project, is_owner) }}
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
               </div>
