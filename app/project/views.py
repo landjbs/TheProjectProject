@@ -580,15 +580,17 @@ def delete_question(project_id, question_id):
 
 
 ## urls ##
-@project.route('/add_link/<int:project_id>', methods=['POST'])
+@project.route('/add_link/<int:project_id>/<bool:private>', methods=['POST'])
 @login_required
 @limiter.limit('20/minute')
-def add_link(project_id):
+def add_link(project_id, private):
     ''' Adds link to project '''
     project = Project.query.get_or_404(project_id)
     if not project.is_member(current_user):
         flash('Could not add link because you are not a project member.',
             category='error')
+    elif private and not project.is_owner(current_user):
+        flash('Only the project owner can add private links.', 'error')
     else:
         url = filter_string(request.form.get('link'))
         if link:

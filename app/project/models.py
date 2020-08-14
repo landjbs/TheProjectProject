@@ -129,6 +129,10 @@ class Project(CRUDMixin, db.Model):
         self.last_active = datetime.utcnow()
 
     ## members ##
+    def is_owner(self, user):
+        ''' Checks if user is ownewr of project '''
+        return (user==self.owner)
+
     def is_member(self, user):
         ''' Checks if user is a member of project '''
         return (user in self.members)
