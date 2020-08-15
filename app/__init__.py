@@ -9,8 +9,9 @@ from dateutil import tz
 # config
 from app import config
 # blueprints
-from app.base import base
 from app.auth import auth
+from app.base import base
+from app.competition import competition
 from app.hub import hub
 from app.user import user
 from app.project import project
@@ -119,6 +120,7 @@ def register_blueprints(app):
     app.register_blueprint(notification)
     app.register_blueprint(badge)
     app.register_blueprint(link)
+    app.register_blueprint(competition)
 
 
 def register_errorhandlers(app):
