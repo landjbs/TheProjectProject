@@ -98,7 +98,18 @@
             <button type="button" id="sidebarCollapse" style='background:transparent;'>
               <i class="fa fa-crosshairs" style='color:black; vertical-align: middle;'></i>
             </button>
-            <button class="tablinks" onclick="openTab(event, 'Activity')" id="Activity_Button">Activity</button>
+            <button class="tablinks" onclick="openTab(event, 'Activity')" id="Activity_Button">
+              Activity
+              {% if is_member %}
+                {% set n_todo = project.n_todo() %}
+                {% if n_todo > 0 %}
+                  <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
+                    {{ n_todo }}
+                  </span>
+                {% endif %}
+              {% endif %}
+
+            </button>
             <!-- about -->
             <button class="tablinks" onclick="openTab(event, 'About')" id='About_Button'>
               About
@@ -164,8 +175,8 @@
               <div class="col">
                 <div class='row'>
                   <div class='col'>
-                    <h5>To Do</h5>
                     {% set todo_tasks = project.todo_tasks() %}
+                    <h5>To Do</h5>
                     <div class="list-group">
                       {% if (todo_tasks.all()|length)==0 %}
                         <p class='empty-text'>No tasks to do yet.</p>
