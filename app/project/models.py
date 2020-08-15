@@ -162,6 +162,8 @@ class Project(CRUDMixin, db.Model):
         self.notify_owner(text=f'{user.name} has applied to {self.name}!',
                           important=True)
         self.update()
+        user.notify(text=f'You have applied to {self.name}.',
+                    project=self)
         return True
 
     def accept_application(self, user):
@@ -270,7 +272,9 @@ class Project(CRUDMixin, db.Model):
                              f'{self.name} by the owner. We promise '
                              "it's nothing personal! Please contact us "
                              'if you think something is wrong or have '
-                             'any questions.', project=project)
+                             'any questions.',
+                             important=important,
+                             project=project)
         else:
             self.notify_members(
                 text=(f'{user.name} has been left {self.name}.')

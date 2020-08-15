@@ -215,6 +215,7 @@ class User(CRUDMixin, UserMixin, db.Model):
             note = Notification(text=text, important=important, project=project)
         self.notifications.append(note)
         self.update()
+        return True
 
     def n_unseen(self):
         return self.notifications.filter_by(seen=False).count()
