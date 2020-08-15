@@ -29,3 +29,8 @@ class Hackathon(CRUDMixin, db.Model):
 
     def time_remaining(self):
         return (self.ends_on - datetime.utcnow()).days
+
+    def progressbar_width(self):
+        return f'width: {100*float(self.time_progressed()/self.ends_on)};'
+
+    
