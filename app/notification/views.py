@@ -7,5 +7,11 @@ from ..notification import notification
 
 @notification.route('/notifications')
 def notifications():
-    all_notes = [x for x in current_user.notifications]
-    return render_template('notifications.html', all_notes=all_notes)
+    all_notes = []
+    n_unseen = current_user.n_unseen()
+    for note in current_user.notifications:
+        note.mark_seen()
+        all_notes.append(note)
+    return render_template('notifications.html',
+                        all_notes=all_notes,
+                        n_unseen=n_unseen)

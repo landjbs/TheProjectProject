@@ -24,7 +24,7 @@
       <h4 class='tabname-big'>
         Notifications
         <i class="fas fa-bell"></i>
-        {{ all_notes|length }}
+        {{ n_unseen }}
       </h4>
       <div class="list-group" style='min-height:80vh; max-height:80vh;'>
         {% for notification in all_notes %}

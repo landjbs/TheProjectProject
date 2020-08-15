@@ -281,10 +281,9 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
-    def make_owner(self, user_id):
+    def make_owner(self, user):
         ''' Makes user_id owner of the project '''
-        user = self.members.filter_by(id=user_id).first()
-        if not user:
+        if not self.is_member(user):
             return False
         if user==self.owner:
             return False
