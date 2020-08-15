@@ -31,16 +31,16 @@ class Subject(CRUDMixin, db.Model):
         return f'<Subject {self.name}>'
 
 
-# class User_Subjects(db.Model):
-#     __tablename__ = 'user_subjects'
-#     # user
-#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-#     user = relationship('User', back_populates='subjects')
-#     # subjects
-#     subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'), primary_key=True)
-#     subject = relationship('Subject', back_populates='users')
-#     # count
-#     number = db.Column(db.Integer, nullable=False, default=1)
-#
-#     def __repr__(self):
-#         return f'<USER_SUBJECT u={self.user.name} s={self.subject.name} n={self.number}>'
+class User_Subjects(db.Model):
+    __tablename__ = 'user_subjects'
+    # user
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    user = relationship('User', back_populates='subjects')
+    # subjects
+    subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'), primary_key=True)
+    subject = relationship('Subject', back_populates='users')
+    # count
+    number = db.Column(db.Integer, nullable=False, default=1)
+
+    def __repr__(self):
+        return f'<USER_SUBJECT u={self.user.name} s={self.subject.name} n={self.number}>'

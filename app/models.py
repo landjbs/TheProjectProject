@@ -56,18 +56,3 @@ project_rejections = db.Table('project_rejections', db.Model.metadata,
 badge_to_perk = db.Table('badge_to_perk', db.Model.metadata,
                     db.Column('badge_id', db.Integer, db.ForeignKey('badge.id')),
                     db.Column('perk_id', db.Integer, db.ForeignKey('badge_perk.id')))
-
-
-class User_Subjects(db.Model):
-    __tablename__ = 'user_subjects'
-    # user
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='subjects')
-    # subjects
-    subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'), primary_key=True)
-    subject = relationship('Subject', back_populates='users')
-    # count
-    number = db.Column(db.Integer, nullable=False, default=1)
-
-    def __repr__(self):
-        return f'<USER_SUBJECT u={self.user.name} s={self.subject.name} n={self.number}>'

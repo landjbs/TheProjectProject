@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship, backref
 from app.database import db, CRUDMixin, generate_code
 from app.extensions import bcrypt
 
-from app.models import User_Subjects
+from app.subject.models import User_Subjects
 from app.notification.models import Notification
 from app.badge.models import Badge, User_Badge
 from app.badge.create_badges import badge_name_list
