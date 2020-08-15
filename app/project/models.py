@@ -382,6 +382,10 @@ class Project(CRUDMixin, db.Model):
         question.delete()
         return True
 
+    def n_unanswered(self):
+        ''' Gets number of unanswered questions '''
+        return self.questions.filter_by(answer=None).count()
+
     ## links ##
     def add_link(self, url, public, category):
         # check if link is already in project (in same place with same category)

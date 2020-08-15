@@ -99,7 +99,13 @@
               <i class="fa fa-crosshairs" style='color:black; vertical-align: middle;'></i>
             </button>
             <button class="tablinks" onclick="openTab(event, 'Activity')" id="Activity_Button">Activity</button>
-            <button class="tablinks" onclick="openTab(event, 'About')" id='About_Button'>About</button>
+            <button class="tablinks" onclick="openTab(event, 'About')" id='About_Button'>
+              About
+              {% set n_unanswered = project.n_unanswered() %}
+              {% if n_unseen > 0 %}
+                <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+              {% endif %}
+            </button>
             <button class="tablinks" onclick="openTab(event, 'Members')" id='Members_Button'>Members</button>
             {% if project.is_member(current_user) %}
               <button class="tablinks" onclick="openTab(event, 'Private')" id='Private_Button'>Private</button>
