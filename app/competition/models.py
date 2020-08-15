@@ -37,6 +37,9 @@ class Competition(CRUDMixin, db.Model):
     def get_active_competitions(cls):
         return cls.query.filter_by(active=True)
 
+    def total_length(self):
+        return (self.ends_on - self.starts_on).days
+
     def time_progressed(self):
         return (datetime.utcnow() - self.starts_on).days
 

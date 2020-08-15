@@ -1249,29 +1249,22 @@
       </p>
       <p style='color:rgba(0,0,0,0.7);'>{{ project.prize }}</p>
     </div>
-    <div class='card-foot float-left'>
-      <p style="padding-bottom:0px; margin-bottom:0px;">
-        <i class="fa fa-clock-o"></i>
-        {{ calc_days_since(now(), project.posted_on) }} / {{ project.estimated_time }}
-        days
-      </p>
-      <div>
-        {% for subject in project.subjects|reverse %}
-          <a href='/subject={{ subject.code }}'>
-            {% if loop.index>1 %}
-            ,
-            {% endif %}
-            <p class='subject-tag' style='background:{{ subject.color }};'>
-              {{ subject.name }}
-            </p>
-          </a>
-        {% endfor %}
+    <center>
+      <div class='card-foot'>
+        <p style="margin:0px;">
+            {{ competition.time_progressed() }} / {{ competition.total_length() }}
+        </p>
+        <div class="progress" style='width:80%;'>
+          <div class="progress-bar" role="progressbar"
+              style='{{ competition.progressbar_width() }}'></div>
+        </div>
+        <!-- TODO: maybe put subject list here -->
       </div>
-    </div>
+    </center>
     {% if current_user.is_authenticated %}
       <br><br>
       <hr class="my-4">
-      {{ render_project_action_bar(current_user, project) }}
+      
     {% endif %}
   </div>
 </div>
