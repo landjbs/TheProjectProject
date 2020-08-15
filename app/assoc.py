@@ -1,3 +1,7 @@
+'''
+Association tables for linking models.
+'''
+
 from app.database import db
 
 

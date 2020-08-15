@@ -79,6 +79,7 @@ class Project(CRUDMixin, db.Model):
                          back_populates='starred', lazy='dynamic')
     # buzz
     buzz = db.Column(db.Integer, nullable=False, default=0)
+    # competitions
     # comments
     comments = relationship('Comment', back_populates='project', lazy='dynamic')
     # tasks
