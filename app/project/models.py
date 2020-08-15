@@ -324,6 +324,7 @@ class Project(CRUDMixin, db.Model):
         self.tasks.append(Task(text=text, author=author))
         self.update_last_active()
         self.update()
+        self.notify_members(text=f'{author.name} added the task, "{text}".')
         return True
 
     def change_task_status(self, task_id, user, action):
@@ -353,6 +354,7 @@ class Project(CRUDMixin, db.Model):
         ''' Adds comment to project '''
         self.comments.append(Comment(text=text, author=author))
         self.update()
+        self.notify_members(text=f'{author.name} commented "{text}".')
         return True
 
     def delete_comment(self, comment_id, user):
