@@ -109,7 +109,9 @@
               <p id='time-out' style='display: inline;'></p>
             {% elif elt.name=='team_size' %}
               <div class="slidecontainer">
-                <input type="range" min="2" max="20" value="10" class="slider"
+                <input type="range" min="{{ elt.render_kw['min'] }}"
+                  max="{{ elt.render_kw['max'] }}"
+                  value="{{ elt.render_kw['start'] }}" class="slider"
                       name='{{ elt.name }}' id="team_slider">
               </div>
               <p id='team-out' style='display: inline;'></p>
@@ -147,20 +149,18 @@
     if (this.value==1) {
       time_out.innerHTML = 'n.a.';
     }
-    else if (this.value==30) {
-      time_out.innerHTML = 'long term';
-    }
     else {
       time_out.innerHTML = this.value + ' days';
     }
   };
   team_slider.oninput = function() {
-    if (this.value==20) {
-      team_out.innerHTML = 'comunity-wide';
-    }
-    else {
-      team_out.innerHTML = (this.value) + ' people';
-    }
+    // if (this.value==20) {
+    //   team_out.innerHTML = 'comunity-wide';
+    // }
+    // else {
+    //   team_out.innerHTML = (this.value) + ' people';
+    // }
+    team_out.innerHTML = (this.value) + ' people';
   };
 
   function submit() {
@@ -203,6 +203,7 @@
     document.getElementById("team_size_segment").style.opacity = 1;
     // requires application set to true
     document.getElementById('on-requires_application').checked = true;
+    document.getElementById('off-complete').checked = true;
     toggle_requires_application();
   };
 
@@ -225,6 +226,8 @@
   function yes_application() {
     document.getElementById("application_question").disabled = false;
     document.getElementById("application_question_segment").style.opacity = 1;
+    document.getElementById('on-open').checked = true;
+    document.getElementById('off-complete').checked = true;
   };
 
   function toggle_complete() {
@@ -237,7 +240,7 @@
 
   function toggle_open() {
     if (document.getElementById('on-open').checked) {
-          is_open();
+        is_open();
       } else {
           not_open();
       }

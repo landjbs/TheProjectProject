@@ -19,14 +19,12 @@ class Add_Project(BaseForm):
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
                            description='One line description of your project.',
-                           render_kw={'placeholder':'Project building community.',
+                           render_kw={'placeholder':'Facilitate collaboration on projects.',
                                       'max': 40})
     summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         description='Describe your project in more detail.',
-                        render_kw={'placeholder': ('I need help designing this '
-                                                   'online community of '
-                                                   'builders...'),
+                        render_kw={'placeholder': ('TheProjectProject is founded...'),
                                   'max':400})
     url = StringField(label='URL',
                     validators=[Length(0, 128)],
@@ -41,7 +39,7 @@ class Add_Project(BaseForm):
                                     render_kw={'max':5})
     open = BooleanField('Needs Team',
                         validators=[],
-                        description=('Whether you want to work with other on this project.'))
+                        description=('Whether you want to work with others on this project.'))
     requires_application = BooleanField('Requires Application',
                             validators=[],
                             description=('Applications allow you to choose '
@@ -53,13 +51,13 @@ class Add_Project(BaseForm):
                                 render_kw={'placeholder':'What do you look for in a team?',
                                            'max':128})
     estimated_time = IntegerField('Estimated Time',
-                                  description=('How long you '
-                                  'think the project might take.'),
+                                  description=('We are all about fast, impactful '
+                                            'projects. You will be able to extend this '
+                                            'time later if you need.'),
                                   render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Target Team Size',
-                            description=('The biggest you want your '
-                                         'team to be.'),
-                            render_kw={'min':1, 'max':30, 'start':7})
+                            description=('What size do you want your team to be?'),
+                            render_kw={'min':2, 'max':40, 'start':7})
     complete = BooleanField('Completed',
                             description=('Whether the project has been '
                             'completed.'))
