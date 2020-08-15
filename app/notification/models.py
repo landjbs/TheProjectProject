@@ -17,6 +17,13 @@ class Notification(CRUDMixin, db.Model):
                          back_populates='notifications')
     # timestamp
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    # marks seen
+    seen = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f'<Notification to {self.users} at {self.timestamp}; TEXT={self.text}>'
+
+    def mark_seen(self):
+        self.seen = True
+        self.update()
+        return True
