@@ -41,7 +41,7 @@ def create_app(config=config.BaseConfig):
     # database connection ## #  #
     application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' # f'mysql+pymysql://admin:sk90jal;skdjn,235#adsfjalasdf#%n2sdf@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/theprojectproject_production'
     # application.config['RQ_REDIS_URL'] = 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379'
-    application.config['ELASTICSEARCH_URL'] = None #'http://localhost:9200'
+    application.config['ELASTICSEARCH_URL'] = 'http://localhost:9200'
     register_extensions(application)
     register_blueprints(application)
     register_errorhandlers(application)
