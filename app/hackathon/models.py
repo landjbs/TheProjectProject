@@ -41,4 +41,7 @@ class Hackathon(CRUDMixin, db.Model):
 
     def add_winner(self, project):
         ''' Adds winner project '''
-        
+        self.winners.append(project)
+        winner_note = (f'Congratulations!! You have won the {self.name} '
+                    'hackathon!')
+        project.notify_members('')
