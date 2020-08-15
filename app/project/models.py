@@ -300,6 +300,7 @@ class Project(CRUDMixin, db.Model):
         # notify new owner
         self.notify_owner(
             text=f'You have been promoted to owner of {self.name}!',
+            important=True
         )
         # notify members
         self.notify_members(

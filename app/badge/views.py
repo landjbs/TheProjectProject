@@ -5,7 +5,7 @@ from flask_mobility.decorators import mobilized
 from app.extensions import limiter
 from app.utils import partition_query
 
-from app.competition.models import Competition
+# from app.competition.models import Competition
 
 from .models import Badge
 from ..badge import badge
