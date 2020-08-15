@@ -5,7 +5,7 @@ from flask_mobility.decorators import mobilized
 from app.extensions import limiter
 from app.utils import partition_query
 
-# from app.competition.models import Competition
+from app.competition.models import Competition
 
 from .models import Badge
 from ..badge import badge
@@ -13,7 +13,7 @@ from ..badge import badge
 
 def badge_page():
     # active competitions
-
+    active_competitions = Competition.get_active_competitions()
     # update badges
     current_user.update_badges()
     # progress tabs
@@ -21,6 +21,7 @@ def badge_page():
     # all badges
     all_tabs = list(partition_query(Badge.query.all()))
     return render_template('badge.html',
+                            active_competitions=active_competitions,
                             progress_tabs=progress_tabs,
                             all_tabs=all_tabs)
 
