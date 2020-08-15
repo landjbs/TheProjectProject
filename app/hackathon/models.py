@@ -12,9 +12,9 @@ class Hackathon(CRUDMixin, db.Model):
     # name
     name = db.Column(db.String(100), nullable=False)
     # sponsor
-    sponsor = db.Column(db.String(100), nullable=True)
+    sponsor = db.Column(db.String(100), nullable=False, default='TheProjectProject')
     # description
-    description = db.Column(db.Text(), nullable=False)
+    description = db.Column(db.Text(1000), nullable=False)
     # timing
     starts_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     ends_on = db.Column(db.DateTime, nullable=False)
@@ -27,7 +27,7 @@ class Hackathon(CRUDMixin, db.Model):
                         secondary='hackathon_to_project')
     ## administrative ##
     complete = db.Column(db.Boolean, nullable=False, default=False)
-    
+
 
     def __repr__(self):
         return f'<Hackathon {self.name} by {self.sponsor}>'
