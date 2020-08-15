@@ -13,7 +13,6 @@ class Notification(CRUDMixin, db.Model):
     # important
     important = db.Column(db.Boolean, nullable=False, default=False)
     # user
-    # TODO: change to single user to notification
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = relationship('User', back_populates='notifications')
     # timestamp
