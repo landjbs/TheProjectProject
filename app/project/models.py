@@ -13,7 +13,7 @@ from app.question.suggest import suggest_questions, choose_init_questions
 from app.link.models import Link
 ################################################################################
 
-class Project(CRUDMixin, db.Model):
+class Project(CRUDMixin, SearchableMixin, db.Model):
     __tablename__ = 'project'
     __searchable__ = ['name', 'oneliner', 'summary', 'owner.name']
     # id primary key

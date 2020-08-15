@@ -1,9 +1,9 @@
 from sqlalchemy.orm import relationship, backref
 
-from app.database import db, CRUDMixin, generate_code
+from app.database import db, CRUDMixin, SearchableMixin, generate_code
 
 
-class Subject(CRUDMixin, db.Model):
+class Subject(CRUDMixin, SearchableMixin, db.Model):
     __tablename__ = 'subject'
     __searchable__ = ['name']
     # id primary key
