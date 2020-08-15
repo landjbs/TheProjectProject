@@ -143,7 +143,8 @@ def add_test():
             password='boop',
             url='https://github.com/test',
             about=('I am a test user for TheProjectProject. Excited to be here.'),
-            admin=False
+            accepted=True
+
     )
     user.add_subjects(set(Subject.get_by_id(int(id)) for id in np.random.randint(1, 10+1, size=4)))
     return True

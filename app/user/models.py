@@ -207,9 +207,13 @@ class User(CRUDMixin, UserMixin, db.Model):
         return True
 
     ## notifications ##
-    def notify(self, text, category=0):
+    def notify(self, text, important=False, project=None):
         ''' Notify user with text and category '''
-        self.notifications.append(Notification(text=text, category=category))
+        if not project:
+            note = Notification(text=text, important=important)
+        else:
+            note = Notification(text=text, important=important, project=project)
+        self.notifications.append(note)
         self.update()
 
     def n_unseen(self):
@@ -262,8 +266,7 @@ class User(CRUDMixin, UserMixin, db.Model):
         # notify user
         self.notify(text=(f'{current_user.name} has invited you '
                           f'to collaborate on {project.name}! '
-                           'Visit your profile page to reply.'),
-                    category=1
+                           'Visit your profile page to reply.')
         )
         # add invitation
         self.invitations.append(project)
