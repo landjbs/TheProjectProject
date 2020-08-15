@@ -12,61 +12,9 @@
 
 {% block content %}
 <div class='container my-1' style='min-width: 90%'>
+
+  <!-- COMPETITONS -->
   {% if ((active_competitions|length) == 1) %}
-    <div class="col-md-4">
-      <div class="card mb-2">
-        <div class="card-body">
-          <div class='float-right info-nums'>
-            {{ projects.count() }}
-            <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
-          </div>
-          <div class='card-head'>
-            {{ render_project_name(project, current_user) }}
-            <a href='user={{ project.owner.code }}'>
-              <p class='owner'>
-                {{ project.owner.name }}
-                {% set badge = project.owner.choose_badge('project') %}
-                {% if badge %}
-                  {{ render_badge_icon(badge) }}
-                {% endif %}
-              </p>
-            </a>
-          </div>
-          <hr class="my-4">
-          <!-- summary -->
-          <div class='card-text'>
-            <p class='oneliner'>
-              {{ project.oneliner }}
-            </p>
-            <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
-          </div>
-          <div class='card-foot float-left'>
-            <p style="padding-bottom:0px; margin-bottom:0px;">
-              <i class="fa fa-clock-o"></i>
-              {{ calc_days_since(now(), project.posted_on) }} / {{ project.estimated_time }}
-              days
-            </p>
-            <div>
-              {% for subject in project.subjects|reverse %}
-                <a href='/subject={{ subject.code }}'>
-                  {% if loop.index>1 %}
-                  ,
-                  {% endif %}
-                  <p class='subject-tag' style='background:{{ subject.color }};'>
-                    {{ subject.name }}
-                  </p>
-                </a>
-              {% endfor %}
-            </div>
-          </div>
-          {% if current_user.is_authenticated %}
-            <br><br>
-            <hr class="my-4">
-            {{ render_project_action_bar(current_user, project) }}
-          {% endif %}
-        </div>
-      </div>
-    </div>
   {% endif %}
   {% if progress_tabs!=[] %}
     <h4 style='text-align:left;'>My Badges</h4>
