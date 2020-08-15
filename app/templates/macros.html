@@ -1232,28 +1232,22 @@
 <div class="card mb-2">
   <div class="card-body">
     <div class='float-right info-nums'>
-      {{ projects.count() }}
+      {{ competition.projects.count() }}
       <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
     </div>
     <div class='card-head'>
-      {{  }}
-      <a href='user={{ project.owner.code }}'>
-        <p class='owner'>
-          {{ project.owner.name }}
-          {% set badge = project.owner.choose_badge('project') %}
-          {% if badge %}
-            {{ render_badge_icon(badge) }}
-          {% endif %}
-        </p>
-      </a>
+      {{ competition.name }}
+      <p class='owner'>
+        by {{ competition.sponsor }}
+      </p>
     </div>
     <hr class="my-4">
     <!-- summary -->
     <div class='card-text'>
       <p class='oneliner'>
-        {{ project.oneliner }}
+        {{ competition.description }}
       </p>
-      <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
+      <p style='color:rgba(0,0,0,0.7);'>{{ project.prize }}</p>
     </div>
     <div class='card-foot float-left'>
       <p style="padding-bottom:0px; margin-bottom:0px;">
