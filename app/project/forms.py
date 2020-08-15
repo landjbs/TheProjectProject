@@ -57,7 +57,7 @@ class Add_Project(BaseForm):
                                   render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Target Team Size',
                             description=('What size do you want your team to be?'),
-                            render_kw={'min':2, 'max':40, 'start':7})
+                            render_kw={'min':2, 'max':40, 'start':5})
     complete = BooleanField('Completed',
                             description=('Whether the project has been '
                             'completed.'))

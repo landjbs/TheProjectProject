@@ -428,6 +428,7 @@ class Project(CRUDMixin, db.Model):
         ''' Mark project as incomplete '''
         if self.complete:
             self.complete = False
+            self.estimated_time = (datetime.utcnow() - self.posted_on).days
             self.notify_members(
                 text=(f'{self.name} has been marked as incomplete by the '
                        'owner. You can now post and complete tasks!'),
