@@ -77,6 +77,7 @@
                   </button>
                   <div class="dropdown-content">
                     <a href="/user={{ current_user.code }}">Profile</a>
+                    <a href="{{ url_for('notification.notifications') }}">Notifications</a>
                     <a href="/logout">Log Out</a>
                   </div>
                 </div>

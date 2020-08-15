@@ -1,1 +1,1 @@
-from ..import hackathon
+from ..competition import competition
