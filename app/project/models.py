@@ -160,7 +160,7 @@ class Project(CRUDMixin, db.Model):
             )
         )
         self.notify_owner(text=f'{user.name} has applied to {self.name}!',
-                          important=True)
+                          important=True, project=self)
         self.update()
         user.notify(text=f'You have applied to {self.name}.',
                     project=self)
@@ -193,7 +193,9 @@ class Project(CRUDMixin, db.Model):
                        'to add you to the project right now. '
                        "We promise it's nothing personal! "
                        'Please contact us if you think something'
-                       ' is wrong or have any questions.')
+                       ' is wrong or have any questions.'),
+                important=True,
+                project=self
             )
         else:
             for note in self.owner.notifications:
