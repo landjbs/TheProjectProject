@@ -212,11 +212,6 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.notifications.append(Notification(text=text, category=category))
         self.update()
 
-    def add_notification(self, notification):
-        ''' Notify user with prebuilt notification '''
-        self.notifications.append(notification)
-        self.update()
-
     def n_unseen(self):
         return self.notifications.filter_by(seen=False).count()
 

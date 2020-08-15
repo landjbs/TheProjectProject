@@ -10,8 +10,8 @@ class Notification(CRUDMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # text
     text = db.Column(db.String(160), nullable=False)
-    # category {0:neutral, 1:success, 2:warning: 3:important}
-    category = db.Column(db.Integer, nullable=True)
+    # important
+    important = db.Column(db.Boolean, nullable=False, default=False)
     # user
     # TODO: change to single user to notification
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
