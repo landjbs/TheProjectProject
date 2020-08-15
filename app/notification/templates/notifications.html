@@ -18,7 +18,49 @@
 
 
 {% block content %}
+<div class='container'>
+  <div class="row">
+    <div class='col'>
+      <div class="list-group">
+        {% for notifcation in current_user.notifcations %}
+          <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <h6 class="mb-1">{{ task.text }}</h6>
+            <div class="d-flex w-100 justify-content-between">
+              <small>Requested
+              {% if current_user.is_authenticated %}
+                by
+                <a href='user={{ task.author.code }}' class="mb-1">
+                  {% if task.author %}
+                    <u>{{ task.author.name }}</u>
+                  {% else %}
+                    Anonymous
+                  {% endif %}
+                </a>
+              {% endif %}
+              on {{ time_to_str(task.post_stamp) }}</small>
+            </div>
+            {% if is_member %}
+              <div class='action-bar'>
+                {% if current_user==task.author %}
+                  <div class='hoverable'>
+                    <a class='delete-btn task-btn float-left' href="{{ url_for('project.change_task_status', project_id=project.id, task_id=task.id, action='delete') }}">
+                      <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </a>
+                    <span class='tooltiptext'>Delete Task</span>
+                  </div>
+                {% endif %}
+                <a class='complete-btn task-btn float-right' href="{{ url_for('project.change_task_status', project_id=project.id, task_id=task.id, action='complete') }}">
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
   {% for notification in current_user.notifications %}
-    {{ notification.text }}
+    <p>{{ notification.text }}</p>
   {% endfor %}
 {% endblock %}
