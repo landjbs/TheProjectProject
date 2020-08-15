@@ -47,7 +47,7 @@ def create_app(config=config.BaseConfig):
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
-    register_admin_views(admin, db)
+    # register_admin_views(admin, db)
     register_elasticsearch(application)
 
     @application.before_request
