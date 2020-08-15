@@ -13,11 +13,11 @@ class Notification(CRUDMixin, db.Model):
     # important
     important = db.Column(db.Boolean, nullable=False, default=False)
     # user
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = relationship('User', back_populates='notifications')
     # project
-    project_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    project = db.Column(db.Integer, db.ForeignKey('project.id'))
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable=True)
+    project = relationship('Project', back_populates='notifications')
     # timestamp
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     # marks seen

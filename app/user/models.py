@@ -266,7 +266,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         # notify user
         self.notify(text=(f'{current_user.name} has invited you '
                           f'to collaborate on {project.name}! '
-                           'Visit your profile page to reply.')
+                           'Visit your profile page to reply.'),
+                    important=True,
+                    project=project
         )
         # add invitation
         self.invitations.append(project)

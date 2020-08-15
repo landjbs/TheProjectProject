@@ -32,7 +32,12 @@
             <h6 class="mb-1">{{ notification.text }}</h6>
             <div class="d-flex w-100 justify-content-between">
               <small>
-                On {{ time_to_str(notification.timestamp) }}
+                {% if notification.project %}
+                  <a class='project-name' href="{{ url_for('project.project_page', project_code=notification.project.code) }}">
+                    <u>{{ notification.project.name }}</u> |
+                  </a>
+                {% endif %}
+                {{ time_to_str(notification.timestamp) }}
               </small>
             </div>
           </div>

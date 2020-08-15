@@ -160,7 +160,7 @@ class Project(CRUDMixin, db.Model):
             )
         )
         self.notify_owner(text=f'{user.name} has applied to {self.name}!',
-                          important=True)
+                          important=True, project=self)
         self.update()
         return True
 
@@ -211,7 +211,7 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
-    def notify_members(self, text, include_owner=True):
+    def notify_members(self, text, important=False, include_owner=True):
         ''' Notify project members with text and category '''
         if include_owner:
             owner = self.owner
@@ -219,7 +219,7 @@ class Project(CRUDMixin, db.Model):
             if not include_owner:
                 if member==self.owner:
                     continue
-            member.notify(text)
+            member.notify(text, important=important, project=self)
         return True
 
     def add_member(self, user, notify_owner):
@@ -268,7 +268,7 @@ class Project(CRUDMixin, db.Model):
                              f'{self.name} by the owner. We promise '
                              "it's nothing personal! Please contact us "
                              'if you think something is wrong or have '
-                             'any questions.')
+                             'any questions.', project=project)
         else:
             self.notify_members(
                 text=(f'{user.name} has been left {self.name}.')
@@ -418,6 +418,7 @@ class Project(CRUDMixin, db.Model):
             self.notify_members(
                 text=(f'Congratulations—{self.name} has been marked as '
                        'complete by the owner!'),
+                important=True,
                 include_owner=False
             )
             self.update_last_active()
@@ -433,6 +434,7 @@ class Project(CRUDMixin, db.Model):
             self.notify_members(
                 text=(f'{self.name} has been marked as incomplete by the '
                        'owner. You can now post and complete tasks!'),
+                important=True,
                 include_owner=False
             )
             self.update()
