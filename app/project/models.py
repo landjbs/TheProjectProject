@@ -494,6 +494,9 @@ class Project(CRUDMixin, db.Model):
         self.update()
         return True
 
+    def n_applications(self):
+        return self.pending.count()
+
     ## xp and badges ##
     def action_xp_all_members(self, action:str, positive:bool=True):
         for member in self.members:

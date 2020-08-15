@@ -99,16 +99,30 @@
               <i class="fa fa-crosshairs" style='color:black; vertical-align: middle;'></i>
             </button>
             <button class="tablinks" onclick="openTab(event, 'Activity')" id="Activity_Button">Activity</button>
+            <!-- about -->
             <button class="tablinks" onclick="openTab(event, 'About')" id='About_Button'>
               About
               {% if is_member %}
                 {% set n_unanswered = project.n_unanswered() %}
                 {% if n_unanswered > 0 %}
-                  <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unanswered }}</span>
+                  <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
+                    {{ n_unanswered }}
+                  </span>
                 {% endif %}
               {% endif %}
             </button>
-            <button class="tablinks" onclick="openTab(event, 'Members')" id='Members_Button'>Members</button>
+            <!-- members -->
+            <button class="tablinks" onclick="openTab(event, 'Members')" id='Members_Button'>
+              Members
+              {% if is_member %}
+                {% set n_applications = project.n_applications() %}
+                {% if n_applications > 0 %}
+                  <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
+                    {{ n_applications }}
+                  </span>
+                {% endif %}
+              {% endif %}
+            </button>
             {% if project.is_member(current_user) %}
               <button class="tablinks" onclick="openTab(event, 'Private')" id='Private_Button'>Private</button>
             {% endif %}
