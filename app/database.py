@@ -44,6 +44,8 @@ class CRUDMixin(object):
 
 
 class SearchableMixin(object):
+    __table_args__ = {'extend_existing': True}
+
     @classmethod
     def search(cls, expression, page, per_page):
         ids, total = query_index(cls.__tablename__, expression, page, per_page)

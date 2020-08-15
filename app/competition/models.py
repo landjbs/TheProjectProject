@@ -7,8 +7,6 @@ from app.database import db, CRUDMixin
 
 class Competition(CRUDMixin, db.Model):
     __tablename__ = 'competition'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
     # name
     name = db.Column(db.String(100), nullable=False)
     # sponsor

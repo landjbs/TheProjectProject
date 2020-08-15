@@ -16,8 +16,6 @@ from app.link.models import Link
 class Project(CRUDMixin, SearchableMixin, db.Model):
     __tablename__ = 'project'
     __searchable__ = ['name', 'oneliner', 'summary', 'owner.name']
-    # id primary key
-    id = db.Column(db.Integer, primary_key=True)
     ## base info ##
     # name
     name = db.Column(db.String(25), unique=False, nullable=False)

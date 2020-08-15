@@ -6,8 +6,6 @@ from app.database import db, CRUDMixin
 
 class Badge(CRUDMixin, db.Model):
     __tablename__ = 'badge'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
     ## display ##
     # name
     name = db.Column(db.String(60), nullable=False, unique=True)
