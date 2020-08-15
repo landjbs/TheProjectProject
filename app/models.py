@@ -1,11 +1,4 @@
 from sqlalchemy.orm import relationship, backref
-from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime
-from sqlalchemy import (Table, db.ForeignKey, db.Integer, String, Boolean,
-                        DateTime, Float)
-from sqlalchemy_utils import IntRangeType
-from sqlalchemy import desc
-
 
 from app.database import db
 
