@@ -17,11 +17,8 @@
       <div class="card mb-2">
         <div class="card-body">
           <div class='float-right info-nums'>
-            {{ project.members.all()|length }} / {{ project.team_size }}
+            {{ projects.count() }}
             <i class='far fa-user-circle'></i>
-            <br>
-            {{ project.stars.all()|length }}
-            <i class="fa fa-star"></i>
           </div>
           <div class='card-head'>
             {{ render_project_name(project, current_user) }}
