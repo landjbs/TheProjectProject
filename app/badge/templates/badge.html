@@ -1,5 +1,6 @@
 {% extends "home_base.html" %}
 {% import "badge_macros.html" as badge_macros %}
+{% import "macros.html" as macros %}
 
 {% block title %}Perks{% endblock %}
 
@@ -12,10 +13,14 @@
 
 {% block content %}
 <div class='container my-1' style='min-width: 90%'>
-
+  <br>
   <!-- COMPETITONS -->
-  {% if ((active_competitions|length) == 1) %}
+  {% if ((active_competitions.count()) == 1) %}
+    <h4 style='text-align:left;'>Competitions</h4>
+    <hr class="my-1">
+    {{ macros.render_competition_card(active_competitions[0]) }}
   {% endif %}
+
   {% if progress_tabs!=[] %}
     <h4 style='text-align:left;'>My Badges</h4>
     <hr class="my-1">

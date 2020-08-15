@@ -47,7 +47,7 @@ class Competition(CRUDMixin, db.Model):
         return (self.ends_on - datetime.utcnow()).days
 
     def progressbar_width(self):
-        return f'width: {100*float(self.time_progressed()/self.ends_on)};'
+        return f'width: {100*float(self.time_progressed()/self.total_length())};'
 
     def add_winner(self, project):
         ''' Adds winner project '''

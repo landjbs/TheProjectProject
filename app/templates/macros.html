@@ -1232,12 +1232,12 @@
 <div class="card mb-2">
   <div class="card-body">
     <div class='float-right info-nums'>
-      {{ competition.projects.count() }}
-      <i class="fa fa-circle-o" style='color:#FF5D00;'></i>
+      {{ competition.projects|length }}
+      <i class="fa fa-circle" style='color:#FF5D00;'></i>
     </div>
-    <div class='card-head'>
-      {{ competition.name }}
-      <p class='owner'>
+    <div class='card-head' style='text-align:center;'>
+      <h3>{{ competition.name }}</h3>
+      <p>
         by {{ competition.sponsor }}
       </p>
     </div>
@@ -1247,12 +1247,12 @@
       <p class='oneliner'>
         {{ competition.description }}
       </p>
-      <p style='color:rgba(0,0,0,0.7);'>{{ project.prize }}</p>
+      <p style='color:rgba(0,0,0,0.7);'>{{ competition.prize }}</p>
     </div>
     <center>
       <div class='card-foot'>
         <p style="margin:0px;">
-            {{ competition.time_progressed() }} / {{ competition.total_length() }}
+            {{ competition.time_progressed() }} / {{ competition.total_length() }} days
         </p>
         <div class="progress" style='width:80%;'>
           <div class="progress-bar" role="progressbar"
@@ -1261,11 +1261,8 @@
         <!-- TODO: maybe put subject list here -->
       </div>
     </center>
-    {% if current_user.is_authenticated %}
-      <br><br>
-      <hr class="my-4">
-      
-    {% endif %}
+      <!-- <br><br> -->
+      <!-- <hr class="my-4"> -->
   </div>
 </div>
 {% endmacro -%}
