@@ -337,6 +337,7 @@ class Project(CRUDMixin, db.Model):
         if action=='complete':
             if not task.complete:
                 task.mark_complete(user)
+                self.notify_members(text=f'{user.name} completed the task, "{task.text}".')
             else:
                 task.add_worker(user)
         elif action=='back':
