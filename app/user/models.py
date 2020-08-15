@@ -217,6 +217,9 @@ class User(CRUDMixin, UserMixin, db.Model):
         self.notifications.append(notification)
         self.update()
 
+    def n_unseen(self):
+        return self.notifications.filter_by(seen=False).count()
+
     ## starring ##
     def star_project(self, project):
         if not self.has_starred(project):

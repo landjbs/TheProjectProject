@@ -37,7 +37,7 @@ class Add_Project(BaseForm):
                                     validators=[Select_Limit_Validator(5)],
                                     choices=[], coerce=int,
                                     render_kw={'max':5})
-    open = BooleanField('Needs Team',
+    open = BooleanField('Team Project',
                         validators=[],
                         description=('Whether you want to work with others on this project.'))
     requires_application = BooleanField('Requires Application',
