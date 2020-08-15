@@ -5,6 +5,7 @@ from app.database import db, CRUDMixin, generate_code
 
 class Subject(CRUDMixin, db.Model):
     __tablename__ = 'subject'
+    __searchable__ = ['name']
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
     # name

@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy.orm import relationship, backref
 
-from app.database import db, CRUDMixin, generate_code
+from app.database import db, CRUDMixin, SearchableMixin, generate_code
 ############################# notifications ####################################
 from app.notification.models import Notification
 ################################################################################
@@ -15,6 +15,7 @@ from app.link.models import Link
 
 class Project(CRUDMixin, db.Model):
     __tablename__ = 'project'
+    __searchable__ = ['name', 'oneliner', 'summary', 'owner.name']
     # id primary key
     id = db.Column(db.Integer, primary_key=True)
     ## base info ##
