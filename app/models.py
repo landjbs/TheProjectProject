@@ -1,5 +1,3 @@
-from sqlalchemy.orm import relationship, backref
-
 from app.database import db
 
 
@@ -56,18 +54,3 @@ badge_to_perk = Table('badge_to_perk', db.Model.metadata,
 competition_to_project = Table('competition_to_project', db.Model.metadata,
     db.Column('competition_id', db.Integer, db.ForeignKey('competition.id')),
     db.Column('project_id', db.Integer, db.ForeignKey('project.id')))
-
-
-class User_Subjects(db.Model):
-    __tablename__ = 'user_subjects'
-    # user
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='subjects')
-    # subjects
-    subject_id = db.Column(db.Integer, db.ForeignKey('subject.id'), primary_key=True)
-    subject = relationship('Subject', back_populates='users')
-    # count
-    number = db.Column(db.Integer, nullable=False, default=1)
-
-    def __repr__(self):
-        return f'<USER_SUBJECT u={self.user.name} s={self.subject.name} n={self.number}>'
