@@ -83,6 +83,12 @@ class Project(CRUDMixin, db.Model):
     comments = relationship('Comment', back_populates='project', lazy='dynamic')
     # tasks
     tasks = relationship('Task', back_populates='project', lazy='dynamic')
+    # notifications
+    notifications = relationship('Notification',
+                                 back_populates='project',
+                                 lazy='dynamic',
+                                 cascade='all, delete, delete-orphan',
+                                 order_by='desc(Notification.timestamp)')
 
     def __init__(self, name, oneliner, summary, url, open, subjects,
                 requires_application, application_question, estimated_time,

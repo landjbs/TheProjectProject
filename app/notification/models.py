@@ -15,6 +15,9 @@ class Notification(CRUDMixin, db.Model):
     # user
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = relationship('User', back_populates='notifications')
+    # project
+    project_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    project = db.Column(db.Integer, db.ForeignKey('project.id'))
     # timestamp
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     # marks seen
