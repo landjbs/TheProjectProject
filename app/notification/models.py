@@ -13,9 +13,9 @@ class Notification(CRUDMixin, db.Model):
     # category {0:neutral, 1:success, 2:warning: 3:important}
     category = db.Column(db.Integer, nullable=True)
     # user
-    # TODO: change to single user to notification 
-    users = relationship('User', secondary='user_to_notification',
-                         back_populates='notifications')
+    # TODO: change to single user to notification
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = relationship('User', back_populates='notifications')
     # timestamp
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     # marks seen

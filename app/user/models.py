@@ -81,10 +81,10 @@ class User(CRUDMixin, UserMixin, db.Model):
                                 back_populates='workers')
     # notifications
     notifications = relationship('Notification',
-                                secondary='user_to_notification',
-                                back_populates='users',
-                                lazy='dynamic',
-                                order_by='Notification.timestamp')
+                                 back_populates='user',
+                                 lazy='dynamic',
+                                 cascade='all, delete, delete-orphan',
+                                 order_by='desc(Notification.timestamp)')
     ## honors ##
     # badges
     badges = relationship('User_Badge',
