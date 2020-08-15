@@ -24,7 +24,8 @@ class Hackathon(CRUDMixin, db.Model):
     # winners
     n_winners = db.Column(db.Integer, nullable=False, default=1)
     winners = relationship('Project',
-                        secondary='hackathon_to_project', # TODO: impl)
+                        secondary='hackathon_to_project', # TODO: impl
+                        )
 
     def __repr__(self):
         return f'<Hackathon {self.name} by {self.sponsor}>'
@@ -37,3 +38,7 @@ class Hackathon(CRUDMixin, db.Model):
 
     def progressbar_width(self):
         return f'width: {100*float(self.time_progressed()/self.ends_on)};'
+
+    def add_winner(self, project):
+        ''' Adds winner project '''
+        
