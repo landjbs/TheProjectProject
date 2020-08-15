@@ -17,8 +17,6 @@ from .xp_constants import xp_constants
 class User(CRUDMixin, UserMixin, SearchableMixin, db.Model):
     __tablename__ = 'user'
     __searchable__ = ['name', 'about']
-    # id primary key
-    id = db.Column(db.Integer, primary_key=True)
     # name
     name = db.Column(db.String(128), unique=False)
     # code

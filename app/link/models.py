@@ -8,8 +8,6 @@ from app.database import db, CRUDMixin
 
 class Link(CRUDMixin, db.Model):
     __tablename__ = 'link'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
     # url
     url = db.Column(db.String(500), nullable=False, unique=False)
     # project

@@ -6,8 +6,6 @@ from app.database import db, CRUDMixin, SearchableMixin, generate_code
 class Subject(CRUDMixin, SearchableMixin, db.Model):
     __tablename__ = 'subject'
     __searchable__ = ['name']
-    # id primary key
-    id = db.Column(db.Integer, primary_key=True)
     # name
     name = db.Column(db.String(128), unique=True, nullable=False)
     # color

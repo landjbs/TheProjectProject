@@ -6,8 +6,6 @@ from app.database import db, CRUDMixin
 
 class Notification(CRUDMixin, db.Model):
     __tablename__ = 'notification'
-    # id
-    id = db.Column(db.Integer, primary_key=True)
     # text
     text = db.Column(db.String(160), nullable=False)
     # important
