@@ -26,11 +26,15 @@ class Competition(CRUDMixin, db.Model):
     winners = relationship('Project',
                         secondary='hackathon_to_project')
     ## administrative ##
+    active = db.Column(db.Boolean, nullable=False)
     complete = db.Column(db.Boolean, nullable=False, default=False)
-
 
     def __repr__(self):
         return f'<Competition {self.name} by {self.sponsor}>'
+
+    @classmethod
+    def get_active_competitions(cls):
+        return cls.filter_by(active=True)
 
     def time_progressed(self):
         return (datetime.utcnow() - self.starts_on).days

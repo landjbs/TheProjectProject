@@ -5,11 +5,15 @@ from flask_mobility.decorators import mobilized
 from app.extensions import limiter
 from app.utils import partition_query
 
+from app.competition.models import Competition
+
 from .models import Badge
 from ..badge import badge
 
 
 def badge_page():
+    # active competitions
+
     # update badges
     current_user.update_badges()
     # progress tabs
