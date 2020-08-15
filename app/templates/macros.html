@@ -1250,22 +1250,18 @@
       <p style='color:rgba(0,0,0,0.7);'>{{ competition.prize }}</p>
     </div>
     <center>
-      <div class='card-foot'>
-        <p style="margin:0px;">
-            {{ competition.time_progressed() }} / {{ competition.total_length() }} days
-        </p>
-        <div class="progress" style='width:80%;'>
-          <div class="progress-bar" role="progressbar"
-              style='{{ competition.progressbar_width() }}'></div>
-        </div>
-        <!-- TODO: maybe put subject list here -->
+      <p style="margin:0px;">
+          {{ competition.time_progressed() }} / {{ competition.total_length() }} days
+      </p>
+      <div class="progress" style='width:80%;'>
+        <div class="progress-bar" role="progressbar"
+            style='{{ competition.progressbar_width() }}'></div>
       </div>
     </center>
-    <br><br>
-    <hr class="my-1">
+    <hr class="my-2">
     <div class='action-bar'>
       <a class="btn" href='/add_project'>
-          Join
+          Enter
       </a>
     </div>
   </div>
