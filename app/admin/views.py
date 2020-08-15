@@ -10,7 +10,7 @@ from flask_admin.menu import MenuLink
 
 from app.jobs import send_acceptance_email
 
-import app.models as models
+import app.assoc as assoc
 from app.user.models import User, User_Report
 from app.project.models import Project, Project_Application, Task, Comment
 from app.subject.models import Subject
