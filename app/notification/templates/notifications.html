@@ -18,11 +18,16 @@
 
 
 {% block content %}
-<div class='container big-box'>
+<div class='container'>
   <div class="row">
     <div class='col'>
-      <div class="list-group">
-        {% for notifcation in current_user.notifcations %}
+      <h4 class='tabname-big'>
+        Notifications
+        <i class="fas fa-bell"></i>
+        {{ all_notes|length }}
+      </h4>
+      <div class="list-group" style='min-height:80vh; max-height:80vh;'>
+        {% for notification in all_notes %}
           <div class="list-group-item list-group-item-action flex-column align-items-start">
             <h6 class="mb-1">{{ notification.text }}</h6>
             <div class="d-flex w-100 justify-content-between">
