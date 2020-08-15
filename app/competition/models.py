@@ -5,8 +5,8 @@ from app.database import db, CRUDMixin
 
 
 
-class Hackathon(CRUDMixin, db.Model):
-    __tablename__ = ''
+class Competition(CRUDMixin, db.Model):
+    __tablename__ = 'competition'
     # id
     id = db.Column(db.Integer, primary_key=True)
     # name
@@ -30,7 +30,7 @@ class Hackathon(CRUDMixin, db.Model):
 
 
     def __repr__(self):
-        return f'<Hackathon {self.name} by {self.sponsor}>'
+        return f'<Competition {self.name} by {self.sponsor}>'
 
     def time_progressed(self):
         return (datetime.utcnow() - self.starts_on).days
