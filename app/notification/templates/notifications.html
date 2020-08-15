@@ -29,8 +29,13 @@
       <div class="list-group" style='min-height:80vh; max-height:80vh;'>
         {% for notification in all_notes %}
           <div class="list-group-item list-group-item-action flex-column align-items-start"
-            style='background-color: {% if notification.important %}rgba(0,0,255,0.05){% else %}{% endif %}'>
-            <h6 class="mb-1">{{ notification.text }}</h6>
+            style='background-color: rgba(0,0,255,0.05)'>
+            <h6 class="mb-1">
+              {% if notification.important %}
+                <i class="fa fa-exclamation-circle orange" aria-hidden="true"></i>
+              {% endif %}
+              {{ notification.text }}
+            </h6>
             <div class="d-flex w-100 justify-content-between">
               <small>
                 {% if notification.project %}

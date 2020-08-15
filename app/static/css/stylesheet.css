@@ -271,3 +271,7 @@ input[type="radio"].toggle:checked + label:after {
 .embedly-card .card .action {
   color: #fa4b2a;
 }
+
+.orange {
+  color: #FF5D00;
+}
