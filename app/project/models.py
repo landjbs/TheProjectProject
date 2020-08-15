@@ -108,10 +108,9 @@ class Project(CRUDMixin, db.Model):
         self.add_member(owner, notify_owner=False)
         ### if url, add it to project ###
         if url is not None:
-            self.add_link(url=url, public=True, category=0)
+            self.add_link(url=url, public=True)
         ### choose questions and add them to project ###
         for question in choose_init_questions(self):
-            print(question)
             self.add_question(question=question)
 
 
@@ -155,7 +154,7 @@ class Project(CRUDMixin, db.Model):
             )
         )
         self.notify_owner(text=f'{user.name} has applied to {self.name}!',
-                          category=0)
+                          important=True)
         self.update()
         return True
 
@@ -196,20 +195,18 @@ class Project(CRUDMixin, db.Model):
         return True
 
 
-    def notify_owner(self, text, category=0):
+    def notify_owner(self, text, important=False):
         ''' Notify owner with text and category '''
         self.owner.notifications.append(
             Notification(
                 text=text,
-                category=category
             )
         )
         self.update()
         return True
 
-    def notify_members(self, text, category=0, include_owner=True):
+    def notify_members(self, text, include_owner=True):
         ''' Notify project members with text and category '''
-        notification = Notification(text=text, category=category)
         if include_owner:
             owner = self.owner
         for member in self.members:
@@ -235,7 +232,7 @@ class Project(CRUDMixin, db.Model):
             self.rejections.remove(user)
         # notify other project members
         self.notify_members(text=f'{user.name} has joined {self.name}.',
-                            category=0, include_owner=notify_owner)
+                            include_owner=notify_owner)
         # add member to project
         self.members.append(user)
         # add xp to user
@@ -290,7 +287,6 @@ class Project(CRUDMixin, db.Model):
         # notify new owner
         self.notify_owner(
             text=f'You have been promoted to owner of {self.name}!',
-            category=1
         )
         # notify members
         self.notify_members(
@@ -416,7 +412,6 @@ class Project(CRUDMixin, db.Model):
             self.notify_members(
                 text=(f'Congratulations—{self.name} has been marked as '
                        'complete by the owner!'),
-                category=1,
                 include_owner=False
             )
             self.update_last_active()
@@ -432,7 +427,6 @@ class Project(CRUDMixin, db.Model):
             self.notify_members(
                 text=(f'{self.name} has been marked as incomplete by the '
                        'owner. You can now post and complete tasks!'),
-                category=0,
                 include_owner=False
             )
             self.update()
@@ -445,7 +439,6 @@ class Project(CRUDMixin, db.Model):
             self.open = False
             self.notify_members(
                     text=f'{self.name} has been closed by the owner.',
-                    category=0,
                     include_owner=False)
             self.update_last_active()
             self.update()
@@ -458,7 +451,6 @@ class Project(CRUDMixin, db.Model):
             self.open = True
             self.notify_members(
                     text=f'{self.name} has been opened by the owner.',
-                    category=0,
                     include_owner=False)
             self.update_last_active()
             self.update()
@@ -480,7 +472,7 @@ class Project(CRUDMixin, db.Model):
             self.add_member(application.user, notify_owner=False)
         self.notify_members(text=(f'The application requirement has been '
                                   f'removed from {self.name} by the owner.'),
-                            category=0, include_owner=False)
+                            include_owner=False)
         self.update_last_active()
         self.update()
         return True
