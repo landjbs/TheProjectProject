@@ -24,8 +24,10 @@ class Hackathon(CRUDMixin, db.Model):
     # winners
     n_winners = db.Column(db.Integer, nullable=False, default=1)
     winners = relationship('Project',
-                        secondary='hackathon_to_project', # TODO: impl
-                        )
+                        secondary='hackathon_to_project')
+    ## administrative ##
+    complete = db.Column(db.Boolean, nullable=False, default=False)
+    
 
     def __repr__(self):
         return f'<Hackathon {self.name} by {self.sponsor}>'
@@ -44,4 +46,5 @@ class Hackathon(CRUDMixin, db.Model):
         self.winners.append(project)
         winner_note = (f'Congratulations!! You have won the {self.name} '
                     'hackathon!')
-        project.notify_members('')
+        project.notify_members(winner_note)
+        return True
