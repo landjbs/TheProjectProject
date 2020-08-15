@@ -15,11 +15,16 @@ class Hackathon(CRUDMixin, db.Model):
     sponsor = db.Column(db.String(100), nullable=True)
     # description
     description = db.Column(db.Text(), nullable=False)
-    # prize
-    prize = db.Column(db.String(100), nullable=False)
     # timing
     starts_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     ends_on = db.Column(db.DateTime, nullable=False)
+    ## winning conditions ##
+    # prize
+    prize = db.Column(db.String(100), nullable=False)
+    # winners
+    n_winners = db.Column(db.Integer, nullable=False, default=1)
+    winners = relationship('Project',
+                        secondary='hackathon_to_project', # TODO: impl)
 
     def __repr__(self):
         return f'<Hackathon {self.name} by {self.sponsor}>'
@@ -32,5 +37,3 @@ class Hackathon(CRUDMixin, db.Model):
 
     def progressbar_width(self):
         return f'width: {100*float(self.time_progressed()/self.ends_on)};'
-
-    
