@@ -160,7 +160,7 @@ class Project(CRUDMixin, db.Model):
             )
         )
         self.notify_owner(text=f'{user.name} has applied to {self.name}!',
-                          important=True, project=self)
+                          important=True)
         self.update()
         return True
 
@@ -206,6 +206,8 @@ class Project(CRUDMixin, db.Model):
         self.owner.notifications.append(
             Notification(
                 text=text,
+                project=self,
+                important=important
             )
         )
         self.update()
