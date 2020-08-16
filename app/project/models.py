@@ -15,7 +15,7 @@ from app.link.models import Link
 
 class Project(CRUDMixin, SearchableMixin, db.Model):
     __tablename__ = 'project'
-    __searchable__ = ['name', 'oneliner', 'summary', 'owner.name']
+    __searchable__ = ['name', 'oneliner', 'summary']
     ## base info ##
     # name
     name = db.Column(db.String(25), unique=False, nullable=False)
@@ -399,7 +399,7 @@ class Project(CRUDMixin, SearchableMixin, db.Model):
         return self.questions.filter_by(answer=None).count()
 
     ## links ##
-    def add_link(self, url, public, category):
+    def add_link(self, url, public, category=0):
         # check if link is already in project (in same place with same category)
         prev = self.links.filter_by(url=url, public=public, category=category).first()
         if prev is None:

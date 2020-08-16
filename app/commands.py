@@ -150,9 +150,16 @@ def add_test():
     return True
 
 
+def reindex():
+    ''' Reindexes searchables '''
+    for searchable in tqdm([User, Project, Subject], desc='Reindexing'):
+        searchable.reindex()
+    return True
+
+
 ### list of commands to register ###
 command_list = [create_db, drop_db, rebuild_db, add_badges, add_statics,
-                populate_db, add_test]
+                populate_db, add_test, reindex]
 
 
 ### elasticsearch stuff ##

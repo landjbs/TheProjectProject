@@ -1,5 +1,5 @@
 from numpy.random import randint
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy, event
 from sqlalchemy import or_
 
 from app.recommendations.elastic_search import (
@@ -14,6 +14,7 @@ class CRUDMixin(object):
     __table_args__ = {'extend_existing': True}
 
     id = db.Column(db.Integer, primary_key=True)
+    __searchable__ = False
 
     @classmethod
     def get_by_id(cls, id):
@@ -25,20 +26,34 @@ class CRUDMixin(object):
     @classmethod
     def create(cls, **kwargs):
         instance = cls(**kwargs)
+        # TEMP: searching should be moved to SearchableMixin asap
+        if instance.__searchable__:
+            add_to_index(cls.__tablename__, instance)
         return instance.save()
 
     def update(self, commit=True, **kwargs):
+        # TEMP: searching should be moved to SearchableMixin asap
+        if self.__searchable__:
+            # remove_from_index(self.__tablename__, self)
+            add_to_index(self.__tablename__, self)
         for attr, value in kwargs.items():
             setattr(self, attr, value)
         return commit and self.save() or self
 
     def save(self, commit=True):
         db.session.add(self)
+        # TEMP: searching should be moved to SearchableMixin asap
+        # if self.__searchable__:
+            # remove_from_index(self.__tablename__, self)
+            # add_to_index(self.__tablename__, self)
         if commit:
             db.session.commit()
         return self
 
     def delete(self, commit=True):
+        # TEMP: searching should be moved to SearchableMixin asap
+        if self.__searchable__:
+            remove_from_index(self.__tablename__, self)
         db.session.delete(self)
         return commit and db.session.commit()
 
@@ -61,6 +76,7 @@ class SearchableMixin(object):
     @classmethod
     def before_commit(cls, session):
         ''' Tags changes before commit to update index after '''
+        print("BEFORE")
         session._changes = {
             'add': list(session.new),
             'update': list(session.dirty),
@@ -70,6 +86,7 @@ class SearchableMixin(object):
     @classmethod
     def after_commit(cls, session):
         ''' Update search index after commit is successfully completed '''
+        print("AFTER")
         for obj in session._changes['add']:
             if isinstance(obj, SearchableMixin):
                 add_to_index(obj.__tablename__, obj)
@@ -98,6 +115,13 @@ def generate_code(name, table):
 
 
 ############## establish handlers for SearchableMixin ##########################
-db.event.listens_for(db.session, 'before_commit', SearchableMixin.before_commit)
-db.event.listens_for(db.session, 'after_commit', SearchableMixin.after_commit)
+# @db.event.listens_for(db.session, 'before_commit')
+# def before_commit(SearchableMixin, session):
+#     ''' Tags changes before commit to update index after '''
+#     print("BEFORE")
+#     session._changes = {
+#         'add': list(session.new),
+#         'update': list(session.dirty),
+#         'delete': list(session.deleted)
+#     }
 ################################################################################

@@ -24,6 +24,8 @@ from app.link import link
 from app.admin import register_admin_views
 # database
 from app.database import db, SearchableMixin
+from app.user.models import User
+from app.project.models import Project
 # login
 from app.user.models import Anonymous
 # forms
