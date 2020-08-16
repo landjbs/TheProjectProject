@@ -54,7 +54,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             {% if g.search_form %}
-              <form class="form-inline my-2 my-sm-0" action='/search' method='get'>
+              <form class="form-inline my-2 my-sm-0" action="{{ url_for('hub.search') }}" method='get'>
                 {{ g.search_form.search(style='display:inline;', class="mr-sm-2 search-bar", placeholder="search...") }}
               </form>
             {% endif %}

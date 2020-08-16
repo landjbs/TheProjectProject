@@ -1,5 +1,5 @@
 from flask import (current_app, request, redirect, url_for,
-                   render_template, flash)
+                   render_template, flash, g)
 from flask_login import current_user, login_required
 from flask_mobility.decorators import mobilized
 from datetime import datetime
@@ -62,15 +62,23 @@ def home():
 
 
 ### SEARCH ###
-@hub.route('/search', methods=['GET', 'POST'])
+@hub.route('/search')
 @login_required
 def search():
     if not g.search_form.validate():
         return redirect(url_for('hub.home'))
+
+    page = request.args.get('page', 1, type=int)
+
     results = {}
-    projects, n_projects = Project.search(g.search_form.search.data, 30)
-    users, n_users = User.search(g.search_form.search.data, 30)
-    subjects, n_subjects = Subject.search(g.search_form.search.data, 30)
+    projects, n_projects = Project.search(g.search_form.search.data, page, 30)
+    users, n_users = User.search(g.search_form.search.data, page, 30)
+    subjects, n_subjects = Subject.search(g.search_form.search.data, page, 30)
+
+    results = {'project' :   (list(partition_query(projects)), n_projects),
+            'user'       :   (list(partition_query(users)), n_users),
+            'subject'    :   (list(partition_query(subjects)), n_subjects)}
+
     project_application = Project_Application_Form()
     return render_template('search.html',
                            results=results,

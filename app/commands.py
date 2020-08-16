@@ -153,3 +153,10 @@ def add_test():
 ### list of commands to register ###
 command_list = [create_db, drop_db, rebuild_db, add_badges, add_statics,
                 populate_db, add_test]
+
+
+### elasticsearch stuff ##
+# To have launchd start elasticsearch now and restart at login:
+#   brew services start elasticsearch
+# Or, if you don't want/need a background service you can just run:
+#   elasticsearch
