@@ -98,6 +98,5 @@ def generate_code(name, table):
 
 
 ############## establish handlers for SearchableMixin ##########################
-db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
-db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
+
 ################################################################################

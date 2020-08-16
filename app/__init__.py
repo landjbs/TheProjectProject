@@ -22,7 +22,7 @@ from app.question import question
 from app.link import link
 from app.admin import register_admin_views
 # database
-from app.database import db
+from app.database import db, SearchableMixin
 # login
 from app.user.models import Anonymous
 # forms
@@ -34,6 +34,10 @@ from app.extensions import (assets, admin, bcrypt, csrf, limiter,
 from app.utils import url_for_other_page
 # commands
 from app.commands import command_list
+
+
+db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
+db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
 
 def create_app(config=config.BaseConfig):
