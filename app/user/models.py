@@ -169,6 +169,11 @@ class User(CRUDMixin, UserMixin, SearchableMixin, db.Model):
         self.update()
         return True
 
+    def update_last_active(self):
+        self.last_active = datetime.utcnow()
+        self.update()
+        return True
+
     # password
     def set_password(self, password):
         hash_ = bcrypt.generate_password_hash(password, 10).decode('utf-8')

@@ -6,7 +6,7 @@ from app.forms.base import BaseForm
 from app.forms.validators import Site_URL_Validator, Select_Limit_Validator
 
 
-class Search_Form(BaseForm):
+class SearchForm(BaseForm):
     search = StringField('Search', validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):

@@ -26,7 +26,7 @@ from app.database import db
 # login
 from app.user.models import Anonymous
 # forms
-from app.hub.forms import Search_Form
+from app.hub.forms import SearchForm
 # extensions
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
                             lm, migrate, rq, travis, babel, mobility)
@@ -59,6 +59,10 @@ def create_app(config=config.BaseConfig):
     def before_request():
         ''' prepare to handle each request '''
         g.request_start_time = time.time()
+        # authenticated
+        if current_user.is_authenticated:
+            current_user.update_last_active()
+        #
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
 
