@@ -98,17 +98,6 @@ def generate_code(name, table):
 
 
 ############## establish handlers for SearchableMixin ##########################
-# db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
-# db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
+db.event.listens_for(db.session, 'before_commit', SearchableMixin.before_commit)
+db.event.listens_for(db.session, 'after_commit', SearchableMixin.after_commit)
 ################################################################################
-
-# @db.event.listens_for(SearchableMixin, 'before_commit')
-# def before_commit():
-#     print('BEFORE')
-#     # SearchableMixin.before_commit()
-#
-#
-# @db.event.listens_for(SearchableMixin, 'after_commit')
-# def after_commit():
-#     print('AFTER')
-#     # SearchableMixin.after_commit()

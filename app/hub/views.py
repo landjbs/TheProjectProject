@@ -12,6 +12,12 @@ from app.recommendations.projects import (get_recommended_projects,
 from app.recommendations.search import text_search
 from app.project.forms import Project_Application_Form
 
+# searchables
+from app.user.models import User
+from app.project.models import Project
+from app.subject.models import Subject
+
+
 
 def home():
     # recommended projects
@@ -56,28 +62,42 @@ def home():
 
 
 ### SEARCH ###
+@hub.route('/search', methods=['GET', 'POST'])
+@login_required
 def search():
-    search_text = request.form.get('search')
-    results = text_search(search_text)
-    # forms
+    if not g.search_form.validate():
+        return redirect(url_for('hub.home'))
+    results = {}
+    projects, n_projects = Project.search(g.search_form.search.data, 30)
+    users, n_users = User.search(g.search_form.search.data, 30)
+    subjects, n_subjects = Subject.search(g.search_form.search.data, 30)
     project_application = Project_Application_Form()
     return render_template('search.html',
-                        results=results,
-                        project_application=project_application)
+                           results=results,
+                           project_application=project_application)
 
-
-### SEARCH ###
-@hub.route('/search', methods=['GET', 'POST'])
-@mobilized(search)
-@login_required
-@limiter.limit('60 per minute')
-def search_mobile():
-    ''' Mobile optimized search page '''
-    if request.method=='GET':
-        return redirect(url_for('hub.home'))
-    search_text = request.form.get('search')
-    results = text_search(search_text, partition=False)
-    project_application = Project_Application_Form()
-    return render_template('search_mobile.html',
-                        results=results,
-                        project_application=project_application)
+# def search():
+#     search_text = request.form.get('search')
+#     results = text_search(search_text)
+#     # forms
+#     project_application = Project_Application_Form()
+#     return render_template('search.html',
+#                         results=results,
+#                         project_application=project_application)
+#
+#
+# ### SEARCH ###
+# @hub.route('/search', methods=['GET', 'POST'])
+# @mobilized(search)
+# @login_required
+# @limiter.limit('60 per minute')
+# def search_mobile():
+#     ''' Mobile optimized search page '''
+#     if request.method=='GET':
+#         return redirect(url_for('hub.home'))
+#     search_text = request.form.get('search')
+#     results = text_search(search_text, partition=False)
+#     project_application = Project_Application_Form()
+#     return render_template('search_mobile.html',
+#                         results=results,
+#                         project_application=project_application)
