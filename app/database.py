@@ -48,17 +48,19 @@ class SearchableMixin(object):
 
     @classmethod
     def search(cls, expression, page, per_page):
+        ''' Gets list of results as SQLAlchemy instances using Elasticsearch '''
         ids, total = query_index(cls.__tablename__, expression, page, per_page)
         if total == 0:
             return cls.query.filter_by(id=0), 0
         when = []
-        for i in range(len(ids)):
-            when.append((ids[i], i))
+        for i, id in enumerate(ids):
+            when.append((id, i))
         return cls.query.filter(cls.id.in_(ids)).order_by(
             db.case(when, value=cls.id)), total
 
     @classmethod
     def before_commit(cls, session):
+        ''' Tags changes before commit to update index after '''
         session._changes = {
             'add': list(session.new),
             'update': list(session.dirty),
@@ -67,6 +69,7 @@ class SearchableMixin(object):
 
     @classmethod
     def after_commit(cls, session):
+        ''' Update search index after commit is successfully completed '''
         for obj in session._changes['add']:
             if isinstance(obj, SearchableMixin):
                 add_to_index(obj.__tablename__, obj)
