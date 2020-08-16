@@ -55,7 +55,7 @@
           <ul class="navbar-nav ml-auto">
             {% if current_user.is_authenticated %}
               <form class="form-inline my-2 my-sm-0" action='/search' method='get'>
-                {{ g.search_form(style='display:inline;', class="mr-sm-2 search-bar", placeholder="search...", aria-label="Search") }}
+                {{ g.search_form() }}
               </form>
             {% endif %}
             <li class="nav-item">

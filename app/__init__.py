@@ -36,10 +36,6 @@ from app.utils import url_for_other_page
 from app.commands import command_list
 
 
-db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
-db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
-
-
 def create_app(config=config.BaseConfig):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
@@ -64,9 +60,9 @@ def create_app(config=config.BaseConfig):
         ''' prepare to handle each request '''
         g.request_start_time = time.time()
         # authenticated only
-        if current_user.is_authenticated:
-            current_user.update_last_active()
-            g.search_form = SearchForm()
+        # if current_user.is_authenticated:
+        current_user.update_last_active()
+        g.search_form = SearchForm()
         #
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
