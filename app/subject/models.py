@@ -1,11 +1,11 @@
 from sqlalchemy.orm import relationship, backref
 
-from app.database import db, CRUDMixin, SearchableMixin, generate_code
+from app.database import db, CRUDMixin, generate_code
 
 
-class Subject(CRUDMixin, SearchableMixin, db.Model):
+class Subject(CRUDMixin, db.Model): # SearchableMixin
     __tablename__ = 'subject'
-    __searchable__ = ['name']
+    # __searchable__ = ['name']
     # name
     name = db.Column(db.String(128), unique=True, nullable=False)
     # color

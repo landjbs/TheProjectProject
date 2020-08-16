@@ -1,26 +1,57 @@
 ''' configurations for different app runs '''
 
+import os
 
-class BaseConfig(object):
+
+class base_config(object):
     def __init__(self):
+        # SITE
+        SITE_NAME = os.environ.get('APP_NAME', 'TheProjectProject')
+
+        # SERVER
+        SECRET_KEY = os.environ.get('SECRET_KEY', 'secrets')
+
+        # MAIL
+        SES_REGION = 'us-east-1'
+        SES_EMAIL_SOURCE = 'admin@theprojectproject.io'
+        AWS_ACCESS_KEY_ID = 'AKIAQVSLC6YU44B3L5FB'
+        AWS_SECRET_ACCESS_KEY= '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'
+
+
+        # SQLALCHEMY URI
         db_user = 'admin'
         db_password = 'jl245o234jDFalsdkjf;kl2j4508usdjilfka'
         endpoint = 'theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306'
         db_url = 'dev_db'
-        self.SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{db_user}:{db_password}@{endpoint}/{db_url}'
 
-        # VCP ID: vpc-4d83fe37
+        DB_USER = os.environ.get('DB_USER', 'admin')
+        DB_PASSWORD = os.environ.get('DB_PASSWORD')
+        DB_ENDPOINT = os.environ.get('DB_ENDPOINT')
+        DB_URL = os.environ.get('DB_URL')
 
-        # Uncomment the line below if you want to work with a local DB
-        # SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
+        SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://%s:%s@%s/%s' % (
+            DB_USER,
+            DB_PASSWORD,
+            DB_ENDPOINT,
+            DB_URL
+        )
+
+        # SQLALCHEMY SETTINGS
+        self.SQLALCHEMY_POOL_RECYCLE = 3600
+        SQLALCHEMY_TRACK_MODIFICATIONS = False
 
         self.SEND_FILE_MAX_AGE_DEFAULT = 0
-        self.REDIS_URL = 'redis://redis:6379/0'
+
+        # REDIS
+        self.REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis:6379/0')
         self.QUEUES = ['default']
+
+        # ADMIN
         self.FLASK_ADMIN_SWITCH = 'orange'
 
-        self.SQLALCHEMY_POOL_RECYCLE = 3600
-
+        # FORMS
         self.WTF_CSRF_ENABLED = True
-        # SECRET_KEY = 'cC1YCIWOj9GgWspgNEo2'
+
+
+
         self.SECRET_KEY = '1v8GEdD0oUBA55MQRkD/D/wS7CGmmSHyatMm0arx'

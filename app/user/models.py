@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import desc
 from sqlalchemy.orm import relationship, backref
 
-from app.database import db, CRUDMixin, SearchableMixin, generate_code
+from app.database import db, CRUDMixin, generate_code
 from app.extensions import bcrypt
 
 from app.subject.models import User_Subjects
@@ -14,9 +14,9 @@ from app.badge.create_badges import badge_name_list
 from .xp_constants import xp_constants
 
 
-class User(CRUDMixin, UserMixin, SearchableMixin, db.Model):
+class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     __tablename__ = 'user'
-    __searchable__ = ['name', 'about']
+    # __searchable__ = ['name', 'about']
     # name
     name = db.Column(db.String(128), unique=False)
     # code

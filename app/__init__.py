@@ -23,9 +23,7 @@ from app.question import question
 from app.link import link
 from app.admin import register_admin_views
 # database
-from app.database import db, SearchableMixin
-from app.user.models import User
-from app.project.models import Project
+from app.database import db
 # login
 from app.user.models import Anonymous
 # forms
@@ -49,7 +47,7 @@ def create_app(config=config.BaseConfig):
     # database connection ## #  #
     application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' # f'mysql+pymysql://admin:sk90jal;skdjn,235#adsfjalasdf#%n2sdf@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/theprojectproject_production'
     # application.config['RQ_REDIS_URL'] = 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379'
-    application.config['ELASTICSEARCH_URL'] = 'http://localhost:9200'
+    application.config['ELASTICSEARCH_URL'] = None # 'http://localhost:9200'
     register_extensions(application)
     register_blueprints(application)
     register_errorhandlers(application)

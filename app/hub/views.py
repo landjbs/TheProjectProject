@@ -62,50 +62,53 @@ def home():
 
 
 ### SEARCH ###
-@hub.route('/search')
-@login_required
+# @hub.route('/search')
+# @login_required
+# def search():
+#     if not g.search_form.validate():
+#         return redirect(url_for('hub.home'))
+#
+#     page = request.args.get('page', 1, type=int)
+#
+#     results = {}
+#     projects, n_projects = Project.search(g.search_form.search.data, page, 30)
+#     users, n_users = User.search(g.search_form.search.data, page, 30)
+#     subjects, n_subjects = Subject.search(g.search_form.search.data, page, 30)
+#
+#     results = {'project' :   (list(partition_query(projects)), n_projects),
+#             'user'       :   (list(partition_query(users)), n_users),
+#             'subject'    :   (list(partition_query(subjects)), n_subjects)}
+#
+#     project_application = Project_Application_Form()
+#     return render_template('search.html',
+#                            results=results,
+#                            project_application=project_application)
+
+
 def search():
     if not g.search_form.validate():
         return redirect(url_for('hub.home'))
-
-    page = request.args.get('page', 1, type=int)
-
-    results = {}
-    projects, n_projects = Project.search(g.search_form.search.data, page, 30)
-    users, n_users = User.search(g.search_form.search.data, page, 30)
-    subjects, n_subjects = Subject.search(g.search_form.search.data, page, 30)
-
-    results = {'project' :   (list(partition_query(projects)), n_projects),
-            'user'       :   (list(partition_query(users)), n_users),
-            'subject'    :   (list(partition_query(subjects)), n_subjects)}
-
+    search_text = g.search_form.search.data
+    results = text_search(search_text)
+    # forms
     project_application = Project_Application_Form()
     return render_template('search.html',
-                           results=results,
-                           project_application=project_application)
+                        results=results,
+                        project_application=project_application)
 
-# def search():
-#     search_text = request.form.get('search')
-#     results = text_search(search_text)
-#     # forms
-#     project_application = Project_Application_Form()
-#     return render_template('search.html',
-#                         results=results,
-#                         project_application=project_application)
-#
-#
-# ### SEARCH ###
-# @hub.route('/search', methods=['GET', 'POST'])
-# @mobilized(search)
-# @login_required
-# @limiter.limit('60 per minute')
-# def search_mobile():
-#     ''' Mobile optimized search page '''
-#     if request.method=='GET':
-#         return redirect(url_for('hub.home'))
-#     search_text = request.form.get('search')
-#     results = text_search(search_text, partition=False)
-#     project_application = Project_Application_Form()
-#     return render_template('search_mobile.html',
-#                         results=results,
-#                         project_application=project_application)
+
+### SEARCH ###
+@hub.route('/search', methods=['GET', 'POST'])
+@mobilized(search)
+@login_required
+@limiter.limit('60 per minute')
+def search():
+    ''' Mobile optimized search page '''
+    if not g.search_form.validate():
+        return redirect(url_for('hub.home'))
+    search_text = g.search_form.search.data
+    results = text_search(search_text, partition=False)
+    project_application = Project_Application_Form()
+    return render_template('search_mobile.html',
+                        results=results,
+                        project_application=project_application)
