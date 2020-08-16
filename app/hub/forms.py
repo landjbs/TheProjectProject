@@ -1,3 +1,4 @@
+from flask import request
 from wtforms import (TextField, StringField)
 from wtforms.validators import (DataRequired, Length, EqualTo, Email)
 
@@ -14,4 +15,4 @@ class SearchForm(BaseForm):
             kwargs['formdata'] = request.args
         if 'csrf_enabled' not in kwargs:
             kwargs['csrf_enabled'] = False
-        super(Search_Form, self).__init__(*args, **kwargs)
+        super(SearchForm, self).__init__(*args, **kwargs)

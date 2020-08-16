@@ -2,6 +2,7 @@ import time
 import arrow
 import requests
 from flask import Flask, g, render_template, request
+from flask_login import current_user
 from flask_sqlalchemy import SQLAlchemy
 from elasticsearch import Elasticsearch
 from dateutil import tz
@@ -56,13 +57,13 @@ def create_app(config=config.BaseConfig):
     register_elasticsearch(application)
 
     @application.before_request
-    def before_request():
+    def before_app_request():
         ''' prepare to handle each request '''
         g.request_start_time = time.time()
         # authenticated only
-        # if current_user.is_authenticated:
-        current_user.update_last_active()
-        g.search_form = SearchForm()
+        if current_user.is_authenticated:
+            current_user.update_last_active()
+            g.search_form = SearchForm()
         #
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
