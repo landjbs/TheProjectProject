@@ -21,14 +21,19 @@ from app.badge import badge
 from app.question import question
 from app.link import link
 from app.admin import register_admin_views
-#
+# database
 from app.database import db
+# login
+from app.user.models import Anonymous
+# forms
+from app.hub.forms import Search_Form
+# extensions
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
                             lm, migrate, rq, travis, babel, mobility)
-from app.commands import command_list
+# utils
 from app.utils import url_for_other_page
-
-from app.user.models import Anonymous
+# commands
+from app.commands import command_list
 
 
 def create_app(config=config.BaseConfig):
