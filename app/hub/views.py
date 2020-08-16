@@ -57,8 +57,6 @@ def home():
 
 ### SEARCH ###
 def search():
-    if request.method=='GET':
-        return redirect(url_for('hub.home'))
     search_text = request.form.get('search')
     results = text_search(search_text)
     # forms

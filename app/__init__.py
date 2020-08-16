@@ -59,9 +59,10 @@ def create_app(config=config.BaseConfig):
     def before_request():
         ''' prepare to handle each request '''
         g.request_start_time = time.time()
-        # authenticated
+        # authenticated only
         if current_user.is_authenticated:
             current_user.update_last_active()
+            g.search_form = SearchForm()
         #
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
