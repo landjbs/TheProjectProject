@@ -83,6 +83,7 @@ class SearchableMixin(object):
 
     @classmethod
     def reindex(cls):
+        ''' Rebuilds index using all class data from rds '''
         for obj in cls.query:
             add_to_index(cls.__tablename__, obj)
 
@@ -94,3 +95,9 @@ def generate_code(name, table):
     while table.query.filter_by(code=temp_code).first() is not None:
         temp_code = f'{code}_{str(randint(0, 1000))}'
     return temp_code
+
+
+############## establish handlers for SearchableMixin ##########################
+db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
+db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
+################################################################################
