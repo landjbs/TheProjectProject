@@ -24,7 +24,6 @@ def home():
     # recommended
     recommended = get_recommended_projects(current_user)
     # show trending and owned only on web
-    if not request.MOBILE:
     trending, my = (get_trending_projects(), get_user_projects(current_user)) \
             if not request.MOBILE else (None, None)
     # notifcations

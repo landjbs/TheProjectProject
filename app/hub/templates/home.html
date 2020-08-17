@@ -20,21 +20,25 @@
       interval=5000)
   }}
   <!-- trending -->
-  {{
-    render_carousel(
-      label='Trending Projects',
-      id_postfix='trending',
-      card_type='project-big',
-      data=trending)
-  }}
+  {% if trending %}
+    {{
+      render_carousel(
+        label='Trending Projects',
+        id_postfix='trending',
+        card_type='project-big',
+        data=trending)
+    }}
+  {% endif %}
   <!-- owned -->
-  {{
-    render_carousel(
-      label='My Projects',
-      id_postfix='my',
-      card_type='project-big',
-      data=trending)
-  }}
+  {% if my %}
+    {{
+      render_carousel(
+        label='My Projects',
+        id_postfix='my',
+        card_type='project-big',
+        data=trending)
+    }}
+  {% endif %}
 
 
   <h4 style='text-align:left;'>My Projects</h4>
