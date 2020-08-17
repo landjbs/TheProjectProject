@@ -7,10 +7,8 @@ from faker import Faker
 import unittest
 
 
-
-admin_username = 'cburmeister'
-admin_email = 'cburmeister@discogs.com'
-admin_password = 'test123'
+admin_email = 'landonsmith@college.harvard.edu'
+admin_password = 'boop'
 
 fake = Faker()
 
@@ -26,65 +24,65 @@ class TestCase(unittest.TestCase):
 
     def login(self, username, password):
         return self.app.post('/login', data=dict(
-            username=username,
+            email=email,
             password=password
         ), follow_redirects=True)
 
-    def register_user(self, username, email, password):
-        return self.app.post('/register', data=dict(
-            username=username,
-            email=email,
-            password=password,
-            confirm=password,
-            accept_tos=True
-        ), follow_redirects=True)
+    # def register_user(self, username, email, password):
+    #     return self.app.post('/register', data=dict(
+    #         username=username,
+    #         email=email,
+    #         password=password,
+    #         confirm=password,
+    #         accept_tos=True
+    #     ), follow_redirects=True)
 
-    def edit_user(self, user, email):
-        return self.app.post('/user/edit/%s' % user.id, data=dict(
-            username=user.username,
-            email=user.email,
-        ), follow_redirects=True)
+    # def edit_user(self, user, email):
+    #     return self.app.post('/user/edit/%s' % user.id, data=dict(
+    #         username=user.username,
+    #         email=user.email,
+    #     ), follow_redirects=True)
 
     def delete_user(self, uid):
         return self.app.get('/user/delete/%s' % uid, follow_redirects=True)
 
     def test_404(self):
         resp = self.app.get('/nope', follow_redirects=True)
-        assert resp.data, 'Page Not Found'
+        assert resp.data, '404'
 
     def test_index(self):
         resp = self.app.get('/index', follow_redirects=True)
-        assert resp.data, 'Flask Bones'
+        assert resp.data, 'Index'
 
     def test_login(self):
-        resp = self.login(admin_username, admin_password)
-        assert resp.data, 'You were logged in'
+        resp = self.login(admin_email, admin_password)
+        assert resp.data, 'Login'
 
     def test_logout(self):
-        resp = self.login(admin_username, admin_password)
+        resp = self.login(admin_email, admin_password)
         resp = self.app.get('/logout', follow_redirects=True)
-        assert resp.data, 'You were logged out'
+        assert resp.data, 'Logout'
 
-    def test_register_user(self):
-        username = fake.user_name()
-        email = fake.email()
-        password = fake.word() + fake.word()
-        resp = self.register_user(username, email, password)
-        assert resp.data, 'Sent verification email to %s' % email
+    # def test_register_user(self):
+    #     username = fake.user_name()
+    #     email = fake.email()
+    #     password = fake.word() + fake.word()
+    #     resp = self.register_user(username, email, password)
+        # assert resp.data, 'Sent verification email to %s' % email
+    #
+    # def test_edit_user(self):
+    #     user = User.query.order_by(func.random()).first()
+    #     resp = self.login(admin_email, admin_password)
+    #     resp = self.edit_user(user, email=fake.email())
+    #     assert resp.data, 'User %s edited' % user.username
 
-    def test_edit_user(self):
-        user = User.query.order_by(func.random()).first()
-        resp = self.login(admin_username, admin_password)
-        resp = self.edit_user(user, email=fake.email())
-        assert resp.data, 'User %s edited' % user.username
+    # def test_delete_user(self):
+    #     user = User.query.order_by(func.random()).first()
+    #     resp = self.login(admin_email, admin_password)
+    #     resp = self.delete_user(user.id)
+    #     assert resp.data, 'User %s deleted' % user.username
 
-    def test_delete_user(self):
-        user = User.query.order_by(func.random()).first()
-        resp = self.login(admin_username, admin_password)
-        resp = self.delete_user(user.id)
-        assert resp.data, 'User %s deleted' % user.username
-
-    def test_user_list(self):
-        resp = self.login(admin_username, admin_password)
-        resp = self.app.get('/user/list', follow_redirects=True)
-        assert resp.data, 'Users'
+    # def test_user_list(self):
+    #     resp = self.login(admin_email, admin_password)
+    #     resp = self.app.get('/user/list', follow_redirects=True)
+    #     assert resp.data, 'Users'
