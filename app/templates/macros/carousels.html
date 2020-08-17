@@ -24,16 +24,17 @@
 
 
 <!-- CAROUSEL -->
-{% macro render_carousel(label, id_postfix, card_type, data, interval=4000, icon_type=False) -%}
+{% macro render_carousel(label, id_postfix, card_type, data, interval=4000, icon_type=False, redirect_empty=False) -%}
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
+  {% set n = data|length %}
   <!-- HEADER -->
   <h4 class='tabname-big'>
     {{ label }}
     {% if icon_type %}
       <i class='{{ icon_types[icon_type] }}'></i>
-      {{ data|length }}
+      {{ n }}
     {% endif %}
   </h4>
   <hr class='my-2'>
@@ -41,11 +42,11 @@
   <!-- web requests -->
   {% if not request.MOBILE %}
     <!-- partition data -->
-    {% set data = partition_query(data) %}
+    {% set tabs = partition_query(data) %}
     <!-- carousel -->
     <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
       <div class='carousel-inner' role='listbox'>
-        {% for tab in data %}
+        {% for tab in tabs %}
           <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
             <div class='row'>
               {% for elt in tab %}
@@ -57,7 +58,7 @@
       </div>
     </div>
     <!-- multi-page case -->
-    {% if data|length > 1 %}
+    {% if tabs|length > 1 %}
       <!-- cache ids -->
       {% set counter_id = 'counter-{id_postfix}'.format(id_postfix=id_postfix) %}
       {% set storage_index = 'index-{id_postfix}'.format(id_postfix=id_postfix) %}
@@ -93,6 +94,12 @@
       {{ render_fn(elt) }}
     {% endfor %}
   {% endif %}
-
+  {% if n==0 and redirect_empty %}
+    <div style='text-align:center;'>
+      <a type="button" href="{{ redirect_empty }}">
+        <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+      </a>
+    </div>
+  {% endif %}
 {% endmacro -%}
 <!-- /CAROUSEL -->
