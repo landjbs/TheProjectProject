@@ -4,22 +4,19 @@
 <!-- CACHE RENDER CARD FUNCTIONS -->
 {%
   set card_renders = dict([
-    <!-- project cards -->
     ('project-big',     cards.render_big_project_card),
     ('project-mid',     cards.render_mid_project_card),
     ('project-small',   cards.render_small_project_card),
-    <!-- user cards -->
-    ('user',            card.render_user_card)
+    ('user',            cards.render_user_card)
   ])
 %}
 <!-- /RENDER CARD FUNCTIONS -->
+
 <!-- CACHE ICON TYPES -->
 {%
   set icon_types = dict([
-    <!-- projects -->
     ('project',           'fa fa-circle'),
     ('member-project',    'fa-cirlce-o'),
-    <!-- users -->
     ('users',             'fa fa-user-circle')
   ])
 %}
@@ -27,14 +24,17 @@
 
 
 <!-- CAROUSEL -->
-{% macro render_carousel(label, id_postfix, card_type, data, interval=3000, icon_type=False) -%}
+{% macro render_carousel(label, id_postfix, card_type, data, interval=4000, icon_type=False) -%}
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
   <!-- HEADER -->
   <h4 class='tabname-big'>
     {{ label }}
-    <i class='{{ icon_types[] }}'>
+    {% if icon_type %}
+      <i class='{{ icon_types[icon_type] }}'></i>
+      {{ data|length }}
+    {% endif %}
   </h4>
   <hr class='my-2'>
   <!-- BODY -->
