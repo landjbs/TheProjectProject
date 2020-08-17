@@ -11,7 +11,7 @@
 <!-- MACROS FOR RENDERING CAROUSELS -->
 
 <!-- project carousel -->
-{% macro render_project_carousel(label, id_postfix, card_type, data) -%}
+{% macro render_project_carousel(label, id_postfix, card_type, data, interval=3000) -%}
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   <!-- HEADER -->
@@ -20,6 +20,7 @@
   <!-- BODY -->
   <!-- web requests -->
   {% if not request.MOBILE %}
+    <!-- carousel -->
     <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
       <div class='carousel-inner' role='listbox'>
         {% for tab in data %}
@@ -33,6 +34,33 @@
         {% endfor %}
       </div>
     </div>
+    <!-- multi-page case -->
+    {% if data|length > 1 %}
+      <!-- controls -->
+      <div class="controls-top">
+        <a class="btn-floating" href="#{{ carousel_id }}" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+        <p id='{{ counter_id }}' class='counter'>0</p>
+        <a class="btn-floating" href="#{{ carousel_id }}" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+      </div>
+      <!-- scroll scripts -->
+      <script>
+        // cache ids
+        {% set counter_id = 'counter-{id_postfix}'.format(id_postfix=id_postfix) %}
+        {% set storage_index = 'index-{id_postfix}'.format(id_postfix=id_postfix) %}
+        // set scroll speed
+        $('#{{ carousel_id }}').carousel({
+          interval: {{ interval }}
+        })
+        // cache scroll iterator and update counter
+        $('#{{ carousel_id }}').on('slid.bs.carousel', function () {
+          var count_index = $('#{{ carousel_id }} div.active').index()
+          sessionStorage.setItem('index_{{ carousel_id }}', count_index);
+          $('#{{ counter_id }}').html(count_index);
+        });
+        // rescroll on refresh
+        if (sessionStorage.getItem)
+      </script>
+    {% endif %}
   <!-- mobile -->
   {% else %}
     mobile
