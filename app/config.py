@@ -7,10 +7,10 @@ class base_config(object):
     # SITE
     SITE_NAME = os.environ.get('APP_NAME', 'TheProjectProject')
     # SERVER
-    SECRET_KEY = os.environ.get('SECRET_KEY', 'secrets')
+    SECRET_KEY = os.environ.get('SECRET_KEY')
     # MAIL
-    SES_REGION = os.environ.get('SES_REGION')
-    SES_EMAIL_SOURCE = os.environ.get('SES_EMAIL_SOURCE')
+    SES_REGION = os.environ.get('SES_REGION', 'us-east-1')
+    SES_EMAIL_SOURCE = os.environ.get('SES_EMAIL_SOURCE', 'admin@theprojectproject.io')
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY= os.environ.get('AWS_SECRET_ACCESS_KEY')
     # SQLALCHEMY URI
@@ -44,7 +44,7 @@ class dev_config(base_config):
     # STATICS
     SEND_FILE_MAX_AGE_DEFAULT = 0
     # FORMS
-    WTF_CSRF_ENABLED = False
+    WTF_CSRF_ENABLED = True
     # DEBUGGING
     ASSETS_DEBUG = True
     ENV = 'development'

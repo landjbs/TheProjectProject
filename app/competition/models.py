@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy.orm import relationship
 
-from app.database import db, CRUDMixin
+from app.database import db, CRUDMixin, generate_code
 
 
 
@@ -10,7 +10,7 @@ class Competition(CRUDMixin, db.Model):
     # name
     name = db.Column(db.String(100), nullable=False)
     # sponsor
-    sponsor = db.Column(db.String(100), nullable=False, default='TheProjectProject')
+    sponsor = db.Column(db.String(400), nullable=False, default='TheProjectProject')
     # description
     description = db.Column(db.Text(1000), nullable=False)
     # timing

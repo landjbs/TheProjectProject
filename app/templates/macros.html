@@ -1229,16 +1229,23 @@
 
 
 {% macro render_competition_card(competition) -%}
-<div class="card mb-2">
+<center>
+<div class="card mb-2" style='max-width:80%;'>
   <div class="card-body">
     <div class='float-right info-nums'>
       {{ competition.projects|length }}
       <i class="fa fa-circle" style='color:#FF5D00;'></i>
     </div>
     <div class='card-head' style='text-align:center;'>
-      <h3>{{ competition.name }}</h3>
+      <i class="fas fa-trophy fa-2x" style='color:gold;'></i>
+      <br>
+      <h3>
+        <a href="{{ url_for('competition.competition_page', code=competition.code)}}">
+          {{ competition.name }}
+        </a>
+      </h3>
       <p>
-        by {{ competition.sponsor }}
+        by {{ competition.sponsor|safe }}
       </p>
     </div>
     <hr class="my-4">
@@ -1266,4 +1273,5 @@
     </div>
   </div>
 </div>
+</center>
 {% endmacro -%}

@@ -333,7 +333,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.tasks.append(Task(text=text, author=author))
         self.update_last_active()
         self.update()
-        self.notify_members(text=f'{author.name} added the task, "{text}".')
+        self.notify_members(text=f'{author.name} added the task "{text}".')
         return True
 
     def change_task_status(self, task_id, user, action):
