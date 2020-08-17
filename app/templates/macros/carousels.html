@@ -12,14 +12,13 @@
 
 <!-- project carousel -->
 {% macro render_project_carousel(label, id_postfix, card_type, data) -%}
-  <!-- cache ids -->
+  <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
-
-  <!-- carousel header -->
+  <!-- HEADER -->
   <h4 style='text-align:left;'>{{ label }}</h4>
   <hr class='my-2'>
-  <!-- RENDER CAROUSEL -->
-  <!-- web -->
+  <!-- BODY -->
+  <!-- web requests -->
   {% if not request.MOBILE %}
     <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
       <div class='carousel-inner' role='listbox'>
