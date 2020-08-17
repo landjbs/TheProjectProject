@@ -18,7 +18,8 @@ from app.project.models import Project
 from app.subject.models import Subject
 
 
-
+@hub.route('/home')
+@login_required
 def home():
     # recommended
     recommended = get_recommended_projects(current_user)
@@ -35,24 +36,9 @@ def home():
     #         db.session.commit()
     #     except:
     #         db.session.rollback()
-    return render_template('home.html',
-                            recommended=recommended,
-                            trending=trending,
-                            my=my)
-
-
-@hub.route('/home')
-@login_required
-@mobilized(home)
-def home():
-    ''' Mobile optimized route for home page '''
-    # only load recommended projects and dont tab
-    recommended_projects = get_recommended_projects(current_user)
-    # get forms
-    project_application = Project_Application_Form()
-    return render_template('home_mobile.html',
-                           recommended_projects=recommended_projects,
-                           project_application=project_application)
+    return render_template(
+        'home.html', recommended=recommended, trending=trending, my=my
+    )
 
 
 ### SEARCH ###
