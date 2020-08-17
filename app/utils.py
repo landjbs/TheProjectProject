@@ -44,8 +44,10 @@ def partition_query(l):
         c = l.count()
     except:
         c = len(l)
-    for i in range(0, c, n):
-        yield l[i:i+n]
+    return [l[i:i+n] for i in range(0, c, n)]
+    # uncomment if should be generator
+    # for i in range(0, c, n):
+        # yield l[i:i+n]
 
 
 def filter_string(s):
