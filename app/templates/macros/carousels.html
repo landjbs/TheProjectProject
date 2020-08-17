@@ -24,9 +24,13 @@
     <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
       <div class='carousel-inner' role='listbox'>
         {% for tab in data %}
-          {% for elt in tab %}
-            {{card_renders[card_type](elt) }}
-          {% endfor %}
+          <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
+            {% for elt in tab %}
+              <div class='row'>
+                {{card_renders[card_type](elt) }}
+              </div>
+            {% endfor %}
+          </div>
         {% endfor %}
       </div>
     </div>
