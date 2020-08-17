@@ -33,7 +33,7 @@ from app.hub.forms import SearchForm
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
                             lm, migrate, rq, travis, babel, mobility)
 # utils
-from app.utils import url_for_other_page
+from app.utils import url_for_other_page, partition_query
 # commands
 from app.commands import command_list
 
@@ -149,6 +149,7 @@ def register_jinja_env(app):
     app.jinja_env.globals.update({
         'timeago': lambda x: arrow.get(x).humanize(),
         'url_for_other_page': url_for_other_page,
+        'partition_query': partition_query
     })
 
 

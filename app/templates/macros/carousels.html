@@ -14,6 +14,7 @@
 {% macro render_carousel(label, id_postfix, card_type, data, interval=3000) -%}
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
+  {% set render_fn = card_renders[card_type] %}
   <!-- HEADER -->
   <h4 style='text-align:left;'>{{ label }}</h4>
   <hr class='my-2'>
@@ -27,7 +28,7 @@
           <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
             <div class='row'>
               {% for elt in tab %}
-                  {{card_renders[card_type](elt) }}
+                  {{ render_fn(elt) }}
               {% endfor %}
             </div>
           </div>
@@ -67,7 +68,9 @@
     {% endif %}
   <!-- mobile -->
   {% else %}
-    mobile
+    {% for elt in data %}
+      {{ render_fn(elt) }}
+    {% endfor %}
   {% endif %}
   <!-- /RENDER CAROUSEL -->
 
