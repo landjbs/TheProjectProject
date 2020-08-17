@@ -54,11 +54,13 @@
         // cache scroll iterator and update counter
         $('#{{ carousel_id }}').on('slid.bs.carousel', function () {
           var count_index = $('#{{ carousel_id }} div.active').index()
-          sessionStorage.setItem('index_{{ carousel_id }}', count_index);
+          sessionStorage.setItem('{{ storage_index }}', count_index);
           $('#{{ counter_id }}').html(count_index);
         });
         // rescroll on refresh
-        if (sessionStorage.getItem)
+        if (sessionStorage.getItem('{{ storage_index }}')) {
+          $('#{{ carousel_id }}').carousel(1*sessionStorage.getItem('{{ storage_index }}'));
+        }
       </script>
     {% endif %}
   <!-- mobile -->
