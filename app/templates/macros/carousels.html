@@ -57,6 +57,7 @@
           sessionStorage.setItem('{{ storage_index }}', count_index);
           $('#{{ counter_id }}').html(count_index);
         });
+        // TODO: fix rescroll and or add ajax for like and project actions
         // rescroll on refresh
         count_index = sessionStorage.getItem('{{ storage_index }}')
         if (count_index) {
