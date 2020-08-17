@@ -271,42 +271,6 @@
 </div>
 {% endmacro -%}
 
-
-
-{% macro render_project_share_button(project) -%}
-  <!-- TODO: FIX BASE URL SO PROJECT.CODE IS EVAL -->
-  {% set base_url = "http://theprojectproject.io/project=" %}
-  {% set base_url =  base_url + project.code %}
-  <div class='hoverable'>
-    <i class="fa fa-share-alt" aria-hidden="false"></i>
-    <span class='tooltiptext'>
-      <!-- twitter -->
-      <!-- <a class="twitter-share-button"
-          href="https://twitter.com/share?url={{ base_url }}"
-          data-size="large">
-        <i class="fa fa-twitter" aria-hidden="true"></i>
-      </a> -->
-      <!-- facebook -->
-      <!-- <a class="facebook-share-button"
-        href="https://www.facebook.com/sharer/sharer.php?u={{ base_url }}" target="_blank">
-        <i class="fa fa-facebook-square" aria-hidden="true"></i>
-      </a> -->
-      <!-- linkedin -->
-      <!-- <a class="linkedin-share-button"
-          href="https://www.linkedin.com/sharing/share-offsite/?url={{ base_url }}"
-          target="_blank">
-        <i class="fa fa-linkedin-square" aria-hidden="true"></i>
-      </a> -->
-      <!-- email -->
-      <a class="email-share-button"
-          href="mailto:?subject={{ project.name }} on TheProjectProject&body=Check out {{ project.name }} on TheProjectProject:%0D%0A{{ base_url }}">
-          <i class="fa fa-envelope" aria-hidden="true"></i>
-      </a>
-    </span>
-  </div>
-{% endmacro -%}
-
-
 <!-- MODALS -->
 {% macro render_join_modal(current_user, project, project_application) -%}
 <div id="modal_project_{{ project.id }}" class="modal fade" role="dialog" style='z-index:9999;'>
