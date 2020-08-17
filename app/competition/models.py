@@ -8,7 +8,9 @@ from app.database import db, CRUDMixin, generate_code
 class Competition(CRUDMixin, db.Model):
     __tablename__ = 'competition'
     # name
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(128), nullable=False)
+    # code
+    code = db.Column(db.String(128), nullable=False, unique=True)
     # sponsor
     sponsor = db.Column(db.String(400), nullable=False, default='TheProjectProject')
     # description
@@ -27,6 +29,11 @@ class Competition(CRUDMixin, db.Model):
     ## administrative ##
     active = db.Column(db.Boolean, nullable=False, default=True)
     complete = db.Column(db.Boolean, nullable=False, default=False)
+
+    def __init__(self, **kwargs):
+        for attr, value in kwargs.items():
+            setattr(self, attr, value)
+        self.code = generate_code(kwargs.get('name'))
 
     def __repr__(self):
         return f'<Competition {self.name} by {self.sponsor}>'
