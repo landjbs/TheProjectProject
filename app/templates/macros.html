@@ -93,68 +93,6 @@
 {%- endmacro %}
 
 
-{% macro render_mid_project_card(current_user, project, now, calc_days_since) -%}
-<div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body">
-      <p class="float-right info-nums">
-        {{ project.members.all()|length  }}
-        <i class='far fa-user-circle'></i>
-        <br>
-        {{ project.stars.all()|length }}
-        <i class="fa fa-star"></i>
-      </p>
-      <div class='card-head little'>
-        {{ render_project_name(project, current_user) }}
-        <a href='user={{ project.owner.code }}'>
-          <p class='owner'>
-            {{ project.owner.name }}
-            {% set badge = project.owner.choose_badge('project') %}
-            {% if badge %}
-              {{ render_badge_icon(badge) }}
-            {% endif %}
-          </p>
-        </a>
-      </div>
-      <p class='oneliner'>
-        {{ project.oneliner }}
-      </p>
-    </div>
-  </div>
-</div>
-{% endmacro -%}
-
-
-{% macro render_small_project_card(current_user, project, now, calc_days_since) -%}
-<div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body">
-      <div class='float-right'>
-        {% if current_user==project.owner %}
-          {% set pending = project.pending.all()|length %}
-          {{ pending }}
-          {% if pending>0 %}
-            <i class="fa fa-bell" aria-hidden="true"></i>
-          {% else %}
-            <i class="fa fa-bell-o" aria-hidden="true"></i>
-          {% endif %}
-          <br>
-        {% endif %}
-        {{ project.stars.all()|length }}
-        <i class="fa fa-star"></i>
-      </div>
-      <div class='card-head tiny'>
-        {{ render_project_name(project, current_user) }}
-      </div>
-      <!-- summary -->
-      <p class='oneliner'>
-        {{ project.oneliner }}
-      </p>
-    </div>
-  </div>
-</div>
-{% endmacro -%}
-
 <!-- project card to be shown to anonymous users -->
 {% macro render_anon_project_card(project, current_user) -%}
 <div class="col-md-4">

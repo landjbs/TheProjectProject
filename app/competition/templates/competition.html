@@ -21,23 +21,13 @@
 {% block content %}
 <div class='container my-1' style='min-width:90%; padding-top:10px;'>
   {{ macros.render_competition_card(competition) }}
-  {{ render_carousel(
+  {{
+    render_carousel(
       label='Projects',
       id_postfix='project',
       card_type='project-big',
       data=competition.projects,
-      icon_type='project',
-      redirect_empty='/add_project')
+      icon_type='project')
   }}
 </div>
 {% endblock %}
-
-
-<!--
-<div>
-  {% for tab in recommended %}
-    {% for project in tab %}
-      {{ macros.render_join_modal(current_user, project, project_application) }}
-    {% endfor %}
-  {% endfor %}
-</div> -->
