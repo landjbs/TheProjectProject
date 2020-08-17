@@ -23,8 +23,11 @@
   {{ macros.render_competition_card(competition) }}
   {{
     render_carousel(
-      label='Projects', id_postfix='project',  card_type='project-big',
-      data=competition.projects)
+      label='Projects',
+      id_postfix='project',
+      card_type='project-big',
+      data=competition.projects,
+      icon_type='project')
   }}
 </div>
 {% endblock %}
