@@ -56,6 +56,7 @@ def create_app(config=config.dev_config):
         g.request_start_time = time.time()
         # authenticated only
         if current_user.is_authenticated:
+            g.current_user = current_user
             current_user.update_last_active()
             g.search_form = SearchForm()
         #
