@@ -9,7 +9,7 @@ from dateutil import tz
 from werkzeug.utils import import_string
 
 # config
-# from app import config
+from app import config
 # blueprints
 from app.auth import auth
 from app.base import base
@@ -38,11 +38,10 @@ from app.utils import url_for_other_page
 from app.commands import command_list
 
 
-def create_app():
+def create_app(config=config.production_config):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
-    cfg = import_string('app.config.base_config')()
-    application.config.from_object(cfg)
+    application.config.from_object(config())
     register_extensions(application)
     register_blueprints(application)
     register_errorhandlers(application)
