@@ -37,12 +37,11 @@ from app.utils import url_for_other_page
 from app.commands import command_list
 
 
-def create_app(config=config.base_config):
+def create_app(config_as=config.base_config):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
-    application.config.from_object(config())
-    # TODO: better secret key define in config
-    # application.config['SECRET_KEY'] = 'asdlfkjads;lkfj;lk2n34,mbn'
+    application.config.from_object(config_as)
+    print(application.config['SECRET_KEY'])
     application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     # database connection ## #  #
     application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' # f'mysql+pymysql://admin:sk90jal;skdjn,235#adsfjalasdf#%n2sdf@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/theprojectproject_production'

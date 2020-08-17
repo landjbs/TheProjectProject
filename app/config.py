@@ -8,6 +8,7 @@ class base_config(object):
         # SITE
         SITE_NAME = os.environ.get('APP_NAME', 'TheProjectProject')
         # SERVER
+        print(os.environ.get('SECRET_KEY'))
         SECRET_KEY = os.environ.get('SECRET_KEY', 'secrets')
         # MAIL
         SES_REGION = os.environ.get('SES_REGION')
