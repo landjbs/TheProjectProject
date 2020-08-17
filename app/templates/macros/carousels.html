@@ -13,17 +13,29 @@
   ])
 %}
 <!-- /RENDER CARD FUNCTIONS -->
+<!-- CACHE ICON TYPES -->
+{%
+  set icon_types = dict([
+    <!-- projects -->
+    ('project',           'fa fa-circle'),
+    ('member-project',    'fa-cirlce-o'),
+    <!-- users -->
+    ('users',             'fa fa-user-circle')
+  ])
+%}
+<!-- /CACHE ICON TYPES -->
 
 
-<!-- MACROS FOR RENDERING CAROUSELS -->
-
-<!-- project carousel -->
+<!-- CAROUSEL -->
 {% macro render_carousel(label, id_postfix, card_type, data, interval=3000) -%}
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
   <!-- HEADER -->
-  <h4 style='text-align:left;'>{{ label }}</h4>
+  <h4 class='tabname-big'>
+    {{ label }}
+    <i>
+  </h4>
   <hr class='my-2'>
   <!-- BODY -->
   <!-- web requests -->
@@ -81,7 +93,6 @@
       {{ render_fn(elt) }}
     {% endfor %}
   {% endif %}
-  <!-- /RENDER CAROUSEL -->
 
 {% endmacro -%}
-<!-- /project carousel -->
+<!-- /CAROUSEL -->
