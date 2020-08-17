@@ -24,9 +24,12 @@ def home():
     # recommended
     recommended = get_recommended_projects(current_user)
     # trending
-    trending = get_trending_projects()
-    # my
-    my = get_user_projects(current_user)
+    if not request.MOBILE:
+        trending = get_trending_projects()
+        my = get_user_projects(current_user)
+    else:
+        trending = None
+        my = None
     # notifcations
     # if (current_user.notifications.count())>0:
     #     for notification in current_user.notifications:
