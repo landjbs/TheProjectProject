@@ -35,25 +35,25 @@ class base_config(object):
         SQLALCHEMY_POOL_RECYCLE = 3600
         SQLALCHEMY_TRACK_MODIFICATIONS = False
         # REDIS
-        self.REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis:6379/0')
-        self.QUEUES = ['default']
+        QUEUES = ['default']
         # ADMIN
         self.FLASK_ADMIN_SWITCH = 'orange'
         # FORMS
         self.WTF_CSRF_ENABLED = True
-
-
+        
         self.SECRET_KEY = '1v8GEdD0oUBA55MQRkD/D/wS7CGmmSHyatMm0arx'
 
 
 class dev_config(base_config):
     # SQLALCHEMY URI
     SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
-    # statics
+    # REDIS
+    REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis:6379/0')
+    # STATICS
     SEND_FILE_MAX_AGE_DEFAULT = 0
-    # forms
+    # FORMS
     WTF_CSRF_ENABLED = False
-    # debugging
+    # DEBUGGIN
     ASSETS_DEBUG = True
 
 
