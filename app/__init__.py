@@ -29,6 +29,7 @@ from app.database import db
 from app.user.models import Anonymous
 # forms
 from app.hub.forms import SearchForm
+from app.project.forms import Project_Application_Form
 # extensions
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
                             lm, migrate, rq, travis, babel, mobility)
@@ -59,6 +60,7 @@ def create_app(config=config.dev_config):
             g.current_user = current_user
             current_user.update_last_active()
             g.search_form = SearchForm()
+            g.project_application = Project_Application_Form()
         #
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)

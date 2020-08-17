@@ -24,9 +24,8 @@ def home():
     recommended = get_recommended_projects(current_user)
     # trending
     trending = get_trending_projects()
-    # user projects
-    my = list(get_user_projects(current_user))
-    project_application = Project_Application_Form()
+    # my
+    my = get_user_projects(current_user)
     # notifcations
     # if (current_user.notifications.count())>0:
     #     for notification in current_user.notifications:
@@ -37,11 +36,9 @@ def home():
     #     except:
     #         db.session.rollback()
     return render_template('home.html',
-                            recommended_tabs=recommended_tabs,
-                            top_tabs=trending_tabs,
-                            user_tabs=user_tabs,
-                            user_project_count=len(user_projects),
-                            project_application=project_application)
+                            recommended=recommended,
+                            trending=trending,
+                            my=my)
 
 
 @hub.route('/home')
