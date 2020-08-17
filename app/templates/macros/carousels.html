@@ -30,76 +30,79 @@
   {% set render_fn = card_renders[card_type] %}
   {% set n = data|length %}
   <!-- HEADER -->
-  <h4 class='tabname-big'>
-    {{ label }}
-    {% if icon_type %}
-      <i class='{{ icon_types[icon_type] }}'></i>
-      {{ n }}
-    {% endif %}
-  </h4>
-  <hr class='my-2'>
-  <!-- BODY -->
-  <!-- web requests -->
-  {% if not request.MOBILE %}
-    <!-- partition data -->
-    {% set tabs = partition_query(data) %}
-    <!-- carousel -->
-    <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
-      <div class='carousel-inner' role='listbox'>
-        {% for tab in tabs %}
-          <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
-            <div class='row'>
-              {% for elt in tab %}
-                  {{ render_fn(elt) }}
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    <!-- multi-page case -->
-    {% if tabs|length > 1 %}
-      <!-- cache ids -->
-      {% set counter_id = 'counter-{id_postfix}'.format(id_postfix=id_postfix) %}
-      {% set storage_index = 'index-{id_postfix}'.format(id_postfix=id_postfix) %}
-      <!-- controls -->
-      <div class="controls-top">
-        <a class="btn-floating" href="#{{ carousel_id }}" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-        <p id='{{ counter_id }}' class='counter'>1</p>
-        <a class="btn-floating" href="#{{ carousel_id }}" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-      </div>
-      <!-- scroll scripts -->
-      <script>
-        // set scroll speed
-        $('#{{ carousel_id }}').carousel({
-          interval: {{ interval }}
-        })
-        // cache scroll iterator and update counter
-        $('#{{ carousel_id }}').on('slid.bs.carousel', function () {
-          var count_index = $('#{{ carousel_id }} div.active').index() + 1
-          sessionStorage.setItem('{{ storage_index }}', count_index);
-          $('#{{ counter_id }}').html(count_index);
-        });
-        // TODO: fix rescroll and or add ajax for like and project actions
-        // rescroll on refresh
-        count_index = sessionStorage.getItem('{{ storage_index }}')
-        if (count_index) {
-          document.getElementById('{{ carousel_id }}').carousel(1*count_index);
-        }
-      </script>
-    {% endif %}
-  <!-- mobile -->
+  {% if n==0 and not redirect_empty %}
   {% else %}
-    {% for elt in data %}
-      {{ render_fn(elt) }}
-    {% endfor %}
-  {% endif %}
-  {% if n==0 and redirect_empty %}
-    <div style='text-align:center;'>
-      <a type="button" href="{{ redirect_empty }}">
-        <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
-      </a>
-    </div>
+    <h4 class='tabname-big'>
+      {{ label }}
+      {% if icon_type %}
+        <i class='{{ icon_types[icon_type] }}'></i>
+        {{ n }}
+      {% endif %}
+    </h4>
+    <hr class='my-2'>
+    <!-- BODY -->
+    <!-- web requests -->
+    {% if not request.MOBILE %}
+      <!-- partition data -->
+      {% set tabs = partition_query(data) %}
+      <!-- carousel -->
+      <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
+        <div class='carousel-inner' role='listbox'>
+          {% for tab in tabs %}
+            <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
+              <div class='row'>
+                {% for elt in tab %}
+                    {{ render_fn(elt) }}
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <!-- multi-page case -->
+      {% if tabs|length > 1 %}
+        <!-- cache ids -->
+        {% set counter_id = 'counter-{id_postfix}'.format(id_postfix=id_postfix) %}
+        {% set storage_index = 'index-{id_postfix}'.format(id_postfix=id_postfix) %}
+        <!-- controls -->
+        <div class="controls-top">
+          <a class="btn-floating" href="#{{ carousel_id }}" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
+          <p id='{{ counter_id }}' class='counter'>1</p>
+          <a class="btn-floating" href="#{{ carousel_id }}" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
+        </div>
+        <!-- scroll scripts -->
+        <script>
+          // set scroll speed
+          $('#{{ carousel_id }}').carousel({
+            interval: {{ interval }}
+          })
+          // cache scroll iterator and update counter
+          $('#{{ carousel_id }}').on('slid.bs.carousel', function () {
+            var count_index = $('#{{ carousel_id }} div.active').index() + 1
+            sessionStorage.setItem('{{ storage_index }}', count_index);
+            $('#{{ counter_id }}').html(count_index);
+          });
+          // TODO: fix rescroll and or add ajax for like and project actions
+          // rescroll on refresh
+          count_index = sessionStorage.getItem('{{ storage_index }}')
+          if (count_index) {
+            document.getElementById('{{ carousel_id }}').carousel(1*count_index);
+          }
+        </script>
+      {% endif %}
+    <!-- mobile -->
+    {% else %}
+      {% for elt in data %}
+        {{ render_fn(elt) }}
+      {% endfor %}
+    {% endif %}
+    {% if n==0 and redirect_empty %}
+      <div style='text-align:center;'>
+        <a type="button" href="{{ redirect_empty }}">
+          <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+        </a>
+      </div>
+    {% endif %}
   {% endif %}
 {% endmacro -%}
 <!-- /CAROUSEL -->
