@@ -10,9 +10,8 @@ class base_config(object):
         # SERVER
         SECRET_KEY = os.environ.get('SECRET_KEY', 'secrets')
         # MAIL
-        SES_REGION = os.environ.get('SES_REGION', 'us-east-1')
-        SES_EMAIL_SOURCE = os.environ.get('SES_EMAIL_SOURCE',
-                                        'admin@theprojectproject.io')
+        SES_REGION = os.environ.get('SES_REGION')
+        SES_EMAIL_SOURCE = os.environ.get('SES_EMAIL_SOURCE')
         AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY= os.environ.get('AWS_SECRET_ACCESS_KEY')
         # SQLALCHEMY URI
@@ -32,9 +31,9 @@ class base_config(object):
         # REDIS
         QUEUES = ['default']
         # ADMIN
-        self.FLASK_ADMIN_SWITCH = 'orange'
+        FLASK_ADMIN_SWITCH = 'orange'
         # FORMS
-        self.WTF_CSRF_ENABLED = True
+        WTF_CSRF_ENABLED = True
 
 
 class dev_config(base_config):

@@ -37,7 +37,7 @@ from app.utils import url_for_other_page
 from app.commands import command_list
 
 
-def create_app(config=config.BaseConfig):
+def create_app(config=config.base_config):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())
