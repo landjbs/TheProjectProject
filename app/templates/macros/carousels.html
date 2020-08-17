@@ -3,7 +3,14 @@
 
 <!-- CACHE RENDER CARD FUNCTIONS -->
 {%
-  set card_renders = dict([('project-big',cards.render_big_project_card)])
+  set card_renders = dict([
+    <!-- project cards -->
+    ('project-big',     cards.render_big_project_card),
+    ('project-mid',     cards.render_mid_project_card),
+    ('project-small',   cards.render_small_project_card),
+    <!-- user cards -->
+    ('user',            card.render_user_card)
+  ])
 %}
 <!-- /RENDER CARD FUNCTIONS -->
 
@@ -21,6 +28,8 @@
   <!-- BODY -->
   <!-- web requests -->
   {% if not request.MOBILE %}
+    <!-- partition data -->
+    {% set data = partition_query(data) %}
     <!-- carousel -->
     <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
       <div class='carousel-inner' role='listbox'>
