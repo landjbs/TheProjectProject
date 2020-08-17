@@ -58,8 +58,9 @@
           $('#{{ counter_id }}').html(count_index);
         });
         // rescroll on refresh
-        if (sessionStorage.getItem('{{ storage_index }}')) {
-          $('#{{ carousel_id }}').carousel(1*sessionStorage.getItem('{{ storage_index }}'));
+        count_index = sessionStorage.getItem('{{ storage_index }}')
+        if (count_index) {
+          document.getElementById('{{ carousel_id }}').carousel(1*count_index);
         }
       </script>
     {% endif %}
