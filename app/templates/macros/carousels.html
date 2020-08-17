@@ -1,9 +1,9 @@
-{% import 'cards.html' as cards %}
+{% import 'macros/cards.html' as cards with context %}
 
 
 <!-- CACHE RENDER CARD FUNCTIONS -->
 {%
-  set card_renders = dict('project-big'=cards.render_big_project_card)
+  set card_renders = dict([('project-big',cards.render_big_project_card)])
 %}
 <!-- /RENDER CARD FUNCTIONS -->
 

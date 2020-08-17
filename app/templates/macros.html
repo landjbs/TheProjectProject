@@ -237,36 +237,7 @@
 {% endmacro -%}
 
 
-<!-- BUTTONS -->
-{% macro render_join_button(current_user, project) -%}
-  {% if not current_user in project.members %}
-    {% if current_user.has_applied(project) %}
-      <button type="button" class="btn" disabled>
-          Pending
-      </button>
-    {% elif project.complete==True %}
-      <button type="button" class="btn" disabled>
-        Complete
-      </button>
-    {% elif project.open==False %}
-      <button type="button" class="btn" disabled>
-        Closed
-      </button>
-    {% elif project in current_user.invitations %}
-      <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-        Respond
-      </button>
-    {% else %}
-      <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-        Join
-      </button>
-    {% endif %}
-  {% else %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-        Leave
-    </button>
-  {% endif %}
-{% endmacro -%}
+
 
 
 {% macro render_collaborate_button(current_user, target_user) -%}

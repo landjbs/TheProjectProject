@@ -60,6 +60,7 @@ def create_app(config=config.dev_config):
             current_user.update_last_active()
             g.search_form = SearchForm()
         #
+        g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
 

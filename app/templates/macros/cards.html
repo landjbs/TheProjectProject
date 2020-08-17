@@ -1,4 +1,4 @@
-{% from 'badge_components.html' import render_badge_icon %}
+{% from 'macros/badges.html' import render_badge_icon %}
 
 <!-- PROJECTS -->
 {% macro render_project_name(project, user) -%}
@@ -55,7 +55,7 @@
       <div class='card-foot float-left'>
         <p style="padding-bottom:0px; margin-bottom:0px;">
           <i class="fa fa-clock-o"></i>
-          {{ calc_days_since(g.request_time, project.posted_on) }} / {{ project.estimated_time }}
+          {{ calc_days_since(g.now(), project.posted_on) }} / {{ project.estimated_time }}
           days
         </p>
         <div>
