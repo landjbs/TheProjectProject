@@ -1,6 +1,8 @@
 from flask import request, redirect, url_for, render_template, flash
 from flask_login import login_required, current_user
 
+from app.utils import partition_query
+
 from .models import Competition
 
 from ..competition import competition
@@ -10,4 +12,5 @@ from ..competition import competition
 @login_required
 def competition_page(code):
     competition = Competition.query.filter_by(code=code).first_or_404()
+    projects = partition_query(completion.projects)
     return render_template('competition.html', competition=competition)
