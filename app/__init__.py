@@ -6,9 +6,10 @@ from flask_login import current_user
 from flask_sqlalchemy import SQLAlchemy
 from elasticsearch import Elasticsearch
 from dateutil import tz
+from werkzeug.utils import import_string
 
 # config
-from app import config
+# from app import config
 # blueprints
 from app.auth import auth
 from app.base import base
@@ -37,23 +38,18 @@ from app.utils import url_for_other_page
 from app.commands import command_list
 
 
-def create_app(config_as=config.base_config):
+def create_app():
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
-    application.config.from_object(config_as)
-    print(application.config['SECRET_KEY'])
-    application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    # database connection ## #  #
-    application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' # f'mysql+pymysql://admin:sk90jal;skdjn,235#adsfjalasdf#%n2sdf@theprojectproject.c4u7frshhdtj.us-east-1.rds.amazonaws.com:3306/theprojectproject_production'
-    # application.config['RQ_REDIS_URL'] = 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379'
-    application.config['ELASTICSEARCH_URL'] = None # 'http://localhost:9200'
+    cfg = import_string('app.config.base_config')()
+    application.config.from_object(cfg)
     register_extensions(application)
     register_blueprints(application)
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
     register_admin_views(admin, db)
-    register_elasticsearch(application)
+    # register_elasticsearch(application)
 
     @application.before_request
     def before_app_request():
