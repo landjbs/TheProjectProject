@@ -1,3 +1,5 @@
+{% from 'macros/carousels.html' import render_carousel with context %}
+
 {% extends "home_base.html" %}
 {% block title %}Home{% endblock %}
 
@@ -25,7 +27,7 @@
       render_carousel(
         label='Trending Projects',
         id_postfix='trending',
-        card_type='project-big',
+        card_type='project-mid',
         data=trending)
     }}
   {% endif %}
@@ -35,61 +37,11 @@
       render_carousel(
         label='My Projects',
         id_postfix='my',
-        card_type='project-big',
-        data=trending)
+        card_type='project-small',
+        data=my,
+        redirect_empty='/add_project'
+      )
     }}
   {% endif %}
-
-
-  <h4 style='text-align:left;'>My Projects</h4>
-  <hr class="my-1">
-  {% if user_project_count>0 %}
-    <div id="my-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-      <!--Slides-->
-      <div class="carousel-inner" role="listbox">
-        {% for tab in user_tabs %}
-          {% if loop.index==1 %}
-          <div class="carousel-item active">
-          {% else %}
-          <div class="carousel-item">
-          {% endif %}
-            <div class='row'>
-              {% for project in tab %}
-                {{ macros.render_small_project_card(current_user, project, now, calc_days_since) }}
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% if (user_tabs|length > 1) and not request.MOBILE %}
-      <!--Controls-->
-      <div class="controls-top">
-        <a class="btn-floating" href="#my-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-        <p id='my-count' class='counter'>0</p>
-        <a class="btn-floating" href="#my-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-      </div>
-      <!--/.Controls-->
-    {% else %}
-      <br>
-    {% endif %}
-  {% else %}
-  <div style='text-align:center;'>
-    <a type="button" href="/add_project">
-      <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
-    </a>
-  </div>
-  {% endif %}
 </div>
-
-
-
-<div>
-  {% for tab in recommended_tabs %}
-    {% for project in tab %}
-      {{ macros.render_join_modal(current_user, project, project_application) }}
-    {% endfor %}
-  {% endfor %}
-</div>
-
 {% endblock %}
