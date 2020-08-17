@@ -1,4 +1,4 @@
-{% from 'macros/carousels.html' import render_project_carousel with context %}
+{% from 'macros/carousels.html' import render_carousel with context %}
 
 {% extends "home_base.html" %}
 
@@ -21,6 +21,6 @@
 {% block content %}
 <div class='container my-1' style='min-width:90%; padding-top:10px;'>
   {{ macros.render_competition_card(competition) }}
-  {{ render_project_carousel(label='Projects', id_postfix='project', card_type='project-big', data=projects) }}
+  {{ render_carousel(label='Projects', id_postfix='project', card_type='project-big', data=projects) }}
 </div>
 {% endblock %}
