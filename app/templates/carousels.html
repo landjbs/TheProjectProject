@@ -1,9 +1,37 @@
+{% import 'cards.html' as cards %}
+
+
+<!-- CACHE RENDER CARD FUNCTIONS -->
+{% set card_renders = dict('project-big', cards.render_big_project_card) %}
+<!-- /RENDER CARD FUNCTIONS -->
+
+
 <!-- MACROS FOR RENDERING CAROUSELS -->
 
 <!-- project carousel -->
-{% macro render_project_carousel() -%}
+{% macro render_project_carousel(label, id_postfix, card_type, data) -%}
+  <!-- cache ids -->
+  {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
 
-
+  <!-- carousel header -->
+  <h4 style='text-align:left;'>{{ label }}</h4>
+  <!-- RENDER CAROUSEL -->
+  <!-- web -->
+  {% if not request.MOBILE %}
+    <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
+      <div class='carousel-inner' role='listbox'>
+        {% for tab in data %}
+          {% for elt in tab %}
+            {{card_renders[card_type](elt) }}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  <!-- mobile -->
+  {% else %}
+    mobile
+  {% endif %}
+  <!-- /RENDER CAROUSEL -->
 
 {% endmacro -%}
 <!-- /project carousel -->
