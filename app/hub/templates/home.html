@@ -13,7 +13,7 @@
   <!-- recommendations -->
   {{
     render_carousel(
-      label='Recommended',
+      label='Recommended Projects',
       id_postfix='recommended',
       card_type='project-big',
       data=recommended,
@@ -22,16 +22,16 @@
   <!-- trending -->
   {{
     render_carousel(
-      label='Trending',
-      id_postfix='recommended',
+      label='Trending Projects',
+      id_postfix='trending',
       card_type='project-big',
       data=trending)
   }}
-  <!--  -->
+  <!-- owned -->
   {{
     render_carousel(
-      label='Trending',
-      id_postfix='recommended',
+      label='My Projects',
+      id_postfix='my',
       card_type='project-big',
       data=trending)
   }}
@@ -77,6 +77,8 @@
   </div>
   {% endif %}
 </div>
+
+
 
 <div>
   {% for tab in recommended_tabs %}

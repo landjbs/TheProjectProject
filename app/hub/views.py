@@ -20,15 +20,12 @@ from app.subject.models import Subject
 
 
 def home():
-    # recommended projects
-    recommended_projects = get_recommended_projects(current_user)
-    recommended_tabs = list(partition_query(recommended_projects))
-    # top projects
-    trending_projects = get_trending_projects()
-    trending_tabs =  list(partition_query(trending_projects))
+    # recommended
+    recommended = get_recommended_projects(current_user)
+    # trending
+    trending = get_trending_projects()
     # user projects
-    user_projects = list(get_user_projects(current_user))
-    user_tabs = list(partition_query(user_projects))
+    my = list(get_user_projects(current_user))
     project_application = Project_Application_Form()
     # notifcations
     # if (current_user.notifications.count())>0:
