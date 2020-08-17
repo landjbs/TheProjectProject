@@ -12,5 +12,4 @@ from ..competition import competition
 @login_required
 def competition_page(code):
     competition = Competition.query.filter_by(code=code).first_or_404()
-    projects = competition.projects
-    return render_template('competition.html', competition=competition, projects=projects)
+    return render_template('competition.html', competition=competition)
