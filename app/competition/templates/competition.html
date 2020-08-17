@@ -17,9 +17,10 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-1' style='min-width:90%;'>
+<div class='container my-1' style='min-width:90%; padding-top:10px;'>
   {{ macros.render_competition_card(competition) }}
-  {{ macros.render_big_project_carousel(label='Projects', prefix='project', data=competition.projects) }}
 </div>
-
 {% endblock %}
+
+
+<!-- {{ macros.render_big_project_carousel(label='Projects', prefix='project', data=competition.projects) }} -->
