@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# python tests.py
+python tests.py
 eb deploy

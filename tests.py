@@ -54,9 +54,9 @@ class TestCase(unittest.TestCase):
         resp = self.app.get('/index', follow_redirects=True)
         assert resp.data, 'Index'
 
-    def test_login(self):
-        resp = self.login(admin_email, admin_password)
-        assert resp.data, 'Login'
+    # def test_login(self):
+        # resp = self.login(admin_email, admin_password)
+        # assert resp.data, 'Login'
 
     # def test_logout(self):
     #     resp = self.login(admin_email, admin_password)

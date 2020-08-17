@@ -1,12 +1,12 @@
 import time
 import arrow
+import click
 import requests
 from flask import Flask, g, render_template, request
 from flask_login import current_user
 from flask_sqlalchemy import SQLAlchemy
 from elasticsearch import Elasticsearch
 from dateutil import tz
-from werkzeug.utils import import_string
 
 # config
 from app import config
@@ -38,7 +38,7 @@ from app.utils import url_for_other_page
 from app.commands import command_list
 
 
-def create_app(config=config.production_config):
+def create_app(config):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())
