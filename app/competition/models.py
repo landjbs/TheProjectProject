@@ -99,7 +99,10 @@ class Competition(CRUDMixin, db.Model):
                     'has come to an end! We had some awesome submissions—'
                     f'{project.name} included. While we were really impressed '
                     'with your work, we have not selected you as a winner this '
-                    'time around. ')
+                    'time around. This if far from the end of the world—'
+                    f'you can certainly keep working on {project.name}, and we '
+                    'may still be able to connect you with resources and '
+                    'publicity on our social media accounts!')
                 )
         self.active = False
         self.complete = True
