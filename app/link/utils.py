@@ -1,5 +1,7 @@
 import re
-from http.client import HTTPConnection
+import requests
+# TODO: consider switching to HTTPConnection as per https://stackoverflow.com/questions/16778435/python-check-if-website-exists for head requests
+# from http.client import HTTPConnection
 
 
 # matcher for valid route protocol
@@ -13,11 +15,9 @@ def parsable(url:str):
 def valid(url:str, timeout:int=2):
     ''' Determines if url is valid by requesting head '''
     try:
-        c = HTTPConnection(url, timeout=timeout)
-        c.request("HEAD", '')
-        return (c.getresponse().status==200)
+        request = requests.get(url)
+        return (request.status_code==200)
     except Exception as e:
-        print(f'ERROR: {e}')
         return False
 
 def fix_url(url:str):
@@ -29,5 +29,6 @@ def fix_url(url:str):
             url = f'https://{url}'
         else:
             url = f'https://{url}'
+    print(url)
     # try connecting to url to validate
     return (url if valid(url) else False)
