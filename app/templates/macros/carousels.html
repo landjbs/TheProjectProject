@@ -1,13 +1,19 @@
-{% import 'macros/cards.html' as cards with context %}
-
+{%
+  from 'macros/cards/project.html' import
+  (render_big_project_card, render_mid_project_card, render_small_project_card)
+  with context
+%}
+{% from 'macros/cards/user.html' import render_user_card with context %}
+{% from 'macros/cards/competition.html' import render_competition_card with context %}
 
 <!-- CACHE RENDER CARD FUNCTIONS -->
 {%
   set card_renders = dict([
-    ('project-big',     cards.render_big_project_card),
-    ('project-mid',     cards.render_mid_project_card),
-    ('project-small',   cards.render_small_project_card),
-    ('user',            cards.render_user_card)
+    ('project-big',     render_big_project_card),
+    ('project-mid',     render_mid_project_card),
+    ('project-small',   render_small_project_card),
+    ('user',            render_user_card)
+    ('competition',     render_competition_card)
   ])
 %}
 <!-- /RENDER CARD FUNCTIONS -->
