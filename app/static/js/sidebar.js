@@ -16,10 +16,4 @@ function readySidebar() {
         $('#sidebar').toggleClass('active');
         $(this).toggleClass('active');
     });
-
-    if (sessionStorage.openTab) {
-      document.getElementById(sessionStorage.openTab).click();
-    } else {
-      document.getElementById("Activity").click();
-    }
 }
