@@ -16,11 +16,8 @@ def badge_page():
     competitions = Competition.get_active_competitions()
     # update badges
     current_user.update_badges()
-    # progress tabs
-    progress_tabs = list(partition_query(current_user.badges))
     # all badges
     all_tabs = list(partition_query(Badge.query.all()))
     return render_template('badge.html',
                             competitions=competitions,
-                            progress_tabs=progress_tabs,
                             all_tabs=all_tabs)
