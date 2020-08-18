@@ -109,7 +109,7 @@
         {% endfor %}
       </div>
       <div class='col right'>
-        {% for elt in [form.estimated_time, form.team_size, form.subjects] %}
+        {% for elt in [form.estimated_time, form.team_size, form.subjects, form.competition] %}
           <div class="row input-segment" id='{{ elt.name }}_segment'>
             <div class='input-title'>
               <h6 style="display: inline;">{{ elt.label }}</h6>
@@ -136,6 +136,8 @@
               <p id='team-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
               {{ render_multiselect(elt) }}
+            {% elif elt.type=='SelectField' %}
+              {{ elt() }}
             {% else %}
               <div class='input-box'>
                 {% if not elt.errors %}
