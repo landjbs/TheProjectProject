@@ -403,7 +403,7 @@
               {% endif %}
               <div class='about-col'>
                 {% for link in project.public_links() %}
-                  {{ macros.render_project_link_card(link, project, is_owner) }}
+                  {{ render_project_link_card(link, project, is_owner) }}
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
                 {% endfor %}
               </div>
