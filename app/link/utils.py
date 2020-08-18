@@ -15,7 +15,7 @@ def parsable(url:str):
 def valid(url:str, timeout:int=2):
     ''' Determines if url is valid by requesting head '''
     try:
-        request = requests.get(url)
+        request = requests.get(url, timeout=timeout)
         return (request.status_code==200)
     except Exception as e:
         return False
@@ -29,6 +29,5 @@ def fix_url(url:str):
             url = f'https://{url}'
         else:
             url = f'https://{url}'
-    print(url)
     # try connecting to url to validate
     return (url if valid(url) else False)

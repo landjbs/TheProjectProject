@@ -110,10 +110,10 @@ class Competition(CRUDMixin, db.Model):
         return True
 
 
-class Submission(db.Model):
+class Submission(CRUDMixin, db.Model):
     __tablename__ = 'submission'
     # competition
-    competition_id = db.Column(db.Integer, db.ForeignKey('competition.id'), primary_key=True)
+    competition_id = db.Column(db.Integer, db.ForeignKey('competition.id'))
     competition = relationship('Competition', back_populates='submissions')
     # project
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
