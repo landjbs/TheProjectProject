@@ -32,6 +32,7 @@ def add_project():
             competition = Competition.query.get(int(form.competition.data))
         else:
             competition = None
+        print(f'ASDFADSFASDFDS: {competion}')
         project = Project.create(
             name = form.name.data,
             oneliner=form.oneliner.data,
