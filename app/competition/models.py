@@ -23,7 +23,7 @@ class Competition(CRUDMixin, db.Model):
     prize = db.Column(db.String(100), nullable=False)
     # winners
     n_winners = db.Column(db.Integer, nullable=False, default=1)
-    projects = relationship('Project',
+    submissions = relationship('Submission',
                         secondary='competition_to_project',
                         back_populates='competition')
     ## administrative ##
@@ -57,10 +57,22 @@ class Competition(CRUDMixin, db.Model):
             return f'width:100%;'
         return f'width: {100*float(self.time_progressed()/self.total_length())};'
 
-    def add_winner(self, project):
-        ''' Adds winner project '''
-        self.winners.append(project)
-        winner_note = (f'Congratulations!! You have won the {self.name} '
-                    'competition!')
-        project.notify_members(winner_note)
-        return True
+    def winners(self):
+        pass
+
+
+class Submission(db.Model):
+    __tablename__ = 'submission'
+    # competition
+    competition_id = db.Column(db.Integer, db.ForeignKey('competition.id'), primary_key=True)
+    competition = relationship('Competition', back_populates='submissions')
+    # project
+    project_id = db.Column(db.)
+    ## post data ##
+    # post time
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    ## win data ##
+    winner = db.Column(db.Boolean, nullable=True)
+
+    def __repr__(self):
+        return f'<Submission competition={self.competition} project={self.project}>'
