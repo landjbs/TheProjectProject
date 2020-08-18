@@ -128,6 +128,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def __repr__(self):
         return f'<Project {self.name}>'
 
+    def get_url(self):
+        return f'/project={self.code}'
+
     ## activity ##
     def recently_active(self, second_window=302400):
         ''' second_window: number of seconds to count as recent.
@@ -212,12 +215,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
 
     def notify_owner(self, text, important=False):
         ''' Notify owner with text and category '''
-        self.owner.notifications.append(
-            Notification(
-                text=text,
-                project=self,
-                important=important
-            )
+        self.owner.notify(
+            text=text,
+            important=important,
+            redirect=self.get_url()
         )
         self.update()
         return True
@@ -230,7 +231,11 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             if not include_owner:
                 if member==self.owner:
                     continue
-            member.notify(text, important=important, project=self)
+            member.notify(
+                text=text,
+                important=important,
+                redirect=self.get_url()
+            )
         return True
 
     def add_member(self, user, notify_owner):
@@ -272,8 +277,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         # notifications
         if by_owner:
             self.notify_members(
-                text=(f'{user.name} has been removed from {self.name}.'),
-                include_owner=False
+                text=(f'{user.name} has been removed from {self.name}.')
             )
             user.notify(text=f'You have been removed from '
                              f'{self.name} by the owner. We promise '
@@ -281,10 +285,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                              'if you think something is wrong or have '
                              'any questions.',
                              important=important,
-                             project=project)
+                             redirect=self.get_url())
         else:
             self.notify_members(
-                text=(f'{user.name} has been left {self.name}.')
+                text=f'{user.name} has left {self.name}.'
             )
         # remove xp from user
         user.action_xp('join_project', positive=False)

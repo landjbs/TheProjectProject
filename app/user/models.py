@@ -211,12 +211,9 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return True
 
     ## notifications ##
-    def notify(self, text, important=False, project=None):
+    def notify(self, text, important=False, redirect=None):
         ''' Notify user with text and category '''
-        if not project:
-            note = Notification(text=text, important=important)
-        else:
-            note = Notification(text=text, important=important, project=project)
+        note = Notification(text=text, important=important, redirect=redirect)
         self.notifications.append(note)
         self.update()
         return True
