@@ -171,7 +171,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                           important=True)
         self.update()
         user.notify(text=f'You have applied to {self.name}.',
-                    project=self)
+                    redirect=self.get_url())
         return True
 
     def accept_application(self, user):
@@ -203,7 +203,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                        'Please contact us if you think something'
                        ' is wrong or have any questions.'),
                 important=True,
-                project=self
+                redirect=self.get_url()
             )
         else:
             for note in self.owner.notifications:
@@ -290,6 +290,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             self.notify_members(
                 text=f'{user.name} has left {self.name}.'
             )
+            user.notify(
+                text=f'You have left {self.name}.',
+                redirect=self.get_url()
+            )
         # remove xp from user
         user.action_xp('join_project', positive=False)
         # add rejection from project to user
@@ -339,7 +343,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.tasks.append(Task(text=text, author=author))
         self.update_last_active()
         self.update()
-        self.notify_members(text=f'{author.name} added the task "{text}".')
+        self.notify_members(
+            text=f'{author.name} added the task "{text}" to {self.name}.'
+        )
         return True
 
     def change_task_status(self, task_id, user, action):
