@@ -1,3 +1,5 @@
+{% from 'macros/cards/components.html' import render_share_button %}
+
 <!-- action bar -->
 {% macro render_user_action_bar(user) -%}
 <div class='action-bar'>
@@ -22,7 +24,7 @@
     &nbsp;
     {{ render_collaborate_button(g.current_user, target_user) }}
     &nbsp;
-    {{ render_user_share_button(target_user) }}
+    {{ render_share_button(target_user) }}
   </center>
 </div>
 {% endmacro -%}
