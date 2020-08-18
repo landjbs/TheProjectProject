@@ -16,6 +16,7 @@ from app.link.models import Link
 from app.competition.models import Submission
 ################################################################################
 
+
 class Project(CRUDMixin, db.Model): # SearchableMixin
     __tablename__ = 'project'
     # __searchable__ = ['name', 'oneliner', 'summary']

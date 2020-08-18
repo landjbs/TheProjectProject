@@ -141,7 +141,8 @@ class User_Badge(CRUDMixin, db.Model):
             self.earned = True
             # notify user
             self.user.notify(text=('Congratulations—you have won the '
-                                   f'{self.badge.name} badge!'))
+                                   f'{self.badge.name} badge!'),
+                            important=True)
             self.update()
             return True
         return False
@@ -156,7 +157,8 @@ class User_Badge(CRUDMixin, db.Model):
             self.user.notify(text=('Due to changes to your account (eg. left '
                                    'projects or deleted tasks), you no longer '
                                    'meet the threshold for the '
-                                   f'{self.badge.name} badge.'))
+                                   f'{self.badge.name} badge.'),
+                            important=True)
             self.update()
             return True
         return False
