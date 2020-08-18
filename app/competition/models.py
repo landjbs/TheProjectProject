@@ -7,6 +7,7 @@ from app.database import db, CRUDMixin, generate_code
 
 class Competition(CRUDMixin, db.Model):
     __tablename__ = 'competition'
+    # __searchable__ = ['name', 'sponsor']
     # name
     name = db.Column(db.String(128), nullable=False)
     # code
