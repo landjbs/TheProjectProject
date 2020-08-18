@@ -31,7 +31,8 @@
       </h4>
       <div class="list-group" style='min-height:80vh; max-height:80vh;'>
         {% for (notification, seen) in all_notes %}
-          <div class="list-group-item list-group-item-action flex-column align-items-start"
+          <a {% if notification.redirect %}href='{{ notification.redirect  }}'{% endif %}
+            class="list-group-item list-group-item-action flex-column align-items-start"
             {% if not seen %}style='background-color: rgba(0,0,255,0.05)'{% endif %}>
             <h6 class="mb-1">
               {% if notification.important %}
@@ -41,11 +42,6 @@
             </h6>
             <div class="d-flex w-100 justify-content-between">
               <small>
-                {% if notification.project %}
-                  <a class='project-name' href="{{ url_for('project.project_page', project_code=notification.project.code) }}">
-                    <u>{{ notification.project.name }}</u> |
-                  </a>
-                {% endif %}
                 {{ time_to_str(notification.timestamp) }}
               </small>
             </div>
