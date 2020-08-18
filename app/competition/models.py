@@ -70,10 +70,10 @@ class Competition(CRUDMixin, db.Model):
 
     ## admin ##
     def activate(self):
-
+        # assertions
         assert not self.active, 'Already active.'
         assert not self.complete, 'Already complete.'
-        assert not (datetime.utcnow() > self.ends_on), 'Invalid enddate.'
+        assert not (datetime.utcnow() > self.ends_on), 'Invalid end date.'
         # make active
         self.active = True
         # notify relevant users # TODO: potentially only recommend to certain users in future
