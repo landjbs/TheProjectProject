@@ -73,26 +73,4 @@ def search():
         return redirect(url_for('hub.home'))
     search_text = g.search_form.search.data
     results = text_search(search_text)
-    print(f"asdfad: {results['project'][0]}")
     return render_template('search.html', results=results)
-
-
-# <!-- modals/ -->
-# <div>
-#   <!-- project modals -->
-#   {% for tab in results['project'][0] %}
-#     {% for project in tab %}
-#       {{ macros.render_join_modal(current_user, project, project_application) }}
-#     {% endfor %}
-#   {% endfor %}
-#   <!-- user modals -->
-#   {% for tab in results['user'][0] %}
-#     {% for user in tab %}
-#       {{ macros.render_collaborate_modal(current_user, user) }}
-#       {% if not user==current_user %}
-#         {{ macros.render_report_modal(user) }}
-#       {% endif %}
-#     {% endfor %}
-#   {% endfor %}
-# </div>
-# <!-- /modals -->
