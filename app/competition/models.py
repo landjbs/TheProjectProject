@@ -82,12 +82,21 @@ class Competition(CRUDMixin, db.Model):
             if not winner:
                 raise ValueError(f'Project with id {id} has not submitted.')
             winning_projects.append(winner) = True
+        # notify winning project members
         for winner in winning_projects:
             winner.winner = True
             winner.notify_members(text=('Congratulations—your project '
                     f'{winner.name} has won the competition {self.name}! '
                     'We were really impressed by your work and will follow up '
-                    'soon with instructions for claiming your reward!'))
+                    'soon with instructions for claiming your reward!'),
+                    important=True)
+        # notify other members
+        for submission in self.submissions:
+            project = submission.project
+            if not project in self.winners:
+                project.notify_members(text=(f'The competition {self.name}'
+                    'has come to an end! While we were really impressed with '
+                    'your work, we have decided '))
         self.active = False
         self.complete = True
         self.update()
