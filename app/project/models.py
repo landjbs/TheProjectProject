@@ -13,7 +13,7 @@ from app.question.suggest import suggest_questions, choose_init_questions
 from app.link.models import Link
 ################################################################################
 ########################### competitions #######################################
-from app.competition.models import Competition
+from app.competition.models import Submission
 ################################################################################
 
 class Project(CRUDMixin, db.Model): # SearchableMixin
@@ -515,7 +515,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
 
     ## competitions ##
     def submit_to_competition(self, competition):
-
+        self.competition = Submission(competition=competition, project=self)
+        self.notify_members(text=(f'{self.name} has been submitted to the '
+                                f'competion "{competition.name}".'))
+        self.update()
 
     ## xp and badges ##
     def action_xp_all_members(self, action:str, positive:bool=True):
