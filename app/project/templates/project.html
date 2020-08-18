@@ -344,11 +344,15 @@
         <!-- MEMBER TAB -->
         <div id='Members' class='tabcontent'>
           <!-- current members -->
-          <div class='row'>
-            <div class='container my-2' style='min-width: 99%;'>
-
-            </div>
-          </div>
+          {{
+            render_carousel(
+              label='Members',
+              id_postfix='members',
+              card_type='user',
+              icon_type='user',
+              data=members
+            )
+          }}
 
           <!-- pending members -->
           {% if project.pending.all()|length > 0 %}
@@ -387,42 +391,7 @@
             </div>
           {% endif %}
 
-          <!-- invited members -->
-          {% if (project.invitations.all()|length > 0) and current_user==project.owner %}
-            <div class='row'>
-              <div class='container my-2' style='min-width: 99%;'>
-                <h4 class='tabname-big'>
-                  Invitations
-                  <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                  {{ project.invitations.all()|length }}
-                </h4>
-                <div id="invitation-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-                  <div class="carousel-inner" role="listbox">
-                    {% for tab in invitation_tabs %}
-                      {% if loop.index==1 %}
-                      <div class="carousel-item active">
-                      {% else %}
-                      <div class="carousel-item">
-                      {% endif %}
-                        <div class='row'>
-                          {% for user in tab %}
-                            {{ macros.render_user_card(current_user, user, carousel_type='member') }}
-                          {% endfor %}
-                        </div>
-                      </div>
-                    {% endfor %}
-                  </div>
-                </div>
-                <!--Controls-->
-                <div class="controls-top">
-                  <a class="btn-floating" href="#user-rec-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-                  <p id='user-count' class='counter'>0</p>
-                  <a class="btn-floating" href="#user-rec-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-                </div>
-                <!--/.Controls-->
-              </div>
-            </div>
-          {% endif %}
+
         </div>
 
         <!-- About -->
