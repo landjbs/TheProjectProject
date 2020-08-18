@@ -27,7 +27,8 @@ class Competition(CRUDMixin, db.Model):
                             back_populates='competition',
                             lazy='dynamic',
                             cascade='all, delete, delete-orphan',
-                            order_by='desc(Submission.timestamp)')
+                            order_by='desc(Submission.timestamp) if True else Submission.timestamp')
+                            # TODO: verify that this order_by works
     ## administrative ##
     active = db.Column(db.Boolean, nullable=False, default=True)
     complete = db.Column(db.Boolean, nullable=False, default=False)
