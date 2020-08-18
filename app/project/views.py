@@ -7,6 +7,7 @@ from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query, filter_string
 from app.recommendations.users import recommend_users
 from app.subject.models import Subject
+from app.competition.models import Competition
 from app.user.models import User
 # package imports
 from .models import Project
@@ -23,6 +24,7 @@ def add_project():
     # form preprocessing
     form = Add_Project()
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
+    form.competition.choices = [(c.id, c.name) for c in Competition.query.all()]
     # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
