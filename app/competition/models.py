@@ -75,15 +75,21 @@ class Competition(CRUDMixin, db.Model):
         n_selected = len(winner_ids)
         assert (n_selected==self.n_winners), (f'Invalid winner number '
                                             f'{n_selected}/{self.n_winners}.')
+        winning_projects = []
+        # first loop to make sure no errors before starting actions
         for id in winner_ids:
             winner = self.submissions.filter_by(project_id=id).first()
             if not winner:
                 raise ValueError(f'Project with id {id} has not submitted.')
+            winning_projects.append(winner) = True
+        for winner in winning_projects:
             winner.winner = True
+            
         self.active = False
         self.complete = True
         self.update()
         return True
+
 
 class Submission(db.Model):
     __tablename__ = 'submission'
