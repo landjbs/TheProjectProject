@@ -13,15 +13,15 @@ class Competition(CRUDMixin, db.Model):
     # code
     code = db.Column(db.String(128), nullable=False, unique=True)
     # sponsor
-    sponsor = db.Column(db.String(400), nullable=False, default='TheProjectProject')
+    sponsor = db.Column(db.String(400), nullable=False, default='<a href="/">TheProjectProject</a>')
+    # oneliner
+    oneliner = db.Column(db.String(100), nullable=False)
     # description
     description = db.Column(db.Text(1000), nullable=False)
     # timing
     starts_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     ends_on = db.Column(db.DateTime, nullable=False)
     ## winning conditions ##
-    # prize
-    prize = db.Column(db.String(100), nullable=False)
     # winners
     n_winners = db.Column(db.Integer, nullable=False, default=1)
     submissions = relationship('Submission',
@@ -81,7 +81,7 @@ class Competition(CRUDMixin, db.Model):
             winner = self.submissions.filter_by(project_id=id).first()
             if not winner:
                 raise ValueError(f'Project with id {id} has not submitted.')
-            winning_projects.append(winner) = True
+            winning_projects.append(winner)
         # notify winning project members
         for winner in winning_projects:
             winner.winner = True
