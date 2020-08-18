@@ -63,6 +63,7 @@ class Add_Project(BaseForm):
                             description=('Whether the project has been '
                             'completed.'))
     competition = SelectField('Competition',
+                            validators=[],
                             description=('Submit your project to '
                                         'competitions and win rewards! Please '
                                         'make sure you meet criteria.'),
@@ -93,6 +94,7 @@ class Add_Project(BaseForm):
             fixed_url = fix_url(self.url.data)
             if not fixed_url:
                 self.url.errors = ['Invalid URL.']
+                error_flag = True
             else:
                 self.url.data = fixed_url
         return (not error_flag)
