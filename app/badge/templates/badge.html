@@ -1,6 +1,5 @@
 {% extends "home_base.html" %}
-{% import "badge_macros.html" as badge_macros %}
-{% import "macros.html" as macros %}
+{% from 'macros/carousels.html' import render_carousel %}
 
 {% block title %}Perks{% endblock %}
 
@@ -12,10 +11,9 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-1' style='min-width: 90%'>
-  <br>
-  <!-- COMPETITONS -->
-  
+<div class='container my-1 main-box'>
+  <!-- competitions -->
+
 
 
   {% if ((active_competitions.count()) == 1) %}

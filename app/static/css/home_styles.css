@@ -7,6 +7,11 @@ body {
   background-color: black;
 }
 
+.main {
+  min-width: 90%;
+  padding-top: 3vh;
+}
+
 /* Dropdown Button */
 .dropbtn {
   background-color: transparent;
