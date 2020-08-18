@@ -353,6 +353,26 @@
               data=members
             )
           }}
+          <!-- pending members -->
+          {{
+            render_carousel(
+              label='Applications',
+              card_type='applicaiton',
+              icon_type='notifcation',
+              data=applicaitons
+            )
+          }}
+          <!-- recommended members -->
+          {{
+            render_carousel(
+              label='Recommended',
+              card_type='user',
+              data=recommended
+            )
+          }}
+          <!-- invited members -->
+
+
 
           <!-- pending members -->
           {% if project.pending.all()|length > 0 %}
