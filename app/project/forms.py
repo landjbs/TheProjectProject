@@ -68,8 +68,7 @@ class Add_Project(BaseForm):
                                         'competitions and win rewards! Please '
                                         'make sure you meet criteria.'),
                             choices=[],
-                            coerce=int,
-                            default=None
+                            # coerce=int
                         )
 
     def validate(self):

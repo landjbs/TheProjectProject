@@ -137,7 +137,12 @@
             {% elif elt.type=='SelectMultipleField' %}
               {{ render_multiselect(elt) }}
             {% elif elt.type=='SelectField' %}
-              {{ elt(class='add-select') }}
+              {% if not elt.errors %}
+                {{ elt(class='input valid add-select') }}
+              {% else %}
+                {{ elt(class='input add-select') }}
+                <p class='warning'>{{ elt.errors[0] }}</p>
+              {% endif %}
             {% else %}
               <div class='input-box'>
                 {% if not elt.errors %}
@@ -175,12 +180,6 @@
     }
   };
   team_slider.oninput = function() {
-    // if (this.value==20) {
-    //   team_out.innerHTML = 'comunity-wide';
-    // }
-    // else {
-    //   team_out.innerHTML = (this.value) + ' people';
-    // }
     team_out.innerHTML = (this.value) + ' people';
   };
 

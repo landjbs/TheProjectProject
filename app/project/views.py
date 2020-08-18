@@ -24,7 +24,7 @@ def add_project():
     # form preprocessing
     form = Add_Project()
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
-    form.competition.choices = [(False, '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
+    form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
     # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
@@ -32,7 +32,6 @@ def add_project():
             competition = Competition.query.get(int(form.competition.data))
         else:
             competition = None
-        print(f'ASDFADSFASDFDS: {competion}')
         project = Project.create(
             name = form.name.data,
             oneliner=form.oneliner.data,
