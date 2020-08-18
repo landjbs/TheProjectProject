@@ -12,6 +12,9 @@ from app.question.suggest import suggest_questions, choose_init_questions
 ############################## links ###########################################
 from app.link.models import Link
 ################################################################################
+########################### competitions #######################################
+from app.competition.models import Competition
+################################################################################
 
 class Project(CRUDMixin, db.Model): # SearchableMixin
     __tablename__ = 'project'
@@ -511,8 +514,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         return self.pending.count()
 
     ## competitions ##
-    def submit_to_competition(self):
-        
+    def submit_to_competition(self, competition):
+
 
     ## xp and badges ##
     def action_xp_all_members(self, action:str, positive:bool=True):
