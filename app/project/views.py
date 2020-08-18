@@ -107,19 +107,18 @@ def project_page(project_code):
         completed[n] = user_completed_count if user_completed_count else 0
     ## subject visualization ##
     project_subjects = project.subject_data()
-    ## partition member stuff ##
-    member_tabs = list(partition_query(project.members))
-    application_tabs = list(partition_query(project.pending))
-    invitation_tabs = list(partition_query(project.invitations))
+    ## all user stuff ##
+    members = project.members.all()
+    applications = project.pending.all()
+    invitations = project.invitations.all()
     ## recommended members ##
-    recommended_tabs = False
+    recommended = False
     edit_form = False
     edit_application_form = False
     show_edit_modal = False
     if current_user==project.owner:
         if project.open and not project.complete:
-            recommended_members = recommend_users(project)
-            recommended_tabs = list(partition_query(recommended_members))
+            recommended = recommend_users(project)
         ## edit project form ##
         edit_form = Edit_Project()
         edit_application_form = Edit_Project_Application()
@@ -159,9 +158,9 @@ def project_page(project_code):
                 show_edit_modal = True
     return render_template('project.html',
                             project=project,
-                            member_tabs=member_tabs,
-                            application_tabs=application_tabs,
-                            invitation_tabs=invitation_tabs,
+                            members=members,
+                            applications=applications,
+                            invitations=invitations,
                             comment_form=comment_form,
                             project_application=project_application,
                             task_form=task_form,
@@ -169,7 +168,7 @@ def project_page(project_code):
                             authored=authored,
                             completed=completed,
                             project_subjects=project_subjects,
-                            recommended_tabs=recommended_tabs,
+                            recommended=recommended,
                             edit_form=edit_form,
                             edit_application_form=edit_application_form,
                             show_edit_modal=show_edit_modal)
