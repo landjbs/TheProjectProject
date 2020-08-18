@@ -25,7 +25,7 @@ class Competition(CRUDMixin, db.Model):
     n_winners = db.Column(db.Integer, nullable=False, default=1)
     projects = relationship('Project',
                         secondary='competition_to_project',
-                        back_populates='competitions')
+                        back_populates='competition')
     ## administrative ##
     active = db.Column(db.Boolean, nullable=False, default=True)
     complete = db.Column(db.Boolean, nullable=False, default=False)

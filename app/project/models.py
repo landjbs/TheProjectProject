@@ -95,7 +95,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
 
     def __init__(self, name, oneliner, summary, url, open, subjects,
                 requires_application, application_question, estimated_time,
-                team_size, complete, owner):
+                team_size, complete, owner, competition):
         self.name = str(name)
         self.code = generate_code(name, Project)
         self.oneliner = str(oneliner)
@@ -118,6 +118,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         ### if url, add it to project ###
         if url is not None:
             self.add_link(url=url, public=True)
+        ### if competition, add it to project ##
+        if competition:
+            self.competition = competition
         ### choose questions and add them to project ###
         for question in choose_init_questions(self):
             self.add_question(question=question)
