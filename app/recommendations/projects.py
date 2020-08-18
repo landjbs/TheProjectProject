@@ -54,7 +54,7 @@ def get_recommended_projects(user):
     candidates = Project.query.filter(Project.open==True,
                                       Project.complete==False,
                                       ~Project.id.in_(nowshow_ids)
-                                  ).limit(50)
+                                  ).limit(200)
     ## get invited projects ##
     invited = [project for project in user.invitations]
     ## format user preferences ##
@@ -64,7 +64,7 @@ def get_recommended_projects(user):
     # TODO: USE BOOGLE RANKING ALGORITHM RATHER THAN TIMSORT
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = (invited + results)
-    results = results[:9]
+    results = results[:30]
     if len(results)==0:
         results = user.projects
     return results
