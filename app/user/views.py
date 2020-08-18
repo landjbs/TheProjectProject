@@ -22,12 +22,10 @@ def user_page(code):
         task_data['end_activity'] = end_activity
         task_data['earliest'] = earliest
     # owned projects
-    owned = user.owned
-    owned_tabs = list(partition_query(owned))
+    owned = user.owned.all()
     # member projects
-    member_projects = [project for project in user.projects
+    member = [project for project in user.projects
                        if not project in owned]
-    member_tabs = list(partition_query(member_projects))
     # subjects
     subject_data = user.subject_data()
     ## forms ##

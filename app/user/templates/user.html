@@ -1,5 +1,9 @@
+{% from 'macros/carousels.html' import render_carousel with context %}
+{% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
+{% from 'macros/cards/user.html' import render_user_action_bar %}
+
 {% extends "home_base.html" %}
-{% import 'macros.html' as macros %}
+
 
 {% block title %}{{ user.name }}{% endblock %}
 
@@ -40,7 +44,7 @@
                     {{ user.name }}
                     {% set badge = user.choose_badge('search') %}
                     {% if badge %}
-                      {{ macros.render_badge_icon_bigger(badge) }}
+                      {{ render_badge_icon_bigger(badge) }}
                     {% endif %}
                     {% if user.recently_active() %}
                       <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
@@ -54,7 +58,7 @@
                 {% endif %}
             </div>
             {% if current_user.is_authenticated %}
-              {{ macros.render_user_action_bar(current_user, user) }}
+              {{ render_user_action_bar(user) }}
             {% endif %}
             <br>
             <ul class="list-unstyled components">
@@ -156,28 +160,6 @@
     </div>
 
     <!-- modals -->
-    <div>
-      {% if current_user.is_authenticated %}
-        <!-- user modal -->
-        {% if current_user!=user %}
-          <!-- collaborate -->
-          {{ macros.render_collaborate_modal(current_user, user) }}
-          {{ macros.render_report_modal(user) }}
-        {% else %}
-          <!-- edit and delete modals -->
-          {{ macros.render_edit_user_modal(user, edit_form) }}
-          {{ macros.render_delete_account_modal(user) }}
-        {% endif %}
-        <!-- project modals -->
-        {% for tab in owned_tabs %}
-          {% for project in tab %}
-            {{ macros.render_join_modal(current_user, project, project_application) }}
-          {% endfor %}
-        {% endfor %}
-      {% endif %}
-    </div>
-    <!-- /modals -->
-
     <!-- jQuery CDN - Slim version (=without AJAX) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
@@ -287,3 +269,26 @@
   {% endif %}
 
   {% endblock %}
+
+
+  <div>
+    {% if current_user.is_authenticated %}
+      <!-- user modal -->
+      {% if current_user!=user %}
+        <!-- collaborate -->
+        {{ macros.render_collaborate_modal(current_user, user) }}
+        {{ macros.render_report_modal(user) }}
+      {% else %}
+        <!-- edit and delete modals -->
+        {{ macros.render_edit_user_modal(user, edit_form) }}
+        {{ macros.render_delete_account_modal(user) }}
+      {% endif %}
+      <!-- project modals -->
+      {% for tab in owned_tabs %}
+        {% for project in tab %}
+          {{ macros.render_join_modal(current_user, project, project_application) }}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  </div>
+  <!-- /modals -->
