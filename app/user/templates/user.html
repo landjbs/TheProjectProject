@@ -159,10 +159,12 @@
         </div>
     </div>
 
-    <div>
-      {{ render_edit_user_modal(user) }}
-      {{ render_delete_account_modal(user) }}
-    </div>
+    {% if current_user==user %}
+      <div>
+        {{ render_edit_user_modal(user, edit_form) }}
+        {{ render_delete_account_modal(user) }}
+      </div>
+    {% endif %}
 
     <!-- modals -->
     <!-- jQuery CDN - Slim version (=without AJAX) -->
