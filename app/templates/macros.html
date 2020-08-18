@@ -116,21 +116,6 @@
 
 
 
-
-
-{% macro render_collaborate_button(g.current_user, target_user) -%}
-  {% if g.current_user!=target_user %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ target_user.id }}">
-        Collab
-    </button>
-  {% else %}
-    <button type="button" class="btn" disabled>
-        You!
-    </button>
-  {% endif %}
-{% endmacro -%}
-
-
 {% macro render_project_action_bar(g.current_user, project) -%}
 <div class='action-bar'>
   {% if g.current_user in project.stars %}
