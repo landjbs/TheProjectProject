@@ -65,30 +65,12 @@ def home():
 #                            project_application=project_application)
 
 
+@hub.route('/search', methods=['GET', 'POST'])
+@login_required
+@limiter.limit('60 per minute')
 def search():
     if not g.search_form.validate():
         return redirect(url_for('hub.home'))
     search_text = g.search_form.search.data
     results = text_search(search_text)
-    # forms
-    project_application = Project_Application_Form()
-    return render_template('search.html',
-                        results=results,
-                        project_application=project_application)
-
-
-### SEARCH ###
-@hub.route('/search', methods=['GET', 'POST'])
-@mobilized(search)
-@login_required
-@limiter.limit('60 per minute')
-def search():
-    ''' Mobile optimized search page '''
-    if not g.search_form.validate():
-        return redirect(url_for('hub.home'))
-    search_text = g.search_form.search.data
-    results = text_search(search_text, partition=False)
-    project_application = Project_Application_Form()
-    return render_template('search_mobile.html',
-                        results=results,
-                        project_application=project_application)
+    return render_template('search.html', results=results)
