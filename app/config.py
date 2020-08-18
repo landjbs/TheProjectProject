@@ -1,11 +1,11 @@
 ''' configurations for different app runs '''
 
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-# load .env config file
-basedir = os.path.abspath(os.path.dirname('..'))
-load_dotenv(os.path.join(basedir, '.env'))
+# # load .env config file
+# basedir = os.path.abspath(os.path.dirname('..'))
+# load_dotenv(os.path.join(basedir, '.env'))
 
 
 class base_config(object):
