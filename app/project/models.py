@@ -485,8 +485,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         if self.open:
             self.open = False
             self.notify_members(
-                    text=f'{self.name} has been closed by the owner.',
-                    include_owner=False)
+                text=f'{self.name} has been closed.',
+            )
             self.update_last_active()
             self.update()
             return True
@@ -497,8 +497,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         if not self.open:
             self.open = True
             self.notify_members(
-                    text=f'{self.name} has been opened by the owner.',
-                    include_owner=False)
+                text=f'{self.name} has been opened.',
+            )
             self.update_last_active()
             self.update()
             return True
@@ -517,9 +517,6 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.requires_application = False
         for application in self.pending:
             self.add_member(application.user, notify_owner=False)
-        self.notify_members(text=(f'The application requirement has been '
-                                  f'removed from {self.name} by the owner.'),
-                            include_owner=False)
         self.update_last_active()
         self.update()
         return True
@@ -530,8 +527,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     ## competitions ##
     def submit_to_competition(self, competition):
         self.competition = Submission(competition=competition, project=self)
-        self.notify_members(text=(f'{self.name} has been submitted to the '
-                                f'competion "{competition.name}"!'))
+        self.notify_members(
+            text=(f'{self.name} has been submitted to the '
+                f'competion {competition.name}!')
+        )
         self.update()
 
     ## xp and badges ##
