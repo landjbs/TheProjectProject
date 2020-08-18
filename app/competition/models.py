@@ -96,8 +96,11 @@ class Competition(CRUDMixin, db.Model):
             project = submission.project
             if not project in self.winners:
                 project.notify_members(text=(f'The competition {self.name}'
-                    'has come to an end! While we were really impressed with '
-                    'your work, we have decided not '))
+                    'has come to an end! We had some awesome submissions—'
+                    f'{project.name} included. While we were really impressed '
+                    'with your work, we have not selected you as a winner this '
+                    'time around. ')
+                )
         self.active = False
         self.complete = True
         self.update()
