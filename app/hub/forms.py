@@ -14,5 +14,5 @@ class SearchForm(BaseForm):
         if 'formdata' not in kwargs:
             kwargs['formdata'] = request.args
         if 'csrf_enabled' not in kwargs:
-            kwargs['csrf_enabled'] = False
+            kwargs['meta']={'csrf': False}
         super(SearchForm, self).__init__(*args, **kwargs)
