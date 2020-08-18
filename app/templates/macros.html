@@ -584,48 +584,6 @@
 {% endmacro -%}
 
 
-{% macro render_question_card(question, project, user) -%}
-{% set border_style = 'red' if not question.answer else 'green' %}
-<div class='card mb-2' style='border-color: {{ border_style }};'>
-  <div class='card-body'>
-    <div class='card-head'>
-      <p style='padding-bottom:1px;'>
-        {{ question.question }}
-      </p>
-    </div>
-    {% if not project.is_member(user) %}
-      <p style='margin-bottom:0px;'>
-        {% if question.answer %}
-          {{ question.answer }}
-        {% else %}
-          Project members haven't answered this yet.
-        {% endif %}
-      </p>
-    {% else %}
-      <form action="{{ url_for('project.edit_answer', project_id=project.id, question_id=question.id) }}"
-        method='post' style='margin-bottom:0px;'>
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-          {% if question.answer %}
-            <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}'>
-          {% else %}
-            <input style='margin-bottom:0px;' name='answer' class='select-clean' placeholder='Write your answer here...'>
-          {% endif %}
-        </input>
-        <div class='float-right'>
-          <a class='delete-btn task-btn'
-              style='background: transparent;'
-              href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
-              <i class="fa fa-times-circle" aria-hidden="true"></i>
-          </a>
-          <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
-              <i class="fa fa-check-circle" aria-hidden="true"></i>
-          </button>
-        </div>
-      </form>
-    {% endif %}
-  </div>
-</div>
-{% endmacro -%}
 
 
 <!-- USER ACTION BAR FOR RELATIONSHIP ACTIONS -->
