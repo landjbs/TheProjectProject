@@ -16,13 +16,13 @@ from ..badge import badge
 @limiter.limit('')
 def perk_page():
     # active competitions
-    competitions = Competition.get_active_competitions()
+    competitions = list(Competition.get_active_competitions().all())
     # update badges
     current_user.update_badges()
     # all badges currently in progress
-    my_badges = current_user.badges
+    my_badges = list(current_user.badges)
     # all badges
-    other_badges = Badge.query.all()
+    other_badges = list(Badge.query.all())
     return render_template('badge.html',
                             competitions=competitions,
                             my_badges=my_badges,

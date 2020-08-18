@@ -1,0 +1,47 @@
+{% macro render_competition_card(competition) -%}
+<center>
+<div class="card mb-2" style='max-width:80%;'>
+  <div class="card-body">
+    <div class='float-right info-nums'>
+      {{ competition.projects|length }}
+      <i class="fa fa-circle" style='color:#FF5D00;'></i>
+    </div>
+    <div class='card-head' style='text-align:center;'>
+      <i class="fas fa-trophy fa-2x" style='color:gold;'></i>
+      <br>
+      <h3>
+        <a href="competition={{ competition.code }}">
+          {{ competition.name }}
+        </a>
+      </h3>
+      <p>
+        by {{ competition.sponsor|safe }}
+      </p>
+    </div>
+    <hr class="my-4">
+    <!-- summary -->
+    <div class='card-text'>
+      <p class='oneliner'>
+        {{ competition.description }}
+      </p>
+      <p style='color:rgba(0,0,0,0.7);'>{{ competition.prize }}</p>
+    </div>
+    <center>
+      <p style="margin:0px;">
+          {{ competition.time_progressed() }} / {{ competition.total_length() }} days
+      </p>
+      <div class="progress" style='width:80%;'>
+        <div class="progress-bar" role="progressbar"
+            style='{{ competition.progressbar_width() }}'></div>
+      </div>
+    </center>
+    <hr class="my-2">
+    <div class='action-bar'>
+      <a class="btn" href='/add_project'>
+          Enter
+      </a>
+    </div>
+  </div>
+</div>
+</center>
+{% endmacro -%}
