@@ -1,9 +1,10 @@
 {% from 'macros/cards/components.html' import render_share_button %}
 
+
 <!-- collaboration -->
-{% macro render_collaborate_button(g.current_user, target_user) -%}
-  {% if g.current_user!=target_user %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ target_user.id }}">
+{% macro render_collaborate_button(user) -%}
+  {% if g.current_user!=user %}
+    <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ user.id }}">
         Collab
     </button>
   {% else %}
@@ -12,6 +13,7 @@
     </button>
   {% endif %}
 {% endmacro -%}
+
 
 <!-- action bar -->
 {% macro render_user_action_bar(user) -%}
