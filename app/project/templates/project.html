@@ -1,7 +1,7 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
 {% from 'macros/cards/project.html' import render_project_action_bar %}
 {% from 'macros/cards/question.html' import render_question_card, render_add_question_card %}
-{% from 'macros/cards/link.html' import render_add_link_card, render_project_link_card %}
+{% from 'macros/cards/link.html' import render_add_link_card, render_project_link_card, render_private_link %}
 
 {% extends "home_base.html" %}
 
@@ -440,12 +440,12 @@
                 </h4>
               </div>
               <br>
-              {{ macros.render_add_link_card('Private Link', "fas fa-link", 'https://developmentwebsite.com', project, 0, 0) }}
+              {{ render_add_link_card('Private Link', "fas fa-link", 'https://developmentwebsite.com', project, 0, 0) }}
               {% for category in range(1,5) %}
-                {{ macros.render_private_link(category, project, is_owner) }}
+                {{ render_private_link(category, project, is_owner) }}
               {% endfor %}
               {% for link in project.get_other_private_links() %}
-                {{ macros.render_project_link_card(link, project, is_owner) }}
+                {{ render_project_link_card(link, project, is_owner) }}
               {% endfor %}
             </div>
           </div>
@@ -454,31 +454,6 @@
       </div>
     </div>
 
-    <!-- modals -->
-    <div style='display:hidden;'>
-      <!-- join/leave modal -->
-      {{ macros.render_join_modal(current_user, project, project_application) }}
-      <!-- collaborate modals -->
-      {% if recommended_tabs != False %}
-        {% for tab in recommended_tabs %}
-          {% for user in tab %}
-            {{ macros.render_collaborate_modal(current_user, user, project) }}
-          {% endfor %}
-        {% endfor %}
-      {% endif %}
-      {% if current_user == project.owner %}
-        <!-- edit modal -->
-        {{ macros.render_edit_project_modal(project, edit_form, {'elapsed':elapsed, 'est':est, 'elapsed_style':elapsed_style}) }}
-        <!-- complete modal -->
-        {{ macros.render_complete_modal(project) }}
-        <!-- open/closed modal -->
-        {{ macros.render_open_modal(project) }}
-        <!-- requires application modal -->
-        {{ macros.render_requires_application_modal(project, edit_application_form) }}
-      {% endif %}
-      <!-- question modals -->
-      {{ macros.render_ask_question_modal(project, current_user) }}
-    </div>
     <!-- /modals -->
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
@@ -506,30 +481,6 @@
         });
 
     });
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-                $(this).toggleClass('active');
-            });
-            if (sessionStorage.openTab) {
-              document.getElementById(sessionStorage.openTab).click();
-            } else {
-              document.getElementById("Activity").click();
-            }
-        });
-
-        $('#user-rec-carousel').on('slid.bs.carousel', function () {
-          var cur = $('#user-rec-carousel div.active').index()
-          sessionStorage.setItem('recSlide', cur);
-          $('#user-count').html(cur);
-        });
-
-        if(sessionStorage.recSlide){
-          $("#user-rec-carousel").carousel(sessionStorage.recSlide*1);
-        }
     </script>
 
     <script>
@@ -702,3 +653,30 @@
 
 
   {% endblock %}
+
+
+  <!-- modals -->
+  <div style='display:hidden;'>
+    <!-- join/leave modal -->
+    {{ macros.render_join_modal(current_user, project, project_application) }}
+    <!-- collaborate modals -->
+    {% if recommended_tabs != False %}
+      {% for tab in recommended_tabs %}
+        {% for user in tab %}
+          {{ macros.render_collaborate_modal(current_user, user, project) }}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+    {% if current_user == project.owner %}
+      <!-- edit modal -->
+      {{ macros.render_edit_project_modal(project, edit_form, {'elapsed':elapsed, 'est':est, 'elapsed_style':elapsed_style}) }}
+      <!-- complete modal -->
+      {{ macros.render_complete_modal(project) }}
+      <!-- open/closed modal -->
+      {{ macros.render_open_modal(project) }}
+      <!-- requires application modal -->
+      {{ macros.render_requires_application_modal(project, edit_application_form) }}
+    {% endif %}
+    <!-- question modals -->
+    {{ macros.render_ask_question_modal(project, current_user) }}
+  </div>
