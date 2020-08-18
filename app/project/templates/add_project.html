@@ -137,7 +137,7 @@
             {% elif elt.type=='SelectMultipleField' %}
               {{ render_multiselect(elt) }}
             {% elif elt.type=='SelectField' %}
-              {{ elt(class='select-clean') }}
+              {{ elt(class='add-select') }}
             {% else %}
               <div class='input-box'>
                 {% if not elt.errors %}

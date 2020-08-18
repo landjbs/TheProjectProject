@@ -204,3 +204,12 @@ a:hover {
   border-bottom: 1px solid black;
   width: 100%;
 }
+
+.select-clean {
+  border:0px;
+  border-bottom: 1px solid black;
+  width:100%;
+  background: transparent;
+  border-radius: 0px;
+  -webkit-appearance:none;
+}

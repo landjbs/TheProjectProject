@@ -86,3 +86,14 @@ textarea {
 .input-control {
   text-align: center;
 }
+
+
+.add-select {
+  border: 0px;
+  border-bottom: 1px solid white;
+  color: white;
+  background: transparent;
+  width:100%;
+  border-radius: 0px;
+  -webkit-appearance:none;
+}
