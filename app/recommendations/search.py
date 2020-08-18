@@ -21,6 +21,6 @@ def text_search(search_text):
     project_results = project_results
     user_results = user_results
     ## return dict of results and analytics
-    return {'project'       :   (project_results.all()      project_count),
+    return {'project'       :   (project_results.all(),     project_count),
             'user'          :   (user_results.all(),        user_count),
             'subject'       :   (subject_results.all(),     subject_count)}
