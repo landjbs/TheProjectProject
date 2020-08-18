@@ -24,7 +24,7 @@
 
 
 <!-- CAROUSEL -->
-{% macro render_carousel(label, id_postfix, card_type, data, interval=4000, icon_type=False, redirect_empty=False) -%}
+{% macro render_carousel(id_postfix, card_type, data, label=False, interval=4000, icon_type=False, redirect_empty=False) -%}
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
@@ -32,14 +32,16 @@
   <!-- HEADER -->
   {% if n==0 and not redirect_empty %}
   {% else %}
-    <h4 class='tabname-big'>
-      {{ label }}
-      {% if icon_type %}
-        <i class='{{ icon_types[icon_type] }}'></i>
-        {{ n }}
-      {% endif %}
-    </h4>
-    <hr class='my-2'>
+    {% if label %}
+      <h4 class='tabname-big'>
+        {{ label }}
+        {% if icon_type %}
+          <i class='{{ icon_types[icon_type] }}'></i>
+          {{ n }}
+        {% endif %}
+      </h4>
+      <hr class='my-2'>
+    {% endif %}
     <!-- BODY -->
     <!-- web requests -->
     {% if not request.MOBILE %}

@@ -31,70 +31,10 @@
 {% endmacro -%}
 
 <!-- CARDS -->
-<!-- project cards -->
-{% macro render_big_project_card(current_user, project, now, calc_days_since) -%}
-<div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body">
-      <div class='float-right info-nums'>
-        {{ project.members.all()|length }} / {{ project.team_size }}
-        <i class='far fa-user-circle'></i>
-        <br>
-        {{ project.stars.all()|length }}
-        <i class="fa fa-star"></i>
-      </div>
-      <div class='card-head'>
-        {{ render_project_name(project, current_user) }}
-        <a href='user={{ project.owner.code }}'>
-          <p class='owner'>
-            {{ project.owner.name }}
-            {% set badge = project.owner.choose_badge('project') %}
-            {% if badge %}
-              {{ render_badge_icon(badge) }}
-            {% endif %}
-          </p>
-        </a>
-      </div>
-      <hr class="my-4">
-      <!-- summary -->
-      <div class='card-text'>
-        <p class='oneliner'>
-          {{ project.oneliner }}
-        </p>
-        <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
-      </div>
-      <div class='card-foot float-left'>
-        <p style="padding-bottom:0px; margin-bottom:0px;">
-          <i class="fa fa-clock-o"></i>
-          {{ calc_days_since(now(), project.posted_on) }} / {{ project.estimated_time }}
-          days
-        </p>
-        <div>
-          {% for subject in project.subjects|reverse %}
-            <a href='/subject={{ subject.code }}'>
-              {% if loop.index>1 %}
-              ,
-              {% endif %}
-              <p class='subject-tag' style='background:{{ subject.color }};'>
-                {{ subject.name }}
-              </p>
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-      {% if current_user.is_authenticated %}
-        <br><br>
-        <hr class="my-4">
-        {{ render_project_action_bar(current_user, project) }}
-      {% endif %}
-    </div>
-  </div>
-</div>
-{%- endmacro %}
 
 
 <!-- project card to be shown to anonymous users -->
-{% macro render_anon_project_card(project, current_user) -%}
+{% macro render_anon_project_card(project, g.current_user) -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
@@ -106,7 +46,7 @@
         <i class="fa fa-star"></i>
       </p>
       <div class='card-head little'>
-        {{ render_project_name(project, current_user) }}
+        {{ render_project_name(project, g.current_user) }}
         <p class='oneliner'>
           {{ project.oneliner }}
         </p>
@@ -178,8 +118,8 @@
 
 
 
-{% macro render_collaborate_button(current_user, target_user) -%}
-  {% if current_user!=target_user %}
+{% macro render_collaborate_button(g.current_user, target_user) -%}
+  {% if g.current_user!=target_user %}
     <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ target_user.id }}">
         Collab
     </button>
@@ -191,9 +131,9 @@
 {% endmacro -%}
 
 
-{% macro render_project_action_bar(current_user, project) -%}
+{% macro render_project_action_bar(g.current_user, project) -%}
 <div class='action-bar'>
-  {% if current_user in project.stars %}
+  {% if g.current_user in project.stars %}
     <a href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}">
       <i class="fa fa-star"></i>
     </a>
@@ -203,14 +143,14 @@
     </a>
   {% endif %}
   &nbsp;
-  {{ render_join_button(current_user, project) }}
+  {{ render_join_button(g.current_user, project) }}
   &nbsp;
   {{ render_project_share_button(project) }}
 </div>
 {% endmacro -%}
 
 <!-- MODALS -->
-{% macro render_join_modal(current_user, project, project_application) -%}
+{% macro render_join_modal(g.current_user, project, project_application) -%}
 <div id="modal_project_{{ project.id }}" class="modal fade" role="dialog" style='z-index:9999;'>
   <div class="modal-dialog">
     <div class="modal-content">
@@ -220,7 +160,7 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-    {% if project in current_user.invitations %}
+    {% if project in g.current_user.invitations %}
       <div class="modal-body">
           You have been invited to join <a href='/project={{ project.code }}'>{{ project.name }}</a>.
           Accept below to join!
@@ -238,7 +178,7 @@
         </a>
 
       </div>
-    {% elif not current_user in project.members %}
+    {% elif not g.current_user in project.members %}
       <form action="{{ url_for('project.join_project', project_id=project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
@@ -258,7 +198,7 @@
       <form action="{{ url_for('project.leave_project', project_id=project.id) }}" method='post'>
           <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
           <div class="modal-body">
-            {% if project.owner==current_user %}
+            {% if project.owner==g.current_user %}
               {% if project.members.all()|length>1 %}
                 <p style='color:red;'>
                   WARNING: To leave {{ project.name }}, you will have to transfer
@@ -610,7 +550,7 @@
 
 <!-- USER MACROS -->
 <!-- USER CARD FOR DISPLAY IN CAROUSEL -->
-{% macro render_user_card(current_user, user, carousel_type='search') -%}
+{% macro render_user_card(g.current_user, user, carousel_type='search') -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
@@ -647,7 +587,7 @@
       </div>
       <br>
       <hr class="my-2">
-      {{ render_user_action_bar(current_user, user) }}
+      {{ render_user_action_bar(g.current_user, user) }}
     </div>
   </div>
 </div>
@@ -875,10 +815,10 @@
 
 
 <!-- USER ACTION BAR FOR RELATIONSHIP ACTIONS -->
-{% macro render_user_action_bar(current_user, target_user) -%}
+{% macro render_user_action_bar(g.current_user, target_user) -%}
 <div class='action-bar'>
   <center>
-    {% if current_user!= target_user %}
+    {% if g.current_user!= target_user %}
       <div class='hoverable'>
         <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         <span class='tooltiptext'>
@@ -896,7 +836,7 @@
       </form>
     {% endif %}
     &nbsp;
-    {{ render_collaborate_button(current_user, target_user) }}
+    {{ render_collaborate_button(g.current_user, target_user) }}
     &nbsp;
     {{ render_user_share_button(target_user) }}
   </center>
@@ -932,7 +872,7 @@
 {% endmacro -%}
 
 <!-- COLLABORATE MODAL FOR EXTENDING INVITATIONS TO USER -->
-{% macro render_collaborate_modal(current_user, target_user, target_project=None) -%}
+{% macro render_collaborate_modal(g.current_user, target_user, target_project=None) -%}
 <div id="modal_user_{{ target_user.id }}" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -943,14 +883,14 @@
         </a>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
-      {% if (current_user.owned.count())>0 %}
+      {% if (g.current_user.owned.count())>0 %}
       <form action="{{ url_for('user.collaborate', target_user_id=target_user.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
           <label for="new_owner">Select project on which to collaborate with {{ target_user.name }}:</label>
           <br>
           <select name="selected_project" id="selected_project" class='select-clean'>
-            {% for project in current_user.owned %}
+            {% for project in g.current_user.owned %}
               {% if (project.complete!=True) and (project.open==True) and (target_user not in project.members) and (target_user not in project.invitations )%}
                 {% if project==target_project %}
                   <option value="{{ project.id }}" selected>{{ project.name }}</option>

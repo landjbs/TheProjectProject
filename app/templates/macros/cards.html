@@ -119,8 +119,8 @@
             </a>
           {% endif %}
           &nbsp;
-          {% if not current_user in project.members %}
-            {% if current_user.has_applied(project) %}
+          {% if not g.current_user in project.members %}
+            {% if g.current_user.has_applied(project) %}
               <button type="button" class="btn" disabled>
                   Pending
               </button>
@@ -132,7 +132,7 @@
               <button type="button" class="btn" disabled>
                 Closed
               </button>
-            {% elif project in current_user.invitations %}
+            {% elif project in g.current_user.invitations %}
               <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
                 Respond
               </button>
@@ -156,7 +156,7 @@
 {%- endmacro %}
 
 
-{% macro render_mid_project_card(current_user, project, now, calc_days_since) -%}
+{% macro render_mid_project_card(project) -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
@@ -168,7 +168,7 @@
         <i class="fa fa-star"></i>
       </p>
       <div class='card-head little'>
-        {{ render_project_name(project, current_user) }}
+        {{ render_project_name(project, g.current_user) }}
         <a href='user={{ project.owner.code }}'>
           <p class='owner'>
             {{ project.owner.name }}
@@ -189,12 +189,12 @@
 
 
 
-{% macro render_small_project_card(current_user, project, now, calc_days_since) -%}
+{% macro render_small_project_card(project) -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
       <div class='float-right'>
-        {% if current_user==project.owner %}
+        {% if g.current_user==project.owner %}
           {% set pending = project.pending.all()|length %}
           {{ pending }}
           {% if pending>0 %}
@@ -208,7 +208,7 @@
         <i class="fa fa-star"></i>
       </div>
       <div class='card-head tiny'>
-        {{ render_project_name(project, current_user) }}
+        {{ render_project_name(project, g.current_user) }}
       </div>
       <!-- summary -->
       <p class='oneliner'>
