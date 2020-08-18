@@ -23,12 +23,18 @@ class base_config(object):
     DB_PASSWORD = os.environ.get('DB_PASSWORD')
     DB_ENDPOINT = os.environ.get('DB_ENDPOINT')
     DB_URL = os.environ.get('DB_URL')
+    print("here")
+    print(f'DB_USER:{DB_USER}')
+    print(f'DB_PASSWORD:{DB_PASSWORD}')
+    print(f'DB_ENDPOINT:{DB_ENDPOINT}')
+    print(f'DB_URL:{DB_URL}')
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://%s:%s@%s/%s' % (
         DB_USER,
         DB_PASSWORD,
         DB_ENDPOINT,
         DB_URL
     )
+    print(f'SQLALCHEMY_DATABASE_URI: {SQLALCHEMY_DATABASE_URI}')
     # SQLALCHEMY SETTINGS
     SQLALCHEMY_POOL_RECYCLE = 3600
     SQLALCHEMY_TRACK_MODIFICATIONS = False
