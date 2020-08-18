@@ -1,5 +1,5 @@
 import re
-import httplib
+from http.client import HTTPConnection
 
 
 # matcher for valid route protocol
@@ -10,11 +10,15 @@ def parsable(url:str):
     ''' Deterimines if url has valid protocol '''
     return True if url_matcher.fullmatch(url) else False
 
-def valid(url:str, timout:int=2):
+def valid(url:str, timeout:int=2):
     ''' Determines if url is valid by requesting head '''
-    c = httplib.HTTPConnection(url, timout=timout)
-    c.request("HEAD", '')
-    return (c.getresponse().status==200)
+    try:
+        c = HTTPConnection(url, timeout=timeout)
+        c.request("HEAD", '')
+        return (c.getresponse().status==200)
+    except Exception as e:
+        print(f'ERROR: {e}')
+        return False
 
 def fix_url(url:str):
     ''' Adds proper route to url. Returns url if fixed else return False '''
