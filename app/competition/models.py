@@ -69,12 +69,21 @@ class Competition(CRUDMixin, db.Model):
 
     ## admin ##
     def select_winners(self, winner_ids):
-        ''' Selects winners for competition '''
+        ''' Selects winners for competition using project id '''
+        assert self.active, 'Cannot select winners for inactive competition.'
+        assert not self.complete, 'Cannot select winners for compelte competition.'
         n_selected = len(winner_ids)
         assert (n_selected==self.n_winners), (f'Invalid winner number '
                                             f'{n_selected}/{self.n_winners}.')
-
-
+        for id in winner_ids:
+            winner = self.submissions.filter_by(project_id=id).first()
+            if not winner:
+                raise ValueError(f'Project with id {id} has not submitted.')
+            winner.winner = True
+        self.active = False
+        self.complete = True
+        self.update()
+        return True
 
 class Submission(db.Model):
     __tablename__ = 'submission'
