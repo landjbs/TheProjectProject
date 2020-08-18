@@ -5,6 +5,7 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email)
 
 from app.forms.base import BaseForm
 from app.forms.validators import Select_Limit_Validator
+from app.link.utils import fix_url
 
 from app.user.models import User
 
@@ -21,7 +22,7 @@ class Apply(BaseForm):
                                    'are allowed. Please reach out if you would '
                                    'like your school to be added.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
-    url = StringField('URL',
+    url = StringField('Link',
                     validators=[Length(0, 254)],
                     description=('Tell us about yourself with a Github or '
                                  'personal website!'),
@@ -63,15 +64,16 @@ class Apply(BaseForm):
             self.email.errors.append('There is already an account registered '
                                      'with that email.')
             error_flag = True
-        # unique url validation
+        # url fixing/mapping to none
         if self.url.data=='':
-            self.url.data = None
-        if self.url.data:
-            user = User.query.filter_by(url=self.url.data).first()
-            if user:
-                self.url.errors.append('There is already an account '
-                                         'registered with that URL.')
+            self.url.data=None
+        else:
+            fixed_url = fix_url(self.url.data)
+            if not fixed_url:
+                self.url.errors = ['Invalid URL.']
                 error_flag = True
+            else:
+                self.url.data = fixed_url
         return (not error_flag)
 
 
