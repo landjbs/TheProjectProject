@@ -1,6 +1,6 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
 {% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
-{% from 'macros/cards/user.html' import render_user_action_bar %}
+{% from 'macros/cards/user.html' import render_user_action_bar, render_edit_user_modal, render_delete_account_modal %}
 
 {% extends "home_base.html" %}
 
@@ -160,7 +160,8 @@
     </div>
 
     <div>
-      {{ render_edit_user_modal }}
+      {{ render_edit_user_modal(user) }}
+      {{ render_delete_account_modal(user) }}
     </div>
 
     <!-- modals -->
