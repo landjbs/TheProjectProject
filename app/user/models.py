@@ -219,11 +219,12 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return True
 
     @classmethod
-    def notify_all_users(cls, text, important=False, redirect=None):
+    def notify_all(cls, text, important=False, redirect=None):
         ''' Notifies all users '''
         note = Notification(text=text, important=important, redirect=redirect)
         for user in cls.query.all():
             user.notify(text=text, important=important, redirect=redirect)
+        return True
 
     def n_unseen(self):
         return self.notifications.filter_by(seen=False).count()

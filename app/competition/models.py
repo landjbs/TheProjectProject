@@ -2,7 +2,7 @@ from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin, generate_code
-
+from app.user.models import User
 
 
 class Competition(CRUDMixin, db.Model):
@@ -40,6 +40,9 @@ class Competition(CRUDMixin, db.Model):
     def __repr__(self):
         return f'<Competition {self.name} by {self.sponsor}>'
 
+    def get_url(self):
+        return f'/competion={self.code}'
+
     @classmethod
     def get_active_competitions(cls):
         return cls.query.filter_by(active=True)
@@ -69,6 +72,11 @@ class Competition(CRUDMixin, db.Model):
     def activate(self):
         assert not self.active, 'Already active.'
         assert not self.complete, 'Already complete.'
+        User.notify_all(
+            text='',
+            important=True,
+            redirect=self.get_url()
+        )
 
 
     def select_winners(self, winner_ids):
