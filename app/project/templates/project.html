@@ -456,6 +456,11 @@
       </div>
     </div>
 
+    <!-- modals -->
+    {{ render_edit_project_modal(project, edit_form) }}
+    {{ render_complete_modal(project) }}
+    {{ render_open_modal(project) }}
+    {{ render_requires_application_modal(project, edit_application_form) }}
     <!-- /modals -->
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->

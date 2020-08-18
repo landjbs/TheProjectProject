@@ -300,7 +300,7 @@
 {%- endmacro %}
 
 
-{% macro render_edit_project_modal(project, edit_form, completion_data) -%}
+{% macro render_edit_project_modal(project, edit_form) -%}
 <div id="edit_modal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -358,9 +358,9 @@
                 <span>
                   Estimated Time:<br>
                   <i class="fa fa-clock-o"></i>
-                  {{ completion_data['elapsed'] }} /
-                  <input type='number' step=1 min='{{ completion_data["elapsed"] }}'
-                      max='{{ completion_data["elapsed"] + edit_form.estimated_time.render_kw["max"] }}'
+                  {{ project.elasped() }} /
+                  <input type='number' step=1 min='{{ project.elasped() }}'
+                      max='{{ project.elasped() + edit_form.estimated_time.render_kw["max"] }}'
                       value="{{ project.estimated_time }}"
                       name='{{ edit_form.estimated_time.name }}'></input>
                 </span>
