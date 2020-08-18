@@ -517,7 +517,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def submit_to_competition(self, competition):
         self.competition = Submission(competition=competition, project=self)
         self.notify_members(text=(f'{self.name} has been submitted to the '
-                                f'competion "{competition.name}".'))
+                                f'competion "{competition.name}"!'))
         self.update()
 
     ## xp and badges ##
