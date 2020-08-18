@@ -22,49 +22,51 @@
 {% endmacro -%}
 
 
-<div class='action-bar'>
-  {% if g.current_user in project.stars %}
-    <a href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}">
-      <i class="fa fa-star"></i>
-    </a>
-  {% else %}
-    <a href="{{ url_for('project.like_action', project_id=project.id, action='like') }}">
-      <i class="fa fa-star-o"></i>
-    </a>
-  {% endif %}
-  &nbsp;
-  {% if not g.current_user in project.members %}
-    {% if g.current_user.has_applied(project) %}
-      <button type="button" class="btn" disabled>
-          Pending
-      </button>
-    {% elif project.complete==True %}
-      <button type="button" class="btn" disabled>
-        Complete
-      </button>
-    {% elif project.open==False %}
-      <button type="button" class="btn" disabled>
-        Closed
-      </button>
-    {% elif project in g.current_user.invitations %}
-      <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-        Respond
-      </button>
+{% macro render_project_action_bar(project) -%}
+  <div class='action-bar'>
+    {% if g.current_user in project.stars %}
+      <a href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}">
+        <i class="fa fa-star"></i>
+      </a>
+    {% else %}
+      <a href="{{ url_for('project.like_action', project_id=project.id, action='like') }}">
+        <i class="fa fa-star-o"></i>
+      </a>
+    {% endif %}
+    &nbsp;
+    {% if not g.current_user in project.members %}
+      {% if g.current_user.has_applied(project) %}
+        <button type="button" class="btn" disabled>
+            Pending
+        </button>
+      {% elif project.complete==True %}
+        <button type="button" class="btn" disabled>
+          Complete
+        </button>
+      {% elif project.open==False %}
+        <button type="button" class="btn" disabled>
+          Closed
+        </button>
+      {% elif project in g.current_user.invitations %}
+        <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+          Respond
+        </button>
+      {% else %}
+        <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+          Join
+        </button>
+      {% endif %}
     {% else %}
       <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-        Join
+          Leave
       </button>
     {% endif %}
-  {% else %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-        Leave
-    </button>
+    &nbsp;
+    {{ render_share_button(project, 'project') }}
+  </div>
   {% endif %}
-  &nbsp;
-  {{ render_share_button(project, 'project') }}
-</div>
-{% endif %}
-</div>
+  </div>
+{% endmacro -%}
 
 
 {% macro render_big_project_card(project) -%}
