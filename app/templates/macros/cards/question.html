@@ -26,7 +26,7 @@
       <br><br>
       {% if project.is_member(g.current_user) %}
         <label for="answer">Answer:</label>
-        <textarea name='answer' class='select-clean'></textarea>
+        <input type='text' name='answer' class='select-clean'></input>
       {% endif %}
       <div class='float-right'>
         <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px; display:inline-block;'>
