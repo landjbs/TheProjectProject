@@ -1,6 +1,5 @@
 {% macro render_competition_card(competition) -%}
-<center>
-<div class="card mb-2" style='max-width:80%;'>
+<div class="card mb-2" style='min-width:60%; max-width:60%;'>
   <div class="card-body">
     <div class='float-right info-nums'>
       {{ competition.projects|length }}
@@ -43,5 +42,4 @@
     </div>
   </div>
 </div>
-</center>
 {% endmacro -%}
