@@ -1,27 +1,34 @@
-{% macro render_add_question_card() -%}
-<div class='card mb-2'>
-  <div class='card-body' data-toggle='modal' data-target='#modal_ask_question' style='color:black; text-align:center;'>
-    <i class="fas fa-question-circle fa-2x"></i>
-    <h5>Add A Question</h5>
-  </div>
-</div>
-
-{% set cover_id = '{fname}_Cover'.format(fname=name) %}
-{% set input_id = '{fname}_Input'.format(fname=name) %}
+{% macro render_add_question_card(project) -%}
+{% set cover_id = 'Question_Cover'.format(fname=name) %}
+{% set input_id = 'Question_Input'.format(fname=name) %}
 <div class='card mb-2'>
   <div class='card-body' id='{{ cover_id }}' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')" style='color:black; text-align:center;'>
     <i class="fas fa-question-circle fa-2x"></i>
-    <h5>Add {{ name }}</h5>
+    <h5>Add A Question</h5>
   </div>
   <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
     <center><i class="fas fa-question-circle" style='display:inline;'></i></center>
-    <form action="{{ url_for('project.add_link', project_id=project.id, public=public, category=category) }}" method='post'>
+    <form action="{{ url_for('project.add_question', project_id=project.id) }}" method='post'>
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      <input type='text' name='link' class='select-clean' placeholder="{{ placeholder }}"></input>
+      <label for="question">Question:</label>
+      <input type="text" name="question" list="question_suggestions" class='select-clean'
+        required>
+      <datalist id="question_suggestions">
+        {% for question in project.suggest_questions() %}
+        <!-- TODO: make first index actually be selected -->
+          {% if loop.index==1 %}
+            <option value='{{ question }}'>
+          {% else %}
+            <option value='{{ question }}'>
+          {% endif %}
+        {% endfor %}
+      </datalist>
+      <br><br>
+      {% if project.is_member(g.current_user) %}
+        <label for="answer">Answer:</label>
+        <textarea name='answer' class='select-clean'></textarea>
+      {% endif %}
       <div class='float-right'>
-        <div class='back-btn task-btn' style='border:0px; background:transparent; display:inline-block;' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')">
-          <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-        </div>
         <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px; display:inline-block;'>
             <i class="fa fa-check-circle" aria-hidden="true"></i>
         </button>
@@ -29,7 +36,6 @@
     </form>
   </div>
 </div>
-
 {% endmacro -%}
 
 

@@ -391,7 +391,7 @@
           <div class='row'>
             <!-- QUESTIONS -->
             <div class='col'>
-              {{ render_add_question_card() }}
+              {{ render_add_question_card(project) }}
               <div class='about-col'>
                 {% for question in project.questions %}
                   {{ render_question_card(question, project) }}
