@@ -84,7 +84,8 @@ class Competition(CRUDMixin, db.Model):
             winning_projects.append(winner) = True
         for winner in winning_projects:
             winner.winner = True
-            
+            winner.notify_members(text=('Congratulations—your project '
+                    f'{winner.name} has won the competition {self.name}!'))
         self.active = False
         self.complete = True
         self.update()
