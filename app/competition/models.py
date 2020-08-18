@@ -70,14 +70,20 @@ class Competition(CRUDMixin, db.Model):
 
     ## admin ##
     def activate(self):
+
         assert not self.active, 'Already active.'
         assert not self.complete, 'Already complete.'
+        assert not (datetime.utcnow() > self.ends_on), 'Invalid enddate.'
+        # make active
+        self.active = True
+        # notify relevant users # TODO: potentially only recommend to certain users in future
         User.notify_all(
             text=(f'{self.name}, a new competition you might like, just went '
-                  'live! Good luck!'),
+                  'live! Click here to join—good luck!'),
             important=True,
             redirect=self.get_url()
         )
+        return True
 
     def select_winners(self, winner_ids):
         ''' Selects winners for competition using project id '''
