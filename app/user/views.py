@@ -164,7 +164,7 @@ def report_user(target_user_id):
             'experienced issues while using our platform and will begin '
             'reviewing your report immediately. If necessary, we may contact '
             'you for more information.')
-        manager.report_user(current_user, target_user, text=text)
+        target_user.report(text=text, reporter=current_user)
     return redirect(request.referrer)
 
 

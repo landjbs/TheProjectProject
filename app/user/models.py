@@ -471,6 +471,13 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         ''' Gets dict '''
         raise RuntimeError('Not yet implemented')
 
+    ## reporting
+    def report(self, text, reporter):
+        self.reports.append(
+            User_Report(reporter=reporter, text=text)
+        )
+        return True
+
 
 class Anonymous(AnonymousUserMixin):
     ''' Anonymous user '''
