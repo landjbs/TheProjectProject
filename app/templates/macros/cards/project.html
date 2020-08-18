@@ -3,22 +3,22 @@
 
 <!-- PROJECTS -->
 {% macro render_project_name(project, user) -%}
-{% if user.is_authenticated %}
-  <a class='project-name' href='project={{ project.code }}'>
-{% else %}
-  <a class='project-name' href='/login'>
-{% endif %}
-  <h5>
-    {{ project.name }}
-    {% if project.complete %}
-      <i class="fa fa-check-circle" aria-hidden="true" style='color:#00FF5D;'></i>
-    {% elif not project.open %}
-      <i class="fa fa-lock" aria-hidden="true" style='color:#F4D510;'></i>
-    {% elif project.recently_active() %}
-      <i class="fa fa-circle" aria-hidden="true" style='color:#00FF5D;'></i>
-    {% endif %}
-  </h5>
-</a>
+  {% if user.is_authenticated %}
+    <a class='project-name' href='project={{ project.code }}'>
+  {% else %}
+    <a class='project-name' href='/login'>
+  {% endif %}
+    <h5>
+      {{ project.name }}
+      {% if project.complete %}
+        <i class="fa fa-check-circle" aria-hidden="true" style='color:#00FF5D;'></i>
+      {% elif not project.open %}
+        <i class="fa fa-lock" aria-hidden="true" style='color:#F4D510;'></i>
+      {% elif project.recently_active() %}
+        <i class="fa fa-circle" aria-hidden="true" style='color:#00FF5D;'></i>
+      {% endif %}
+    </h5>
+  </a>
 {% endmacro -%}
 
 
@@ -63,8 +63,6 @@
     {% endif %}
     &nbsp;
     {{ render_share_button(project, 'project') }}
-  </div>
-  {% endif %}
   </div>
 {% endmacro -%}
 
@@ -123,6 +121,8 @@
         <br><br>
         <hr class="my-4">
         {{ render_project_action_bar(project) }}
+      {% endif %}
+    </div>
   </div>
 </div>
 {%- endmacro %}
