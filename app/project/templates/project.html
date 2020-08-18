@@ -474,53 +474,13 @@
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
-    <script>
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-            $(this).toggleClass('active');
-        });
-        if (sessionStorage.openTab) {
-          document.getElementById(sessionStorage.openTab).click();
-        } else {
-          document.getElementById("Activity").click();
-        }
-    });
-
-    $(document).ready(function () {
-        $("#sidebar").mCustomScrollbar({
-             theme: "minimal"
-        });
-        $('#sidebarCollapse').on('click', function () {
-            // open or close navbar
-            $('#sidebar').toggleClass('active');
-            // close dropdowns
-            $('.collapse.in').toggleClass('in');
-            // and also adjust aria-expanded attributes we use for the open/closed arrows
-            // in our CSS
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-    });
-    </script>
+    <!-- Custom JS -->
+    <script src="js/tabs.js"></script>
 
     <script>
-      // if there was a tab open before refresh, click else open default
-      function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-          tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-          tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-        sessionStorage.openTab = tabName + '_Button';
-      }
+    $(document).ready(function () {
+    });
     </script>
-
 
     <script>
     Chart.defaults.global.legend.display = false;
