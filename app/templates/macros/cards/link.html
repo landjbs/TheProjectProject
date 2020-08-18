@@ -1,0 +1,25 @@
+{% macro render_add_link_card(name, icon, placeholder, project, public, category=0) -%}
+  {% set cover_id = '{fname}_Cover'.format(fname=name) %}
+  {% set input_id = '{fname}_Input'.format(fname=name) %}
+  <div class='card mb-2'>
+    <div class='card-body' id='{{ cover_id }}' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')" style='color:black; text-align:center;'>
+      <i class='{{ icon }} fa-2x'></i>
+      <h5>Add {{ name }}</h5>
+    </div>
+    <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
+      <center><i class="{{ icon }}" style='display:inline;'></i></center>
+      <form action="{{ url_for('project.add_link', project_id=project.id, public=public, category=category) }}" method='post'>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <input type='text' name='link' class='select-clean' placeholder="{{ placeholder }}"></input>
+        <div class='float-right'>
+          <div class='back-btn task-btn' style='border:0px; background:transparent; display:inline-block;' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+          </div>
+          <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px; display:inline-block;'>
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endmacro -%}

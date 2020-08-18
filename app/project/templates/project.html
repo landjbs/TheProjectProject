@@ -1,6 +1,7 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
 {% from 'macros/cards/project.html' import render_project_action_bar %}
 {% from 'macros/cards/question.html' import render_question_card %}
+{% from 'macros/cards/link.html' import render_add_link_card %}
 
 {% extends "home_base.html" %}
 
@@ -391,14 +392,14 @@
               {{ render_add_question_card() }}
               <div class='about-col'>
                 {% for question in project.questions %}
-                  {{ macros.render_question_card(question, project, current_user) }}
+                  {{ render_question_card(question, project) }}
                 {% endfor %}
               </div>
             </div>
             <!-- LINKS -->
             <div class='col'>
               {% if project.is_member(current_user) %}
-                {{ macros.render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, 1, 0) }}
+                {{ render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, 1, 0) }}
               {% endif %}
               <div class='about-col'>
                 {% for link in project.public_links() %}
