@@ -149,7 +149,7 @@ def delete_user():
 ## user to user interactions ##
 @user.route('/report_user/<int:target_user_id>', methods=['POST'])
 @login_required
-@limiter.limit('2 per minute')
+# @limiter.limit('5/minute')
 def report_user(target_user_id):
     target_user = User.query.get_or_404(int(target_user_id))
     text = request.form.get('report_text')

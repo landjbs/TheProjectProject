@@ -476,6 +476,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.reports.append(
             User_Report(reporter=reporter, text=text)
         )
+        self.update()
         return True
 
 
