@@ -66,7 +66,7 @@ def get_recommended_projects(user):
     results = (invited + results)
     results = results[:30]
     if len(results)==0:
-        results = user.projects
+        results = user.projects.all()
     return results
 
 

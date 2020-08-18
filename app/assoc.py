@@ -53,9 +53,3 @@ project_rejections = db.Table('project_rejections', db.Model.metadata,
 badge_to_perk = db.Table('badge_to_perk', db.Model.metadata,
             db.Column('badge_id', db.Integer, db.ForeignKey('badge.id')),
             db.Column('perk_id', db.Integer, db.ForeignKey('badge_perk.id')))
-
-
-# competition to project
-# competition_to_project = db.Table('competition_to_project', db.Model.metadata,
-#     db.Column('competition_id', db.Integer, db.ForeignKey('competition.id')),
-#     db.Column('project_id', db.Integer, db.ForeignKey('project.id')))

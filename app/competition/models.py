@@ -28,8 +28,7 @@ class Competition(CRUDMixin, db.Model):
                             back_populates='competition',
                             lazy='dynamic',
                             cascade='all, delete, delete-orphan',
-                            order_by='desc(Submission.timestamp) if True else Submission.timestamp')
-                            # TODO: verify that this order_by works
+                            order_by='desc(Submission.timestamp)')
     ## administrative ##
     active = db.Column(db.Boolean, nullable=False, default=True)
     complete = db.Column(db.Boolean, nullable=False, default=False)
@@ -70,7 +69,7 @@ class Competition(CRUDMixin, db.Model):
     def activate(self):
         assert not self.active, 'Already active.'
         assert not self.complete, 'Already complete.'
-        
+
 
     def select_winners(self, winner_ids):
         ''' Selects winners for competition using project id '''
