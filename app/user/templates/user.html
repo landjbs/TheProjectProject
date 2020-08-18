@@ -237,29 +237,6 @@
     {% endif %}
   </script>
 
-  <!-- log tab locations -->
-  <script>
-  $('#owned-carousel').on('slid.bs.carousel', function () {
-      var cur = $('#owned-carousel div.active').index()
-      sessionStorage.setItem('ownedSlide', cur);
-      $('#owned-count').html(cur);
-    });
-
-  $('#member-carousel').on('slid.bs.carousel', function () {
-      var cur = $('#member-carousel div.active').index()
-      sessionStorage.setItem('memberSlide', cur);
-      $('#member-count').html(cur);
-    });
-
-  if(sessionStorage.ownedSlide){
-      $("#owned-carousel").carousel(sessionStorage.ownedSlide*1);
-    }
-
-  if(sessionStorage.memberSlide){
-      $("#member-carousel").carousel(sessionStorage.memberSlide*1);
-    }
-  </script>
-
   {% if show_edit_modal %}
   <script>
     $(document).ready(function(){
