@@ -86,8 +86,8 @@ class Competition(CRUDMixin, db.Model):
             winner.winner = True
             winner.notify_members(text=('Congratulations—your project '
                     f'{winner.name} has won the competition {self.name}! '
-                    'We will be in touch shortly about claiming your reward. '
-                    'Until then, '))
+                    'We were really impressed by your work and will be in '
+                    'touch shortly about claiming your reward!'))
         self.active = False
         self.complete = True
         self.update()
