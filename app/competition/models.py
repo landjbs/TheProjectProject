@@ -70,7 +70,8 @@ class Submission(db.Model):
     competition_id = db.Column(db.Integer, db.ForeignKey('competition.id'), primary_key=True)
     competition = relationship('Competition', back_populates='submissions')
     # project
-    project_id = db.Column(db.)
+    project_id = db.Column(db.Integer, db.ForeignKey('project.id'))
+    project = relationship('Project', back_populates='competition')
     ## post data ##
     # post time
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
@@ -78,4 +79,5 @@ class Submission(db.Model):
     winner = db.Column(db.Boolean, nullable=True)
 
     def __repr__(self):
-        return f'<Submission competition={self.competition} project={self.project}>'
+        return (f'<Submission competition={self.competition.name} '
+                f'project={self.project.name}>')

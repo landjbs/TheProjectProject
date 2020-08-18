@@ -9,6 +9,7 @@ from app.user.models import User
 from app.project.models import Project
 from app.subject.models import Subject
 from app.badge.models import Badge, User_Badge
+from app.competition.models import Competition
 
 from app.subject.create_subjects import create_subjects
 from app.badge.create_badges import create_badges
@@ -132,6 +133,10 @@ def populate_db(num_users, num_projects):
         )
     for project in tqdm(projects, desc='Adding Projects'):
         db.session.add(project)
+    # fake competitions
+    for _ in trange(num_competitions, desc='Populating Competitions'):
+
+
     db.session.commit()
 
 

@@ -79,9 +79,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     # buzz
     buzz = db.Column(db.Integer, nullable=False, default=0)
     # competition
-    competition = relationship('Competition',
-                               secondary='competition_to_project',
-                               back_populates='projects')
+    competition = relationship('Submission', uselist=False, back_populates='project')
     # comments
     comments = relationship('Comment', back_populates='project', lazy='dynamic')
     # tasks
@@ -95,7 +93,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
 
     def __init__(self, name, oneliner, summary, url, open, subjects,
                 requires_application, application_question, estimated_time,
-                team_size, complete, owner, competition):
+                team_size, complete, owner, competition=None):
         self.name = str(name)
         self.code = generate_code(name, Project)
         self.oneliner = str(oneliner)
