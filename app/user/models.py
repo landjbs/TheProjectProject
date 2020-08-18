@@ -303,6 +303,11 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             return (message, 'error')
         self.invitations.remove(project)
         self.add_rejection(project)
+        self.notify(
+            text=(f'The owner of {project.name} has withdrawn the invitation'
+                "to collaborate. We promise it's nothing personal! If you have "
+                'any questions or concerns, please contact us.')
+        )
         self.update()
         message = ('You have withdrawn the offer to collaborate on '
                    f'{project.name} with {self.name}.')
@@ -343,6 +348,10 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         # if user merits start of badge or has already started
         if (progress>0):
             if not user_badge:
+                self.notify(
+                    text=f'You have started progress on the {badge_name} badge!',
+                    redirect='/perks'
+                )
                 user_badge = User_Badge(badge)
                 self.badges.append(user_badge)
             user_badge.update_progress()

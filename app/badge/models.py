@@ -37,7 +37,6 @@ class Badge(CRUDMixin, db.Model):
         for perk_text in perks:
             self.add_perk(perk_text)
 
-
     def __repr__(self):
         return f'<Badge {self.name}>'
 
