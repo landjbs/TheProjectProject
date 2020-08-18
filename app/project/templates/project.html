@@ -371,7 +371,14 @@
             )
           }}
           <!-- invited members -->
-
+          {{
+            render_carousel(
+              label='Invitations',
+              card_type='user',
+              icon_type='sent',
+              data=invitations
+            )
+          }}
 
 
           <!-- pending members -->
