@@ -92,8 +92,9 @@ class Add_Project(BaseForm):
         else:
             fixed_url = fix_url(self.url.data)
             if not fixed_url:
-                self.url.errors = 
-
+                self.url.errors = ['Invalid URL.']
+            else:
+                self.url.data = fixed_url
         return (not error_flag)
 
 

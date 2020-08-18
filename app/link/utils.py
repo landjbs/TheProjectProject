@@ -1,4 +1,4 @@
-import url
+import re
 
 # matcher for valid route protocol
 url_string = r'https://\S+|http://\S+'
