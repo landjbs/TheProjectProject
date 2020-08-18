@@ -1,4 +1,4 @@
 virt
 *.rdb
 *.db
-secrets.py
+*.env
