@@ -550,48 +550,6 @@
 
 <!-- USER MACROS -->
 <!-- USER CARD FOR DISPLAY IN CAROUSEL -->
-{% macro render_user_card(g.current_user, user, carousel_type='search') -%}
-<div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body">
-      <div class='card-head tiny'>
-        <a class='project-name' href='user={{ user.code }}'>
-          <h5>
-            {{ user.name }}
-            {% set badge = user.choose_badge(carousel_type) %}
-            {% if badge %}
-              {{ render_badge_icon(badge) }}
-            {% endif %}
-            {% if user.recently_active() %}
-              <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
-            {% endif %}
-          </h5>
-        </a>
-      </div>
-      <div class='card-oneline' style=''>
-        <p class='oneliner'>
-          {{ user.about }}
-        </p>
-      </div>
-      <div class='card-foot float-left'>
-        {% for s in user.subjects[:5] %}
-          <a href='/subject={{ s.subject.code }}'>
-            {% if loop.index>1 %}
-            ,
-            {% endif %}
-            <p class='subject-tag' style='background:{{ s.subject.color }};'>
-              {{ s.subject.name }}
-            </p>
-          </a>
-        {% endfor %}
-      </div>
-      <br>
-      <hr class="my-2">
-      {{ render_user_action_bar(g.current_user, user) }}
-    </div>
-  </div>
-</div>
-{% endmacro -%}
 
 
 {% macro render_add_link_card(name, icon, placeholder, project, public, category=0) -%}
@@ -816,31 +774,7 @@
 
 <!-- USER ACTION BAR FOR RELATIONSHIP ACTIONS -->
 {% macro render_user_action_bar(g.current_user, target_user) -%}
-<div class='action-bar'>
-  <center>
-    {% if g.current_user!= target_user %}
-      <div class='hoverable'>
-        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-        <span class='tooltiptext'>
-          <a data-toggle='modal' data-target='#report_modal_{{ target_user.id }}'>
-            Report User
-          </a>
-        </span>
-      </div>
-    {% else %}
-      <form action="{{ url_for('user.flash_encouragement') }}" style='display:inline;' method='post'>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-        <button style='background:transparent; color: #F82B91; border:0;'>
-          <i class="fa fa-heart" aria-hidden="true"></i>
-        </button>
-      </form>
-    {% endif %}
-    &nbsp;
-    {{ render_collaborate_button(g.current_user, target_user) }}
-    &nbsp;
-    {{ render_user_share_button(target_user) }}
-  </center>
-</div>
+
 {% endmacro -%}
 
 <!-- SHARE BUTTON FOR USER PAGE -->
