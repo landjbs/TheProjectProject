@@ -23,23 +23,3 @@ def subject_page(subject_name):
                            projects=projects,
                            users=users,
                            subject=subject)
-
-
-def subject_page(subject_name):
-    ''' Mobile optimized route for subject page '''
-    subject = Subject.query.filter_by(code=subject_name).first_or_404()
-    # projects
-    subject_projects = Project.query.filter(Project.subjects.contains(subject))
-    project_count = subject_projects.count()
-    # users
-    user_count = len(subject.users)
-    subject_users = [s.user for s in subject.users[:30]]
-    # format result data
-    results = {'project'    :   (list(subject_projects), project_count),
-               'user'       :   (list(subject_users), user_count)}
-    # form
-    project_application = Project_Application_Form()
-    return render_template('subject_mobile.html',
-                        results=results,
-                        subject=subject,
-                        user_results=subject_users)
