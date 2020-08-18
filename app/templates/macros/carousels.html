@@ -3,7 +3,11 @@
   with context %}
 {% from 'macros/cards/user.html' import render_user_card with context %}
 {% from 'macros/cards/competition.html' import render_competition_card with context %}
-
+{%
+  from 'macros/cards/badge.html' import
+    render_user_badge_card, render_badge_card
+    with context
+%}
 
 <!-- CACHE RENDER CARD FUNCTIONS -->
 {%
