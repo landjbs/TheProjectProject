@@ -34,27 +34,3 @@
   </div>
 </div>
 {% endmacro -%}
-
-
-<!-- subject cards -->
-
-
-{% macro render_user_subject(user_subject) -%}
-{% set subject = user_subject.subject %}
-<div class="col-md-4">
-  <a class='project-name' href='subject={{ subject.code }}'>
-    <div class="card mb-2">
-      <div class="card-body"
-      style='background: {{ subject.color }}'>
-        <p class="float-right" style='color:white;'>
-          {{ user_subject.number  }}
-          <i class='fa fa-flask'></i>
-        </p>
-        <div class='card-head tiny'>
-          <h5 style='color:white;'>{{ subject.name }}</h5>
-        </div>
-      </div>
-    </div>
-  </a>
-</div>
-{% endmacro -%}
