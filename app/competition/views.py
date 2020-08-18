@@ -12,4 +12,5 @@ from ..competition import competition
 @login_required
 def competition_page(code):
     competition = Competition.query.filter_by(code=code).first_or_404()
+    submissions = [s.project for s in Competition.submissions]
     return render_template('competition.html', competition=competition)
