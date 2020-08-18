@@ -21,10 +21,8 @@
 {% endmacro -%}
 
 
-{% macro render_project_share_button(project) -%}
-  <!-- TODO: FIX BASE URL SO PROJECT.CODE IS EVAL -->
-  {% set base_url = "http://theprojectproject.io/project=" %}
-  {% set base_url =  base_url + project.code %}
+{% macro render_share_button(obj, type) -%}
+  {% set base_url = "http://theprojectproject.io/{type}={code}".format(type=type, code=obj.code) %}
   <div class='hoverable'>
     <i class="fa fa-share-alt" aria-hidden="false"></i>
     <span class='tooltiptext'>
@@ -47,7 +45,7 @@
       </a> -->
       <!-- email -->
       <a class="email-share-button"
-          href="mailto:?subject={{ project.name }} on TheProjectProject&body=Check out {{ project.name }} on TheProjectProject:%0D%0A{{ base_url }}">
+          href="mailto:?subject={{ obj.name }} on TheProjectProject&body=Check out {{ obj.name }} on TheProjectProject:%0D%0A{{ base_url }}">
           <i class="fa fa-envelope" aria-hidden="true"></i>
       </a>
     </span>
@@ -147,7 +145,7 @@
             </button>
           {% endif %}
           &nbsp;
-          {{ render_project_share_button(project) }}
+          {{ render_share_button(project, 'project') }}
         </div>
       {% endif %}
     </div>
