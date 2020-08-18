@@ -16,13 +16,26 @@
     <button class="tablinks" onclick="openTab(event, 'Users')">Users</button>
   </div>
 
+  <!-- projects -->
+  {{
+    render_carousel(
+      label='Projects',
+      id_postfix='projects',
+      card_type='project-big',
+      data=projects,
+      icon_type='project'
+    )
+  }}
+  <!-- users -->
+  {{
+    render_carousel(
+      label='Users',
+      id_postfix='users',
+      card_type='user',
+      data=users,
+      icon_type='user'
+    )
+  }}
 
 </div>
-
-<div>
-  {% for project in recommended_projects %}
-    {{ macros.render_join_modal(current_user, project, project_application) }}
-  {% endfor %}
-</div>
-
 {% endblock %}
