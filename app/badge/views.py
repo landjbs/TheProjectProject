@@ -16,7 +16,7 @@ from ..badge import badge
 @limiter.limit('')
 def perk_page():
     # active competitions
-    competitions = list(Competition.get_active_competitions().all())
+    competitions = list(Competition.get_active_competitions())
     # update badges
     current_user.update_badges()
     # all badges currently in progress
