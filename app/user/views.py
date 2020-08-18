@@ -68,9 +68,8 @@ def user_page(code):
                             user=user,
                             task_data=task_data,
                             subject_data=subject_data,
-                            owned_tabs=owned_tabs,
-                            member_tabs=member_tabs,
-                            project_application=project_application,
+                            owned=owned,
+                            member=member,
                             edit_form=edit_form,
                             show_edit_modal=show_edit_modal)
 
