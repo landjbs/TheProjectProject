@@ -18,8 +18,8 @@ def text_search(search_text):
     user_count = user_results.count()
     subject_count = subject_results.count()
     ## limits ##
-    project_results = project_results
-    user_results = user_results
+    project_results = project_results.limit(30)
+    user_results = user_results.limit(30)
     ## return dict of results and analytics
     return {'project'       :   (project_results.all(),     project_count),
             'user'          :   (user_results.all(),        user_count),

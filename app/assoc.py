@@ -56,6 +56,6 @@ badge_to_perk = db.Table('badge_to_perk', db.Model.metadata,
 
 
 # competition to project
-competition_to_project = db.Table('competition_to_project', db.Model.metadata,
-    db.Column('competition_id', db.Integer, db.ForeignKey('competition.id')),
-    db.Column('project_id', db.Integer, db.ForeignKey('project.id')))
+# competition_to_project = db.Table('competition_to_project', db.Model.metadata,
+#     db.Column('competition_id', db.Integer, db.ForeignKey('competition.id')),
+#     db.Column('project_id', db.Integer, db.ForeignKey('project.id')))
