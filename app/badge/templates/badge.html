@@ -11,9 +11,17 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-1 main-box'>
+<div class='container my-1 default-box'>
   <!-- competitions -->
-
+  {{
+    render_carousel(
+      label='Competitions',
+      id_postfix='competitions',
+      card_type='competition',
+      data=competitions,
+      interval=5000
+    )
+  }}
 
 
   {% if ((active_competitions.count()) == 1) %}
