@@ -20,7 +20,7 @@ def perk_page():
     # update badges
     current_user.update_badges()
     # all badges currently in progress
-    my_badges = list(current_user.badges)
+    my_badges = current_user.badges.all()
     # all badges
     other_badges = list(Badge.query.all())
     return render_template('badge.html',

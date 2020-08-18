@@ -22,7 +22,16 @@
       interval=5000
     )
   }}
-  
+  <!-- badges in progress -->
+  {% set badge_label = 'My Badges' if not request.MOBILE else 'Badges' %}
+  {{
+    render_carousel(
+      label=badge_label,
+      id_postfix='my',
+      card_type='user_badge',
+      data=my_badges
+    )
+  }}
   <!-- other badges -->
   {% set badge_label = 'Badges' if not request.MOBILE else False %}
   {{
