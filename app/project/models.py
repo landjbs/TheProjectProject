@@ -122,7 +122,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             self.submit_to_competition(competition)
         ### choose questions and add them to project ###
         for question in choose_init_questions(self):
-            self.add_question(question=question)
+            self.add_question(question=question, notify=False)
 
 
     def __repr__(self):
@@ -356,7 +356,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         if action=='complete':
             if not task.complete:
                 task.mark_complete(user)
-                self.notify_members(text=f'{user.name} completed the task, "{task.text}".')
+                self.notify_members(
+                    text=f'{user.name} completed the task, "{task.text}" for {self.name}.'
+                )
             else:
                 task.add_worker(user)
         elif action=='back':
@@ -376,7 +378,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         ''' Adds comment to project '''
         self.comments.append(Comment(text=text, author=author))
         self.update()
-        self.notify_members(text=f'{author.name} commented "{text}".')
+        self.notify_members(
+            text=f'{author.name} commented "{text}" on {self.name}.'
+        )
         return True
 
     def delete_comment(self, comment_id, user):
@@ -394,8 +398,12 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         ''' Generates list of suggested questions based on project stats '''
         return suggest_questions(self)
 
-    def add_question(self, question, answer=None):
+    def add_question(self, question, answer=None, notify=True):
         self.questions.append(Question(question=question, answer=answer))
+        if notify:
+            self.notify_members(
+                text=f'Someone asked a new question on {self.name}!'
+            )
         self.update()
         return True
 
