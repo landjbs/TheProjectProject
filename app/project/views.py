@@ -161,14 +161,13 @@ def project_page(project_code):
                             members=members,
                             applications=applications,
                             invitations=invitations,
+                            recommended=recommended,
                             comment_form=comment_form,
-                            project_application=project_application,
                             task_form=task_form,
                             activity_data=activity_data,
                             authored=authored,
                             completed=completed,
                             project_subjects=project_subjects,
-                            recommended=recommended,
                             edit_form=edit_form,
                             edit_application_form=edit_application_form,
                             show_edit_modal=show_edit_modal)
@@ -186,7 +185,6 @@ def project_page(project_code):
     # forms
     comment_form = Comment_Form()
     task_form = Task_Form()
-    project_application = Project_Application_Form()
     # editing
     recommended_members = False
     edit_form = False
