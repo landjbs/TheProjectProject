@@ -51,6 +51,7 @@
         <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
           Respond
         </button>
+        {{ render_join_modal(project) }}
       {% else %}
         <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
           Join
@@ -61,6 +62,7 @@
       <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
           Leave
       </button>
+      {{ render_join_modal(project) }}
     {% endif %}
     &nbsp;
     {{ render_share_button(project, 'project') }}
