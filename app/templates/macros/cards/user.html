@@ -8,6 +8,7 @@
     <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ user.id }}">
         Collab
     </button>
+    {{ render_collaborate_modal(user) }}
   {% else %}
     <button type="button" class="btn" disabled>
         You!
@@ -93,7 +94,7 @@
 
 <!-- MODALS -->
 {% macro render_collaborate_modal(user, target_project=None) -%}
-{% set modal_id = "modal_project_{user_id}".format(user_id=user.id) %}
+{% set modal_id = "modal_user_{user_id}".format(user_id=user.id) %}
 <div id="{{ modal_id }}" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -105,7 +106,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       {% if (g.current_user.owned.count())>0 %}
-      <form action="{{ url_for('user.collaborate', user_id=user.id) }}" method='post'>
+      <form action="{{ url_for('user.collaborate', target_user_id=user.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="modal-body">
           <label for="new_owner">Select project on which to collaborate with {{ user.name }}:</label>
@@ -148,4 +149,119 @@
 <script>
   $('#{{ modal_id }}').appendTo('body');
 </script>
+{% endmacro -%}
+
+
+
+<!-- MODAL FOR EDITING USER ACCOUNT -->
+{% macro render_edit_user_modal(user, edit_form) -%}
+<div id="edit_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Edit Your Account</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form id='editForm' method='post'>
+        <div class="modal-body">
+          <!-- token -->
+          {{ edit_form.csrf_token }}
+          <!-- ABOUT -->
+          <center>
+            <h6 style='text-decoration:underline;'>About</h6>
+          </center>
+          <!-- name -->
+          {{ edit_form.name.label }}:<br>
+          {{ edit_form.name(class='edit-input', value=user.name) }}
+          {% if edit_form.name.errors %}
+            <p class='warning'>{{ edit_form.name.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-2'><br>
+          <!-- user -->
+          {{ edit_form.url.label }}:<br>
+          {{ edit_form.url(class='edit-input', value=user.url) }}
+          {% if edit_form.url.errors %}
+            <p class='warning'>{{ edit_form.url.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-2'><br>
+          <!-- about -->
+          {{ edit_form.about.label }}:<br>
+          {{ edit_form.about(class='edit-input', value=user.about) }}
+          {% if edit_form.about.errors %}
+            <p class='warning'>{{ edit_form.about.errors[0] }}</p>
+          {% endif %}
+          <hr class='my-4'>
+          <!-- PASSWORD -->
+          <center>
+            <h6 style='text-decoration:underline;'>Change Password</h6>
+          </center>
+          {% for password_field in [edit_form.password, edit_form.confirm] %}
+            {{ password_field.label }}:<br>
+            {{ password_field(class='edit-input') }}
+            {% if password_field.errors %}
+              <p class='warning'>{{ password_field.errors[0] }}</p>
+            {% endif %}
+            {% if loop.index==1 %}
+              <hr class='my-2'><br>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="modal-footer row m-3">
+          <button type='button' data-toggle='modal' data-target='#delete_account_modal' class='btn delete-btn col float-left'>
+            Delete Account
+          </button>
+          <button class='btn col'>Change</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+<!-- MODAL FOR DELETING USER ACCOUNT -->
+{% macro render_delete_account_modal(user) -%}
+<div id="delete_account_modal" class="modal fade" role="dialog" style='z-index:9999;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Delete Your Account</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('user.delete_user') }}" method='post'>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="modal-body">
+          <p style='color: red;'>
+            WARNING: You are trying to delete your account. THIS CANNOT BE
+            UNDONE (and also it will make us very sad, but that's okay).
+          </p>
+          <p>
+            You will need to choose a new owner for all of your shared projects.
+            Your solo projects will be permanently deleted.
+          </p>
+          {% for project in user.owned %}
+            {% if project.members.all()|length > 1 %}
+            <label for="new_owner">Select new owner for {{ project.name }}:</label>
+            <br>
+            <select name="new_owner_{{ project.id }}"
+              id="new_owner_{{ project.id }}" class='select-clean'>
+              {% for member in project.members %}
+                {% if not member==project.owner %}
+                  <option value="{{ member.id }}">{{ member.name }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+            <br><br>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="modal-footer">
+          <button class='btn delete-btn'>Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 {% endmacro -%}
