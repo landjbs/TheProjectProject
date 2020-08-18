@@ -11,7 +11,9 @@ from .models import Badge
 from ..badge import badge
 
 
-def badge_page():
+@badge.route('/perks', methods=['GET'])
+@login_required()
+def perk_page():
     # active competitions
     competitions = Competition.get_active_competitions()
     # update badges
