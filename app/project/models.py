@@ -121,7 +121,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             self.add_link(url=url, public=True)
         ### if competition, add it to project ##
         if competition:
-            self.competition = competition
+            self.submit_to_competition(competition)
         ### choose questions and add them to project ###
         for question in choose_init_questions(self):
             self.add_question(question=question)
