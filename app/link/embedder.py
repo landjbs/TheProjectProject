@@ -11,7 +11,7 @@ def parsable(url:str):
     ''' Deterimines if url has valid protocol '''
     return True if url_matcher.fullmatch(url) else False
 
-def fix_url(url:str, root:str):
+def fix_url(url:str):
     ''' Adds proper route to url '''
     if not parsable(url):
         if url.startswith('http'):
@@ -19,7 +19,7 @@ def fix_url(url:str, root:str):
         elif url.startswith('www'):
             url = f'https://{url}'
         else:
-            return False
+            url = f'https://{url}'
     return url
 ####################################
 
