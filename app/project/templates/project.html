@@ -355,32 +355,34 @@
               data=members
             )
           }}
-          <!-- pending members -->
-          {{
-            render_carousel(
-              label='Applications',
-              card_type='applicaiton',
-              icon_type='notifcation',
-              data=applicaitons
-            )
-          }}
-          <!-- recommended members -->
-          {{
-            render_carousel(
-              label='Recommended',
-              card_type='user',
-              data=recommended
-            )
-          }}
-          <!-- invited members -->
-          {{
-            render_carousel(
-              label='Invitations',
-              card_type='user',
-              icon_type='sent',
-              data=invitations
-            )
-          }}
+          {% if is_owner %}
+            <!-- pending members -->
+            {{
+              render_carousel(
+                label='Applications',
+                card_type='applicaiton',
+                icon_type='notifcation',
+                data=applicaitons
+              )
+            }}
+            <!-- recommended members -->
+            {{
+              render_carousel(
+                label='Recommended',
+                card_type='user',
+                data=recommended
+              )
+            }}
+            <!-- invited members -->
+            {{
+              render_carousel(
+                label='Invitations',
+                card_type='user',
+                icon_type='sent',
+                data=invitations
+              )
+            }}
+          {% endif %}
 
         </div>
 
