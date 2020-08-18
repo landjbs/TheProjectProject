@@ -11,6 +11,8 @@ from .models import Subject
 from ..subject import subject
 
 
+@subject.route('/subject=<subject_name>')
+@login_required
 def subject_page(subject_name):
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
     # projects
@@ -23,9 +25,6 @@ def subject_page(subject_name):
                            subject=subject)
 
 
-@subject.route('/subject=<subject_name>')
-@login_required
-@mobilized(subject_page)
 def subject_page(subject_name):
     ''' Mobile optimized route for subject page '''
     subject = Subject.query.filter_by(code=subject_name).first_or_404()
