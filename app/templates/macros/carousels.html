@@ -31,7 +31,7 @@
 {%
   set icon_types = dict([
     ('project',           'fa fa-circle'),
-    ('member-project',    'fa-cirlce-o'),
+    ('project-member',    'fa fa-circle-o'),
     ('user',              'fa fa-user-circle'),
     ('subject',           'fa fa-flask'),
     ('notification',      'fa fa-bell'),
@@ -73,13 +73,19 @@
       <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
         <div class='carousel-inner' role='listbox'>
           {% for tab in tabs %}
-            <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
-              <div class='row'>
-                {% for elt in tab %}
-                  {{ render_fn(elt) }}
-                {% endfor %}
+            {% if tab|length > 1 %}
+              <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
+                <div class='row'>
+                  {% for elt in tab %}
+                    {{ render_fn(elt) }}
+                  {% endfor %}
+                </div>
               </div>
-            </div>
+            {% else %}
+              <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
+                {{ render_fn(tab[0]) }}
+              </div>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
