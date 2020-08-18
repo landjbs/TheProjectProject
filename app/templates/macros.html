@@ -462,47 +462,12 @@
 <!-- USER MACROS -->
 <!-- USER CARD FOR DISPLAY IN CAROUSEL -->
 
-
-{% macro render_project_link_card(link, project, is_owner) -%}
-<div class='card mb-2'>
-  <div style='padding-right:20px; padding-top:5px; margin-bottom:0px; padding-bottom:0px;'>
-    <a class='delete-btn task-btn float-right' style='background: transparent;'
-      href="{{ url_for('project.remove_link', project_id=project.id, link_id=link.id) }}">
-        <i class="fa fa-times-circle" aria-hidden="true"></i>
-    </a>
-  </div>
-  <div class='card-body' style='text-align:center; padding-top:0px;'>
-    <style class="embedly-css">
-      .card .action {
-        color: #fa4b2a;
-      }
-    </style>
-    <blockquote class="embedly-card" data-card-controls='0' data-card-key="1d5c48f7edc34c54bdae4c37b681ea2b">
-      <h4>
-        <a href="{{ link.url }}"></a>
-      </h4>
-      <p>{{ link.description }}.</p>
-    </blockquote>
-  </div>
-</div>
-{% endmacro -%}
-
 {% set category_maps = {
   1:['Repository', "fab fa-github", 'https://github.com/me/example'],
   2:['Communications', "fab fa-slack", 'https://example.slack.com/messages/channel'],
   3:['Drive', "fab fa-google", 'https://drive.google.com/drive/example'],
   4:['Management', "fas fa-tasks", 'https://app.asana.com/example']}
 %}
-
-{% macro render_private_link(category, project, is_owner) -%}
-  {% set link = project.get_link_category(category) %}
-  {% if link %}
-    {{ render_project_link_card(link, project, is_owner) }}
-  {% elif is_owner %}
-    {% set name, icon, placeholder = category_maps[category] %}
-    {{ render_add_link_card(name, icon, placeholder, project, 0, category) }}
-  {% endif %}
-{% endmacro -%}
 
 
 {% macro render_ask_question_modal(project, user) -%}
