@@ -38,7 +38,7 @@ def url_for_other_page(**kwargs):
     return url_for(request.endpoint, **url_for_args)
 
 
-def partition_query(l, override_partition):
+def partition_query(l, override_partition=False):
     if not override_partition:
         n = 3 if not request.MOBILE else 1
     else:
