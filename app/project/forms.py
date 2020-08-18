@@ -6,6 +6,7 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
 # absolute imports
 from app.forms.base import BaseForm
 from app.forms.validators import Select_Limit_Validator
+from app.link.utils import fix_url
 # package imports
 from .models import Project
 
@@ -85,9 +86,14 @@ class Add_Project(BaseForm):
         # team size defaults to 1 if None
         if self.team_size.data is None:
             self.team_size.data = 1
-        # url to none
+        # url fixing/mapping to none
         if self.url.data=='':
             self.url.data=None
+        else:
+            fixed_url = fix_url(self.url.data)
+            if not fixed_url:
+                self.url.errors = 
+
         return (not error_flag)
 
 

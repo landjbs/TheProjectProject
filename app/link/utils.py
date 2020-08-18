@@ -9,7 +9,7 @@ def parsable(url:str):
     return True if url_matcher.fullmatch(url) else False
 
 def fix_url(url:str):
-    ''' Adds proper route to url '''
+    ''' Adds proper route to url. Returns url if fixed else return False '''
     if not parsable(url):
         if url.startswith('http'):
             pass
@@ -17,4 +17,4 @@ def fix_url(url:str):
             url = f'https://{url}'
         else:
             url = f'https://{url}'
-    return url
+    return (url if parsable(url) else False)
