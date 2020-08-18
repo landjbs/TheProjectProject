@@ -30,40 +30,21 @@
       id_postfix='my',
       card_type='user_badge',
       data=current_user.badges,
-      
+
+    )
+  }}
+  <!-- other badges -->
+  {% set badge_label = 'My Badges' if not request.MOBILE else 'Badges' %}
+  {{
+    render_carousel(
+      label=badge_label,
+      id_postfix='my',
+      card_type='user_badge',
+      data=current_user.badges,
+
     )
   }}
 
-
-  {% if progress_tabs!=[] %}
-    <h4 style='text-align:left;'>My Badges</h4>
-    <hr class="my-1">
-    <div id="progress-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">
-      <!--Slides-->
-      <div class="carousel-inner" role="listbox">
-        {% for tab in progress_tabs %}
-          {% if loop.index==1 %}
-          <div class="carousel-item active">
-          {% else %}
-          <div class="carousel-item">
-          {% endif %}
-            <div class='row'>
-              {% for user_badge in tab %}
-                {{ badge_macros.render_user_badge_card(user_badge) }}
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-      <!--Controls-->
-      <div class="controls-top">
-        <a class="btn-floating" href="#progress-carousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-lg"></i></a>
-        <p id='progress-count' class='counter'>0</p>
-        <a class="btn-floating" href="#progress-carousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-lg"></i></a>
-      </div>
-      <!--/.Controls-->
-    </div>
-  {% endif %}
 
   {% if all_tabs!=[] %}
       <div id="all-carousel" class="carousel slide carousel-multi-item" data-ride="carousel">

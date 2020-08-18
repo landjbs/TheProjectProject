@@ -22,8 +22,8 @@ def perk_page():
     # all badges currently in progress
     my_badges = current_user.badges
     # all badges
-    all_badges = Badge.query.all()
+    other_badges = Badge.query.all()
     return render_template('badge.html',
                             competitions=competitions,
                             my_badges=my_badges,
-                            all_tabs=all_badges)
+                            other_badges=other_badges)
