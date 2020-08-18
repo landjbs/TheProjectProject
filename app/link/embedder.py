@@ -24,8 +24,8 @@ def fix_url(url:str):
 ####################################
 
 
-def scrape(url):
-    response = requests.get(url)
+def scrape(url, timeout=2):
+    response = requests.get(url, timeout=timeout)
     soup = BeautifulSoup(response.text)
     metas = soup.find_all('meta')
     description = [meta.attrs['content'] for meta in metas if 'name' in meta.attrs and meta.attrs['name'] == 'description' ]
