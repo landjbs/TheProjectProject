@@ -1,4 +1,6 @@
 import re
+import httplib
+
 
 # matcher for valid route protocol
 url_string = r'https://\S+|http://\S+'
@@ -7,6 +9,12 @@ url_matcher = re.compile(url_string)
 def parsable(url:str):
     ''' Deterimines if url has valid protocol '''
     return True if url_matcher.fullmatch(url) else False
+
+def valid(url:str, timout:int=2):
+    ''' Determines if url is valid by requesting head '''
+    c = httplib.HTTPConnection(url, timout=timout)
+    c.request("HEAD", '')
+    return (c.getresponse().status==200)
 
 def fix_url(url:str):
     ''' Adds proper route to url. Returns url if fixed else return False '''
@@ -17,4 +25,5 @@ def fix_url(url:str):
             url = f'https://{url}'
         else:
             url = f'https://{url}'
-    return (url if parsable(url) else False)
+    # try connecting to url to validate
+    return (url if valid(url) else False)
