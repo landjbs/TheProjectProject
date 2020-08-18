@@ -37,7 +37,6 @@ class Competition(CRUDMixin, db.Model):
     def __init__(self, **kwargs):
         for attr, value in kwargs.items():
             setattr(self, attr, value)
-        self.code = generate_code(kwargs.get('name'))
 
     def __repr__(self):
         return f'<Competition {self.name} by {self.sponsor}>'
@@ -68,6 +67,11 @@ class Competition(CRUDMixin, db.Model):
         return self.submissions.filter_by(winner=True)
 
     ## admin ##
+    def activate(self):
+        assert not self.active, 'Already active.'
+        assert not self.complete, 'Already complete.'
+        
+
     def select_winners(self, winner_ids):
         ''' Selects winners for competition using project id '''
         assert self.active, 'Cannot select winners for inactive competition.'
