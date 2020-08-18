@@ -24,10 +24,14 @@ def add_project():
     # form preprocessing
     form = Add_Project()
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
-    form.competition.choices = [(None, '')] + [(c.id, c.name) for c in Competition.query.all()]
+    form.competition.choices = [(False, '')] + [(c.id, c.name) for c in Competition.query.all()]
     # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
+        if form.competition.data:
+            competition = Competition.query.get(int(form.competition.data))
+        else:
+            competition = None
         project = Project.create(
             name = form.name.data,
             oneliner=form.oneliner.data,
@@ -40,7 +44,8 @@ def add_project():
             application_question = form.application_question.data,
             estimated_time = form.estimated_time.data,
             team_size = form.team_size.data,
-            complete = form.complete.data
+            complete = form.complete.data,
+            competition = competition
         )
         # successful message
         flash(f'Congratulations—your project, {form.name.data}, '
