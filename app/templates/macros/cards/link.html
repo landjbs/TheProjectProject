@@ -1,3 +1,11 @@
+{% set category_maps = {
+  1:['Repository', "fab fa-github", 'https://github.com/me/example'],
+  2:['Communications', "fab fa-slack", 'https://example.slack.com/messages/channel'],
+  3:['Drive', "fab fa-google", 'https://drive.google.com/drive/example'],
+  4:['Management', "fas fa-tasks", 'https://app.asana.com/example']}
+%}
+
+
 {% macro render_add_link_card(name, icon, placeholder, project, public, category=0) -%}
   {% set cover_id = '{fname}_Cover'.format(fname=name) %}
   {% set input_id = '{fname}_Input'.format(fname=name) %}

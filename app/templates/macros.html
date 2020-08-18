@@ -462,14 +462,6 @@
 <!-- USER MACROS -->
 <!-- USER CARD FOR DISPLAY IN CAROUSEL -->
 
-{% set category_maps = {
-  1:['Repository', "fab fa-github", 'https://github.com/me/example'],
-  2:['Communications', "fab fa-slack", 'https://example.slack.com/messages/channel'],
-  3:['Drive', "fab fa-google", 'https://drive.google.com/drive/example'],
-  4:['Management', "fas fa-tasks", 'https://app.asana.com/example']}
-%}
-
-
 {% macro render_ask_question_modal(project, user) -%}
 <div id="modal_ask_question" class="modal fade" role="dialog">
   <div class="modal-dialog">
