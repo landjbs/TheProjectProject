@@ -107,16 +107,18 @@ def project_page(project_code):
         completed[n] = user_completed_count if user_completed_count else 0
     ## subject visualization ##
     project_subjects = project.subject_data()
-    ## all user stuff ##
+    ## public user stuff ##
     members = project.members.all()
-    applications = project.pending.all()
-    invitations = project.invitations.all()
     ## recommended members ##
     recommended = False
     edit_form = False
     edit_application_form = False
     show_edit_modal = False
+    applications = False
+    invitations = False
     if current_user==project.owner:
+        applications = project.pending.all()
+        invitations = project.invitations.all()
         if project.open and not project.complete:
             recommended = recommend_users(project)
         ## edit project form ##
