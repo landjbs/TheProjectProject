@@ -298,3 +298,260 @@
   $('#{{ modal_id }}').appendTo('body');
 </script>
 {%- endmacro %}
+
+
+{% macro render_edit_project_modal(project, edit_form, completion_data) -%}
+<div id="edit_modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Edit {{ project.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      {% if project.complete==False %}
+        <form id='editForm' method='post'>
+          <div class="modal-body">
+            <!-- token -->
+            {{ edit_form.csrf_token }}
+            <!-- DESCRIPTION -->
+            <center>
+              <h6 style='text-decoration:underline;'>Description</h6>
+            </center>
+            <!-- name -->
+            {{ edit_form.name.label }}:<br>
+            {{ edit_form.name(class='edit-input', value=project.name) }}
+            {% if edit_form.name.errors %}
+              <p class='warning'>{{ edit_form.name.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
+            <!-- oneliner -->
+            {{ edit_form.oneliner.label }}:<br>
+            {{ edit_form.oneliner(class='edit-input', value=project.oneliner) }}
+            {% if edit_form.oneliner.errors %}
+              <p class='warning'>{{ edit_form.oneliner.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
+            <!-- summary -->
+            {{ edit_form.summary.label }}:<br>
+            {{ edit_form.summary(class='edit-input', value=project.summary) }}
+            {% if edit_form.summary.errors %}
+              <p class='warning'>{{ edit_form.summary.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
+            <!-- MANAGEMENT -->
+            <center>
+              <h6 style='text-decoration:underline;'>Management</h6>
+            </center>
+            <div class='row' style='text-align:center;'>
+              <div class='col'>
+                <span>
+                  Team Size:<br>
+                  <i class='far fa-user-circle'></i>
+                  {{ project.members.all()|length }} /
+                  <input type='number' step=1 min='{{ project.members.all()|length }}'
+                      max='{{ edit_form.team_size.render_kw["max"] }}' value="{{ project.team_size }}"
+                      name='{{ edit_form.team_size.name }}'/>
+                </span>
+              </div>
+              <div class='col'>
+                <span>
+                  Estimated Time:<br>
+                  <i class="fa fa-clock-o"></i>
+                  {{ completion_data['elapsed'] }} /
+                  <input type='number' step=1 min='{{ completion_data["elapsed"] }}'
+                      max='{{ completion_data["elapsed"] + edit_form.estimated_time.render_kw["max"] }}'
+                      value="{{ project.estimated_time }}"
+                      name='{{ edit_form.estimated_time.name }}'></input>
+                </span>
+              </div>
+            </div>
+            <br>
+            <hr class='my-2'><br>
+            <!-- ACTIONS -->
+            <center>
+              <h6 style='text-decoration:underline;'>Actions</h6>
+            </center>
+            <div class='row' style='text-align:center;'>
+              <div class='col'>
+                <button type='button' data-toggle='modal' data-target='#complete_modal' class='btn'>
+                  Complete
+                </button>
+              </div>
+              <div class='col'>
+                <button type='button' data-toggle='modal' data-target='#open_modal' class='btn'>
+                  {% if project.open %}
+                    Close
+                  {% else %}
+                    Open
+                  {% endif %}
+                </button>
+              </div>
+              <div class='col'>
+                {% if project.open %}
+                  <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn'>
+                {% else %}
+                  <button type='button' data-toggle='modal' data-target='#requires_application_modal' class='btn' disabled>
+                {% endif %}
+                    Edit App.
+                  </button>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer row m-3">
+            <button type='button' data-toggle='modal' data-target='#modal_project_{{ project.id }}' class='btn delete-btn col float-left'>
+              Leave Project
+            </button>
+            <button class='btn col'>Change</button>
+          </div>
+        </form>
+      {% else %}
+        <form action="{{ url_for('project.uncomplete_project', project_id=project.id) }}" method='post'>
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <div class="modal-body">
+            <button class='btn col'>
+              Mark Incomplete
+            </button>
+          </div>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+{% macro render_complete_modal(project) -%}
+<div id="complete_modal" class="modal fade" role="dialog" style='z-index:9999;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Complete {{ project.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('project.complete_project', project_id=project.id) }}" method='post'>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="modal-body">
+          <p>
+            Congratulations on completing {{ project.name }}! In light of your
+            amazing work, we may want to share your project on TheProjectProject's
+            social media or put you in touch with funding/award opportunities.
+            We will reach out to ask permission if this is the case. You will be
+            able to edit the completed setting should you want to work more on
+            {{ project.name }} later.
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class='btn' id='complete-btn'>Complete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+{% macro render_open_modal(project) -%}
+<div id="open_modal" class="modal fade" role="dialog" style='z-index:9997;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        {% if project.open %}
+          <h5>Close {{ project.name }}</h5>
+          {% set action = 'close' %}
+        {% else %}
+          <h5>Open {{ project.name }}</h5>
+          {% set action = 'open' %}
+        {% endif %}
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('project.change_project_open', project_id=project.id, action=action) }}" method='post'>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="modal-body">
+          <p>
+            {% if project.open %}
+              You are tyring to close {{ project.name }}. This will not
+              remove current members, but will prevent other members from joining
+              and will hide {{ project.name }} from other's recommended feed.
+            {% else %}
+              You are trying to open {{ project.name }}. This will allow other users
+              to see the project in their recommended feed and apply. To edit application
+              settings, please check the "Edit App" button.
+            {% endif %}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class='btn'>
+            {% if project.open %}
+              Close Project
+            {% else %}
+              Open Project
+            {% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
+{% macro render_requires_application_modal(project, edit_application_form) -%}
+<div id="requires_application_modal" class="modal fade" role="dialog" style='z-index:9997;'>
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        {% if project.requires_application %}
+          <h5>Edit Application: {{ project.name }}</h5>
+          {% set action = 'edit' %}
+        {% else %}
+          <h5>Add Application: {{ project.name }}</h5>
+          {% set action = 'add' %}
+        {% endif %}
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <form action="{{ url_for('project.add_application', project_id=project.id) }}" method='post'>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="modal-body">
+            {% if action=='add' %}
+              <p>
+              You are trying to add an application to {{ project.name }}. This
+              will require applicants to respond to your application question
+              and allow you to choose who can join the project. You can edit this
+              in the project settings.
+              </p>
+              <br>
+            {% endif %}
+            <p>Application Question</p>
+            {{ edit_application_form.csrf_token()  }}
+            {{ edit_application_form.application_question(class='join-input', value=project.application_question, required=True) }}
+            <br>
+            {% if action=='edit' %}
+              <small style='color:red;'>
+                WARNING: If you remove the application, pending users will
+                automatically be accepted.
+              </small>
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+          {% if action!='add' %}
+            <button type='submit' formaction="{{ url_for('project.remove_application_requirement', project_id=project.id) }}" class='btn delete-btn col'>
+              Remove Application
+            </button>
+          {% endif %}
+          <button class='btn col'>
+            {% if action=='add' %}
+              Add
+            {% else %}
+              Edit
+            {% endif %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
