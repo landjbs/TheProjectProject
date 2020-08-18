@@ -458,9 +458,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             self.complete = True
             self.notify_members(
                 text=(f'Congratulations—{self.name} has been marked as '
-                       'complete by the owner!'),
-                important=True,
-                include_owner=False
+                       'complete!'),
+                important=True
             )
             self.update_last_active()
             self.update()
@@ -473,10 +472,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             self.complete = False
             self.estimated_time = (datetime.utcnow() - self.posted_on).days
             self.notify_members(
-                text=(f'{self.name} has been marked as incomplete by the '
-                       'owner. You can now post and complete tasks!'),
-                important=True,
-                include_owner=False
+                text=(f'{self.name} has been marked as incomplete. '
+                       'You can now post and complete tasks!'),
+                important=True
             )
             self.update()
             return True
