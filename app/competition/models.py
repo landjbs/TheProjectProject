@@ -67,6 +67,14 @@ class Competition(CRUDMixin, db.Model):
             return None
         return self.submissions.filter_by(winner=True)
 
+    ## admin ##
+    def select_winners(self, winner_ids):
+        ''' Selects winners for competition '''
+        n_selected = len(winner_ids)
+        assert (n_selected==self.n_winners), (f'Invalid winner number '
+                                            f'{n_selected}/{self.n_winners}.')
+
+
 
 class Submission(db.Model):
     __tablename__ = 'submission'
