@@ -268,20 +268,15 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         # notify user
         self.notify(text=(f'{current_user.name} has invited you '
                           f'to collaborate on {project.name}! '
-                           'Visit your profile page to reply.'),
+                           'Click here to reply.'),
                     important=True,
-                    project=project
+                    redirect=project.get_url()
         )
         # add invitation
         self.invitations.append(project)
         # add xp to inviter and invitee
         self.action_xp('recieve_collab')
         current_user.action_xp('send_collab')
-        # notify user
-        self.notify(
-            text=f'You have been invited to collaborate on {project.name}!',
-            redirect=project.get_url()
-        )
         # update project activity
         project.update_last_active()
         self.update()
@@ -309,7 +304,6 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.invitations.remove(project)
         self.add_rejection(project)
         self.update()
-        # TODO: CLEAR NotificationS POTENTIALLy
         message = ('You have withdrawn the offer to collaborate on '
                    f'{project.name} with {self.name}.')
         return (message, 'success')
