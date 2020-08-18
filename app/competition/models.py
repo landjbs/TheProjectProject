@@ -73,11 +73,11 @@ class Competition(CRUDMixin, db.Model):
         assert not self.active, 'Already active.'
         assert not self.complete, 'Already complete.'
         User.notify_all(
-            text='',
+            text=(f'{self.name}, a new competition you might like, just went '
+                  'live! Good luck!'),
             important=True,
             redirect=self.get_url()
         )
-
 
     def select_winners(self, winner_ids):
         ''' Selects winners for competition using project id '''
