@@ -63,7 +63,9 @@ class Add_Project(BaseForm):
                             'completed.'))
     competition = SelectField('Competition',
                             description=('Submit your project to active '
-                                        'competitions and win rewards!'),
+                                        'competitions and win rewards! Please '
+                                        'make sure your project meets any '
+                                        'competion criteria before selecting.'),
                             choices=[],
                             coerce=int,
                             default=None
