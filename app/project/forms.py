@@ -1,4 +1,4 @@
-from wtforms import (TextField, StringField, BooleanField,
+from wtforms import (TextField, StringField, BooleanField, SelectField,
                     SelectMultipleField, FloatField, IntegerField,
                     TextAreaField, validators)
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
@@ -61,6 +61,11 @@ class Add_Project(BaseForm):
     complete = BooleanField('Completed',
                             description=('Whether the project has been '
                             'completed.'))
+    competition = SelectField('Competition',
+                            description=('Submit your project to active '
+                                        'competitions and win rewards!')
+                            choices=[], coerce=int
+                        )
 
     def validate(self):
         ''' Validates project '''
