@@ -6,7 +6,7 @@ from app.utils import partition_query
 
 # TODO: replace with better elastic_search
 
-def text_search(search_text, partition=True):
+def text_search(search_text):
     ## results ##
     project_results = Project.query.filter(Project.name.contains(search_text) |
                                    Project.oneliner.contains(search_text))
@@ -18,14 +18,9 @@ def text_search(search_text, partition=True):
     user_count = user_results.count()
     subject_count = subject_results.count()
     ## limits ##
-    project_results = project_results.limit(30)
-    user_results = user_results.limit(30)
-    ## partition ##
-    if partition:
-        project_results =   partition_query(project_results)
-        user_results =      partition_query(user_results)
-        subject_results =   partition_query(subject_results)
+    project_results = project_results
+    user_results = user_results
     ## return dict of results and analytics
-    return {'project'       :   (list(project_results), project_count),
-            'user'          :   (list(user_results), user_count),
-            'subject'       :   (list(subject_results), subject_count)}
+    return {'project'       :   (project_results.all()      project_count),
+            'user'          :   (user_results.all(),        user_count),
+            'subject'       :   (subject_results.all(),     subject_count)}
