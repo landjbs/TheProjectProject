@@ -9,52 +9,14 @@
 {% endblock %}
 
 {% block content %}
-<div class='container my-2' style='min-width: 99%'>
+<div class='container my-2'>
   <p>Subject: {{ subject.name }}</p>
-  <ul class="list-unstyled components">
-    <!-- PROJECT -->
-    {% if results['project'][1]!=0 %}
-      <li>
-        <a href="#projectScroll" data-toggle="collapse" aria-expanded="false">
-          <h4 style='text-align:left;'>
-            Projects
-            <i class="fa fa-circle" style='color:#FF5D00;'></i>
-            {{ results['project'][1] }}
-          </h4>
-          <small style='padding:0px;margin:0px;color:grey;'>Click to view</small>
-        </a>
-        <ul class="collapse list-unstyled" id="projectScroll">
-          {% for project in results['project'][0] %}
-            <li>
-              {{ macros.render_big_project_card(current_user, project, now, calc_days_since) }}
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-      <hr class="my-2">
-    {% endif %}
-    <!-- USER -->
-    {% if results['user'][1]!=0 %}
-      <li>
-        <a href="#userScroll" data-toggle="collapse" aria-expanded="false">
-          <h4 style='text-align:left;'>
-            Users
-            <i class="fa fa-user-circle" style='color:#FF5D00;'></i>
-            {{ results['user'][1] }}
-          </h4>
-          <small style='padding:0px;margin:0px;color:grey;'>Click to view</small>
-        </a>
-        <ul class="collapse list-unstyled" id="userScroll">
-          {% for user in results['user'][0] %}
-            <li>
-              {{ macros.render_user_card(current_user, user) }}
-            </li>
-          {% endfor %}
-        </ul>
-      </li>
-      <hr class="my-2">
-    {% endif %}
-  </ul>
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'Projects')" id="defaultOpen">Projects</button>
+    <button class="tablinks" onclick="openTab(event, 'Users')">Users</button>
+  </div>
+
+
 </div>
 
 <div>
