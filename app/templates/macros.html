@@ -1,16 +1,3 @@
-<!-- BADGE MACROS -->
-<!-- TODO: MOVE -->
-{% macro render_badge_icon(badge) -%}
-  <img class='badge-icon' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
-{% endmacro -%}
-
-{% macro render_badge_icon_bigger(badge) -%}
-  <img class='badge-icon-bigger' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
-{% endmacro -%}
-
-
-
-
 <!-- project card to be shown to anonymous users -->
 {% macro render_anon_project_card(project, g.current_user) -%}
 <div class="col-md-4">
