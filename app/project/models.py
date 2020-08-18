@@ -510,6 +510,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def n_applications(self):
         return self.pending.count()
 
+    ## competitions ##
+    def submit_to_competition(self):
+        
+
     ## xp and badges ##
     def action_xp_all_members(self, action:str, positive:bool=True):
         for member in self.members:

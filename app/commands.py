@@ -133,10 +133,18 @@ def populate_db(num_users, num_projects):
         )
     for project in tqdm(projects, desc='Adding Projects'):
         db.session.add(project)
+    # TODO: finish populating competitions
     # fake competitions
-    for _ in trange(num_competitions, desc='Populating Competitions'):
-
-
+    # competitions = []
+    # for _ in trange(num_competitions, desc='Populating Competitions'):
+    #     competitions.append(
+    #         Competition(
+    #             name=rand_words(2),
+    #             sponsor=rand_words(2),
+    #             description=rand_words(40),
+    #             prize=rand_words(5),
+    #         )
+    #     )
     db.session.commit()
 
 
