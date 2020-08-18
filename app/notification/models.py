@@ -22,7 +22,7 @@ class Notification(CRUDMixin, db.Model):
     seen = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
-        return f'<Notification to {self.users} at {self.timestamp}; TEXT={self.text}>'
+        return f'<Notification at {self.timestamp}; TEXT={self.text}>'
 
     def mark_seen(self):
         self.seen = True

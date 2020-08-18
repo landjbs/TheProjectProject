@@ -35,7 +35,8 @@
     ('user',              'fa fa-user-circle'),
     ('subject',           'fa fa-flask'),
     ('notification',      'fa fa-bell'),
-    ('sent',              'fa fa-paper-plane')
+    ('sent',              'fa fa-paper-plane'),
+    ('competition',       'fa fa-trophy')
   ])
 %}
 <!-- /CACHE ICON TYPES -->
@@ -46,7 +47,7 @@
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
-  {% set n = data|length %}
+  {% set n = (data|length) if data else 0 %}
   <!-- HEADER -->
   {% if n==0 and not redirect_empty %}
   {% else %}
