@@ -92,6 +92,49 @@
 </div>
 {% endmacro -%}
 
+{% render_invitation_card(user) %}
+<div class="col-md-4">
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class='card-head tiny'>
+        <a class='project-name' href='user={{ user.code }}'>
+          <h5>
+            {{ user.name }}
+            {% set badge = user.choose_badge(carousel_type) %}
+            {% if badge %}
+              {{ render_badge_icon(badge) }}
+            {% endif %}
+            {% if user.recently_active() %}
+              <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+            {% endif %}
+          </h5>
+        </a>
+      </div>
+      <div class='card-oneline' style=''>
+        <p class='oneliner'>
+          {{ user.about }}
+        </p>
+      </div>
+      <div class='card-foot float-left'>
+        {% for s in user.subjects[:5] %}
+          <a href='/subject={{ s.subject.code }}'>
+            {% if loop.index>1 %}
+            ,
+            {% endif %}
+            <p class='subject-tag' style='background:{{ s.subject.color }};'>
+              {{ s.subject.name }}
+            </p>
+          </a>
+        {% endfor %}
+      </div>
+      <br>
+      <hr class="my-2">
+      {{ render_user_action_bar(user) }}
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
 
 <!-- MODALS -->
 {% macro render_collaborate_modal(user, target_project=None) -%}
