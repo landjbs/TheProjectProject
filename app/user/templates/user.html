@@ -185,7 +185,7 @@
           </div>
         {% endif %}
       </div>
-      
+
     </div>
 
     <!-- modals -->
@@ -213,6 +213,7 @@
         if (sessionStorage.openTab) {
           document.getElementById(sessionStorage.openTab).click();
         } else {
+          alert(document.getElementById("About_Button"));
           document.getElementById("About_Button").click();
         }
       });
