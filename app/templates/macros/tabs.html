@@ -1,5 +1,5 @@
 <!-- renders tabs if mobile and otherwise stacked carousels -->
-{% macro render_safe_tabs(carousel_list) -%}
+{% macro render_safe_tabs(carousel_list, default='Projects') -%}
     {% if request.MOBILE %}
       <link rel='stylesheet' href="css/mobile_profile_styles.css">
       <script src="js/tabs.js"></script>
@@ -30,7 +30,7 @@
         if (sessionStorage.openTab) {
           document.getElementById(sessionStorage.openTab).click();
         } else {
-          document.getElementById("Projects").click();
+          document.getElementById('{{ default }}').click();
         }
       });
     </script>
