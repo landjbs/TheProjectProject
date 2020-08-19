@@ -1,10 +1,10 @@
 {% macro render_badge_icon(badge) -%}
-  <img class='badge-icon' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
+  <img class='badge-icon' src="{{ user_badge.badge.get_icon_url() }}"/>
 {% endmacro -%}
 
 
 {% macro render_badge_icon_bigger(badge) -%}
-  <img class='badge-icon-bigger' src="{{ url_for('badge.static', filename=badge.get_icon_url()) }}"/>
+  <img class='badge-icon-bigger' src="{{ user_badge.badge.get_icon_url() }}"/>
 {% endmacro -%}
 
 
@@ -15,7 +15,7 @@
     <div class="card-body">
       <div class='card-head' style='text-align:center;'>
         <center>
-          <img class='big-badge' src="{{ url_for('badge.static', filename=user_badge.badge.get_icon_url()) }}"/>
+          <img class='big-badge' src="{{ user_badge.badge.get_icon_url() }}"/>
           <h5>{{ user_badge.badge.name }}</h5>
           <br>
           <p style="margin:0px;">
