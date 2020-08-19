@@ -39,25 +39,19 @@
               </button>
             {% endif %}
           </p>
-          <a onclick="scrollToTop()">
-            <h3>
-              {{ project.name }}
-              {% if project.complete %}
-                <i class="fa fa-check-circle" aria-hidden="true"></i>
-              {% elif not project.open %}
-                <i class="fa fa-lock" aria-hidden="true"></i>
-              {% endif %}
-            </h3>
-          </a>
+          <h3>
+            {{ project.name }}
+            {% if project.complete %}
+              <i class="fa fa-check-circle" aria-hidden="true"></i>
+            {% elif not project.open %}
+              <i class="fa fa-lock" aria-hidden="true"></i>
+            {% endif %}
+          </h3>
           <p>
             by
-            {% if current_user.is_authenticated %}
-              <a class='user-name' href='user={{ project.owner.code }}'>
-            {% else %}
-              <a class='user-name' href='/login'>
-            {% endif %}
-                {{ project.owner.name }}
-              </a>
+            <a class='user-name' href='user={{ project.owner.code }}'>
+              {{ project.owner.name }}
+            </a>
           </p>
         </div>
         <!-- extra project info -->
