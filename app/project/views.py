@@ -329,12 +329,15 @@ def leave_project(project_id):
 @limiter.limit('45 per minute')
 def like_action(project_id, action):
     ''' Star or unstar project '''
+    print('HERE')
     project = Project.query.get_or_404(project_id)
     if action == 'like':
         current_user.star_project(project)
     if action == 'unlike':
         current_user.unstar_project(project)
-    is_starred = current_user.has_starred(project)
+    print('DONE')
+    is_starred = 1 if current_user.has_starred(project) else 0
+    print(is_starred)
     return jsonify({'stars':project.stars.count(), 'is_starred':is_starred})
 
 
