@@ -203,6 +203,15 @@
                       </form>
                     {% endif %}
                   </div>
+                  <!-- complete tasks -->
+                  {{
+                    render_listbox(
+                      label='Completed',
+                      id_postfix='completed',
+                      card_type='completed-task',
+                      data=project.completed_tasks().all()
+                    )
+                  }}
 
                   <div class='col'>
                     <h5>Completed Tasks</h5>
