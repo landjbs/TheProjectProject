@@ -3,13 +3,13 @@
   with context %}
 {%
   from 'macros/cards/user.html' import
-  render_user_card, render_invitation_card
+  render_user_card, render_invitation_card, render_member_card
   with context
 %}
 {% from 'macros/cards/competition.html' import render_competition_card with context %}
 {%
   from 'macros/cards/badge.html' import
-    render_user_badge_card, render_badge_card, render_member_card
+    render_user_badge_card, render_badge_card
   with context
 %}
 {% from 'macros/cards/subject.html' import render_subject_card with context %}

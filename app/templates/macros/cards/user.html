@@ -139,17 +139,18 @@
           </h5>
         </a>
       </div>
-      <div class='float-left'>
-        <button type="button" class="btn" action="{{ url_for('project.remove_member', user_id=user.id, project_id=g.project.id) }}">
-          Remove
-        </button>
-      </div>
-      <div class='float-right'>
-        <button type="button" class="btn" action="{{ url_for('project.make_owner', user_id=user.id, project_id=g.project.id) }}">
-          Make Owner
-        </button>
-      </div>
-      </center>
+      {% if not g.project.is_owner(user) %}
+        <div class='float-left'>
+          <button type="button" class="btn" action="{{ url_for('project.remove_member', user_id=user.id, project_id=g.project.id) }}">
+            Remove
+          </button>
+        </div>
+        <div class='float-right'>
+          <button type="button" class="btn" action="{{ url_for('project.make_owner', user_id=user.id, project_id=g.project.id) }}">
+            Make Owner
+          </button>
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
