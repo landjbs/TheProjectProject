@@ -30,8 +30,8 @@
     {% set is_owner = (project.owner==current_user) %}
     <!-- PAGE -->
     <div class='container' style="min-width:100%;padding:0px;">
-        <nav class='sidebar-header sticky-top' id='nameNav'>
-        <div class='nav-keep' style='padding-bottom:2vh; padding-top:2vh;'>
+        <nav class='sidebar-header absolute-top' id='nameNav'>
+        <div class='nav-keep' style='padding-top: 5vh;'>
           <p class='float-right'>
             <i class="fa fa-star"></i>
             {{ project.stars.all()|length }}
@@ -62,9 +62,13 @@
         <!-- extra project info -->
         <div id='nav-expanded'>
           <div class='about-text'>
-            <p>{{ project.oneliner }}</p>
-            <p>{{ project.summary }}</p>
+            <p>
+              {{ project.oneliner }}
+              <br>
+              {{ project.summary }}
+            </p>
           </div>
+          <br>
           {% if current_user.is_authenticated %}
             <center>
               {{ render_project_action_bar(project) }}
