@@ -28,10 +28,6 @@ a, a:hover, a:focus {
   perspective: 1500px;
 }
 
-.bio {
-  border-bottom: 1px solid white;
-}
-
 #sidebar {
   min-width: 50vh;
   max-width: 50vh;
