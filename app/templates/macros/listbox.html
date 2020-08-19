@@ -37,7 +37,11 @@
       {{ label }}
       {% if icon_type %}
         <i class='{{ icon_types[icon_type] }}'></i>
-        {% if not n_override %}{{ n }}{% else %}{{ n_override }}{% endif %}
+        {% if n_override is sameas false %}
+          {{ n }}
+        {% else %}
+          {{ n_override }}
+        {% endif %}
       {% endif %}
     </h4>
   {% endif %}

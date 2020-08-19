@@ -267,7 +267,7 @@ def join_project(project_id):
         return redirect(request.referrer)
     if project.open:
         if not project.requires_application:
-            flash(f'You have been added to {project.name}!')
+            current_user.notify(text=f'You have joined {project.name}!')
             project.add_member(current_user, notify_owner=True)
             return redirect(
                 url_for('project.project_page', project_code=project.code)
