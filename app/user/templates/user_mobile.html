@@ -65,6 +65,29 @@
         </div>
       </nav>
 
+      {% set carousels = [
+          (
+            'Owned',
+            render_carousel(
+              label='Owned',
+              id_postfix='owned',
+              card_type='project-big',
+              data=owned,
+              icon_type='project'
+            )
+          ),
+          (
+            'Member',
+            render_carousel(
+              label='Member',
+              id_postfix='member',
+              card_type='project-big',
+              data=member,
+              icon_type='project-member'
+            )
+          ),
+        ]
+      %}
 
 
 
