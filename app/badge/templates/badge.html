@@ -14,16 +14,30 @@
 
 {% block content %}
 <div class='container main'>
-  <!-- competitions -->
+  {% set carousels = [
+      ('Competitions',
+        render_carousel(
+          label='Competitions',
+          id_postfix='competitions',
+          card_type='competition',
+          data=competitions,
+          interval=5000,
+          override_partition=1
+        )
+      ),
+      ('Badges'
+        render_carousel(
+          label=badge_label,
+          id_postfix='my',
+          card_type='user_badge',
+          data=my_badges
+        )
+      )
+
+    ]
+  %}
   {{
-    render_carousel(
-      label='Competitions',
-      id_postfix='competitions',
-      card_type='competition',
-      data=competitions,
-      interval=5000,
-      override_partition=1
-    )
+
   }}
   <!-- badges in progress -->
   {% set badge_label = 'My Badges' if not request.MOBILE else 'Badges' %}
