@@ -19,21 +19,20 @@ def user_page(code):
     # user data
     task_data = False
     subject_data = False
-    if not request.MOBILE:
-        # worked tasks
-        tasks = user.tasks_worked
-        task_data = {} if (len(tasks)>0) else None
-        if task_data is not None:
-            _, end_activity, earliest = tasks_to_daily_activity(tasks)
-            task_data['end_activity'] = end_activity
-            task_data['earliest'] = earliest
-        # owned projects
-        owned = user.owned.all()
-        # member projects
-        member = [project for project in user.projects
-                           if not project in owned]
-        # subjects
-        subject_data = user.subject_data()
+    # worked tasks
+    tasks = user.tasks_worked
+    task_data = {} if (len(tasks)>0) else None
+    if task_data is not None:
+        _, end_activity, earliest = tasks_to_daily_activity(tasks)
+        task_data['end_activity'] = end_activity
+        task_data['earliest'] = earliest
+    # owned projects
+    owned = user.owned.all()
+    # member projects
+    member = [project for project in user.projects
+                       if not project in owned]
+    # subjects
+    subject_data = user.subject_data()
     ## forms ##
     # edit user account
     show_edit_modal = False
@@ -66,22 +65,14 @@ def user_page(code):
                 user.update()
         else:
             show_edit_modal = True
-    if not request.MOBILE:
-        return render_template('user.html',
-                                user=user,
-                                task_data=task_data,
-                                subject_data=subject_data,
-                                owned=owned,
-                                member=member,
-                                edit_form=edit_form,
-                                show_edit_modal=show_edit_modal)
-    else:
-        return render_template('user_mobile.html',
-                                user=user,
-                                owned=owned,
-                                member=member,
-                                edit_form=edit_form,
-                                show_edit_modal=show_edit_modal)
+    return render_template('user.html' if not request.MOBILE else 'user_mobile.html',
+                            user=user,
+                            task_data=task_data,
+                            subject_data=subject_data,
+                            owned=owned,
+                            member=member,
+                            edit_form=edit_form,
+                            show_edit_modal=show_edit_modal)
 
 
 ## user to self interactions ##
