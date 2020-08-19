@@ -112,10 +112,21 @@
           )
         ]
       %}
-      <!-- TODO: add task -->
 
       {% if current_user==user %}
-        <!-- TODO: add invitations -->
+        {%
+          set carousels = carousels + [
+            {{
+              (
+                'Invitations',
+                render_carousel(
+                  label='Invitations',
+                  id_postfix='invitations',
+                )
+              )
+            }}
+          ]
+        %}
       {% endif %}
 
       {{ render_safe_tabs(carousels, 'Owned') }}
