@@ -54,7 +54,7 @@
 
 
 {% macro render_project_application_card(application) -%}
-  {% set project = applicaiton.project %}
+  {% set project = application.project %}
   <div class="col-md-4">
     <div class="card mb-2">
       <div class="card-body">
@@ -71,4 +71,4 @@
       </div>
     </div>
   </div>
-{% endfor -%}
+{% endmacro -%}

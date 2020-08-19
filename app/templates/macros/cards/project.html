@@ -76,10 +76,10 @@
 
 {% macro render_project_invitation_bar(project) -%}
   <div class='action-bar'>
-    <a class='float-left' href="{{ url_for('project.reject_collaboration', project_id=project.id) }}">
+    <a class='float-left' href="{{ url_for('user.reject_collaboration', project_id=project.id) }}">
       <button class='btn'>Reject</button>
     </a>
-    <a class='float-right' href="{{ url_for('project.accept_collaboration', project_id=project.id) }}">
+    <a class='float-right' href="{{ url_for('user.accept_collaboration', project_id=project.id) }}">
       <button class='btn'>Accept</button>
     </a>
   </div>
@@ -212,7 +212,7 @@
 
 
 {% macro render_project_invitation_card(project) %}
-  {{ render_big_project_card(project, ) }}
+  {{ render_big_project_card(project, render_project_invitation_bar) }}
 {% endmacro -%}
 
 
