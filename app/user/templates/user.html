@@ -2,7 +2,6 @@
 {% from 'macros/listbox.html' import render_listbox with context %}
 {% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
 {% from 'macros/cards/user.html' import render_user_action_bar, render_edit_user_modal, render_delete_account_modal %}
-{% from 'macros/icon.html' import icon_types %}
 
 {% extends "home_base.html" %}
 
@@ -136,7 +135,6 @@
                 {% endif %}
               </div>
             </div>
-          {% endif %}
             <!-- PROJECTS -->
             <div class='container my-2' style='min-width: 100%'>
               <!-- owned carousel -->
@@ -166,6 +164,7 @@
             </div>
           </div>
         </div>
+
     </div>
 
     <!-- modals -->
