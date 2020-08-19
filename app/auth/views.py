@@ -37,7 +37,7 @@ def apply():
         s = URLSafeTimedSerializer(current_app.secret_key)
         token = s.dumps(user.id, salt='email-confirm-salt')
         url = url_for('auth.verify', token=token, _external=True)
-        send_registration_email.queue(user, url)
+        send_registration_email(user, url)
         # notify user and redirect to index
         flash(f'Congratulations, {user.name}, your application to '
                'TheProjectProject has been submitted! '
@@ -75,7 +75,7 @@ def verify(token, expiration=604800):
     if user.confirmed:
         abort(404)
     user.confirmed = True
-    send_confirmation_email.queue(user)
+    send_confirmation_email(user)
     user.update()
     flash('You have confirmed your application! We will email you with '
           'application updates as soon as possible.', category='success')

@@ -47,7 +47,7 @@ class UserModelView(AdminBaseView):
     def accept_single(self):
         user = User.query.get_or_404(int(request.args.get('id')))
         user.accept()
-        send_acceptance_email.queue(user)
+        send_acceptance_email(user)
         flash(f'You have accepted {user.name}.')
         return redirect(request.referrer)
 
