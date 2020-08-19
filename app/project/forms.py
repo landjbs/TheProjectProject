@@ -82,7 +82,6 @@ class Add_Project(BaseForm):
         if (len(self.subjects.data)>5):
             self.subjects.errors = ['Can only choose up to 5 subjects.']
             error_flag = True
-        # TODO: BETTER
         # team size defaults to 1 if None
         if self.team_size.data is None:
             self.team_size.data = 1
