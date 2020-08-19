@@ -10,4 +10,4 @@ class Add_Link(BaseForm):
     url = StringField(
         label='URL',
         validators=[DataRequired(), Length(1,500), Link_Validator()],
-        render_kw={'placeholder':'https://github.com/example'})
+    )

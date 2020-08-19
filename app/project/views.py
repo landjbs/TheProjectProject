@@ -9,6 +9,7 @@ from app.recommendations.users import recommend_users
 from app.subject.models import Subject
 from app.competition.models import Competition
 from app.user.models import User
+from app.link.forms import Add_Link
 # package imports
 from .models import Project
 from .forms import (Add_Project, Comment_Form, Task_Form,
@@ -115,6 +116,8 @@ def project_page(project_code):
         user_completed_count = completed_counts.get(n)
         authored[n] = user_author_count if user_author_count else 0
         completed[n] = user_completed_count if user_completed_count else 0
+    ## forms ##
+    link_form = Add_Link()
     ## subject visualization ##
     project_subjects = project.subject_data()
     ## public user stuff ##

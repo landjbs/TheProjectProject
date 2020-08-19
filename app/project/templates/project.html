@@ -315,7 +315,7 @@
             <!-- LINKS -->
             <div class='col'>
               {% if project.is_member(current_user) %}
-                {{ render_add_link_card('Link', "fas fa-link", 'https://developmentwebsite.com', project, 1, 0) }}
+                {{ render_add_link_card(link_form, 'Link', "fas fa-link", 'https://developmentwebsite.com', project, 1, 0) }}
               {% endif %}
               <div class='about-col'>
                 {% for link in project.public_links() %}
