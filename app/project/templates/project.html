@@ -356,12 +356,12 @@
                 </h4>
               </div>
               <br>
-              {{ render_add_link_card('Private Link', "fas fa-link", 'https://developmentwebsite.com', project, 0, 0) }}
+              {{ render_add_link_card(link_form, 'Private Link', "fas fa-link", 'https://developmentwebsite.com', project, 0, 0) }}
               {% for category in range(1,5) %}
-                {{ render_private_link(category, project, is_owner) }}
+                {{ render_private_link(link_form, category, project, is_owner) }}
               {% endfor %}
               {% for link in project.get_other_private_links() %}
-                {{ render_project_link_card(link, project, is_owner) }}
+                {{ render_project_link_card(link_form, link, project, is_owner) }}
               {% endfor %}
             </div>
           </div>

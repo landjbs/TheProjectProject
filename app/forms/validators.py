@@ -23,6 +23,7 @@ class Link_Validator(object):
         pass
 
     def __call__(self, form, field):
+        print('df;laskjdk3y')
         url = field.data
         fixed_url = fix_url(url)
         if not fixed_url:

@@ -179,6 +179,7 @@ def project_page(project_code):
                             recommended=recommended,
                             comment_form=comment_form,
                             task_form=task_form,
+                            link_form=link_form,
                             activity_data=activity_data,
                             authored=authored,
                             completed=completed,

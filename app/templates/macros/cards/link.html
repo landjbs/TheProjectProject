@@ -18,7 +18,7 @@
       <center><i class="{{ icon }}" style='display:inline;'></i></center>
       <form action="{{ url_for('project.add_link', project_id=project.id, public=public, category=category) }}" method='post'>
         {{ link_form.csrf_token }}
-        <input type='text' name='link' class='select-clean' placeholder="{{ placeholder }}"></input>
+        {{ link_form.link(class='select-clean', placeholder=placeholder) }}
         <div class='float-right'>
           <div class='back-btn task-btn' style='border:0px; background:transparent; display:inline-block;' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')">
             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
@@ -58,12 +58,12 @@
 {% endmacro -%}
 
 
-{% macro render_private_link(category, project, is_owner) -%}
+{% macro render_private_link(link_form, category, project, is_owner) -%}
   {% set link = project.get_link_category(category) %}
   {% if link %}
     {{ render_project_link_card(link, project, is_owner) }}
   {% elif is_owner %}
     {% set name, icon, placeholder = category_maps[category] %}
-    {{ render_add_link_card(name, icon, placeholder, project, 0, category) }}
+    {{ render_add_link_card(link_form, name, icon, placeholder, project, 0, category) }}
   {% endif %}
 {% endmacro -%}
