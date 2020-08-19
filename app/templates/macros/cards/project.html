@@ -27,6 +27,7 @@
 
 {% macro render_project_action_bar(project) -%}
   {% set star_id = 'star_{project_id}'.format(project_id=project.id) %}
+  {% set count_id = 'starcount_{project_id}'.format(project_id=project.id) %}
   {% if not project.id in g.current_user.stars %}
     {% set url = url_for('project.like_action', project_id=project.id, action='like') %}
     {% set action = 1 %}
@@ -35,7 +36,7 @@
     {% set action = 0 %}
   {% endif %}
   <div class='action-bar'>
-    <a onclick="toggleStar({{ project.id }}, '{{ url }}', {{ action }}, '{{ star_id }}')">
+    <a onclick="toggleStar({{ project.id }}, '{{ url }}', {{ action }}, '{{ star_id }}', '{{ count_id }}')">
       <i id='{{ star_id }}'
         class="fa fa-star{% if action=='star' %}-o{% endif %}">
       </i>
@@ -85,7 +86,7 @@
         {{ project.members.all()|length }} / {{ project.team_size }}
         <i class='far fa-user-circle'></i>
         <br>
-        {{ project.stars.all()|length }}
+        <p id='starcount_{{ project.id }}'>{{ project.stars.all()|length }}</p>
         <i class="fa fa-star"></i>
       </div>
       <div class='card-head'>
