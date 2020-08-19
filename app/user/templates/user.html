@@ -97,9 +97,10 @@
                   render_listbox(
                     label='Completed',
                     id_postfix='completed',
-                    card_type='complete-task-sparse',
-                    data=user.tasks_worked,
-                    empty_message='No tasks completed yet.'
+                    card_type='complete-task',
+                    data=project.completed_tasks().all(),
+                    empty_message='No tasks completed yet.',
+                    small=True
                   )
                 }}
               </div>
