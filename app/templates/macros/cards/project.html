@@ -199,6 +199,38 @@
 {% endmacro -%}
 
 
+{% macro render_project_invitation_card(project) %}
+<div class="col-md-4">
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class='card-head tiny'>
+        <a class='project-name' href="{{ url_for('project.project_page', project_id=project.id) }}">
+          <h5>
+            {{ user.name }}
+            {% set badge = user.choose_badge('member') %}
+            {% if badge %}
+              {{ render_badge_icon(badge) }}
+            {% endif %}
+            {% if user.recently_active() %}
+              <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+            {% endif %}
+          </h5>
+        </a>
+      </div>
+      {% if not g.project.is_owner(user) %}
+        <a class='float-left' href="{{ url_for('project.remove_member', user_id=user.id, project_id=g.project.id) }}">
+          <button class='btn'>Remove</button>
+        </a>
+        <a class='float-right' href="{{ url_for('project.make_owner', user_id=user.id, project_id=g.project.id) }}">
+          <button class='btn'>Make Owner</button>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
+
 <!-- MODALS -->
 {% macro render_join_modal(project) -%}
 {% set modal_id = "modal_project_{project_id}".format(project_id=project.id) %}
