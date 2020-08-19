@@ -8,7 +8,7 @@
           <button
             class="tablinks"
             onclick="openTab(event, {{ name }})"
-            {% if loop.index==1 %}id="defaultOpen"{% else %}>
+            {% if loop.index==1 %}id="defaultOpen"{% endif %}>
             {{ name }}
           </button>
         {% endfor %}

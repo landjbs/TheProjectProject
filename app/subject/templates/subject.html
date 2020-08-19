@@ -17,23 +17,28 @@
     <!-- projects -->
     {% set carousels = [
         (
-        'Projects'
-          render_carousel(
-            label='Projects',
-            id_postfix='projects',
-            card_type='project-big',
-            data=projects,
-            icon_type='project'
-          )
+          'Projects',
+          {{
+            render_carousel(
+              label='Projects',
+              id_postfix='projects',
+              card_type='project-big',
+              data=projects,
+              icon_type='project'
+            )
+          }}
         ),
-        ('Users',
-          render_carousel(
-            label='Users',
-            id_postfix='users',
-            card_type='user',
-            data=users,
-            icon_type='user'
-          )
+        (
+          'Users',
+          {{
+            render_carousel(
+              label='Users',
+              id_postfix='users',
+              card_type='user',
+              data=users,
+              icon_type='user'
+            )
+          }}
         )
       ]
     %}
