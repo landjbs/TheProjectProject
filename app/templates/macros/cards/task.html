@@ -14,5 +14,21 @@
       on {{ time_to_str(task.post_stamp) }}
     </small>
   </div>
+  <!-- action bar -->
+  {% if g.project.is_member(g.current_user) %}
+    <div class='action-bar'>
+      {% if g.current_user==task.author %}
+        <div class='hoverable'>
+          <a class='delete-btn task-btn float-left' href="{{ url_for('project.change_task_status', project_id=g.project.id, task_id=task.id, action='delete') }}">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+          </a>
+          <span class='tooltiptext'>Delete Task</span>
+        </div>
+      {% endif %}
+      <a class='complete-btn task-btn float-right' href="{{ url_for('project.change_task_status', project_id=g.project.id, task_id=task.id, action='complete') }}">
+        <i class="fa fa-check-circle" aria-hidden="true"></i>
+      </a>
+    </div>
+  {% endif %}
 </div>
 {% endmacro -%}
