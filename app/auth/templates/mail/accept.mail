@@ -16,11 +16,9 @@ feed or
 <a href="{{ urls['add'] }}">adding a new project idea</a>
 and sending collaboration invitations to other users.
 <br><br>
-Login Here (using the email and password from your application)...
-<br><br>
-<a href="{{ urls['login'] }}">Click Here</a>
-<br><br>
-...and let's start building together!
+<a href="{{ urls['login'] }}">Login Here</a>
+(using the email and password from your application)
+and let's start building together!
 <br><br>
 
 Please contact us at
