@@ -68,7 +68,36 @@
         </div>
       </nav>
 
-      {% set carousels = [
+      {% set carousels = [] %}
+
+      {% if current_user==user %}
+        {%
+          set carousels = carousels + [
+            (
+              'Invitations',
+              render_carousel(
+                label='Invitations',
+                id_postfix='invitations',
+                card_type='project-invitation',
+                icon_type='notifcation',
+                data=user.invitations.all()
+              )
+            ),
+            (
+              'Applications',
+              render_carousel(
+                label='Applications',
+                id_postfix='invitations',
+                card_type='project-application',
+                icon_type='sent',
+                data=user.pending.all()
+              )
+            )
+          ]
+        %}
+      {% endif %}
+
+      {% set carousels = carousels + [
           (
             'Owned',
             render_carousel(
@@ -112,33 +141,6 @@
           )
         ]
       %}
-
-      {% if current_user==user %}
-        {%
-          set carousels = carousels + [
-            (
-              'Invitations',
-              render_carousel(
-                label='Invitations',
-                id_postfix='invitations',
-                card_type='project-invitation',
-                icon_type='notifcation',
-                data=user.invitations.all()
-              )
-            ),
-            (
-              'Applications',
-              render_carousel(
-                label='Applications',
-                id_postfix='invitations',
-                card_type='project-application',
-                icon_type='sent',
-                data=user.pending.all()
-              )
-            )
-          ]
-        %}
-      {% endif %}
 
       {{ render_safe_tabs(carousels, 'Owned') }}
     </div>
