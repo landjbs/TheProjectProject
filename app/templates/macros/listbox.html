@@ -18,9 +18,10 @@
 %}
 
 
-{% macro render_listbox(id_postfix, card_type, data, label=False, icon_type=False, empty_message=False, n_override=False) -%}
+{% macro render_listbox(id_postfix, card_type, data, label=False, icon_type=False, empty_message=False, n_override=False, small=False) -%}
   {% set render_fn = card_renders[card_type] %}
   {% set n = (data|length) if data else 0 %}
+  {% set boxclass = 'list-group' if not small else 'list-group small' %}
   {% if label %}
     <h4 class='tabname-big'>
       {{ label }}
@@ -30,7 +31,7 @@
       {% endif %}
     </h4>
   {% endif %}
-  <div class='list-group'>
+  <div class='{{ boxclass }}'>
     {% if n==0 and empty_message %}
       <p class='empty-text'>{{ empty_message }}</p>
     {% else %}
