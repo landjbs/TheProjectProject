@@ -1,8 +1,9 @@
 ''' Custom validators for WTF_Forms '''
 
 import re
-from app.link.utils import fix_url
+from wtforms.validators import ValidationError
 
+from app.link.utils import fix_url
 
 class Email_Ext_Validator(object):
     ''' Validator for allowed email extensions '''
