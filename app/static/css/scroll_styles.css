@@ -157,9 +157,6 @@ a:hover {
 
 .fa-star {
   color: gold;
-  -webkit-appearance:none;
-  border: 0px;
-  outline: none;
 }
 
 .fa-star-o:hover {
