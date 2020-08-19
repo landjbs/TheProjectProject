@@ -149,7 +149,19 @@
           ]
         %}
       {% else %}
-
+        {% set carousels = carousels + [
+            (
+              'Members',
+              render_carousel(
+                label='Members',
+                id_postfix='members',
+                card_type='user',
+                icon_type='user',
+                data=members
+              )
+            )
+          ]
+        %}
       {% endif %}
 
 
