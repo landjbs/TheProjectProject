@@ -2,7 +2,7 @@
 {% macro render_safe_tabs(carousel_list) -%}
     {% if request.MOBILE %}
       <link rel='stylesheet' href="css/mobile_profile_styles.css">
-      <script src="js/tavs.js"></script>
+      <script src="js/tabs.js"></script>
       <div class="tab">
         {% for name, _ in carousel_list %}
           <button
