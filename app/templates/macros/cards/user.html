@@ -120,6 +120,41 @@
 </div>
 {% endmacro -%}
 
+<!-- card for users who are members of project -->
+{% macro render_member_card(user) -%}
+<div class="col-md-4">
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class='card-head tiny'>
+        <a class='project-name' href='user={{ user.code }}'>
+          <h5>
+            {{ user.name }}
+            {% set badge = user.choose_badge('member') %}
+            {% if badge %}
+              {{ render_badge_icon(badge) }}
+            {% endif %}
+            {% if user.recently_active() %}
+              <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+            {% endif %}
+          </h5>
+        </a>
+      </div>
+      <div class='float-left'>
+        <button type="button" class="btn" action="{{ url_for('project.remove_member', user_id=user.id, project_id=g.project.id) }}">
+          Remove
+        </button>
+      </div>
+      <div class='float-right'>
+        <button type="button" class="btn" action="{{ url_for('project.make_owner', user_id=user.id, project_id=g.project.id) }}">
+          Make Owner
+        </button>
+      </div>
+      </center>
+    </div>
+  </div>
+</div>
+{% endmacro -%}
+
 
 <!-- MODALS -->
 {% macro render_collaborate_modal(user, target_project=None) -%}
