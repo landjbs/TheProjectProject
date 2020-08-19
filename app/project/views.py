@@ -411,10 +411,11 @@ def remove_member(project_id, user_id):
 def make_owner(project_id, user_id):
     ''' Transfers ownership of project to user '''
     project = Project.query.get_or_404(project_id)
+    user = User.query.get_or_404(user_id)
     if current_user!=project.owner:
         flash('Must be project owner to transfer ownership.')
     else:
-        if not project.make_owner(user_id):
+        if not project.make_owner(user):
             flash('Could not transfer ownership', 'error')
     return redirect(request.referrer)
 

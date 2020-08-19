@@ -285,7 +285,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                              'if you think something is wrong or have '
                              'any questions.',
                              important=True,
-                             redirect=self.get_url())
+                             redirect=self.get_url()
+            )
         else:
             self.notify_members(
                 text=f'{user.name} has left {self.name}.'
