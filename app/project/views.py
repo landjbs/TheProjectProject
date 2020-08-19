@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render_template, flash, jsonify
+from flask import request, redirect, url_for, render_template, flash, jsonify, g
 from flask_login import login_required, current_user
 from flask_mobility.decorators import mobilized
 from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED

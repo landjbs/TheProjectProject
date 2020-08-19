@@ -1,7 +1,11 @@
 {% from 'macros/cards/project.html' import
   render_big_project_card, render_mid_project_card, render_small_project_card
   with context %}
-{% from 'macros/cards/user.html' import render_user_card with context %}
+{%
+  from 'macros/cards/user.html' import
+  render_user_card, render_invitation_card
+  with context
+%}
 {% from 'macros/cards/competition.html' import render_competition_card with context %}
 {%
   from 'macros/cards/badge.html' import
@@ -18,6 +22,7 @@
     ('project-mid',     render_mid_project_card),
     ('project-small',   render_small_project_card),
     ('user',            render_user_card),
+    ('invitation',      render_invitation_card),
     ('competition',     render_competition_card),
     ('user_badge',      render_user_badge_card),
     ('badge',           render_badge_card),

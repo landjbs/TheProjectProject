@@ -92,7 +92,7 @@
 </div>
 {% endmacro -%}
 
-{% render_invitation_card(user) %}
+{% macro render_invitation_card(user) -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
@@ -110,9 +110,16 @@
           </h5>
         </a>
       </div>
-      <button type="button" class="btn" action="{{ url_for('user.withdraw_collaboration', user_id=user.id, project=g.project.id) }}">
-        Withdraw
-      </button>
+      <div class='card-oneline' style=''>
+        <p class='oneliner'>
+          {{ user.about }}
+        </p>
+      </div>
+      <center>
+        <button type="button" class="btn" action="{{ url_for('user.withdraw_collaboration', user_id=user.id, project_id=g.project.id) }}">
+          Withdraw
+        </button>
+      </center>
     </div>
   </div>
 </div>
