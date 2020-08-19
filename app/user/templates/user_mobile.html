@@ -97,44 +97,11 @@
           )
         ]
       %}
+      <!-- TODO: add task -->
 
       {% if current_user==user %}
-        (
-          'Invitations',
-          render_carousel(
-            label='Inviations',
-          )
-        )
+        <!-- TODO: add invitations -->
       {% endif %}
-
-
-
-      <div id="Tasks" class="tabcontent">
-        {% set completed_tasks = user.tasks_worked %}
-        <h4 class='tabname-big'>
-          Completed Tasks
-          <i class="fa fa-check-circle" style='color:#FF5D00;'></i>
-          {{ completed_tasks|length }}
-        </h4>
-        {% for task in completed_tasks|reverse %}
-          <div class="list-group-item list-group-item-action flex-column align-items-start">
-            <h6 class="mb-1">{{ task.text }}</h6>
-            <div class="d-flex w-100 justify-content-between">
-              <small>Completed
-              on {{ time_to_str(task.complete_stamp) }}
-            for
-            {% if current_user.is_authenticated %}
-              <a href='project={{ task.project.code }}' class='user-name'>
-            {% else %}
-              <a href='/login' class='user-name'>
-            {% endif %}
-              {{ task.project.name }}
-            </a></small>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-
     </div>
 
     <!-- modals -->
