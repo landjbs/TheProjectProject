@@ -1,4 +1,3 @@
-document.getElementById("defaultOpen").click();
 function openTab(evt, tabName) {
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -11,4 +10,5 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
+  sessionStorage.openTab = tabName + '_Button';
 }
