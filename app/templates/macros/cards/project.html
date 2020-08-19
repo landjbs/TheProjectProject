@@ -27,17 +27,12 @@
 
 {% macro render_project_action_bar(project) -%}
   <div class='action-bar'>
-    {% if g.current_user in project.stars %}
-      <button onclick="star(project.id)">
-        <i id='star_{{ project.id }}' class="fa fa-star"></i>
-      </button>
-
+    <button onclick="toggle_star(project.id)">
+      <i id='star_{{ project.id }}'
+        class="fa fa-star{% if g.current_user in project.stars %}-o{% endif %}">
+      </i>
+    </button>
       <!-- href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}" -->
-    {% else %}
-      <a href="{{ url_for('project.like_action', project_id=project.id, action='like') }}">
-        <i class="fa fa-star-o"></i>
-      </a>
-    {% endif %}
     &nbsp;
     {% if not g.current_user in project.members %}
       {% if g.current_user.has_applied(project) %}
