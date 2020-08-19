@@ -76,7 +76,7 @@
 
 {% macro render_project_invitation_bar(project) -%}
   <div class='action-bar'>
-    <a class='float-left' href="{{ url_for('project.remove_member', user_id=user.id, project_id=g.project.id) }}">
+    <a class='float-left' href="{{ url_for('project.reject_collaboration', project_id=project.id) }}">
       <button class='btn'>Reject</button>
     </a>
     <a class='float-right' href="{{ url_for('project.accept_collaboration', project_id=project.id) }}">
