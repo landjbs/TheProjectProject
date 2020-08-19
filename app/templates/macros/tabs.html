@@ -7,7 +7,7 @@
         {% for name, _ in carousel_list %}
           <button
             class="tablinks"
-            onclick="openTab(event, {{ name }})"
+            onclick="openTab(event, '{{ name }}')"
             id="{{ name }}_Button"
             {% if loop.index==1 %}id="defaultOpen"{% endif %}>
             {{ name }}

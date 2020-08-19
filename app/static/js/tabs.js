@@ -1,5 +1,4 @@
 function openTab(evt, tabName) {
-  alert('herte');
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
