@@ -92,8 +92,20 @@
               </div>
 
               <div class="col-sm-4">
+                {{
+                  render_listbox(
+                    label='Completed',
+                    id_postfix='completed',
+                    card_type='complete-task',
+                    data=user.tasks_worked.all(),
+                    empty_message='No tasks completed yet.'
+                  )
+                }}
+              </div>
+
+              <div class="col-sm-4">
                 <h6>Completed Tasks</h6>
-                  {% set completed_tasks = user.tasks_worked %}
+                  {% set completed_tasks =  %}
                   <div class="list-group list-small">
                     {% if completed_tasks|length==0 %}
                       <p class='empty-text'>No tasks completed yet.</p>
