@@ -362,15 +362,17 @@
             {{
               render_carousel(
                 label='Applications',
-                card_type='applicaiton',
+                id_postfix='applications',
+                card_type='application',
                 icon_type='notifcation',
-                data=applicaitons
+                data=applications
               )
             }}
             <!-- recommended members -->
             {{
               render_carousel(
                 label='Recommended',
+                id_postfix='recommended',
                 card_type='user',
                 data=recommended
               )
@@ -379,6 +381,7 @@
             {{
               render_carousel(
                 label='Invitations',
+                id_postfix='invitations',
                 card_type='invitation',
                 icon_type='sent',
                 data=invitations

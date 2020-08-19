@@ -79,7 +79,8 @@ def add_project():
     return render_template('add_project.html', form=form)
 
 
-
+@project.route('/project=<project_code>', methods=['GET', 'POST'])
+@limiter.limit('60/minute')
 def project_page(project_code):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # add project to globals
@@ -184,72 +185,72 @@ def project_page(project_code):
                             show_edit_modal=show_edit_modal)
 
 
-@project.route('/project=<project_code>', methods=['GET', 'POST'])
-@limiter.limit('60 per minute')
-@mobilized(project_page)
-def project_page(project_code):
-    ''' Mobile optimized project page '''
-    # get project object
-    project = Project.query.filter_by(code=project_code).first_or_404()
-    # get relevant data
-    project_subjects = project.subject_data()
-    # forms
-    comment_form = Comment_Form()
-    task_form = Task_Form()
-    # editing
-    recommended_members = False
-    edit_form = False
-    edit_application_form = False
-    show_edit_modal = False
-    if current_user==project.owner:
-        if project.open and not project.complete:
-            recommended_members = recommend_users(project)
-        ## edit project form ##
-        edit_form = Edit_Project()
-        edit_application_form = Edit_Project_Application()
-        if request.method=='POST':
-            if edit_form.validate_on_submit():
-                edits_made = False
-                # name
-                new_name = edit_form.name.data
-                if new_name!=project.name:
-                    project.name = new_name
-                    edits_made = True
-                # oneliner
-                new_oneliner = edit_form.oneliner.data
-                if new_oneliner!=project.oneliner:
-                    project.oneliner = new_oneliner
-                    edits_made = True
-                # summary
-                new_summary = edit_form.summary.data
-                if new_summary!=project.summary:
-                    project.summary = new_summary
-                    edits_made = True
-                # estimated time
-                new_time = edit_form.estimated_time.data
-                if new_time!=project.estimated_time:
-                    project.estimated_time = new_time
-                    edits_made = True
-                # team size
-                new_size = edit_form.team_size.data
-                if new_size!=project.team_size:
-                    project.team_size = new_size
-                    edits_made = True
-                if edits_made:
-                    flash(f'You have successfully edited {project.name}.',
-                          'success')
-                    project.update()
-            else:
-                show_edit_modal = True
-    return render_template('mobile/project.html',
-                            project=project,
-                            comment_form=comment_form,
-                            project_application=project_application,
-                            task_form=task_form,
-                            project_subjects=project_subjects,
-                            recommended_members=recommended_members,
-                            edit_form=edit_form,
-                            edit_application_form=edit_application_form)
+# @project.route('/project=<project_code>', methods=['GET', 'POST'])
+# @limiter.limit('60 per minute')
+# @mobilized(project_page)
+# def project_page(project_code):
+#     ''' Mobile optimized project page '''
+#     # get project object
+#     project = Project.query.filter_by(code=project_code).first_or_404()
+#     # get relevant data
+#     project_subjects = project.subject_data()
+#     # forms
+#     comment_form = Comment_Form()
+#     task_form = Task_Form()
+#     # editing
+#     recommended_members = False
+#     edit_form = False
+#     edit_application_form = False
+#     show_edit_modal = False
+#     if current_user==project.owner:
+#         if project.open and not project.complete:
+#             recommended_members = recommend_users(project)
+#         ## edit project form ##
+#         edit_form = Edit_Project()
+#         edit_application_form = Edit_Project_Application()
+#         if request.method=='POST':
+#             if edit_form.validate_on_submit():
+#                 edits_made = False
+#                 # name
+#                 new_name = edit_form.name.data
+#                 if new_name!=project.name:
+#                     project.name = new_name
+#                     edits_made = True
+#                 # oneliner
+#                 new_oneliner = edit_form.oneliner.data
+#                 if new_oneliner!=project.oneliner:
+#                     project.oneliner = new_oneliner
+#                     edits_made = True
+#                 # summary
+#                 new_summary = edit_form.summary.data
+#                 if new_summary!=project.summary:
+#                     project.summary = new_summary
+#                     edits_made = True
+#                 # estimated time
+#                 new_time = edit_form.estimated_time.data
+#                 if new_time!=project.estimated_time:
+#                     project.estimated_time = new_time
+#                     edits_made = True
+#                 # team size
+#                 new_size = edit_form.team_size.data
+#                 if new_size!=project.team_size:
+#                     project.team_size = new_size
+#                     edits_made = True
+#                 if edits_made:
+#                     flash(f'You have successfully edited {project.name}.',
+#                           'success')
+#                     project.update()
+#             else:
+#                 show_edit_modal = True
+#     return render_template('mobile/project.html',
+#                             project=project,
+#                             comment_form=comment_form,
+#                             project_application=project_application,
+#                             task_form=task_form,
+#                             project_subjects=project_subjects,
+#                             recommended_members=recommended_members,
+#                             edit_form=edit_form,
+#                             edit_application_form=edit_application_form)
 
 
 
