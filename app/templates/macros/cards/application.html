@@ -54,15 +54,16 @@
 
 
 {% macro render_project_application_card(application) -%}
-<div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body">
-      <div class='card-head tiny'>
-        <a class='project-name' href='user={{ user.code }}'>
-          {{ application.project.name }}
-        </a>
+  {% set project = applicaiton.project %}
+  <div class="col-md-4">
+    <div class="card mb-2">
+      <div class="card-body">
+        <div class='card-head tiny'>
+          <a class='project-name' href="{{ url_for('project.project_page', project_code=project.code) }}">
+            {{ project.name }}
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 {% endfor -%}
