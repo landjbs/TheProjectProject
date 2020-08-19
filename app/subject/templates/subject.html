@@ -1,5 +1,5 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
-{% from 'macros/tabs.html' import remder_safe_tabs with context %}
+{% from 'macros/tabs.html' import render_safe_tabs with context %}
 
 {% extends "home_base.html" %}
 
@@ -18,30 +18,27 @@
     {% set carousels = [
         (
           'Projects',
-          {{
-            render_carousel(
-              label='Projects',
-              id_postfix='projects',
-              card_type='project-big',
-              data=projects,
-              icon_type='project'
-            )
-          }}
+          render_carousel(
+            label='Projects',
+            id_postfix='projects',
+            card_type='project-big',
+            data=projects,
+            icon_type='project'
+          )
         ),
         (
           'Users',
-          {{
-            render_carousel(
-              label='Users',
-              id_postfix='users',
-              card_type='user',
-              data=users,
-              icon_type='user'
-            )
-          }}
+          render_carousel(
+            label='Users',
+            id_postfix='users',
+            card_type='user',
+            data=users,
+            icon_type='user'
+          )
         )
       ]
     %}
+    {{ render_safe_tabs(carousels) }}
 
 </div>
 
