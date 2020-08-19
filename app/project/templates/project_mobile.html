@@ -1,3 +1,7 @@
+{% from 'macros/carousels.html' import render_carousel with context %}
+{% from 'macros/listbox.html' import render_listbox with context %}
+{% from 'macros/tabs.html' import render_safe_tabs with context %}
+{% from 'macros/cards/project.html' import render_project_action_bar %}
 
 
 {% extends "home_base.html" %}
@@ -68,6 +72,18 @@
           <br>
         </div>
       </nav>
+
+      {%
+        set carousels = [
+
+        ]
+      %}
+
+      {%
+
+      %}
+
+
 
       <div class="tab">
         <button class="tablinks" onclick="openTab(event, 'Tasks')" id="defaultOpen">Tasks</button>
