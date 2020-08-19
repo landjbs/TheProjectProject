@@ -25,6 +25,14 @@
           override_partition=1
         )
       ),
+      ('Progress'
+        render_carousel(
+          label=badge_label,
+          id_postfix='my',
+          card_type='user_badge',
+          data=my_badges
+        )
+      ),
       ('Badges'
         render_carousel(
           label=badge_label,
@@ -33,7 +41,6 @@
           data=my_badges
         )
       )
-
     ]
   %}
   {{
