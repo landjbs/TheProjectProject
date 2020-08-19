@@ -32,9 +32,11 @@
     <div class='container' style="min-width:100%;padding:0px;">
         <nav class='sidebar-header absolute-top' id='nameNav'>
         <div class='nav-keep' style='padding-top: 5vh;'>
-          <p class='float-right'>
-            <i class="fa fa-star"></i>
-            {{ project.stars.all()|length }}
+          <p class='float-right' style='text-align: right;'>
+            <span id='starcount_{{ project.id }}'>
+              {{ project.stars.all()|length }}
+              <i class="fa fa-star"></i>
+            </span>
             <!-- edit button -->
             {% if is_owner %}
               <br>
