@@ -26,7 +26,7 @@
 
 
 {% macro render_project_action_bar(project) -%}
-  {% set action = 'star' if not project.id in g.current_user.stars else 'unstar' %}
+  {% set action = 0 if not project.id in g.current_user.stars else 1 %}
   <div class='action-bar'>
     <a onclick="toggleStar({{ project.id }}, {{ action }})">
       <i id='star_{{ project.id }}'
