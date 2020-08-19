@@ -183,8 +183,9 @@
             <div class="row">
               <div class="col">
                 <div class='row'>
+
+                  <!-- todo tasks -->
                   <div class='col'>
-                    <!-- todo tasks -->
                     {{
                       render_listbox(
                         label='ToDo',
@@ -223,65 +224,24 @@
                         label='Comments',
                         id_postfix='comments',
                         card_type='comment',
-                        data=project.comments.all()
+                        data=project.comments.all(),
                         empty_message='No commments yet.'
                       )
                     }}
+                    {% if current_user.is_authenticated %}
+                      <form class='post_form' id='comment_form' method='post'
+                        action="{{ url_for('project.add_comment', project_id=project.id) }}">
+                        {{ comment_form.hidden_tag() }}
+                        {{ comment_form.text(class='post-input', placeholder='Comment') }}
+                        <button>Add</button>
+                      </form>
+                    {% endif %}
                   </div>
-
-              <div class="col">
-                <h5>Comments</h5>
-                <div class="list-group">
-                  {% if project.comments.count()==0 %}
-                    <p class='empty-text'>No comments yet.</p>
-                  {% endif %}
-                  {% for comment in project.comments|reverse %}
-                    <div class="list-group-item list-group-item-action flex-column align-items-start">
-                      <div class="d-flex w-100 justify-content-between">
-                        {% if current_user.is_authenticated %}
-                          <a href='user={{ comment.author.code }}' class="mb-1">
-                        {% else %}
-                          <a href='/login'>
-                        {% endif %}
-                            <u>{{ comment.author.name }}</u>
-                            {% if (comment.author == project.owner) %}
-                              <div class='hoverable'>
-                                <i class="fa fa-circle" style='color:#FF5D00;'></i>
-                                <span class='tooltiptext'>Owner</span>
-                              </div>
-                            {% elif project.is_member(comment.author) %}
-                              <div class='hoverable'>
-                                <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
-                                <span class='tooltiptext'>Member</span>
-                              </div>
-                            {% endif %}
-                          </a>
-                        <small>{{ time_to_str(comment.timestamp) }}</small>
-                      </div>
-                      <p class="mb-1">{{ comment.text }}
-                        {% if current_user in [comment.author, project.owner] %}
-                          <div class='hoverable'>
-                            <a class='delete-btn task-btn float-right' href="{{ url_for('project.delete_comment', project_id=project.id, comment_id=comment.id) }}">
-                              <i class="fa fa-times-circle" aria-hidden="true"></i>
-                            </a>
-                            <span class='tooltiptext'>Delete Comment</span>
-                          </div>
-                        {% endif %}
-                      </p>
-                    </div>
-                  {% endfor %}
-                </div>
-                {% if current_user.is_authenticated %}
-                  <form class='post_form' id='comment_form' method='post'
-                    action="{{ url_for('project.add_comment', project_id=project.id) }}">
-                    {{ comment_form.hidden_tag() }}
-                    {{ comment_form.text(class='post-input', placeholder='Comment') }}
-                    <button>Add</button>
-                  </form>
-                {% endif %}
               </div>
             </div>
           </div>
+        </div>
+
 
         <!-- MEMBER TAB -->
         <div id='Members' class='tabcontent'>
