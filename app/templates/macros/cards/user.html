@@ -110,7 +110,7 @@
           </h5>
         </a>
       </div>
-      <button type="button" class="btn" action="{{ url_for('user.withdraw_collaboration', user_id=user.id, project=project.id) }}">
+      <button type="button" class="btn" action="{{ url_for('user.withdraw_collaboration', user_id=user.id, project=g.project.id) }}">
         Withdraw
       </button>
     </div>
