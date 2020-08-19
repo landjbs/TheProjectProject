@@ -103,32 +103,6 @@
                 }}
               </div>
 
-              <div class="col-sm-4">
-                <h6>Completed Tasks</h6>
-                  {% set completed_tasks =  %}
-                  <div class="list-group list-small">
-                    {% if completed_tasks|length==0 %}
-                      <p class='empty-text'>No tasks completed yet.</p>
-                    {% endif %}
-                    {% for task in completed_tasks|reverse %}
-                      <div class="list-group-item list-group-item-action flex-column align-items-start">
-                        <h6 class="mb-1">{{ task.text }}</h6>
-                        <div class="d-flex w-100 justify-content-between">
-                          <small>Completed
-                          on {{ time_to_str(task.complete_stamp) }}
-                        for
-                        {% if current_user.is_authenticated %}
-                          <a href='project={{ task.project.code }}' class='user-name'>
-                        {% else %}
-                          <a href='/login' class='user-name'>
-                        {% endif %}
-                          {{ task.project.name }}
-                        </a></small>
-                        </div>
-                      </div>
-                    {% endfor %}
-                  </div>
-              </div>
 
               <div class="col-sm-4">
                 <h6>Subject Breakdown</h6>
