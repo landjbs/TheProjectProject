@@ -55,7 +55,10 @@ def send_confirmation_email(user):
 
 # @rq.job
 def send_acceptance_email(user):
-    urls = {'login':  url_for('auth.login', _external=True)}
+    urls = {'login':            url_for('auth.login', _external=True),
+            'recommended':      url_for('hub.home', _external=True),
+            'add':              url_for('project.add_project', _external=True),
+            'perks':            url_for('badge.perk_page', _external=True)}
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [user.email]},
