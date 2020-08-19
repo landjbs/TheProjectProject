@@ -28,9 +28,11 @@
 {% macro render_project_action_bar(project) -%}
   <div class='action-bar'>
     {% if g.current_user in project.stars %}
-      <a href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}">
+      <button onclick="star()">
         <i class="fa fa-star"></i>
       </a>
+
+      <!-- href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}" -->
     {% else %}
       <a href="{{ url_for('project.like_action', project_id=project.id, action='like') }}">
         <i class="fa fa-star-o"></i>
