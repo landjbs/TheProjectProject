@@ -16,38 +16,57 @@
 <div class='container my-1 main'>
   <p style='text-align:left;'>Results for "{{ search_text }}"</p>
   <hr class="my-1">
-  {% set carousels = [
-      (
-        'Projects',
-        render_carousel(
-          label='Projects',
-          id_postfix='projects',
-          card_type='project-big',
-          data=results['project'][0],
-          icon_type='project'
+  {% set carousels = [] %}
+  <!-- add projects -->
+  {% if results['project'][1] > 0 %}
+    {%
+      set carousels = carousels + [
+        (
+          'Projects',
+          render_carousel(
+            label='Projects',
+            id_postfix='projects',
+            card_type='project-big',
+            data=results['project'][0],
+            icon_type='project'
+          )
         )
-      ),
-      (
-        'Users',
-        render_carousel(
-          label='Users',
-          id_postfix='users',
-          card_type='user',
-          data=results['user'][0],
-          icon_type='user'
+      ]
+    %}
+  {% endif %}
+  {% if results['user'][1] > 0 %}
+    {%
+      set carousels = carousels + [
+        (
+          'Users',
+          render_carousel(
+            label='Users',
+            id_postfix='users',
+            card_type='user',
+            data=results['user'][0],
+            icon_type='user'
+          )
         )
-      ),
-      ('Subjects',
-        render_carousel(
-          label='Subjects',
-          id_postfix='subject',
-          card_type='subject',
-          data=results['subject'][0],
-          icon_type='subject'
+      ]
+    %}
+  {% endif %}
+  {% if results['subject'][1] > 0 %}
+    {%
+      set carousels = carousels + [
+        (
+          'Subjects',
+          render_carousel(
+            label='Subjects',
+            id_postfix='subjects',
+            card_type='subject',
+            data=results['subject'][0],
+            icon_type='subject'
+          )
         )
-      )
-    ]
-  %}
+      ]
+    %}
+  {% endif %}
+
   {{ render_safe_tabs(carousels) }}
 </div>
 <script src="js/stars.js"></script>
