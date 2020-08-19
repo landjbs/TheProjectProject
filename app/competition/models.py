@@ -2,7 +2,6 @@ from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin, generate_code
-from app.user.models import User
 
 
 class Competition(CRUDMixin, db.Model):
@@ -77,6 +76,7 @@ class Competition(CRUDMixin, db.Model):
         # make active
         self.active = True
         # notify relevant users # TODO: potentially only recommend to certain users in future
+        from app.models.user import User
         User.notify_all(
             text=(f'{self.name}, a new competition you might like, just went '
                   'live! Click here to join—good luck!'),
