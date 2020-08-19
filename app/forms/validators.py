@@ -1,7 +1,7 @@
 ''' Custom validators for WTF_Forms '''
 
 import re
-from urllib.parse import urlparse
+from app.link.utils import fix_url
 
 
 class Email_Ext_Validator(object):
@@ -18,17 +18,17 @@ class Email_Ext_Validator(object):
 
 
 class Link_Validator(object):
-    ''' Validator for link format '''
+    ''' Validates link using request and fixes if necessary '''
     def __init__(self):
         pass
 
     def __call__(self, form, field):
         url = field.data
-        try:
-            result = urlparse(url)
-            return all([result.scheme, result.netloc, result.path])
-        except:
-            return False
+        fixed_url = fix_url(url)
+        if not fixed_url:
+            raise ValidationError('Invalid URL.')
+        else:
+            field.data = fixed_url
 
 
 class Select_Limit_Validator(object):
