@@ -126,9 +126,20 @@
                 icon_type='notifcation',
                 data=applications
               )
+            ),
+            (
+              'Recommended',
+              render_carousel(
+                label='Recommended',
+                id_postfix='recommended',
+                card_type='user',
+                data=recommended
+              )
             )
           ]
         %}
+      {% else %}
+
       {% endif %}
 
 
