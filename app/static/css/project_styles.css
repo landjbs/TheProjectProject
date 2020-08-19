@@ -189,15 +189,6 @@ ul ul a {
   text-decoration: underline;
 }
 
-/* comment and text boxes */
-.list-group {
-  min-height: 40vh;
-  max-height: 40vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  background: rgba(0,0,0,0.02);
-}
-
 .progress-bar {
   background: #00FF5D;
 }
