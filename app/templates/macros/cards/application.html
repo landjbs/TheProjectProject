@@ -64,7 +64,7 @@
           </a>
         </div>
         <center>
-          <button type="button" class="btn" action="{{ url_for('user.withdraw_collaboration', user_id=user.id, project_id=g.project.id) }}">
+          <button type="button" class="btn" action="{{ url_for('project.withdraw_application', project_id=project.id) }}">
             Withdraw
           </button>
         </center>
