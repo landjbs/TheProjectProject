@@ -1,5 +1,22 @@
-{% from 'macros/carousel.html' import render_carousel %}
-
-
 <!-- renders tabs if mobile and otherwise stacked carousels -->
-{% macro render_safe_tabs() -%}
+{% macro render_safe_tabs(carousel_list) -%}
+    {% if request.MOBILE %}
+      <link rel='stylesheet' href="css/mobile_profile_styles.css">
+      <script src="js/tavs.js"></script>
+      <div class="tab">
+        {% for name, _ in carousel_list %}
+          <button
+            class="tablinks"
+            onclick="openTab(event, {{ name }})"
+            {% if loop.index==1 %}id="defaultOpen"{% else %}>
+            {{ name }}
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% for _, carousel in carousel_list %}
+      {{ carousel }}
+    {% endfor %}
+
+{% endmacro -%}
