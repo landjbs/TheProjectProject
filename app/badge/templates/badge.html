@@ -25,7 +25,7 @@
           override_partition=1
         )
       ),
-      ('Progress'
+      ('Progress',
         render_carousel(
           label=badge_label,
           id_postfix='my',
@@ -33,37 +33,15 @@
           data=my_badges
         )
       ),
-      ('Badges'
+      ('Badges',
         render_carousel(
           label=badge_label,
-          id_postfix='my',
-          card_type='user_badge',
-          data=my_badges
+          id_postfix='other',
+          card_type='badge',
+          data=other_badges
         )
       )
     ]
   %}
-  {{
-
-  }}
-  <!-- badges in progress -->
-  {% set badge_label = 'My Badges' if not request.MOBILE else 'Badges' %}
-  {{
-    render_carousel(
-      label=badge_label,
-      id_postfix='my',
-      card_type='user_badge',
-      data=my_badges
-    )
-  }}
-  <!-- other badges -->
-  {% set badge_label = 'Badges' if not request.MOBILE else False %}
-  {{
-    render_carousel(
-      label=badge_label,
-      id_postfix='other',
-      card_type='badge',
-      data=other_badges
-    )
-  }}
+  {{ render_safe_tabs(carousels) }}
 {% endblock %}
