@@ -19,6 +19,7 @@ def subject_page(subject_name):
     projects = Project.query.filter(Project.subjects.contains(subject)).all()
     # users
     users = [s.user for s in subject.users[:30]]
+    # template
     return render_template('subject.html',
                            projects=projects,
                            users=users,
