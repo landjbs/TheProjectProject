@@ -138,3 +138,16 @@ body {
   min-height:80vh;
   max-height:80vh;
 }
+
+
+/* card columns take up almost full width */
+@media (max-width: 600px) {
+  [class*='col-'] {
+    padding-left:   0px;
+    padding-right:  0px;
+  }
+  .competion-card {
+    min-width:99%;
+    max-width:99%;
+  }
+}
