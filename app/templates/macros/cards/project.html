@@ -30,7 +30,7 @@
     {% if g.current_user in project.stars %}
       <button onclick="star(project.id)">
         <i id='star_{{ project.id }}' class="fa fa-star"></i>
-      </a>
+      </button>
 
       <!-- href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}" -->
     {% else %}
