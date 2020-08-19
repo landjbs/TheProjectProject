@@ -17,6 +17,8 @@ from ..user import user
 def user_page(code):
     user = User.query.filter_by(code=code).first_or_404()
     # user data
+    task_data = False
+    subject_data = False
     if not request.MOBILE:
         # worked tasks
         tasks = user.tasks_worked
