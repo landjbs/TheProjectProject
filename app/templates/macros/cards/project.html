@@ -28,18 +28,14 @@
 {% macro render_project_action_bar(project) -%}
   {% set star_id = 'star_{project_id}'.format(project_id=project.id) %}
   {% set count_id = 'starcount_{project_id}'.format(project_id=project.id) %}
-  {% if not project.id in g.current_user.stars %}
-    {% set url = url_for('project.like_action', project_id=project.id) %}
-    {% set action = 1 %}
-  {% else %}
-    {% set url = url_for('project.like_action', project_id=project.id) %}
-    {% set action = 0 %}
-  {% endif %}
+  {% set url = url_for('project.like_action', project_id=project.id) %}
   <div class='action-bar'>
     <a onclick="toggleStar({{ project.id }}, '{{ url }}', '{{ star_id }}', '{{ count_id }}')">
-      <i id='{{ star_id }}'
-        class="fa fa-star{% if action=='star' %}-o{% endif %}">
-      </i>
+      {% if g.current_user.has_starred(project) %}
+        <i id='{{ star_id }}' class="fa fa-star"></i>
+      {% else %}
+        <i id='{{ star_id }}' class="fa fa-star-o"></i>
+      {% endif %}
     </a>
     &nbsp;
     {% if not g.current_user in project.members %}
