@@ -18,6 +18,8 @@
   with context %}
 {% from 'macros/cards/application.html' import render_application_card with context %}
 
+{% from 'macros/icons' import icon_types %}
+
 <!-- CACHE RENDER CARD FUNCTIONS -->
 <!-- TODO: change user_badge to user-badge -->
 {%
@@ -37,20 +39,6 @@
   ])
 %}
 <!-- /RENDER CARD FUNCTIONS -->
-
-<!-- CACHE ICON TYPES -->
-{%
-  set icon_types = dict([
-    ('project',           'fa fa-circle'),
-    ('project-member',    'fa fa-circle-o'),
-    ('user',              'fa fa-user-circle'),
-    ('subject',           'fa fa-flask'),
-    ('notification',      'fa fa-bell'),
-    ('sent',              'fa fa-paper-plane'),
-    ('competition',       'fa fa-trophy')
-  ])
-%}
-<!-- /CACHE ICON TYPES -->
 
 
 <!-- CAROUSEL -->
