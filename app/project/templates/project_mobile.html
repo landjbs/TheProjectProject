@@ -98,6 +98,20 @@
               {% endif %}
             )
           ),
+          (
+            'Completed',
+            (
+              render_listbox(
+                label='Completed',
+                id_postfix='completed',
+                card_type='complete-task',
+                icon_type='complete',
+                data=project.completed_tasks().all(),
+                empty_message='No tasks completed yet.',
+                size='default'
+              )
+            )
+          )
         ]
       %}
 
