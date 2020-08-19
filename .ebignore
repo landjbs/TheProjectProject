@@ -2,4 +2,3 @@ virt
 *.rdb
 *.db
 *.env
-.ebextensions
