@@ -28,15 +28,15 @@
     <div class='container' style="min-width:100%;padding:0px;">
         <nav class='sidebar-header absolute-top' id='nameNav'>
         <div class='nav-keep' style='padding-top:5vh;'>
-          <p class='float-right'>
-            <i class="fa fa-star"></i>
+          <p class='float-right' style='text-align:right;'>
             {{ user.total_stars() }}
+            <i class="fa fa-star"></i>
             <!-- edit button -->
             {% if user == current_user %}
                 <br>
                 <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   Edit
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>
             {% endif %}
           </p>

@@ -175,6 +175,17 @@
       {{ render_safe_tabs(carousels, 'To Do') }}
     </div>
 
+    <!-- modals -->
+    {% if is_owner %}
+      <div>
+        {{ render_edit_project_modal(project, edit_form) }}
+        {{ render_complete_modal(project) }}
+        {{ render_open_modal(project) }}
+        {{ render_requires_application_modal(project, edit_application_form) }}
+      </div>
+    {% endif %}
+    <!-- /modals -->
+
 
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
