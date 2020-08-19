@@ -1,4 +1,4 @@
-{% from 'macros/cards/task.html' import render_todo_task %}
+{% from 'macros/cards/task.html' import render_todo_task with context %}
 
 {% from 'macros/icon.html' import icon_types %}
 
@@ -30,5 +30,6 @@
       {% for elt in data %}
         {{ render_fn(elt) }}
       {% endfor %}
+    {% endif %}
   </div>
 {% endmacro -%}

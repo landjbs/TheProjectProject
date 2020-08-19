@@ -1,8 +1,9 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
+{% from 'macros/listbox.html' import render_listbox with context %}
+
 {% from 'macros/cards/project.html' import render_project_action_bar, render_edit_project_modal, render_complete_modal, render_open_modal, render_requires_application_modal %}
 {% from 'macros/cards/question.html' import render_question_card, render_add_question_card %}
 {% from 'macros/cards/link.html' import render_add_link_card, render_project_link_card, render_private_link %}
-{% from 'macros/listbox.html' import render_listbox %}
 
 {% extends "home_base.html" %}
 
@@ -189,7 +190,7 @@
                         label='ToDo',
                         id_postfix='todo',
                         card_type='todo-task',
-                        data=project.todo_tasks(),
+                        data=project.todo_tasks().all(),
                         empty_message='No tasks to do right now.'
                       )
                     }}
