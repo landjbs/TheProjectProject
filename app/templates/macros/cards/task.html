@@ -80,3 +80,18 @@
   {% endif %}
 </div>
 {% endmacro -%}
+
+
+{% macro render_complete_task_sparse -%}
+<div class="list-group-item list-group-item-action flex-column align-items-start">
+  <h6 class="mb-1">{{ task.text }}</h6>
+  <div class="d-flex w-100 justify-content-between">
+    <small>
+      Completed on {{ time_to_str(task.complete_stamp) }} for
+      <a href='project={{ task.project.code }}' class='user-name'>
+        {{ task.project.name }}
+      </a>
+    </small>
+  </div>
+</div>
+{% endmacro -%}
