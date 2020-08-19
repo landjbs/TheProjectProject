@@ -61,7 +61,7 @@
           <p>{{ user.about }}</p>
           {% if current_user.is_authenticated and current_user!=user %}
             <center>
-              {{ render_user_action_bar(current_user, user) }}
+              {{ render_user_action_bar(user) }}
             </center>
           {% endif %}
           <br>
