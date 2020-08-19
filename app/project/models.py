@@ -284,7 +284,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                              "it's nothing personal! Please contact us "
                              'if you think something is wrong or have '
                              'any questions.',
-                             important=important,
+                             important=True,
                              redirect=self.get_url())
         else:
             self.notify_members(
