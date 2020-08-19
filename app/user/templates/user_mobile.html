@@ -122,6 +122,9 @@
                 render_carousel(
                   label='Invitations',
                   id_postfix='invitations',
+                  card_type='project-invitation',
+                  icon_type='notifcation',
+                  data=user.invitations.all()
                 )
               )
             }}
