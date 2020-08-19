@@ -66,14 +66,22 @@ def user_page(code):
                 user.update()
         else:
             show_edit_modal = True
-    return render_template('user.html',
-                            user=user,
-                            task_data=task_data,
-                            subject_data=subject_data,
-                            owned=owned,
-                            member=member,
-                            edit_form=edit_form,
-                            show_edit_modal=show_edit_modal)
+    if not request.MOBILE:
+        return render_template('user.html',
+                                user=user,
+                                task_data=task_data,
+                                subject_data=subject_data,
+                                owned=owned,
+                                member=member,
+                                edit_form=edit_form,
+                                show_edit_modal=show_edit_modal)
+    else:
+        return render_template('user_mobile.html',
+                                user=user,
+                                owned=owned,
+                                member=member,
+                                edit_form=edit_form,
+                                show_edit_modal=show_edit_modal)
 
 
 ## user to self interactions ##
