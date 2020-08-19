@@ -74,7 +74,7 @@
 {% endmacro -%}
 
 
-{% macro render_big_project_card(project) -%}
+{% macro render_big_project_card(project, render_action_bar_fn=render_project_action_bar) -%}
 <div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
@@ -128,7 +128,7 @@
       {% if g.current_user.is_authenticated %}
         <br><br>
         <hr class="my-4">
-        {{ render_project_action_bar(project) }}
+        {{ render_action_bar_fn(project) }}
       {% endif %}
     </div>
   </div>
