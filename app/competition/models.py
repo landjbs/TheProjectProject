@@ -75,7 +75,7 @@ class Competition(CRUDMixin, db.Model):
         assert not (datetime.utcnow() > self.ends_on), 'Invalid end date.'
         # make active
         self.active = True
-        # notify relevant users # TODO: potentially only recommend to certain users in future
+        # notify relevant users # # NOTE: potentially only recommend to certain users in future
         from app.models.user import User
         User.notify_all(
             text=(f'{self.name}, a new competition you might like, just went '

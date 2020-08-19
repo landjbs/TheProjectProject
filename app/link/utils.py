@@ -1,6 +1,6 @@
 import re
 import requests
-# TODO: consider switching to HTTPConnection as per https://stackoverflow.com/questions/16778435/python-check-if-website-exists for head requests
+# # NOTE: consider switching to HTTPConnection as per https://stackoverflow.com/questions/16778435/python-check-if-website-exists for head requests
 # from http.client import HTTPConnection
 
 
