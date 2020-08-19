@@ -56,8 +56,8 @@ def create_app(config=config.production_config):
         ''' prepare to handle each request '''
         g.request_start_time = time.time()
         # authenticated only
+        g.current_user = current_user
         if current_user.is_authenticated:
-            g.current_user = current_user
             current_user.update_last_active()
             g.search_form = SearchForm()
             g.project_application = Project_Application_Form()

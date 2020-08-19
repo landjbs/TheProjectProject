@@ -26,51 +26,53 @@
 
 
 {% macro render_project_action_bar(project) -%}
-  {% set star_id = 'star_{project_id}'.format(project_id=project.id) %}
-  {% set count_id = 'starcount_{project_id}'.format(project_id=project.id) %}
-  {% set url = url_for('project.like_action', project_id=project.id) %}
-  <div class='action-bar'>
-    <a onclick="toggleStar({{ project.id }}, '{{ url }}', '{{ star_id }}', '{{ count_id }}')">
-      {% if g.current_user.has_starred(project) %}
-        <i id='{{ star_id }}' class="fa fa-star"></i>
+  {% if g.current_user.is_authenticated %}
+    {% set star_id = 'star_{project_id}'.format(project_id=project.id) %}
+    {% set count_id = 'starcount_{project_id}'.format(project_id=project.id) %}
+    {% set url = url_for('project.like_action', project_id=project.id) %}
+    <div class='action-bar'>
+      <a onclick="toggleStar({{ project.id }}, '{{ url }}', '{{ star_id }}', '{{ count_id }}')">
+        {% if g.current_user.has_starred(project) %}
+          <i id='{{ star_id }}' class="fa fa-star"></i>
+        {% else %}
+          <i id='{{ star_id }}' class="fa fa-star-o"></i>
+        {% endif %}
+      </a>
+      &nbsp;
+      {% if not g.current_user in project.members %}
+        {% if g.current_user.has_applied(project) %}
+          <button type="button" class="btn" disabled>
+              Pending
+          </button>
+        {% elif project.complete==True %}
+          <button type="button" class="btn" disabled>
+            Complete
+          </button>
+        {% elif project.open==False %}
+          <button type="button" class="btn" disabled>
+            Closed
+          </button>
+        {% elif project in g.current_user.invitations %}
+          <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+            Respond
+          </button>
+          {{ render_join_modal(project) }}
+        {% else %}
+          <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
+            Join
+          </button>
+          {{ render_join_modal(project) }}
+        {% endif %}
       {% else %}
-        <i id='{{ star_id }}' class="fa fa-star-o"></i>
-      {% endif %}
-    </a>
-    &nbsp;
-    {% if not g.current_user in project.members %}
-      {% if g.current_user.has_applied(project) %}
-        <button type="button" class="btn" disabled>
-            Pending
-        </button>
-      {% elif project.complete==True %}
-        <button type="button" class="btn" disabled>
-          Complete
-        </button>
-      {% elif project.open==False %}
-        <button type="button" class="btn" disabled>
-          Closed
-        </button>
-      {% elif project in g.current_user.invitations %}
         <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-          Respond
+            Leave
         </button>
         {{ render_join_modal(project) }}
-      {% else %}
-        <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-          Join
-        </button>
-        {{ render_join_modal(project) }}
       {% endif %}
-    {% else %}
-      <button type="button" class="btn" data-toggle="modal" data-target="#modal_project_{{ project.id }}">
-          Leave
-      </button>
-      {{ render_join_modal(project) }}
-    {% endif %}
-    &nbsp;
-    {{ render_share_button(project, 'project') }}
-  </div>
+      &nbsp;
+      {{ render_share_button(project, 'project') }}
+    </div>
+  {% endif %}
 {% endmacro -%}
 
 
