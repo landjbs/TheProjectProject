@@ -165,7 +165,16 @@
       {% endif %}
 
       {% set carousels = carousels + [
-
+          (
+            'Subjects',
+            render_carousel(
+              label='Subjects',
+              id_postfix='subjects',
+              card_type='subject',
+              icon_type='subject',
+              data=project.subjects.all()
+            )
+          )
         ]
       %}
 
