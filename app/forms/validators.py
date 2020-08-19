@@ -1,7 +1,8 @@
 ''' Custom validators for WTF_Forms '''
 
 import re
-from wtforms.validators import ValidationError
+from wtforms.validators import (DataRequired, Length, EqualTo, Email,
+                                InputRequired, ValidationError, NumberRange)
 
 from app.link.utils import fix_url
 
