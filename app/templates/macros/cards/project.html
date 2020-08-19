@@ -86,8 +86,7 @@
         {{ project.members.all()|length }} / {{ project.team_size }}
         <i class='far fa-user-circle'></i>
         <br>
-        <p id='starcount_{{ project.id }}'>{{ project.stars.all()|length }}</p>
-        <i class="fa fa-star"></i>
+        <p id='starcount_{{ project.id }}'>{{ project.stars.all()|length }} <i class="fa fa-star"></i></p>
       </div>
       <div class='card-head'>
         {{ render_project_name(project, g.current_user) }}
