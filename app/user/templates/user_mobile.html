@@ -145,6 +145,14 @@
       {{ render_safe_tabs(carousels, 'Owned') }}
     </div>
 
+    <!-- modals -->
+    {% if current_user==user %}
+      <div>
+        {{ render_edit_user_modal(user, edit_form) }}
+        {{ render_delete_account_modal(user) }}
+      </div>
+    {% endif %}
+
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
