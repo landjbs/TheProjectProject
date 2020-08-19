@@ -16,20 +16,23 @@ from ..user import user
 @limiter.limit('60 per minute')
 def user_page(code):
     user = User.query.filter_by(code=code).first_or_404()
-    # worked tasks
-    tasks = user.tasks_worked
-    task_data = {} if (len(tasks)>0) else None
-    if task_data is not None:
-        _, end_activity, earliest = tasks_to_daily_activity(tasks)
-        task_data['end_activity'] = end_activity
-        task_data['earliest'] = earliest
-    # owned projects
-    owned = user.owned.all()
-    # member projects
-    member = [project for project in user.projects
-                       if not project in owned]
-    # subjects
-    subject_data = user.subject_data()
+    task_data = None
+    subject_data = None
+    if not request.MOBILE:
+        # worked tasks
+        tasks = user.tasks_worked
+        task_data = {} if (len(tasks)>0) else None
+        if task_data is not None:
+            _, end_activity, earliest = tasks_to_daily_activity(tasks)
+            task_data['end_activity'] = end_activity
+            task_data['earliest'] = earliest
+        # owned projects
+        owned = user.owned.all()
+        # member projects
+        member = [project for project in user.projects
+                           if not project in owned]
+        # subjects
+        subject_data = user.subject_data()
     ## forms ##
     # application to projects
     project_application = Project_Application_Form()
