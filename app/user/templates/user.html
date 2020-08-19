@@ -171,7 +171,7 @@
                 label='Invitations',
                 id_postfix='invitations',
                 card_type='project-invitation',
-                data=user.invitations
+                data=user.invitations.all()
               )
             }}
             {{
@@ -179,7 +179,7 @@
                 label='Applications',
                 id_postfix='applications',
                 card_type='project-application',
-                data=user.pending
+                data=user.pending.all()
               )
             }}
           </div>
