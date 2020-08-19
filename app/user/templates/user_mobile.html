@@ -92,11 +92,20 @@
               label='Subjects',
               id_postfix='subjects',
               card_type='user-subject',
-              
+              icon_type='subject'
             )
           )
         ]
       %}
+
+      {% if current_user==user %}
+        (
+          'Invitations',
+          render_carousel(
+            label='Inviations',
+          )
+        )
+      {% endif %}
 
 
 
