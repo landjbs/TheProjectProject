@@ -5,11 +5,16 @@ so excited to welcome you to our community of innovators, and are confident you
 will be a good fit.
 <br><br>
 If you have worked on any independent projects before, we recommend you
-add those to your profile to show off your skills to future teammates! You also
-might want to check out the competitions and perks you're eligible for at your
-"perks" page. If you want to get right to work, try browsing your
-"recommended projects" feed or adding a new project idea and sending
-collaboration invitations to other users.
+<a href="{{ urls['add'] }}">add those to your profile</a>
+to show off your skills to future teammates! You also
+might want to check out the
+<a href="{{ urls['perks'] }}">competitions and perks</a>
+that ProjectProject members get access to.
+If you want to get right to work, try browsing your
+<a href="{{ urls['recommended'] }}">recommended projects</a>
+feed or
+<a href="{{ urls['add'] }}">adding a new project idea</a>
+and sending collaboration invitations to other users.
 <br><br>
 Login Here (using the email and password from your application)...
 <br><br>
