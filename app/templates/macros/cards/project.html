@@ -26,10 +26,11 @@
 
 
 {% macro render_project_action_bar(project) -%}
+  {% set action = 'star' if not project.id in g.current_user.stars else 'unstar' %}
   <div class='action-bar'>
-    <a onclick="toggleStar({{ project.id }}, {{ project.id in g.current_user.stars }})">
+    <a onclick="toggleStar({{ project.id }}, {{ action }})">
       <i id='star_{{ project.id }}'
-        class="fa fa-star{% if g.current_user in project.stars %}-o{% endif %}">
+        class="fa fa-star{% if action=='star' %}-o{% endif %}">
       </i>
     </a>
     &nbsp;
