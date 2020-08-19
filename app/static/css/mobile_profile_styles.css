@@ -18,3 +18,9 @@
   max-height: 10vh;
   overflow-y: scroll;
 }
+
+/* card columns take up almost full width */
+.col-md-10 {
+  padding-left: 1px;
+  padding-right: 1px;
+}
