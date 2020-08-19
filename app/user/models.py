@@ -312,7 +312,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.invitations.remove(project)
         self.add_rejection(project)
         self.notify(
-            text=(f'The owner of {project.name} has withdrawn the invitation'
+            text=(f'The owner of {project.name} has withdrawn the invitation '
                 "to collaborate. We promise it's nothing personal! If you have "
                 'any questions or concerns, please contact us.')
         )
