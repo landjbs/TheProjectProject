@@ -64,9 +64,9 @@
           </a>
         </div>
         <center>
-          <button type="button" class="btn" action="{{ url_for('project.withdraw_application', project_id=project.id) }}">
-            Withdraw
-          </button>
+          <a class='task-btn' href="{{ url_for('project.withdraw_application', project_id=project.id) }}">
+            <button class='btn'>Withdraw</button>
+          </a>
         </center>
       </div>
     </div>
