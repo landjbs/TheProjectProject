@@ -13,7 +13,7 @@ collaboration invitations to other users.
 <br><br>
 Login Here (using the email and password from your application)...
 <br><br>
-{{ urls['login'] }}
+<a href="{{ urls['login'] }}">Click Here</a>
 <br><br>
 ...and let's start building together!
 <br><br>
