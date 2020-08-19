@@ -85,17 +85,14 @@
             <button type="button" id="sidebarCollapse" style='background:transparent;'>
               <i class="fa fa-crosshairs" style='color:black; vertical-align: middle;'></i>
             </button>
-            <button class="tablinks" onclick="openTab(event, 'Activity')" id="Activity_Button">
-              Activity
-              {% if is_member %}
-                {% set n_todo = project.n_todo() %}
-                {% if n_todo > 0 %}
-                  <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
-                    {{ n_todo }}
-                  </span>
-                {% endif %}
-              {% endif %}
+            <button class="tablinks" onclick="openTab(event, 'About')" id="About_Button">
+              About
             </button>
+            {% if current_user==user %}
+              <button class="tablinks" onclick="openTab(event, 'About')" id="About_Button">
+                About
+              </button>
+            {% endif %}
           </div>
 
 
