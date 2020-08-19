@@ -164,9 +164,18 @@
             </div>
           </div>
 
-        <div id='Invitations' class='tabcontent'>
-          
-        </div>
+        {% if current_user==user %}
+          <div id='Invitations' class='tabcontent'>
+            {{
+              render_carousel(
+                label='Invitations',
+                id_postfix='invitations',
+                card_type='project-invitation',
+                data=user.invitations
+              )
+            }}
+          </div>
+        {% endif %}
 
     </div>
 
