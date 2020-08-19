@@ -324,16 +324,18 @@ def leave_project(project_id):
     return redirect(request.referrer)
 
 
-@project.route('/like/<int:project_id>/<action>')
+@project.route('/like/<int:project_id>')
 @login_required
 @limiter.limit('45 per minute')
-def like_action(project_id, action):
+def like_action(project_id):
     ''' Star or unstar project '''
     print('HERE')
     project = Project.query.get_or_404(project_id)
-    if action == 'like':
+    if not current_user.has_starred(project):
+        print('star')
         current_user.star_project(project)
-    if action == 'unlike':
+    else:
+        print('unstar')
         current_user.unstar_project(project)
     print('DONE')
     is_starred = 1 if current_user.has_starred(project) else 0

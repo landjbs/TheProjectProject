@@ -29,10 +29,10 @@
   {% set star_id = 'star_{project_id}'.format(project_id=project.id) %}
   {% set count_id = 'starcount_{project_id}'.format(project_id=project.id) %}
   {% if not project.id in g.current_user.stars %}
-    {% set url = url_for('project.like_action', project_id=project.id, action='like') %}
+    {% set url = url_for('project.like_action', project_id=project.id) %}
     {% set action = 1 %}
   {% else %}
-    {% set url = url_for('project.like_action', project_id=project.id, action='{{ action }}') %}
+    {% set url = url_for('project.like_action', project_id=project.id) %}
     {% set action = 0 %}
   {% endif %}
   <div class='action-bar'>
