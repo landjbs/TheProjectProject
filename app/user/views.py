@@ -1,10 +1,9 @@
-from flask import request, redirect, url_for, render_template, flash
+from flask import request, redirect, url_for, render_template, flash, g
 from flask_login import login_required, current_user
 from flask_mobility.decorators import mobilized
 # absolute imports
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
-from app.project.forms import Project_Application_Form
 from app.project.models import Project
 # package imports
 from .models import User
@@ -16,6 +15,7 @@ from ..user import user
 @limiter.limit('60 per minute')
 def user_page(code):
     user = User.query.filter_by(code=code).first_or_404()
+    g.user = user
     # user data
     task_data = False
     subject_data = False
