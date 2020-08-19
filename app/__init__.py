@@ -65,7 +65,6 @@ def create_app(config=config.production_config):
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
 
-    # TODO: SIMPLIFY CONTEXT PROCESSOR: MOSTLY INTEGRATE INTO AJAX ACCORDING TO FLASK TUTORIAL
     from datetime import datetime
     @application.context_processor
     def utility_processor():

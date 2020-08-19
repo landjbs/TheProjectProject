@@ -51,7 +51,7 @@
       <h4>
         <a href="{{ link.url }}"></a>
       </h4>
-      {% if link.description %}
+      {% if link.has_description() %}
         <p>{{ link.description }}.</p>
       {% endif %}
     </blockquote>

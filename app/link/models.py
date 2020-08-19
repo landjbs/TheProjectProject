@@ -32,3 +32,6 @@ class Link(CRUDMixin, db.Model):
 
     def __repr__(self):
         return f'<Link {self.url}>'
+
+    def has_description(self):
+        return (self.description != 'None')

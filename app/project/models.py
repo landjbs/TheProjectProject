@@ -561,7 +561,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         return project_subjects
 
     def task_number(self):
-        # TODO: make efficient
+        # NOTE: inefficient
         n = 0
         for task in self.tasks:
             n += 1
