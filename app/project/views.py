@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render_template, flash
+from flask import request, redirect, url_for, render_template, flash, jsonify
 from flask_login import login_required, current_user
 from flask_mobility.decorators import mobilized
 from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED
@@ -334,7 +334,8 @@ def like_action(project_id, action):
         current_user.star_project(project)
     if action == 'unlike':
         current_user.unstar_project(project)
-    return redirect(request.referrer)
+    is_starred = current_user.has_starred(project)
+    return jsonify({'stars':project.stars.count(), 'is_starred':is_starred})
 
 
 @project.route('/project/<int:project_id>/task', methods=['POST'])
