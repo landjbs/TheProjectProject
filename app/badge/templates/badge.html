@@ -27,7 +27,7 @@
       ),
       ('Progress',
         render_carousel(
-          label=badge_label,
+          label='Progress',
           id_postfix='my',
           card_type='user_badge',
           data=my_badges
@@ -35,7 +35,7 @@
       ),
       ('Badges',
         render_carousel(
-          label=badge_label,
+          label='Badges',
           id_postfix='other',
           card_type='badge',
           data=other_badges
@@ -43,5 +43,5 @@
       )
     ]
   %}
-  {{ render_safe_tabs(carousels) }}
+  {{ render_safe_tabs(carousels, 'Competitions') }}
 {% endblock %}
