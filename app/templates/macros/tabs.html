@@ -15,8 +15,14 @@
       </div>
     {% endif %}
 
-    {% for _, carousel in carousel_list %}
-      {{ carousel }}
+    {% for name, carousel in carousel_list %}
+      {% if request.MOBILE %}
+        <div id='{{ name }}' class='tabcontent'>
+          {{ carousel }}
+        </div>
+      {% else %}
+        {{ carousel }}
+      {% endif %}
     {% endfor %}
 
 {% endmacro -%}
