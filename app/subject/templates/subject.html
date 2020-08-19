@@ -9,33 +9,48 @@
   {{ super() }}
   <link type="text/css" href="css/scroll_styles.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% if reuqest.MOBILE %}
+    <link rel='stylesheet' href="css/mobile_profile_styles.css">
+  {% endif %}
 {% endblock %}
 
 {% block content %}
 <div class='container my-1 main'>
-  <p>Subject: {{ subject.name }}</p>
-  <!-- projects -->
-  {{
-    render_carousel(
-      label='Projects',
-      id_postfix='projects',
-      card_type='project-big',
-      data=projects,
-      icon_type='project'
-    )
-  }}
-  <!-- users -->
-  {{
-    render_carousel(
-      label='Users',
-      id_postfix='users',
-      card_type='user',
-      data=users,
-      icon_type='user'
-    )
-  }}
+  {% if not request.MOBILE %}
+    <p>Subject: {{ subject.name }}</p>
+    <!-- projects -->
+    {{
+      render_carousel(
+        label='Projects',
+        id_postfix='projects',
+        card_type='project-big',
+        data=projects,
+        icon_type='project'
+      )
+    }}
+    <!-- users -->
+    {{
+      render_carousel(
+        label='Users',
+        id_postfix='users',
+        card_type='user',
+        data=users,
+        icon_type='user'
+      )
+    }}
+  {% else %}
+    <div class="tab">
+      <button class="tablinks" onclick="openTab(event, 'Owned')" id="defaultOpen">Owned</button>
+      <button class="tablinks" onclick="openTab(event, 'Projects')">Projects</button>
+    </div>
+  {% endif %}
 </div>
 
 <!-- allow starring and unstarring of project -->
 <script src="js/stars.js"></script>
+
+{% if request.mobile %}
+  
+{% endif %}
+
 {% endblock %}
