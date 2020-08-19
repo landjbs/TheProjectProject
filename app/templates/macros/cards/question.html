@@ -15,12 +15,7 @@
         required>
       <datalist id="question_suggestions">
         {% for question in project.suggest_questions() %}
-        <!-- TODO: make first index actually be selected -->
-          {% if loop.index==1 %}
-            <option value='{{ question }}'>
-          {% else %}
-            <option value='{{ question }}'>
-          {% endif %}
+          <option value='{{ question }}'>
         {% endfor %}
       </datalist>
       <br><br>

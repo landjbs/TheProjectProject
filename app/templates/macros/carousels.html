@@ -26,7 +26,6 @@
 {% from 'macros/icon.html' import icon_types %}
 
 <!-- CACHE RENDER CARD FUNCTIONS -->
-<!-- TODO: change user_badge to user-badge -->
 {%
   set card_renders = dict([
     ('project-big',           render_big_project_card),
@@ -39,7 +38,7 @@
     ('project-application',   render_project_application_card),
     ('member',                render_member_card),
     ('competition',           render_competition_card),
-    ('user_badge',            render_user_badge_card),
+    ('user-badge',            render_user_badge_card),
     ('badge',                 render_badge_card),
     ('subject',               render_subject_card),
     ('user-subject',          render_user_subject)
@@ -121,9 +120,9 @@
           });
           // TODO: fix rescroll and or add ajax for like and project actions
           // rescroll on refresh
-          count_index = sessionStorage.getItem('{{ storage_index }}')
-          if (count_index) {
-            document.getElementById('{{ carousel_id }}').carousel(1*count_index);
+          // count_index = sessionStorage.getItem('{{ storage_index }}')
+          // if (count_index) {
+          //   document.getElementById('{{ carousel_id }}').carousel(1*count_index);
           }
         </script>
       {% endif %}
