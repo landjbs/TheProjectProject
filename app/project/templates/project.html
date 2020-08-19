@@ -2,6 +2,7 @@
 {% from 'macros/cards/project.html' import render_project_action_bar, render_edit_project_modal, render_complete_modal, render_open_modal, render_requires_application_modal %}
 {% from 'macros/cards/question.html' import render_question_card, render_add_question_card %}
 {% from 'macros/cards/link.html' import render_add_link_card, render_project_link_card, render_private_link %}
+{% from 'macros/listbox.html' import render_listbox %}
 
 {% extends "home_base.html" %}
 
@@ -182,47 +183,16 @@
               <div class="col">
                 <div class='row'>
                   <div class='col'>
-                    {% set todo_tasks = project.todo_tasks() %}
-                    <h5>To Do</h5>
-                    <div class="list-group">
-                      {% if (todo_tasks.all()|length)==0 %}
-                        <p class='empty-text'>No tasks to do yet.</p>
-                      {% endif %}
-                      {% for task in todo_tasks %}
-                        <div class="list-group-item list-group-item-action flex-column align-items-start">
-                          <h6 class="mb-1">{{ task.text }}</h6>
-                          <div class="d-flex w-100 justify-content-between">
-                            <small>Requested
-                            {% if current_user.is_authenticated %}
-                              by
-                              <a href='user={{ task.author.code }}' class="mb-1">
-                                {% if task.author %}
-                                  <u>{{ task.author.name }}</u>
-                                {% else %}
-                                  Anonymous
-                                {% endif %}
-                              </a>
-                            {% endif %}
-                            on {{ time_to_str(task.post_stamp) }}</small>
-                          </div>
-                          {% if is_member %}
-                            <div class='action-bar'>
-                              {% if current_user==task.author %}
-                                <div class='hoverable'>
-                                  <a class='delete-btn task-btn float-left' href="{{ url_for('project.change_task_status', project_id=project.id, task_id=task.id, action='delete') }}">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                  </a>
-                                  <span class='tooltiptext'>Delete Task</span>
-                                </div>
-                              {% endif %}
-                              <a class='complete-btn task-btn float-right' href="{{ url_for('project.change_task_status', project_id=project.id, task_id=task.id, action='complete') }}">
-                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-                              </a>
-                            </div>
-                          {% endif %}
-                        </div>
-                      {% endfor %}
-                    </div>
+                    <!-- todo tasks -->
+                    {{
+                      render_listbox(
+                        label='ToDo',
+                        id_postfix='todo',
+                        card_type='todo-task',
+                        data=project.todo_tasks(),
+                        empty_message='No tasks to do right now.'
+                      )
+                    }}
                     {% if is_member and not project.complete %}
                       <form class='post_form' id='task_form' method='post'
                         action="{{url_for('project.add_task', project_id=project.id)}}">

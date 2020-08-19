@@ -1,6 +1,6 @@
 {% from 'macros/cards/task.html' import render_todo_task %}
 
-{% from 'macros/icons.html' import icon_types %}
+{% from 'macros/icon.html' import icon_types %}
 
 
 {%
@@ -12,23 +12,23 @@
 
 
 {% macro render_listbox(id_postfix, card_type, data, label=False, icon_type=False, empty_message=False, n_override=False) -%}
-{% set render_fn = card_renders[card_type] %}
-{% set n = (data|length) if data else 0 %}
-{% if label %}
-  <h4 class='tabname-big'>
-    {{ label }}
-    {% if icon_type %}
-      <i class='{{ icon_types[icon_type] }}'></i>
-      {{ n if not n_override else n_override }}
-    {% endif %}
-  </h4>
-{% endif %}
-<div class='list-group'>
-  {% if n==0 and empty_message %}
-    <p class='empty-text'>{{ empty_message }}</p>
-  {% else %}
-    {% for elt in data %}
-      {{ render_fn(elt) }}
-    {% endfor %}
-</div>
+  {% set render_fn = card_renders[card_type] %}
+  {% set n = (data|length) if data else 0 %}
+  {% if label %}
+    <h4 class='tabname-big'>
+      {{ label }}
+      {% if icon_type %}
+        <i class='{{ icon_types[icon_type] }}'></i>
+        {% if not n_override %}{{ n }}{% else %}{{ n_override }}{% endif %}
+      {% endif %}
+    </h4>
+  {% endif %}
+  <div class='list-group'>
+    {% if n==0 and empty_message %}
+      <p class='empty-text'>{{ empty_message }}</p>
+    {% else %}
+      {% for elt in data %}
+        {{ render_fn(elt) }}
+      {% endfor %}
+  </div>
 {% endmacro -%}
