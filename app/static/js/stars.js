@@ -1,19 +1,17 @@
-function toggleStar() {
-  {% if project_id in g.current_user.stars %}
+function toggleStar(project_id, unstar) {
+  if unstar {
     url = "{{ url_for('project.like_action', project_id=project.id, action='unlike') }}",
-    star = false
-  {% else %}
+  } else {
     url = "{{ url_for('project.like_action', project_id=project.id, action='like') }}",
-    star = true
-  {% endif %}
+  }
   alert(url);
   $.ajax({
     type: 'GET',
     url: url,
   })
-  if star {
-    $('#star_{{ project_id }}').class = 'fa fa-star'
-  } else {
+  if unstar {
     $('#star_{{ project_id }}').class = 'fa fa-star-o'
+  } else {
+    $('#star_{{ project_id }}').class = 'fa fa-star'
   }
 }
