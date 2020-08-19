@@ -31,15 +31,17 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <p class='float-right'>
-                  <i class="fa fa-star"></i>
-                  {{ project.stars.all()|length }}
+                <p class='float-right' style='text-align:right;'>
+                  <span id='starcount_{{ project.id }}'>
+                    {{ project.stars.all()|length }}
+                    <i class="fa fa-star"></i>
+                  </span>
                   <!-- edit button -->
                   {% if is_owner %}
                   <br>
                   <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     Edit
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   </button>
                   {% endif %}
                 </p>
@@ -467,8 +469,6 @@
     {% endif %}
     <!-- /modals -->
 
-    <!-- jQuery CDN - Slim version (=without AJAX) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
