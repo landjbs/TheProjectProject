@@ -2,6 +2,7 @@
 {% from 'macros/listbox.html' import render_listbox with context %}
 {% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
 {% from 'macros/cards/user.html' import render_user_action_bar, render_edit_user_modal, render_delete_account_modal %}
+{% from 'macros/icon.html' import icon_types %}
 
 {% extends "home_base.html" %}
 
@@ -92,7 +93,7 @@
               <button class="tablinks" onclick="openTab(event, 'Invitations')" id="Invitations_Button">
                 Inviations
                 {% if current_user.inviations.count() > 0 %}
-                  <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
+                  <span class="badge" style='background:#FF5D00; vertical-align:top;'>
                     {{ current_user.inviations.count() }}
                   </span>
                 {% endif %}
