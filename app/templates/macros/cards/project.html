@@ -29,7 +29,7 @@
   <div class='action-bar'>
     <button onclick="toggle_star(project.id)">
       <i id='star_{{ project.id }}'
-        class="fa fa-star{% if g.current_user in project.stars %}-o{% endif %}">
+        class="btn fa fa-star{% if g.current_user in project.stars %}-o{% endif %}">
       </i>
     </button>
       <!-- href="{{ url_for('project.like_action', project_id=project.id, action='unlike') }}" -->
