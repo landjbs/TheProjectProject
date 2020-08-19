@@ -348,26 +348,16 @@
         <!-- MEMBER TAB -->
         <div id='Members' class='tabcontent'>
           {% if not is_owner %}
-          {{
-            render_carousel(
-              label='Members',
-              id_postfix='members',
-              card_type='user',
-              icon_type='user',
-              data=members
-            )
-          }}
-          {% else %}
-            <!-- current members -->
             {{
               render_carousel(
                 label='Members',
                 id_postfix='members',
-                card_type='member',
+                card_type='user',
                 icon_type='user',
                 data=members
               )
             }}
+          {% else %}
             <!-- pending members -->
             {{
               render_carousel(
@@ -395,6 +385,16 @@
                 card_type='invitation',
                 icon_type='sent',
                 data=invitations
+              )
+            }}
+            <!-- current members -->
+            {{
+              render_carousel(
+                label='Members',
+                id_postfix='members',
+                card_type='member',
+                icon_type='user',
+                data=members
               )
             }}
           {% endif %}
