@@ -12,7 +12,10 @@
     render_user_badge_card, render_badge_card
   with context
 %}
-{% from 'macros/cards/subject.html' import render_subject_card with context %}
+{%
+  from 'macros/cards/subject.html' import
+    render_subject_card, render_user_subject
+  with context %}
 {% from 'macros/cards/application.html' import render_application_card with context %}
 
 <!-- CACHE RENDER CARD FUNCTIONS -->
