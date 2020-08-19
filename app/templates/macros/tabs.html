@@ -8,8 +8,7 @@
           <button
             class="tablinks"
             onclick="openTab(event, '{{ name }}')"
-            id="{{ name }}_Button"
-            {% if loop.index==1 %}id="defaultOpen"{% endif %}>
+            id="{{ name }}_Button">
             {{ name }}
           </button>
         {% endfor %}
@@ -25,5 +24,15 @@
         {{ carousel }}
       {% endif %}
     {% endfor %}
+
+    <script>
+      $(document).ready(function () {
+        if (sessionStorage.openTab) {
+          document.getElementById(sessionStorage.openTab).click();
+        } else {
+          document.getElementById("defaultOpen").click();
+        }
+      });
+    </script>
 
 {% endmacro -%}
