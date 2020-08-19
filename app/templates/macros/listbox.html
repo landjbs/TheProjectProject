@@ -17,11 +17,19 @@
   ])
 %}
 
+{%
+  set box_classes = dict([
+    ('default',     'list-group'),
+    ('small',       'list-group list-small'),
+    ('big',         'list-group list-big')
+  ])
+%}
 
-{% macro render_listbox(id_postfix, card_type, data, label=False, icon_type=False, empty_message=False, n_override=False, small=False) -%}
+
+{% macro render_listbox(id_postfix, card_type, data, label=False, icon_type=False, empty_message=False, n_override=False, size='default') -%}
   {% set render_fn = card_renders[card_type] %}
   {% set n = (data|length) if data else 0 %}
-  {% set boxclass = 'list-group' if not small else 'list-group small' %}
+  {% set boxclass =  if not small else 'list-group list-small' %}
   {% if label %}
     <h4 class='tabname-big'>
       {{ label }}
