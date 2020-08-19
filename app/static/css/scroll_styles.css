@@ -157,8 +157,13 @@ a:hover {
 
 .fa-star {
   color: gold;
-  border: 0px;
   -webkit-appearance:none;
+  border: 0px;
+  outline: none;
+}
+
+.fa-star-o:hover {
+  color: gold;
 }
 
 .fa-share-alt:hover {
