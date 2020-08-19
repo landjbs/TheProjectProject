@@ -18,7 +18,7 @@ class Link(CRUDMixin, db.Model):
     # category within project: {0:other, 1:repo, 2:communications, 3:drive, 4:management}
     category = db.Column(db.Integer, nullable=False, default=0)
     ## render data (potentially should be moved somewhere more efficient) ##
-    description = db.Column(db.Text(100000), nullable=True, unique=False)
+    description = db.Column(db.Text(1000), nullable=True, unique=False)
     is_rendered = db.Column(db.Boolean, nullable=False, default=False)
 
     def __init__(self, url, public, category):
