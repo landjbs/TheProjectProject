@@ -3,11 +3,7 @@
 
 <!-- PROJECTS -->
 {% macro render_project_name(project, user) -%}
-  {% if user.is_authenticated %}
-    <a class='project-name' href='project={{ project.code }}'>
-  {% else %}
-    <a class='project-name' href='/login'>
-  {% endif %}
+  <a class='project-name' href='project={{ project.code }}'>
     <h5>
       {{ project.name }}
       {% if project.complete %}
