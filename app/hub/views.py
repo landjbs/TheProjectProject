@@ -73,4 +73,6 @@ def search():
         return redirect(url_for('hub.home'))
     search_text = g.search_form.search.data
     results = text_search(search_text)
-    return render_template('search.html', results=results)
+    return render_template('search.html',
+                        results=results,
+                        search_text=search_text)
