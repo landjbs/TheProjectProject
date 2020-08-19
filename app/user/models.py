@@ -5,6 +5,7 @@ from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
 from app.extensions import bcrypt
+from app.jobs import send_acceptance_email
 
 from app.subject.models import User_Subjects
 from app.notification.models import Notification
