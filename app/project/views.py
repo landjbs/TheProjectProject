@@ -171,7 +171,7 @@ def project_page(project_code):
                     project.update()
             else:
                 show_edit_modal = True
-    return render_template('project.html',
+    return render_template('project.html' if not request.MOBILE else 'project_mobile.html',
                             project=project,
                             members=members,
                             applications=applications,
