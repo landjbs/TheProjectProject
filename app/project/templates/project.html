@@ -217,6 +217,17 @@
                     }}
                   </div>
 
+                  <div class='col'>
+                    {{
+                      render_listbox(
+                        label='Comments',
+                        id_postfix='comments',
+                        card_type='comment',
+                        data=project.comments.all()
+                      )
+                    }}
+                  </div>
+
               <div class="col">
                 <h5>Comments</h5>
                 <div class="list-group">
