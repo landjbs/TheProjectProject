@@ -1,6 +1,6 @@
 {%
   from 'macros/cards/task.html' import
-    render_todo_task, render_complete_task
+    render_todo_task, render_complete_task, render_complete_task_sparse
   with context
 %}
 {% from 'macros/cards/comment.html' import render_comment with context %}
@@ -12,7 +12,7 @@
   set card_renders = dict([
     ('todo-task',             render_todo_task),
     ('complete-task',         render_complete_task),
-    ('complete-task-sparse',  render_complete_task_sparse)
+    ('complete-task-sparse',  render_complete_task_sparse),
     ('comment',               render_comment)
   ])
 %}

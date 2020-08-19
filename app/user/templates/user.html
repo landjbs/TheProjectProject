@@ -1,4 +1,5 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
+{% from 'macros/listbox.html' import render_listbox with context %}
 {% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
 {% from 'macros/cards/user.html' import render_user_action_bar, render_edit_user_modal, render_delete_account_modal %}
 
@@ -97,12 +98,11 @@
                     label='Completed',
                     id_postfix='completed',
                     card_type='complete-task-sparse',
-                    data=user.tasks_worked.all(),
+                    data=user.tasks_worked,
                     empty_message='No tasks completed yet.'
                   )
                 }}
               </div>
-
 
               <div class="col-sm-4">
                 <h6>Subject Breakdown</h6>
