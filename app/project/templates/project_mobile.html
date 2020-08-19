@@ -67,7 +67,7 @@
           </div>
           {% if current_user.is_authenticated %}
             <center>
-              {{ render_project_action_bar(current_user, project) }}
+              {{ render_project_action_bar(project) }}
             </center>
           {% endif %}
           <br>
@@ -78,24 +78,14 @@
         set carousels = [
           (
             'To Do',
-            (
-              render_listbox(
-                label='To Do',
-                id_postfix='To Do',
-                card_type='todo-task',
-                icon_type='todo',
-                data=project.todo_tasks().all(),
-                empty_message='No tasks to do right now.',
-                size='default'
-              )
-              {% if is_member and not project.complete %}
-                <form class='post_form' id='task_form' method='post'
-                  action="{{url_for('project.add_task', project_id=project.id)}}">
-                  {{ task_form.hidden_tag() }}
-                  {{ task_form.text(class='post-input', placeholder='Task') }}
-                  <button>Add</button>
-                </form>
-              {% endif %}
+            render_listbox(
+              label='To Do',
+              id_postfix='To Do',
+              card_type='todo-task',
+              icon_type='todo',
+              data=project.todo_tasks().all(),
+              empty_message='No tasks to do right now.',
+              size='default'
             )
           ),
           (
@@ -177,33 +167,10 @@
           )
         ]
       %}
+
+      {{ render_safe_tabs(carousels, 'To Do') }}
     </div>
 
-    <!-- modals -->
-    <div style='display:hidden;'>
-      <!-- join/leave modal -->
-      {{ macros.render_join_modal(current_user, project, project_application) }}
-      <!-- collaborate modals -->
-      {% if recommended_members != False %}
-        {% for user in recommended_members %}
-          {{ macros.render_collaborate_modal(current_user, user, project) }}
-        {% endfor %}
-      {% endif %}
-      {% if current_user == project.owner %}
-        <!-- edit modal -->
-        {% set elapsed = calc_days_since(now(), project.posted_on) %}
-        {% set est = project.estimated_time %}
-        {% set elapsed_style = elapsed_style(elapsed, est) %}
-        {{ macros.render_edit_project_modal(project, edit_form, {'elapsed':elapsed, 'est':est, 'elapsed_style':elapsed_style}) }}
-        <!-- complete modal -->
-        {{ macros.render_complete_modal(project) }}
-        <!-- open/closed modal -->
-        {{ macros.render_open_modal(project) }}
-        <!-- requires application modal -->
-        {{ macros.render_requires_application_modal(project, edit_application_form) }}
-      {% endif %}
-    </div>
-    <!-- /modals -->
 
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
