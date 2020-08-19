@@ -361,7 +361,7 @@
                 {{ render_private_link(link_form, category, project, is_owner) }}
               {% endfor %}
               {% for link in project.get_other_private_links() %}
-                {{ render_project_link_card(link_form, link, project, is_owner) }}
+                {{ render_project_link_card(link, project, is_owner) }}
               {% endfor %}
             </div>
           </div>

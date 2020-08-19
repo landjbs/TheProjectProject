@@ -17,7 +17,7 @@
     <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
       <center><i class="{{ icon }}" style='display:inline;'></i></center>
       <form action="{{ url_for('project.add_link', project_id=project.id, public=public, category=category) }}" method='post'>
-        {{ link_form.csrf_token }}
+        {{ link_form.hidden_tag() }}
         {{ link_form.link(class='select-clean', placeholder=placeholder) }}
         <div class='float-right'>
           <div class='back-btn task-btn' style='border:0px; background:transparent; display:inline-block;' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')">

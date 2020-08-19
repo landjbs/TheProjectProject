@@ -602,13 +602,14 @@ def add_link(project_id, public, category):
     ''' Adds link to project '''
     project = Project.query.get_or_404(project_id)
     public = True if (public==1) else False
+    form = Add_Link()
     if not project.is_member(current_user):
         flash('Could not add link because you are not a project member.',
             category='error')
     elif not public and not project.is_owner(current_user):
         flash('Only the project owner can add private links.', 'error')
-    else:
-        url = filter_string(request.form.get('link'))
+    elif form.validate_on_submit():
+        url = form.link.data
         if url:
             project.add_link(url, public=public, category=category)
             flash('Link added!', 'success')
