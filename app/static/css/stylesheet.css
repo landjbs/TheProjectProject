@@ -69,7 +69,7 @@ a:focus, a:hover {
   #navbarResponsive {
     border: 1px solid white;
     background: black;
-    padding-left: 1px;
+    padding-left: 10px;
   }
   .navbar-light .navbar-nav .nav-link {
     color: white;
