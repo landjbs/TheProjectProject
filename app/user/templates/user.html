@@ -90,7 +90,7 @@
             </button>
             {% if current_user==user %}
               <button class="tablinks" onclick="openTab(event, 'Invitations')" id="Invitations_Button">
-                Inviations
+                Invitations
                 {% if current_user.invitations.count() > 0 %}
                   <span class="badge" style='background:#FF5D00; vertical-align:top;'>
                     {{ current_user.invitations.count() }}
@@ -164,7 +164,8 @@
             </div>
           </div>
 
-
+        <div id='Invitations' class='tabcontent'>
+          
         </div>
 
     </div>
