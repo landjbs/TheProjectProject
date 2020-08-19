@@ -64,17 +64,18 @@
   <!-- action bar -->
   {% if task.project.is_member(g.current_user) %}
     <div class='action-bar'>
-      {% if g.current_user==task.author %}
+      {% if g.current_user in task.workers %}
         <div class='hoverable'>
-          <a class='delete-btn task-btn float-left' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='delete') }}">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
+          <a class='back-btn task-btn float-left' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='back') }}">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
           </a>
-          <span class='tooltiptext'>Delete Task</span>
+          <span class='tooltiptext'>Actually, I Didn't Help</span>
         </div>
+      {% else %}
+        <a class='complete-btn task-btn float-right' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='complete') }}">
+          <i class="fa fa-check-circle" aria-hidden="true"></i>
+        </a>
       {% endif %}
-      <a class='complete-btn task-btn float-right' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='complete') }}">
-        <i class="fa fa-check-circle" aria-hidden="true"></i>
-      </a>
     </div>
   {% endif %}
 </div>
