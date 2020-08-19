@@ -118,3 +118,15 @@ body {
 .tabname-big i {
   color: #FF5D00;
 }
+
+
+/* list groups */
+.list-small {
+  min-height: 20vh;
+  max-height: 20vh;
+}
+
+.list-big {
+  min-height:80vh;
+  max-height:80vh;
+}
