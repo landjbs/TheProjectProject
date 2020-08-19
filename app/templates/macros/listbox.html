@@ -14,15 +14,16 @@
     ('todo-task',             render_todo_task),
     ('complete-task',         render_complete_task),
     ('complete-task-sparse',  render_complete_task_sparse),
-    ('comment',               render_comment)
+    ('comment',               render_comment),
+    ('notification',          render_notification)
   ])
 %}
 
 {%
   set box_classes = dict([
-    ('default',     'list-group'),
-    ('small',       'list-group list-small'),
-    ('small',       'list-group list-big')
+    ('default',      'list-group'),
+    ('small',        'list-group list-small'),
+    ('big',          'list-group list-big')
   ])
 %}
 
