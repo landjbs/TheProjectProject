@@ -89,14 +89,14 @@
               About
             </button>
             {% if current_user==user %}
-              <button class="tablinks" onclick="openTab(event, 'About')" id="About_Button">
-                About
+              <button class="tablinks" onclick="openTab(event, 'Invitations')" id="Invitations_Button">
+                Inviations
               </button>
             {% endif %}
           </div>
 
 
-          {% if not request.MOBILE %}
+          <div id='About' class='tabcontent'>
             <div class="row">
               <div class="col-sm-4">
                 <h6>Daily Activity</h6>
