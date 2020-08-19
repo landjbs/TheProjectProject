@@ -4,10 +4,12 @@ function toggleStar(project_id, url, action, star_id) {
     url: url
   })
   if (action==0) {
-    $(star_id).classList.remove('fa-star');
-    $(star_id).classList.add('fa-star-o');
+    document.getElementById(star_id).className = 'fa fa-star-o';
+    // document.getElementById(star_id).classList.remove('fa-star');
+    // document.getElementById(star_id).classList.add('fa-star-o');
   } else {
-    $(star_id).classList.remove('fa-star-o');
-    $(star_id).classList.add('fa-star');
+      document.getElementById(star_id).className = 'fa fa-star';
+    // document.getElementById(star_id).classList.remove('fa-star-o');
+    // document.getElementById(star_id).classList.add('fa-star');
   }
 }
