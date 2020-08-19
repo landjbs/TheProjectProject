@@ -633,7 +633,7 @@ def remove_link(project_id, link_id):
 def save_instructions(project_id):
     ''' Saves project instructions '''
     project = Project.query.get_or_404(project_id)
-    if not project.is_owner(current_user):
+    if not project.is_member(current_user):
         flash('Could not edit instructions because you are not a project member.',
             category='error')
     else:
