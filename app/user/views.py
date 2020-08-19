@@ -16,8 +16,7 @@ from ..user import user
 @limiter.limit('60 per minute')
 def user_page(code):
     user = User.query.filter_by(code=code).first_or_404()
-    task_data = None
-    subject_data = None
+    # user data
     if not request.MOBILE:
         # worked tasks
         tasks = user.tasks_worked
@@ -34,8 +33,6 @@ def user_page(code):
         # subjects
         subject_data = user.subject_data()
     ## forms ##
-    # application to projects
-    project_application = Project_Application_Form()
     # edit user account
     show_edit_modal = False
     edit_form = Edit_User() if (current_user==user) else False
