@@ -2,6 +2,7 @@
 {% from 'macros/listbox.html' import render_listbox with context %}
 {% from 'macros/tabs.html' import render_safe_tabs with context %}
 {% from 'macros/cards/project.html' import render_project_action_bar %}
+{% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
 
 
 {% extends "home_base.html" %}
@@ -66,7 +67,7 @@
           </div>
           {% if current_user.is_authenticated %}
             <center>
-              {{ macros.render_project_action_bar(current_user, project) }}
+              {{ render_project_action_bar(current_user, project) }}
             </center>
           {% endif %}
           <br>
