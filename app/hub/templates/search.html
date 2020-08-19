@@ -1,4 +1,6 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
+{% from 'macros/tabs.html' import render_safe_tabs with context %}
+
 
 {% extends "home_base.html" %}
 {% block title %}Search{% endblock %}
@@ -14,36 +16,39 @@
 <div class='container my-1 main'>
   <p style='text-align:left;'>Results for "{{ search_text }}"</p>
   <hr class="my-1">
-
-  {{
-    render_carousel(
-      label='Projects',
-      id_postfix='projects',
-      card_type='project-big',
-      data=results['project'][0],
-      icon_type='project'
-    )
-  }}
-
-  {{
-    render_carousel(
-      label='Users',
-      id_postfix='users',
-      card_type='user',
-      data=results['user'][0],
-      icon_type='user'
-    )
-  }}
-
-  {{
-    render_carousel(
-      label='Subjects',
-      id_postfix='subject',
-      card_type='subject',
-      data=results['subject'][0],
-      icon_type='subject'
-    )
-  }}
+  {% set carousels = [
+      (
+        'Projects',
+        render_carousel(
+          label='Projects',
+          id_postfix='projects',
+          card_type='project-big',
+          data=results['project'][0],
+          icon_type='project'
+        )
+      ),
+      (
+        'Users',
+        render_carousel(
+          label='Users',
+          id_postfix='users',
+          card_type='user',
+          data=results['user'][0],
+          icon_type='user'
+        )
+      ),
+      ('Subjects',
+        render_carousel(
+          label='Subjects',
+          id_postfix='subject',
+          card_type='subject',
+          data=results['subject'][0],
+          icon_type='subject'
+        )
+      )
+    ]
+  %}
+  {{ render_safe_tabs(carousels) }}
 </div>
 <script src="js/stars.js"></script>
 {% endblock %}
