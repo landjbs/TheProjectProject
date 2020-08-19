@@ -4,14 +4,19 @@ Congratulations—your application to TheProjectProject has been accepted. We ar
 so excited to welcome you to our community of innovators, and are confident you
 will be a good fit.
 <br><br>
-If you have ever worked on any independent projects before, we recommend you
-<a href="">add those to your profile</a>
-to show off your skill to future teammates!
+If you have worked on any independent projects before, we recommend you
+add those to your profile to show off your skills to future teammates! You also
+might want to check out the competitions and perks you're eligible for at your
+"perks" page. If you want to get right to work, try browsing your
+"recommended projects" feed or adding a new project idea and sending
+collaboration invitations to other users.
 <br><br>
-Login Here (using the email and password from your application):
-<br>
-urls['login']
-
+Login Here (using the email and password from your application)...
+<br><br>
+{{ urls['login'] }}
+<br><br>
+...and let's start building together!
+<br><br>
 
 Please contact us at
 <a href='mailto:admin@theprojectproject.io'>admin@theprojectproject.io</a>

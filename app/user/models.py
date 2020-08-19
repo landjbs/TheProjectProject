@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
 from app.extensions import bcrypt
-from app.jobs import send_acceptance_email
 
 from app.subject.models import User_Subjects
 from app.notification.models import Notification
@@ -157,7 +156,6 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             raise RuntimeError(f'{self} email has not been confirmed.')
         elif self.accepted:
             raise RuntimeError(f'{self} has already been accepted.')
-        send_acceptance_email(self)
         self.accepted = True
         self.accepted_on = datetime.utcnow()
         self.update()

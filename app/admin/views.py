@@ -46,6 +46,7 @@ class UserModelView(AdminBaseView):
     @expose('/action/accept_single', methods=('GET',))
     def accept_single(self):
         user = User.query.get_or_404(int(request.args.get('id')))
+        send_acceptance_email(user)
         user.accept()
         flash(f'You have accepted {user.name}.')
         return redirect(request.referrer)
@@ -65,6 +66,7 @@ class UserModelView(AdminBaseView):
             count = 0
             for user in query.all():
                 if user.accept():
+                    send_acceptance_email(user)
                     count += 1
 
             flash(ngettext('User was successfully accepted.',

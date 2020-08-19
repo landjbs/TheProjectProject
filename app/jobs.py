@@ -1,7 +1,7 @@
 import os
 import boto3
 import sys
-from flask import render_template
+from flask import render_template, url_for
 
 from app.extensions import rq
 from app.user.models import User
@@ -55,7 +55,7 @@ def send_confirmation_email(user):
 
 # @rq.job
 def send_acceptance_email(user):
-    urls = {'login':  url_for('admin.login')}
+    urls = {'login':  url_for('auth.login')}
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [user.email]},
