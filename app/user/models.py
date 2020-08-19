@@ -72,9 +72,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     comments = relationship('Comment',
                             back_populates='author',
                             cascade='all, delete, delete-orphan')
-    # authored tasks # TODO: figure out task deletion on user/project deletion
     tasks_authored = relationship('Task', back_populates='author')
-    # worked tasks # TODO: figure out what to if user deletes and is only worker
     tasks_worked = relationship('Task',
                                 secondary='user_to_task',
                                 back_populates='workers')

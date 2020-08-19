@@ -6,8 +6,7 @@ from app.forms.base import BaseForm
 from .models import User
 
 
-# TODO: ADD "AWAY" BOOL TO USERS
-
+# # NOTE: ADD "AWAY" BOOL TO USERS
 class Edit_User(BaseForm):
     # name
     name = StringField('Name', validators=[DataRequired(), Length(1, 254)],
