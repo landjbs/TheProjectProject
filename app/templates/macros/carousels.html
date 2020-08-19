@@ -10,7 +10,7 @@
 {%
   from 'macros/cards/badge.html' import
     render_user_badge_card, render_badge_card
-    with context
+  with context
 %}
 {% from 'macros/cards/subject.html' import render_subject_card with context %}
 {% from 'macros/cards/application.html' import render_application_card with context %}
@@ -23,6 +23,7 @@
     ('project-small',   render_small_project_card),
     ('user',            render_user_card),
     ('invitation',      render_invitation_card),
+    ('application',     render_application_card),
     ('competition',     render_competition_card),
     ('user_badge',      render_user_badge_card),
     ('badge',           render_badge_card),

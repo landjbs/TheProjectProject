@@ -1,4 +1,4 @@
-{% macro render_application_card(application, project) -%}
+{% macro render_application_card(application) -%}
 {% set user = application.user %}
 <div class="col-md-4">
   <div class="card mb-2">
@@ -18,7 +18,7 @@
       </div>
       <div class='card-oneline' style=''>
         <p class='oneliner'>
-          Question: {{ project.application_question }}
+          Question: {{ g.project.application_question }}
           <br>
           Response: {{ application.text }}
         </p>
@@ -39,12 +39,12 @@
       <hr class="my-2">
       <a class='delete-btn task-btn float-left'
       style='background: transparent;'
-        href="{{ url_for('project.reject_application', project_id=project.id, user_id=application.user.id) }}">
+        href="{{ url_for('project.reject_application', project_id=g.project.id, user_id=application.user.id) }}">
         <button class='btn'>Reject</button>
       </a>
       <a class='complete-btn task-btn float-right'
           style='background: transparent;'
-          href="{{ url_for('project.accept_application', project_id=project.id, user_id=application.user.id) }}">
+          href="{{ url_for('project.accept_application', project_id=g.project.id, user_id=application.user.id) }}">
         <button class='btn'>Accept</button>
       </a>
     </div>
