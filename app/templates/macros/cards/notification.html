@@ -1,0 +1,19 @@
+{% macro render_notification(notification_data) -%}
+<!-- unpack notification data -->
+{% set notification, seen = notification_data %}
+<a {% if notification.redirect %}href='{{ notification.redirect  }}'{% endif %}
+  class="list-group-item list-group-item-action flex-column align-items-start"
+  {% if not seen %}style='background-color: rgba(0,0,255,0.05)'{% endif %}>
+  <h6 class="mb-1">
+    {% if notification.important %}
+      <i class="fa fa-exclamation-circle orange" aria-hidden="true"></i>
+    {% endif %}
+    {{ notification.text }}
+  </h6>
+  <div class="d-flex w-100 justify-content-between">
+    <small>
+      {{ time_to_str(notification.timestamp) }}
+    </small>
+  </div>
+</a>
+{% endmacro -%}
