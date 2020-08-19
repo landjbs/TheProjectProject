@@ -35,7 +35,7 @@
     {% set action = 0 %}
   {% endif %}
   <div class='action-bar'>
-    <a onclick="toggleStar({{ project.id }}, '{{ url }}', {{ action }}, '{{ star_id }}', '#{{ star_id }}')">
+    <a onclick="toggleStar({{ project.id }}, '{{ url }}', {{ action }}, '#{{ star_id }}')">
       <i id='{{ star_id }}'
         class="fa fa-star{% if action=='star' %}-o{% endif %}">
       </i>
