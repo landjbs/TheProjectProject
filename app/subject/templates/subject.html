@@ -1,5 +1,6 @@
 {% from 'macros/carousels.html' import render_carousel with context %}
 {% from 'macros/tabs.html' import render_safe_tabs with context %}
+{% from 'macros/cards/subject.html' import render_subject_tag %}
 
 {% extends "home_base.html" %}
 
@@ -15,7 +16,8 @@
 
 {% block content %}
 <div class='container my-1 main'>
-    <p style='text-align:left;'>Subject: {{ subject.name }}</p>
+    <span style='text-align:left; padding:0px; display:inline; margin:0px;'>Subject: {{ render_subject_tag(subject) }}</span>
+    <hr class="my-1">
     <!-- projects -->
     {% set carousels = [
         (
