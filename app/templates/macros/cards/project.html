@@ -1,5 +1,6 @@
 {% from 'macros/cards/badge.html' import render_badge_icon %}
 {% from 'macros/cards/components.html' import render_share_button %}
+{% from 'macros/cards/subject.html' import render_subject_badge %}
 
 <!-- PROJECTS -->
 {% macro render_project_name(project, user) -%}
@@ -128,9 +129,7 @@
               {% if loop.index>1 %}
               ,
               {% endif %}
-              <p class='subject-tag' style='background:{{ subject.color }};'>
-                {{ subject.name }}
-              </p>
+              {{ render_subject_badge(subject) }}
             </a>
           {% endfor %}
         </div>

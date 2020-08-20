@@ -40,3 +40,10 @@
   </a>
 </div>
 {% endmacro -%}
+
+
+{% macro render_subject_tag(subject) -%}
+  <p class='subject-tag' style='background:{{ subject.color }};'>
+    {{ subject.name }}
+  </p>
+{% endmacro -%}
