@@ -360,6 +360,7 @@ input:checked + .slider:before {
 td {
   border: 1px solid white;
   padding: 3vh;
+  text-align: center;
 }
 
 .sidetable {

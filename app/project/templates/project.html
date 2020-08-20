@@ -72,6 +72,9 @@
                   {{ project.oneliner }}
                 </p>
                 <p>{{ project.summary }}</p>
+                {% if project.competion %}
+                  {{ url_for('competition.competition_page', code=project.competition) }}
+                {% endif %}
                 <center>
                   {% if not project.complete %}
                     {% set elapsed = calc_days_since(now(), project.posted_on) %}
@@ -91,16 +94,8 @@
                           style='width: 100%;'/>
                     </div>
                   {% endif %}
-                  <br>
-                  <table class='sidetable'>
-                    <tr>
-                      <td>Hi<td>
-                    </tr>
-                    <tr>
-                      <td>Hi<td>
-                    </tr>
-                  </table>
                 </center>
+                <br>
               </div>
             </ul>
         </nav>
