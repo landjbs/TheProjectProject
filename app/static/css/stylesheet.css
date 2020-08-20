@@ -282,3 +282,13 @@ input[type="radio"].toggle:checked + label:after {
 .orange {
   color: #FF5D00;
 }
+
+body ::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body  {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
