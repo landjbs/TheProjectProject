@@ -8,6 +8,8 @@ from sqlalchemy import desc
 from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
 
+from time import time
+
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
     # subject scoring [0,4]
