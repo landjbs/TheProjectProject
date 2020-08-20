@@ -358,6 +358,13 @@
               <p class='warning'>{{ edit_form.summary.errors[0] }}</p>
             {% endif %}
             <hr class='my-2'><br>
+            <!-- competition -->
+            {{ edit_form.competition.label }}:<br>
+            {{ edit_form.competition(class='edit-input', value=project.competition) }}
+            {% if edit_form.competition.errors %}
+              <p class='warning'>{{ edit_form.competition.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
             <!-- MANAGEMENT -->
             <center>
               <h6 style='text-decoration:underline;'>Management</h6>
