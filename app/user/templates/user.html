@@ -210,10 +210,10 @@
 
     <script>
       $(document).ready(function () {
-        if (sessionStorage.openTab) {
-          document.getElementById(sessionStorage.openTab).click();
+        opened = sessionStorage.getItem(window.location.href + '_openTab');
+        if (opened) {
+          document.getElementById(opened).click();
         } else {
-          alert(document.getElementById("About_Button"));
           document.getElementById("About_Button").click();
         }
       });

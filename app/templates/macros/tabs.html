@@ -27,12 +27,14 @@
 
     <script>
       $(document).ready(function () {
-        if (sessionStorage.openTab) {
-          document.getElementById(sessionStorage.openTab).click();
+        opened = sessionStorage.getItem(window.location.href + '_openTab');
+        if (opened) {
+          document.getElementById(opened).click();
         } else {
           document.getElementById('{{ default }}').click();
         }
       });
+
     </script>
 
 {% endmacro -%}

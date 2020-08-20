@@ -401,8 +401,9 @@
 
     <script>
     $(document).ready(function () {
-      if (sessionStorage.openTab) {
-        document.getElementById(sessionStorage.openTab).click();
+      opened = sessionStorage.getItem(window.location.href + '_opened');
+      if (opened) {
+        document.getElementById(opened).click();
       } else {
         document.getElementById("Activity_Button").click();
       }

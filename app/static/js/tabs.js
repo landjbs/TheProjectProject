@@ -10,5 +10,6 @@ function openTab(evt, tabName) {
   }
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
-  sessionStorage.openTab = tabName + '_Button';
+  sessionStorage.setItem = (window.location.href + '_opened',
+                            tabName + '_Button');
 }
