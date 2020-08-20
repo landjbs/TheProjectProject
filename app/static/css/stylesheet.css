@@ -1,6 +1,6 @@
 /* div styles */
 body {
-  font-family: 'Varela Round';
+  font-family: 'Varela Round' !important;
 }
 
 /* @media only screen and (max-width: 1026px) {

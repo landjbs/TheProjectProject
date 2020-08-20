@@ -29,8 +29,8 @@ a, a:hover, a:focus {
 }
 
 #sidebar {
-  min-width: 50vh;
-  max-width: 50vh;
+  min-width: 40vh;
+  max-width: 40vh;
   min-height: 100%;
   background: #5D00FF;
   color: #fff;
@@ -39,7 +39,7 @@ a, a:hover, a:focus {
 }
 
 #sidebar.active {
-    margin-left: -50vh;
+    margin-left: -40vh;
     transform: rotateY(100deg);
 }
 
@@ -146,9 +146,9 @@ ul ul a {
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 996px) {
     #sidebar {
-        margin-left: -250px;
+        margin-left: -40vh;
         transform: rotateY(90deg);
     }
     #sidebar.active {
