@@ -62,7 +62,6 @@ def get_recommended_projects(user):
     user_subjects = get_normed_user_subjects(user, temp=2)
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
-    # # NOTE: USE BOOGLE RANKING ALGORITHM RATHER THAN TIMSORT
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = (invited + results)
     results = results[:30]
