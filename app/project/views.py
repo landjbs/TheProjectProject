@@ -169,9 +169,9 @@ def project_page(project_code):
                     project.team_size = new_size
                     edits_made = True
                 # competition
-                if form.competition.data:
-                    competition = Competition.query.get(int(form.competition.data))
-                    if competition!=project.competion:
+                if edit_form.competition.data:
+                    competition = Competition.query.get(int(edit_form.competition.data))
+                    if not project.competition or project.competion!=competition:
                         project.submit_to_competition(competition)
                         edits_made = True
                 if edits_made:
