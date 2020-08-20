@@ -1,40 +1,42 @@
 <!-- renders tabs if mobile and otherwise stacked carousels -->
 {% macro render_safe_tabs(carousel_list, default='Projects') -%}
+  {% if request.MOBILE %}
+    <link rel='stylesheet' href="css/mobile_profile_styles.css">
+    <div class="tab">
+      {% for name, _ in carousel_list %}
+        <button
+          class="tablinks"
+          onclick="openTab(event, '{{ name }}')"
+          id="{{ name }}_Button">
+          {{ name }}
+        </button>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {% for name, carousel in carousel_list %}
     {% if request.MOBILE %}
-      <link rel='stylesheet' href="css/mobile_profile_styles.css">
-      <script src="js/tabs.js"></script>
-      <div class="tab">
-        {% for name, _ in carousel_list %}
-          <button
-            class="tablinks"
-            onclick="openTab(event, '{{ name }}')"
-            id="{{ name }}_Button">
-            {{ name }}
-          </button>
-        {% endfor %}
-      </div>
-    {% endif %}
-
-    {% for name, carousel in carousel_list %}
-      {% if request.MOBILE %}
-        <div id='{{ name }}' class='tabcontent'>
-          {{ carousel }}
-        </div>
-      {% else %}
+      <div id='{{ name }}' class='tabcontent'>
         {{ carousel }}
-      {% endif %}
-    {% endfor %}
+      </div>
+    {% else %}
+      {{ carousel }}
+    {% endif %}
+  {% endfor %}
 
-    <script>
-      $(document).ready(function () {
-        opened = sessionStorage.getItem(window.location.href + '_openTab');
-        if (opened) {
-          document.getElementById(opened).click();
-        } else {
-          document.getElementById('{{ default }}').click();
-        }
-      });
+  <script>
+    $(document).ready(function () {
+      opened = sessionStorage.getItem(window.location.href + '_openTab');
+      if (opened) {
+        document.getElementById(opened).click();
+      } else {
+        document.getElementById('{{ default }}').click();
+      }
+    });
+  </script>
 
-    </script>
+  {% if request.MOBILE %}
+    <script src="js/tabs.js"></script>
+  {% endif %}
 
 {% endmacro -%}
