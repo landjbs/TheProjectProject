@@ -105,10 +105,7 @@
         {% for message in messages|reverse %}
           <div class="toast" role="alert" style='position: fixed; z-index:9999;' aria-live="assertive" aria-atomic="true" data-autohide="false">
             <div class="toast-header">
-              <i class="fa fa-exclamation-circle orange" aria-hidden="true"></i>
-              <strong class="mr-auto">Bootstrap</strong>
-              <small>11 mins ago</small>
-              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <button type="button" class="float-right close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -119,6 +116,36 @@
         {% endfor %}
       {% endif %}
     {% endwith %}
+    <!-- notification messages -->
+    {% for notification in g.notifications %}
+      <!-- <div class="toast" role="alert" style='position: fixed; z-index:9999;' aria-live="assertive" aria-atomic="true" data-autohide="false">
+        <div class="toast-header">
+          <i class="fa fa-exclamation-circle orange" aria-hidden="true"></i>
+          <strong class="mr-auto">Bootstrap</strong>
+          <small>11 mins ago</small>
+          <button type="button" class="close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="toast-body">
+          {{ notification }}
+        </div>
+      </div> -->
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide='false'>
+          <div class="toast-header">
+            <i class="fa fa-exclamation-circle orange" aria-hidden="true"></i>
+            <strong class="mr-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+      </div>
+    {% endfor %}
 
     {% block content %} {% endblock %}
 

@@ -64,7 +64,7 @@ def create_app(config=config.production_config):
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
-        # flash('asdflkasjdfl asldkfjl askdjl nsd,kjl3wkjasdf asdf')
+        g.notifications = ['Hello', 'How are you.']
 
     from datetime import datetime
     @application.context_processor
