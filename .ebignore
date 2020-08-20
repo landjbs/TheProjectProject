@@ -3,3 +3,4 @@ virt
 *.db
 *.env
 dep
+secrets.py
