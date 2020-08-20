@@ -225,7 +225,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return toshow
 
     @classmethod
-    def notify_all(cls, text, important=False, redirect=None):
+    def notify_all(cls, text, name, important=False, redirect=None):
         ''' Notifies all users '''
         note = Notification(text=text, important=important, redirect=redirect)
         for user in cls.query.all():
@@ -283,6 +283,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.notify(text=(f'{current_user.name} has invited you '
                           f'to collaborate on {project.name}! '
                            'Click here to reply.'),
+                    name=project.name,
                     important=True,
                     redirect=project.get_url()
         )

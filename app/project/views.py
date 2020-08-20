@@ -212,6 +212,7 @@ def join_project(project_id):
     if project.open:
         if not project.requires_application:
             current_user.notify(text=f'You have joined {project.name}!',
+                                name=project.name,
                                 redirect=project.get_url())
             project.add_member(current_user, notify_owner=True)
             return redirect(

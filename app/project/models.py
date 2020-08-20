@@ -179,6 +179,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                           important=True)
         self.update()
         user.notify(text=f'You have applied to {self.name}.',
+                    name=self.name,
                     redirect=self.get_url())
         return True
 
@@ -210,6 +211,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                        "We promise it's nothing personal! "
                        'Please contact us if you think something'
                        ' is wrong or have any questions.'),
+                name=self.name,
                 important=True,
                 redirect=self.get_url()
             )
@@ -294,6 +296,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                              "it's nothing personal! Please contact us "
                              'if you think something is wrong or have '
                              'any questions.',
+                             name=self.name,
                              important=True,
                              redirect=self.get_url()
             )
@@ -303,6 +306,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             )
             user.notify(
                 text=f'You have left {self.name}.',
+                name=self.name,
                 redirect=self.get_url()
             )
         # remove xp from user
