@@ -218,8 +218,10 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     def notifications_to_show(self):
         ''' Gets important notifications to show user '''
-        toshow = self.notifications.filter_by(seen=False, important=True)
-        return toshow.all()
+        toshow = list(self.notifications.filter_by(seen=False, important=True))
+        for note in toshow:
+            note.mark_seen()
+        return toshow
 
     @classmethod
     def notify_all(cls, text, important=False, redirect=None):
