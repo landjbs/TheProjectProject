@@ -120,9 +120,9 @@
           });
           // TODO: fix rescroll and or add ajax for like and project actions
           // rescroll on refresh
-          // count_index = sessionStorage.getItem('{{ storage_index }}')
-          // if (count_index) {
-          //   document.getElementById('{{ carousel_id }}').carousel(1*count_index);
+          count_index = sessionStorage.getItem('{{ storage_index }}')
+          if (count_index) {
+            document.getElementById('{{ carousel_id }}').carousel(1*count_index);
           }
         </script>
       {% endif %}
