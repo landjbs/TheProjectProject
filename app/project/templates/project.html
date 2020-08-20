@@ -400,12 +400,18 @@
 
     <script>
     $(document).ready(function () {
+      // toggle open tab
       opened = sessionStorage.getItem(window.location.href + '_opened');
       if (opened) {
         document.getElementById(opened).click();
       } else {
         document.getElementById("Activity_Button").click();
       }
+      // toggle sidebar
+      // barstate = sessionStorage.getItem(window.location.href + '_sidebar');
+      // if (barstate) {
+      //
+      // }
     });
     </script>
 
@@ -413,7 +419,8 @@
       $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
         $(this).toggleClass('active');
-        sessionStorage.setItem(window.location.href + '_sidebar', true);
+        sessionStorage.setItem(window.location.href + '_sidebar',
+                           $('#sidebarCollapse').hasClass('active'));
       });
     </script>
 
