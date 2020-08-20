@@ -28,7 +28,7 @@ class TestCase(unittest.TestCase):
             password=admin_password
         ), follow_redirects=True)
 
-    def register_user(self, username, email, password):
+    def apply_user(self, username, email, password):
         return self.app.post('/register', data=dict(
             username=username,
             email=email,
@@ -58,11 +58,11 @@ class TestCase(unittest.TestCase):
 
     def test_about(self):
         resp = self.app.get('/about', follow_redirects=True)
-        assert resp.data, 'Index'
+        assert resp.data, 'About'
 
     def test_contact(self):
-        resp = self.app.get('/about', follow_redirects=True)
-        assert resp.data, 'Index'
+        resp = self.app.get('/contact', follow_redirects=True)
+        assert resp.data, 'Contact'
 
     def test_login(self):
         resp = self.login(admin_email, admin_password)
