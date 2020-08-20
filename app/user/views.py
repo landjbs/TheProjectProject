@@ -90,7 +90,7 @@ def delete_user():
     for project in current_user.owned:
         if len(project.members.all())>1:
             new_owner = User.query.get_or_404(request.form.get(f'new_owner_{project.id}'))
-            success = transfer_ownership(project, new_owner)
+            success = project.make_owner(new_owner)
             if not success:
                 flash(f'Owner transfer unsuccessful of {project.name}.')
                 return redirect(request.referrer)
