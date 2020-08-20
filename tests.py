@@ -28,14 +28,14 @@ class TestCase(unittest.TestCase):
             password=admin_password
         ), follow_redirects=True)
 
-    # def register_user(self, username, email, password):
-    #     return self.app.post('/register', data=dict(
-    #         username=username,
-    #         email=email,
-    #         password=password,
-    #         confirm=password,
-    #         accept_tos=True
-    #     ), follow_redirects=True)
+    def register_user(self, username, email, password):
+        return self.app.post('/register', data=dict(
+            username=username,
+            email=email,
+            password=password,
+            confirm=password,
+            accept_tos=True
+        ), follow_redirects=True)
 
     # def edit_user(self, user, email):
     #     return self.app.post('/user/edit/%s' % user.id, data=dict(
