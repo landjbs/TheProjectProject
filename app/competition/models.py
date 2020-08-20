@@ -32,12 +32,6 @@ class Competition(CRUDMixin, db.Model):
     active = db.Column(db.Boolean, nullable=False, default=True)
     complete = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __init__(self, **kwargs):
-        for attr, value in kwargs.items():
-            setattr(self, attr, value)
-        if kwargs.get('active')==True:
-            self.activate()
-
     def __repr__(self):
         return f'<Competition {self.name} by {self.sponsor}>'
 
