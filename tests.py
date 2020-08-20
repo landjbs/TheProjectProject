@@ -22,11 +22,11 @@ class TestCase(unittest.TestCase):
     def tearDown(self):
         pass
 
-    # def login(self, username, password):
-    #     return self.app.post('/login', data=dict(
-    #         email=email,
-    #         password=password
-    #     ), follow_redirects=True)
+    def login(self, username, password):
+        return self.app.post('/login', data=dict(
+            email=admin_email,
+            password=admin_password
+        ), follow_redirects=True)
 
     # def register_user(self, username, email, password):
     #     return self.app.post('/register', data=dict(
@@ -54,9 +54,9 @@ class TestCase(unittest.TestCase):
         resp = self.app.get('/index', follow_redirects=True)
         assert resp.data, 'Index'
 
-    # def test_login(self):
-        # resp = self.login(admin_email, admin_password)
-        # assert resp.data, 'Login'
+    def test_login(self):
+        resp = self.login(admin_email, admin_password)
+        assert resp.data, 'Login'
 
     # def test_logout(self):
     #     resp = self.login(admin_email, admin_password)

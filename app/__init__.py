@@ -22,7 +22,7 @@ from app.notification import notification
 from app.badge import badge
 from app.question import question
 from app.link import link
-from app.admin import register_admin_views
+# from app.admin import register_admin_views
 # database
 from app.database import db
 # login
@@ -39,6 +39,11 @@ from app.utils import url_for_other_page, partition_query
 from app.commands import command_list
 
 
+# TODO:
+# follow: https://stackoverflow.com/questions/50070979/wrong-dashboard-while-adding-flask-admin-to-project/50179126#50179126
+# to properly register admin views
+
+
 def create_app(config=config.dev_config):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
@@ -48,7 +53,7 @@ def create_app(config=config.dev_config):
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
-    register_admin_views(admin, db)
+    # register_admin_views(admin, db)
     # register_elasticsearch(application)
 
     @application.before_request
@@ -99,7 +104,7 @@ def create_app(config=config.dev_config):
 
 def register_extensions(app):
     csrf.init_app(app)
-    admin.init_app(app)
+    # admin.init_app(app)
     travis.init_app(app)
     db.init_app(app)
     babel.init_app(app)
