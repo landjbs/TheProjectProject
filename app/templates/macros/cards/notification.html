@@ -12,6 +12,9 @@
   </h6>
   <div class="d-flex w-100 justify-content-between">
     <small>
+      {% if notification.name %}
+        {{ notification.name }} |
+      {% endif %}
       {{ time_to_str(notification.timestamp) }}
     </small>
   </div>

@@ -287,6 +287,9 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                     important=True,
                     redirect=project.get_url()
         )
+        # delete rejection if it exists
+        if project in self.rejections:
+            self.rejections.remove(project)
         # add invitation
         self.invitations.append(project)
         # add xp to inviter and invitee
@@ -308,6 +311,10 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.add_rejection(project)
         self.update()
         message = f'You have rejected the offer to collaborate on {project.name}.'
+        project.notify_owner(text=(f'{self.name} has declined your offer to '
+                                f'collaborate on {project.name}. We promise '
+                                "it's nothing personal. Please contact us if "
+                                'you have any questions.'))
         return (message, 'success')
 
 
@@ -365,6 +372,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             if not user_badge:
                 self.notify(
                     text=f'You have started progress on the {badge_name} badge!',
+                    name=badge_name,
                     redirect='/perks'
                 )
                 user_badge = User_Badge(badge)
