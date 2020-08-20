@@ -171,7 +171,7 @@ def project_page(project_code):
                 # competition
                 if edit_form.competition.data:
                     competition = Competition.query.get(int(edit_form.competition.data))
-                    if not project.competition or project.competion!=competition:
+                    if not project.competition or project.competition!=competition:
                         project.submit_to_competition(competition)
                         edits_made = True
                 if edits_made:

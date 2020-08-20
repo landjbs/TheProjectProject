@@ -62,7 +62,7 @@ class Competition(CRUDMixin, db.Model):
         return f'width: {100*float(self.time_progressed()/self.total_length())};'
 
     def winners(self):
-        ''' Gets winning submissions if competion is over '''
+        ''' Gets winning submissions if competition is over '''
         if not self.complete:
             return None
         return self.submissions.filter_by(winner=True)
