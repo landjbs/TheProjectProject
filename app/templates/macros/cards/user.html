@@ -148,6 +148,12 @@
         <a class='float-right' href="{{ url_for('project.make_owner', user_id=user.id, project_id=g.project.id) }}">
           <button class='btn'>Make Owner</button>
         </a>
+      {% else %}
+        <center>
+          <button data-toggle='modal' data-target='#modal_project_{{ g.project.id }}' class='btn'>
+            Leave
+          </button>
+        </center>
       {% endif %}
     </div>
   </div>
