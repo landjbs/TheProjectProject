@@ -61,10 +61,10 @@ def create_app(config=config.production_config):
             current_user.update_last_active()
             g.search_form = SearchForm()
             g.project_application = Project_Application_Form()
+            g.notifications = current_user.notifications_to_show()
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
-        g.notifications = current_user.notifications_to_show()
 
     from datetime import datetime
     @application.context_processor
