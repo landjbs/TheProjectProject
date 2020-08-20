@@ -80,6 +80,7 @@ class Competition(CRUDMixin, db.Model):
         User.notify_all(
             text=(f'{self.name}, a new competition you might like, just went '
                   'live! Click here to join—good luck!'),
+            name=self.name,
             important=True,
             redirect=self.get_url()
         )
