@@ -143,19 +143,19 @@
       </div>
       <div class='row'>
         {% if not g.project.is_owner(user) %}
-          <div class='col float-left'>
+          <div class='col float-left' style='padding:0px;'>
             <a href="{{ url_for('project.remove_member', user_id=user.id, project_id=g.project.id) }}">
               <button class='btn' style='font-size:80%;'>Remove</button>
             </a>
           </div>
-          <div class='col float-right' style='text-align:right;'>
+          <div class='col float-right' style='text-align:right; padding:0px;'>
             <a href="{{ url_for('project.make_owner', user_id=user.id, project_id=g.project.id) }}">
               <button class='btn' style='font-size:80%;'>Make Owner</button>
             </a>
           </div>
         {% else %}
           <center>
-            <div class='col'>
+            <div class='col' style='padding:0px;'>
               <button data-toggle='modal' data-target='#modal_project_{{ g.project.id }}' class='btn' style='font-size:80%;'>
                 Leave
               </button>

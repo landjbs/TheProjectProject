@@ -413,6 +413,7 @@
       $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
         $(this).toggleClass('active');
+        sessionStorage.setItem(window.location.href + '_sidebar', true);
       });
     </script>
 
