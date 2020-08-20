@@ -46,9 +46,9 @@ class TestCase(unittest.TestCase):
     # def delete_user(self, uid):
         # return self.app.get('/user/delete/%s' % uid, follow_redirects=True)
 
-    # def test_404(self):
-    #     resp = self.app.get('/nope', follow_redirects=True)
-    #     assert resp.data, '404'
+    def test_404(self):
+        resp = self.app.get('/nope', follow_redirects=True)
+        assert resp.data, '404'
 
     def test_index(self):
         resp = self.app.get('/index', follow_redirects=True)
@@ -58,10 +58,10 @@ class TestCase(unittest.TestCase):
         resp = self.login(admin_email, admin_password)
         assert resp.data, 'Login'
 
-    # def test_logout(self):
-    #     resp = self.login(admin_email, admin_password)
-    #     resp = self.app.get('/logout', follow_redirects=True)
-    #     assert resp.data, 'Logout'
+    def test_logout(self):
+        resp = self.login(admin_email, admin_password)
+        resp = self.app.get('/logout', follow_redirects=True)
+        assert resp.data, 'Logout'
 
     # def test_register_user(self):
     #     username = fake.user_name()
