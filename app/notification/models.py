@@ -13,6 +13,8 @@ class Notification(CRUDMixin, db.Model):
     # user
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = relationship('User', back_populates='notifications')
+    # name
+    name = db.Column(db.String(128), nullable=True)
     # redirect
     redirect = db.Column(db.String(128), nullable=True)
     # timestamp
