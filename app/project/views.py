@@ -138,6 +138,7 @@ def project_page(project_code):
             recommended = recommend_users(project)
         ## edit project form ##
         edit_form = Edit_Project()
+        edit_form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
         edit_application_form = Edit_Project_Application()
         if request.method=='POST':
             if edit_form.validate_on_submit():
