@@ -72,9 +72,15 @@
                   {{ project.oneliner }}
                 </p>
                 <p>{{ project.summary }}</p>
-                {% if project.competion %}
-                  {{ url_for('competition.competition_page', code=project.competition) }}
-                {% endif %}
+                <p>
+                  {% if project.competition %}
+                    {% set competition = project.competition.competition %}
+                    <i class='fa fa-trophy' style='color: gold;'></i>
+                    <a class='user-name' href='{{ competition.get_url() }}'>
+                      {{ competition.name }}
+                    </a>
+                  {% endif %}
+                </p>
                 <center>
                   {% if not project.complete %}
                     {% set elapsed = calc_days_since(now(), project.posted_on) %}

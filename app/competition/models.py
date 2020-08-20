@@ -40,7 +40,7 @@ class Competition(CRUDMixin, db.Model):
         return f'<Competition {self.name} by {self.sponsor}>'
 
     def get_url(self):
-        return f'/competion={self.code}'
+        return f'/competition={self.code}'
 
     @classmethod
     def get_active_competitions(cls):
