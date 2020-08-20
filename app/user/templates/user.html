@@ -210,7 +210,7 @@
 
     <script>
       $(document).ready(function () {
-        opened = sessionStorage.getItem(window.location.href + '_openTab');
+        opened = sessionStorage.getItem(window.location.href + '_opened');
         if (opened) {
           document.getElementById(opened).click();
         } else {
