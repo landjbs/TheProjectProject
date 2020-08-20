@@ -8,6 +8,8 @@ from sqlalchemy import desc
 from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
 
+import time
+
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
     # subject scoring [0,4]
@@ -45,6 +47,7 @@ def score_project(project, user_subjects):
 
 def get_recommended_projects(user):
     ## get initial candidates ##
+    s = time()
     member_projects = [p.id for p in user.projects]
     pending_projects = [p.project.id for p in user.pending]
     invited_projects = [p.id for p in user.invitations]
@@ -55,18 +58,28 @@ def get_recommended_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(nowshow_ids)
                                   ).limit(200)
+    print(f'candidates: {time() - s}')
+    s = time()
     ## get invited projects ##
     invited = [project for project in user.invitations]
     ## format user preferences ##
     user_subjects = get_normed_user_subjects(user, temp=2)
+    print(f'user: {time() - s}')
+    s = time()
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
+    print(f'scoring: {time() - s}')
+    s = time()
     # # NOTE: USE BOOGLE RANKING ALGORITHM RATHER THAN TIMSORT
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
+    print(f'sorting: {time() - s}')
+    s = time()
     results = (invited + results)
     results = results[:30]
     if len(results)==0:
         results = user.projects.all()
+    print(f'cleanup: {time() - s}')
+    s = time()
     return results
 
 
