@@ -52,8 +52,10 @@ input {
 
 @media (max-width: 991px) {
   input {
-    font-size: 100%;
-    width: 80%;
+    font-size: 130%;
+  }
+  .input-segment {
+    max-width: 95%;
   }
 }
 

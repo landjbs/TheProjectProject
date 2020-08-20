@@ -11,6 +11,7 @@
 {% block content %}
 
 <form class='big-box container justify-content-center' id='login_form' method='post'>
+  <center>
   {% for elt in form %}
     <!-- csrf token -->
     {% if elt.type == 'CSRFTokenField' %}
@@ -58,6 +59,7 @@
       {% endif %}
     {% endfor %}
   </div>
+</center>
 </form>
 
 <script>

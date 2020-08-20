@@ -12,6 +12,7 @@
 {% block content %}
 
 <form class='big-box container justify-content-center' id='apply_form' method='post'>
+  <center>
   {% for elt in form %}
     <!-- csrf token -->
     {% if elt.type == 'CSRFTokenField' %}
@@ -22,9 +23,9 @@
     <!-- boolean field -->
     {% elif elt.type=='BooleanField' %}
       <div class="row input-segment tab">
-        <h4 style="display: inline;">
+        <h6 style="display: inline;">
           I have read and accept the <a href='terms'>terms</a>.
-        </h4>
+        </h6>
         <div class="input-control">
           <input id="toggle-off-q1" class="toggle toggle-left"
                 name='{{ elt.name }}' value="true" type="radio">
@@ -83,6 +84,7 @@
       {% endif %}
     {% endfor %}
   </div>
+</center>
 </form>
 
 <script>
