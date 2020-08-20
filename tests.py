@@ -46,12 +46,22 @@ class TestCase(unittest.TestCase):
     # def delete_user(self, uid):
         # return self.app.get('/user/delete/%s' % uid, follow_redirects=True)
 
+    ## error handling ##
     def test_404(self):
         resp = self.app.get('/nope', follow_redirects=True)
         assert resp.data, '404'
 
+    ## base pages ##
     def test_index(self):
         resp = self.app.get('/index', follow_redirects=True)
+        assert resp.data, 'Index'
+
+    def test_about(self):
+        resp = self.app.get('/about', follow_redirects=True)
+        assert resp.data, 'Index'
+
+    def test_contact(self):
+        resp = self.app.get('/about', follow_redirects=True)
         assert resp.data, 'Index'
 
     def test_login(self):
@@ -62,6 +72,7 @@ class TestCase(unittest.TestCase):
         resp = self.login(admin_email, admin_password)
         resp = self.app.get('/logout', follow_redirects=True)
         assert resp.data, 'Logout'
+
 
     # def test_register_user(self):
     #     username = fake.user_name()
@@ -76,11 +87,11 @@ class TestCase(unittest.TestCase):
     #     resp = self.edit_user(user, email=fake.email())
     #     assert resp.data, 'User %s edited' % user.username
 
-    def test_delete_user(self):
-        user = User.query.order_by(func.random()).first()
-        resp = self.login(admin_email, admin_password)
-        resp = self.delete_user(user.id)
-        assert resp.data, 'User %s deleted' % user.username
+    # def test_delete_user(self):
+    #     user = User.query.order_by(func.random()).first()
+    #     resp = self.login(admin_email, admin_password)
+    #     resp = self.delete_user(user.id)
+    #     assert resp.data, 'User %s deleted' % user.username
 
     # def test_user_list(self):
     #     resp = self.login(admin_email, admin_password)
