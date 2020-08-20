@@ -45,7 +45,6 @@ def score_project(project, user_subjects):
 
 def get_recommended_projects(user):
     ## get initial candidates ##
-    s = time()
     member_projects = [p.id for p in user.projects]
     pending_projects = [p.project.id for p in user.pending]
     invited_projects = [p.id for p in user.invitations]
@@ -55,7 +54,7 @@ def get_recommended_projects(user):
     candidates = Project.query.filter(Project.open==True,
                                       Project.complete==False,
                                       ~Project.id.in_(nowshow_ids)
-                                  ).limit(100)
+                                  ).order_by(desc(Project.last_active)).limit(100)
     ## get invited projects ##
     invited = [project for project in user.invitations]
     ## format user preferences ##
