@@ -64,7 +64,8 @@ def create_app(config=config.production_config):
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
-        g.notifications = ['Hello', 'How are you.']
+        current_user.notify(text='You are awesome and so forth!')
+        g.notifications = current_user.notifications_to_show()
 
     from datetime import datetime
     @application.context_processor
