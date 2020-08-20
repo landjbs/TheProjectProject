@@ -225,6 +225,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         ''' Notify owner with text and category '''
         self.owner.notify(
             text=text,
+            name=self.name,
             important=important,
             redirect=self.get_url()
         )
@@ -241,6 +242,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                     continue
             member.notify(
                 text=text,
+                name=self.name,
                 important=important,
                 redirect=self.get_url()
             )
