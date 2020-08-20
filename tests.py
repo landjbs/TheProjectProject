@@ -76,11 +76,11 @@ class TestCase(unittest.TestCase):
     #     resp = self.edit_user(user, email=fake.email())
     #     assert resp.data, 'User %s edited' % user.username
 
-    # def test_delete_user(self):
-    #     user = User.query.order_by(func.random()).first()
-    #     resp = self.login(admin_email, admin_password)
-    #     resp = self.delete_user(user.id)
-    #     assert resp.data, 'User %s deleted' % user.username
+    def test_delete_user(self):
+        user = User.query.order_by(func.random()).first()
+        resp = self.login(admin_email, admin_password)
+        resp = self.delete_user(user.id)
+        assert resp.data, 'User %s deleted' % user.username
 
     # def test_user_list(self):
     #     resp = self.login(admin_email, admin_password)
