@@ -8,8 +8,6 @@ from sqlalchemy import desc
 from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
 
-import time
-
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
     # subject scoring [0,4]
@@ -57,7 +55,7 @@ def get_recommended_projects(user):
     candidates = Project.query.filter(Project.open==True,
                                       Project.complete==False,
                                       ~Project.id.in_(nowshow_ids)
-                                  ).limit(200)
+                                  ).limit(50)
     print(f'candidates: {time() - s}')
     s = time()
     ## get invited projects ##
