@@ -22,7 +22,7 @@ from app.notification import notification
 from app.badge import badge
 from app.question import question
 from app.link import link
-# from app.admin import register_admin_views
+from app.admin import register_admin_views
 # database
 from app.database import db
 # login
@@ -44,7 +44,7 @@ from app.commands import command_list
 # to properly register admin views
 
 
-def create_app(config=config.dev_config):
+def create_app(config=config.production_config):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())
@@ -53,7 +53,7 @@ def create_app(config=config.dev_config):
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
-    # register_admin_views(admin, db)
+    register_admin_views(admin, db)
     # register_elasticsearch(application)
 
     @application.before_request
