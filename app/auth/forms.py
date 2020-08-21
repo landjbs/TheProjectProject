@@ -34,7 +34,7 @@ class Apply(BaseForm):
                                'have, or reasons you want to join the '
                                'community.'))
     subjects = SelectMultipleField('Interests',
-                                    description=('What subjects are you '
+                                    description=('What fields are you '
                                                 'interested in?'),
                                     validators=[Select_Limit_Validator(5)],
                                     choices=[], coerce=int,

@@ -6,6 +6,7 @@ from wtforms.validators import (DataRequired, Length, EqualTo, Email,
 
 from app.link.utils import fix_url
 
+
 class Email_Ext_Validator(object):
     ''' Validator for allowed email extensions '''
     def __init__(self, allowed=['college.harvard.edu']):
