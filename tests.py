@@ -43,8 +43,8 @@ class TestCase(unittest.TestCase):
     #         email=user.email,
     #     ), follow_redirects=True)
 
-    # def delete_user(self, uid):
-        # return self.app.get('/user/delete/%s' % uid, follow_redirects=True)
+    def delete_user(self, uid):
+        return self.app.get('/user/delete/%s' % uid, follow_redirects=True)
 
     ## error handling ##
     def test_404(self):
@@ -79,7 +79,7 @@ class TestCase(unittest.TestCase):
         password = fake.word() + fake.word()
         resp = self.register_user(username, email, password)
         assert resp.data, 'Sent verification email to %s' % email
-    
+
     # def test_edit_user(self):
     #     user = User.query.order_by(func.random()).first()
     #     resp = self.login(admin_email, admin_password)
