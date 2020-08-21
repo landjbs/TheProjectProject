@@ -3,13 +3,6 @@ body {
   font-family: 'Varela Round' !important;
 }
 
-/* @media only screen and (max-width: 1026px) {
-    body {
-        display: none;
-        background: black;
-    }
-} */
-
 mark {
   background-color: white;
   padding: 0 0.1em;
