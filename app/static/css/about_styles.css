@@ -19,12 +19,20 @@
   background-color: #F1D004;
 }
 
-.blue-background {
+.light-blue-background {
   background-color: #00A3FF;
 }
 
 .green-background {
   background-color: #04F15A;
+}
+
+.red-background {
+  background-color: #FF0023;
+}
+
+.dark-blue-background {
+  background-color: #006CFF;
 }
 
 
