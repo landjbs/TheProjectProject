@@ -5,24 +5,23 @@
 {% block content %}
 
 <div class="container big-box">
-  <section id='start'>
+  <section id='start' style='min-height:100%;'>
     <div id='play_pannel'>
       <i onclick="play()" class="fas fa-play-circle fa-5x"></i>
       <br><br>
       <h3>projects</h3>
     </div>
   </section>
-</div>
-
-<section id='about'>
-  <div class='container' style='background: #5D00FF; position:relative;'>
-    <div id='play_pannel'>
-      <i onclick="play()" class="fas fa-play-circle fa-5x"></i>
-      <br><br>
-      <h3>projects</h3>
+  <section id='about'>
+    <div style='background: #5D00FF;'>
+      <div id='play_pannel'>
+        <i onclick="play()" class="fas fa-play-circle fa-5x"></i>
+        <br><br>
+        <h3>projects</h3>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <script>
   function play() {
