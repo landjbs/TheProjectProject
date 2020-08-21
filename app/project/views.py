@@ -180,6 +180,7 @@ def project_page(project_code):
                     project.update()
             else:
                 show_edit_modal = True
+    print(members)
     return render_template('project.html' if not request.MOBILE else 'project_mobile.html',
                             project=project,
                             members=members,

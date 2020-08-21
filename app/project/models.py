@@ -169,6 +169,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         return self.pending.filter_by(user=user).first()
 
     def apply(self, user, text):
+        if user in self.invitations:
+            self.add_member(user, notify_owner=True)
+        if user in self.rejections:
+            self.rejections.remove(user)
         self.pending.append(
             Project_Application(
                 user=user,
