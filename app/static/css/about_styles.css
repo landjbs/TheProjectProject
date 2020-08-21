@@ -62,16 +62,31 @@
 }
 
 /* HEX CONTENT */
-#categories li img{
+#categories li img {
   left:-100%; right:-100%;
   width: auto; height:100%;
   margin:0 auto;
 }
 
+#categories li .test {
+  left:-100%; right:-100%;
+  width: auto; height:100%;
+  margin:0 auto;
+  background: red;
+}
+
+h4 {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 #categories div h1, #categories div p{
   width:100%;
   padding:0 5%;
-  background-color: orange; 
+  background-color: orange;
   -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
