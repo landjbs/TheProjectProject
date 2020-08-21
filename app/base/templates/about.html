@@ -5,11 +5,17 @@
 {% block content %}
 
 <div class='container big-box'>
-  <div style='border:1px solid white; width: 3vh; height: 3vh;'>
-    <i class="fas fa-play fa-2x"></i>
+  <div id='play_pannel'>
+    <i onclick="play()" class="fas fa-play-circle fa-5x"></i>
+    <br><br>
+    <h3>projects</h3>
   </div>
-  <br>
-  <h1>the project</h1>
 </div>
+
+<script>
+  function play() {
+    document.getElementById('play_pannel').style.display = 'none';
+  }
+</script>
 
 {% endblock %}
