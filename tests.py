@@ -73,14 +73,13 @@ class TestCase(unittest.TestCase):
         resp = self.app.get('/logout', follow_redirects=True)
         assert resp.data, 'Logout'
 
-
-    # def test_register_user(self):
-    #     username = fake.user_name()
-    #     email = fake.email()
-    #     password = fake.word() + fake.word()
-    #     resp = self.register_user(username, email, password)
-        # assert resp.data, 'Sent verification email to %s' % email
-    #
+    def test_register_user(self):
+        username = fake.user_name()
+        email = fake.email()
+        password = fake.word() + fake.word()
+        resp = self.register_user(username, email, password)
+        assert resp.data, 'Sent verification email to %s' % email
+    
     # def test_edit_user(self):
     #     user = User.query.order_by(func.random()).first()
     #     resp = self.login(admin_email, admin_password)
