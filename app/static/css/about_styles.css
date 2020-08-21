@@ -69,19 +69,15 @@
 }
 
 #categories div h1, #categories div p{
-  width:90%;
+  width:100%;
   padding:0 5%;
-  background-color:#008080; background-color: rgba(0, 128, 128, 0.8);
-  font-family: 'Raleway', sans-serif;
-
+  background-color: orange; 
   -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
 }
 #categories li h1{
   bottom:110%;
-  font-style:italic;
-  font-weight:normal;
   font-size:1.5em;
   padding-top:100%;
   padding-bottom:100%;
