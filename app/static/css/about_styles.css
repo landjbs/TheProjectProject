@@ -1,17 +1,50 @@
+/* background colors */
+.dark-purple-background {
+  background-color: #5D00FF;
+}
+
+.light-purple-background {
+  background-color: #DD00FF;
+}
+
+.pink-background {
+  background-color: #FF00A2;
+}
+
+.orange-background {
+  background-color: #FF5D00;
+}
+
+.yellow-background {
+  background-color: #F1D004;
+}
+
+.blue-background {
+  background-color: #00A3FF;
+}
+
+.green-background {
+  background-color: #04F15A;
+}
+
+
 *{
   margin:0;
   padding:0;
 }
+
 #categories{
   overflow:hidden;
   width:90%;
   margin:0 auto;
 }
+
 .clr:after{
   content:"";
   display:block;
   clear:both;
 }
+
 #categories li{
   position:relative;
   list-style-type:none;
@@ -25,12 +58,15 @@
   -ms-transform: rotate(-60deg) skewY(30deg);
   transform: rotate(-60deg) skewY(30deg);
 }
+
 #categories li:nth-child(3n+2){
   margin:0 1%;
 }
+
 #categories li:nth-child(6n+4){
   margin-left:0.5%;
 }
+
 #categories li:nth-child(6n+4), #categories li:nth-child(6n+5), #categories li:nth-child(6n+6) {
 	margin-top: -6.9285714285%;
   margin-bottom: -6.9285714285%;
@@ -39,20 +75,22 @@
   -ms-transform: translateX(50%) rotate(-60deg) skewY(30deg);
   transform: translateX(50%) rotate(-60deg) skewY(30deg);
 }
+
 #categories li:nth-child(6n+4):last-child, #categories li:nth-child(6n+5):last-child, #categories li:nth-child(6n+6):last-child{
   margin-bottom:0%;
 }
+
 #categories li *{
   position:absolute;
   visibility:visible;
 }
+
 #categories li > div{
   width:100%;
   height:100%;
   text-align:center;
   color:#fff;
   overflow:hidden;
-
   -webkit-transform: skewY(-30deg) rotate(60deg);
   -ms-transform: skewY(-30deg) rotate(60deg);
   transform: skewY(-30deg) rotate(60deg);
@@ -68,14 +106,13 @@
   margin:0 auto;
 }
 
-#categories li .test {
+#categories li .cover {
   left:-100%; right:-100%;
   width: auto; height:100%;
   margin:0 auto;
-  background: red;
 }
 
-h4 {
+h5 {
   margin: 0;
   position: absolute;
   top: 50%;
@@ -86,7 +123,7 @@ h4 {
 #categories div h1, #categories div p{
   width:100%;
   padding:0 5%;
-  background-color: orange;
+  /* background-color: #FF5D00; */
   -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
@@ -120,7 +157,7 @@ h4 {
   padding-bottom:10%;
 }
 
-#categories li div:hover .test h4 {
+#categories li div:hover .cover h5 {
   display: none;
 }
 
@@ -128,4 +165,5 @@ h4 {
 #categories li div:hover p{
   top:50%;
   padding-top:10%;
+  overflow-y: scroll !important;
 }
