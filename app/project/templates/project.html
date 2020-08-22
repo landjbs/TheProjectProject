@@ -198,7 +198,8 @@
                         card_type='todo-task',
                         icon_type='todo',
                         data=project.todo_tasks().all(),
-                        empty_message='No tasks to do right now.'
+                        empty_message='No tasks to do right now.',
+                        tooltip='Add some tasks'
                       )
                     }}
                     {% if is_member and not project.complete %}
