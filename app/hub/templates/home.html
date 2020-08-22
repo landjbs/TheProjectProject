@@ -49,7 +49,7 @@
 </div>
 <script src="js/stars.js"></script>
 <!-- show help tooltips on first login if not mobile dev -->
-{% if not request.MOBILE and g.show_help %}
+{% if not request.MOBILE and (current_user.projects.all()|length)==0 %}
   <script>
   $(function () {
     $('[data-toggle="tooltip"]').tooltip('show')
