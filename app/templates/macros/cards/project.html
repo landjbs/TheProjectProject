@@ -97,14 +97,12 @@
       </div>
       <div class='card-head'>
         {{ render_project_name(project, g.current_user) }}
-        <a href='user={{ project.owner.code }}'>
-          <p class='owner'>
-            {{ project.owner.name }}
-            {% set badge = project.owner.choose_badge('project') %}
-            {% if badge %}
-              {{ render_badge_icon(badge) }}
-            {% endif %}
-          </p>
+        <a href='user={{ project.owner.code }}' style='color: rgba(0,0,0,0.5);'>
+          {{ project.owner.name }}
+          {% set badge = project.owner.choose_badge('project') %}
+          {% if badge %}
+            {{ render_badge_icon(badge) }}
+          {% endif %}
         </a>
       </div>
       <hr class="my-4">
