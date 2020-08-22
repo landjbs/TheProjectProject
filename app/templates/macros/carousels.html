@@ -145,7 +145,7 @@
     {% endif %}
   {% endif %}
   {% if tooltip %}
-    <div data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}">
+    <div id='tooltip-{{ postfix_id }}' data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}">
     </div>
   {% endif %}
 {% endmacro -%}

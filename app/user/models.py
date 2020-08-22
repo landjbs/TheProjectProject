@@ -488,6 +488,9 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return self.xp
 
     ## public analytics ##
+    def n_owned(self):
+        return (self.projects.count()-self.owned.count())
+
     def total_stars(self):
         ''' Gets total stars earned by user '''
         stars = 0
