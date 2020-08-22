@@ -10,7 +10,7 @@
 
 
 {% block content %}
-  <ul id="categories" class="clr" style="list-style: none;">
+  <ul id="categories" class="clr" style="list-style: none;{% if request.MOBILE %}padding-left:10px;{% endif %}">
     <li>
       <div>
         <div class='cover dark-purple-background'><h5>A Community Of Builders</h5></div>
@@ -151,5 +151,20 @@
       </div>
     </li>
     <li class="pusher"></li>
+    <li class="pusher"></li>
+    <li>
+      <div>
+        <div class='cover pink-background'><h5>Want To Help?</h5></div>
+        <p class='toptext'>
+          TheProjectProject is just starting out, but we are moving fast! We
+          are excited to welcome 
+        </p>
+        <p class='bottomtext'>
+          Whether you're a project veteran with years of independent work
+          behind you or a rookie looking for new skills, as long as you are
+          ready
+        </p>
+      </div>
+    </li>
   </ul>
 {% endblock %}

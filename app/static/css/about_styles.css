@@ -4,7 +4,7 @@
 }
 
 #categories{
-  overflow: scroll;
+  overflow: hidden;
   width:90%;
   margin:0 auto;
 }
@@ -21,7 +21,7 @@
   width:27.85714285714286%; /* = (100-2.5) / 3.5 */
   padding-bottom: 32.16760145166612%; /* =  width /0.866 */
   float:left;
-  overflow: scroll;
+  overflow: hidden;
   visibility:hidden;
 
   -webkit-transform: rotate(-60deg) skewY(30deg);
@@ -60,7 +60,7 @@
   height:100%;
   text-align:center;
   color:#fff;
-  overflow: scroll;
+  overflow: hidden;
   -webkit-transform: skewY(-30deg) rotate(60deg);
   -ms-transform: skewY(-30deg) rotate(60deg);
   transform: skewY(-30deg) rotate(60deg);
