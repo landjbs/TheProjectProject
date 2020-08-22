@@ -104,7 +104,7 @@
           <div id='About' class='tabcontent'>
             <div class="row">
               <div class="col-sm-4">
-                <h6>Daily Activity</h6>
+                <h6><u>Daily Activity</u></h6>
                 {% if task_data %}
                   <canvas id="activity_chart"></canvas>
                 {% else %}
@@ -127,7 +127,7 @@
               </div>
 
               <div class="col-sm-4">
-                <h6>Subject Breakdown</h6>
+                <h6><u>Subject Breakdown</u></h6>
                 {% if subject_data %}
                   <canvas id="role_breakdown"></canvas>
                 {% else %}
@@ -171,7 +171,8 @@
                 label='Invitations',
                 id_postfix='invitations',
                 card_type='project-invitation',
-                data=user.invitations.all()
+                data=user.invitations.all(),
+                tooltip='The owners of these projects want to collaborate with you!'
               )
             }}
             {{
@@ -179,8 +180,7 @@
                 label='Applications',
                 id_postfix='applications',
                 card_type='project-application',
-                data=user.pending.all(),
-                tooltip='These users want to work with you'
+                data=user.pending.all()
               )
             }}
           </div>
