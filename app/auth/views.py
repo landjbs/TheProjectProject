@@ -33,16 +33,20 @@ def apply():
                     about=form.data['about'],
                 )
         user.add_subjects(subjects)
-        # generate token and send to user email
-        s = URLSafeTimedSerializer(current_app.secret_key)
-        token = s.dumps(user.id, salt='email-confirm-salt')
-        url = url_for('auth.verify', token=token, _external=True)
-        send_registration_email(user, url)
-        # notify user and redirect to index
-        flash(f'Congratulations, {user.name}, your application to '
-               'TheProjectProject has been submitted! '
-               'Please confirm your email by following the link we just sent you.',
-               category='success')
+        if current_app.config.REGISTER_MAIL:
+            # generate token and send to user email
+            s = URLSafeTimedSerializer(current_app.secret_key)
+            token = s.dumps(user.id, salt='email-confirm-salt')
+            url = url_for('auth.verify', token=token, _external=True)
+            send_registration_email(user, url)
+            # notify user and redirect to index
+            flash(f'Congratulations, {user.name}, your application to '
+                   'TheProjectProject has been submitted! '
+                   'Please confirm your email by following the link we just sent you.',
+                   category='success')
+        else:
+            flash('You have been accepted to TheProjectProject.')
+            user.accept()
         return redirect(url_for('base.index'))
     start_on = 0
     for i, elt in enumerate(form):
