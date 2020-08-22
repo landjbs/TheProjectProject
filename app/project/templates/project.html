@@ -273,13 +273,18 @@
               )
             }}
             <!-- recommended members -->
+            {%
+              set rec_tooltip =
+                "We found some members you might want to work with on this project! Just click the 'Collab' button to send them an invitation."
+                if (project.invitations.count()==0) else None
+            %}
             {{
               render_carousel(
                 label='Recommended',
                 id_postfix='recommended',
                 card_type='user',
                 data=recommended,
-                tooltip="We found some members you might want to work with on this project! Just click the 'Collab' button to send them an invitation."
+                tooltip=rec_tooltip
               )
             }}
             <!-- invited members -->
