@@ -50,7 +50,7 @@
 <script src="js/stars.js"></script>
 <!-- show help tooltips on first login if not mobile dev -->
 {% if not request.MOBILE %}
-  {% if (current_user.n_owned==0) %}
+  {% if (current_user.n_owned() < 1) %}
     <script>
       $(function () {
         // $('[data-toggle="tooltip"]').tooltip('show')
@@ -58,7 +58,7 @@
       })
     </script>
   {% endif %}
-  {% if (current_user.n_member==0) %}
+  {% if (current_user.n_member() < 1) %}
     <script>
       $(function () {
         // $('[data-toggle="tooltip"]').tooltip('show')
@@ -68,6 +68,4 @@
   {% endif %}
 {% endif %}
 
-
-{% endif %}
 {% endblock %}
