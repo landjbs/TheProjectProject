@@ -92,6 +92,7 @@ def login():
     form = Login()
     if form.validate_on_submit():
         user = form.user
+        is_new = (user.last_active is None)
         login_user(user)
         user.active = True
         user.last_active = datetime.utcnow()
