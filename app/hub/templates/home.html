@@ -12,7 +12,6 @@
 
 {% block content %}
 <div class='container my-1 main'>
-  {{ is_new }}
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
   {{
@@ -49,7 +48,7 @@
 </div>
 <script src="js/stars.js"></script>
 <!-- show help tooltips on first login if not mobile dev -->
-{% if not request.MOBILE and is_new %}
+{% if not request.MOBILE and g.is_new %}
   <script>
   $(function () {
     $('[data-toggle="tooltip"]').tooltip('show')

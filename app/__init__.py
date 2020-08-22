@@ -63,11 +63,11 @@ def create_app(config=config.production_config):
         # authenticated only
         g.current_user = current_user
         if current_user.is_authenticated:
+            g.show_help = (current_user.last_active is None)
             current_user.update_last_active()
             g.search_form = SearchForm()
             g.project_application = Project_Application_Form()
             g.notifications = current_user.notifications_to_show()
-            g.is_new = 
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers

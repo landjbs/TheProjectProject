@@ -97,16 +97,12 @@ def login():
     form = Login()
     if form.validate_on_submit():
         user = form.user
-        user.last_active = None
-        user.update()
-        is_new = (user.last_active is None)
-        print(is_new)
         login_user(user)
         user.active = True
         user.last_active = datetime.utcnow()
         user.update_badges()
         user.update()
-        return redirect(request.args.get('next') or url_for('hub.home', is_new=is_new))
+        return redirect(request.args.get('next') or url_for('hub.home'))
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:
