@@ -1,5 +1,4 @@
-@media (max-width: 1000px) {
-  {
+@media (min-width: 1000px) {
   *{
     margin:0;
     padding:0;
@@ -138,5 +137,11 @@
   #categories li div:hover .bottomtext {
     top:50%;
     padding-top: 3%;
+  }
+}
+
+@media (max-width: 1000px) {
+  h5 {
+    text-decoration: underline;
   }
 }
