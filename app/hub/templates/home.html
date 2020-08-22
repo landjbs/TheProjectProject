@@ -12,6 +12,7 @@
 
 {% block content %}
 <div class='container my-1 main'>
+  {{ is_new }}
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
   {{

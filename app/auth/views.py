@@ -33,7 +33,7 @@ def apply():
                     about=form.data['about'],
                 )
         user.add_subjects(subjects)
-        if current_app.config.REGISTER_MAIL:
+        if current_app.config['REGISTER_MAIL']:
             # generate token and send to user email
             s = URLSafeTimedSerializer(current_app.secret_key)
             token = s.dumps(user.id, salt='email-confirm-salt')
@@ -46,6 +46,7 @@ def apply():
                    category='success')
         else:
             flash('You have been accepted to TheProjectProject.')
+            user.confirmed = True
             user.accept()
         return redirect(url_for('base.index'))
     start_on = 0
@@ -96,7 +97,10 @@ def login():
     form = Login()
     if form.validate_on_submit():
         user = form.user
+        user.last_active = None
+        user.update()
         is_new = (user.last_active is None)
+        print(is_new)
         login_user(user)
         user.active = True
         user.last_active = datetime.utcnow()
