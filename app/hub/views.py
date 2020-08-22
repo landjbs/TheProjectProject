@@ -36,9 +36,9 @@ def home():
     #         db.session.commit()
     #     except:
     #         db.session.rollback()
+    print(f'LAST: {current_user.last_active}')
     return render_template(
-        'home.html', recommended=recommended, trending=trending, my=my,
-                    show_help=show_help
+        'home.html', recommended=recommended, trending=trending, my=my
     )
 
 

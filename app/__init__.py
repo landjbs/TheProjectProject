@@ -58,7 +58,8 @@ def create_app(config=config.production_config):
 
     @application.before_request
     def before_app_request():
-        ''' prepare to handle each request '''
+        ''' Prepare to handle request '''
+        print('first')
         g.request_start_time = time.time()
         # authenticated only
         g.current_user = current_user
@@ -67,6 +68,7 @@ def create_app(config=config.production_config):
             g.search_form = SearchForm()
             g.project_application = Project_Application_Form()
             g.notifications = current_user.notifications_to_show()
+            g.show_help = True
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers

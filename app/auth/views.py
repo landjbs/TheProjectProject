@@ -1,5 +1,5 @@
 from flask import (current_app, request, redirect, url_for,
-                   render_template, flash, abort)
+                   render_template, flash, abort, g)
 from flask_login import login_user, login_required, logout_user, current_user
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from datetime import datetime
@@ -103,7 +103,7 @@ def login():
         user.last_active = datetime.utcnow()
         user.update_badges()
         user.update()
-        return redirect(request.args.get('next', show_help=show_help) or url_for('hub.home'))
+        return redirect(request.args.get('next') or url_for('hub.home'))
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:
