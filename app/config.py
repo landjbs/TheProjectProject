@@ -18,6 +18,7 @@ class base_config(object):
     SES_EMAIL_SOURCE = os.environ.get('SES_EMAIL_SOURCE', 'admin@theprojectproject.io')
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY= os.environ.get('AWS_SECRET_ACCESS_KEY')
+    REGISTER_MAIL = False
     # SQLALCHEMY URI
     DB_USER = os.environ.get('DB_USER', 'admin')
     DB_PASSWORD = os.environ.get('DB_PASSWORD')
@@ -61,6 +62,7 @@ class test_config(base_config):
 
 class production_config(base_config):
     ENV = 'production'
+    REGISTER_MAIL = True
     # REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379')
     # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL', None)
     # PREFERRED_URL_SCHEME = 'https'

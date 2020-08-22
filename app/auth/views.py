@@ -98,7 +98,7 @@ def login():
         user.last_active = datetime.utcnow()
         user.update_badges()
         user.update()
-        return redirect(request.args.get('next') or url_for('hub.home'))
+        return redirect(request.args.get('next') or url_for('hub.home', is_new=is_new))
     start_on = 0
     for i, elt in enumerate(form):
         if elt.errors:

@@ -104,7 +104,7 @@ def create_app(config=config.production_config):
 
 def register_extensions(app):
     csrf.init_app(app)
-    # admin.init_app(app)
+    admin.init_app(app)
     travis.init_app(app)
     db.init_app(app)
     babel.init_app(app)

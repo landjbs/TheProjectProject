@@ -20,7 +20,7 @@ csrf = CSRFProtect()
 bcrypt = Bcrypt()
 # cache = SimpleCache()
 limiter = Limiter(key_func=get_remote_address,
-                default_limits=['45/minute'])
+                default_limits=['400/minute'])
 lm = LoginManager()
 migrate = Migrate()
 mobility = Mobility()
