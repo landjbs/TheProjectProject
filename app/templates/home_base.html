@@ -149,12 +149,17 @@
 
     {% block content %} {% endblock %}
 
+    <!-- show tooltips for nonmobile users on first login -->
     <script>
-      $('.toast').toast('show');
-      // var h = $('#mainNav').height();
-      // $('#nav-pad').height(h);
-      // document.body.scrollHeight = '1' + 'px';
-    </script>
+      {% if not request.MOBILE %}
+        $('.toast').toast('show');
+      {% else %}
+        $('.toast').toast('disable');
+      {% endif %}
 
+        // var h = $('#mainNav').height();
+        // $('#nav-pad').height(h);
+        // document.body.scrollHeight = '1' + 'px';
+      </script>
   </body>
 </html>
