@@ -37,7 +37,8 @@ def home():
     #     except:
     #         db.session.rollback()
     return render_template(
-        'home.html', recommended=recommended, trending=trending, my=my
+        'home.html', recommended=recommended, trending=trending, my=my,
+                    show_help=show_help
     )
 
 
