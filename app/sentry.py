@@ -9,8 +9,13 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 
 
 def register_sentry(dsn):
-    ''' Registers sentry with flask integration using dsn from globals '''
-    sentry_sdk.init(
-        dsn=dsn,
-        integrations=[FlaskIntegration()]
-    )
+    '''
+    Registers sentry with flask integration using dsn if provided else passes
+    '''
+    if dsn:
+        sentry_sdk.init(
+            dsn=dsn,
+            integrations=[FlaskIntegration()]
+        )
+        return True
+    return False
