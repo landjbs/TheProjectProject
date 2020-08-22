@@ -2,20 +2,23 @@
 
 {% block head %}
   {{ super() }}
-  <link type="text/css" href="css/about_styles.css" rel="stylesheet">
+  <link type="text/css" href="css/colors.css" rel="stylesheet">
+  {% if not request.MOBILE %}
+    <link type="text/css" href="css/about_styles.css" rel="stylesheet">
+  {% endif %}
 {% endblock %}
 
 
 {% block content %}
-  <ul id="categories" class="clr">
+  <ul id="categories" class="clr" style="list-style: none;">
     <li>
       <div>
         <div class='cover dark-purple-background'><h5>A Community Of Builders</h5></div>
-        <h1>
+        <p class='toptext'>
           We are an application-based community of college
           innovators.
-        </h1>
-        <p>
+        </p>
+        <p class='bottomtext'>
           Members share and collaborate on project ideas in a variety of fields.
         </p>
       </div>
@@ -23,10 +26,10 @@
   	<li>
       <div>
         <div class='cover yellow-background'><h5>Get Stuff Done</h5></div>
-        <h1>
+        <p class='toptext'>
           What if you could complete a different project every week?
-        </h1>
-        <p>
+        </p>
+        <p class='bottomtext'>
           Whether it's bringing your unique skillset to a passionate team or
           recruiting experts to work on one of your own ideas, we give you the
           tools to move faster than ever before.
@@ -36,11 +39,11 @@
     <li>
       <div>
         <div class='cover pink-background'><h5>Funding and Fame</h5></div>
-        <h1>
+        <p class='toptext'>
           Be it connecting you to funding opportunities, industry experts, or
           helpful resources, we are here to help you.
-        </h1>
-        <p>
+        </p>
+        <p class='bottomtext'>
           Our team is always looking for the next awesome project to fund or
           publicize on TheProjectProject social media. We will do everything we
           can to get your ideas the recognition they deserve.
@@ -50,27 +53,33 @@
     <li>
       <div>
         <div class='cover orange-background'><h5>Sponsored Competitions</h5></div>
-        <h1>
+        <p class='toptext'>
           Members get access to our sponsored competitions:
-        </h1>
-        <p>Some sample text about the article this hexagon leads to</p>
+        </p>
+        <p class='bottomtext'>
+          Some sample text about the article this hexagon leads to
+        </p>
       </div>
     </li>
     <li>
       <div>
         <div class='cover green-background'><h5>Bring Your Ideas To Life</h5></div>
-        <h1>This is a title</h1>
-        <p>Some sample text about the article this hexagon leads to</p>
+        <p class='toptext'>
+          This is a title
+        </p>
+        <p class='bottomtext'>
+          Some sample text about the article this hexagon leads to
+        </p>
       </div>
     </li>
     <li>
       <div>
         <div class='cover light-blue-background'><h5>Change The World</h5></div>
-        <h1>
+        <p class='toptext'>
           Replace dated signaling methods, break free from corporate
           bureaucracy, and build things that actually help people.
-        </h1>
-        <p>
+        </p>
+        <p class='bottomtext'>
           What's better than an internship? A resume full of awesome, self-guided
           projects and real-world experience. We are here to
           challenge the soulless recruitment process and give students the
@@ -81,35 +90,45 @@
     <li>
       <div>
         <div class='cover light-purple-background'><h5>Meet Passionate People</h5></div>
-        <h1>This is a title</h1>
-        <p>Some sample text about the article this hexagon leads to</p>
+        <p class='toptext'>
+          This is a title
+        </p>
+        <p class='bottomtext'>
+          Some sample text about the article this hexagon leads to
+        </p>
       </div>
     </li>
     <li>
       <div>
         <div class='cover dark-blue-background'><h5>Protect Your Privacy</h5></div>
-        <h1>TheProjectProject </h1>
-        <p>Some sample text about the article this hexagon leads to</p>
+        <p class='toptext'>
+          TheProjectProject
+        </p>
+        <p class='bottomtext'>
+          Some sample text about the article this hexagon leads to
+        </p>
       </div>
     </li>
     <li>
       <div>
         <div class='cover red-background'><h5>Broaden Your Skillset</h5></div>
-        <h1>
+        <p class='toptext'>
           There are no criteria for success on TheProjectProject:
-        </h1>
-        <p>Some sample text about the article this hexagon leads to</p>
+        </p>
+        <p class='bottomtext'>
+          Some sample text about the article this hexagon leads to
+        </p>
       </div>
     </li>
     <li>
       <div>
         <div class='cover pink-background'><h5>What We Look For</h5></div>
-        <h1>
+        <p class='toptext'>
           TheProjectProject application is NOT about your resume. We look
           for passionate people who care about the community and
           will treat everyone with empathy and respect.
-        </h1>
-        <p>
+        </p>
+        <p class='bottomtext'>
           Whether you're a project veteran with years of independent work
           behind you or a rookie looking for new skills, as long as you are
           ready
@@ -119,12 +138,12 @@
     <li>
       <div>
         <div class='cover yellow-background'><h5>What We Look For</h5></div>
-        <h1>
+        <p class='toptext'>
           TheProjectProject application is NOT about your resume. We look
           for passionate people who care about the community and
           will treat everyone with empathy and respect.
-        </h1>
-        <p>
+        </p>
+        <p class='bottomtext'>
           Whether you're a project veteran with years of independent work
           behind you or a rookie looking for new skills, as long as you are
           ready
