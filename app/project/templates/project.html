@@ -198,8 +198,7 @@
                         card_type='todo-task',
                         icon_type='todo',
                         data=project.todo_tasks().all(),
-                        empty_message='No tasks to do right now.',
-                        tooltip='Add some tasks'
+                        empty_message='No tasks to do right now.'
                       )
                     }}
                     {% if is_member and not project.complete %}
@@ -279,7 +278,8 @@
                 label='Recommended',
                 id_postfix='recommended',
                 card_type='user',
-                data=recommended
+                data=recommended,
+                tooltip="We found some members you might want to work with on this project! Just click the 'Collab' button to send them an invitation."
               )
             }}
             <!-- invited members -->

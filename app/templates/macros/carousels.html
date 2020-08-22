@@ -143,10 +143,10 @@
         </a>
       </div>
     {% endif %}
-  {% endif %}
-  {% if tooltip %}
-    <div id='tooltip-{{ id_postfix }}' data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}">
-    </div>
+    {% if tooltip %}
+      <div id='tooltip-{{ id_postfix }}' data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}">
+      </div>
+    {% endif %}
   {% endif %}
 {% endmacro -%}
 <!-- /CAROUSEL -->
