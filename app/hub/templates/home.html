@@ -12,9 +12,6 @@
 
 {% block content %}
 <div class='container my-1 main'>
-  <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on baop">
-    Tooltip on bap
-  </button>
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
   {{
@@ -51,7 +48,7 @@
 <script src="js/stars.js"></script>
 <script>
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip('show')
 })
 </script>
 {% endblock %}
