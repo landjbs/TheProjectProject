@@ -4,7 +4,7 @@
 }
 
 #categories{
-  overflow:hidden;
+  overflow: scroll;
   width:90%;
   margin:0 auto;
 }
@@ -21,7 +21,7 @@
   width:27.85714285714286%; /* = (100-2.5) / 3.5 */
   padding-bottom: 32.16760145166612%; /* =  width /0.866 */
   float:left;
-  overflow:hidden;
+  overflow: scroll;
   visibility:hidden;
 
   -webkit-transform: rotate(-60deg) skewY(30deg);
@@ -60,7 +60,7 @@
   height:100%;
   text-align:center;
   color:#fff;
-  overflow:hidden;
+  overflow: scroll;
   -webkit-transform: skewY(-30deg) rotate(60deg);
   -ms-transform: skewY(-30deg) rotate(60deg);
   transform: skewY(-30deg) rotate(60deg);
@@ -92,7 +92,7 @@ h5 {
 
 #categories div .toptext, #categories div .bottomtext {
   width:100%;
-  padding:0 5%;
+  padding:0 0%;
   /* background-color: #FF5D00; */
   -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
@@ -115,7 +115,7 @@ h5 {
   z-index:1;
   border-bottom:2px solid #fff;
 }
-#categories li p{
+#categories li .bottomtext {
 	padding-top:3%;
 	top:110%;
 	padding-bottom:3%;
