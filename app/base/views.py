@@ -21,3 +21,7 @@ def contact():
 @base.route('/terms', methods=['GET'])
 def terms():
     return render_template('terms.html')
+
+@base.route('/debug-sentry')
+def trigger_error():
+    print('here')

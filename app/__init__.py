@@ -33,6 +33,8 @@ from app.project.forms import Project_Application_Form
 # extensions
 from app.extensions import (assets, admin, bcrypt, csrf, limiter,
                             lm, migrate, rq, travis, babel, mobility)
+# sentry
+from app.sentry import register_sentry
 # utils
 from app.utils import url_for_other_page, partition_query
 # commands
