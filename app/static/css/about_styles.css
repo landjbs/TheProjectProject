@@ -90,7 +90,7 @@ h5 {
   transform: translate(-50%, -50%);
 }
 
-#categories div h1, #categories div p{
+#categories div .toptext, #categories div .bottomtext {
   width:100%;
   padding:0 5%;
   /* background-color: #FF5D00; */
@@ -98,13 +98,13 @@ h5 {
   -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
   transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
 }
-#categories li h1{
+#categories li .toptext{
   bottom:110%;
   font-size:1rem;
   padding-top:100%;
   padding-bottom:100%;
 }
-#categories li h1:after{
+#categories li .toptext:after{
 	content:'';
   display:block;
   position:absolute;
@@ -123,7 +123,7 @@ h5 {
 
 
 /* HOVER EFFECT  */
-#categories li div:hover h1 {
+#categories li div:hover .toptext {
   bottom: 50%;
   padding-bottom:3%;
 }
@@ -133,7 +133,7 @@ h5 {
 }
 
 
-#categories li div:hover p{
+#categories li div:hover .bottomtext {
   top:50%;
   padding-top: 3%;
 }
