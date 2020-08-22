@@ -48,7 +48,11 @@
 
 
 <!-- CAROUSEL -->
-{% macro render_carousel(id_postfix, card_type, data, label=False, interval=4000, icon_type=False, redirect_empty=False, override_partition=False) -%}
+{%
+  macro render_carousel(id_postfix, card_type, data, label=False, interval=4000,
+                        icon_type=False, redirect_empty=False,
+                        override_partition=False, tooltip=False)
+-%}
   <!-- CACHE -->
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
@@ -139,6 +143,10 @@
         </a>
       </div>
     {% endif %}
+  {% endif %}
+  {% if tooltip %}
+    <div data-toggle="tooltip" data-placement="bottom" title="We've picked out some projects you might be interested in. Everyone here wants to work with you; just click join to make that happen!">
+    </div>
   {% endif %}
 {% endmacro -%}
 <!-- /CAROUSEL -->
