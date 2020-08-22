@@ -57,10 +57,14 @@
               </form>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link" href="/add_project">add project</a>
+              <a class="nav-link" href="/add_project" data-toggle="tooltip" data-placement="bottom" title="Try adding a project you've already worked on to showcase your skills.">
+                add project
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('badge.perk_page') }}">perks</a>
+              <a class="nav-link" href="{{ url_for('badge.perk_page') }}" data-toggle="tooltip" data-placement="bottom" title="Check out the cool perks you can unlock here.">
+                perks
+              </a>
             </li>
             {% if current_user.admin %}
             <li class="nav-item">
@@ -95,10 +99,6 @@
         </div>
       </div>
     </nav>
-
-    <p data-toggle="tooltip" data-placement="bottom" title="Tooltip on baop">
-      Tooltip on bap
-    </p>
 
     <!-- add padding below navbar for mobile -->
     <!-- <p id='nav-pad' style='padding:0px!important;margin:0px!important;'/> -->
