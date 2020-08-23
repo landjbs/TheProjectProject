@@ -1,3 +1,4 @@
+from flask import url_for
 from wtforms import (TextField, StringField, BooleanField, SelectField,
                     SelectMultipleField, FloatField, IntegerField,
                     TextAreaField, validators)
@@ -138,9 +139,11 @@ class Project_Application_Form(BaseForm):
 
 class Task_Form(BaseForm):
     ''' Form to add task to project '''
-    text = TextField('Task', validators=[DataRequired(), Length(1,160)],
-                     render_kw={'max':160})
-
+    text = TextField(
+        'Task',
+        validators=[DataRequired(), Length(1,160)],
+        render_kw={'max':160}
+    )
 
 class Comment_Form(BaseForm):
     ''' Form to add comment to project '''
