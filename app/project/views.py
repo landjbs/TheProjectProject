@@ -90,8 +90,8 @@ def project_page(project_code):
     # add project to globals
     g.project = project
     # forms
-    comment_form = Comment_Form()
-    task_form = Task_Form()
+    comment_form = Comment_Form(project_id=project.id)
+    task_form = Task_Form(project_id=project.id)
     project_application = Project_Application_Form()
     ## task data visualization ##
     # vis activity
