@@ -61,8 +61,14 @@
       {% endfor %}
     {% endif %}
     {% if form %}
-      <form class='post_form' class='form-{{ id_postfix }}' method='post'>
-        
+      <form class='post_form' class='form-{{ id_postfix }}' method='post' action="">
+        {{ form.hidden_tag() }}
+        {{
+          form.text(
+            class='post-input', placeholder=form.render_kw['placeholder'],
+            max=form.render_kw['max']
+          )
+        }}
       </form>
     {% endif %}
   </div>
