@@ -1,6 +1,6 @@
 from flask import request
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.parse import parse_qsl, urlparse
 
 from app.database import db, CRUDMixin
@@ -43,3 +43,10 @@ class PageView(CRUDMixin, db.Model):
             headers=dict(request.headers),
             params=params
         )
+
+    ## pageview analytics ##
+    @classmethod
+    def views_over(cls, past_days=7):
+        ''' Querys views over past_days '''
+        time_ago = (datetime.utcnow() - timedelta(days))
+        # views = cls.query.where.

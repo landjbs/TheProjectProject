@@ -1,7 +1,7 @@
 {% if current_user.admin==True %}
   {% extends 'admin/master.html' %}
   {% block body %}
-    <p>Hello, {{ current_user.name }}.</p>
+    <p>Hello, {{ current_user.name }}. {{ acountBalance }}</p>
   {% endblock %}
 
 {% else %}

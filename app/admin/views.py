@@ -2,7 +2,7 @@ from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session, abort)
 from gettext import ngettext
 from flask_login import current_user
-from flask_admin import expose
+from flask_admin import expose, BaseView
 from flask_admin.actions import action
 from flask_admin.model.template import EndpointLinkRowAction
 from flask_admin.contrib.sqla import ModelView
@@ -20,10 +20,8 @@ from app.competition.models import Competition
 from app.analytics.models import PageView
 
 
-class AdminBaseView(ModelView):
-    def __init__(self, *args, **kwargs):
-        super(AdminBaseView, self).__init__(*args, **kwargs)
-
+class SafeView(object):
+    ''' Meta class factory for safe view generation '''
     def is_accessible(self):
         return (current_user.is_admin())
 
@@ -35,7 +33,24 @@ class AdminBaseView(ModelView):
                 return redirect(url_for('login', next=request.url))
 
 
-class UserModelView(AdminBaseView):
+class SafeBaseView(BaseView, SafeView):
+    def __init__(self, *args, **kwargs):
+        super(SafeBaseView, self).__init__(*args, **kwargs)
+
+
+class SafeModelView(ModelView, SafeView):
+    def __init__(self, *args, **kwargs):
+        super(SafeModelView, self).__init__(*args, **kwargs)
+
+
+class AnalyticsView(SafeBaseView):
+    @expose('/')
+    def index(self, **kwargs):
+        print(f'kwargs: {kwargs}')
+        return self.render('admin/index.html', acountBalance=100)
+
+
+class UserModelView(SafeModelView):
     ''' admin view for user model '''
     column_exclude_list = ['password']
     can_export = True
@@ -99,7 +114,7 @@ class UserModelView(AdminBaseView):
             flash(gettext('Failed to reject users. %(error)s', error=str(ex)), 'error')
 
 
-class ReportModelView(AdminBaseView):
+class ReportModelView(SafeModelView):
     ''' admin view for user reports '''
     column_extra_row_actions = [
         EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'user_report.resolve_report')
@@ -111,18 +126,20 @@ class ReportModelView(AdminBaseView):
         return redirect(request.referrer)
 
 
+
 def register_admin_views(admin, db):
     # model views
+    admin.add_view(AnalyticsView('Analytics'))
     admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
-    admin.add_view(AdminBaseView(Project, db.session, endpoint='AdminProject'))
-    admin.add_view(AdminBaseView(Comment, db.session, endpoint='AdminComment'))
-    admin.add_view(AdminBaseView(Task, db.session, endpoint='AdminTask'))
-    admin.add_view(AdminBaseView(Subject, db.session, endpoint='AdminSubject'))
+    admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
+    admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))
+    admin.add_view(SafeModelView(Task, db.session, endpoint='AdminTask'))
+    admin.add_view(SafeModelView(Subject, db.session, endpoint='AdminSubject'))
     admin.add_view(ReportModelView(User_Report, db.session))
-    admin.add_view(AdminBaseView(Project_Application, db.session, endpoint='AdminApplication'))
-    admin.add_view(AdminBaseView(Notification, db.session, endpoint='AdminNotification'))
-    admin.add_view(AdminBaseView(Competition, db.session, endpoint='AdminCompetition'))
-    admin.add_view(AdminBaseView(PageView, db.session, endpoint='AdminAnalytics'))
+    admin.add_view(SafeModelView(Project_Application, db.session, endpoint='AdminApplication'))
+    admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
+    admin.add_view(SafeModelView(Competition, db.session, endpoint='AdminCompetition'))
+    admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
     # nav links
     # admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
     # admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
