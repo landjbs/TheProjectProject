@@ -25,7 +25,7 @@
 %}
 
 
-{% macro render_cardbox(id_postfix, card_type, data, label=False, add_card=False) -%}
+{% macro render_cardbox(id_postfix, card_type, data, add_card=False) -%}
   {% set render_fn = card_renders[card_type] %}
   <div id='cardbox-{{ id_postfix }}' class='cardbox'>
     {% if add_card %}

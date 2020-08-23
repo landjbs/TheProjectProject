@@ -190,7 +190,12 @@
       {% set carousels = carousels + [
           (
             'Questions',
-            (render_add_question_card(project))
+            render_cardbox(
+              id_postfix='questions',
+              card_type='question',
+              data=project.questions,
+              add_card=True
+            )
           ),
           (
             'Subjects',

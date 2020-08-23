@@ -34,7 +34,7 @@
 {% endmacro -%}
 
 
-{% macro render_question_card(question, project) -%}
+{% macro render_question_card(question) -%}
   {% set border_style = 'red' if not question.answer else 'green' %}
   <div class='card mb-2' style='border-color: {{ border_style }};'>
     <div class='card-body'>
@@ -52,7 +52,7 @@
           {% endif %}
         </p>
       {% else %}
-        <form action="{{ url_for('project.edit_answer', project_id=project.id, question_id=question.id) }}"
+        <form action="{{ url_for('project.edit_answer', project_id=g.project.id, question_id=question.id) }}"
           method='post' style='margin-bottom:0px;'>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {% if question.answer %}
@@ -64,7 +64,7 @@
           <div class='float-right'>
             <a class='delete-btn task-btn'
                 style='background: transparent;'
-                href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
+                href="{{ url_for('project.delete_question', project_id=g.project.id, question_id=question.id) }}">
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </a>
             <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
