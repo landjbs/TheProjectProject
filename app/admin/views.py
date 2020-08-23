@@ -21,7 +21,7 @@ from app.analytics.models import PageView
 
 
 class SafeView(object):
-    ''' Meta class factory for safe view generation '''
+    ''' Base class for generating safe view children of admin stock classes '''
     def is_accessible(self):
         return (current_user.is_admin())
 
