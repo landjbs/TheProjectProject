@@ -11,9 +11,9 @@ from app.subject.models import Subject
 from app.badge.models import Badge, User_Badge
 from app.competition.models import Competition
 
-from app.fake import fake, rand_words, rand_bool, rand_subjects, rand_badges
 from app.subject.create_subjects import create_subjects
 from app.badge.create_badges import create_badges
+from app.fake import fake, rand_words, rand_bool, rand_subjects, rand_badges
 
 
 def create_db():
