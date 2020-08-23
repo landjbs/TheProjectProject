@@ -149,6 +149,8 @@ def register_admin_views(admin, db):
     from app.task.models import Task
     from app.subject.models import Subject
     from app.notification.models import Notification
+    from app.competition.models import Competition
+    from app.analytics.models import PageView
     # import view
     from app.admin.views import (
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
