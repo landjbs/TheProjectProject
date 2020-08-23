@@ -189,12 +189,7 @@
       {% set carousels = carousels + [
           (
             'Questions',
-            render_carousel(
-              label='Questions',
-              id_postfix='questions',
-              card_type='question',
-              icon_type='question'
-            )
+            (render_add_question_card(project))
           ),
           (
             'Subjects',
@@ -230,7 +225,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
 
     <!-- custom js -->
+    <!-- for toggeling between tabs -->
     <script src="js/tabs.js"></script>
+    <!-- for toggeling between divs with input covers -->
+    <script src="js/covers.js"></script>
+    <!-- allow starring and unstarring of project -->
     <script src="js/stars.js"></script>
 
   {% endblock %}
