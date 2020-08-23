@@ -40,9 +40,7 @@ from app.utils import url_for_other_page, partition_query
 from app.commands import command_list
 
 
-# TODO:
 # follow: https://stackoverflow.com/questions/50070979/wrong-dashboard-while-adding-flask-admin-to-project/50179126#50179126
-# to properly register admin views
 
 
 def create_app(config=config.dev_config, register_admin=True):
@@ -55,8 +53,8 @@ def create_app(config=config.dev_config, register_admin=True):
         register_admin_views(application, extensions.admin, db)
     register_errorhandlers(application)
     register_jinja_env(application)
-    register_commands(application)
     register_sentry(application.config['SENTRY_DSN'])
+    register_commands(application)
     # register_elasticsearch(application)
 
     @application.before_request
