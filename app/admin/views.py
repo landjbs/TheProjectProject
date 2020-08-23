@@ -17,6 +17,7 @@ from app.subject.models import Subject
 from app.notification.models import Notification
 from app.badge.models import Badge, User_Badge
 from app.competition.models import Competition
+from app.analytics.models import PageView
 
 
 class AdminBaseView(ModelView):
@@ -121,6 +122,7 @@ def register_admin_views(admin, db):
     admin.add_view(AdminBaseView(Project_Application, db.session, endpoint='AdminApplication'))
     admin.add_view(AdminBaseView(Notification, db.session, endpoint='AdminNotification'))
     admin.add_view(AdminBaseView(Competition, db.session, endpoint='AdminCompetition'))
+    admin.add_view(AdminBaseView(PageView, db.session, endpoint='AdminAnalytics'))
     # nav links
     # admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
     # admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))

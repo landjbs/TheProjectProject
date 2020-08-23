@@ -47,7 +47,7 @@ from app.commands import command_list
 # to properly register admin views
 
 
-def create_app(config=config.production_config):
+def create_app(config=config.dev_config):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())

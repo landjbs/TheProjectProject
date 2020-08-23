@@ -38,13 +38,14 @@ class base_config(object):
     # REDIS
     QUEUES = ['default']
     # ADMIN
-    FLASK_ADMIN_SWITCH = 'orange'
+    FLASK_ADMIN_SWATCH = 'cerulean'
     # FORMS
     WTF_CSRF_ENABLED = True
     # SENTRY (will not enable error notification if no DSN exported)
     SENTRY_DSN = os.environ.get('SENTRY_DSN', default=None)
     #################### ANALYTICS #################
     # 1 pixel GIF, base64-encoded.
+    DOMAIN = 'http://127.0.0.1:5000'  # TODO: change me.
     BEACON = b64decode('R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
     ANALYTIC_SCRIPT = '''
         (function(){
