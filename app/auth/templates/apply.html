@@ -89,7 +89,7 @@
 
 <script>
   function submit() {
-    {% if not request.MOBILE %}
+    {% if not True %}
       var selector = document.getElementById('subjects');
       var selected_subjects = instance.value();
       if (selected_subjects) {

@@ -21,7 +21,3 @@ def contact():
 @base.route('/terms', methods=['GET'])
 def terms():
     return render_template('terms.html')
-
-@base.route('/circle')
-def trigger_error():
-    return render_template('circle.html')

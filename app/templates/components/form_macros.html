@@ -1,6 +1,7 @@
 <!-- SELECTS -->
 {% macro render_multiselect(field) -%}
-  {% if not request.MOBILE %}
+  {% if not True %}
+  <!-- request.MOBILE -->
     <!-- imports/ -->
     <script src="select-pure/dist/bundle.min.js"></script>
     <link type='text/css' href='css/select_styles.css' rel='stylesheet'>
@@ -33,6 +34,7 @@
                                 var last_elt = document.querySelectorAll('.select-pure__selected-label');
                                 last_elt[last_elt.length - 1].style.color='red';
                                 last_elt[last_elt.length - 1].style.borderColor='red';
+                                sessionStorage.setItem('')
                               };
                             },
           classNames: {
@@ -52,12 +54,16 @@
       });
     </script>
   {% else %}
-    <center>{{ field() }}</center>
+    <center>{{ field(style='width:90%; height:40vh; font-size:150%;') }}</center>
     <br>
     {% if field.errors %}
       <p class='warning'>{{ field.errors[0] }}</p>
     {% else %}
       <small>Limit {{ field.render_kw['max'] }}.</small>
+      {% if not request.MOBILE %}
+        <br>
+        <small>⌘/⌃ to select multiple.</small>
+      {% endif %}
     {% endif %}
   {% endif %}
 {% endmacro -%}
