@@ -198,6 +198,15 @@
             )
           ),
           (
+            'Links',
+            render_cardbox(
+              id_postfix='links',
+              card_type='link',
+              data=project.public_links(),
+              add_card=is_owner
+            )
+          ),
+          (
             'Subjects',
             render_carousel(
               label='Subjects',
