@@ -51,6 +51,7 @@ def create_app(config=config.dev_config):
     application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())
     register_extensions(application)
+    register_admin_views(admin, db)
     register_blueprints(application)
     register_errorhandlers(application)
     register_jinja_env(application)
@@ -140,6 +141,15 @@ def register_blueprints(app):
 
 
 def register_admin_views(admin, db):
+    from flask_admin.menu import MenuLink
+    # import models
+    from app.user.models import User, User_Report
+    from app.project.models import Project, Project_Application
+    from app.comment.models import Comment
+    from app.task.models import Task
+    from app.subject.models import Subject
+    from app.notification.models import Notification
+    # import view
     from app.admin.views import (
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
         ReportModelView
@@ -155,7 +165,8 @@ def register_admin_views(admin, db):
     admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
     admin.add_view(SafeModelView(Competition, db.session, endpoint='AdminCompetition'))
     admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
-
+    admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
+    admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
 
 
 def register_errorhandlers(app):
