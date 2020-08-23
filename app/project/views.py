@@ -22,8 +22,6 @@ from ..project import project
 @login_required
 @limiter.limit('10 per minute')
 def add_project():
-    if request.MOBILE:
-        return render_template('add_mobile.html')
     # form preprocessing
     form = Add_Project()
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
@@ -79,7 +77,10 @@ def add_project():
         return redirect(
             url_for('project.project_page', project_code=project.code)
         )
-    return render_template('add_project.html', form=form)
+    return render_template(
+        ('add_project.html' if not request.MOBILE else 'add_mobile.html'), 
+        form=form
+    )
 
 
 @project.route('/project=<project_code>', methods=['GET', 'POST'])
