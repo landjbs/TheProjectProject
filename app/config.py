@@ -13,8 +13,9 @@ from base64 import b64decode
 class base_config(object):
     # SITE
     SITE_NAME = os.environ.get('APP_NAME', 'TheProjectProject')
+    SERVER_NAME = 'https://theprojectproject.io'
     # SERVER
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = os.environ.get('SECRET_KEY', os.urandom(16))
     # MAIL
     SES_REGION = os.environ.get('SES_REGION', 'us-east-1')
     SES_EMAIL_SOURCE = os.environ.get('SES_EMAIL_SOURCE', 'admin@theprojectproject.io')
@@ -43,18 +44,20 @@ class base_config(object):
     WTF_CSRF_ENABLED = True
     # SENTRY (will not enable error notification if no DSN exported)
     SENTRY_DSN = os.environ.get('SENTRY_DSN', default=None)
-    #################### ANALYTICS #################
+    ############################# ANALYTICS ####################################
     # 1 pixel GIF, base64-encoded.
-    SERVER_NAME = 'http://127.0.0.1:5000'  # TODO: change me.
     BEACON = b64decode('R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
     ANALYTIC_SCRIPT = '''
         (function(){
         var d=document,i=new Image,e=encodeURIComponent;
         i.src='%s/a.gif?url='+e(d.location.href)+'&ref='+e(d.referrer)+'&t='+e(d.title);
         })()'''.replace('\n', '')
+    ############################################################################
 
 
 class dev_config(base_config):
+    # SITE
+    SERVER_NAME = 'http://127.0.0.1:5000/'
     # SQLALCHEMY URI
     SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
     # REDIS
