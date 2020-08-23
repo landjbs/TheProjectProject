@@ -1,8 +1,9 @@
-from flask import Flask, Response, abort, request
+from flask import
+ Flask, Response, abort, request
 from base64 import b64decode
-
-import os
 from peewee import *
+
+from .models import PageView
 
 
 # 1 pixel GIF, base64-encoded.
