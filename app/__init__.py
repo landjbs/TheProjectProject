@@ -39,7 +39,6 @@ from app.utils import url_for_other_page, partition_query
 # commands
 from app.commands import command_list
 
-
 # follow: https://stackoverflow.com/questions/50070979/wrong-dashboard-while-adding-flask-admin-to-project/50179126#50179126
 
 

@@ -1,15 +1,19 @@
 from faker import Faker
 
+# from app.subject.models import Subject
+# from app.badge.models import Badge
+
 
 fake = Faker()
 
 # cache database specs
-subject_num = Subject.query.count()
-badge_num = Badge.query.count()
+global subject_num
+global subject_num
+# badge_num = Badge.query.count()
 
 
 def rand_words(n):
-        return ' '.join([fake.word() for _ in range(n)])
+    return ' '.join([fake.word() for _ in range(n)])
 
 
 def rand_bool(p_true):
@@ -25,8 +29,3 @@ def rand_badges(n):
         return []
     return [Badge.get_by_id(int(id))
             for id in np.random.randint(1, badge_num+1, size=n)]
-
-
-def register_faker():
-    from app.subject.models import Subject
-    from app.badge.models import Badge
