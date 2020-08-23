@@ -110,6 +110,16 @@
                 size='default'
               )
             )
+          ),
+          (
+            'Comments',
+            render_listbox(
+              label='Comments',
+              id_postfix='comments',
+              card_type='comment',
+              data=project.comments.all(),
+              empty_message='No commments yet.'
+            )
           )
         ]
       %}

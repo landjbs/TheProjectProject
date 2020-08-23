@@ -14,3 +14,8 @@
   max-height: 10vh;
   overflow-y: scroll;
 }
+
+.tabcontent {
+  padding-left:   4px;
+  padding-right:  4px;
+}
