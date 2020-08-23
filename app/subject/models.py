@@ -40,6 +40,8 @@ class User_Subjects(db.Model):
     subject = relationship('Subject', back_populates='users')
     # count
     number = db.Column(db.Integer, nullable=False, default=1)
+    # user selected (whether user explicity selected subject)
+    user_selected = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):
         return f'<USER_SUBJECT u={self.user.name} s={self.subject.name} n={self.number}>'
