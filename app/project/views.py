@@ -78,7 +78,7 @@ def add_project():
             url_for('project.project_page', project_code=project.code)
         )
     return render_template(
-        ('add_project.html' if not request.MOBILE else 'add_mobile.html'), 
+        ('add_project.html' if not request.MOBILE else 'add_mobile.html'),
         form=form
     )
 
@@ -181,22 +181,23 @@ def project_page(project_code):
                     project.update()
             else:
                 show_edit_modal = True
-    return render_template('project.html' if not request.MOBILE else 'project_mobile.html',
-                            project=project,
-                            members=members,
-                            applications=applications,
-                            invitations=invitations,
-                            recommended=recommended,
-                            comment_form=comment_form,
-                            task_form=task_form,
-                            link_form=link_form,
-                            activity_data=activity_data,
-                            authored=authored,
-                            completed=completed,
-                            project_subjects=project_subjects,
-                            edit_form=edit_form,
-                            edit_application_form=edit_application_form,
-                            show_edit_modal=show_edit_modal)
+    return render_template(
+            'project.html' if not request.MOBILE else 'project_mobile.html',
+            project=project,
+            members=members,
+            applications=applications,
+            invitations=invitations,
+            recommended=recommended,
+            comment_form=comment_form,
+            task_form=task_form,
+            link_form=link_form,
+            activity_data=activity_data,
+            authored=authored,
+            completed=completed,
+            project_subjects=project_subjects,
+            edit_form=edit_form,
+            edit_application_form=edit_application_form,
+            show_edit_modal=show_edit_modal)
 
 
 ## user to project interactions ##
