@@ -1,5 +1,6 @@
 from flask import request
 import json
+from sqlalchemy import func
 from datetime import datetime, timedelta
 from urllib.parse import parse_qsl, urlparse
 
@@ -46,15 +47,19 @@ class PageView(CRUDMixin, db.Model):
 
     ## pageview analytics ##
     @classmethod
-    def views_over(cls, past_days=7):
+    def views_over(cls, past_days):
         ''' Querys views over past_days '''
         if past_days:
             time_ago = (datetime.utcnow() - timedelta(days))
-            return cls.query.where(cls.timestamp >= time_ago)
+            return cls.query.filter(cls.timestamp >= time_ago)
         else:
             return cls.query.all()
 
     @classmethod
+    def view_count(cls, past_days):
+        return cls.views_over(past_days).count()
+
+    @classmethod
     def user_count(cls, past_days=None):
-        if past_days:
-            base = cls.views_oveR(past_days)
+        base = cls.views_over(past_days)
+        unique_users = cls.
