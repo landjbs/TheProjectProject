@@ -15,7 +15,7 @@ fake = Faker()
 
 class TestCase(unittest.TestCase):
     def setUp(self):
-        app = create_app(test_config)
+        app = create_app(test_config, register_admin=False)
         db.app = app  # hack for using db.init_app(app) in app/__init__.py
         self.app = app.test_client()
 

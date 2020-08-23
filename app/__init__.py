@@ -45,13 +45,14 @@ from app.commands import command_list
 # to properly register admin views
 
 
-def create_app(config=config.dev_config):
+def create_app(config=config.dev_config, register_admin=True):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())
     register_extensions(application)
     register_blueprints(application)
-    register_admin_views(application, extensions.admin, db)
+    if register_admin:
+        register_admin_views(application, extensions.admin, db)
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
@@ -153,7 +154,7 @@ def register_admin_views(application, admin, db):
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
         ReportModelView
     )
-    admin.add_view(AnalyticsView('AdminAnalytics'))
+    admin.add_view(AnalyticsView('Analytics', endpoint='AdminAnalytics'))
     admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
     admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
     admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))

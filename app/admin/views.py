@@ -126,23 +126,3 @@ class ReportModelView(SafeModelView):
     def resolve_report(self):
         report = User_Report.query.get_or_404(int(request.args.get('id')))
         return redirect(request.referrer)
-
-
-
-def register_admin_views(admin, db):
-    # model views
-    admin.add_view(AnalyticsView('Analytics'))
-    admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
-    admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
-    admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))
-    admin.add_view(SafeModelView(Task, db.session, endpoint='AdminTask'))
-    admin.add_view(SafeModelView(Subject, db.session, endpoint='AdminSubject'))
-    admin.add_view(ReportModelView(User_Report, db.session))
-    admin.add_view(SafeModelView(Project_Application, db.session, endpoint='AdminApplication'))
-    admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
-    admin.add_view(SafeModelView(Competition, db.session, endpoint='AdminCompetition'))
-    admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
-    # nav links
-    # admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
-    # admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
-    return admin
