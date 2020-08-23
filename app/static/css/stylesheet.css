@@ -3,15 +3,6 @@ body {
   font-family: 'Varela Round' !important;
 }
 
-@media (max-width:996px) {
-  html, body {
-    overflow-x: hidden;
-  }
-  body {
-    position: relative
-  }
-}
-
 mark {
   background-color: white;
   padding: 0 0.1em;
