@@ -22,5 +22,5 @@ def analyze():
 def script():
     ''' View analytics javascript '''
     return Response(
-        current_app.config['ANALYTIC_SCRIPT'] % (current_app.config['SERVER_NAME']),
+        current_app.config['ANALYTIC_SCRIPT'] % (current_app.config['DOMAIN']),
         mimetype='text/javascript')

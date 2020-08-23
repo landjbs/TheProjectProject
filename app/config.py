@@ -13,7 +13,7 @@ from base64 import b64decode
 class base_config(object):
     # SITE
     SITE_NAME = os.environ.get('APP_NAME', 'TheProjectProject')
-    SERVER_NAME = 'https://theprojectproject.io'
+    SERVER_NAME = '127.0.0.1:5000'
     # SERVER
     SECRET_KEY = os.environ.get('SECRET_KEY', os.urandom(16))
     # MAIL
@@ -45,6 +45,7 @@ class base_config(object):
     # SENTRY (will not enable error notification if no DSN exported)
     SENTRY_DSN = os.environ.get('SENTRY_DSN', default=None)
     ############################# ANALYTICS ####################################
+    DOMAIN = 'http://127.0.0.1:5000/'
     # 1 pixel GIF, base64-encoded.
     BEACON = b64decode('R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
     ANALYTIC_SCRIPT = '''
@@ -56,8 +57,6 @@ class base_config(object):
 
 
 class dev_config(base_config):
-    # SITE
-    SERVER_NAME = 'http://127.0.0.1:5000/'
     # SQLALCHEMY URI
     SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
     # REDIS
@@ -77,6 +76,9 @@ class test_config(base_config):
 
 
 class production_config(base_config):
+    # site
+    SERVER_NAME = 'theprojectproject.io'
+    DOMAIN = 'https://theprojectproject.io'
     # environment type
     ENV = 'production'
     # whether to enable registration mailing

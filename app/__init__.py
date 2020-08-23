@@ -31,8 +31,7 @@ from app.user.models import Anonymous
 from app.hub.forms import SearchForm
 from app.project.forms import Project_Application_Form
 # extensions
-from app.extensions import (assets, admin, bcrypt, csrf, limiter,
-                            lm, migrate, rq, travis, babel, mobility)
+import app.extensions as extensions
 # sentry
 from app.sentry import register_sentry
 # utils
@@ -52,7 +51,7 @@ def create_app(config=config.dev_config):
     application.config.from_object(config())
     register_extensions(application)
     register_blueprints(application)
-    register_admin_views(admin, db)
+    register_admin_views(application, extensions.admin, db)
     register_errorhandlers(application)
     register_jinja_env(application)
     register_commands(application)
@@ -106,22 +105,22 @@ def create_app(config=config.dev_config):
 
 
 def register_extensions(app):
-    csrf.init_app(app)
-    admin.init_app(app)
-    travis.init_app(app)
-    db.init_app(app)
-    babel.init_app(app)
-    bcrypt.init_app(app)
-    assets.init_app(app)
-    rq.init_app(app)
-    migrate.init_app(app, db)
-    mobility.init_app(app)
-    limiter.init_app(app)
+    extensions.csrf.init_app(app)
+    extensions.admin.init_app(app)
+    extensions.travis.init_app(app)
+    extensions.babel.init_app(app)
+    extensions.bcrypt.init_app(app)
+    extensions.assets.init_app(app)
+    extensions.rq.init_app(app)
+    extensions.migrate.init_app(app, db)
+    extensions.mobility.init_app(app)
+    extensions.limiter.init_app(app)
     ######### LOGIN MANAGER #########
-    lm.init_app(app)
-    lm.login_view = 'auth.login'
-    lm.anonymous_user = Anonymous
+    extensions.lm.init_app(app)
+    extensions.lm.login_view = 'auth.login'
+    extensions.lm.anonymous_user = Anonymous
     ################################
+    db.init_app(app)
 
 
 def register_blueprints(app):
@@ -139,7 +138,7 @@ def register_blueprints(app):
     app.register_blueprint(competition)
 
 
-def register_admin_views(admin, db):
+def register_admin_views(application, admin, db):
     from flask import url_for
     from flask_admin.menu import MenuLink
     # import models
@@ -154,7 +153,7 @@ def register_admin_views(admin, db):
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
         ReportModelView
     )
-    admin.add_view(AnalyticsView('Analytics'))
+    admin.add_view(AnalyticsView('AdminAnalytics'))
     admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
     admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
     admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))
@@ -165,8 +164,9 @@ def register_admin_views(admin, db):
     admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
     admin.add_view(SafeModelView(Competition, db.session, endpoint='AdminCompetition'))
     admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
-    admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
-    admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
+    with application.app_context():
+        admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
+        admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
     return True
 
 
