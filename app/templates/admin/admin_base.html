@@ -1,0 +1,42 @@
+<!-- base admin that handles first level protection -->
+
+{% if current_user.admin==True %}
+  {% extends 'admin/master.html' %}
+  {% block head %}
+    <head>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+  {% endblock %}
+  {% block body %}
+  {% endblock %}
+{% else %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,
+                                  initial-scale=1,
+                                  shrink-to-fit=no">
+    <meta name="description" content="Welcome to the The Project Project!
+                                      We're excited to have you.">
+    <meta name="author" content="Landon Smith">
+    <title>Admin | TheProjectProject</title>
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <style>
+    body {
+      background: black;
+      color: white;
+      font-family: 'Varela Round';
+    }
+    a {
+      color: white;
+    }
+    </style>
+  </head>
+
+  <body>
+    <br><br><br>
+    <div style='text-align:center;'>
+      <h1 style='font-size:500%;'>Not Authorized</h1>
+      <p>Please <a href='/'>return to menu</a>.</p>
+    </div>
+  </body>
+{% endif %}

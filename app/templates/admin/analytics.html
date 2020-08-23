@@ -1,0 +1,8 @@
+{% if current_user.admin==True %}
+  {% extends 'admin/master.html' %}
+  {% block body %}
+    <div class='container'>
+  {% endblock %}
+
+{% else %}
+{% endif %}
