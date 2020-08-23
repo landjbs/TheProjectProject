@@ -74,6 +74,7 @@ def populate_db(num_users, num_projects):
             user = User(
                     name=name,
                     email=fake.email(),
+                    url=None,
                     password='boop',
                     about=rand_words(10),
                     accepted=True

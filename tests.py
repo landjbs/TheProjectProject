@@ -5,7 +5,7 @@ from app.config import test_config
 from app.database import db
 from app.user.models import User
 from sqlalchemy.sql.expression import func
-import app.fake as fake
+from app.fake import fake, rand_words, rand_bool, rand_subjects, rand_badges
 
 
 admin_email = 'landonsmith@college.harvard.edu'
@@ -27,15 +27,16 @@ class TestCase(unittest.TestCase):
             password=admin_password
         ), follow_redirects=True)
 
-    def apply_user(self):
-        password = fake.rand_words(1)
-        return self.app.post('/register', data=dict(
+    def apply(self):
+        password = rand_words(1)
+        return self.app.post('/apply', data=dict(
             name=fake.name(),
             email=fake.email(),
-            about=fake.rand_words(10)[:500],
+            url=None,
+            about=rand_words(10)[:500],
             password=password,
             confirm=password,
-            subjects=fake.rand_subjects(4)
+            subjects=None
         ), follow_redirects=True)
 
     # def edit_user(self, user, email):
@@ -74,12 +75,11 @@ class TestCase(unittest.TestCase):
         resp = self.app.get('/logout', follow_redirects=True)
         assert resp.data, 'Logout'
 
-    # def test_register_user(self):
-    #     username = fake.user_name()
-    #     email = fake.email()
-    #     password = fake.word() + fake.word()
-    #     resp = self.register_user(username, email, password)
-    #     assert resp.data, 'Sent verification email to %s' % email
+    def test_apply(self):
+        # TODO: make this actually validate and work
+        resp = self.apply()
+        # assert (resp._status_code != 400), 'Bad Request'
+        assert resp.data, 'Sent verification email to %s' % email
 
     # def test_edit_user(self):
     #     user = User.query.order_by(func.random()).first()
