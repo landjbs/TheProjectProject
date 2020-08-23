@@ -11,9 +11,7 @@
 
 {%
   set card_renders = dict([
-    ('add-question',          render_add_question_card),
     ('question',              render_question_card),
-    ('add-link',              render_add_link_card),
     ('project-link',          render_project_link_card),
     ('private-link',          render_private_link)
   ])
@@ -29,6 +27,9 @@
 
 {% macro render_cardbox(id_postfix, card_type, data, label=False, add_card=False) -%}
   {% if add_card %}
-
+    {{ add_card[card_type] }}
   {% endif %}
+  <div class='about-col'>
+    
+  </div>
 {% endmacro -%}
