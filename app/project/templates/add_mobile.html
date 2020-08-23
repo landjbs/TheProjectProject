@@ -15,39 +15,68 @@
 {% block content %}
 
 <form id='project_form' method='post'>
-    <u>
-      <h3 style='text-align:left; margin:0px;'>
-      describe your idea.
-        <div class='boop'>
-          <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-          <span class="tooltiptext">
-            <p style='font-size: 60%; text-align: left; margin-bottom:0px;'>
-              ...and let's make it happen! Whether you have a fully developed
-              project or just an idea of what you want to work on, TheProjectProject
-              is here to help you bring it to reality and showcase the results.
-              Projects you post here will be added to your page. If you need a
-              team, we will recommend your project to other members and help
-              you manage development. If we like your project, we will publicize
-              it on our social media and help connect you to funding and resources.
-              You're going to build incredible things and it all starts right here!
-            </p>
-          </span>
-        </div>
-      </h3>
-    </u>
-    {{ form.csrf_token }}
+  <u>
+    <h3 style='text-align:left; margin:0px;'>
+    describe your idea.
+      <div class='boop'>
+        <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+        <span class="tooltiptext">
+          <p style='font-size: 60%; text-align: left; margin-bottom:0px;'>
+            ...and let's make it happen! Whether you have a fully developed
+            project or just an idea of what you want to work on, TheProjectProject
+            is here to help you bring it to reality and showcase the results.
+            Projects you post here will be added to your page. If you need a
+            team, we will recommend your project to other members and help
+            you manage development. If we like your project, we will publicize
+            it on our social media and help connect you to funding and resources.
+            You're going to build incredible things and it all starts right here!
+          </p>
+        </span>
+      </div>
+    </h3>
+  </u>
+  {{ form.csrf_token }}
     <h3>description</h3>
-      {% for elt in [form.name, form.oneliner, form.summary, form.url]%}
-        <div class="row input-segment" style='text-align:left;'>
-          <div class='input-title'>
-            <h6 style="display: inline;">{{ elt.label }}</h6>
-            {% if elt.description %}
-              <div class='boop'>
-                <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-                <span class="tooltiptext">{{ elt.description}}</span>
-              </div>
-            {% endif %}
+    {% for elt in [form.name, form.oneliner, form.summary, form.url]%}
+      <div class="row input-segment" style='text-align:left;'>
+        <div class='input-title'>
+          <h6 style="display: inline;">{{ elt.label }}</h6>
+          {% if elt.description %}
+            <div class='boop'>
+              <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+              <span class="tooltiptext">{{ elt.description}}</span>
+            </div>
+          {% endif %}
+        </div>
+        <div class='input-box'>
+          {% set c = 'input valid' if not elt.errors else 'input invalid'%}
+          {% set max = elt.render_kw.get('max') %}
+          {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
+                 maxlength=max) }}
+          <p class='warning'>{{ elt.errors[0] }}</p>
+        </div>
+      </div>
+    {% endfor %}
+    <h3>team</h3>
+    {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
+      <div class="row input-segment" id='{{ elt.name }}_segment'>
+        <div class='input-title' id='{{ elt.name }}_label'>
+          <h6 style="display: inline;">{{ elt.label }}</h6>
+          {% if elt.description %}
+            <div class='boop'>
+              <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+              <span class="tooltiptext">{{ elt.description }}</span>
+            </div>
+          {% endif %}
+        </div>
+        {% if elt.type=='BooleanField' %}
+          <div class="input-control" onclick='toggle_{{ elt.name }}()' id='{{ elt.name }}'>
+            <input id="on-{{ elt.name }}" class="toggle toggle-left" name="{{ elt.name }}" value="true" type="radio">
+            <label for="on-{{ elt.name }}" class="btn"><span>A</span> Yes</label>
+            <input id="off-{{ elt.name }}" class="toggle toggle-right" name="{{ elt.name }}" value="false" type="radio">
+            <label for="off-{{ elt.name }}" class="btn"><span>B</span> No</label>
           </div>
+        {% else %}
           <div class='input-box'>
             {% set c = 'input valid' if not elt.errors else 'input invalid'%}
             {% set max = elt.render_kw.get('max') %}
@@ -55,85 +84,56 @@
                    maxlength=max) }}
             <p class='warning'>{{ elt.errors[0] }}</p>
           </div>
-        </div>
-      {% endfor %}
-      {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
-        <div class="row input-segment" id='{{ elt.name }}_segment'>
-          <div class='input-title' id='{{ elt.name }}_label'>
-            <h6 style="display: inline;">{{ elt.label }}</h6>
-            {% if elt.description %}
-              <div class='boop'>
-                <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-                <span class="tooltiptext">{{ elt.description }}</span>
-              </div>
-            {% endif %}
-          </div>
-          {% if elt.type=='BooleanField' %}
-            <div class="input-control" onclick='toggle_{{ elt.name }}()' id='{{ elt.name }}'>
-              <input id="on-{{ elt.name }}" class="toggle toggle-left" name="{{ elt.name }}" value="true" type="radio">
-              <label for="on-{{ elt.name }}" class="btn"><span>A</span> Yes</label>
-              <input id="off-{{ elt.name }}" class="toggle toggle-right" name="{{ elt.name }}" value="false" type="radio">
-              <label for="off-{{ elt.name }}" class="btn"><span>B</span> No</label>
-            </div>
-          {% else %}
-            <div class='input-box'>
-              {% set c = 'input valid' if not elt.errors else 'input invalid'%}
-              {% set max = elt.render_kw.get('max') %}
-              {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
-                     maxlength=max) }}
-              <p class='warning'>{{ elt.errors[0] }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <h3>management</h3>
+    {% for elt in [form.estimated_time, form.team_size, form.subjects, form.competition] %}
+      <div class="row input-segment" id='{{ elt.name }}_segment'>
+        <div class='input-title'>
+          <h6 style="display: inline;">{{ elt.label }}</h6>
+          {% if elt.description %}
+            <div class='boop'>
+              <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+              <span class="tooltiptext">{{ elt.description }}</span>
             </div>
           {% endif %}
         </div>
-      {% endfor %}
-      {% for elt in [form.estimated_time, form.team_size, form.subjects, form.competition] %}
-        <div class="row input-segment" id='{{ elt.name }}_segment'>
-          <div class='input-title'>
-            <h6 style="display: inline;">{{ elt.label }}</h6>
-            {% if elt.description %}
-              <div class='boop'>
-                <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-                <span class="tooltiptext">{{ elt.description }}</span>
-              </div>
-            {% endif %}
+        {% if elt.name=='estimated_time' %}
+          <div class="slidecontainer">
+            <input type="range" min="1" max="30" value="7" class="slider"
+                  name='{{ elt.name }}' id="time_slider">
           </div>
-          {% if elt.name=='estimated_time' %}
-            <div class="slidecontainer">
-              <input type="range" min="1" max="30" value="7" class="slider"
-                    name='{{ elt.name }}' id="time_slider">
-            </div>
-            <p id='time-out' style='display: inline;'></p>
-          {% elif elt.name=='team_size' %}
-            <div class="slidecontainer">
-              <input type="range" min="{{ elt.render_kw['min'] }}"
-                max="{{ elt.render_kw['max'] }}"
-                value="{{ elt.render_kw['start'] }}" class="slider"
-                    name='{{ elt.name }}' id="team_slider">
-            </div>
-            <p id='team-out' style='display: inline;'></p>
-          {% elif elt.type=='SelectMultipleField' %}
-            {{ render_multiselect(elt) }}
-          {% elif elt.type=='SelectField' %}
+          <p id='time-out' style='display: inline;'></p>
+        {% elif elt.name=='team_size' %}
+          <div class="slidecontainer">
+            <input type="range" min="{{ elt.render_kw['min'] }}"
+              max="{{ elt.render_kw['max'] }}"
+              value="{{ elt.render_kw['start'] }}" class="slider"
+                  name='{{ elt.name }}' id="team_slider">
+          </div>
+          <p id='team-out' style='display: inline;'></p>
+        {% elif elt.type=='SelectMultipleField' %}
+          {{ render_multiselect(elt) }}
+        {% elif elt.type=='SelectField' %}
+          {% if not elt.errors %}
+            {{ elt(class='input valid add-select') }}
+          {% else %}
+            {{ elt(class='input add-select') }}
+            <p class='warning'>{{ elt.errors[0] }}</p>
+          {% endif %}
+        {% else %}
+          <div class='input-box'>
             {% if not elt.errors %}
-              {{ elt(class='input valid add-select') }}
+              {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
             {% else %}
-              {{ elt(class='input add-select') }}
+              {{ elt(class='input invalid') }}
               <p class='warning'>{{ elt.errors[0] }}</p>
             {% endif %}
-          {% else %}
-            <div class='input-box'>
-              {% if not elt.errors %}
-                {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
-              {% else %}
-                {{ elt(class='input invalid') }}
-                <p class='warning'>{{ elt.errors[0] }}</p>
-              {% endif %}
-            </div>
-          {% endif %}
-        </div>
-      {% endfor %}
-    </div>
-    <br>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
 </form>
 
 <script>
