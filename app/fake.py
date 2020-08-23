@@ -1,8 +1,5 @@
 from faker import Faker
 
-from app.subject.models import Subject
-from app.badge.models import Badge
-
 
 fake = Faker()
 
@@ -28,3 +25,8 @@ def rand_badges(n):
         return []
     return [Badge.get_by_id(int(id))
             for id in np.random.randint(1, badge_num+1, size=n)]
+
+
+def register_faker():
+    from app.subject.models import Subject
+    from app.badge.models import Badge

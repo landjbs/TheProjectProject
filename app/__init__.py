@@ -53,8 +53,8 @@ def create_app(config=config.dev_config, register_admin=True):
         register_admin_views(application, extensions.admin, db)
     register_errorhandlers(application)
     register_jinja_env(application)
-    register_sentry(application.config['SENTRY_DSN'])
     register_commands(application)
+    register_sentry(application.config['SENTRY_DSN'])
     # register_elasticsearch(application)
 
     @application.before_request
