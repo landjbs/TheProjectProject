@@ -210,7 +210,7 @@
         ]
       %}
 
-      {{ render_safe_tabs(carousels) }}
+      {{ render_safe_tabs(carousels, default='todo') }}
     </div>
 
     <!-- modals -->
@@ -237,16 +237,5 @@
     <script src="js/covers.js"></script>
     <!-- allow starring and unstarring of project -->
     <script src="js/stars.js"></script>
-
-    <script>
-      $(document).ready(function () {
-        opened = sessionStorage.getItem(window.location.href + '_openTab');
-        if (opened) {
-          document.getElementById(opened).click();
-        } else {
-          document.getElementById('{{ default }}_Button').click();
-        }
-      });
-    </script>
 
   {% endblock %}
