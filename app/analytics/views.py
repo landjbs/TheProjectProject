@@ -1,9 +1,8 @@
-from flask import
- Flask, Response, abort, request
+from flask import current_app, Response, abort, request
 from base64 import b64decode
 from peewee import *
 
-from .models import PageView
+from .models import PageView, db
 
 
 # 1 pixel GIF, base64-encoded.
@@ -11,11 +10,10 @@ BEACON = b64decode('R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==
 
 
 ANALYTIC_SCRIPT = '''
-    """(function(){
+    (function(){
     var d=document,i=new Image,e=encodeURIComponent;
     i.src='%s/a.gif?url='+e(d.location.href)+'&ref='+e(d.referrer)+'&t='+e(d.title);
-    })()""".replace('\n', '')
-'''
+    })()'''.replace('\n', '')
 
 
 
@@ -25,10 +23,10 @@ def analyze():
     if not request.args.get('url'):
         abort(404)
 
-    with database.transaction():
+    with db.transaction():
         PageView.create_from_request()
 
-    response = Response(app.config['BEACON'], mimetype='image/gif')
+    response = Response(current_app.config['BEACON'], mimetype='image/gif')
     response.headers['Cache-Control'] = 'private, no-cache'
     return response
 

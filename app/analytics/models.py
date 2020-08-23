@@ -23,9 +23,9 @@ class PageView(CRUDMixin, db.Model):
     timestamp = db.DateTimeField(default=datetime.utcnow, index=True)
     title = db.TextField(default='')
     ip = db.CharField(default='')
-    referrer = TextField(default='')
-    headers = JSONField()
-    params = JSONField()
+    referrer = db.TextField(default='')
+    headers = db.JSONField()
+    params = db.JSONField()
 
     class Meta:
         database = db
