@@ -188,6 +188,15 @@
 
       {% set carousels = carousels + [
           (
+            'Questions',
+            render_carousel(
+              label='Questions',
+              id_postfix='questions',
+              card_type='question',
+              icon_type='question'
+            )
+          ),
+          (
             'Subjects',
             render_carousel(
               label='Subjects',
