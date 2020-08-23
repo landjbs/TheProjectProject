@@ -1,15 +1,15 @@
+import numpy as np
 from faker import Faker
 
-# from app.subject.models import Subject
-# from app.badge.models import Badge
+from app.subject.models import Subject
+from app.badge.models import Badge
 
 
 fake = Faker()
 
 # cache database specs
-global subject_num
-global subject_num
-# badge_num = Badge.query.count()
+subject_num = None
+badge_num = None
 
 
 def rand_words(n):
@@ -21,10 +21,18 @@ def rand_bool(p_true):
 
 
 def rand_subjects(n):
+    global subject_num
+    if subject_num is None:
+        print('recomp')
+        subject_num = Subject.query.count()
     return [Subject.get_by_id(int(id))
             for id in np.random.randint(1, subject_num+1, size=n)]
 
 def rand_badges(n):
+    global badge_num
+    if badge_num is None:
+        print('recomp')
+        badge_num = Badge.query.count()
     if n==0:
         return []
     return [Badge.get_by_id(int(id))
