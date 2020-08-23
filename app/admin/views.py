@@ -47,8 +47,8 @@ class AnalyticsView(SafeBaseView):
     @expose('/')
     def index(self, **kwargs):
         view_data = {}
-        view_data['all_views'] = PageView.view_count(past_days=7)
-        view_data['all_users'] = PageView.user_count(past_days=7)
+        view_data['view_count'] = PageView.view_count(past_days=7)
+        view_data['user_count'] = PageView.user_count(past_days=7)
         return self.render('admin/analytics.html', view_data=view_data)
 
 
