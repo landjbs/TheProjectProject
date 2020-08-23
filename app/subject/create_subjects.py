@@ -33,8 +33,8 @@ def create_subjects(db):
                 Subject('Graphics/Design',          '#AB03FF'),
                 Subject('Hardware',                 '#7903FF'),
                 Subject('Music',                    '#B303FF'),
-                Subject('Art',                      '#B303FF'),
-                Subject('Writing',                  '#B303FF'),
+                Subject('Writing',                  '#BE03FF'),
+                Subject('Art',                      '#D903FF'),
 
                 # dev/engineering:      pink
                 Subject('Mobile Dev',               '#D503FF'),
@@ -43,9 +43,9 @@ def create_subjects(db):
 
                 # project type          orange
                 Subject('Social Issues',            '#F7B914'),
-                Subject('Environmental',            '#F7B914'),
                 Subject('Startup',                  '#FFC100'),
-                Subject('Research',                 '#FF8000')
+                Subject('Research',                 '#FF8000'),
+                Subject('Environmental Issues',     '#F79E14')
             ]
     for subject in subjects:
         db.session.add(subject)

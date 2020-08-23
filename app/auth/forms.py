@@ -33,7 +33,7 @@ class Apply(BaseForm):
                                'projects you have worked on, passions you '
                                'have, or reasons you want to join the '
                                'community.'))
-    subjects = SelectMultipleField('Interests',
+    subjects = SelectMultipleField('Passions',
                                     description=('What fields are you '
                                                 'interested in?'),
                                     validators=[Select_Limit_Validator(5)],

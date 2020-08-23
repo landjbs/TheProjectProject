@@ -19,12 +19,12 @@ class JSONField(db.Text):
 
 
 class PageView(CRUDMixin, db.Model):
-    domain = db.Column(db.String())
-    url = db.Column(db.Text())
+    domain = db.Column(db.String(500))
+    url = db.Column(db.Text(500))
     timestamp = db.Column(db.DateTime(), default=datetime.utcnow, index=True)
-    title = db.Column(db.Text(), default='')
-    ip = db.Column(db.String(), default='')
-    referrer = db.Column(db.Text(), default='')
+    title = db.Column(db.Text(200), default='')
+    ip = db.Column(db.String(100), default='')
+    referrer = db.Column(db.Text(500), default='')
     headers = db.Column(db.JSON())
     params = db.Column(db.JSON())
 

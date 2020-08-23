@@ -23,7 +23,6 @@ from app.badge import badge
 from app.question import question
 from app.link import link
 from app.analytics import analytics
-from app.admin import register_admin_views
 # database
 from app.database import db
 # login
@@ -138,6 +137,25 @@ def register_blueprints(app):
     app.register_blueprint(badge)
     app.register_blueprint(link)
     app.register_blueprint(competition)
+
+
+def register_admin_views(admin, db):
+    from app.admin.views import (
+        SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
+        ReportModelView
+    )
+    admin.add_view(AnalyticsView('Analytics'))
+    admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
+    admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
+    admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))
+    admin.add_view(SafeModelView(Task, db.session, endpoint='AdminTask'))
+    admin.add_view(SafeModelView(Subject, db.session, endpoint='AdminSubject'))
+    admin.add_view(ReportModelView(User_Report, db.session))
+    admin.add_view(SafeModelView(Project_Application, db.session, endpoint='AdminApplication'))
+    admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
+    admin.add_view(SafeModelView(Competition, db.session, endpoint='AdminCompetition'))
+    admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
+
 
 
 def register_errorhandlers(app):
