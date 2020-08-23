@@ -34,7 +34,7 @@ class TestCase(unittest.TestCase):
         return self.app.post('/register', data=dict(
             name=fake.name(),
             email=fake.email(),
-            about=fake.
+            about=fake.rand_words(10)[:500],
             password=password,
             confirm=password,
             accept_tos=True
