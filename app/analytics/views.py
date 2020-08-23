@@ -1,7 +1,6 @@
 from flask import Flask, Response, abort, request
 from base64 import b64decode
 import datetime
-import json
 import os
 from urlparse import parse_qsl, urlparse
 from peewee import *
