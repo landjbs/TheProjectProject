@@ -22,6 +22,6 @@ def contact():
 def terms():
     return render_template('terms.html')
 
-@base.route('/debug-sentry')
+@base.route('/circle')
 def trigger_error():
-    print('here')
+    return render_template('circle.html')

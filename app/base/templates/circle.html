@@ -1,0 +1,112 @@
+<html>
+<head>
+	<title>Points evenly spaced on a circle</title>
+	<script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<style type="text/css">
+		.guide{
+			stroke:#000;
+			fill:none;
+			stroke-width:5;
+			stroke-dasharray:5, 5;
+		}
+
+		.dot{
+			fill:#fff;
+			stroke-width:5;
+			stroke:#000;
+		}
+
+	</style>
+</head>
+
+<body>
+</body>
+
+<script type="text/javascript">
+
+	var size = 300;
+	var dotSize = 15;
+	var margin = 40;
+
+	function pointsOnCircle(num){
+		console.log('---')
+		var angle = (2 * Math.PI)/num;
+		var points = [];
+		var i=0;
+		for(var a = 0; a<(2*Math.PI); a+=angle){
+			i++;
+			points.push({
+				x:Math.cos(a),
+				y:Math.sin(a),
+				rotation:a,
+				label:'point' + i
+			})
+		}
+		return points;
+	}
+
+	function populateConnections( numPoints, connectionChance ){
+		var c = [];
+		for (var i= 0; i<numPoints; i++){
+			c[i] = [];
+			for ( var j=0; j<numPoints; j++){
+				if(i==j){
+					c[i][j] = 0;
+				}else if(Math.random() <= connectionChance ){
+					c[i][j] = 1;
+				}else{
+					c[i][j] = 0;
+				}
+			}
+		}
+		//flatten connection
+		var connections = [];
+
+
+		return c;
+	}
+
+	var circles = [];
+
+	for(var i=1;i<10;i++){
+		circles.push( pointsOnCircle( i ) );
+		console.log( populateConnections( i ) );
+	}
+
+	var scale = d3.scale.linear()
+		.range([0, size])
+		.domain([-1, 1]);
+
+	var pointCircle = function(g){
+		g.append('circle')
+			.attr({
+				r:size/2,
+				cx:size/2,
+				cy:size/2,
+				'class':'guide'
+			});
+
+		g.each(function(data,i){
+			d3.select(this).selectAll('.dot').data(data)
+				.enter()
+					.append('circle')
+					.attr({
+						'class':'dot',
+						r:dotSize,
+						cx:function(d){ return scale(d.x) },
+						cy:function(d){ return scale(d.y) }
+					})
+				});
+	}
+
+	d3.select('body')
+		.selectAll('svg').data(circles)
+		.enter()
+		.append('svg')
+			.attr('width', size + margin*2)
+			.attr('height', size + margin*2)
+			.append('g').attr('transform','translate('+margin+','+margin+')')
+			.call(pointCircle)
+</script>
+
+</html>

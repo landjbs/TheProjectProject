@@ -43,6 +43,7 @@ def create_subjects(db):
 
                 # project type          orange
                 Subject('Social Issues',            '#F7B914'),
+                Subject('Environmental',            '#F7B914'),
                 Subject('Startup',                  '#FFC100'),
                 Subject('Research',                 '#FF8000')
             ]
