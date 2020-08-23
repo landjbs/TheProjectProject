@@ -124,17 +124,24 @@
       %}
 
       {% if is_owner %}
-        {% set carousels = carousels + [
-            (
-              'Applications',
-              render_carousel(
-                label='Applications',
-                id_postfix='applications',
-                card_type='application',
-                icon_type='notifcation',
-                data=applications
+        {% if applications|length > 0 %}
+          {%
+            set carousels = carousels + [
+              (
+                'Applications',
+                render_carousel(
+                  label='Applications',
+                  id_postfix='applications',
+                  card_type='application',
+                  icon_type='notifcation',
+                  data=applications
+                )
               )
-            ),
+            ]
+          %}
+        {% endif %}
+
+        {% set carousels = carousels + [
             (
               'Recommended',
               render_carousel(
