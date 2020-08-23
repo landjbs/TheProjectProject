@@ -1,19 +1,258 @@
 {% extends "home_base.html" %}
+{% from 'components/form_macros.html' import render_multiselect %}
 
 {% block title %}Add Project{% endblock %}
 
 {% block head %}
   {{ super() }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link type="text/css" href="css/add_styles.css" rel="stylesheet">
+  <link type='text/css' href='css/select_styles.css' rel='stylesheet'>
+  <link type='text/css' href='css/slider_styles.css' rel='stylesheet'>
+  <script src="select-pure/dist/bundle.min.js"></script>
 {% endblock %}
 
-
 {% block content %}
-<div class='big-box'>
-<h4 style='text-decoration: underline;'>Managing Projects Is Tough!</h4>
-<h6>
-  To make sure that you have a good experience adding and modifying your
-  project, we ask that you visit this page from a computer.
-</h6>
-</div>
+
+<form id='project_form' method='post'>
+    <u>
+      <h3 style='text-align:left; margin:0px;'>
+      describe your idea.
+        <div class='boop'>
+          <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+          <span class="tooltiptext">
+            <p style='font-size: 60%; text-align: left; margin-bottom:0px;'>
+              ...and let's make it happen! Whether you have a fully developed
+              project or just an idea of what you want to work on, TheProjectProject
+              is here to help you bring it to reality and showcase the results.
+              Projects you post here will be added to your page. If you need a
+              team, we will recommend your project to other members and help
+              you manage development. If we like your project, we will publicize
+              it on our social media and help connect you to funding and resources.
+              You're going to build incredible things and it all starts right here!
+            </p>
+          </span>
+        </div>
+      </h3>
+    </u>
+    {{ form.csrf_token }}
+    <h3>description</h3>
+      {% for elt in [form.name, form.oneliner, form.summary, form.url]%}
+        <div class="row input-segment" style='text-align:left;'>
+          <div class='input-title'>
+            <h6 style="display: inline;">{{ elt.label }}</h6>
+            {% if elt.description %}
+              <div class='boop'>
+                <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+                <span class="tooltiptext">{{ elt.description}}</span>
+              </div>
+            {% endif %}
+          </div>
+          <div class='input-box'>
+            {% set c = 'input valid' if not elt.errors else 'input invalid'%}
+            {% set max = elt.render_kw.get('max') %}
+            {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
+                   maxlength=max) }}
+            <p class='warning'>{{ elt.errors[0] }}</p>
+          </div>
+        </div>
+      {% endfor %}
+      {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
+        <div class="row input-segment" id='{{ elt.name }}_segment'>
+          <div class='input-title' id='{{ elt.name }}_label'>
+            <h6 style="display: inline;">{{ elt.label }}</h6>
+            {% if elt.description %}
+              <div class='boop'>
+                <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+                <span class="tooltiptext">{{ elt.description }}</span>
+              </div>
+            {% endif %}
+          </div>
+          {% if elt.type=='BooleanField' %}
+            <div class="input-control" onclick='toggle_{{ elt.name }}()' id='{{ elt.name }}'>
+              <input id="on-{{ elt.name }}" class="toggle toggle-left" name="{{ elt.name }}" value="true" type="radio">
+              <label for="on-{{ elt.name }}" class="btn"><span>A</span> Yes</label>
+              <input id="off-{{ elt.name }}" class="toggle toggle-right" name="{{ elt.name }}" value="false" type="radio">
+              <label for="off-{{ elt.name }}" class="btn"><span>B</span> No</label>
+            </div>
+          {% else %}
+            <div class='input-box'>
+              {% set c = 'input valid' if not elt.errors else 'input invalid'%}
+              {% set max = elt.render_kw.get('max') %}
+              {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
+                     maxlength=max) }}
+              <p class='warning'>{{ elt.errors[0] }}</p>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      {% for elt in [form.estimated_time, form.team_size, form.subjects, form.competition] %}
+        <div class="row input-segment" id='{{ elt.name }}_segment'>
+          <div class='input-title'>
+            <h6 style="display: inline;">{{ elt.label }}</h6>
+            {% if elt.description %}
+              <div class='boop'>
+                <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+                <span class="tooltiptext">{{ elt.description }}</span>
+              </div>
+            {% endif %}
+          </div>
+          {% if elt.name=='estimated_time' %}
+            <div class="slidecontainer">
+              <input type="range" min="1" max="30" value="7" class="slider"
+                    name='{{ elt.name }}' id="time_slider">
+            </div>
+            <p id='time-out' style='display: inline;'></p>
+          {% elif elt.name=='team_size' %}
+            <div class="slidecontainer">
+              <input type="range" min="{{ elt.render_kw['min'] }}"
+                max="{{ elt.render_kw['max'] }}"
+                value="{{ elt.render_kw['start'] }}" class="slider"
+                    name='{{ elt.name }}' id="team_slider">
+            </div>
+            <p id='team-out' style='display: inline;'></p>
+          {% elif elt.type=='SelectMultipleField' %}
+            {{ render_multiselect(elt) }}
+          {% elif elt.type=='SelectField' %}
+            {% if not elt.errors %}
+              {{ elt(class='input valid add-select') }}
+            {% else %}
+              {{ elt(class='input add-select') }}
+              <p class='warning'>{{ elt.errors[0] }}</p>
+            {% endif %}
+          {% else %}
+            <div class='input-box'>
+              {% if not elt.errors %}
+                {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
+              {% else %}
+                {{ elt(class='input invalid') }}
+                <p class='warning'>{{ elt.errors[0] }}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <br>
+</form>
+
+<script>
+  // query sliders
+  var time_slider = document.getElementById("time_slider");
+  var team_slider = document.getElementById("team_slider");
+  // query outputs
+  var time_out = document.getElementById("time-out");
+  var team_out = document.getElementById("team-out");
+  // defaults
+  time_out.innerHTML = time_slider.value + ' days';
+  team_out.innerHTML = team_slider.value + ' people';
+  // time sliding
+  time_slider.oninput = function() {
+    if (this.value==1) {
+      time_out.innerHTML = 'n.a.';
+    }
+    else {
+      time_out.innerHTML = this.value + ' days';
+    }
+  };
+  team_slider.oninput = function() {
+    team_out.innerHTML = (this.value) + ' people';
+  };
+
+  function submit() {
+    var selector = document.getElementById('subjects');
+    var selected_subjects = instance.value();
+    if (selected_subjects) {
+      for (i=0; i<selected_subjects.length; i++) {
+        selector.options[selected_subjects[i]-1].selected='selected';
+      }
+    }
+    document.getElementById("project_form").submit();
+  };
+
+  // toggles //
+  function is_complete() {
+    // change timing
+    document.getElementById("time_slider").disabled = true;
+    time_out.innerHTML = 'n.a.';
+    document.getElementById("time_slider").value = 1;
+    document.getElementById("estimated_time_segment").style.opacity = 0.4;
+    // project isn't open
+    document.getElementById('off-open').checked = true;
+    toggle_open();
+  };
+
+  function not_complete() {
+    document.getElementById("time_slider").disabled = false;
+    time_out.innerHTML = '7 days';
+    document.getElementById("time_slider").value = 7;
+    document.getElementById("estimated_time_segment").style.opacity = 1;
+    document.getElementById('on-open').checked = true;
+    toggle_open();
+  };
+
+  function is_open() {
+    // change team to 10
+    document.getElementById("team_slider").disabled = false;
+    document.getElementById("team_slider").value = 10;
+    team_out.innerHTML = '10 people';
+    document.getElementById("team_size_segment").style.opacity = 1;
+    // requires application set to true
+    document.getElementById('on-requires_application').checked = true;
+    document.getElementById('off-complete').checked = true;
+    toggle_requires_application();
+  };
+
+  function not_open() {
+    // turn off team slider
+    document.getElementById("team_slider").disabled = true;
+    document.getElementById("team_slider").value = 1;
+    team_out.innerHTML = '1 person';
+    document.getElementById("team_size_segment").style.opacity = 0.4;
+    // turn off application
+    document.getElementById('off-requires_application').checked = true;
+    toggle_requires_application();
+  }
+
+  function no_application() {
+    document.getElementById("application_question").disabled = true;
+    document.getElementById("application_question_segment").style.opacity = 0.4;
+  };
+
+  function yes_application() {
+    document.getElementById("application_question").disabled = false;
+    document.getElementById("application_question_segment").style.opacity = 1;
+    document.getElementById('on-open').checked = true;
+    document.getElementById('off-complete').checked = true;
+  };
+
+  function toggle_complete() {
+    if (document.getElementById('on-complete').checked) {
+        is_complete();
+      } else {
+        not_complete();
+      }
+  }
+
+  function toggle_open() {
+    if (document.getElementById('on-open').checked) {
+        is_open();
+      } else {
+          not_open();
+      }
+  }
+
+  function toggle_requires_application() {
+    if (document.getElementById('on-requires_application').checked) {
+          yes_application();
+      } else {
+          no_application();
+      }
+  }
+
+  // start with not completed and default subsequents
+  document.getElementById("off-complete").checked = true;
+  toggle_complete();
+</script>
+
 {% endblock %}
