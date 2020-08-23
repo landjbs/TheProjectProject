@@ -8,7 +8,6 @@ from ..analytics import analytics
 @analytics.route('/a.gif')
 def analyze():
     ''' View analytics 1pixel gif '''
-    print('analysis')
     if not request.args.get('url'):
         abort(404)
 
@@ -22,7 +21,6 @@ def analyze():
 @analytics.route('/a.js')
 def script():
     ''' View analytics javascript '''
-    print('scripting')
     return Response(
         current_app.config['ANALYTIC_SCRIPT'] % (current_app.config['DOMAIN']),
         mimetype='text/javascript')
