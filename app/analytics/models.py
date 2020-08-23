@@ -48,5 +48,13 @@ class PageView(CRUDMixin, db.Model):
     @classmethod
     def views_over(cls, past_days=7):
         ''' Querys views over past_days '''
-        time_ago = (datetime.utcnow() - timedelta(days))
-        # views = cls.query.where.
+        if past_days:
+            time_ago = (datetime.utcnow() - timedelta(days))
+            return cls.query.where(cls.timestamp >= time_ago)
+        else:
+            return cls.query.all()
+
+    @classmethod
+    def user_count(cls, past_days=None):
+        if past_days:
+            base = cls.views_oveR(past_days)

@@ -1,5 +1,7 @@
 <!-- base admin that handles first level protection -->
 
+<!-- WARNING: not imp/integrated yet -->
+
 {% if current_user.admin==True %}
   {% extends 'admin/master.html' %}
   {% block head %}
@@ -8,6 +10,8 @@
     </head>
   {% endblock %}
   {% block body %}
+    {% block if_admin %}
+    {% endblock %}
   {% endblock %}
 {% else %}
   <head>
