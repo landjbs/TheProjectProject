@@ -1,12 +1,11 @@
 import unittest
 
 from app import create_app
-import app.fake as fake
 from app.config import test_config
 from app.database import db
 from app.user.models import User
 from sqlalchemy.sql.expression import func
-
+import app.fake as fake
 
 
 admin_email = 'landonsmith@college.harvard.edu'
