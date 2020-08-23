@@ -25,17 +25,6 @@
     {% endif %}
   {% endfor %}
 
-  <script>
-    $(document).ready(function () {
-      opened = sessionStorage.getItem(window.location.href + '_openTab');
-      if (opened) {
-        document.getElementById(opened).click();
-      } else {
-        document.getElementById('{{ default }}_Button').click();
-      }
-    });
-  </script>
-
   {% if request.MOBILE %}
     <script src="js/tabs.js"></script>
   {% endif %}

@@ -14,5 +14,7 @@ function openTab(evt, tabName) {
   // show tooltip in selected tab
   $('#' + tabName + ' [data-toggle="tooltip"]').tooltip('show');
   evt.currentTarget.className += " active";
-  sessionStorage.setItem((window.location.href + '_opened'), (tabName + '_Button'));
+  sessionStorage.setItem(
+    (window.location.href + '_opened'), (tabName + '_Button')
+  );
 }
