@@ -6,6 +6,7 @@ from flask_admin import expose, BaseView
 from flask_admin.actions import action
 from flask_admin.model.template import EndpointLinkRowAction
 from flask_admin.contrib.sqla import ModelView
+from flask_admin.menu import MenuLink
 
 from app.jobs import send_acceptance_email
 
@@ -46,8 +47,8 @@ class AnalyticsView(SafeBaseView):
     @expose('/')
     def index(self, **kwargs):
         view_data = {}
-        view_data['view_count'] = PageView.view_count(past_days=7)
-        view_data['user_count'] = PageView.user_count(past_days=7)
+        view_data['all_views'] = PageView.view_count(past_days=7)
+        view_data['all_users'] = PageView.user_count(past_days=7)
         return self.render('admin/analytics.html', view_data=view_data)
 
 
@@ -125,3 +126,23 @@ class ReportModelView(SafeModelView):
     def resolve_report(self):
         report = User_Report.query.get_or_404(int(request.args.get('id')))
         return redirect(request.referrer)
+
+
+
+def register_admin_views(admin, db):
+    # model views
+    admin.add_view(AnalyticsView('Analytics'))
+    admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
+    admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
+    admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))
+    admin.add_view(SafeModelView(Task, db.session, endpoint='AdminTask'))
+    admin.add_view(SafeModelView(Subject, db.session, endpoint='AdminSubject'))
+    admin.add_view(ReportModelView(User_Report, db.session))
+    admin.add_view(SafeModelView(Project_Application, db.session, endpoint='AdminApplication'))
+    admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
+    admin.add_view(SafeModelView(Competition, db.session, endpoint='AdminCompetition'))
+    admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
+    # nav links
+    # admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
+    # admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
+    return admin
