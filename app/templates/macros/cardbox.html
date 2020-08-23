@@ -19,7 +19,16 @@
   ])
 %}
 
+{%
+  set add_cards = dict([
+    ('question',      render_add_question_card),
+    ('link',          render_add_link_card)
+  ])
+%}
 
-{% macro render_cardbox(id_postfix, card_type, data, label) -%}
 
+{% macro render_cardbox(id_postfix, card_type, data, label=False, add_card=False) -%}
+  {% if add_card %}
+
+  {% endif %}
 {% endmacro -%}
