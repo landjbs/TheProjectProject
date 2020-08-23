@@ -58,7 +58,7 @@
           {% endif %}
         </div>
         <div id='nav-expanded'>
-          <p>{{ user.about }}</p>
+          <p class='about-text'>{{ user.about }}</p>
           {% if current_user.is_authenticated and current_user!=user %}
             <center>
               {{ render_user_action_bar(user) }}
