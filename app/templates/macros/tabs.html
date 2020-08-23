@@ -14,6 +14,7 @@
     </div>
   {% endif %}
 
+  <!-- TODO: hide tabs with no data -->
   {% for name, carousel in carousel_list %}
     {% if request.MOBILE %}
       <div id='{{ name }}' class='tabcontent'>
