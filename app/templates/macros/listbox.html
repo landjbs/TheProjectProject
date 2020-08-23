@@ -60,5 +60,10 @@
         {{ render_fn(elt) }}
       {% endfor %}
     {% endif %}
+    {% if form %}
+      <form class='post_form' class='form-{{ id_postfix }}' method='post'>
+        
+      </form>
+    {% endif %}
   </div>
 {% endmacro -%}

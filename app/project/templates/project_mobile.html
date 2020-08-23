@@ -81,6 +81,17 @@
       </nav>
 
       {%
+        set task_form =
+        <form class='post_form' id='comment_form' method='post'
+          action="{{ url_for('project.add_comment', project_id=project.id) }}">
+          {{ comment_form.hidden_tag() }}
+          {{ comment_form.text(class='post-input', placeholder='Comment') }}
+          <button>Add</button>
+        </form>
+        if is_member else False
+      %}
+
+      {%
         set carousels = [
           (
             'To Do',
@@ -91,7 +102,8 @@
               icon_type='todo',
               data=project.todo_tasks().all(),
               empty_message='No tasks to do right now.',
-              size='default'
+              size='default',
+              form=task_form
             )
           ),
           (
