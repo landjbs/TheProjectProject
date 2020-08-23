@@ -19,3 +19,12 @@
   padding-left:   4px;
   padding-right:  4px;
 }
+
+
+.bigname {
+  margin-bottom: 0px;
+}
+
+.undername {
+  color: rgba(255,255,255,0.5);
+}

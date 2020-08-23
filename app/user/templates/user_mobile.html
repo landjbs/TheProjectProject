@@ -41,7 +41,7 @@
             {% endif %}
           </p>
           <a>
-            <h4>
+            <h3 class='bigname'>
               {{ user.name }}
               {% set badge = user.choose_badge('search') %}
               {% if badge %}
@@ -49,10 +49,10 @@
               {% elif user.recently_active() %}
                 <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
               {% endif %}
-            </h4>
+            </h3>
           </a>
           {% if current_user.is_authenticated %}
-            <a id='hide-mail' href='mailto:{{ user.email }}'>
+            <a class='undername' id='hide-mail' href='mailto:{{ user.email }}'>
               {{ user.email }}
             </a>
           {% endif %}

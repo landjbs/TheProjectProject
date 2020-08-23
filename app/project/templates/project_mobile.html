@@ -49,7 +49,7 @@
               </button>
             {% endif %}
           </p>
-          <h3>
+          <h3 class='bigname'>
             {{ project.name }}
             {% if project.complete %}
               <i class="fa fa-check-circle" aria-hidden="true"></i>
@@ -59,7 +59,7 @@
           </h3>
           <p>
             by
-            <a class='user-name' href='user={{ project.owner.code }}'>
+            <a class='undername' href='user={{ project.owner.code }}'>
               {{ project.owner.name }}
             </a>
           </p>
