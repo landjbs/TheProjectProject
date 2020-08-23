@@ -182,14 +182,16 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return bcrypt.check_password_hash(self.password, password)
 
     ## subjects ##
-    def add_subjects(self, subjects):
+    def add_subjects(self, subjects, user_selected=False):
         ''' Adds subjects to user subjects '''
         for subject in subjects:
             prev = self.subjects.filter_by(subject=subject).first()
             if prev is not None:
                 prev.number += 1
             else:
-                new = User_Subjects(user=self, subject=subject)
+                new = User_Subjects(
+                    user=self, subject=subject, user_selected=user_selected
+                )
                 self.subjects.append(new)
         self.update()
         return True

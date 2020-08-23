@@ -32,7 +32,7 @@ def apply():
                     url=form.data['url'],
                     about=form.data['about'],
                 )
-        user.add_subjects(subjects)
+        user.add_subjects(subjects, user_selected=True)
         if current_app.config['REGISTER_MAIL']:
             # generate token and send to user email
             s = URLSafeTimedSerializer(current_app.secret_key)
