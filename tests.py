@@ -1,7 +1,7 @@
 import unittest
-from faker import Faker
 
 from app import create_app
+import app.fake as fake
 from app.config import test_config
 from app.database import db
 from app.user.models import User
@@ -11,8 +11,6 @@ from sqlalchemy.sql.expression import func
 
 admin_email = 'landonsmith@college.harvard.edu'
 admin_password = 'boop'
-
-fake = Faker()
 
 
 class TestCase(unittest.TestCase):
@@ -30,14 +28,15 @@ class TestCase(unittest.TestCase):
             password=admin_password
         ), follow_redirects=True)
 
-    def apply_user(self, username, email, password):
+    def apply_user(self):
+        password = fake.rand_words(1)
         return self.app.post('/register', data=dict(
             name=fake.name(),
             email=fake.email(),
             about=fake.rand_words(10)[:500],
             password=password,
             confirm=password,
-            accept_tos=True
+            subjects=fake.rand_subjects(4)
         ), follow_redirects=True)
 
     # def edit_user(self, user, email):
