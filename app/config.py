@@ -38,7 +38,7 @@ class base_config(object):
     # REDIS
     QUEUES = ['default']
     # ADMIN
-    FLASK_ADMIN_SWATCH = 'cerulean'
+    FLASK_ADMIN_SWATCH = 'cyborg'
     # FORMS
     WTF_CSRF_ENABLED = True
     # SENTRY (will not enable error notification if no DSN exported)
