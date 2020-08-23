@@ -156,6 +156,12 @@ class Comment_Form(BaseForm):
     text = TextField('Comment', validators=[DataRequired(), Length(1,160)],
                      render_kw={'max':160})
 
+    def __init__(self, *args, **kwargs):
+        super(Comment_Form, self).__init__()
+        project_id = kwargs.get('project_id')
+        if project_id:
+            self.text.render_kw['action'] = url_for('project.add_comment', project_id=project_id)
+
 
 class URL_Form(BaseForm):
     ''' Form to add url to project '''
