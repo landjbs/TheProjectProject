@@ -60,16 +60,17 @@
         {{ render_fn(elt) }}
       {% endfor %}
     {% endif %}
-    {% if form %}
-      <form class='post_form' class='form-{{ id_postfix }}' method='post' action="{{ form.render_kw['action'] }}">
-        {{ form.hidden_tag() }}
-        {{
-          form.text(
-            class='post-input', placeholder=form.render_kw['placeholder'],
-            max=form.render_kw['max']
-          )
-        }}
-      </form>
-    {% endif %}
   </div>
+  {% if form %}
+    <form class='post_form' class='form-{{ id_postfix }}' method='post' action="{{ form.text.render_kw['action'] }}">
+      {{ form.hidden_tag() }}
+      {{
+        form.text(
+          class='post-input', placeholder=form.text.render_kw['placeholder'],
+          max=form.text.render_kw['max']
+        )
+      }}
+      <button>Add</button>
+    </form>
+  {% endif %}
 {% endmacro -%}
