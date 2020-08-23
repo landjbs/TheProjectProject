@@ -1,0 +1,26 @@
+{%
+  from 'macros/cards/question.html' import
+    render_add_question_card, render_question_card
+  with context
+%}
+{%
+  from 'macros/cards/link.html' import
+    render_add_link_card, render_project_link_card, render_private_link
+  with context
+%}
+
+{%
+  set card_renders = dict([
+    ('add-question',          render_add_question_card),
+    ('question',              render_question_card),
+    ('add-link',              render_add_link_card),
+    ('project-link',          render_project_link_card),
+    ('private-link',          render_private_link)
+  ])
+%}
+
+
+
+{% macro render_cardbox() -%}
+
+{% endmacro -%}
