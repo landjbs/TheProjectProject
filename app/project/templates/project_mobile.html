@@ -141,16 +141,23 @@
           %}
         {% endif %}
 
-        {% set carousels = carousels + [
-            (
-              'Recommended',
-              render_carousel(
-                label='Recommended',
-                id_postfix='recommended',
-                card_type='user',
-                data=recommended
+        {% if recommended %}
+          {%
+            set carousels = carousels + [
+              (
+                'Recommended',
+                render_carousel(
+                  label='Recommended',
+                  id_postfix='recommended',
+                  card_type='user',
+                  data=recommended
+                )
               )
-            ),
+            ]
+          %}
+        {% endif %}
+
+        {% set carousels = carousels + [
             (
               'Members',
               render_carousel(
