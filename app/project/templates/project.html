@@ -198,17 +198,10 @@
                         card_type='todo-task',
                         icon_type='todo',
                         data=project.todo_tasks().all(),
-                        empty_message='No tasks to do right now.'
+                        empty_message='No tasks to do right now.',
+                        form=task_form
                       )
                     }}
-                    {% if is_member and not project.complete %}
-                      <form class='post_form' id='task_form' method='post'
-                        action="{{url_for('project.add_task', project_id=project.id)}}">
-                        {{ task_form.hidden_tag() }}
-                        {{ task_form.text(class='post-input', placeholder='Task') }}
-                        <button>Add</button>
-                      </form>
-                    {% endif %}
                   </div>
 
                   <!-- complete tasks -->
@@ -232,7 +225,8 @@
                         id_postfix='comments',
                         card_type='comment',
                         data=project.comments.all(),
-                        empty_message='No commments yet.'
+                        empty_message='No commments yet.',
+                        form=comment_form
                       )
                     }}
                     {% if current_user.is_authenticated %}
