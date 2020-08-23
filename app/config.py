@@ -1,6 +1,8 @@
 ''' configurations for different app runs '''
 
 import os
+from base64 import b64decode
+
 # from dotenv import load_dotenv
 
 # # load .env config file
@@ -41,6 +43,14 @@ class base_config(object):
     WTF_CSRF_ENABLED = True
     # SENTRY (will not enable error notification if no DSN exported)
     SENTRY_DSN = os.environ.get('SENTRY_DSN', default=None)
+    #################### ANALYTICS #################
+    # 1 pixel GIF, base64-encoded.
+    BEACON = b64decode('R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
+    ANALYTIC_SCRIPT = '''
+        (function(){
+        var d=document,i=new Image,e=encodeURIComponent;
+        i.src='%s/a.gif?url='+e(d.location.href)+'&ref='+e(d.referrer)+'&t='+e(d.title);
+        })()'''.replace('\n', '')
 
 
 class dev_config(base_config):
