@@ -54,7 +54,7 @@
       });
     </script>
   {% else %}
-    <center>{{ field(style='width:90%; height:40vh; font-size:150%;') }}</center>
+    <center>{{ field() }}</center>
     <br>
     {% if field.errors %}
       <p class='warning'>{{ field.errors[0] }}</p>

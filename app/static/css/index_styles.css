@@ -98,3 +98,9 @@ button {
 .step.finish {
   background-color: white;
 }
+
+select {
+  width:90%;
+  height:40vh;
+  font-size:150%;
+}
