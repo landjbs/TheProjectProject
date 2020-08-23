@@ -20,6 +20,10 @@
   padding-right:  4px;
 }
 
+.about-text {
+  padding-bottom: 2px;
+  padding-top:    2px;
+}
 
 .bigname {
   margin-bottom: 0px;
@@ -27,4 +31,6 @@
 
 .undername {
   color: rgba(255,255,255,0.5);
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }

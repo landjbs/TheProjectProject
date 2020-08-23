@@ -57,12 +57,9 @@
               <i class="fa fa-lock" aria-hidden="true"></i>
             {% endif %}
           </h3>
-          <p>
-            by
-            <a class='undername' href='user={{ project.owner.code }}'>
-              {{ project.owner.name }}
-            </a>
-          </p>
+          <a class='undername' href='user={{ project.owner.code }}'>
+            by {{ project.owner.name }}
+          </a>
         </div>
         <!-- extra project info -->
         <div id='nav-expanded'>
