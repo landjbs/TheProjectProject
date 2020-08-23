@@ -29,7 +29,7 @@
   {% set render_fn = card_renders[card_type] %}
   <div id='cardbox-{{ id_postfix }}' class='cardbox'>
     {% if add_card %}
-      {{ add_card[card_type] }}
+      {{ add_cards[card_type]() }}
     {% endif %}
     <div class='about-col'>
       {% for elt in data %}

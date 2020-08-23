@@ -1,4 +1,4 @@
-{% macro render_add_question_card(project) -%}
+{% macro render_add_question_card() -%}
   {% set cover_id = 'Question_Cover'.format(fname=name) %}
   {% set input_id = 'Question_Input'.format(fname=name) %}
   <div class='card mb-2'>
@@ -8,18 +8,18 @@
     </div>
     <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
       <center><i class="fas fa-question-circle" style='display:inline;'></i></center>
-      <form action="{{ url_for('project.add_question', project_id=project.id) }}" method='post'>
+      <form action="{{ url_for('project.add_question', project_id=g.project.id) }}" method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="question">Question:</label>
         <input type="text" name="question" list="question_suggestions" class='select-clean'
           required>
         <datalist id="question_suggestions">
-          {% for question in project.suggest_questions() %}
+          {% for question in g.project.suggest_questions() %}
             <option value='{{ question }}'>
           {% endfor %}
         </datalist>
         <br><br>
-        {% if project.is_member(g.current_user) %}
+        {% if g.project.is_member(g.current_user) %}
           <label for="answer">Answer:</label>
           <input type='text' name='answer' class='select-clean'></input>
         {% endif %}
@@ -52,7 +52,7 @@
           {% endif %}
         </p>
       {% else %}
-        <form action="{{ url_for('project.edit_answer', project_id=g.project.id, question_id=question.id) }}"
+        <form action="{{ url_for('project.edit_answer', project_id=project.id, question_id=question.id) }}"
           method='post' style='margin-bottom:0px;'>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {% if question.answer %}
@@ -64,7 +64,7 @@
           <div class='float-right'>
             <a class='delete-btn task-btn'
                 style='background: transparent;'
-                href="{{ url_for('project.delete_question', project_id=g.project.id, question_id=question.id) }}">
+                href="{{ url_for('project.delete_question', project_id=project.id, question_id=question.id) }}">
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </a>
             <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
