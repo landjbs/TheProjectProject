@@ -30,47 +30,50 @@
 {% macro render_listbox(id_postfix, card_type, data, label=False, icon_type=False, empty_message=False, n_override=False, size='default', form=False) -%}
   {% set render_fn = card_renders[card_type] %}
   {% set n = (data|length) if data else 0 %}
-  {% set boxclass =  box_classes[size] %}
-  {% if label %}
-    {% if size != 'small' %}
-      <h4 class='tabname-big'>
-    {% else %}
-      <h6 class='tabname-big'>
-    {% endif %}
-      {{ label }}
-      {% if icon_type %}
-        <i class='{{ icon_types[icon_type] }}'></i>
-        {% if n_override is sameas false %}
-          {{ n }}
-        {% else %}
-          {{ n_override }}
-        {% endif %}
+  {% if n==0 and not icon_type and not empty_message %}
+  {% else %}
+    {% set boxclass =  box_classes[size] %}
+    {% if label %}
+      {% if size != 'small' %}
+        <h4 class='tabname-big'>
+      {% else %}
+        <h6 class='tabname-big'>
       {% endif %}
-    {% if size != 'small' %}
-      </h4>
-    {% else %}
-  </h6>
+        {{ label }}
+        {% if icon_type %}
+          <i class='{{ icon_types[icon_type] }}'></i>
+          {% if n_override is sameas false %}
+            {{ n }}
+          {% else %}
+            {{ n_override }}
+          {% endif %}
+        {% endif %}
+      {% if size != 'small' %}
+        </h4>
+      {% else %}
+    </h6>
+      {% endif %}
     {% endif %}
-  {% endif %}
-  <div class='{{ boxclass }}'>
-    {% if n==0 and empty_message %}
-      <p class='empty-text'>{{ empty_message }}</p>
-    {% else %}
-      {% for elt in data %}
-        {{ render_fn(elt) }}
-      {% endfor %}
+    <div class='{{ boxclass }}'>
+      {% if n==0 and empty_message %}
+        <p class='empty-text'>{{ empty_message }}</p>
+      {% else %}
+        {% for elt in data %}
+          {{ render_fn(elt) }}
+        {% endfor %}
+      {% endif %}
+    </div>
+    {% if form %}
+      <form class='post_form' class='form-{{ id_postfix }}' method='post' action="{{ form.text.render_kw['action'] }}">
+        {{ form.hidden_tag() }}
+        {{
+          form.text(
+            class='post-input', placeholder=form.text.render_kw['placeholder'],
+            max=form.text.render_kw['max']
+          )
+        }}
+        <button>Add</button>
+      </form>
     {% endif %}
-  </div>
-  {% if form %}
-    <form class='post_form' class='form-{{ id_postfix }}' method='post' action="{{ form.text.render_kw['action'] }}">
-      {{ form.hidden_tag() }}
-      {{
-        form.text(
-          class='post-input', placeholder=form.text.render_kw['placeholder'],
-          max=form.text.render_kw['max']
-        )
-      }}
-      <button>Add</button>
-    </form>
   {% endif %}
 {% endmacro -%}
