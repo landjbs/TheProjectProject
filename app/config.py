@@ -39,6 +39,8 @@ class base_config(object):
     FLASK_ADMIN_SWITCH = 'orange'
     # FORMS
     WTF_CSRF_ENABLED = True
+    # SENTRY (will not enable error notification if no DSN exported)
+    SENTRY_DSN = os.environ.get('SENTRY_DSN', default=None)
 
 
 class dev_config(base_config):
@@ -65,8 +67,6 @@ class production_config(base_config):
     ENV = 'production'
     # whether to enable registration mailing
     REGISTER_MAIL = True
-    # sentry error notification. will not enable sentry if no sdn exported
-    SENTRY_SDN = os.environ.get('SENTRY_SDN', default=None)
     # REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379')
     # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL', None)
     PREFERRED_URL_SCHEME = 'https'
