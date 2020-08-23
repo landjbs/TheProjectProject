@@ -81,7 +81,7 @@ class production_config(base_config):
     DOMAIN = 'https://theprojectproject.io'
     # environment type
     ENV = 'production'
-    # whether to enable registration mailing
+    # enable registration mailing in production only
     REGISTER_MAIL = True
     # REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379')
     # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL', None)

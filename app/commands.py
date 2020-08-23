@@ -11,6 +11,7 @@ from app.subject.models import Subject
 from app.badge.models import Badge, User_Badge
 from app.competition.models import Competition
 
+from app.fake import fake, rand_words, rand_bool, rand_subjects, rand_badges
 from app.subject.create_subjects import create_subjects
 from app.badge.create_badges import create_badges
 
@@ -65,22 +66,6 @@ def add_statics():
 def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
     fake = Faker()
-    # helpers for selection /
-    def rand_words(n):
-        return ' '.join([fake.word() for _ in range(n)])
-    def rand_bool(p_true):
-        return np.random.choice([True, False], p=[p_true, (1-p_true)])
-    subject_num = Subject.query.count()
-    def rand_subjects(n):
-        return [Subject.get_by_id(int(id))
-                for id in np.random.randint(1, subject_num+1, size=n)]
-    badge_num = Badge.query.count()
-    def rand_badges(n):
-        if n==0:
-            return []
-        return [Badge.get_by_id(int(id))
-                for id in np.random.randint(1, badge_num+1, size=n)]
-    # ./helpers
     # fake users
     users = []
     for _ in trange(num_users, desc='Populating Users'):
@@ -89,8 +74,7 @@ def populate_db(num_users, num_projects):
             user = User(
                     name=name,
                     email=fake.email(),
-                    password='boop',#(fake.word()+fake.word()),
-                    url=f'https://github.com/{"_".join(name.split(" ")+[str(i) for i in np.random.randint(0,300,size=10)]).lower()}',
+                    password='boop',
                     about=rand_words(10),
                     accepted=True
                 )
