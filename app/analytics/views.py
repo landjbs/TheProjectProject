@@ -3,6 +3,7 @@ from base64 import b64decode
 from peewee import *
 
 from .models import PageView, db
+from ..analytics import analytics
 
 
 # 1 pixel GIF, base64-encoded.

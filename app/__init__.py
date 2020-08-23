@@ -22,6 +22,7 @@ from app.notification import notification
 from app.badge import badge
 from app.question import question
 from app.link import link
+from app.analytics import analytics
 from app.admin import register_admin_views
 # database
 from app.database import db
@@ -128,6 +129,7 @@ def register_blueprints(app):
     ''' Registers all blueprints with application '''
     app.register_blueprint(base)
     app.register_blueprint(auth)
+    app.register_blueprint(analytics)
     app.register_blueprint(hub)
     app.register_blueprint(user)
     app.register_blueprint(project)
