@@ -27,12 +27,14 @@
 
 {% macro render_cardbox(id_postfix, card_type, data, label=False, add_card=False) -%}
   {% set render_fn = card_renders[card_type] %}
-  {% if add_card %}
-    {{ add_card[card_type] }}
-  {% endif %}
-  <div class='about-col'>
-    {% for elt in data %}
-      {{ render_fn(elt) }}
-    {% endfor %}
+  <div id='cardbox-{{ id_postfix }}' class='cardbox'>
+    {% if add_card %}
+      {{ add_card[card_type] }}
+    {% endif %}
+    <div class='about-col'>
+      {% for elt in data %}
+        {{ render_fn(elt) }}
+      {% endfor %}
+    </div>
   </div>
 {% endmacro -%}
