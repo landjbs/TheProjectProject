@@ -46,9 +46,10 @@ class SafeModelView(ModelView, SafeView):
 class AnalyticsView(SafeBaseView):
     @expose('/')
     def index(self, **kwargs):
-        all_views = PageView.view_count(past_days=7)
-        all_users = PageView.user_count(past_days=7)
-        return self.render('admin/analytics.html', all_views=all_views)
+        view_data = {}
+        view_data['view_count'] = PageView.view_count(past_days=7)
+        view_data['user_count'] = PageView.user_count(past_days=7)
+        return self.render('admin/analytics.html', view_data=view_data)
 
 
 class UserModelView(SafeModelView):

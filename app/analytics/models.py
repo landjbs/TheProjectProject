@@ -50,7 +50,7 @@ class PageView(CRUDMixin, db.Model):
     def views_over(cls, past_days):
         ''' Querys views over past_days '''
         if past_days:
-            time_ago = (datetime.utcnow() - timedelta(days))
+            time_ago = (datetime.utcnow() - timedelta(past_days))
             return cls.query.filter(cls.timestamp >= time_ago)
         else:
             return cls.query.all()
@@ -61,5 +61,8 @@ class PageView(CRUDMixin, db.Model):
 
     @classmethod
     def user_count(cls, past_days=None):
+        # TODO: rewrite in sql to be faster
         base = cls.views_over(past_days)
-        unique_users = cls.
+        # unique_users = cls.query
+        unique_users = set(view.ip for view in base)
+        return len(unique_users)
