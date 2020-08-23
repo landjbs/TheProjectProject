@@ -44,7 +44,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                              back_populates='project',
                              cascade='all, delete, delete-orphan',
                              lazy='dynamic',
-                             order_by='Question.asked_on')
+                             order_by='desc(Question.asked_on)')
     ## people ##
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
