@@ -198,15 +198,6 @@
             )
           ),
           (
-            'Links',
-            render_cardbox(
-              id_postfix='links',
-              card_type='link',
-              data=project.public_links(),
-              add_card=is_owner
-            )
-          ),
-          (
             'Subjects',
             render_carousel(
               label='Subjects',
@@ -246,5 +237,20 @@
     <script src="js/covers.js"></script>
     <!-- allow starring and unstarring of project -->
     <script src="js/stars.js"></script>
+
+    <!-- keep tab open on refresh -->
+    <script>
+    $(document).ready(function () {
+      // toggle open tab
+      opened = sessionStorage.getItem(window.location.href + '_opened');
+      if (opened) {
+        document.getElementById(opened).click();
+      } else {
+        document.getElementById("Activity_Button").click();
+      }
+      // toggle sidebar // TODO: make this work without flashes or long slides
+      // barstate = sessionStorage.getItem(window.location.href + '_sidebar');
+    });
+    </script>
 
   {% endblock %}

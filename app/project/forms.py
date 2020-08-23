@@ -151,6 +151,7 @@ class Task_Form(BaseForm):
         if project_id:
             self.text.render_kw['action'] = url_for('project.add_task', project_id=project_id)
 
+
 class Comment_Form(BaseForm):
     ''' Form to add comment to project '''
     text = TextField('Comment', validators=[DataRequired(), Length(1,160)],
