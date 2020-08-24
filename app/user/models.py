@@ -28,8 +28,6 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     # subject
     subjects = relationship('Subject', secondary='user_to_subject',
                             back_populates='users', lazy='dynamic')
-    # url
-    url = db.Column(db.String(254), unique=True, nullable=True)
     # about
     about = db.Column(db.String(500), nullable=False)
     ## permissions and other bools ##
@@ -106,13 +104,12 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                            lazy='dynamic',
                            cascade='all, delete, delete-orphan')
 
-    def __init__(self, name, email, password, url, about, accepted=False,
+    def __init__(self, name, email, password, about, accepted=False,
                  admin=False):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
         self.set_password(password)
-        self.url = url
         self.about = str(about)
         self.admin = admin
         self.accepted = True if admin else False
