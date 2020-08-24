@@ -172,3 +172,10 @@ def withdraw_collaboration(user_id, project_id):
         message, category = user.withdraw_collaboration(project)
         flash(message, category)
     return redirect(request.referrer)
+
+
+## avaliability ##
+@user.route('/mark_avaliable')
+@login_required
+def mark_avaliable():
+    
