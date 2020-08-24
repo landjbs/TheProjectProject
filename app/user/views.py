@@ -45,11 +45,6 @@ def user_page(code):
             if new_name!=user.name:
                 user.name = new_name
                 edits_made = True
-            # url
-            new_url = edit_form.url.data
-            if new_url!=user.url:
-                user.url = new_url
-                edits_made = True
             # about
             new_about = edit_form.about.data
             if new_about!=user.about:
