@@ -22,11 +22,11 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     # __searchable__ = ['name', 'oneliner', 'summary']
     ## base info ##
     # name
-    name = db.Column(db.String(25), unique=False, nullable=False)
+    name = db.Column(db.String(30), unique=False, nullable=False)
     # code for url
     code = db.Column(db.String(128), unique=True, nullable=False)
     # oneliner
-    oneliner = db.Column(db.String(40))
+    oneliner = db.Column(db.String(40), nullable=False)
     # summary
     summary = db.Column(db.String(400), nullable=False)
     # instructions

@@ -14,10 +14,10 @@ from .models import Project
 
 class Add_Project(BaseForm):
     name = StringField(label='Project Name',
-                       validators=[DataRequired(), Length(1, 25)],
+                       validators=[DataRequired(), Length(1, 30)],
                        description='Give your project a name!',
                        render_kw={'placeholder':'TheProjectProject',
-                                  'max': 25})
+                                  'max': 30})
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 40)],
                            description='One line description of your project.',

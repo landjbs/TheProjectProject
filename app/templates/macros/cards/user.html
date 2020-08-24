@@ -291,17 +291,17 @@
           {% endfor %}
           <hr class='my-2'><br>
           {% if user.available %}
-            <button formaction="{{ url_for('user.mark_unavailable') }}" class='btn col'>
+            <a href="{{ url_for('user.mark_unavailable') }}" class='btn col'>
               Mark Unavailable
-            </button>
-            <small style='line-spacing'>
+            </a>
+            <small>
               Unavailable users can still join and work on projects, but they won't be recommended to other project owners.
             </small>
           {% else %}
-            <button formaction="{{ url_for('user.mark_available') }}" class='btn col'>
+            <a href="{{ url_for('user.mark_available') }}" class='btn col'>
               Mark Available
-            </button>
-            <small style='line-spacing'>
+            </a>
+            <small>
               available users can be recommended to other project owners.
             </small>
           {% endif %}
@@ -310,7 +310,7 @@
           <button type='button' data-toggle='modal' data-target='#delete_account_modal' class='btn delete-btn col float-left'>
             Delete Account
           </button>
-          <button class='btn col'>Make Changes</button>
+          <button action='submit' class='btn col'>Make Changes</button>
         </div>
       </form>
     </div>

@@ -170,7 +170,7 @@ def withdraw_collaboration(user_id, project_id):
 
 
 ## avaliability ##
-@user.route('/mark_available', methods=['POST'])
+@user.route('/mark_available')
 @login_required
 def mark_available():
     if current_user.mark_available():
@@ -181,7 +181,7 @@ def mark_available():
     return redirect(request.referrer)
 
 
-@user.route('/mark_unavailable', methods=['POST'])
+@user.route('/mark_unavailable')
 @login_required
 def mark_unavailable():
     if current_user.mark_unavailable():

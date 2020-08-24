@@ -10,12 +10,14 @@ from app.recommendations.utils import get_normed_user_subjects
 
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
+    print(f'\n\n{project.name}:')
     # subject scoring [0,4]
     score = 0
     for subject, subject_score in user_subjects.items():
         if subject in project.subjects:
             score += subject_score
     score /= (len(user_subjects)+0.0000001 * 0.25)
+    print(score)
     # recently active scoring [0,2]
     if project.recently_active():
         score += 2
@@ -27,6 +29,7 @@ def score_project(project, user_subjects):
         score += 1.5
     elif n_incomplete>=3:
         score += 2
+    print(score)
     # time scores [0,1] give boost to newer projects
     time_since = (datetime.utcnow() - project.posted_on).days
     if time_since<1:
@@ -35,11 +38,16 @@ def score_project(project, user_subjects):
         score += 0.8
     elif time_since<10:
         score += 0.5
+    print(score)
     # members score [0,1] gives boost to more empty projects
     n_members = 0
     for m in project.members:
         n_members += 1
-    score += (1 - (n_members / (project.team_size+0.0000001)))
+    if (project.team_size>0):
+        score += (1 - (n_members / (project.team_size+0.0000001)))
+    else:
+        score = 0
+    print(score)
     return score
 
 

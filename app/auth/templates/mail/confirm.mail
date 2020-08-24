@@ -14,17 +14,9 @@ decision. For future reference, we have attached a copy of your application:
 <br>
 {{ user.email }}
 <br>
-<br>
-{% if user.url %}
-  <u>URL</u>:<br>
-  {{ user.url }}
-  <br>
-  <br>
-{% endif %}
 <u>About</u>:
 <br>
 {{ user.about }}
-<br>
 <br>
 <u>Subjects</u>:<br>
 {% for subject in user.subjects %}

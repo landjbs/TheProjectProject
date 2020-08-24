@@ -18,7 +18,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     __tablename__ = 'user'
     # __searchable__ = ['name', 'about']
     # name
-    name = db.Column(db.String(128), unique=False)
+    name = db.Column(db.String(128), nullable=False, unique=False)
     # code
     code = db.Column(db.String(128), nullable=False, unique=True)
     # email
@@ -38,7 +38,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     accepted_on = db.Column(db.DateTime, nullable=True)
     active = db.Column(db.Boolean, nullable=False, default=False)
     last_active = db.Column(db.DateTime, nullable=True)
-    available = db.Column(db.Boolean, nullable=True, default=False)
+    available = db.Column(db.Boolean, nullable=True, default=True)
     ## projects ##
     owned = relationship('Project',
                         back_populates='owner',
