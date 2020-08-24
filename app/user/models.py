@@ -40,6 +40,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     accepted_on = db.Column(db.DateTime, nullable=True)
     active = db.Column(db.Boolean, nullable=False, default=False)
     last_active = db.Column(db.DateTime, nullable=True)
+    available = db.Column(db.Boolean, nullable=False, default=False)
     ## projects ##
     owned = relationship('Project',
                         back_populates='owner',
@@ -158,6 +159,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             raise RuntimeError(f'{self} has already been accepted.')
         self.accepted = True
         self.accepted_on = datetime.utcnow()
+        self.available = True
         self.update()
         return True
 
@@ -180,6 +182,22 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     def check_password(self, password):
         return bcrypt.check_password_hash(self.password, password)
+
+    ## availability ##
+    def mark_avaliable(self):
+        if not self.available:
+            self.available = True
+            self.update()
+            return True
+        return False
+
+    def mark_unavaliable(self):
+        if self.available:
+            self.available = False
+            self.update()
+            return True
+        return False
+
 
     ## subjects ##
     def add_subjects(self, subjects, user_selected=False):
