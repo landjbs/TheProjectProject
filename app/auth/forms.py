@@ -59,16 +59,6 @@ class Apply(BaseForm):
             self.email.errors.append('There is already an account registered '
                                      'with that email.')
             error_flag = True
-        # url fixing/mapping to none
-        if self.url.data=='':
-            self.url.data=None
-        else:
-            fixed_url = fix_url(self.url.data)
-            if not fixed_url:
-                self.url.errors = ['Invalid URL.']
-                error_flag = True
-            else:
-                self.url.data = fixed_url
         return (not error_flag)
 
 

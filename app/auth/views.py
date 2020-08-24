@@ -29,7 +29,6 @@ def apply():
                     name=form.data['name'],
                     email=form.data['email'],
                     password=form.data['password'],
-                    url=form.data['url'],
                     about=form.data['about'],
                 )
         user.add_subjects(subjects, user_selected=True)
