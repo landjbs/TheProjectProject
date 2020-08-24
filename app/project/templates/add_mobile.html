@@ -21,7 +21,7 @@
 
 <form id='project_form' method='post'>
   {{ form.csrf_token }}
-  {% for elt in [form.name, form.oneliner, form.summary, form.url]%}
+  {% for elt in [form.name, form.oneliner, form.summary]%}
     <div class="row input-segment" style='text-align:left;'>
       <div class='input-title'>
         <h6 style="display: inline;">{{ elt.label }}</h6>

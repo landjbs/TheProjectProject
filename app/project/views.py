@@ -37,7 +37,6 @@ def add_project():
             name = form.name.data,
             oneliner=form.oneliner.data,
             summary = form.summary.data,
-            url = form.url.data,
             subjects = subjects,
             owner = current_user,
             open = form.open.data,

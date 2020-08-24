@@ -28,11 +28,11 @@ class Add_Project(BaseForm):
                         description='Describe your project in more detail.',
                         render_kw={'placeholder': ('TheProjectProject is founded...'),
                                   'max':400})
-    url = StringField(label='URL',
-                    validators=[Length(0, 128)],
-                    description=('You can link media (eg. a Github, website, '
-                                 'doc, etc.) to showcase your progress.'),
-                    render_kw={'placeholder':'https://www.github.com/me/example', 'max':128})
+    # url = StringField(label='URL',
+                    # validators=[Length(0, 128)],
+                    # description=('You can link media (eg. a Github, website, '
+                                 # 'doc, etc.) to showcase your progress.'),
+                    # render_kw={'placeholder':'https://www.github.com/me/example', 'max':128})
     subjects = SelectMultipleField('Subjects',
                                     description=('What subjects might this '
                                                 'project involve?'),
@@ -86,16 +86,6 @@ class Add_Project(BaseForm):
         # team size defaults to 1 if None
         if self.team_size.data is None:
             self.team_size.data = 1
-        # url fixing/mapping to none
-        if self.url.data=='':
-            self.url.data=None
-        else:
-            fixed_url = fix_url(self.url.data)
-            if not fixed_url:
-                self.url.errors = ['Invalid URL.']
-                error_flag = True
-            else:
-                self.url.data = fixed_url
         return (not error_flag)
 
 
