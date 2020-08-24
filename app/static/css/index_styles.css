@@ -99,8 +99,10 @@ button {
   background-color: white;
 }
 
-select {
-  width:90%;
-  height:40vh;
-  font-size:150%;
+@media (min-width: 996px) {
+  select {
+    width:90%;
+    height:40vh;
+    font-size:150%;
+  }
 }
