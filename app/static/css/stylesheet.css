@@ -285,3 +285,7 @@ body  {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.tooltip {
+  z-index: 900 !important;
+}

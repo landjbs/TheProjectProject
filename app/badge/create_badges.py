@@ -47,7 +47,7 @@ def create_badges(db):
             ####################################################################
             ########## StarStruck: have earned>=200 cumulative stars ###########
             Badge(name='StarStruck',
-                description='Earn a total of 300 stars and cement your superstar-status within the community!',
+                description='Earn a total of 300 stars and cement your superstar status within the community!',
                 perks=[f'{badge_xp} XP',
                     'StarStruck badge next to your name',
                    'We will review your projects and profile our favorite in TheProjectProject social media'],
@@ -70,14 +70,14 @@ def create_badges(db):
             ####################################################################
             ############ KnockEmDown: complete >=300 different tasks ###########
             Badge(name='KnockEmDown',
-                description='Completion 300 tasks to showcase your follow-through!',
+                description='Complete 300 tasks to showcase your follow-through!',
                 perks=[f'{badge_xp} XP', 'KnockEmDown badge next to your name'],
                 criteria=300,
                 evaluator='n_tasks_worked'),
             ####################################################################
             ################## Verified: have >=25000 xp #######################
             Badge(name='Verified',
-                description='The highest honor any social media user can achieve—the coveted Verified badge!',
+                description='Earn 100000 XP and obtain the highest honor any social media user can achieve—the coveted Verified badge!',
                 perks=['Verified badge next to your name!',
                        'We will review your account and share your story on TheProjectProject social media',
                        'Recommendation Boost in all Recommendation Stacks'],

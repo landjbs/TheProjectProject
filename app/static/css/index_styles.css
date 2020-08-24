@@ -99,6 +99,10 @@ button {
   background-color: white;
 }
 
+select option::selection {
+  background-color: red;
+}
+
 @media (min-width: 996px) {
   select {
     width:90%;
