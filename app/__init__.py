@@ -42,7 +42,7 @@ from app.commands import command_list
 # follow: https://stackoverflow.com/questions/50070979/wrong-dashboard-while-adding-flask-admin-to-project/50179126#50179126
 
 
-def create_app(config=config.dev_config, register_admin=True):
+def create_app(config=config.production_config, register_admin=True):
     ''' '''
     application = Flask(__name__, static_folder='static', static_url_path='')
     application.config.from_object(config())

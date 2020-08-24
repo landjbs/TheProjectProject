@@ -22,7 +22,7 @@ bcrypt = Bcrypt()
 limiter = Limiter(key_func=get_remote_address,
                 default_limits=['400/minute'])
 lm = LoginManager()
-migrate = Migrate()
+migrate = Migrate(compare_type=True)
 mobility = Mobility()
 rq = RQ()
 travis = Travis()

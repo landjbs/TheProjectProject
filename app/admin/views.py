@@ -20,8 +20,23 @@ from app.competition.models import Competition
 from app.analytics.models import PageView
 
 
-class SafeView(object):
-    ''' Base class for generating safe view children of admin stock classes '''
+# class SafeView(object):
+#     ''' Base class for generating safe view children of admin stock classes '''
+#     def is_accessible(self):
+#         return (current_user.is_admin())
+#
+#     def _handle_view(self, name, **kwargs):
+#         if not self.is_accessible():
+#             if current_user.is_authenticated:
+#                 abort(403)
+#             else:
+#                 return redirect(url_for('login', next=request.url))
+
+
+class SafeBaseView(BaseView):
+    def __init__(self, *args, **kwargs):
+        super(SafeBaseView, self).__init__(*args, **kwargs)
+
     def is_accessible(self):
         return (current_user.is_admin())
 
@@ -33,14 +48,19 @@ class SafeView(object):
                 return redirect(url_for('login', next=request.url))
 
 
-class SafeBaseView(BaseView, SafeView):
-    def __init__(self, *args, **kwargs):
-        super(SafeBaseView, self).__init__(*args, **kwargs)
-
-
-class SafeModelView(ModelView, SafeView):
+class SafeModelView(ModelView):
     def __init__(self, *args, **kwargs):
         super(SafeModelView, self).__init__(*args, **kwargs)
+
+    def is_accessible(self):
+        return (current_user.is_admin())
+
+    def _handle_view(self, name, **kwargs):
+        if not self.is_accessible():
+            if current_user.is_authenticated:
+                abort(403)
+            else:
+                return redirect(url_for('login', next=request.url))
 
 
 class AnalyticsView(SafeBaseView):

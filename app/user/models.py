@@ -40,7 +40,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     accepted_on = db.Column(db.DateTime, nullable=True)
     active = db.Column(db.Boolean, nullable=False, default=False)
     last_active = db.Column(db.DateTime, nullable=True)
-    available = db.Column(db.Boolean, nullable=False, default=False)
+    available = db.Column(db.Boolean, nullable=True, default=False)
     ## projects ##
     owned = relationship('Project',
                         back_populates='owner',
