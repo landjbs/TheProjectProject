@@ -91,7 +91,7 @@ def project_page(project_code):
     g.project = project
     # forms
     comment_form = Comment_Form(project_id=project.id)
-    task_form = Task_Form(project_id=project.id)
+    task_form = Task_Form(project_id=project.id) if project.is_member(current_user) else False
     project_application = Project_Application_Form()
     ## task data visualization ##
     # vis activity
