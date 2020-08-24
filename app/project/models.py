@@ -100,7 +100,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                         cascade='all, delete, delete-orphan',
                         order_by='Task.complete_stamp')
 
-    def __init__(self, name, oneliner, summary, url, open, subjects,
+    def __init__(self, name, oneliner, summary, open, subjects,
                 requires_application, application_question, estimated_time,
                 team_size, complete, owner, competition=None):
         self.name = str(name)
@@ -122,9 +122,6 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.estimated_time = estimated_time if not complete else None
         self.complete = bool(complete)
         self.add_member(owner, notify_owner=False)
-        ### if url, add it to project ###
-        if url is not None:
-            self.add_link(url=url, public=True)
         ### if competition, add it to project ##
         if competition:
             self.submit_to_competition(competition)
