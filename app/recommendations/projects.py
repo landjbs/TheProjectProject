@@ -11,12 +11,13 @@ from app.recommendations.utils import get_normed_user_subjects
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
     print(f'\n\n{project.name}:')
-    # subject scoring [0,4]
+    # subject scoring [0,6]
     score = 0
     for subject, subject_score in user_subjects.items():
         if subject in project.subjects:
             score += subject_score
-    score /= (len(user_subjects)+0.0000001 * 0.25)
+    score /= (len(user_subjects)+0.0000001)
+    score *= 6
     # recently active scoring [0,2]
     if project.recently_active():
         score += 2
