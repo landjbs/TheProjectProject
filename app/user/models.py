@@ -185,6 +185,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     ## availability ##
     def mark_avaliable(self):
+        print('here')
         if not self.available:
             self.available = True
             self.update()
@@ -192,6 +193,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return False
 
     def mark_unavaliable(self):
+        print('there')
         if self.available:
             self.available = False
             self.update()

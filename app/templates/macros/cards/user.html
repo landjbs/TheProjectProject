@@ -289,12 +289,21 @@
             {% endif %}
           {% endfor %}
           <hr class='my-2'><br>
-          <button class='btn col'>
-            Mark Unavaliable
-          </button>
-          <small style='line-spacing'>
-            Unavaliable users can still join and work on projects, but they won't be recommended to other project owners.
-          </small>
+          {% if user.avaliable %}
+            <button action="{{ url_for('user.mark_unavaliable') }}" class='btn col'>
+              Mark Unavaliable
+            </button>
+            <small style='line-spacing'>
+              Unavaliable users can still join and work on projects, but they won't be recommended to other project owners.
+            </small>
+          {% else %}
+            <button action="{{ url_for('user.mark_unavaliable') }}" class='btn col'>
+              Mark Avaliable
+            </button>
+            <small style='line-spacing'>
+              Avaliable users can be recommended to other project owners.
+            </small>
+          {% endif %}
         </div>
         <div class="modal-footer row m-3">
           <button type='button' data-toggle='modal' data-target='#delete_account_modal' class='btn delete-btn col float-left'>

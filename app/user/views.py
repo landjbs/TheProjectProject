@@ -178,9 +178,21 @@ def withdraw_collaboration(user_id, project_id):
 @user.route('/mark_avaliable')
 @login_required
 def mark_avaliable():
-    if user.mark_avaliable():
+    if current_user.mark_avaliable():
         flash(('You have marked yourself as available: you will now be '
             'recommend to project owners!'))
     else:
         flash('Could not change status to avaliable.')
+    return redirect(request.referrer)
+
+
+@user.route('/mark_unavaliable')
+@login_required
+def mark_unavaliable():
+    if current_user.mark_unavaliable():
+        flash(('You have marked yourself as unavailable: you will not be '
+        'recommended to project owners until you change your status back'
+        'to avaliable.'))
+    else:
+        flash('Could not change status to unavaliable.')
     return redirect(request.referrer)
