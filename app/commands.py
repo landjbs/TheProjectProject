@@ -52,7 +52,6 @@ def add_statics():
             name='Landon Smith',
             email='landonsmith@college.harvard.edu',
             password='boop',
-            url='https://github.com/landjbs',
             about=('I love AI and NLP. Founder of Strada Routing and '
                    'TheProjectProject!'),
             admin=True
@@ -74,7 +73,6 @@ def populate_db(num_users, num_projects):
             user = User(
                     name=name,
                     email=fake.email(),
-                    url=None,
                     password='boop',
                     about=rand_words(10),
                     accepted=True
@@ -106,7 +104,6 @@ def populate_db(num_users, num_projects):
                 name=rand_words(2),
                 oneliner=rand_words(6),
                 summary=rand_words(60),
-                url=None,
                 complete=complete,
                 open=rand_bool(0.8) if not complete else None,
                 subjects=subjects,
@@ -139,7 +136,6 @@ def add_test():
             name='Test User',
             email='test@college.harvard.edu',
             password='boop',
-            url='https://github.com/test',
             about=('I am a test user for TheProjectProject. Excited to be here.'),
             accepted=True
 

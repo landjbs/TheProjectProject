@@ -268,13 +268,6 @@
             <p class='warning'>{{ edit_form.name.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
-          <!-- user -->
-          {{ edit_form.url.label }}:<br>
-          {{ edit_form.url(class='edit-input', value=user.url) }}
-          {% if edit_form.url.errors %}
-            <p class='warning'>{{ edit_form.url.errors[0] }}</p>
-          {% endif %}
-          <hr class='my-2'><br>
           <!-- about -->
           {{ edit_form.about.label }}:<br>
           {{ edit_form.about(class='edit-input', value=user.about) }}

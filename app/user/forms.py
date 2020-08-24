@@ -11,8 +11,7 @@ class Edit_User(BaseForm):
     # name
     name = StringField('Name', validators=[DataRequired(), Length(1, 254)],
                        render_kw={'max':254})
-    # url
-    url = StringField('URL', validators=[Length(0, 254)], render_kw={'max':254})
+    # about
     about = TextField('About', validators=[DataRequired(), Length(1, 500)],
                       render_kw={'max':500})
     # password

@@ -22,11 +22,6 @@ class Apply(BaseForm):
                                    'are allowed. Please reach out if you would '
                                    'like your school to be added.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
-    url = StringField('Link',
-                    validators=[Length(0, 254)],
-                    description=('Tell us about yourself with a Github or '
-                                 'personal website!'),
-                    render_kw={'placeholder': 'https://www.github.com/example'})
     about = TextField('About You',
                     validators=[DataRequired(), Length(1, 500)],
                     description=('Describe yourself! This might include '

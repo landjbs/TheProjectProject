@@ -104,8 +104,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                            lazy='dynamic',
                            cascade='all, delete, delete-orphan')
 
-    def __init__(self, name, email, password, about, accepted=False,
-                 admin=False):
+    def __init__(self, name, email, password, about, accepted=False, admin=False):
         self.name = str(name)
         self.code = generate_code(name, User)
         self.email = str(email)
