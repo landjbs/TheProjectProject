@@ -190,6 +190,14 @@
           <form action="{{ url_for('user.collaborate', target_user_id=user.id) }}" method='post'>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="modal-body">
+              {% if not user.available %}
+                <small style='color:red;'>
+                  WARNING: {{ user.name }} has marked themself as unavailable.
+                  You may still send an invitation, but they may
+                  not be able to participate at the moment.
+                </small>
+                <br><br>
+              {% endif %}
               <label for="new_owner">Select project on which to collaborate with {{ user.name }}:</label>
               <br>
               <select name="selected_project" id="selected_project" class='select-clean'>
