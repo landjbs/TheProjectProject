@@ -184,16 +184,14 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return bcrypt.check_password_hash(self.password, password)
 
     ## availability ##
-    def mark_avaliable(self):
-        print('here')
+    def mark_available(self):
         if not self.available:
             self.available = True
             self.update()
             return True
         return False
 
-    def mark_unavaliable(self):
-        print('there')
+    def mark_unavailable(self):
         if self.available:
             self.available = False
             self.update()

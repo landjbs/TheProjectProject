@@ -56,7 +56,8 @@ def recommend_users(project):
                   + project_invitations + project_rejections)
     candidates = User.query.filter(~User.id.in_(nowshow_ids),
                                    User.accepted==True,
-                                   User.admin==False
+                                   User.admin==False,
+                                   User.available==True
                                     ).limit(200)
     ## rank candidates ##
     results = [(user, score_user(user, project)) for user in candidates]

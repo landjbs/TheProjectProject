@@ -289,19 +289,19 @@
             {% endif %}
           {% endfor %}
           <hr class='my-2'><br>
-          {% if user.avaliable %}
-            <button action="{{ url_for('user.mark_unavaliable') }}" class='btn col'>
-              Mark Unavaliable
+          {% if user.available %}
+            <button formaction="{{ url_for('user.mark_unavailable') }}" class='btn col'>
+              Mark Unavailable
             </button>
             <small style='line-spacing'>
-              Unavaliable users can still join and work on projects, but they won't be recommended to other project owners.
+              Unavailable users can still join and work on projects, but they won't be recommended to other project owners.
             </small>
           {% else %}
-            <button action="{{ url_for('user.mark_unavaliable') }}" class='btn col'>
-              Mark Avaliable
+            <button formaction="{{ url_for('user.mark_available') }}" class='btn col'>
+              Mark Available
             </button>
             <small style='line-spacing'>
-              Avaliable users can be recommended to other project owners.
+              available users can be recommended to other project owners.
             </small>
           {% endif %}
         </div>
