@@ -289,8 +289,14 @@
               <hr class='my-2'><br>
             {% endif %}
           {% endfor %}
+          {% set subject_iter = 0 %}
           {% for user_subject in user.selected_subjects() %}
-            {{ user_subject.subject.name }}
+            <select name="new_owner" id="subject_select_{{ subject_iter }}" class='select-clean'>
+              {% for user_subject in user.selected_subjects() %}
+                {{ user_subject.subject.name }}
+              {% endfor %}
+            </select>
+            {% set subject_iter = subject_iter + 1 %}
           {% endfor %}
           <hr class='my-2'><br>
           {% if user.available %}
