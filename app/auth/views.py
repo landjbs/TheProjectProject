@@ -119,7 +119,7 @@ def reset():
     if form.validate_on_submit():
         user = form.user
         send_password_reset_email(user.name, )
-    return render_template('reset_start.html')
+    return render_template('reset_start.html', form=form)
 
 
 @auth.route('/logout')

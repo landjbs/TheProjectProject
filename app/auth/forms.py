@@ -98,9 +98,10 @@ class Login(BaseForm):
 
 
 class StartReset(BaseForm):
-    email = StringField('Harvard Email',
+    email = StringField('Enter Email to Reset Password',
                     validators=[DataRequired(), Length(1, 254),
                                 Email()], # Email_Ext_Validator()
+                    render_kw={'placeholder': 'example@college.harvard.edu'}
     )
 
     def validate(self):
