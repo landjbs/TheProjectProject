@@ -11,7 +11,7 @@ from app.jobs import (
 )
 from app.user.models import User
 from app.subject.models import Subject
-from .forms import Login, Apply, StartReset, PasswordResetForm
+from .forms import Login, Apply, StartReset, PasswordReset
 from ..auth import auth
 
 
@@ -132,7 +132,7 @@ def reset():
 
 @auth.route('/reset_password', methods=['GET', 'POST'])
 def reset():
-    form = StartReset()
+    form = PasswordReset()
     if form.validate_on_submit():
         user = form.user
         token = serializer.dumps(user.id, salt=RESET_SALT)

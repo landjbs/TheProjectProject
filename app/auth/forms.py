@@ -115,7 +115,7 @@ class StartReset(BaseForm):
         return True
 
 
-class PasswordResetForm(BaseForm):
+class PasswordReset(BaseForm):
     password = PasswordField('New Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')],
