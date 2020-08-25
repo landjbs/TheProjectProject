@@ -123,9 +123,10 @@ def reset():
     form = StartReset()
     if form.validate_on_submit():
         user = form.user
-        token = serializer.dumps(user.id, salt=bcrypt.gensalt())
-
-        send_password_reset_email(form.email.data, user.name, )
+        token = serializer.dumps(user.id, salt=RESET_SALT)
+        url = url_for('auth.reset_end', token=token, _external=True)
+        send_password_reset_email(form.email.data, user.name, url)
+        flash('A password reset link has been sent to your email.')
     return render_template('reset_start.html', form=form)
 
 
