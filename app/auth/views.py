@@ -4,7 +4,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from datetime import datetime
 
-from app.extensions import lm
+from app.extensions import lm, bcrypt
 from app.jobs import (
     send_registration_email, send_confirmation_email, send_password_reset_email
 )
@@ -12,6 +12,10 @@ from app.user.models import User
 from app.subject.models import Subject
 from .forms import Login, Apply, StartReset
 from ..auth import auth
+
+
+# initialize URLSafeTimedSerializer # IDEA: move this to app.extensions
+serializer = URLSafeTimedSerializer(current_app.secret_key)
 
 
 @lm.user_loader
@@ -36,8 +40,7 @@ def apply():
         user.add_subjects(subjects, user_selected=True)
         if current_app.config['REGISTER_MAIL']:
             # generate token and send to user email
-            s = URLSafeTimedSerializer(current_app.secret_key)
-            token = s.dumps(user.id, salt='email-confirm-salt')
+            token = serializer.dumps(user.id, salt=bcrypt.gensalt())
             url = url_for('auth.verify', token=token, _external=True)
             send_registration_email(user, url)
             # notify user and redirect to index
@@ -68,7 +71,7 @@ def verify(token, expiration=604800):
     '''
     s = URLSafeTimedSerializer(current_app.secret_key)
     try:
-        id = s.loads(token, salt='email-confirm-salt', max_age=expiration)
+        id = s.loads(token, salt=bcrypt.gensalt(), max_age=expiration)
     except SignatureExpired:
         # NOTE: RACE CONDITION IF DELETION AND CONFIRMATION HAPPEN SIMULTANEOUSLY
         # TODO: ACTUALLY REMOVE APPLICATION VERY IMPORTANT
@@ -118,7 +121,9 @@ def reset():
     form = StartReset()
     if form.validate_on_submit():
         user = form.user
-        send_password_reset_email(user.name, )
+        token = serializer.dumps(user.id, salt=bcrypt.gensalt())
+
+        send_password_reset_email(form.email.data, user.name, )
     return render_template('reset_start.html', form=form)
 
 
