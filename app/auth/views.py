@@ -16,6 +16,8 @@ from ..auth import auth
 
 # initialize URLSafeTimedSerializer # IDEA: move this to app.extensions
 serializer = URLSafeTimedSerializer(current_app.secret_key)
+CONFIRM_SALT = bcrypt.gensalt()
+RESET_SALT = bcrypt.gensalt()
 
 
 @lm.user_loader
@@ -40,7 +42,7 @@ def apply():
         user.add_subjects(subjects, user_selected=True)
         if current_app.config['REGISTER_MAIL']:
             # generate token and send to user email
-            token = serializer.dumps(user.id, salt=bcrypt.gensalt())
+            token = serializer.dumps(user.id, salt=CONFIRM_SALT)
             url = url_for('auth.verify', token=token, _external=True)
             send_registration_email(user, url)
             # notify user and redirect to index
@@ -71,7 +73,7 @@ def verify(token, expiration=604800):
     '''
     s = URLSafeTimedSerializer(current_app.secret_key)
     try:
-        id = s.loads(token, salt=bcrypt.gensalt(), max_age=expiration)
+        id = s.loads(token, salt=CONFIRM_SALT, max_age=expiration)
     except SignatureExpired:
         # NOTE: RACE CONDITION IF DELETION AND CONFIRMATION HAPPEN SIMULTANEOUSLY
         # TODO: ACTUALLY REMOVE APPLICATION VERY IMPORTANT
