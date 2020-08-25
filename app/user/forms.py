@@ -15,15 +15,15 @@ class Edit_User(BaseForm):
     # about
     about = TextField('About', validators=[DataRequired(), Length(1, 500)],
                       render_kw={'max':500})
-    for i in range(5):
-        setattr(
-            obj=self,
-            name=f'subject{i}',
-            value=SelectField(
-                label=f'Subject {i}',
-                choices=[],
-                coerce=int
-            ))
+    # for i in range(5):
+    #     setattr(
+    #         obj=self,
+    #         name=f'subject{i}',
+    #         value=SelectField(
+    #             label=f'Subject {i}',
+    #             choices=[],
+    #             coerce=int
+    #         ))
     # password
     password = PasswordField('New Password',
                              validators=[Length(0, 254), EqualTo('confirm')],

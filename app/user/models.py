@@ -225,6 +225,11 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.update()
         return True
 
+    def user_selected_subjects(self):
+        ''' Gets all subjects explicitly selected by user '''
+        user_selected = self.subjects.query.filter_by(user_selected=True)
+        return user_selected
+
     ## notifications ##
     def notify(self, text, name, important=False, redirect=None):
         ''' Notify user with text and category '''

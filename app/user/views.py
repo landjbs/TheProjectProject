@@ -38,8 +38,7 @@ def user_page(code):
     show_edit_modal = False
     edit_form = False
     if current_user==user:
-        edit_form = Edit_User()
-        for field in 
+        edit_form = Edit_User()    
     if request.method=='POST':
         if edit_form.validate_on_submit():
             edits_made = False
