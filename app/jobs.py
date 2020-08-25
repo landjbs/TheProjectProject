@@ -73,7 +73,8 @@ def send_acceptance_email(user):
     return True
 
 
-def send_password_reset_email(email, url):
+# @rq.job
+def send_password_reset_email(email, name, url):
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [email]},

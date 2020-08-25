@@ -113,7 +113,7 @@ def login():
 
 @auth.route('/reset', methods=['GET', 'POST'])
 def reset():
-
+    
     redirect(url_for)
 
 
