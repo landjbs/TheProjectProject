@@ -142,13 +142,11 @@ def reset_password(token, expiration=3600):
     except BadSignature:
         abort(404)
     form = PasswordReset()
-    print(form)
     if form.validate_on_submit():
         user = User.query.filter_by(id=id).first_or_404()
         user.set_password(form.password.data)
         flash('You have reset your password!', category='success')
         return redirect(url_for('auth.login'))
-    print('THERE')
     return render_template('reset_end.html', form=form)
 
 

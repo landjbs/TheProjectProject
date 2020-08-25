@@ -9,15 +9,12 @@
 {% block content %}
   <form class='big-box justify-content-center' method='post'>
     {{ form.csrf_token }}
-    <div class="row input-segment">
-      <h4 style="display: inline;">{{ form.email.label }}</h4>
-      <br>
-      {% if not form.errors %}
-        {{ form.email(class='input valid', placeholder=form.email.render_kw['placeholder']) }}
-      {% else %}
-        {{ form.email(class='input invalid') }}
-        <div class='warning'>{{ form.errors[0] }}</div>
-      {% endif %}
-    </div>
+    <h4 style="display: inline;">{{ form.email.label }}</h4>
+    <br>
+    {{ form.email(class='input valid', placeholder=form.email.render_kw['placeholder']) }}
+    {% if form.email.errors %}
+      <br><br>
+      <p class='warning'>{{ form.email.errors[0] }}</p>
+    {% endif %}
   </form>
 {% endblock %}
