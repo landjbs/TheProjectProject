@@ -115,12 +115,11 @@ class StartReset(BaseForm):
         return True
 
 
-class EndReset(BaseForm):
+class PasswordResetForm(BaseForm):
     password = PasswordField('New Password',
                              validators=[DataRequired(), Length(1, 254),
                                          EqualTo('confirm')],
-                             description=('Create a password to use if you are '
-                                          'accepted.'))
+                             description=(''))
     confirm = PasswordField('Confirm Password',
                             validators=[DataRequired()])
 

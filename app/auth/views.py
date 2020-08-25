@@ -11,7 +11,7 @@ from app.jobs import (
 )
 from app.user.models import User
 from app.subject.models import Subject
-from .forms import Login, Apply, StartReset
+from .forms import Login, Apply, StartReset, PasswordResetForm
 from ..auth import auth
 
 
