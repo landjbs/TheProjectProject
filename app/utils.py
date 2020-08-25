@@ -9,10 +9,10 @@ def tasks_to_daily_activity(tasks):
     start_stamps = []
     end_stamps = []
     for task in tasks:
-        start_stamps.append(round((current_time-task.post_stamp).days))
+        start_stamps.append(round((current_time-task.post_stamp).seconds/60))
         # start_stamps.append((current_time-task.post_stamp).days)
         if task.complete:
-            end_stamps.append(round(((current_time-task.complete_stamp).days)))
+            end_stamps.append(round(((current_time-task.complete_stamp).seconds/60)))
             # end_stamps.append((current_time-task.complete_stamp).days)
     start_activity = Counter(start_stamps)
     end_activity = Counter(end_stamps)

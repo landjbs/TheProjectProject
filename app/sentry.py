@@ -7,6 +7,8 @@ Integrates Sentry SDK for error tracking in deployment.
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
 
+from app.config import production_config
+
 
 def register_sentry(dsn):
     '''
@@ -15,7 +17,8 @@ def register_sentry(dsn):
     if dsn:
         sentry_sdk.init(
             dsn=dsn,
-            integrations=[FlaskIntegration()]
+            integrations=[FlaskIntegration()],
+            release=production_config.VERSION
         )
         return True
     return False

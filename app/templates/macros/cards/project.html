@@ -114,13 +114,15 @@
         <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
       </div>
       <div class='card-foot float-left'>
-        {% if project.estimated_time %}
-          <p style="padding-bottom:0px; margin-bottom:0px;">
-            <i class="fa fa-clock-o"></i>
+        <p style="padding-bottom:0px; margin-bottom:0px;">
+          <i class="fa fa-clock-o"></i>
+          {% if project.estimated_time %}
             {{ calc_days_since(g.now(), project.posted_on) }} / {{ project.estimated_time }}
             days
-          </p>
-        {% endif %}
+          {% else %}
+            NA
+          {% endif %}
+        </p>
         <div>
           {% for subject in project.subjects|reverse %}
             <a href='/subject={{ subject.code }}'>

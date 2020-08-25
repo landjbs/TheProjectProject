@@ -74,7 +74,8 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     tasks_authored = relationship('Task', back_populates='author')
     tasks_worked = relationship('Task',
                                 secondary='user_to_task',
-                                back_populates='workers')
+                                back_populates='workers',
+                                order_by='Task.complete_stamp')
     # notifications
     notifications = relationship('Notification',
                                  back_populates='user',

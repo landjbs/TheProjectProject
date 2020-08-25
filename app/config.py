@@ -86,3 +86,5 @@ class production_config(base_config):
     # REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379')
     # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL', None)
     PREFERRED_URL_SCHEME = 'https'
+    # versioning
+    VERSION = 'theprojecproject@0.0.0'
