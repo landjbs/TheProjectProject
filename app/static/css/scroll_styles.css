@@ -111,6 +111,12 @@ a:hover {
   color: black;
 }
 
+@media (max-height: 900px) {
+  .owner {
+    display: none;
+  }
+}
+
 /* Tooltip text */
 .hoverable .tooltiptext {
   display: none;
@@ -144,6 +150,10 @@ a:hover {
   text-decoration:bold;
   color: #FF5D00;
   text-align: left;
+}
+
+.card-body {
+  padding-bottom: 1rem;
 }
 
 .card-foot {
