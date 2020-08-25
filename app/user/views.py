@@ -30,8 +30,7 @@ def user_page(code):
     # owned projects
     owned = user.owned.all()
     # member projects
-    member = [project for project in user.projects
-                       if not project in owned]
+    member = [project for project in user.projects if not project in owned]
     # subjects
     subject_data = user.subject_data()
     ## forms ##
