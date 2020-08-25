@@ -332,7 +332,8 @@
             <p><u>Private: Content posted here will be visible only to project members.</u></p>
           </div>
           <div class='row'>
-            <form class='col right-border' method="post">
+            <form class='col right-border' id='instruction_form' method="post"
+            action="{{ url_for('project.save_instructions', project_id=project.id) }}">
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
               <div class='row bottom-border'>
                 <h4>
@@ -340,6 +341,7 @@
                 </h4>
                 <div class='float-right'>
                   <div class='complete-btn task-btn float-right' type='submit' id='saveInstructions' style='background:transparent;border:0px;margin-bottom:0px; display:none;'>
+                      &nbsp;
                       <i class="fa fa-check-circle" aria-hidden="true"></i>
                   </div>
                 </div>
@@ -432,14 +434,12 @@
 
       //user is "finished typing," do something
       function doneTyping () {
+        // $('#instruction_form').ajaxSubmit({url: '', type: 'post'});
+        post_url = $();
         $.ajax({
-          type: 'GET',
-          url: "{{ url_for('project.save_instructions', project_id=project.id) }}",
-          dataType: 'json',
-          success: function(data){
-            showSaveButton('saveInstructions');
-          }
+          url :
         })
+        showSaveButton('saveInstructions');
       }
 
     </script>
