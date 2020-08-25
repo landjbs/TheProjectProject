@@ -16,3 +16,13 @@ def competition_page(code):
     return render_template('competition.html',
                         competition=competition,
                         submissions=submissions)
+
+
+@competition.route(f'/activate/<int:competition_id>', methods=['GET', 'POST'])
+@login_required
+def activate(compe):
+    competition = Competition.query.filter_by(code=code).first_or_404()
+    submissions = [s.project for s in competition.submissions]
+    return render_template('competition.html',
+                        competition=competition,
+                        submissions=submissions)

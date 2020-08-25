@@ -139,10 +139,23 @@ class UserModelView(SafeModelView):
 class ReportModelView(SafeModelView):
     ''' admin view for user reports '''
     column_extra_row_actions = [
-        EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'user_report.resolve_report')
+        EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'ReportModelView.resolve_report')
     ]
 
     @expose('/action/resolve_report', methods=('GET',))
     def resolve_report(self):
         report = User_Report.query.get_or_404(int(request.args.get('id')))
+        return redirect(request.referrer)
+
+
+class CompetitionModelView(SafeModelView):
+    ''' admin view for competitions '''
+    column_extra_row_actions = [
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'CompetitionModelView.activate')
+    ]
+
+    @expose('/action/activate', methods=('GET',))
+    def activate(self):
+        competition = Competition.query.get_or_404(int(request.args.get('id')))
+        competition.activate()
         return redirect(request.referrer)

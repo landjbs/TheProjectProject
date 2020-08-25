@@ -150,7 +150,7 @@ def register_admin_views(application, admin, db):
     # import view
     from app.admin.views import (
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
-        ReportModelView
+        ReportModelView, CompetitionModelView
     )
     admin.add_view(AnalyticsView('Analytics', endpoint='AdminAnalytics'))
     admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
@@ -161,7 +161,7 @@ def register_admin_views(application, admin, db):
     admin.add_view(ReportModelView(User_Report, db.session))
     admin.add_view(SafeModelView(Project_Application, db.session, endpoint='AdminApplication'))
     admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
-    admin.add_view(SafeModelView(Competition, db.session, endpoint='AdminCompetition'))
+    admin.add_view(CompetitionModelView(Competition, db.session, endpoint='AdminCompetition'))
     admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
     with application.app_context():
         admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
