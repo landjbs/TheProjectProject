@@ -113,8 +113,10 @@ def login():
 
 @auth.route('/reset', methods=['GET', 'POST'])
 def reset():
-    
-    redirect(url_for)
+    form = StartReset()
+    if form.validate_on_submit():
+        
+    render_template()
 
 
 @auth.route('/logout')
