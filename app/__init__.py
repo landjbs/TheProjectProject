@@ -113,15 +113,13 @@ def register_extensions(app):
     extensions.migrate.init_app(app, db)
     extensions.mobility.init_app(app)
     extensions.limiter.init_app(app)
+    extensions.serializer.init_app(app)
     ######### LOGIN MANAGER #########
     extensions.lm.init_app(app)
     extensions.lm.login_view = 'auth.login'
     extensions.lm.anonymous_user = Anonymous
     ################################
     db.init_app(app)
-    ########### SERIALIZER #########
-    serializer = URLSafeTimedSerializer(current_app.secret_key)
-    ################################
 
 
 def register_blueprints(app):

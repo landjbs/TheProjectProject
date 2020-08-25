@@ -4,7 +4,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from itsdangerous import BadSignature, SignatureExpired
 from datetime import datetime
 
-from app.extensions import lm, bcrypt
+from app.extensions import lm, bcrypt, serializer
 from app.jobs import (
     send_registration_email, send_confirmation_email, send_password_reset_email
 )

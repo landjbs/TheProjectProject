@@ -15,11 +15,13 @@ from itsdangerous import URLSafeTimedSerializer
 
 
 class FlaskSerializer(URLSafeTimedSerializer):
+    ''' Flask-friendly serializer supporting init_app '''
     def __init__(self):
         pass
 
-    def initialize(self, app):
+    def init_app(self, app):
         super(FlaskSerializer, self).__init__(app.secret_key)
+
 
 
 assets = Environment()
@@ -35,3 +37,4 @@ migrate = Migrate(compare_type=True)
 mobility = Mobility()
 rq = RQ()
 travis = Travis()
+serializer = FlaskSerializer()
