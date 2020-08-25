@@ -111,6 +111,10 @@ def login():
     return render_template('login.html', form=form, start_on=start_on)
 
 
+@auth.route('/reset', methods=['GET', 'POST'])
+def reset():
+    redirect(url_for)
+
 
 @auth.route('/logout')
 @login_required

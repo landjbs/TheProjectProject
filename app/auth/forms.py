@@ -95,3 +95,10 @@ class Login(BaseForm):
                                      'check back soon!')
             return False
         return True
+
+
+class Password_Reset(BaseForm):
+    email = StringField('Harvard Email',
+                    validators=[DataRequired(), Length(1, 254),
+                                   Email()], # Email_Ext_Validator()
+    )

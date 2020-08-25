@@ -1,5 +1,5 @@
 /* background colors */
-@media (min-width: 996px) {
+@media (min-width: 100px) {
   .dark-purple-background {
     background-color: #5D00FF;
   }
@@ -38,7 +38,7 @@
 }
 
 /* background colors */
-@media (max-width: 996px) {
+@media (max-width: 1000px) {
   .dark-purple-background {
     color: #5D00FF;
   }
