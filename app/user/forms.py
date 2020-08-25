@@ -1,4 +1,4 @@
-from wtforms import (TextField, StringField, PasswordField, SelectField)
+from wtforms import (TextField, StringField, PasswordField, MultipleSelectField)
 from wtforms.validators import (DataRequired, Length, EqualTo)
 # absolute imports
 from app.forms.base import BaseForm
@@ -14,15 +14,14 @@ class Edit_User(BaseForm):
     # about
     about = TextField('About', validators=[DataRequired(), Length(1, 500)],
                       render_kw={'max':500})
-    # for i in range(5):
-    #     setattr(
-    #         obj=self,
-    #         name=f'subject{i}',
-    #         value=SelectField(
-    #             label=f'Subject {i}',
-    #             choices=[],
-    #             coerce=int
-    #         ))
+    # subjects
+    subjects = SelectMultipleField(
+                'Subjects',
+                description=('What subjects might this '
+                            'project involve?'),
+                validators=[Select_Limit_Validator(5)],
+                choices=[], coerce=int,
+                render_kw={'max':5})
     # password
     password = PasswordField('New Password',
                              validators=[Length(0, 254), EqualTo('confirm')],
