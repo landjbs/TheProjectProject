@@ -143,13 +143,11 @@ def reset(token, expiration=3600):
     except BadSignature:
         abort(404)
     if form.validate_on_submit():
-        user = form.user
-        token = serializer.dumps(user.id, salt=RESET_SALT)
-        url = url_for('auth.reset_end', token=token, _external=True)
-        send_password_reset_email(form.email.data, user.name, url)
-        flash('A password reset link has been sent to your email.')
-        return redirect(url_for('base.index'))
-    return render_template('reset_start.html', form=form)
+        user = User.query.filter_by(id=id).first_or_404()
+        user.set_password(form.password.data)
+        flash('You have reset your password!', category='success')
+        return redirect(url_for('auth.login'))
+    return redirect(request.referrer)
 
 
 @auth.route('/logout')
