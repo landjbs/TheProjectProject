@@ -1,3 +1,4 @@
+from os import urandom
 from flask import (current_app, request, redirect, url_for,
                    render_template, flash, abort, g)
 from flask_login import login_user, login_required, logout_user, current_user
@@ -14,8 +15,8 @@ from .forms import Login, Apply, StartReset
 from ..auth import auth
 
 
-CONFIRM_SALT = bcrypt.gensalt()
-RESET_SALT = bcrypt.gensalt()
+CONFIRM_SALT = urandom(16)
+RESET_SALT = urandom(16)
 
 
 @lm.user_loader
@@ -117,6 +118,19 @@ def login():
 
 
 @auth.route('/reset', methods=['GET', 'POST'])
+def reset():
+    form = StartReset()
+    if form.validate_on_submit():
+        user = form.user
+        token = serializer.dumps(user.id, salt=RESET_SALT)
+        url = url_for('auth.reset_end', token=token, _external=True)
+        send_password_reset_email(form.email.data, user.name, url)
+        flash('A password reset link has been sent to your email.')
+        return redirect(url_for('base.index'))
+    return render_template('reset_start.html', form=form)
+
+
+@auth.route('/reset_password', methods=['GET', 'POST'])
 def reset():
     form = StartReset()
     if form.validate_on_submit():
