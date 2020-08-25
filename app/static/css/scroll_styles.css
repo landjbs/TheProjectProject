@@ -150,13 +150,17 @@ a:hover {
   text-decoration:bold;
   color: #FF5D00;
   text-align: left;
-  min-height: 3vw;
-  max-height: 3vw;
-  overflow: scroll;
 }
 
-.card-body {
-  padding-bottom: 1vw;
+@media (min-width: 480px) {
+  .card-body {
+    padding-bottom: 1vw;
+  }
+  .oneliner {
+    max-height: 3vw;
+    min-height: 3vw;
+    overflow: scroll;
+  }
 }
 
 .card-foot {
