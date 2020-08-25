@@ -122,8 +122,6 @@ def reset():
     form = StartReset()
     if form.validate_on_submit():
         user = form.user
-        print(user.name)
-        print(user.id)
         token = serializer.dumps(user.id, salt=RESET_SALT)
         url = url_for('auth.reset_password', token=token, _external=True)
         send_password_reset_email(form.email.data, user.name, url)
