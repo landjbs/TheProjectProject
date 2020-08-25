@@ -112,6 +112,7 @@ class StartReset(BaseForm):
         self.user = User.query.filter_by(email=self.email.data).first()
         if not self.user:
             self.email.errors.append('Email not found.')
+            return False
         return True
 
 
@@ -122,13 +123,3 @@ class PasswordReset(BaseForm):
                              description=(''))
     confirm = PasswordField('Confirm Password',
                             validators=[DataRequired()])
-
-    def validate(self):
-        # stock validation
-        rv = BaseForm.validate(self)
-        if not rv:
-            return False
-        self.user = User.query.filter_by(email=self.email.data).first()
-        if not self.user:
-            self.email.errors.append('Email not found.')
-        return True
