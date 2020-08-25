@@ -130,9 +130,18 @@ def reset():
     return render_template('reset_start.html', form=form)
 
 
-@auth.route('/reset_password', methods=['GET', 'POST'])
-def reset():
+@auth.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset(token, expiration=3600):
     form = PasswordReset()
+    try:
+        id = s.loads(token, salt=RESET_SALT, max_age=expiration)
+    except SignatureExpired:
+        flash(('Oops! Your password reset link expired. You can get a new '
+            'link by clicking "reset password" on the login page.'),
+            category='error')
+        return redirect(url_for('auth.apply'))
+    except BadSignature:
+        abort(404)
     if form.validate_on_submit():
         user = form.user
         token = serializer.dumps(user.id, salt=RESET_SALT)
