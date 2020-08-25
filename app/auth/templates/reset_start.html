@@ -6,21 +6,16 @@
 
 {% block content %}
   <form class='big-box justify-content-center' method='post'>
+    {{ form.csrf_token }}
     <div class="row input-segment">
-      {% for elt in form %}
-        {% if elt.type=='CSRFTokenField' %}
-          {{ elt }}
-        {% else %}
-          <h4 style="display: inline;">{{ elt.label }}</h4>
-          <br>
-          {% if not elt.errors %}
-            {{ elt(class='input valid', placeholder=form.email.render_kw['placeholder']) }}
-          {% else %}
-            {{ elt(class='input invalid') }}
-            <div class='warning'>{{ elt[0] }}</div>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
+      <h4 style="display: inline;">{{ form.email.label }}</h4>
+      <br>
+      {% if not form.errors %}
+        {{ form.email(class='input valid', placeholder=form.email.render_kw['placeholder']) }}
+      {% else %}
+        {{ form.email(class='input invalid') }}
+        <div class='warning'>{{ form.errors[0] }}</div>
+      {% endif %}
     </div>
   </form>
 {% endblock %}

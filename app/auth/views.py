@@ -131,7 +131,7 @@ def reset():
 
 
 @auth.route('/reset_password/<token>', methods=['GET', 'POST'])
-def reset(token, expiration=3600):
+def reset_password(token, expiration=3600):
     try:
         id = serializer.loads(token, salt=RESET_SALT, max_age=expiration)
     except SignatureExpired:
@@ -142,12 +142,14 @@ def reset(token, expiration=3600):
     except BadSignature:
         abort(404)
     form = PasswordReset()
+    print(form)
     if form.validate_on_submit():
         user = User.query.filter_by(id=id).first_or_404()
         user.set_password(form.password.data)
         flash('You have reset your password!', category='success')
         return redirect(url_for('auth.login'))
-    return redirect(request.referrer)
+    print('THERE')
+    return render_template('reset_end.html', form=form)
 
 
 @auth.route('/logout')
