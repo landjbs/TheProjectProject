@@ -149,7 +149,6 @@ def reset_password(token, expiration=3600):
         user.set_password(form.password.data)
         flash('You have reset your password!', category='success')
         return redirect(url_for('auth.login'))
-    print('HERE')
     return render_template('reset_end.html', form=form)
 
 
