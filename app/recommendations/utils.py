@@ -5,7 +5,6 @@ def get_normed_user_subjects(user, temp):
     norm_sum = 0
     user_subjects = []
     for s in user.subjects:
-        print('here')
         normed = np.exp(s.number / temp)
         user_subjects.append((s.subject, normed))
         norm_sum += normed

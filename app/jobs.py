@@ -21,7 +21,6 @@ ses = boto3.client('ses',
 
 # @rq.job
 def send_registration_email(user, url):
-    print('HERE')
     ses.send_email(
         Source=SES_EMAIL_SOURCE,
         Destination={'ToAddresses': [user.email]},

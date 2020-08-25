@@ -139,7 +139,7 @@ class UserModelView(SafeModelView):
 class ReportModelView(SafeModelView):
     ''' admin view for user reports '''
     column_extra_row_actions = [
-        EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'ReportModelView.resolve_report')
+        EndpointLinkRowAction('glyphicon glyphicon-screenshot', 'AdminReport.resolve_report')
     ]
 
     @expose('/action/resolve_report', methods=('GET',))
@@ -151,7 +151,7 @@ class ReportModelView(SafeModelView):
 class CompetitionModelView(SafeModelView):
     ''' admin view for competitions '''
     column_extra_row_actions = [
-        EndpointLinkRowAction('glyphicon glyphicon-ok', 'CompetitionModelView.activate')
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminCompetition.activate')
     ]
 
     @expose('/action/activate', methods=('GET',))
