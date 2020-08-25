@@ -100,5 +100,15 @@ class Login(BaseForm):
 class StartReset(BaseForm):
     email = StringField('Harvard Email',
                     validators=[DataRequired(), Length(1, 254),
-                                   Email()], # Email_Ext_Validator()
+                                Email()], # Email_Ext_Validator()
     )
+
+    def validate(self):
+        # stock validation
+        rv = BaseForm.validate(self)
+        if not rv:
+            return False
+        self.user = User.query.filter_by(email=self.email.data).first()
+        if not self.user:
+            self.email.errors.append('Email not found.')
+        return True
