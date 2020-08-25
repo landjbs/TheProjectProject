@@ -139,7 +139,7 @@ def reset(token, expiration=3600):
         flash(('Oops! Your password reset link expired. You can get a new '
             'link by clicking "reset password" on the login page.'),
             category='error')
-        return redirect(url_for('auth.apply'))
+        return redirect(url_for('auth.login'))
     except BadSignature:
         abort(404)
     if form.validate_on_submit():
