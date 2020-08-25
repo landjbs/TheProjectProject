@@ -1,0 +1,14 @@
+Dear {{ user.name }},
+<br><br>
+Thank you for applying to TheProjectProject—we can't wait to review your application!
+Confirm your email by clicking this link:
+<br>
+&nbsp;{{ url }}
+<br>
+This token will expire in one week—if you have not confirmed by then, you will
+have to reapply. If you did not apply to TheProjectProject, you can safely
+ignore this email.
+<br><br>
+
+Best,<br>
+TheProjectProject Team

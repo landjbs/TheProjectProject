@@ -71,3 +71,17 @@ def send_acceptance_email(user):
         }
     )
     return True
+
+
+def send_password_reset_email(email, url):
+    ses.send_email(
+        Source=SES_EMAIL_SOURCE,
+        Destination={'ToAddresses': [email]},
+        Message={
+            'Subject': {'Data': 'Reset Your Password'},
+            'Body': {
+                'Html': {'Data': render_template('mail/reset.mail', url=url)
+                }
+            }
+        }
+    )

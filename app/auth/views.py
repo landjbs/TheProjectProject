@@ -8,7 +8,7 @@ from app.extensions import lm
 from app.jobs import send_registration_email, send_confirmation_email
 from app.user.models import User
 from app.subject.models import Subject
-from .forms import Login, Apply
+from .forms import Login, Apply, StartReset
 from ..auth import auth
 
 
@@ -113,6 +113,7 @@ def login():
 
 @auth.route('/reset', methods=['GET', 'POST'])
 def reset():
+
     redirect(url_for)
 
 
