@@ -40,12 +40,13 @@ def user_page(code):
     edit_form = False
     if current_user==user:
         edit_form = Edit_User()
-        edit_form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
+        # edit_form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
         # set defaults
-        edit_form.name.default = user.name
-        edit_form.about.default = user.about
-        edit_form.subjects.default = [s.subject.id for s in user.selected_subjects()]
-        edit_form.process()
+        # edit_form.name.default = user.name
+        # # edit_form.about.default = user.about
+        # # edit_form.password.default = ""
+        # # edit_form.confirm.default = ""
+        # edit_form.subjects.default = [s.subject.id for s in user.selected_subjects()]
     if request.method=='POST':
         if edit_form.validate_on_submit():
             edits_made = False

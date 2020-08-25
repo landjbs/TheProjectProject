@@ -16,12 +16,12 @@ class Edit_User(BaseForm):
     about = TextField('About', validators=[DataRequired(), Length(1, 500)],
                       render_kw={'max':500})
     # subjects
-    subjects = SelectMultipleField(
-                'Interests',
-                validators=[Select_Limit_Validator(5)],
-                choices=[],
-                coerce=int,
-                render_kw={'max':5})
+    # subjects = SelectMultipleField(
+    #             'Interests',
+    #             validators=[Select_Limit_Validator(5)],
+    #             choices=[],
+    #             coerce=int,
+    #             render_kw={'max':5})
     # password
     password = PasswordField('New Password',
                              validators=[Length(0, 254), EqualTo('confirm')],
