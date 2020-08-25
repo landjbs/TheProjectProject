@@ -10,7 +10,16 @@ from flask_migrate import Migrate
 from flask_rq2 import RQ
 from flask_travis import Travis
 from flask_mobility import Mobility
+from itsdangerous import URLSafeTimedSerializer
 # from werkzeug.contrib.cache import SimpleCache
+
+
+class FlaskSerializer(URLSafeTimedSerializer):
+    def __init__(self):
+        pass
+
+    def initialize(self, app):
+        super(FlaskSerializer, self).__init__(app.secret_key)
 
 
 assets = Environment()

@@ -1,7 +1,7 @@
 from flask import (current_app, request, redirect, url_for,
                    render_template, flash, abort, g)
 from flask_login import login_user, login_required, logout_user, current_user
-from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
+from itsdangerous import BadSignature, SignatureExpired
 from datetime import datetime
 
 from app.extensions import lm, bcrypt
