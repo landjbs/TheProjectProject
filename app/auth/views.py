@@ -123,7 +123,7 @@ def reset():
     if form.validate_on_submit():
         user = form.user
         token = serializer.dumps(user.id, salt=RESET_SALT)
-        url = url_for('auth.reset_end', token=token, _external=True)
+        url = url_for('auth.reset_password', token=token, _external=True)
         send_password_reset_email(form.email.data, user.name, url)
         flash('A password reset link has been sent to your email.')
         return redirect(url_for('base.index'))
@@ -132,9 +132,8 @@ def reset():
 
 @auth.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset(token, expiration=3600):
-    form = PasswordReset()
     try:
-        id = s.loads(token, salt=RESET_SALT, max_age=expiration)
+        id = serializer.loads(token, salt=RESET_SALT, max_age=expiration)
     except SignatureExpired:
         flash(('Oops! Your password reset link expired. You can get a new '
             'link by clicking "reset password" on the login page.'),
@@ -142,6 +141,7 @@ def reset(token, expiration=3600):
         return redirect(url_for('auth.login'))
     except BadSignature:
         abort(404)
+    form = PasswordReset()
     if form.validate_on_submit():
         user = User.query.filter_by(id=id).first_or_404()
         user.set_password(form.password.data)
