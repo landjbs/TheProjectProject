@@ -2,7 +2,6 @@ from wtforms import (TextField, StringField, PasswordField, SelectField)
 from wtforms.validators import (DataRequired, Length, EqualTo)
 # absolute imports
 from app.forms.base import BaseForm
-from app.subjects.models import Subject
 # package imports
 from .models import User
 

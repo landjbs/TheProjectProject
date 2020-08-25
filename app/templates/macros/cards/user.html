@@ -289,9 +289,9 @@
               <hr class='my-2'><br>
             {% endif %}
           {% endfor %}
-          {% for subject in user.subjects %}
-            {{  }}
-          {% endif %}
+          {% for user_subject in user.selected_subjects() %}
+            {{ user_subject.subject.name }}
+          {% endfor %}
           <hr class='my-2'><br>
           {% if user.available %}
             <a href="{{ url_for('user.mark_unavailable') }}" class='btn col'>
