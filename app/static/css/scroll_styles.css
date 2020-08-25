@@ -111,7 +111,7 @@ a:hover {
   color: black;
 }
 
-@media (max-height: 900px) {
+@media (max-height: 800px) {
   .owner {
     display: none;
   }
@@ -150,10 +150,13 @@ a:hover {
   text-decoration:bold;
   color: #FF5D00;
   text-align: left;
+  min-height: 3vw;
+  max-height: 3vw;
+  overflow: scroll;
 }
 
 .card-body {
-  padding-bottom: 1rem;
+  padding-bottom: 1vw;
 }
 
 .card-foot {

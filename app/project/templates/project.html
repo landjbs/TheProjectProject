@@ -68,7 +68,7 @@
             <br>
             <ul class="list-unstyled components">
               <div class='bio'>
-                <p class='oneliner'>
+                <p>
                   {{ project.oneliner }}
                 </p>
                 <p>{{ project.summary }}</p>
@@ -272,6 +272,7 @@
                 label='Recommended',
                 id_postfix='recommended',
                 card_type='user',
+                icon_type='recommended',
                 data=recommended,
                 tooltip=rec_tooltip
               )

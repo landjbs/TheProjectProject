@@ -2,7 +2,7 @@
   {% set cover_id = 'Question_Cover'.format(fname=name) %}
   {% set input_id = 'Question_Input'.format(fname=name) %}
   <div class='card mb-2'>
-    <div class='card-body' id='{{ cover_id }}' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')" style='color:black; text-align:center;'>
+    <div class='card-body card-cover' id='{{ cover_id }}' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')" style='color:black; text-align:center;'>
       <i class="fas fa-question-circle fa-2x"></i>
       <h5>Add A Question</h5>
     </div>

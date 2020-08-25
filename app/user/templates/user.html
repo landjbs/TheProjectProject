@@ -28,7 +28,7 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <p class='float-right' style='text-align:right;'>
+                <p class='float-right info-nums' style='text-align:right;'>
                   {{ user.total_stars() }}
                   <i class="fa fa-star"></i>
                   <!-- edit button -->
@@ -40,7 +40,7 @@
                       </button>
                   {% endif %}
                 </p>
-                <a href='/user={{ user.code }}'>
+                <a class='username-big' href='/user={{ user.code }}'>
                   <h3>
                     {{ user.name }}
                     {% set badge = user.choose_badge('search') %}
@@ -64,7 +64,7 @@
             <br>
             <ul class="list-unstyled components">
               <div class='bio'>
-                <p class='oneliner'>{{ user.about }}</p>
+                <p>{{ user.about }}</p>
                 <center>
                   <p style="margin:0px;">
                     {{ user.xp }} XP

@@ -366,3 +366,7 @@ td {
 .sidetable {
   border:0px !important;
 }
+
+.card-cover:hover {
+  background: rgba(0,0,255,0.07)
+}
