@@ -140,10 +140,13 @@
             <button class="tablinks" onclick="openTab(event, 'Members')" id='Members_Button'>
               Members
               {% if is_member %}
-                {% set n_applications = project.n_applications() %}
-                {% if n_applications > 0 %}
+                {% set n_member_notes = project.n_applications() %}
+                {% if recommended %}
+                  {% set n_member_notes = n_member_notes + (recommended|length) %}
+                {% endif %}
+                {% if n_member_notes > 0 %}
                   <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
-                    {{ n_applications }}
+                    {{ n_member_notes }}
                   </span>
                 {% endif %}
               {% endif %}

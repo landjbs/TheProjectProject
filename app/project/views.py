@@ -558,6 +558,8 @@ def add_link(project_id, public, category):
             flash('Link added!', 'success')
         else:
             flash('Invalid link.', 'error')
+    else:
+        flash('Invalid link.', 'error')
     return redirect(request.referrer)
 
 
