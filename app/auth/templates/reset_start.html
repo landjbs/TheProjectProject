@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block content %}
+  <form class='big-box' method='post'>
+    {{ form.csrf_token }}
+    {% if not form.errors %}
+      {{ form.email(class='input valid') }}
+    {% else %}
+      {{ form.email(class='input invalid') }}
+      {{ form.errors[0] }}
+    {% endif %}
+  </form
+{% endblock %}

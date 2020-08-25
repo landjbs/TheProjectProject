@@ -5,7 +5,9 @@ from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
 from datetime import datetime
 
 from app.extensions import lm
-from app.jobs import send_registration_email, send_confirmation_email
+from app.jobs import (
+    send_registration_email, send_confirmation_email, send_password_reset_email
+)
 from app.user.models import User
 from app.subject.models import Subject
 from .forms import Login, Apply, StartReset
@@ -115,8 +117,9 @@ def login():
 def reset():
     form = StartReset()
     if form.validate_on_submit():
-        
-    render_template()
+        user = form.user
+        send_password_reset_email(user.name, )
+    return render_template('reset_start.html')
 
 
 @auth.route('/logout')
