@@ -36,7 +36,10 @@ def user_page(code):
     ## forms ##
     # edit user account
     show_edit_modal = False
-    edit_form = Edit_User() if (current_user==user) else False
+    edit_form = False
+    if current_user==user:
+        edit_form = Edit_User()
+        for field in 
     if request.method=='POST':
         if edit_form.validate_on_submit():
             edits_made = False
