@@ -119,6 +119,9 @@ def register_extensions(app):
     extensions.lm.anonymous_user = Anonymous
     ################################
     db.init_app(app)
+    ########### SERIALIZER #########
+    serializer = URLSafeTimedSerializer(current_app.secret_key)
+    ################################
 
 
 def register_blueprints(app):

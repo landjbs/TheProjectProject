@@ -14,8 +14,6 @@ from .forms import Login, Apply, StartReset
 from ..auth import auth
 
 
-# initialize URLSafeTimedSerializer # IDEA: move this to app.extensions
-serializer = URLSafeTimedSerializer(current_app.secret_key)
 CONFIRM_SALT = bcrypt.gensalt()
 RESET_SALT = bcrypt.gensalt()
 
@@ -127,6 +125,7 @@ def reset():
         url = url_for('auth.reset_end', token=token, _external=True)
         send_password_reset_email(form.email.data, user.name, url)
         flash('A password reset link has been sent to your email.')
+        return redirect(url_for('base.index'))
     return render_template('reset_start.html', form=form)
 
 
