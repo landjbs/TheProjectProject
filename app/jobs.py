@@ -81,7 +81,9 @@ def send_password_reset_email(email, name, url):
         Message={
             'Subject': {'Data': 'Reset Your Password'},
             'Body': {
-                'Html': {'Data': render_template('mail/reset.mail', url=url)
+                'Html': {'Data': render_template(
+                            'mail/reset.mail', name=name, url=url
+                        )
                 }
             }
         }
