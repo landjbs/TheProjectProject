@@ -275,6 +275,9 @@
             <p class='warning'>{{ edit_form.about.errors[0] }}</p>
           {% endif %}
           <hr class='my-4'>
+          {{ edit_form.subjects.label }}:<br>
+          {{ edit_form.subjects() }}
+          <hr class='my-4'>
           <!-- PASSWORD -->
           <center>
             <h6 style='text-decoration:underline;'>Change Password</h6>

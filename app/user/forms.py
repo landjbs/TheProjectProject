@@ -1,7 +1,8 @@
-from wtforms import (TextField, StringField, PasswordField, MultipleSelectField)
+from wtforms import (TextField, StringField, PasswordField, SelectMultipleField)
 from wtforms.validators import (DataRequired, Length, EqualTo)
 # absolute imports
 from app.forms.base import BaseForm
+from app.forms.validators import Select_Limit_Validator
 # package imports
 from .models import User
 
@@ -16,9 +17,7 @@ class Edit_User(BaseForm):
                       render_kw={'max':500})
     # subjects
     subjects = SelectMultipleField(
-                'Subjects',
-                description=('What subjects might this '
-                            'project involve?'),
+                'Interests',
                 validators=[Select_Limit_Validator(5)],
                 choices=[], coerce=int,
                 render_kw={'max':5})

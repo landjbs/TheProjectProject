@@ -5,6 +5,7 @@ from flask_mobility.decorators import mobilized
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query
 from app.project.models import Project
+from app.subject.models import Subject
 # package imports
 from .models import User
 from .forms import Edit_User
@@ -38,7 +39,9 @@ def user_page(code):
     show_edit_modal = False
     edit_form = False
     if current_user==user:
-        edit_form = Edit_User()    
+        edit_form = Edit_User()
+        edit_form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
+        edit_form.default = [s.subject.id for s in user.selected_subjects()]
     if request.method=='POST':
         if edit_form.validate_on_submit():
             edits_made = False
