@@ -19,7 +19,8 @@ class Edit_User(BaseForm):
     subjects = SelectMultipleField(
                 'Interests',
                 validators=[Select_Limit_Validator(5)],
-                choices=[], coerce=int,
+                choices=[],
+                coerce=int,
                 render_kw={'max':5})
     # password
     password = PasswordField('New Password',

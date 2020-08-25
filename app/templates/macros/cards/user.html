@@ -263,14 +263,14 @@
           </center>
           <!-- name -->
           {{ edit_form.name.label }}:<br>
-          {{ edit_form.name(class='edit-input', value=user.name) }}
+          {{ edit_form.name(class='edit-input') }}
           {% if edit_form.name.errors %}
             <p class='warning'>{{ edit_form.name.errors[0] }}</p>
           {% endif %}
           <hr class='my-2'><br>
           <!-- about -->
           {{ edit_form.about.label }}:<br>
-          {{ edit_form.about(class='edit-input', value=user.about) }}
+          {{ edit_form.about(class='edit-input') }}
           {% if edit_form.about.errors %}
             <p class='warning'>{{ edit_form.about.errors[0] }}</p>
           {% endif %}
