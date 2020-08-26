@@ -332,15 +332,13 @@
             <p><u>Private: Content posted here will be visible only to project members.</u></p>
           </div>
           <div class='row'>
-            <form class='col right-border' id='instruction_form' method="post"
-            action="{{ url_for('project.save_instructions', project_id=project.id) }}">
-              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <form class='col right-border' id='instruction_form' method="post">
               <div class='row bottom-border'>
                 <h4>
                   Instructions
                 </h4>
                 <div class='float-right'>
-                  <div class='complete-btn task-btn float-right' type='submit' id='saveInstructions' style='background:transparent;border:0px;margin-bottom:0px; display:none;'>
+                  <div class='complete-btn float-right' id='saveInstructions' style='background:transparent;border:0px;margin-bottom:0px; display:none;'>
                       &nbsp;
                       <i class="fa fa-check-circle" aria-hidden="true"></i>
                   </div>
@@ -422,7 +420,7 @@
     <script>
       //setup before functions
       let typingTimer;                //timer identifier
-      let doneTypingInterval = 1000;  //time in ms (5 seconds)
+      let doneTypingInterval = 500;  //time in ms (5 seconds)
       let instructions = document.getElementById('instructions');
       //on keyup, start the countdown
       instructions.addEventListener('keyup', () => {
@@ -434,11 +432,15 @@
 
       //user is "finished typing," do something
       function doneTyping () {
-        form_data = document.getElementById('instructions').serialize();
-        alert(form_data);
+        var form_data = JSON.stringify({'data' : document.getElementById('instructions').value});
+        $.ajaxSetup({
+          headers: {'X-CSRFToken': '{{ csrf_token() }}'}
+        })
         $.ajax({
           url   : "{{ url_for('project.save_instructions', project_id=project.id) }}",
-          type  : 'GET',
+          type  : 'POST',
+          dataType : 'json',
+          contentType: "application/json",
           data  : form_data,
           success: function() {
               showSaveButton('saveInstructions');

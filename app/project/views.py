@@ -285,7 +285,6 @@ def like_action(project_id):
     else:
         current_user.unstar_project(project)
     is_starred = 1 if current_user.has_starred(project) else 0
-    print(is_starred)
     return jsonify({'stars':project.stars.count(), 'is_starred':is_starred})
 
 
@@ -579,7 +578,7 @@ def remove_link(project_id, link_id):
     return redirect(request.referrer)
 
 
-@project.route('/save_instructions/<int:project_id>', methods=['GET'])
+@project.route('/save_instructions/<int:project_id>', methods=['GET', 'POST'])
 def save_instructions(project_id):
     ''' Saves project instructions '''
     project = Project.query.get_or_404(project_id)
@@ -587,12 +586,9 @@ def save_instructions(project_id):
         flash('Could not edit instructions because you are not a project member.',
             category='error')
     else:
-        print(request.json)
-        for elt in request:
-            print(elt)
         instructions = request.json.get('data')
         print(instructions)
         if instructions is not None:
             project.instructions = instructions
             project.update()
-    return redirect(request.referrer)
+    return jsonify({})
