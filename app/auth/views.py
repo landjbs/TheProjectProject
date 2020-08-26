@@ -145,6 +145,7 @@ def reset_password(token, expiration=3600):
     if form.validate_on_submit():
         user = User.query.filter_by(id=id).first_or_404()
         user.set_password(form.password.data)
+        user.update()
         flash('You have reset your password!', category='success')
         return redirect(url_for('auth.login'))
     return render_template('reset_end.html', form=form)
