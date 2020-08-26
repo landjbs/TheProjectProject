@@ -25,10 +25,7 @@ from ..project import project
 def add_project(competition_id=None):
     print(competition_id)
     # form preprocessing
-    form = Add_Project()
-    if competition_id:
-        form.competition.default = competition_id
-        form.process()
+    form = Add_Project(competition=competition_id)
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
     form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
     # form validation
