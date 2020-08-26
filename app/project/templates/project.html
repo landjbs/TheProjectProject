@@ -161,7 +161,7 @@
             <!-- CHARTS -->
             <div class="row">
               <div class="col-sm-4">
-                <h6>Daily Activity</h6>
+                <h6><u>Daily Activity</u></h6>
                 {% if activity_data != False %}
                   <canvas id="activity_chart"></canvas>
                 {% else %}
@@ -169,7 +169,7 @@
                 {% endif %}
               </div>
               <div class="col-sm-4">
-                <h6>Member Activity</h6>
+                <h6><u>Member Activity</u></h6>
                 {% if ((authored|length) > 0) %}
                   <canvas id="tasks_complete"></canvas>
                 {% else %}
@@ -177,7 +177,7 @@
                 {% endif %}
               </div>
               <div class="col-sm-4">
-                <h6>Team Skills</h6>
+                <h6><u>Team Skills</u></h6>
                 {% if project_subjects %}
                   <canvas id="team_skills"></canvas>
                 {% else %}

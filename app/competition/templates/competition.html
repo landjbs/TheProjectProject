@@ -29,7 +29,7 @@
       card_type='project-big',
       data=submissions,
       icon_type='project',
-      redirect_empty='/add_project')
+      redirect_empty="{{ url_for('project.add_project', competition_id=competition.id) }}")
   }}
 </div>
 <script src="js/stars.js"></script>

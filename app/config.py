@@ -77,7 +77,7 @@ class test_config(base_config):
 
 class production_config(base_config):
     # site
-    SERVER_NAME = 'theprojectproject.io'
+    SERVER_NAME = '52.4.177.178'
     DOMAIN = 'https://theprojectproject.io'
     # environment type
     ENV = 'production'
