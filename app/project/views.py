@@ -199,7 +199,8 @@ def project_page(project_code, open_tab=None):
             project_subjects=project_subjects,
             edit_form=edit_form,
             edit_application_form=edit_application_form,
-            show_edit_modal=show_edit_modal)
+            show_edit_modal=show_edit_modal,
+            open_tab=open_tab)
 
 
 ## user to project interactions ##

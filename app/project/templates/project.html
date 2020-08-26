@@ -388,25 +388,33 @@
 
     <!-- Custom JS -->
     <!-- for toggeling between tabs -->
-    <script src="js/tabs.js"></script>
+    <script src="/js/tabs.js"></script>
     <!-- for toggeling between divs with input covers -->
-    <script src="js/covers.js"></script>
+    <script src="/js/covers.js"></script>
     <!-- allow starring and unstarring of project -->
-    <script src="js/stars.js"></script>
+    <script src="/js/stars.js"></script>
 
-    <script>
-    $(document).ready(function () {
-      // toggle open tab
-      opened = sessionStorage.getItem(window.location.href + '_opened');
-      if (opened) {
-        document.getElementById(opened).click();
-      } else {
-        document.getElementById("Activity_Button").click();
-      }
-      // toggle sidebar // TODO: make this work without flashes or long slides
-      // barstate = sessionStorage.getItem(window.location.href + '_sidebar');
-    });
-    </script>
+    {% if not open_tab %}
+      <script>
+        $(document).ready(function () {
+          // toggle open tab
+          opened = sessionStorage.getItem(window.location.href + '_opened');
+          if (opened) {
+            document.getElementById(opened).click();
+          } else {
+            document.getElementById("Activity_Button").click();
+          }
+          // toggle sidebar // TODO: make this work without flashes or long slides
+          // barstate = sessionStorage.getItem(window.location.href + '_sidebar');
+        });
+      </script>
+    {% else %}
+      <script>
+        $(document).ready(function () {
+          document.getElementById("{{ open_tab }}_Button").click();
+        });
+      </script>
+    {% endif %}
 
     <script>
       $('#sidebarCollapse').on('click', function () {
