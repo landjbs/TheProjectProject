@@ -44,7 +44,7 @@ from app.commands import command_list
 
 def create_app(config=config.dev_config, register_admin=True):
     ''' '''
-    application = Flask(__name__, static_folder='static', static_url_path='')
+    application = Flask(__name__, static_folder='static', static_url_path='/', instance_relative_config=True)
     application.config.from_object(config())
     register_extensions(application)
     register_blueprints(application)

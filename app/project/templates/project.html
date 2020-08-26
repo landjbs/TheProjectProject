@@ -78,6 +78,9 @@
                     <i class='fa fa-trophy' style='color: gold;'></i>
                     <a class='user-name' href='{{ competition.get_url() }}'>
                       {{ competition.name }}
+                      &nbsp;
+                      <i class='fa fa-clock-o'></i>
+                      {{ competition.time_progressed() }} / {{ competition.total_length() }}
                     </a>
                   {% endif %}
                 </p>
