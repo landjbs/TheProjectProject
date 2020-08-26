@@ -85,8 +85,9 @@ def add_project(competition_id=None):
 
 
 @project.route('/project=<project_code>', methods=['GET', 'POST'])
+@project.route('/project=<project_code>/<open_tab>', methods=['GET', 'POST'])
 @limiter.limit('60/minute')
-def project_page(project_code):
+def project_page(project_code, open_tab=None):
     project = Project.query.filter_by(code=project_code).first_or_404()
     # add project to globals
     g.project = project
