@@ -68,7 +68,7 @@ class Add_Project(BaseForm):
                             description=('Submit your project to '
                                         'competitions and win rewards! Please '
                                         'make sure you meet criteria.'),
-                            choices=[],
+                            choices=[]
                             # coerce=int
                         )
 

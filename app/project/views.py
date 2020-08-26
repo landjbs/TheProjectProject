@@ -18,16 +18,17 @@ from .forms import (Add_Project, Comment_Form, Task_Form,
 from ..project import project
 
 
-@project.route('/add_project', defaults={'competition_id':None}, strict_slashes=False)
-@project.route('/add_project/<int:competition_id>', strict_slashes=False)
+@project.route('/add_project', methods=['GET','POST'])
+@project.route('/add_project/<int:competition_id>', methods=['GET','POST'])
 @login_required
 @limiter.limit('30 per minute')
-def add_project(competition_id):
+def add_project(competition_id=None):
     print(competition_id)
     # form preprocessing
     form = Add_Project()
     if competition_id:
         form.competition.default = competition_id
+        form.process()
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
     form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
     # form validation
