@@ -86,14 +86,18 @@
               About
             </button>
             {% if current_user==user %}
-              <button class="tablinks" onclick="openTab(event, 'Invitations')" id="Invitations_Button">
-                Invitations
-                {% if current_user.invitations.count() > 0 %}
-                  <span class="badge" style='background:#FF5D00; vertical-align:top;'>
-                    {{ current_user.invitations.count() }}
-                  </span>
-                {% endif %}
-              </button>
+              {% set invitation_count = current_user.invitations.count() %}
+              {% set application_count = current_user.invitations.count() %}
+              {% if (invitation_count + application_count) > 0 %}
+                <button class="tablinks" onclick="openTab(event, 'Invitations')" id="Invitations_Button">
+                  Invitations
+                  {% if invitation_count > 0 %}
+                    <span class="badge" style='background:#FF5D00; vertical-align:top;'>
+                      {{ invitation_count }}
+                    </span>
+                  {% endif %}
+                </button>
+              {% endif %}
             {% endif %}
           </div>
 

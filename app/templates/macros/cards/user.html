@@ -59,7 +59,7 @@
         {{ user.xp }} XP
       </div>
       <div class='card-head tiny'>
-        <a class='project-name' href='user={{ user.code }}'>
+        <a class='project-name' href="{{ url_for('user.user_page', code=user.code) }}">
           <h5>
             {{ user.name }}
             {% set badge = user.choose_badge(carousel_type) %}
