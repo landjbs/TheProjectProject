@@ -434,12 +434,16 @@
 
       //user is "finished typing," do something
       function doneTyping () {
-        // $('#instruction_form').ajaxSubmit({url: '', type: 'post'});
-        post_url = $();
+        form_data = document.getElementById('instructions').serialize();
+        alert(form_data);
         $.ajax({
-          url :
+          url   : "{{ url_for('project.save_instructions', project_id=project.id) }}",
+          type  : 'GET',
+          data  : form_data,
+          success: function() {
+              showSaveButton('saveInstructions');
+          }
         })
-        showSaveButton('saveInstructions');
       }
 
     </script>
