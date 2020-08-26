@@ -37,7 +37,7 @@
     </center>
     <hr class="my-2">
     <div class='action-bar'>
-      <a class="btn" href='/add_project'>
+      <a class="btn" href="{{ url_for('project.add_project', competition_id=competition.id) }}">
           Enter
       </a>
     </div>

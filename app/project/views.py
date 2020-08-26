@@ -18,11 +18,12 @@ from .forms import (Add_Project, Comment_Form, Task_Form,
 from ..project import project
 
 
-@project.route('/add_project', methods=['GET', 'POST'])
-@project.route('/add_project/<int:competition_id>', methods=['GET', 'POST'])
+@project.route('/add_project/')
+@project.route('/add_project/<int:competition_id>')
 @login_required
-@limiter.limit('10 per minute')
+@limiter.limit('30 per minute')
 def add_project(competition_id=None):
+    print(competition_id)
     # form preprocessing
     form = Add_Project()
     if competition_id:
