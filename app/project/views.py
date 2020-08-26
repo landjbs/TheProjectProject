@@ -23,7 +23,6 @@ from ..project import project
 @login_required
 @limiter.limit('30 per minute')
 def add_project(competition_id=None):
-    print(competition_id)
     # form preprocessing
     form = Add_Project(competition=competition_id)
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
@@ -512,7 +511,6 @@ def add_question(project_id):
 @login_required
 def edit_answer(project_id, question_id):
     project = Project.query.get_or_404(project_id)
-    print(project)
     question = project.questions.filter_by(id=question_id).first()
     if not question:
         flash('Could not find question.', category='error')

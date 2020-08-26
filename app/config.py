@@ -13,7 +13,6 @@ from base64 import b64decode
 class base_config(object):
     # SITE
     SITE_NAME = os.environ.get('APP_NAME', 'TheProjectProject')
-    SERVER_NAME = '127.0.0.1:5000'
     # SERVER
     SECRET_KEY = os.environ.get('SECRET_KEY', os.urandom(16))
     # MAIL
@@ -57,6 +56,7 @@ class base_config(object):
 
 
 class dev_config(base_config):
+    # SERVER_NAME = '127.0.0.1:5000'
     # SQLALCHEMY URI
     SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'
     # REDIS
@@ -72,12 +72,13 @@ class dev_config(base_config):
 
 
 class test_config(base_config):
+    # SERVER_NAME = '127.0.0.1:5000'
     TESTING = True
 
 
 class production_config(base_config):
     # site
-    SERVER_NAME = '52.4.177.178'
+    # SERVER_NAME = 'https://theprojectproject.io 52.4.87.116'
     DOMAIN = 'https://theprojectproject.io'
     # environment type
     ENV = 'production'

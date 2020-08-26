@@ -23,7 +23,6 @@ def rand_bool(p_true):
 def rand_subjects(n):
     global subject_num
     if subject_num is None:
-        print('recomp')
         subject_num = Subject.query.count()
     return [Subject.get_by_id(int(id))
             for id in np.random.randint(1, subject_num+1, size=n)]
@@ -31,7 +30,6 @@ def rand_subjects(n):
 def rand_badges(n):
     global badge_num
     if badge_num is None:
-        print('recomp')
         badge_num = Badge.query.count()
     if n==0:
         return []

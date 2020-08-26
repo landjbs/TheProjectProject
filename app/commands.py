@@ -30,7 +30,6 @@ def drop_db():
 
 def rebuild_db():
     ''' Drops database, creates, and adds statics '''
-    print(colored('Dropping...'))
     drop_db()
     create_db()
     add_statics()
