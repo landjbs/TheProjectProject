@@ -98,7 +98,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                         back_populates='project',
                         lazy='dynamic',
                         cascade='all, delete, delete-orphan',
-                        order_by='Task.complete_stamp')
+                        order_by='desc(Task.complete_stamp)')
 
     def __init__(self, name, oneliner, summary, open, subjects,
                 requires_application, application_question, estimated_time,
