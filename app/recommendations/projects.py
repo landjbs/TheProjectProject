@@ -20,8 +20,9 @@ def score_project(project, user_subjects):
     # subject scoring [0,6]
     s = time()
     score = 0
+    project_subjects = set(project.subjects)
     for subject, subject_score in user_subjects.items():
-        if subject in project.subjects:
+        if subject in project_subjects:
             score += subject_score
     score /= (len(user_subjects)+0.0000001)
     score *= 6
@@ -61,7 +62,6 @@ def score_project(project, user_subjects):
     else:
         score = 0
     TIME_BREAKDOWN['members'] += (time() - s)
-    s = time()
     return score
 
 
@@ -88,6 +88,7 @@ def get_recommended_projects(user):
     results = results[:30]
     if len(results)==0:
         results = user.projects.all()
+    print(TIME_BREAKDOWN)
     return results
 
 
