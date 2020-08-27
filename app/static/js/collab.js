@@ -1,4 +1,4 @@
-function toggleStar(project_id, url, star_id, count_id) {
+function sendCollab(url) {
   $.ajax({
     type: 'POST',
     url: url,
