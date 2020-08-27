@@ -37,8 +37,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                          lazy='dynamic',
                          cascade='all, delete, delete-orphan')
     # subject
-    subjects = relationship('Subject', secondary='project_to_subject',
-                            back_populates='projects', lazy='dynamic')
+    subjects = relationship('Subject',
+                            secondary='project_to_subject',
+                            back_populates='projects',
+                            lazy='dynamic')
     # question
     questions = relationship('Question',
                              back_populates='project',
