@@ -31,6 +31,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     summary = db.Column(db.String(400), nullable=False)
     # instructions
     instructions = db.Column(db.Text(3000), nullable=True)
+    # type {0:indep, 1:startup}
+    type = db.Column(db.Integer, nullable=False, default=0)
     # links
     links = relationship('Link',
                          back_populates='project',

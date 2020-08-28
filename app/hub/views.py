@@ -23,19 +23,10 @@ from app.subject.models import Subject
 def home():
     # recommended
     recommended = get_recommended_projects(current_user)
-    # show trending and owned only on web
+    # show trending and owned only on desktop
     trending, my = (get_trending_projects().all(),
                     get_user_projects(current_user).all()) \
             if not request.MOBILE else (None, None)
-    # notifcations
-    # if (current_user.notifications.count())>0:
-    #     for notification in current_user.notifications:
-    #         flash(notification.text)
-    #         current_user.notifications.remove(notification)
-    #     try:
-    #         db.session.commit()
-    #     except:
-    #         db.session.rollback()
     return render_template(
         'home.html', recommended=recommended, trending=trending, my=my
     )
