@@ -1,4 +1,6 @@
-function sendCollab(url) {
+function sendCollab() {
+  var form = $('#collab-form-0');
+  alert(form);
   // $.ajax({
   //   type: 'POST',
   //   url: url,
@@ -15,3 +17,12 @@ function sendCollab(url) {
   //   }
   // })
 }
+
+
+// Set up an event listener for the contact form.
+$('collab-form-').submit(function(event) {
+    // Stop the browser from submitting the form.
+    event.preventDefault();
+
+    // TODO
+});

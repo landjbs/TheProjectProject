@@ -10,9 +10,13 @@
     </button>
     {{ render_collaborate_modal(user) }}
   {% else %}
-    <button type="button" class="btn" disabled>
-        You!
+    <button type="button" class="btn" data-toggle="modal" data-target="#edit_modal">
+        Edit
     </button>
+    {{ render_edit_user_modal(user, g.edit_user_form) }}
+    <script>
+      $('#edit_modal').appendTo('body');
+    </script>
   {% endif %}
 {% endmacro -%}
 
@@ -187,7 +191,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           {% if (g.current_user.owned.count())>0 %}
-          <form action='sendCollab()' id='collab-form-{user.id}' method='post'>
+          <form action="{{ url_for('user.collaborate', target_user_id=user.id) }}" method='post'>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div class="modal-body">
               {% if not user.available %}
