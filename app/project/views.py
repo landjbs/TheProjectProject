@@ -20,7 +20,7 @@ from ..project import project
 
 @project.route('/new_add', methods=['GET','POST'])
 @project.route('/new_add/<int:competition_id>', methods=['GET','POST'])
-@login_required
+# @login_required
 def new_add(competition_id=None):
     form = Add_Project(competition=competition_id)
     form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
