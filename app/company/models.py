@@ -13,4 +13,5 @@ class Company(CRUDMixin, db.Model):
 
 class Company_Role(db.Model):
     __tablename__ = 'company_role'
-    user = 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    
