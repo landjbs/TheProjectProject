@@ -1,3 +1,5 @@
+from collections import Counter
+
 from flask import (Flask, render_template, request, flash, redirect,
                    url_for, session, abort)
 from gettext import ngettext
