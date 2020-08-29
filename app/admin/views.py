@@ -1,3 +1,4 @@
+from operator import itemgetter
 from collections import Counter
 
 from flask import (Flask, render_template, request, flash, redirect,
@@ -74,8 +75,13 @@ class AnalyticsView(SafeBaseView):
         view_time_agos = []
         for view in base:
             view_times.append((g.now - view.timestamp).hours)
-        partitioned_view_counts = Counter(view_time_agos)
-        
+        view_counts = Counter(view_time_agos)
+        earliest = max(view_time_agos)+1
+        for i in range(earliest):
+            if i not in view_counts:
+                view_counts.update({i:0})
+        hourly_activity = [x[1] for x in sorted(view_counts, key=itemgetter(0), reverse=True)]
+        # get other data
         view_data['views_over'] = base
         view_data['view_count'] = PageView.view_count(days=7)
         view_data['user_count'] = PageView.user_count(days=7)
