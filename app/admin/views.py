@@ -68,6 +68,8 @@ class AnalyticsView(SafeBaseView):
     def index(self, **kwargs):
         view_data = {}
         base = PageView.views_over(days=7)
+        for x in base:
+            print(x.timestamp)
         view_data['views_over'] = base
         view_data['view_count'] = PageView.view_count(days=7)
         view_data['user_count'] = PageView.user_count(days=7)
