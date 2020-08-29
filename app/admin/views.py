@@ -1,7 +1,7 @@
 from collections import Counter
 
 from flask import (Flask, render_template, request, flash, redirect,
-                   url_for, session, abort)
+                   url_for, session, abort, g)
 from gettext import ngettext
 from flask_login import current_user
 from flask_admin import expose, BaseView
@@ -69,9 +69,13 @@ class AnalyticsView(SafeBaseView):
     @expose('/')
     def index(self, **kwargs):
         view_data = {}
+        # break views down hour by hour
         base = PageView.views_over(days=7)
-        for x in base:
-            print(x.timestamp)
+        view_time_agos = []
+        for view in base:
+            view_times.append((g.now - view.timestamp).hours)
+        partitioned_view_counts = Counter(view_time_agos)
+        
         view_data['views_over'] = base
         view_data['view_count'] = PageView.view_count(days=7)
         view_data['user_count'] = PageView.user_count(days=7)
