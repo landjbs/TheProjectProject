@@ -44,9 +44,10 @@ from app.commands import command_list
 
 
 def create_app(config=config.dev_config, register_admin=True):
-    ''' '''
+    ''' Create app and register all extensions and blueprints '''
     application = Flask(__name__, static_folder='static', static_url_path='/', instance_relative_config=True)
     application.config.from_object(config())
+    application.url_map.strict_slashes = False
     register_extensions(application)
     register_blueprints(application)
     if register_admin:

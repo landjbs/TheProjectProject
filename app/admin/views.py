@@ -30,7 +30,7 @@ from app.analytics.models import PageView
 #             if current_user.is_authenticated:
 #                 abort(403)
 #             else:
-#                 return redirect(url_for('login', next=request.url))
+#                 return redirect(url_for('login'))
 
 
 class SafeBaseView(BaseView):
@@ -45,7 +45,7 @@ class SafeBaseView(BaseView):
             if current_user.is_authenticated:
                 abort(403)
             else:
-                return redirect(url_for('login', next=request.url))
+                return redirect(url_for('login'))
 
 
 class SafeModelView(ModelView):
@@ -60,7 +60,7 @@ class SafeModelView(ModelView):
             if current_user.is_authenticated:
                 abort(403)
             else:
-                return redirect(url_for('login', next=request.url))
+                return redirect(url_for('login'))
 
 
 class AnalyticsView(SafeBaseView):
@@ -69,8 +69,8 @@ class AnalyticsView(SafeBaseView):
         view_data = {}
         base = PageView.views_over(days=7)
         view_data['views_over'] = base
-        view_data['view_count'] = PageView.view_count(past_days=7)
-        view_data['user_count'] = PageView.user_count(past_days=7)
+        view_data['view_count'] = PageView.view_count(days=7)
+        view_data['user_count'] = PageView.user_count(days=7)
         return self.render('admin/analytics.html', view_data=view_data)
 
 

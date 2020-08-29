@@ -47,22 +47,22 @@ class PageView(CRUDMixin, db.Model):
 
     ## pageview analytics ##
     @classmethod
-    def views_over(cls, past_days):
-        ''' Querys views over past_days '''
-        if past_days:
-            time_ago = (datetime.utcnow() - timedelta(past_days))
+    def views_over(cls, days):
+        ''' Querys views over days '''
+        if days:
+            time_ago = (datetime.utcnow() - timedelta(days))
             return cls.query.filter(cls.timestamp >= time_ago)
         else:
             return cls.query.all()
 
     @classmethod
-    def view_count(cls, past_days):
-        return cls.views_over(past_days).count()
+    def view_count(cls, days):
+        return cls.views_over(days).count()
 
     @classmethod
-    def user_count(cls, past_days=None):
+    def user_count(cls, days=None):
         # TODO: rewrite in sql to be faster
-        base = cls.views_over(past_days)
+        base = cls.views_over(days)
         # unique_users = cls.query
         unique_users = set(view.ip for view in base)
         return len(unique_users)
