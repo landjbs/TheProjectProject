@@ -10,7 +10,33 @@
           <h1>{{ view_data['user_count'] }} users</h1>
         </div>
       </div>
+      <div class='row'>
+        <canvas id="activity_chart"></canvas>
+      </div>
     </div>
+
+  <script>
+    var ctx = document.getElementById('activity_chart');
+    Chart.defaults.global.legend.display = false;
+    new Chart(ctx {
+      type: 'line':
+      data: {
+        labels: [
+          {% for i in range(view_data['hourly_activity']) %}
+            '{{ i }}',
+          {% endfor %}
+        ],
+      datasets: {
+        {
+          data: [
+            {% fo%}
+          ]
+        }
+      }
+      }
+    })
+  </script>
+
   {% endblock %}
 
 {% else %}

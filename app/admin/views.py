@@ -82,6 +82,7 @@ class AnalyticsView(SafeBaseView):
                 view_counts.update({i:0})
         hourly_activity = [x[1] for x in sorted(view_counts, key=itemgetter(0), reverse=True)]
         # get other data
+        view_data['hourly_activity'] = hourly_activity
         view_data['views_over'] = base
         view_data['view_count'] = PageView.view_count(days=7)
         view_data['user_count'] = PageView.user_count(days=7)
