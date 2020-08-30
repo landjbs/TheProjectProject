@@ -41,7 +41,9 @@ class base_config(object):
     FLASK_ADMIN_SWATCH = 'cyborg'
     # FORMS
     WTF_CSRF_ENABLED = True
-    # SENTRY (will not enable error notification if no DSN exported)
+    ############################ RECOMMENDATION ################################
+    
+    ############################## SENTRY ######################################
     SENTRY_DSN = os.environ.get('SENTRY_DSN', default=None)
     ############################# ANALYTICS ####################################
     DOMAIN = 'http://127.0.0.1:5000/'

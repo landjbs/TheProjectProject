@@ -32,6 +32,13 @@ def home():
     )
 
 
+@hub.route('/load_recommendations')
+def load_recommendations():
+    # recommended
+    recommended = get_recommended_projects(current_user)
+
+
+
 ### SEARCH ###
 # @hub.route('/search')
 # @login_required
