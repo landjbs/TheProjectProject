@@ -12,7 +12,9 @@ from time import time
 
 
 global TIME_BREAKDOWN
-TIME_BREAKDOWN = {'subjects':0, 'active':0, 'tasks':0, 'timesince':0, 'members':0}
+TIME_BREAKDOWN = {
+    'subjects':0, 'active':0, 'tasks':0, 'timesince':0, 'members':0, 'ids':0
+}
 
 
 def score_project(project, user_subjects):
@@ -80,12 +82,21 @@ def get_recommended_projects(user):
     ## format user preferences ##
     user_subjects = get_normed_user_subjects(user, temp=2)
     ## score each candidate ##
-    results = [(project,score_project(project, user_subjects)) for project in candidates]
-    results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
-    results = (invited_projects + results)
-    results = results[:30]
-    if len(results)==0:
-        results = [project for project in Project.query.all().limit(30)]
+    scored_ids = [
+        (project.id , score_project(project, user_subjects))
+        for project in candidates
+    ]
+    result_ids = [
+        x[0] for x in sorted(scored_ids, key=itemgetter(1), reverse=True)
+    ]
+    # add ids of invited projects to front of result ids
+    result_ids = (invited_projects + result_ids)
+    s = time()
+    results = Project.query.order_by(*result_ids)
+    TIME_BREAKDOWN['ids'] += (time() - s)
+    print(results)
+    # if len(results)==0:
+        # results = [project for project in Project.query.all().limit(30)]
     print(TIME_BREAKDOWN)
     return results
 
