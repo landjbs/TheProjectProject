@@ -1,6 +1,5 @@
-function sendCollab() {
-  var form = $('#collab-form-0');
-  alert(form);
+function sendCollab(id) {
+  alert(id);
   // $.ajax({
   //   type: 'POST',
   //   url: url,

@@ -191,7 +191,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           {% if (g.current_user.owned.count())>0 %}
-            <form action="sendCollab('collab-{{ user.id }}')">
+            <form action="sendCollab({{ modal_id }})">
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
               <div class="modal-body">
                 {% if not user.available %}
