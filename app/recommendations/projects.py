@@ -76,7 +76,7 @@ def get_recommended_projects(user):
     candidates = Project.query.filter(Project.open==True,
                                       Project.complete==False,
                                       ~Project.id.in_(nowshow_ids)
-                                  ).order_by(desc(Project.last_active)).limit(100)
+                                  ).order_by(desc(Project.last_active)).limit(300)
     ## get invited projects ##
     invited = [project for project in user.invitations]
     ## format user preferences ##
