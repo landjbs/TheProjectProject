@@ -33,7 +33,7 @@ from app.analytics.models import PageView
 #             if current_user.is_authenticated:
 #                 abort(403)
 #             else:
-#                 return redirect(url_for('login'))
+#                 return redirect(url_for('auth.login') or request.next)
 
 
 class SafeBaseView(BaseView):
@@ -48,7 +48,7 @@ class SafeBaseView(BaseView):
             if current_user.is_authenticated:
                 abort(403)
             else:
-                return redirect(url_for('login'))
+                return redirect(url_for('auth.login') or request.next)
 
 
 class SafeModelView(ModelView):
@@ -63,7 +63,7 @@ class SafeModelView(ModelView):
             if current_user.is_authenticated:
                 abort(403)
             else:
-                return redirect(url_for('login'))
+                return redirect(url_for('auth.login') or request.next)
 
 
 class AnalyticsView(SafeBaseView):
@@ -74,13 +74,14 @@ class AnalyticsView(SafeBaseView):
         base = PageView.views_over(days=7)
         view_time_agos = []
         for view in base:
-            view_times.append((g.now - view.timestamp).hours)
+            view_time_agos.append(int((g.now() - view.timestamp).seconds/3600))
         view_counts = Counter(view_time_agos)
         earliest = max(view_time_agos)+1
         for i in range(earliest):
             if i not in view_counts:
                 view_counts.update({i:0})
-        hourly_activity = [x[1] for x in sorted(view_counts, key=itemgetter(0), reverse=True)]
+        hourly_activity = [(i, x) for i, x
+            in enumerate(sorted(view_counts.items(), key=itemgetter(0), reverse=True))]
         # get other data
         view_data['hourly_activity'] = hourly_activity
         view_data['views_over'] = base

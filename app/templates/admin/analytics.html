@@ -15,6 +15,11 @@
       </div>
     </div>
 
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+
   <script>
     var ctx = document.getElementById('activity_chart');
     Chart.defaults.global.legend.display = false;
@@ -22,15 +27,21 @@
       type: 'line':
       data: {
         labels: [
-          {% for i in range(view_data['hourly_activity']) %}
-            '{{ i }}',
+          {% for i in view_data['hourly_activity'] %}
+            '{{ i[0] }}',
           {% endfor %}
         ],
       datasets: {
         {
           data: [
-            {% fo%}
-          ]
+            {% for i in view_data['hourly_activity'] %}
+              '{{ i[1] }}',
+            {% endfor %}
+          ],
+          label: 'Activity',
+          borderColor: "#FF5D00",
+          backgroundColor: "rgba(255,93,0,0.5)",
+          fill: false
         }
       }
       }
