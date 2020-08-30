@@ -1,6 +1,8 @@
 {% if current_user.admin==True %}
   {% extends 'admin/master.html' %}
   {% block body %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
     <div class='container'>
       <div class='row'>
         <div class='col'>
@@ -15,12 +17,10 @@
       </div>
     </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
   <script>
     var ctx = document.getElementById('activity_chart');
     Chart.defaults.global.legend.display = false;
-    new Chart(ctx {
+    new Chart(ctx, {
       type: 'line':
       data: {
         labels: [
