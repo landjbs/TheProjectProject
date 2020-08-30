@@ -3,7 +3,7 @@
 import numpy as np
 from operator import itemgetter
 from datetime import datetime
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 
 from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
@@ -92,7 +92,7 @@ def get_recommended_projects(user):
     # add ids of invited projects to front of result ids
     result_ids = (invited_projects + result_ids)
     s = time()
-    results = Project.query.order_by(*result_ids)
+    results = Project.query.order_by((*result_ids))
     TIME_BREAKDOWN['ids'] += (time() - s)
     print(results)
     # if len(results)==0:
