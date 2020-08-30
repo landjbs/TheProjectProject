@@ -47,9 +47,9 @@ def load_recommendations():
             res = make_response(jsonify({}), 200)
         else:
             print(f"Returning posts {counter} to {counter + quantity}")
-            # Slice counter -> quantity from the db
-            res = make_response(jsonify(db[counter: counter + quantity]), 200)
-
+            # [counter:quantity] from recommendations
+            res = make_response(jsonify(db[counter:(counter+quantity)]), 200)
+    return res
 
 
 

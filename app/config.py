@@ -42,7 +42,7 @@ class base_config(object):
     # FORMS
     WTF_CSRF_ENABLED = True
     ############################ RECOMMENDATION ################################
-    
+
     ############################## SENTRY ######################################
     SENTRY_DSN = os.environ.get('SENTRY_DSN', default=None)
     ############################# ANALYTICS ####################################
