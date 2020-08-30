@@ -100,7 +100,7 @@ def get_recommended_projects(user):
     # get query from ordered ids
     results = Project.query.filter(
                 Project.id.in_(result_ids)
-            ).order_by(ordering).all()
+            ).order_by(ordering).all().paginate()
     # if len(results)==0:
         # results = [project for project in Project.query.all().limit(30)]
     print(TIME_BREAKDOWN)
