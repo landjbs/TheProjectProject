@@ -85,7 +85,7 @@ def get_recommended_projects(user):
     results = (invited_projects + results)
     results = results[:30]
     if len(results)==0:
-        results = user.projects.all()
+        results = [project for project in Project.query.all().limit(30)]
     print(TIME_BREAKDOWN)
     return results
 
