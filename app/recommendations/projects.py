@@ -98,10 +98,7 @@ def get_recommended_projects(user):
         value=Project.id
     )
     # get query from ordered ids
-    s = time()
     results = Project.query.filter(Project.id.in_(result_ids)).order_by(ordering).all()
-    TIME_BREAKDOWN['ids'] += (time() - s)
-    # print(results)
     # if len(results)==0:
         # results = [project for project in Project.query.all().limit(30)]
     print(TIME_BREAKDOWN)
