@@ -28,7 +28,7 @@
             '{{ i[0] }}',
           {% endfor %}
         ],
-        datasets: {
+        datasets: [
           {
             data: [
               {% for i in view_data['hourly_activity'] %}
@@ -40,7 +40,7 @@
             backgroundColor: "rgba(255,93,0,0.5)",
             fill: false
           }
-        }
+        ]
       },
       options: {
         scale: {
