@@ -4,6 +4,7 @@ import numpy as np
 from operator import itemgetter
 from datetime import datetime
 from sqlalchemy import desc, func
+from sqlalchemy.sql.expression import case
 
 from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
@@ -91,10 +92,16 @@ def get_recommended_projects(user):
     ]
     # add ids of invited projects to front of result ids
     result_ids = (invited_projects + result_ids)
+    # build case statement for ordered query
+    ordering = case(
+        {id: index for index, id in enumerate(result_ids)},
+        value=Project.id
+    )
+    # get query from ordered ids
     s = time()
-    results = Project.query.order_by((*result_ids))
+    results = Project.query.filter(Project.id.in_(result_ids)).order_by(ordering).all()
     TIME_BREAKDOWN['ids'] += (time() - s)
-    print(results)
+    # print(results)
     # if len(results)==0:
         # results = [project for project in Project.query.all().limit(30)]
     print(TIME_BREAKDOWN)
