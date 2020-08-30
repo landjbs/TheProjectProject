@@ -77,14 +77,12 @@ def get_recommended_projects(user):
                                       Project.complete==False,
                                       ~Project.id.in_(nowshow_ids)
                                   ).order_by(desc(Project.last_active)).limit(300)
-    ## get invited projects ##
-    invited = [project for project in user.invitations]
     ## format user preferences ##
     user_subjects = get_normed_user_subjects(user, temp=2)
     ## score each candidate ##
     results = [(project,score_project(project, user_subjects)) for project in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
-    results = (invited + results)
+    results = (invited_projects + results)
     results = results[:30]
     if len(results)==0:
         results = user.projects.all()
