@@ -1,5 +1,7 @@
 function sendCollab(id) {
   alert(id);
+  var x = document.getElementById(id);
+  alert(x);
   // $.ajax({
   //   type: 'POST',
   //   url: url,
