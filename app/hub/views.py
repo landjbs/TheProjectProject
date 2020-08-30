@@ -1,5 +1,5 @@
 from flask import (current_app, request, redirect, url_for,
-                   render_template, flash, g)
+                   render_template, flash, g, make_response)
 from flask_login import current_user, login_required
 from flask_mobility.decorators import mobilized
 from datetime import datetime
@@ -36,6 +36,20 @@ def home():
 def load_recommendations():
     # recommended
     recommended = get_recommended_projects(current_user)
+    if request.args:
+        # get counter from query string
+        counter = int(request.args.get("c"))
+        if counter == 0:
+            # [0:quantity] from recommendations
+            res = make_response(jsonify(db[0: quantity]), 200)
+        elif counter == posts:
+            # no posts left
+            res = make_response(jsonify({}), 200)
+        else:
+            print(f"Returning posts {counter} to {counter + quantity}")
+            # Slice counter -> quantity from the db
+            res = make_response(jsonify(db[counter: counter + quantity]), 200)
+
 
 
 
