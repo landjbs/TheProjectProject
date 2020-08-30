@@ -28,19 +28,30 @@
             '{{ i[0] }}',
           {% endfor %}
         ],
-      datasets: {
-        {
-          data: [
-            {% for i in view_data['hourly_activity'] %}
-              '{{ i[1] }}',
-            {% endfor %}
-          ],
-          label: 'Activity',
-          borderColor: "#FF5D00",
-          backgroundColor: "rgba(255,93,0,0.5)",
-          fill: false
+        datasets: {
+          {
+            data: [
+              {% for i in view_data['hourly_activity'] %}
+                '{{ i[1] }}',
+              {% endfor %}
+            ],
+            label: 'Activity',
+            borderColor: "#FF5D00",
+            backgroundColor: "rgba(255,93,0,0.5)",
+            fill: false
+          }
         }
-      }
+      },
+      options: {
+        scale: {
+              angleLines: {
+              display: false
+          },
+          ticks: {
+              suggestedMin: 0,
+              display: false
+          },
+        }
       }
     })
   </script>
