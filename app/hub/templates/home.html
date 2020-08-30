@@ -47,12 +47,6 @@
   {% endif %}
 </div>
 
-<!-- custom js imports -->
-<!-- allow card starring -->
-<script src="js/stars.js"></script>
-<!-- allow collab ajax -->
-<script src="js/collab.js"></script>
-
 <!-- show help tooltips on first login if not mobile dev -->
 {% if not request.MOBILE %}
   {% if (current_user.n_owned() < 1) %}
@@ -70,5 +64,11 @@
     </script>
   {% endif %}
 {% endif %}
+
+<!-- custom js imports -->
+<!-- allow card starring -->
+<script src="js/stars.js"></script>
+<!-- allow collab ajax -->
+<script src="js/collab.js"></script>
 
 {% endblock %}

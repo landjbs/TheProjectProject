@@ -1,6 +1,5 @@
-function sendCollab(id) {
-  alert(id);
-  var x = document.getElementById(id);
+function sendCollab(elt, modal_id) {
+  var x = document.getElementById(modal_id);
   alert(x);
   // $.ajax({
   //   type: 'POST',
