@@ -27,5 +27,4 @@ $('collab-form-').submit(function(event) {
     // TODO
 });
 
-
-// action="{{ url_for('user.collaborate', target_user_id=user.id) }}" method='post'
+// onclick="sendCollab({{ modal_id }})"
