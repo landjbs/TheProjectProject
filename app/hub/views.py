@@ -1,5 +1,5 @@
 from flask import (current_app, request, redirect, url_for,
-                   render_template, flash, g, make_response)
+                   render_template, flash, g, make_response, jsonify)
 from flask_login import current_user, login_required
 from flask_mobility.decorators import mobilized
 from datetime import datetime

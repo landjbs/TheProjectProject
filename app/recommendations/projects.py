@@ -91,7 +91,11 @@ def get_recommended_projects(user):
         x[0] for x in sorted(scored_ids, key=itemgetter(1), reverse=True)
     ]
     # add ids of invited projects to front of result ids
-    result_ids = (invited_projects + result_ids)
+    result_ids = (
+            invited_projects
+            + result_ids
+            + list(set(nowshow_ids).difference(invited_projects))
+    )
     # build case statement for ordered query
     ordering = case(
         {id: index for index, id in enumerate(result_ids)},
