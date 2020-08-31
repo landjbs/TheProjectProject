@@ -206,16 +206,6 @@ a:hover {
   background-color: #FF5D00;
 }
 
-.subject-tag {
-  border-radius: 5%;
-  text-align: center;
-  display: inline-block;
-  font-size: 80%;
-  color: white;
-  padding: 0px 6px 0px 6px;
-  white-space: nowrap;
-}
-
 .join-input {
   border: 0px;
   border-bottom: 1px solid black;

@@ -28,7 +28,7 @@ def load_user(id):
 def apply():
     # form preprocessing
     form = Apply()
-    form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
+    form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]

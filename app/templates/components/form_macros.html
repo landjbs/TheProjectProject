@@ -68,9 +68,26 @@
       {% endif %}
     {% endif %}
   {% else %}
-    <center>{{ field(style='display:hidden;') }}</center>
-    {% for subject in field.choices %}
-      {{ render_subject_tag(subject) }}
-    {% endfor %}
+    <div class='row'>
+      <div class='col'>
+        bap
+      </div>
+      <div class='col' style='padding:1px;'>
+        {% for _, subject in field.choices %}
+          {{ render_subject_tag(subject) }}
+        {% endfor %}
+      </div>
+    </div>
+    <script>
+      var subject_tags = document.getElementsByClassName('subject-tag');
+      var subject_click = function () {
+        var data = this.getAttribute("data");
+        this.style.display = 'none';
+        alert(data);
+      }
+      for(var i=0;i<subject_tags.length;i++){
+          subject_tags[i].addEventListener('click', subject_click, false);
+      }
+    </script>
   {% endif %}
 {% endmacro -%}
