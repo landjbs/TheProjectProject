@@ -1,7 +1,7 @@
 {% from 'macros/cards/subject.html' import render_subject_tag %}
 
 <!-- SELECTS -->
-{% macro render_multiselect(field) -%}
+{% macro render_multiselect(field, tags=0) -%}
   {% if not True %}
   <!-- request.MOBILE -->
     <!-- imports/ -->
@@ -55,7 +55,7 @@
           }
       });
     </script>
-  {% elif request.MOBILE %}
+  {% elif request.MOBILE or tags==0 %}
     <center>{{ field() }}</center>
     <br>
     {% if field.errors %}

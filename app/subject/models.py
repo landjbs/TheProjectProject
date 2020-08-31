@@ -27,7 +27,7 @@ class Subject(CRUDMixin, db.Model): # SearchableMixin
         self.projects = []
 
     def __repr__(self):
-        return f'<Subject {self.name}>'
+        return self.name
 
 
 class User_Subjects(db.Model):
