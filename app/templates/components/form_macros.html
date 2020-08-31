@@ -70,8 +70,7 @@
   {% else %}
     {{ field(style='display:none;') }}
     <div class='row'>
-      <div class='col' style='border-right:1px solid white;'>
-        bap
+      <div class='col selected-subjects' style='border-right:1px solid white; padding:1px;'>
       </div>
       <div class='col' style='padding:1px;'>
         {% for _, subject in field.choices %}
@@ -82,9 +81,11 @@
     <script>
       var subject_tags = document.getElementsByClassName('subject-tag');
       var subject_click = function () {
-        var data = this.getAttribute("data");
-        this.style.display = 'none';
-        alert(data);
+        var subject = this.getAttribute("data");
+        this.remove();
+        $('.selected-subjects').append('&nbsp;');
+        $('.selected-subjects').append(this);
+        $('.selected-subjects').append('&nbsp;');
       }
       for(var i=0;i<subject_tags.length;i++){
           subject_tags[i].addEventListener('click', subject_click, false);

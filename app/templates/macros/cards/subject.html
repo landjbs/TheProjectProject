@@ -44,7 +44,7 @@
 
 {% macro render_subject_tag(subject) -%}
   <p class='subject-tag' id='subject-tag-{{ subject.id }}'
-    data='{{ subject.id }}' style='background:{{ subject.color }};'>
+    data='{{ subject }}' style='background:{{ subject.color }};'>
     {{ subject.name }}
   </p>
 {% endmacro -%}
