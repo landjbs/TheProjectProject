@@ -70,15 +70,15 @@
   {% else %}
     <style>
       .selected-subjects .subject-tag {
-        margin-left: 2px;
-        margin-right: 2px; 
+        margin-left:  2px;
+        margin-right: 2px;
       }
     </style>
-    {{ field(style='display:none;') }}
+    {{ field(id='hidden-select', style='display:none;') }}
     <div class='row'>
-      <div class='col selected-subjects' style='border-right:1px solid white; margin:2px;'>
+      <div class='col selected-subjects' style='border-right:1px solid white;'>
       </div>
-      <div class='col' style='padding:1px;'>
+      <div class='col unselected-subjects'>
         {% for _, subject in field.choices %}
           {{ render_subject_tag(subject) }}
         {% endfor %}
@@ -87,9 +87,16 @@
     <script>
       var subject_tags = document.getElementsByClassName('subject-tag');
       var subject_click = function () {
-        var subject = this.getAttribute("data");
+        var subject_id = this.getAttribute("data");
+        var selected = this.getAttribute('selected');
         this.remove();
-        $('.selected-subjects').append(this);
+        if (selected=='false') {
+          $('.selected-subjects').append(this);
+          this.setAttribute('selected', 'true');
+        } else {
+          $('.unselected-subjects').append(this);
+          this.setAttribute('selected', 'false');
+        }
       }
       for(var i=0;i<subject_tags.length;i++){
           subject_tags[i].addEventListener('click', subject_click, false);
