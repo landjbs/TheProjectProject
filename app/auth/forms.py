@@ -15,12 +15,10 @@ class Apply(BaseForm):
     name = StringField('Name',
                     validators=[DataRequired(), Length(1, 254)],
                     render_kw={'placeholder': 'John Harvard'})
-    email = StringField('Harvard Email',
+    email = StringField('Email',
                     validators=[DataRequired(), Length(1, 254),
                                    Email()], # Email_Ext_Validator()
-                    description=('Currently only Harvard College emails '
-                                   'are allowed. Please reach out if you would '
-                                   'like your school to be added.'),
+                    description=('College emails are preferred.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
     about = TextField('About You',
                     validators=[DataRequired(), Length(1, 500)],
