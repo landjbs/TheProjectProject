@@ -43,7 +43,7 @@ from app.commands import command_list
 # follow: https://stackoverflow.com/questions/50070979/wrong-dashboard-while-adding-flask-admin-to-project/50179126#50179126
 
 
-def create_app(config=config.dev_config, register_admin=True):
+def create_app(config=config.production_config, register_admin=True):
     ''' Create app and register all extensions and blueprints '''
     application = Flask(__name__, static_folder='static', static_url_path='/', instance_relative_config=True)
     application.config.from_object(config())
@@ -150,6 +150,7 @@ def register_admin_views(application, admin, db):
     from app.notification.models import Notification
     from app.competition.models import Competition
     from app.analytics.models import PageView
+    from app.badge.models import Badge
     # import view
     from app.admin.views import (
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
@@ -167,6 +168,7 @@ def register_admin_views(application, admin, db):
         admin.add_view(SafeModelView(Project_Application, db.session, endpoint='AdminApplication'))
         admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
         admin.add_view(CompetitionModelView(Competition, db.session, endpoint='AdminCompetition'))
+        admin.add_view(SafeModelView(Badge, db.session, endpoint='AdminBadge'))
         admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
         admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
         admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))

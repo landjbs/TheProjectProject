@@ -9,19 +9,10 @@ from sqlalchemy.sql.expression import case
 from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
 
-from time import time
-
-
-global TIME_BREAKDOWN
-TIME_BREAKDOWN = {
-    'subjects':0, 'active':0, 'tasks':0, 'timesince':0, 'members':0, 'ids':0
-}
-
 
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
     # subject scoring [0,6]
-    s = time()
     score = 0
     project_subjects = set(project.subjects)
     for subject, subject_score in user_subjects.items():
@@ -29,13 +20,9 @@ def score_project(project, user_subjects):
             score += subject_score
     score /= (len(user_subjects)+0.0000001)
     score *= 6
-    TIME_BREAKDOWN['subjects'] += (time() - s)
-    s = time()
     # recently active scoring [0,2]
     if project.recently_active():
         score += 2
-    TIME_BREAKDOWN['active'] += (time() - s)
-    s = time()
     # tasks scores [0,2] gives boost to projects with incomplete tasks
     n_incomplete = project.tasks.filter_by(complete=False).count()
     if n_incomplete==1:
@@ -44,8 +31,6 @@ def score_project(project, user_subjects):
         score += 1.5
     elif n_incomplete>=3:
         score += 2
-    TIME_BREAKDOWN['tasks'] += (time() - s)
-    s = time()
     # time scores [0,1] give boost to newer projects
     time_since = (datetime.utcnow() - project.posted_on).days
     if time_since<1:
@@ -54,8 +39,6 @@ def score_project(project, user_subjects):
         score += 0.8
     elif time_since<10:
         score += 0.5
-    TIME_BREAKDOWN['timesince'] += (time() - s)
-    s = time()
     # members score [0,1] gives boost to more empty projects
     n_members = 0
     for m in project.members:
@@ -64,7 +47,6 @@ def score_project(project, user_subjects):
         score += (1 - (n_members / (project.team_size+0.0000001)))
     else:
         score = 0
-    TIME_BREAKDOWN['members'] += (time() - s)
     return score
 
 
