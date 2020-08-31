@@ -1,3 +1,5 @@
+{% from 'macros/cards/subject.html' import render_subject_tag %}
+
 <!-- SELECTS -->
 {% macro render_multiselect(field) -%}
   {% if not True %}
@@ -53,7 +55,7 @@
           }
       });
     </script>
-  {% else %}
+  {% elif False %}
     <center>{{ field() }}</center>
     <br>
     {% if field.errors %}
@@ -65,5 +67,10 @@
         <small>⌘/⌃ to select multiple.</small>
       {% endif %}
     {% endif %}
+  {% else %}
+    <center>{{ field(style='display:hidden;') }}</center>
+    {% for subject in field.choices %}
+      {{ render_subject_tag(subject) }}
+    {% endfor %}
   {% endif %}
 {% endmacro -%}
