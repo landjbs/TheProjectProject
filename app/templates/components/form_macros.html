@@ -79,9 +79,13 @@
       }
     </style>
     {{ field(id='hidden-select', style='display:none;') }}
-    {{ field.data }}
     <div class='row'>
       <div class='col selected-subjects' style='border-right:1px solid white;'>
+        {% if field.data %}
+          {% for id in field.data %}
+            {{ render_subject_tag(field.choices[id]) }}
+          {% endfor %}
+        {% endif %}
       </div>
       <div class='col unselected-subjects' style='margin:0px; padding:0px;'>
         {% for _, subject in field.choices %}
