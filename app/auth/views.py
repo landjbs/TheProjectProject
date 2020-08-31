@@ -32,6 +32,7 @@ def apply():
     # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
+        print(subjects)
         user = User.create(
                     name=form.data['name'],
                     email=form.data['email'],
@@ -55,9 +56,15 @@ def apply():
             user.accept()
         return redirect(url_for('base.index'))
     start_on = 0
+    stop_at = len(form)
     for i, elt in enumerate(form):
+        if (elt.name=='password'):
+            stop_at = i
         if elt.errors:
-            start_on = i
+            if i > stop_at:
+                start_on = stop_at
+            else:
+                start_on = i
             break
     return render_template('apply.html', form=form, start_on=start_on)
 

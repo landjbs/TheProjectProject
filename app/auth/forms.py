@@ -31,7 +31,7 @@ class Apply(BaseForm):
     subjects = SelectMultipleField('Passions',
                                     description=('What fields are you '
                                                 'interested in?'),
-                                    validators=[Select_Limit_Validator(5)],
+                                    validators=[],
                                     choices=[], coerce=int,
                                     render_kw={'max':5})
     password = PasswordField('Create Password',
