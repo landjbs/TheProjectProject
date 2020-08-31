@@ -56,12 +56,12 @@ def apply():
             user.accept()
         return redirect(url_for('base.index'))
     start_on = 0
-    stop_at = len(form)
+    stop_at = None
     for i, elt in enumerate(form):
         if (elt.name=='password'):
             stop_at = i
         if elt.errors:
-            if i > stop_at:
+            if stop_at and (i > stop_at):
                 start_on = stop_at
             else:
                 start_on = i
