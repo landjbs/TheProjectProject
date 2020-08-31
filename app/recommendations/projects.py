@@ -96,6 +96,8 @@ def get_recommended_projects(user):
             + result_ids
             + list(set(nowshow_ids).difference(invited_projects))
     )
+    if len(result_ids)==0:
+        return []
     # build case statement for ordered query
     ordering = case(
         {id: index for index, id in enumerate(result_ids)},
