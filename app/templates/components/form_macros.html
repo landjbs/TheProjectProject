@@ -86,7 +86,7 @@
           {{ render_subject_tag(field.choices[id]) }}
         {% endfor %}
       </div>
-      <div class='col unselected-subjects' style='margin:0px; padding:0px;'>
+      <div class='col unselected-subjects'>
         {% for id, subject in field.choices %}
           {% if not id in prev_data %}
             {{ render_subject_tag(subject) }}
