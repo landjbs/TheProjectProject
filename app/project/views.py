@@ -18,15 +18,15 @@ from .forms import (Add_Project, Comment_Form, Task_Form,
 from ..project import project
 
 
-@project.route('/new_add', methods=['GET','POST'])
-@project.route('/new_add/<int:competition_id>', methods=['GET','POST'])
-# @login_required
-def new_add(competition_id=None):
-    form = Add_Project(competition=competition_id)
-    form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
-    form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
-    return render_template('new_add.html', form=form)
-
+# @project.route('/new_add', methods=['GET','POST'])
+# @project.route('/new_add/<int:competition_id>', methods=['GET','POST'])
+# # @login_required
+# def new_add(competition_id=None):
+#     form = Add_Project(competition=competition_id)
+#     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
+#     form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
+#     return render_template('new_add.html', form=form)
+#
 
 
 @project.route('/add_project/', methods=['GET','POST'])
@@ -36,7 +36,7 @@ def new_add(competition_id=None):
 def add_project(competition_id=None):
     # form preprocessing
     form = Add_Project(competition=competition_id)
-    form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
+    form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
     # form validation
     if form.validate_on_submit():
