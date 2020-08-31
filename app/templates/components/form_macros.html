@@ -55,7 +55,7 @@
           }
       });
     </script>
-  {% elif False %}
+  {% elif request.MOBILE %}
     <center>{{ field() }}</center>
     <br>
     {% if field.errors %}
@@ -68,8 +68,9 @@
       {% endif %}
     {% endif %}
   {% else %}
+    {{ field(style='display:none;') }}
     <div class='row'>
-      <div class='col'>
+      <div class='col' style='border-right:1px solid white;'>
         bap
       </div>
       <div class='col' style='padding:1px;'>
