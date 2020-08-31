@@ -150,15 +150,21 @@ def add_test():
 #     return True
 
 @click.argument('text')
+@click.argument('name', default=None)
 @click.argument('redirect', default=None)
-@click.option('--important', default=True, help='Whether note is important.')
-def notify_users(text, redirect, important):
-    User.notify_all(text=text, redirect=redirect, important=important)
+@click.option('--important', default=True, type=bool)
+def notify_all(text, name, redirect, important):
+    User.notify_all(
+        text=str(text),
+        name=str(name),
+        redirect=str(redirect),
+        important=bool(important)
+    )
     return True
 
 ### list of commands to register ###
 command_list = [create_db, drop_db, rebuild_db, add_badges, add_statics,
-                populate_db, add_test, notify_users]
+                populate_db, add_test, notify_all]
 
 
 ### elasticsearch stuff ##
