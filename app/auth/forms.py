@@ -18,7 +18,9 @@ class Apply(BaseForm):
     email = StringField('College Email',
                     validators=[DataRequired(), Length(1, 254),
                                    Email(), EDU_Validator()],
-                    description=('College emails are preferred.'),
+                    description=(('Currently, only college emails are allowed. Please '
+                            'contact us if you do not have a college email, but would like '
+                            'to join.')),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
     about = TextField('About You',
                     validators=[DataRequired(), Length(1, 500)],
