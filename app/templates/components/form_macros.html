@@ -79,6 +79,7 @@
       }
     </style>
     {{ field(id='hidden-select', style='display:none;') }}
+    {{ field.data }}
     <div class='row'>
       <div class='col selected-subjects' style='border-right:1px solid white;'>
       </div>
@@ -97,6 +98,7 @@
         if (selected=='false') {
           $('.selected-subjects').append(this);
           this.setAttribute('selected', 'true');
+          alert($('selected_subjects').selected)
         } else {
           $('.unselected-subjects').append(this);
           this.setAttribute('selected', 'false');
