@@ -4,7 +4,7 @@ from wtforms import (TextField, StringField, PasswordField, BooleanField,
 from wtforms.validators import (DataRequired, Length, EqualTo, Email)
 
 from app.forms.base import BaseForm
-from app.forms.validators import Select_Limit_Validator
+from app.forms.validators import Select_Limit_Validator, EDU_Validator
 from app.link.utils import fix_url
 
 from app.user.models import User
@@ -15,9 +15,9 @@ class Apply(BaseForm):
     name = StringField('Name',
                     validators=[DataRequired(), Length(1, 254)],
                     render_kw={'placeholder': 'John Harvard'})
-    email = StringField('Email',
+    email = StringField('College Email',
                     validators=[DataRequired(), Length(1, 254),
-                                   Email()], # Email_Ext_Validator()
+                                   Email(), EDU_Validator()],
                     description=('College emails are preferred.'),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
     about = TextField('About You',

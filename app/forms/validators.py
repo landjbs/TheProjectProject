@@ -43,6 +43,15 @@ class Select_Limit_Validator(object):
             raise ValidationError(f'Must select no more than {self.max} options.')
 
 
+class EDU_Validator(object):
+    def __init__(self):
+        pass
+
+    def __call__(self, form, field):
+        if not field.data.endswith('.edu'):
+            raise ValidationError("College email must end with '.edu'.")
+
+
 ## DEPRECATED (for now) ##
 # class Site_URL_Validator(object):
 #     ''' Validator for http or https URLs from site '''
