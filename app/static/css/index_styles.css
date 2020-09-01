@@ -7,6 +7,13 @@ body {
   background-color: black;
 }
 
+@media (max-width: 992px) {
+  #navbarResponsive {
+    z-index: 999;
+  }
+}
+
+
 @media (max-width: 991px) {
   .big-head {
     display: none;
