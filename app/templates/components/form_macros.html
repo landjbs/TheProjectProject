@@ -69,6 +69,10 @@
     {% endif %}
   {% else %}
     <style>
+      .subject-tag:hover {
+        border: 1px solid white;
+        cursor: pointer;
+      }
       .selected-subjects .subject-tag {
         margin-left:  2px;
         margin-right: 2px;
@@ -77,16 +81,21 @@
         margin-left:  2px;
         margin-right: 2px;
       }
+      .passion-column-header {
+        text-decoration: underline;
+      }
     </style>
     {{ field(id='hidden-select', style='display:none;') }}
     {% set prev_data = field.data if field.data else [] %}
     <div class='row'>
       <div class='col selected-subjects' style='border-right:1px solid white;'>
+        <h4 class='passion-column-header'>Your Passions</h4>
         {% for id in prev_data %}
           {{ render_subject_tag(field.choices[id][1]) }}
         {% endfor %}
       </div>
       <div class='col unselected-subjects'>
+        <h4 class='passion-column-header'>Options</h4>
         {% for id, subject in field.choices %}
           {% if not id in prev_data %}
             {{ render_subject_tag(subject) }}
