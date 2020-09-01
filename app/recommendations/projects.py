@@ -77,7 +77,7 @@ def get_recommended_projects(user):
             invited_projects
             + result_ids
             + list(set(nowshow_ids).difference(invited_projects))
-    )
+    )[:30]
     if len(result_ids)==0:
         return []
     # build case statement for ordered query
@@ -91,7 +91,6 @@ def get_recommended_projects(user):
             ).order_by(ordering).all()
     # if len(results)==0:
         # results = [project for project in Project.query.all().limit(30)]
-    print(TIME_BREAKDOWN)
     return results
 
 
