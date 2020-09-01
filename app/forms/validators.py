@@ -48,8 +48,9 @@ class EDU_Validator(object):
         pass
 
     def __call__(self, form, field):
-        if not field.data.endswith('.edu'):
-            raise ValidationError("College email must end with '.edu'.")
+        return True
+        # if not field.data.endswith('.edu'):
+            # raise ValidationError("College email must end with '.edu'.")
 
 
 ## DEPRECATED (for now) ##

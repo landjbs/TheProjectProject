@@ -1,10 +1,16 @@
-from time import time
+# WARNING: deprecated/not used
 
-from app.user.models import User
+from time import sleep
 
-while True:
-    time.sleep(30)
-    pending = User.query.filter_by(confirmed=True, accepted=False)
-    for user in pending:
-        user.accept()
-        print(f'ACCEPTED: {user.name}.')
+from app import app
+
+
+with app.app_context():
+    from app import db
+    print('ACCEPTER RUNNING')
+    while True:
+        sleep(1)
+        pending = db.session.query('User').filter_by(confirmed=True, accepted=False)
+        for user in pending:
+            user.accept()
+            print(f'ACCEPTED: {user.name}.')

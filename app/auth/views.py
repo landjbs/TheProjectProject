@@ -7,7 +7,8 @@ from datetime import datetime
 
 from app.extensions import lm, bcrypt, serializer
 from app.jobs import (
-    send_registration_email, send_confirmation_email, send_password_reset_email
+    send_registration_email, send_confirmation_email, send_password_reset_email,
+    send_acceptance_email
 )
 from app.user.models import User
 from app.subject.models import Subject
@@ -70,19 +71,21 @@ def apply():
 
 
 @auth.route('/verify/<token>', methods=['GET'])
-def verify(token, expiration=604800):
+def verify(token, expiration=60480000000):
     '''
     Verifies token from confirmation application
     Args:
         token:      URLSafeTimedSerializer token from apply()
         expiration: Seconds until expiration
     '''
-    s = URLSafeTimedSerializer(current_app.secret_key)
     try:
-        id = s.loads(token, salt=CONFIRM_SALT, max_age=expiration)
+        id = serializer.loads(token, salt=CONFIRM_SALT, max_age=expiration)
     except SignatureExpired:
         # NOTE: RACE CONDITION IF DELETION AND CONFIRMATION HAPPEN SIMULTANEOUSLY
-        # TODO: ACTUALLY REMOVE APPLICATION VERY IMPORTANT
+        # WARNING: this hasnt been tested: lower expiration could lead to bugs
+        id = serializer.loads(token, salt=CONFIRM_SALT)
+        user = User.query.filter_by(id=id).first_or_404()
+        user.delete()
         # notify user and redirect to application page
         flash(('Oops! Your email confirmation expired so we removed your ' \
                'application. Please apply again.'), category='error')
@@ -93,10 +96,11 @@ def verify(token, expiration=604800):
     if user.confirmed:
         abort(404)
     user.confirmed = True
-    send_confirmation_email(user)
+    user.accept()
     user.update()
     flash('You have confirmed your application! We will email you with '
           'application updates as soon as possible.', category='success')
+    send_acceptance_email(user)
     return redirect(url_for('base.index'))
 
 

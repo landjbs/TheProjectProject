@@ -20,7 +20,7 @@ class base_config(object):
     SES_EMAIL_SOURCE = os.environ.get('SES_EMAIL_SOURCE', 'admin@theprojectproject.io')
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY= os.environ.get('AWS_SECRET_ACCESS_KEY')
-    REGISTER_MAIL = False
+    REGISTER_MAIL = True
     # SQLALCHEMY URI
     DB_USER = os.environ.get('DB_USER', 'admin')
     DB_PASSWORD = os.environ.get('DB_PASSWORD')
