@@ -114,34 +114,40 @@
         </div>
       </div>
     {% else %}
-    <div class='row selected-subjects'>
-      <style>
-        .selected-subjects {
-          border-bottom: 1px solid white;
-          max-height: 10vh;
-          overflow-y: scroll;
-        }
-        .unselected-subjects {
-          max-height: 10vh;
-          overflow-y: scroll;
-        }
-        .passion-column-header {
-          text-align: center;
-        }
-      </style>
-      <p class='passion-column-header'>Selected<br></p>
-      {% for id in prev_data %}
-        {{ render_subject_tag(field.choices[id][1]) }}
-      {% endfor %}
-    </div>
-    <br>
-    <div class='row unselected-subjects'>
-      <p class='passion-column-header'>Unselected<br></p>
-      {% for id, subject in field.choices %}
-        {% if not id in prev_data %}
-          {{ render_subject_tag(subject) }}
-        {% endif %}
-      {% endfor %}
+    <style>
+      .selected-subjects {
+        border-bottom: 1px solid white;
+        max-height: 10vh;
+        overflow-y: scroll;
+      }
+      .unselected-subjects {
+        max-height: 10vh;
+        overflow-y: scroll;
+      }
+      .passion-column-header {
+        text-align: center;
+      }
+    </style>
+    <div class='col'>
+      <div class='row'>
+        <p class='passion-column-header'>Selected</p>
+      </div>
+      <div class='row selected-subjects'>
+        {% for id in prev_data %}
+          {{ render_subject_tag(field.choices[id][1]) }}
+        {% endfor %}
+      </div>
+      <br>
+      <div class='row'>
+        <p class='passion-column-header'>Unselected</p>
+      </div>
+      <div class='row unselected-subjects'>
+        {% for id, subject in field.choices %}
+          {% if not id in prev_data %}
+            {{ render_subject_tag(subject) }}
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
     {% endif %}
     <script>
