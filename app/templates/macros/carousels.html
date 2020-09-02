@@ -114,7 +114,18 @@
             <i class="fa fa-chevron-circle-right fa-lg"></i>
           </a>
         </div>
-
+        <!-- scroll scripts -->
+        <script>
+          // set scroll speed
+          $('#{{ carousel_id }}').carousel({
+            interval: {{ interval }}
+          })
+          // cache scroll iterator and update counter
+          $('#{{ carousel_id }}').on('slid.bs.carousel', function () {
+            var count_index = $('#{{ carousel_id }} div.active').index() + 1
+            $('#{{ counter_id }}').html(count_index);
+          });
+        </script>
       {% endif %}
     <!-- mobile -->
     {% else %}
@@ -124,7 +135,7 @@
     {% endif %}
     {% if n==0 and redirect_empty %}
       <div style='text-align:center;'>
-        <a type="button" href="{{ redirect_empty }}">
+        <a type="button" class='add_button' href="{{ redirect_empty }}">
           <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
         </a>
       </div>

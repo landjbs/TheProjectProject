@@ -193,6 +193,9 @@ a:hover {
 
 .add_button {
   color: #5D00FF;
+  background: transparent;
+  border: 0px;
+  -webkit-appearance:none !important;
 }
 
 .btn {
