@@ -154,6 +154,7 @@ def project_page(project_code, open_tab=None):
         edit_application_form = Edit_Project_Application()
         edit_form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
         edit_form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
+        print(f'ERROR: {edit_form.errors}')
         if request.method=='POST':
             if edit_form.validate_on_submit():
                 edits_made = False
