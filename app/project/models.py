@@ -353,6 +353,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         edits_made = False
         prev_subjects = set(self.subjects)
         new_subjects = set(subjects)
+        print(prev_subjects)
+        print(new_subjects)
         for subject in new_subjects:
             if not subject in prev_subjects:
                 self.subjects.append(subject)
