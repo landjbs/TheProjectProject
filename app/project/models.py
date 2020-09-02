@@ -347,6 +347,24 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.update()
         return True
 
+    ## subjects ##
+    def change_subjects(subjects):
+        ''' Changes project subjects to subject list '''
+        edits_made = False
+        prev_subjects = set(self.subjects)
+        new_subjects = set(subjects)
+        for subject in new_subjects:
+            if not subject in prev_subjects:
+                self.subjects.append(subject)
+                edits_made = True
+        for subject in prev_subjects:
+            if not subject in new_subjects:
+                self.subjects.remove(subject)
+                edits_made = True
+        if edits_made:
+            self.update()
+        return edits_made
+
     ## tasks ##
     def n_todo(self):
         return self.todo_tasks().count()
