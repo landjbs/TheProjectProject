@@ -79,11 +79,6 @@
         .selected-subjects {
           border-bottom: 1px solid white;
         }
-        .unselected-subjects {
-          max-height: 10vh;
-          padding-bottom: 0px;
-          overflow-y: scroll;
-        }
       </style>
     {% endif %}
     <style>
@@ -108,26 +103,41 @@
     </style>
     {{ field(id='hidden-select', style='display:none;') }}
     {% set prev_data = field.data if field.data else [] %}
-    <div class='row'>
-      <div class='col selected-subjects'>
-        {% if show_labels==1 %}
-          <h4 class='passion-column-header'>Your Passions</h4>
-        {% endif %}
-        {% for id in prev_data %}
-          {{ render_subject_tag(field.choices[id][1]) }}
-        {% endfor %}
-      </div>
-      <div class='col unselected-subjects'>
-        {% if show_labels==1 %}
-          <h4 class='passion-column-header'>Options</h4>
-        {% endif %}
-        {% for id, subject in field.choices %}
-          {% if not id in prev_data %}
-            {{ render_subject_tag(subject) }}
+    {% if show_labels==1 %}
+      <div class='row'>
+        <div class='col selected-subjects'>
+          {% if show_labels==1 %}
+            <h4 class='passion-column-header'>Your Passions</h4>
           {% endif %}
-        {% endfor %}
+          {% for id in prev_data %}
+            {{ render_subject_tag(field.choices[id][1]) }}
+          {% endfor %}
+        </div>
+        <div class='col unselected-subjects'>
+          {% if show_labels==1 %}
+            <h4 class='passion-column-header'>Options</h4>
+          {% endif %}
+          {% for id, subject in field.choices %}
+            {% if not id in prev_data %}
+              {{ render_subject_tag(subject) }}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
+    {% else %}
+    <div class='row selected-subjects'>
+      {% for id in prev_data %}
+        {{ render_subject_tag(field.choices[id][1]) }}
+      {% endfor %}
     </div>
+    <div class='row unselected-subjects'>
+      {% for id, subject in field.choices %}
+        {% if not id in prev_data %}
+          {{ render_subject_tag(subject) }}
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
     <script>
       sessionStorage.setItem('n', 0);
       var subject_tags = document.getElementsByClassName('subject-tag');
