@@ -38,9 +38,7 @@ class Add_Project(BaseForm):
     subjects = SelectMultipleField('Subjects',
                                     description=('What subjects might this '
                                                 'project involve?'),
-                                    validators=[],
-                                    choices=[], coerce=int,
-                                    render_kw={'max':5})
+                                    validators=[], choices=[], coerce=int)
     open = BooleanField('Team Project',
                         validators=[],
                         description=('Whether you want to work with others on this project.'))
@@ -68,8 +66,7 @@ class Add_Project(BaseForm):
     competition = SelectField('Competition',
                             validators=[],
                             description=('Submit your project to '
-                                        'competitions and win rewards! Please '
-                                        'make sure you meet criteria.'),
+                                        'and win rewards!'),
                             choices=[]
                             # coerce=int
                         )
@@ -81,9 +78,6 @@ class Add_Project(BaseForm):
         # stock validation
         rv = BaseForm.validate(self)
         if not rv:
-            error_flag = True
-        if (len(self.subjects.data)>5):
-            self.subjects.errors = ['Can only choose up to 5 subjects.']
             error_flag = True
         # team size defaults to 1 if None
         if self.team_size.data is None:
@@ -104,7 +98,11 @@ class Edit_Project(BaseForm):
                         render_kw={'max':400})
     estimated_time = FloatField('Estimated Time', render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Target Team Size',
-                            render_kw={'min':1, 'max':30, 'start':7})
+                            render_kw={'min':1, 'max':40, 'start':7})
+        subjects = SelectMultipleField('Subjects',
+                                        description=('What subjects might this '
+                                                    'project involve?'),
+                                        validators=[], choices=[], coerce=int)
     competition = SelectField('Competition',
                             validators=[],
                             description=('Submit your project to '
