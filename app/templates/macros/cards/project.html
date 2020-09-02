@@ -359,11 +359,11 @@
             {% endif %}
             <hr class='my-2'><br>
             {{ edit_form.subjects.label }}:<br>
-            {% set defaults = [] %}
-            {% for s in project.subjects %}
-              {% set defaults = default + [s.id] %}
-            {% endfor %}
-            {{ render_multiselect(edit_form.subjects, 1, 0, defaults) }}
+            {% set subjects = [] %}
+            {% for subject in project.subjects %}
+              {% subjects = subjects + [(subject.id, subject)] %}
+            {% endfor }
+            {{ render_multiselect(edit_form.subjects, 1, 0, project.subjects) }}
             {% if edit_form.subjects.errors %}
               <p class='warning'>{{ edit_form.subjects.errors[0] }}</p>
             {% endif %}

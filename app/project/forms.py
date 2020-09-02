@@ -103,7 +103,8 @@ class Edit_Project(BaseForm):
                                     description=('What subjects does this '
                                                 'project involve?'),
                                     validators=[],
-                                    choices=[]
+                                    choices=[],
+                                    coerce=int
                                 )
     competition = SelectField('Competition',
                             validators=[],
