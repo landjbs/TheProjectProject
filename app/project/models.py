@@ -213,9 +213,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             user.notify(
                 text=(f'The owner of {self.name} decided not '
                        'to add you to the project right now. '
-                       "We promise it's nothing personal! "
-                       'Please contact us if you think something'
-                       ' is wrong or have any questions.'),
+                       "We promise it's nothing personal!"),
                 name=self.name,
                 important=True,
                 redirect=self.get_url()

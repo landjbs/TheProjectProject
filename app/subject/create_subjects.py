@@ -35,6 +35,9 @@ def create_subjects(db):
                 Subject('Music',                    '#B303FF'),
                 Subject('Writing',                  '#BE03FF'),
                 Subject('Art',                      '#D903FF'),
+                Subject('Film',                     '#A003FF'),
+                Subject('Photography',              '#B603FF'),
+                Subject('Podcasting',               '#9403FF'),
 
                 # dev/engineering:      pink
                 Subject('Mobile Dev',               '#D503FF'),
