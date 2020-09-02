@@ -196,6 +196,11 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             return False
         # add user to project
         self.add_member(user, notify_owner=False)
+        user.notify(
+            text=f'You have been accepted to {self.name}',
+            name=self.name,
+            redirect=self.get_url()
+        )
         return True
 
     def reject_application(self, user, by_owner:bool):
