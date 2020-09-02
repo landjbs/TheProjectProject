@@ -150,7 +150,7 @@ def project_page(project_code, open_tab=None):
         if project.open and not project.complete:
             recommended = recommend_users(project)
         ## edit project form ##
-        edit_form = Edit_Project(obj=project)
+        edit_form = Edit_Project(subjects=[s.id for s in project.subjects])
         edit_form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
         # edit_form.subjects.data = [s.id for s in project.subjects]
         edit_form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
