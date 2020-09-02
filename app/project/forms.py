@@ -99,15 +99,13 @@ class Edit_Project(BaseForm):
     estimated_time = FloatField('Estimated Time', render_kw={'min':0, 'max':30, 'start':7})
     team_size = IntegerField('Target Team Size',
                             render_kw={'min':1, 'max':40, 'start':7})
-        subjects = SelectMultipleField('Subjects',
-                                        description=('What subjects might this '
-                                                    'project involve?'),
-                                        validators=[], choices=[], coerce=int)
+    subjects = SelectMultipleField('Subjects',
+                                    description=('What subjects does this '
+                                                'project involve?'),
+                                    validators=[], choices=[], coerce=int)
     competition = SelectField('Competition',
                             validators=[],
-                            description=('Submit your project to '
-                                        'competitions and win rewards! Please '
-                                        'make sure you meet criteria.'),
+                            description=('You can enter this project into competitions!'),
                             choices=[],
                             # coerce=int
                         )

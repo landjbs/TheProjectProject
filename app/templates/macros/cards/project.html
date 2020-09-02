@@ -1,6 +1,7 @@
 {% from 'macros/cards/badge.html' import render_badge_icon %}
 {% from 'macros/cards/components.html' import render_share_button %}
 {% from 'macros/cards/subject.html' import render_subject_tag %}
+{% from 'components/form_macros.html' import render_multiselect %}
 
 <!-- PROJECTS -->
 {% macro render_project_name(project, user) -%}
@@ -355,6 +356,12 @@
             {{ edit_form.summary(class='edit-input', value=project.summary) }}
             {% if edit_form.summary.errors %}
               <p class='warning'>{{ edit_form.summary.errors[0] }}</p>
+            {% endif %}
+            <hr class='my-2'><br>
+            {{ edit_form.subjects.label }}:<br>
+            {{ render_multiselect(edit_form.subjects, 1, 0) }}
+            {% if edit_form.subjects.errors %}
+              <p class='warning'>{{ edit_form.subjects.errors[0] }}</p>
             {% endif %}
             <hr class='my-2'><br>
             <!-- competition -->
