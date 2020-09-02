@@ -59,7 +59,7 @@ def add_statics():
     db.session.commit()
 
 
-@click.option('--num_users', default=400, help='Number of users.')
+@click.option('--num_users', default=10, help='Number of users.')
 @click.option('--num_projects', default=50, help='Number of projects.')
 def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
@@ -90,30 +90,30 @@ def populate_db(num_users, num_projects):
         except Exception as e:
             print(f'Could not add: {e}')
     # fake projects
-    # projects = []
-    # user_num = User.query.count()
-    # for _ in trange(num_projects, desc='Populating Projects'):
-    #     requires_application = rand_bool(0.5)
-    #     complete = rand_bool(0.05)
-    #     owner = User.get_by_id(np.random.randint(1, user_num+1))
-    #     subjects = rand_subjects(np.random.randint(0,6))
-    #     projects.append(
-    #         Project(
-    #             owner=owner,
-    #             name=rand_words(2),
-    #             oneliner=rand_words(6),
-    #             summary=rand_words(60),
-    #             complete=complete,
-    #             open=rand_bool(0.8) if not complete else None,
-    #             subjects=subjects,
-    #             requires_application=requires_application if not complete else None,
-    #             application_question=rand_words(6) if requires_application else None,
-    #             estimated_time=max(2, int(np.random.normal(10,4))) if not complete else None,
-    #             team_size=np.random.randint(0,30)
-    #         )
-    #     )
-    # for project in tqdm(projects, desc='Adding Projects'):
-    #     db.session.add(project)
+    projects = []
+    user_num = User.query.count()
+    for _ in trange(num_projects, desc='Populating Projects'):
+        requires_application = rand_bool(0.5)
+        complete = rand_bool(0.05)
+        owner = User.get_by_id(np.random.randint(1, user_num+1))
+        subjects = rand_subjects(np.random.randint(0,6))
+        projects.append(
+            Project(
+                owner=owner,
+                name=rand_words(2),
+                oneliner=rand_words(6),
+                summary=rand_words(60),
+                complete=complete,
+                open=rand_bool(0.8) if not complete else None,
+                subjects=subjects,
+                requires_application=requires_application if not complete else None,
+                application_question=rand_words(6) if requires_application else None,
+                estimated_time=max(2, int(np.random.normal(10,4))) if not complete else None,
+                team_size=np.random.randint(0,30)
+            )
+        )
+    for project in tqdm(projects, desc='Adding Projects'):
+        db.session.add(project)
     # # NOTE: finish populating competitions
     # fake competitions
     # competitions = []
