@@ -136,7 +136,7 @@
               </div>
               <p id='team-out' style='display: inline;'></p>
             {% elif elt.type=='SelectMultipleField' %}
-              {{ render_multiselect(elt) }}
+              {{ render_multiselect(elt, 1) }}
             {% elif elt.type=='SelectField' %}
               {% if not elt.errors %}
                 {{ elt(class='input valid add-select') }}

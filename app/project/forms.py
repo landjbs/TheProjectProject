@@ -38,7 +38,7 @@ class Add_Project(BaseForm):
     subjects = SelectMultipleField('Subjects',
                                     description=('What subjects might this '
                                                 'project involve?'),
-                                    validators=[Select_Limit_Validator(5)],
+                                    validators=[],
                                     choices=[], coerce=int,
                                     render_kw={'max':5})
     open = BooleanField('Team Project',
