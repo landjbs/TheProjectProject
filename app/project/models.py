@@ -348,7 +348,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         return True
 
     ## subjects ##
-    def change_subjects(subjects):
+    def change_subjects(self, subjects):
         ''' Changes project subjects to subject list '''
         edits_made = False
         prev_subjects = set(self.subjects)

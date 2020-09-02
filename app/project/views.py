@@ -185,10 +185,7 @@ def project_page(project_code, open_tab=None):
                     edits_made = True
                 # subjects
                 subjects = set(Subject.query.get(int(id)) for id in edit_form.subjects.data)
-                prev_subjects = set(project.subjects)
-                edits_made = (prev_subjects != set(subjects))
-                project.subjects = subjects
-                project.update()
+                edits_made = project.change_subjects(subjects)
                 # competition
                 if edit_form.competition.data:
                     competition = Competition.query.get(int(edit_form.competition.data))

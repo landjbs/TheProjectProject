@@ -63,5 +63,4 @@ def recommend_users(project):
     results = [(user, score_user(user, project)) for user in candidates]
     results = [x[0] for x in sorted(results, key=itemgetter(1), reverse=True)]
     results = results[:15]
-    print(results)
     return results
