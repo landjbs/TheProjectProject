@@ -1,7 +1,7 @@
 {% from 'macros/cards/subject.html' import render_subject_tag %}
 
 <!-- SELECTS -->
-{% macro render_multiselect(field, tags=0, show_labels=0) -%}
+{% macro render_multiselect(field, tags=0, show_labels=0, defaults=None) -%}
   {% if not True %}
   <!-- request.MOBILE -->
     <!-- imports/ -->
@@ -86,7 +86,14 @@
       }
     </style>
     {{ field(id='hidden-select', style='display:none;') }}
-    {% set prev_data = field.data if field.data else [] %}
+    {% if not defaults %}
+      {% set prev_data = field.data if field.data else [] %}
+    {% else %}
+      {% set prev_data = [] %}
+      {% for default in defaults %}
+        {% set prev_data = prev_data + [default] %}
+      {% endfor %}
+    {% endif %}
     {% if show_labels==1 %}
       <style>
         .selected-subjects {

@@ -102,7 +102,9 @@ class Edit_Project(BaseForm):
     subjects = SelectMultipleField('Subjects',
                                     description=('What subjects does this '
                                                 'project involve?'),
-                                    validators=[], choices=[], coerce=int)
+                                    validators=[],
+                                    choices=[]
+                                )
     competition = SelectField('Competition',
                             validators=[],
                             description=('You can enter this project into competitions!'),
