@@ -165,7 +165,7 @@
       // sessionStorage.setItem('n', 0);
       var select_box = document.getElementById('select-box');
       var subject_tags = select_box.getElementsByClassName('subject-tag');
-      var select = select_box.getElementById('hidden-select');
+      var select = document.getElementById('hidden-select');
       // start selected subjects as selected
       var prev_selected = select_box.getElementsByClassName('selected-subjects')[0];
       for(var i=0; i<prev_selected.lenght; i++) {
