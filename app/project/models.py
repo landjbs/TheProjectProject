@@ -1,4 +1,5 @@
 from datetime import datetime
+from heapq import nlargest
 from sqlalchemy.orm import relationship, backref
 
 from app.database import db, CRUDMixin, generate_code
@@ -586,7 +587,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def elasped(self):
         return int((datetime.utcnow() - self.posted_on).days)
 
-    def subject_data(self):
+    def subject_data(self, n=10):
         ''' Get dict mapping project subject names to member skill levels '''
         project_subjects = {s.name:0 for s in self.subjects}
         if project_subjects!={}:
@@ -596,6 +597,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                     if name in project_subjects:
                         # -1 to account for skills gained via project association
                         project_subjects[name] += (user_subject.number)
+        project_subjects = nlargest(n, project_subjects, project_subjects.get)
         return project_subjects
 
     def task_number(self):
