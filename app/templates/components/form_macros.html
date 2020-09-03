@@ -140,9 +140,15 @@
       <div class='row'>
         <p class='passion-column-header'>Selected</p>
       </div>
+      <script>
+        var select = document.getElementById('hidden-select');
+      </script>
       <div class='row selected-subjects'>
         {% for id in prev_data %}
           {{ render_subject_tag(field.choices[id][1]) }}
+          <script>
+            select.getElementsByTagName('option')[id].selected = true;
+          </script>
         {% endfor %}
       </div>
       <br>
