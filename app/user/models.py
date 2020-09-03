@@ -216,7 +216,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.update()
         return True
 
-    def remove_subjects(self, subjects):
+    def remove_subjects(self, subjects, user_selected=False):
         for subject in subjects:
             prev = self.subjects.filter_by(subject=subject).first()
             if prev:
@@ -225,6 +225,8 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                     db.session.delete(prev)
                 else:
                     prev.number = new_number
+                    if user_selected and prev.user_selected:
+                        prev.user_selected = False
             else:
                 return False
         self.update()
