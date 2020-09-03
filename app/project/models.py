@@ -597,7 +597,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                     if name in project_subjects:
                         # -1 to account for skills gained via project association
                         project_subjects[name] += (user_subject.number)
-        project_subjects = nlargest(n, project_subjects, project_subjects.get)
+        top_n = nlargest(n, project_subjects, project_subjects.get)
+        project_subject = {project_subjects[subject] for subject in top_n}
         return project_subjects
 
     def task_number(self):
