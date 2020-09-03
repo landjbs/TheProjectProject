@@ -10,10 +10,9 @@
     </button>
     {{ render_collaborate_modal(user) }}
   {% else %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#edit_modal">
+    <a class="btn" href='{{ user.get_url() }}'>
         Edit
-    </button>
-    {{ render_edit_user_modal(user, g.edit_user_form) }}
+    </a>
     <script>
       $('#edit_modal').appendTo('body');
     </script>

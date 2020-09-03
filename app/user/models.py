@@ -119,6 +119,9 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     def __repr__(self):
         return f'<User {self.name}>'
 
+    def get_url(self):
+        return f'/user={self.code}'
+
     # auth/login
     def get_id(self):
         return str(self.id)
