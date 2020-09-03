@@ -360,7 +360,8 @@
             <hr class='my-2'><br>
             {{ edit_form.subjects.label }}:<br>
             {% set subjects = [] %}
-            {% for subject in project.subjects %}
+            {{ project.subjects.all() }}
+            {% for subject in project.subjects.all() %}
               {% set subjects = subjects + [(subject.id, subject)] %}
             {% endfor %}
             {{ render_multiselect(edit_form.subjects, 1, 0, subjects) }}
