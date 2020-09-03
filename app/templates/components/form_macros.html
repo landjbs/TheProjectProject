@@ -161,6 +161,7 @@
     <script>
       // sessionStorage.setItem('n', 0);
       var subject_tags = document.getElementsByClassName('subject-tag');
+      var select = document.getElementById('hidden-select');
       var subject_click = function () {
         var subject_id = this.getAttribute("data");
         var selected = this.getAttribute('selected');
@@ -168,12 +169,12 @@
         if (selected=='false') {
           $('.selected-subjects').append(this);
           this.setAttribute('selected', 'true');
-          document.getElementsByTagName('option')[subject_id].selected = true;
+          select.getElementsByTagName('option')[subject_id].selected = true;
           // sessionStorage.setItem('n', sessionStorage.getItem('n')+1);
         } else {
           $('.unselected-subjects').append(this);
           this.setAttribute('selected', 'false');
-          document.getElementsByTagName('option')[subject_id].selected = false;
+          select.getElementsByTagName('option')[subject_id].selected = false;
           // sessionStorage.setItem('n', sessionStorage.getItem('n')-1);
         }
       }
