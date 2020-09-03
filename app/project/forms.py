@@ -65,8 +65,7 @@ class Add_Project(BaseForm):
                             'completed.'))
     competition = SelectField('Competition',
                             validators=[],
-                            description=('Submit your project to '
-                                        'and win rewards!'),
+                            description=('Enter to win rewards!'),
                             choices=[]
                             # coerce=int
                         )

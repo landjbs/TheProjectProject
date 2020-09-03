@@ -14,7 +14,6 @@
     {% if field.errors %}
       <p class='warning'>{{ field.errors[0] }}</p>
     {% else %}
-      <small>Limit {{ field.render_kw['max'] }}.</small>
     {% endif %}
 
     <script>
@@ -62,9 +61,7 @@
     {% if field.errors %}
       <p class='warning'>{{ field.errors[0] }}</p>
     {% else %}
-      <small>Limit {{ field.render_kw['max'] }}.</small>
       {% if not request.MOBILE %}
-        <br>
         <small>⌘/⌃ to select multiple.</small>
       {% endif %}
     {% endif %}
