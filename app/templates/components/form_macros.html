@@ -140,15 +140,9 @@
       <div class='row'>
         <p class='passion-column-header'>Selected</p>
       </div>
-      <script>
-        var select = document.getElementById('hidden-select');
-      </script>
       <div class='row selected-subjects'>
         {% for id in prev_data %}
           {{ render_subject_tag(field.choices[id-1][1]) }}
-          <script>
-            select.getElementsByTagName('option')[id-1].selected = true;
-          </script>
         {% endfor %}
       </div>
       <br>
@@ -168,6 +162,12 @@
       // sessionStorage.setItem('n', 0);
       var subject_tags = document.getElementsByClassName('subject-tag');
       var select = document.getElementById('hidden-select');
+      // start selected subjects as selected
+      var prev_selected = document.getElementsByClassName('selected-subjects')[0];
+      for(var i=0; i<prev_selected.lenght; i++) {
+        var id = prev_selected[i].getAttribute("data");
+        select.getElementsByTagName('option')[id-1].selected = true;
+      }
       var subject_click = function () {
         var subject_id = this.getAttribute("data");
         var selected = this.getAttribute('selected');
