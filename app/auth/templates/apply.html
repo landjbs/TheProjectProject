@@ -41,10 +41,11 @@
         <h4 style="display: inline;">{{ elt.label }}</h4>
         <div class='boop'>
           <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-          <span class="tooltiptext">{{ elt.description}}</span>
+          <span class="tooltiptext">{{ elt.description }}</span>
         </div>
         <br>
-        {{ render_multiselect(elt, 1, 1) }}
+        {% set tags = 1 if not request.MOBILE else 0 %}
+        {{ render_multiselect(elt, tags, 1) }}
       </div>
     {% else %}
       <div class="row input-segment tab">

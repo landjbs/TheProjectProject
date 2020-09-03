@@ -61,7 +61,9 @@
     {% if field.errors %}
       <p class='warning'>{{ field.errors[0] }}</p>
     {% else %}
+      <small>Scroll for more.</small>
       {% if not request.MOBILE %}
+        <br>
         <small>⌘/⌃ to select multiple.</small>
       {% endif %}
     {% endif %}
