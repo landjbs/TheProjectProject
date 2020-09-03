@@ -189,8 +189,13 @@
         }
       }
       for(var i=0;i<subject_tags.length;i++){
-          subject_tags[i].addEventListener('click', subject_click, false);
-
+          var tag = subject_tags[i];
+          tag.addEventListener('click', subject_click, false);
+          var prev_selected = tag.parentElement.classList.contains('selected-subjects');
+          if (prev_selected) {
+            var subject_id = tag.getAttribute("data");
+            select.getElementsByTagName('option')[subject_id-1].selected = true;
+          }
       }
     </script>
   </div>
