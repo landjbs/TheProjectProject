@@ -206,6 +206,8 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             prev = self.subjects.filter_by(subject=subject).first()
             if prev is not None:
                 prev.number += 1
+                if user_selected and not prev.user_selected:
+                    prev.user_selected = True
             else:
                 new = User_Subjects(
                     user=self, subject=subject, user_selected=user_selected
