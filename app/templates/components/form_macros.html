@@ -145,9 +145,9 @@
       </script>
       <div class='row selected-subjects'>
         {% for id in prev_data %}
-          {{ render_subject_tag(field.choices[id][1]) }}
+          {{ render_subject_tag(field.choices[id-1][1]) }}
           <script>
-            select.getElementsByTagName('option')[id].selected = true;
+            select.getElementsByTagName('option')[id-1].selected = true;
           </script>
         {% endfor %}
       </div>
@@ -175,12 +175,12 @@
         if (selected=='false') {
           $('.selected-subjects').append(this);
           this.setAttribute('selected', 'true');
-          select.getElementsByTagName('option')[subject_id].selected = true;
+          select.getElementsByTagName('option')[subject_id-1].selected = true;
           // sessionStorage.setItem('n', sessionStorage.getItem('n')+1);
         } else {
           $('.unselected-subjects').append(this);
           this.setAttribute('selected', 'false');
-          select.getElementsByTagName('option')[subject_id].selected = false;
+          select.getElementsByTagName('option')[subject_id-1].selected = false;
           // sessionStorage.setItem('n', sessionStorage.getItem('n')-1);
         }
       }
