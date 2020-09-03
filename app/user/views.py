@@ -40,7 +40,6 @@ def user_page(code):
     if current_user==user:
         edit_form = Edit_User()
         edit_form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
-        print(edit_form.subjects.choices)
         if request.method=='POST':
             if edit_form.validate_on_submit():
                 edits_made = False

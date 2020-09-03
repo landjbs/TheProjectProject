@@ -1,6 +1,5 @@
 {% from 'macros/cards/badge.html' import render_badge_icon %}
 {% from 'macros/cards/components.html' import render_share_button %}
-{% from 'components/form_macros.html' import render_multiselect %}
 
 
 <!-- collaboration -->
@@ -283,10 +282,11 @@
           {{ edit_form.subjects.label }}:<br>
           {% set subject_ids = [] %}
           {% for user_subject in user.subjects.all() %}
-            {% if subject_ids.append(user_subject.subject.id) %}
+            {% if user_subject.user_selected %}
+              {% if subject_ids.append(user_subject.subject.id) %}
+              {% endif %}
             {% endif %}
           {% endfor %}
-          {{ render_multiselect(edit_form.subjects, 1, 0, subject_ids) }}
           {% if edit_form.subjects.errors %}
             <p class='warning'>{{ edit_form.subjects.errors[0] }}</p>
           {% endif %}
