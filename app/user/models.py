@@ -228,7 +228,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         self.update()
         return True
 
-    def edit_selected_subjects(self, subjects):
+    def change_subjects(self, subjects):
         edits_made = False
         prev_selected = set([s.subject for s in self.selected_subjects()])
         new_subjects = set(subjects)

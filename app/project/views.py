@@ -184,7 +184,6 @@ def project_page(project_code, open_tab=None):
                     project.team_size = new_size
                     edits_made = True
                 # subjects
-                print(edit_form.subjects.data)
                 subjects = set(Subject.query.get(int(id)) for id in edit_form.subjects.data)
                 edits_made = project.change_subjects(subjects)
                 # competition
