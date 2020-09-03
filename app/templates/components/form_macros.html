@@ -194,6 +194,7 @@
           var prev_selected = tag.parentElement.classList.contains('selected-subjects');
           if (prev_selected) {
             var subject_id = tag.getAttribute("data");
+            tag.setAttribute('selected', 'true');
             select.getElementsByTagName('option')[subject_id-1].selected = true;
           }
       }
