@@ -275,7 +275,7 @@
           <hr class='my-2'><br>
           {{ edit_form.subjects.label }}:<br>
           {% set subject_ids = [] %}
-          {% for user_subject in user.subjects.all() %}
+          {% for user_subject in user.selected_subjects() %}
             {% if user_subject.user_selected %}
               {% if subject_ids.append(user_subject.subject.id) %}
               {% endif %}
