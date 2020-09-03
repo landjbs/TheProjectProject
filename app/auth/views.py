@@ -98,8 +98,8 @@ def verify(token, expiration=60480000000):
     user.confirmed = True
     user.accept()
     user.update()
-    flash('You have confirmed your application! We will email you with '
-          'application updates as soon as possible.', category='success')
+    flash('You have confirmed your application! Click the login button to get started!',
+            category='success')
     send_acceptance_email(user)
     return redirect(url_for('base.index'))
 
