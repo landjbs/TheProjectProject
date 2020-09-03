@@ -55,6 +55,7 @@
           }
       });
     </script>
+  <!-- mobile select -->
   {% elif request.MOBILE or tags==0 %}
     <center>{{ field() }}</center>
     <br>
@@ -67,7 +68,9 @@
         <small>⌘/⌃ to select multiple.</small>
       {% endif %}
     {% endif %}
+  <!-- tag select -->
   {% else %}
+  <div id='select-box'>
     <style>
       .subject-tag:hover {
         border: 1px solid white;
@@ -160,10 +163,11 @@
     {% endif %}
     <script>
       // sessionStorage.setItem('n', 0);
-      var subject_tags = document.getElementsByClassName('subject-tag');
-      var select = document.getElementById('hidden-select');
+      var select_box = document.getElementById('select-box');
+      var subject_tags = select_box.getElementsByClassName('subject-tag');
+      var select = select_box.getElementById('hidden-select');
       // start selected subjects as selected
-      var prev_selected = document.getElementsByClassName('selected-subjects')[0];
+      var prev_selected = select_box.getElementsByClassName('selected-subjects')[0];
       for(var i=0; i<prev_selected.lenght; i++) {
         var id = prev_selected[i].getAttribute("data");
         select.getElementsByTagName('option')[id-1].selected = true;
@@ -186,7 +190,9 @@
       }
       for(var i=0;i<subject_tags.length;i++){
           subject_tags[i].addEventListener('click', subject_click, false);
+
       }
     </script>
+  </div>
   {% endif %}
 {% endmacro -%}
