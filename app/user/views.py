@@ -39,36 +39,30 @@ def user_page(code):
     edit_form = False
     if current_user==user:
         edit_form = Edit_User()
-        # edit_form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
-        # set defaults
-        # edit_form.name.default = user.name
-        # # edit_form.about.default = user.about
-        # # edit_form.password.default = ""
-        # # edit_form.confirm.default = ""
-        # edit_form.subjects.default = [s.subject.id for s in user.selected_subjects()]
-    if request.method=='POST':
-        if edit_form.validate_on_submit():
-            edits_made = False
-            # name
-            new_name = edit_form.name.data
-            if new_name!=user.name:
-                user.name = new_name
-                edits_made = True
-            # about
-            new_about = edit_form.about.data
-            if new_about!=user.about:
-                user.about = new_about
-                edits_made = True
-            # new password
-            if edit_form.password.data!='':
-                if not user.check_password(edit_form.password.data):
-                    user.set_password(edit_form.password.data)
+        edit_form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
+        if request.method=='POST':
+            if edit_form.validate_on_submit():
+                edits_made = False
+                # name
+                new_name = edit_form.name.data
+                if new_name!=user.name:
+                    user.name = new_name
                     edits_made = True
-            if edits_made:
-                flash('You have successfully edited your acount.')
-                user.update()
-        else:
-            show_edit_modal = True
+                # about
+                new_about = edit_form.about.data
+                if new_about!=user.about:
+                    user.about = new_about
+                    edits_made = True
+                # new password
+                if edit_form.password.data!='':
+                    if not user.check_password(edit_form.password.data):
+                        user.set_password(edit_form.password.data)
+                        edits_made = True
+                if edits_made:
+                    flash('You have successfully edited your acount.')
+                    user.update()
+            else:
+                show_edit_modal = True
     return render_template('user.html' if not request.MOBILE else 'user_mobile.html',
                             user=user,
                             task_data=task_data,
