@@ -91,7 +91,6 @@
     {% else %}
       {% set prev_data = defaults %}
     {% endif %}
-    {{ defaults }}
     {% if show_labels==1 %}
       <style>
         .selected-subjects {
@@ -160,7 +159,7 @@
     </div>
     {% endif %}
     <script>
-      sessionStorage.setItem('n', 0);
+      // sessionStorage.setItem('n', 0);
       var subject_tags = document.getElementsByClassName('subject-tag');
       var subject_click = function () {
         var subject_id = this.getAttribute("data");
@@ -170,12 +169,14 @@
           $('.selected-subjects').append(this);
           this.setAttribute('selected', 'true');
           document.getElementsByTagName('option')[subject_id].selected = true;
-          sessionStorage.setItem('n', sessionStorage.getItem('n')+1);
+          alert(document.getElementsByTagName('option')[subject_id].selected);
+          // sessionStorage.setItem('n', sessionStorage.getItem('n')+1);
         } else {
           $('.unselected-subjects').append(this);
           this.setAttribute('selected', 'false');
           document.getElementsByTagName('option')[subject_id].selected = false;
-          sessionStorage.setItem('n', sessionStorage.getItem('n')-1);
+          alert(document.getElementsByTagName('option')[subject_id].selected);
+          // sessionStorage.setItem('n', sessionStorage.getItem('n')-1);
         }
       }
       for(var i=0;i<subject_tags.length;i++){
