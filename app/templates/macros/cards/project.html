@@ -363,7 +363,8 @@
             {% for subject in project.subjects.all() %}
               {% set subject = (subject.id, subject) %}
               {{ subject }}
-              {% set subjects = subjects + [subject] %}
+              {% set subjects = [subject] %}
+              {{ subjects }}
             {% endfor %}
             {{ subjects }}
             {{ render_multiselect(edit_form.subjects, 1, 0, subjects) }}
