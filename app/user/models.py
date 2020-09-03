@@ -230,17 +230,12 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     def edit_selected_subjects(self, subjects):
         edits_made = False
-
+        prev_selected = set([s.subject for s in self.selected_subjects()])
         new_subjects = set(subjects)
-        prev_subjects = set([s.subject for s in self.subjects])
-        prev_selected_subjects = set([s.subject for s in self.selected_subjects()])
-
-
         to_add = [subject for subject in new_subjects
-                    if not subject in prev_selected_subjects]
-        to_rem = [subject for subject in prev_selected_subjects
+                    if not subject in prev_selected]
+        to_rem = [subject for subject in prev_selected
                     if not subject in new_subjects]
-
         if len(to_add)>0:
             self.add_subjects(to_add, user_selected=True)
             edits_made = True
