@@ -31,6 +31,8 @@ from app.user.forms import Edit_User
 # forms
 from app.hub.forms import SearchForm
 from app.project.forms import Project_Application_Form
+# models
+from app.subject.models import Subject
 # extensions
 import app.extensions as extensions
 # sentry
@@ -70,6 +72,7 @@ def create_app(config=config.dev_config, register_admin=True):
             g.project_application = Project_Application_Form()
             g.notifications = current_user.notifications_to_show()
             g.edit_user_form = Edit_User()
+            g.edit_user_form.subjects.choices = [(s.id, s.name) for s in Subject.query.all()]
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
