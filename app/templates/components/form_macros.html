@@ -55,7 +55,7 @@
       });
     </script>
   <!-- mobile select -->
-  {% elif request.MOBILE or tags==0 %}
+  {% elif tags==0 %}
     <center>{{ field() }}</center>
     <br>
     {% if field.errors %}
