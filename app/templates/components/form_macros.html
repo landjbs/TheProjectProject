@@ -169,13 +169,11 @@
           $('.selected-subjects').append(this);
           this.setAttribute('selected', 'true');
           document.getElementsByTagName('option')[subject_id].selected = true;
-          alert(document.getElementsByTagName('option')[subject_id].selected);
           // sessionStorage.setItem('n', sessionStorage.getItem('n')+1);
         } else {
           $('.unselected-subjects').append(this);
           this.setAttribute('selected', 'false');
           document.getElementsByTagName('option')[subject_id].selected = false;
-          alert(document.getElementsByTagName('option')[subject_id].selected);
           // sessionStorage.setItem('n', sessionStorage.getItem('n')-1);
         }
       }

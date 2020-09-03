@@ -157,6 +157,7 @@ def project_page(project_code, open_tab=None):
         print(f'ERROR: {edit_form.errors}')
         if request.method=='POST':
             if edit_form.validate_on_submit():
+                print(edit_form.subjects.data)
                 edits_made = False
                 # name
                 new_name = edit_form.name.data
