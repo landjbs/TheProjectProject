@@ -244,7 +244,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             self.add_subjects(to_add, user_selected=True)
             edits_made = True
         if len(to_rem)>0:
-            self.remove_subjects(to_rem)
+            self.remove_subjects(to_rem, user_selected=True)
             edits_made = True
         return edits_made
 
