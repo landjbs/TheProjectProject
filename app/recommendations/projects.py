@@ -88,7 +88,7 @@ def get_recommended_projects(user):
         result_ids += [p.id for p in closed_or_completed]
         n_results = len(result_ids)
         if (n_results < RESULT_NUM):
-            result_ids += list(set(nowshow_ids.difference(invited_projects)))
+            result_ids += list(set(nowshow_ids).difference(invited_projects))
     # if past or at max, slice to max
     result_ids = result_ids[:RESULT_NUM]
     # if still nothing, return empty list
