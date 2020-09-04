@@ -3,7 +3,7 @@
 import numpy as np
 from operator import itemgetter
 from datetime import datetime
-from sqlalchemy import desc, func
+from sqlalchemy import desc, func, _or
 from sqlalchemy.sql.expression import case
 
 from app.project.models import Project
@@ -80,14 +80,17 @@ def get_recommended_projects(user):
     # add completed and closed projects if results are too few
     n_results = len(result_ids)
     if (n_results < RESULT_NUM):
-        closed_or_completed = Project.query.filter(Project.open==False,
-                                                Project.complete==False
+        closed_or_completed = Project.query.filter(
+                                        _or(Project.open==False,
+                                            Project.complete==False)
                                     ).order_by(desc(Project.last_active)
                                 ).limit(RESULT_NUM - n_results)
         result_ids += [p.id for p in closed_or_completed]
+        n_results = len(result_ids)
+        if (n_results < RESULT_NUM):
+            result_ids += list(set(nowshow_ids.difference(invited_projects)))
     # if past or at max, slice to max
-    else:
-        result_ids = result_ids[:RESULT_NUM]
+    result_ids = result_ids[:RESULT_NUM]
     # if still nothing, return empty list
     if len(result_ids)==0:
         return []
