@@ -79,14 +79,12 @@ def get_recommended_projects(user):
     result_ids = (invited_projects + result_ids)
     # add completed and closed projects if results are too few
     n_results = len(result_ids)
-    print(n_results)
     if (n_results < RESULT_NUM):
         closed_or_completed = Project.query.filter(
                                         or_(Project.open==False,
                                             Project.complete==False)
                                     ).order_by(desc(Project.last_active)
                                 ).limit(RESULT_NUM - n_results)
-        print(closed_or_completed)
         result_ids += [p.id for p in closed_or_completed]
         n_results = len(result_ids)
         if (n_results < RESULT_NUM):

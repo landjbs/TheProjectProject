@@ -36,15 +36,17 @@
     }}
   {% endif %}
   <!-- owned -->
-  {{
-    render_carousel(
-      label='My Projects',
-      id_postfix='my',
-      card_type='project-small',
-      data=my,
-      redirect_empty='/add_project'
-    )
-  }}
+  {% if my!=False %}
+    {{
+      render_carousel(
+        label='My Projects',
+        id_postfix='my',
+        card_type='project-small',
+        data=my,
+        redirect_empty='/add_project'
+      )
+    }}
+  {% endif %}
 </div>
 
 <!-- show help tooltips on first login if not mobile dev -->
