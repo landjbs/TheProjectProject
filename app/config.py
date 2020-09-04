@@ -56,6 +56,9 @@ class base_config(object):
         })()'''.replace('\n', '')
     ############################################################################
 
+    def __repr__(self):
+        return '<BASE_CONFIG>'
+
 
 class dev_config(base_config):
     # SERVER_NAME = '127.0.0.1:5000'
@@ -72,10 +75,16 @@ class dev_config(base_config):
     ASSETS_DEBUG = True
     ENV = 'development'
 
+    def __repr__(self):
+        return '<DEV_CONFIG>'
+
 
 class test_config(base_config):
     # SERVER_NAME = '127.0.0.1:5000'
     TESTING = True
+
+    def __repr__(self):
+        return '<TEST_CONFIG>'
 
 
 class production_config(base_config):
@@ -91,3 +100,6 @@ class production_config(base_config):
     PREFERRED_URL_SCHEME = 'https'
     # versioning
     VERSION = 'theprojecproject@0.0.0'
+
+    def __repr__(self):
+        return '<PRODUCTION_CONFIG>'
