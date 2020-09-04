@@ -10,6 +10,9 @@ from app.project.models import Project
 from app.recommendations.utils import get_normed_user_subjects
 
 
+RESULT_NUM = 30
+
+
 def score_project(project, user_subjects):
     ''' Assigns project ranking given user [0,8] '''
     # subject scoring [0,6]
@@ -73,11 +76,15 @@ def get_recommended_projects(user):
         x[0] for x in sorted(scored_ids, key=itemgetter(1), reverse=True)
     ]
     # add ids of invited projects to front of result ids
-    result_ids = (
-            invited_projects
-            + result_ids
-            + list(set(nowshow_ids).difference(invited_projects))
-    )[:30]
+    result_ids = (invited_projects + result_ids)
+    # add completed and closed projects if results are too few
+    n_results = len(result_ids)
+    if (n_results < RESULT_NUM):
+        closed_or_completed = Project.query.filter(Project.open==False,
+                                                Project.complete==False
+                                    ).order_by(desc(Project.last_active)
+                                ).limit(RESULT_NUM - n_results)
+        result_ids += [p.id for p in closed_or_completed]
     if len(result_ids)==0:
         return []
     # build case statement for ordered query
