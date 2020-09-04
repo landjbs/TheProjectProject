@@ -85,6 +85,10 @@ def get_recommended_projects(user):
                                     ).order_by(desc(Project.last_active)
                                 ).limit(RESULT_NUM - n_results)
         result_ids += [p.id for p in closed_or_completed]
+    # if past or at max, slice to max
+    else:
+        result_ids = result_ids[:RESULT_NUM]
+    # if still nothing, return empty list
     if len(result_ids)==0:
         return []
     # build case statement for ordered query
