@@ -33,7 +33,6 @@ def apply():
     # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
-        print(subjects)
         user = User.create(
                     name=form.data['name'],
                     email=form.data['email'],
