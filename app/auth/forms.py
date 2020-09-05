@@ -35,10 +35,8 @@ class Apply(BaseForm):
                                     choices=[], coerce=int,
                                     render_kw={'max':5})
     password = PasswordField('Create Password',
-                             validators=[DataRequired(), Length(1, 254),
-                                         EqualTo('confirm')],
-                             description=('Create a password to use if you are '
-                                          'accepted.'))
+                             validators=[DataRequired(), Length(1, 254)],
+                             description=('Create a password!'))
     accept_terms = BooleanField('I have read and accept the terms.',
                                 validators=[DataRequired()],
                             render_kw={'placeholder': 'Yes'})
