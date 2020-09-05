@@ -38,7 +38,7 @@ def apply():
                     name=form.data['name'],
                     email=form.data['email'],
                     password=form.data['password'],
-                    about=form.data['about'],
+                    about=''
                 )
         user.add_subjects(subjects, user_selected=True)
         if current_app.config['REGISTER_MAIL']:

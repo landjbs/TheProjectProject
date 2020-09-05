@@ -22,12 +22,12 @@ class Apply(BaseForm):
                             'contact us if you do not have a college email, but would like '
                             'to join.')),
                     render_kw={'placeholder': 'example@college.harvard.edu'})
-    about = TextField('About You',
-                    validators=[DataRequired(), Length(1, 500)],
-                    description=('Describe yourself! This might include '
-                               'projects you have worked on, passions you '
-                               'have, or reasons you want to join the '
-                               'community.'))
+    # about = TextField('About You',
+    #                 validators=[DataRequired(), Length(1, 500)],
+    #                 description=('Describe yourself! This might include '
+    #                            'projects you have worked on, passions you '
+    #                            'have, or reasons you want to join the '
+    #                            'community.'))
     subjects = SelectMultipleField('Passions',
                                     description=('What fields are you '
                                                 'interested in?'),
@@ -39,8 +39,6 @@ class Apply(BaseForm):
                                          EqualTo('confirm')],
                              description=('Create a password to use if you are '
                                           'accepted.'))
-    confirm = PasswordField('Confirm Password',
-                            validators=[DataRequired()])
     accept_terms = BooleanField('I have read and accept the terms.',
                                 validators=[DataRequired()],
                             render_kw={'placeholder': 'Yes'})

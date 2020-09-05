@@ -1,6 +1,7 @@
 ''' Custom validators for WTF_Forms '''
 
 import re
+from flask import current_app
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 
@@ -48,8 +49,11 @@ class EDU_Validator(object):
         pass
 
     def __call__(self, form, field):
-        if not field.data.endswith('.edu'):
-            raise ValidationError("College email must end with '.edu'.")
+        if current_app.config['REQUIRE_EDU']:
+            if not field.data.endswith('.edu'):
+                raise ValidationError("College email must end with '.edu'.")
+        else:
+            pass
 
 
 ## DEPRECATED (for now) ##
