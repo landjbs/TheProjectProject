@@ -538,6 +538,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     def n_applied(self):
         ''' Number of projects to which user has applied '''
+        print(self.pending.count())
         return self.pending.count()
 
     def n_member(self):
