@@ -15,11 +15,6 @@
 <div class='container my-1 main'>
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
-  {%
-    set rec_tip = "We've picked out some projects you might be interested in. Everyone here wants to work with you; just click join to make that happen!"
-                  if ((current_user.n_owned()+current_user.n_applied()) < 1)
-                  else False
-  %}
   {{
     render_carousel(
       label=rec_label,
@@ -27,7 +22,7 @@
       card_type='project-big',
       data=recommended,
       interval=5000,
-      tooltip=rec_tip)
+      tooltip="We've picked out some projects you might be interested in. Everyone here wants to work with you; just click join to make that happen!")
   }}
   <!-- trending -->
   {% if trending %}
@@ -55,17 +50,26 @@
 
 <!-- show help tooltips on first login if not mobile dev -->
 {% if not request.MOBILE %}
+  <!--  -->
   {% if (current_user.n_owned() < 1) %}
     <script>
       $(function () {
-        $('#add-project').tooltip('show')
+        $('#add-project').tooltip('show');
       })
     </script>
   {% endif %}
-  {% if (current_user.n_member() < 1) %}
+  {% if (current_user.about=='') %}
     <script>
       $(function () {
-        $('#tooltip-recommended').tooltip('show')
+        $('#user-drop').tooltip('show');
+      })
+    </script>
+  {% endif %}
+  <!--  -->
+  {% if ((current_user.n_owned()+current_user.n_applied()) < 1) %}
+    <script>
+      $(function () {
+        $('#tooltip-recommended').tooltip('show');
       })
     </script>
   {% endif %}
