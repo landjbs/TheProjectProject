@@ -55,7 +55,7 @@ class Competition(CRUDMixin, db.Model):
         total_length = self.total_length()
         if total_length==0:
             return f'width:100%;'
-        return f'width: {100*float(self.time_progressed()/self.total_length())};'
+        return f'width: {100*float(self.time_progressed()/self.total_length())}%;'
 
     def winners(self):
         ''' Gets winning submissions if competition is over '''
