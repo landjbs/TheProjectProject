@@ -59,11 +59,11 @@
     </script>
   {% endif %}
   {% if (current_user.about=='') %}
-    <script>
+    <!-- <script>
       $(function () {
-        $('#user-drop').tooltip('show');
+        $('#user-drop').tooltip('toggle');
       })
-    </script>
+    </script> -->
   {% endif %}
   <!--  -->
   {% if ((current_user.n_owned()+current_user.n_applied()) < 1) %}
