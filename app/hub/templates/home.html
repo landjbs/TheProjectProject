@@ -15,6 +15,7 @@
 <div class='container my-1 main'>
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
+  {{ current_user.n_owned()+current_user.n_applied() }}
   {%
     set rec_tip = "We've picked out some projects you might be interested in. Everyone here wants to work with you; just click join to make that happen!"
                   if ((current_user.n_owned()+current_user.n_applied()) > 0)
