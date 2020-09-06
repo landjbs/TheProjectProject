@@ -536,6 +536,10 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         ''' Number of projects owned by user '''
         return self.owned.count()
 
+    def n_applied(self):
+        ''' Number of projects to which user has applied '''
+        return self.pending.count()
+
     def n_member(self):
         ''' Number of nonowned projects of which user is member '''
         return (self.projects.count()-self.owned.count())

@@ -13,9 +13,12 @@
 
 {% block content %}
 <div class='container my-1 main'>
-  {{ g.show_help }}
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
+  {%
+    set rec_tip = "We've picked out some projects you might be interested in. Everyone here wants to work with you; just click join to make that happen!"
+                  if (current_user.n_owned() > 0) else False
+  %}
   {{
     render_carousel(
       label=rec_label,
