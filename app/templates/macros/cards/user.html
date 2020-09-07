@@ -81,7 +81,7 @@
         <p class='oneliner'>{{ user.about }}</p>
       </div>
       <div class='card-foot float-left'>
-        {% for user_subject in user.subjects %}
+        {% for user_subject in user.subjects[:5] %}
           {% set subject = user_subject.subject %}
           <a href='/subject={{ subject.code }}'>
             {% if loop.index>1 %}
