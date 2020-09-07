@@ -86,7 +86,7 @@
                 <center>
                   {% if not project.complete %}
                     {% set elapsed = calc_days_since(now(), project.posted_on) %}
-                    {% set est = project.estimated_time %}
+                    {% set est = project.estimated_time|round|int %}
                     {% set elapsed_style = elapsed_style(elapsed, est) %}
                     <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
                     <div class="progress" style='width:80%;'>
