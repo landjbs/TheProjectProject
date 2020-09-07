@@ -78,13 +78,17 @@
         </a>
       </div>
       <div class='card-oneline' style=''>
-        <p class='oneliner'>
-          {{ user.about }}
-        </p>
+        <p class='oneliner'>{{ user.about }}</p>
       </div>
       <div class='card-foot float-left'>
         {% for user_subject in user.subjects %}
-          {{ render_subject_tag(user_subject.subject) }}
+          {% set subject = user_subject.subject %}
+          <a href='/subject={{ subject.code }}'>
+            {% if loop.index>1 %}
+            ,
+            {% endif %}
+            {{ render_subject_tag(subject) }}
+          </a>
         {% endfor %}
       </div>
       <br>
