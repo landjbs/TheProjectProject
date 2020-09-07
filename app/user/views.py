@@ -50,13 +50,13 @@ def user_page(code):
                     edits_made = True
                 # about
                 new_about = edit_form.about.data
-                print(new_about)
                 if new_about!=user.about:
                     user.about = new_about
                     edits_made = True
                 # subjects
                 subjects = set(Subject.query.get(int(id)) for id in edit_form.subjects.data)
-                edits_made = user.change_subjects(subjects)
+                if user.change_subjects(subjects):
+                    edits_made = True
                 # new password
                 if edit_form.password.data!='':
                     if not user.check_password(edit_form.password.data):
