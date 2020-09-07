@@ -13,7 +13,6 @@
 
 {% block content %}
 <div class='container my-1 main'>
-  {{ current_user.about == '' }}
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
   {{
