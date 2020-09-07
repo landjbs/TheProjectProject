@@ -59,6 +59,13 @@
     </script>
   {% endif %}
   <!-- TODO: make bio tooltip show -->
+  {% if current_user.about == '' %}
+    <script>
+      $(function () {
+        $('#user-drop').tooltip('show');
+      })
+    </script>
+  {% endif %}
   <!--  -->
   {% if ((current_user.n_owned()+current_user.n_applied()) < 1) %}
     <script>
