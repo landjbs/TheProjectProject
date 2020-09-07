@@ -83,7 +83,7 @@ def populate_db(num_users, num_projects):
     for user in tqdm(users, desc='Adding Users'):
         try:
             db.session.add(user)
-            user.add_subjects(rand_subjects(np.random.randint(0,6)))
+            user.add_subjects(rand_subjects(np.random.randint(10,30)))
             badges = rand_badges(np.random.randint(0,4))
             for badge in badges:
                 user.badges.append(User_Badge(badge=badge, earned=True))
