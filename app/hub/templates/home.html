@@ -13,6 +13,7 @@
 
 {% block content %}
 <div class='container my-1 main'>
+  {{ current_user.about == '' }}
   <!-- recommendations -->
   {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
   {{
@@ -62,7 +63,18 @@
   {% if current_user.about == '' %}
     <script>
       $(function () {
-        $('#user-drop').tooltip('enable');
+        $('#user-drop').tooltip('show');
+      })
+    </script>
+    <style>
+      .tooltip-inner {
+          border: solid 1px white;
+      }
+    </style>
+  {% else %}
+    <script>
+      $(function () {
+        $('#user-drop').tooltip('disable');
       })
     </script>
   {% endif %}

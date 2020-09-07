@@ -13,7 +13,7 @@ class Edit_User(BaseForm):
     name = StringField('Name', validators=[DataRequired(), Length(1, 254)],
                        render_kw={'max':254})
     # about
-    about = TextField('Bio', validators=[DataRequired(), Length(1, 500)],
+    about = TextField('About', validators=[DataRequired(), Length(1, 500)],
                       render_kw={'max':500})
     # subjects
     subjects = SelectMultipleField('Passions',

@@ -50,6 +50,7 @@ def user_page(code):
                     edits_made = True
                 # about
                 new_about = edit_form.about.data
+                print(new_about)
                 if new_about!=user.about:
                     user.about = new_about
                     edits_made = True
