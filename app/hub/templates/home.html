@@ -65,6 +65,11 @@
         $('#user-drop').tooltip('show');
       })
     </script>
+    <style>
+      #user-drop.tooltip {
+          border: solid 1px white;
+      }
+    </style>
   {% endif %}
   <!--  -->
   {% if ((current_user.n_owned()+current_user.n_applied()) < 1) %}
