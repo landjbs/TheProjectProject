@@ -1,7 +1,7 @@
 from flask_login import UserMixin, AnonymousUserMixin
 from datetime import datetime
 from sqlalchemy import desc
-from sqlalchemy.orm import relationship, backref
+from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin, generate_code
 from app.extensions import bcrypt

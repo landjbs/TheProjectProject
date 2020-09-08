@@ -152,13 +152,13 @@ def register_admin_views(application, admin, db):
     from app.competition.models import Competition
     from app.analytics.models import PageView
     from app.badge.models import Badge
+    from app.company.models import Company
     # import view
     from app.admin.views import (
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
         ReportModelView, CompetitionModelView
     )
     with application.test_request_context('theprojectproject.io'):
-    # with application.app_context():
         admin.add_view(AnalyticsView('Analytics', endpoint='AdminAnalytics'))
         admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
         admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
@@ -172,6 +172,7 @@ def register_admin_views(application, admin, db):
         admin.add_view(CompetitionModelView(Competition, db.session, endpoint='AdminCompetition'))
         admin.add_view(SafeModelView(Badge, db.session, endpoint='AdminBadge'))
         admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
+        admin.add_view(SafeModelView(Company, db.session, endpoint='AdminCompany'))
         admin.add_link(MenuLink(name='Home', url=url_for('hub.home'), category='Links'))
         admin.add_link(MenuLink(name='Logout', url=url_for('auth.logout'), category='Links'))
     return True
