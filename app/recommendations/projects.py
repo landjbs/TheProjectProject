@@ -85,18 +85,13 @@ def get_recommended_projects(user):
                                             Project.complete==False)
                                     ).order_by(desc(Project.last_active)
                                 ).limit(RESULT_NUM - n_results)
+        print(result_ids)
         result_ids += [p.id for p in closed_or_completed]
+        print(result_ids)
         n_results = len(result_ids)
         if (n_results < RESULT_NUM):
-            difference_ids = set(invited_projects + result_ids)
-            print(difference_ids)
-            print(nowshow_ids)
-            nowshows = set(nowshow_ids)
-            for d in difference_ids:
-                if d in nowshows:
-                    print(f'here: {d}')
-                    nowshows.remove(d)
-            result_ids += list(nowshows)
+            print(result_ids)
+            result_ids += list(nowshow_ids)
             print(result_ids)
     # if past or at max, slice to max
     result_ids = result_ids[:RESULT_NUM]
