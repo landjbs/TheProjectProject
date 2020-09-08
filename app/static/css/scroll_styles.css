@@ -19,8 +19,8 @@
 }
 
 .card:hover {
-  background: rgba(0, 0, 255, 0.03);
-  border: 1px solid #ccc;
+  background: rgba(0, 0, 255, 0.005);
+  border: 2px solid #ccc;
 }
 
 .card-text {
