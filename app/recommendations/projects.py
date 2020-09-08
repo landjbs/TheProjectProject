@@ -85,9 +85,7 @@ def get_recommended_projects(user):
                                             Project.complete==False)
                                     ).order_by(desc(Project.last_active)
                                 ).limit(RESULT_NUM - n_results)
-        print([Project.get_by_id(id).closed for id in result_ids])
         result_ids += [p.id for p in closed_or_completed]
-        print([Project.get_by_id(id).closed for id in result_ids])
         n_results = len(result_ids)
         if (n_results < RESULT_NUM):
             result_ids += list(set(nowshow_ids).difference(invited_projects))
@@ -101,10 +99,12 @@ def get_recommended_projects(user):
         {id: index for index, id in enumerate(result_ids)},
         value=Project.id
     )
+    print([Project.get_by_id(id).complete for id in result_ids])
     # get query from ordered ids
     results = Project.query.filter(
                 Project.id.in_(result_ids)
             ).order_by(ordering).all()
+    print([p.complete for p in results])
     # if len(results)==0:
         # results = [project for project in Project.query.all().limit(30)]
     return results
