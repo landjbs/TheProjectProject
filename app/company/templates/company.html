@@ -1,0 +1,21 @@
+{% from 'macros/carousels.html' import render_carousel with context %}
+{% from 'macros/listbox.html' import render_listbox with context %}
+{% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
+{% from 'macros/cards/user.html' import render_user_action_bar, render_edit_user_modal, render_delete_account_modal %}
+
+{% extends "home_base.html" %}
+
+
+{% block title %}{{ company.name }}{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <meta name="description" content='{{ company.name }} on TheProjectProject. Oneliner: "{{ company.oneliner }}".'>
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="/css/scroll_styles.css">
+  <link rel="stylesheet" href="/css/project_styles.css">
+  <link rel='stylesheet' href="/css/badge_styles.css">
+{% endblock %}

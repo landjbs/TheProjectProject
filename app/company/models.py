@@ -5,7 +5,7 @@ from app.database import db, CRUDMixin
 
 class Company(CRUDMixin, db.Model):
     __tablename__ = 'company'
-    # __searchable__ = ['name']
+    __searchable__ = ['name']
     # name
     name = db.Column(db.String(128), nullable=False, unique=True)
     # code for url
@@ -50,4 +50,3 @@ class Company_Project(db.Model):
     company = relationship('Company', back_populates='users')
     # pay
     pay = db.Column(db.Integer, nullable=False, default=0)
-    
