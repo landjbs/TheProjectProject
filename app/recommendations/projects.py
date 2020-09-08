@@ -80,19 +80,16 @@ def get_recommended_projects(user):
     # add completed and closed projects if results are too few
     n_results = len(result_ids)
     if (n_results < RESULT_NUM):
+        # TODO: figure out edge case in closed/completed that allows result ids in
         closed_or_completed = Project.query.filter(
                                         or_(Project.open==False,
                                             Project.complete==False)
                                     ).order_by(desc(Project.last_active)
                                 ).limit(RESULT_NUM - n_results)
-        print(result_ids)
-        result_ids += [p.id for p in closed_or_completed]
-        print(result_ids)
+        result_ids += set(p.id for p in closed_or_completed).difference(set(result_ids + nowshow_ids))
         n_results = len(result_ids)
         if (n_results < RESULT_NUM):
-            print(result_ids)
             result_ids += list(nowshow_ids)
-            print(result_ids)
     # if past or at max, slice to max
     result_ids = result_ids[:RESULT_NUM]
     # if still nothing, return empty list
