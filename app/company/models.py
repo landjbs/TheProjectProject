@@ -7,12 +7,20 @@ from app.database import db, CRUDMixin
 class Company(CRUDMixin, db.Model):
     __tablename__ = 'company'
     __searchable__ = False
+    # name
     name = db.Column(db.String(128), nullable=False, unique=True)
+    # code for url
     code = db.Column(db.String(128), nullable=False, unique=True)
+    # oneliner
+    oneliner = db.Column(db.String(40), nullable=False)
+    # summary
+    summary = db.Column(db.String(400), nullable=False)
+    # users
     users = relationship('Company_Role',
                         back_populates='companies',
                         cascade='delete-orphan',
                         order_by='desc(Company_Role.joined_on)')
+    # projects
     projects = relationship('Company_Project',
                             back_populates='companies',
                             cascade='delete-orphan',
