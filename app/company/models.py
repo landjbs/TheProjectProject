@@ -6,7 +6,7 @@ from app.database import db, CRUDMixin
 
 class Company(CRUDMixin, db.Model):
     __tablename__ = 'company'
-    __searchable__ = ['name']
+    # __searchable__ = ['name']
     # name
     name = db.Column(db.String(128), nullable=False, unique=True)
     # code for url

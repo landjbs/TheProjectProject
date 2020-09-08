@@ -9,4 +9,5 @@ from ..company import company
 
 @company.route('/company=<code>', methods=['GET', 'POST'])
 @limiter.limit('')
-def __
+def company_page(code):
+    pass
