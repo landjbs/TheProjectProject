@@ -89,6 +89,8 @@ def get_recommended_projects(user):
         n_results = len(result_ids)
         if (n_results < RESULT_NUM):
             difference_ids = set(invited_projects + result_ids)
+            print(difference_ids)
+            print(nowshow_ids)
             nowshows = set(nowshow_ids)
             for d in difference_ids:
                 if d in nowshows:
