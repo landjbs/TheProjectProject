@@ -88,24 +88,23 @@ def get_recommended_projects(user):
         result_ids += [p.id for p in closed_or_completed]
         n_results = len(result_ids)
         if (n_results < RESULT_NUM):
-            result_ids += list(set(nowshow_ids).difference(invited_projects))
+            result_ids += list(set(nowshow_ids).difference(invited_projects).difference(set(result_ids)))
     # if past or at max, slice to max
     result_ids = result_ids[:RESULT_NUM]
     # if still nothing, return empty list
     if len(result_ids)==0:
         return []
     # build case statement for ordered query
-    ordering = case(
-        {id: index for index, id in enumerate(result_ids)},
-        value=Project.id
-    )
-    print(ordering)
-    print([Project.get_by_id(id).id for id in result_ids])
+    # ordering = case(
+    #     {id: index for index, id in enumerate(result_ids)},
+    #     value=Project.id
+    # )
     # get query from ordered ids
-    results = Project.query.filter(
-                Project.id.in_(result_ids)
-            ).order_by(ordering).all()
-    print([p.id for p in results])
+    # OPTIMIZE: case result query doesn't work yet, time against get by id and fix if way faster
+    results = [Project.get_by_id(id) for id in result_ids]
+    # results = Project.query.filter(
+                # Project.id.in_(result_ids)
+            # ).order_by(ordering).all()
     # if len(results)==0:
         # results = [project for project in Project.query.all().limit(30)]
     return results
