@@ -8,7 +8,7 @@ from ..base import base
 def domain():
     if current_user.is_authenticated and current_user.is_active:
         return redirect(url_for('hub.home'))
-    return redirect(url_for('base.index'))
+    return render_template('index.html')
 
 
 @base.route('/index', methods=['GET'])
