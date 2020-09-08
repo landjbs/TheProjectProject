@@ -18,6 +18,11 @@
   background: rgba(0, 0, 255, 0.01);
 }
 
+.card:hover {
+  background: rgba(0, 0, 255, 0.03);
+  border: 1px solid #ccc;
+}
+
 .card-text {
   min-height: 10vh;
   max-height: 10vh;
