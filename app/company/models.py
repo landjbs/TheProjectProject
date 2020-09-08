@@ -18,12 +18,10 @@ class Company(CRUDMixin, db.Model):
     # users
     users = relationship('Company_Role',
                         back_populates='companies',
-                        cascade='delete-orphan',
                         order_by='desc(Company_Role.joined_on)')
     # projects
     projects = relationship('Company_Project',
                             back_populates='companies',
-                            cascade='delete-orphan',
                             order_by='desc(Company_Project.)')
 
 
@@ -49,5 +47,5 @@ class Company_Project(db.Model):
     # company
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), primary_key=True)
     company = relationship('Company', back_populates='users')
-    # pay
-    pay = db.Column(db.Integer, nullable=False, default=0)
+    # salary
+    salary = db.Column(db.Integer, nullable=False, default=0)
