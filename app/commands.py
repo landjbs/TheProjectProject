@@ -59,8 +59,8 @@ def add_statics():
     db.session.commit()
 
 
-@click.option('--num_users', default=10, help='Number of users.')
-@click.option('--num_projects', default=50, help='Number of projects.')
+@click.option('--num_users', default=3, help='Number of users.')
+@click.option('--num_projects', default=5, help='Number of projects.')
 def populate_db(num_users, num_projects):
     ''' Populates db with seed '''
     fake = Faker()
@@ -94,7 +94,7 @@ def populate_db(num_users, num_projects):
     user_num = User.query.count()
     for _ in trange(num_projects, desc='Populating Projects'):
         requires_application = rand_bool(0.5)
-        complete = rand_bool(0.05)
+        complete = rand_bool(1)
         owner = User.get_by_id(np.random.randint(1, user_num+1))
         subjects = rand_subjects(np.random.randint(0,6))
         projects.append(
