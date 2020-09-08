@@ -99,12 +99,13 @@ def get_recommended_projects(user):
         {id: index for index, id in enumerate(result_ids)},
         value=Project.id
     )
-    print([Project.get_by_id(id).complete for id in result_ids])
+    print(ordering)
+    print([Project.get_by_id(id).id for id in result_ids])
     # get query from ordered ids
     results = Project.query.filter(
                 Project.id.in_(result_ids)
             ).order_by(ordering).all()
-    print([p.complete for p in results])
+    print([p.id for p in results])
     # if len(results)==0:
         # results = [project for project in Project.query.all().limit(30)]
     return results
