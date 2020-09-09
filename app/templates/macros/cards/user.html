@@ -57,7 +57,6 @@
 
 <!-- user card -->
 {% macro render_user_card(user, carousel_type='search') -%}
-<div class="col-md-4">
   <div class="card mb-2">
     <div class="card-body">
       <div class='float-right info-nums'>
@@ -96,7 +95,6 @@
       {{ render_user_action_bar(user) }}
     </div>
   </div>
-</div>
 {% endmacro -%}
 
 {% macro render_invitation_card(user) -%}
