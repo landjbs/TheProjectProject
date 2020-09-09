@@ -46,6 +46,8 @@
 %}
 <!-- /RENDER CARD FUNCTIONS -->
 
+
+<!-- CAROUSEL -->
 {%
   macro render_carousel(id_postfix, card_type, data, label=False, interval=4000,
                         icon_type=False, redirect_empty=False,
@@ -55,10 +57,9 @@
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
   {% set n = (data|length) if data else 0 %}
-  <!-- /CACHE -->
+  <!-- HEADER -->
   {% if n==0 and not redirect_empty %}
   {% else %}
-    <!-- HEADER -->
     {% if label %}
       <h4 class='tabname-big'>
         {{ label }}
@@ -69,30 +70,64 @@
       </h4>
       <hr class='my-1'>
     {% endif %}
-    <!-- /HEADER -->
     <!-- BODY -->
-    <!-- desktop requests -->
+    <!-- web requests -->
     {% if not request.MOBILE %}
-      <div id='{{ carousel_id }}' class='glider'>
-        {% for elt in data %}
-          {{ render_fn(elt) }}
-        {% endfor %}
+      <!-- partition data -->
+      {% if not override_partition %}
+        {% set tabs = partition_query(data) %}
+      {% else %}
+        {% set tabs = partition_query(data, override_partition) %}
+      {% endif %}
+      <!-- carousel -->
+      <div id='{{ carousel_id }}' class='carousel slide carousel-multi-item' data-ride='carousel'>
+        <div class='carousel-inner' role='listbox'>
+          {% for tab in tabs %}
+            {% if tab|length > 1 %}
+              <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
+                <div class='row'>
+                  {% for elt in tab %}
+                    {{ render_fn(elt) }}
+                  {% endfor %}
+                </div>
+              </div>
+            {% else %}
+              <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
+                {{ render_fn(tab[0]) }}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
-      <!-- controls -->
-      <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
-      <!-- initialize -->
-      <script>
-      new Glider(document.querySelector('#{{ carousel_id }}'), {
-        startAt: 6,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        // speed aggravator - higher is slower
-        duration: .5,
-        draggable: true,
-        dots: '#dots-{{ carousel_id }}'
-        });
-      </script>
-    <!-- mobile requests -->
+      <!-- multi-page case -->
+      {% if tabs|length > 1 %}
+        <!-- cache ids -->
+        {% set counter_id = 'counter-{id_postfix}'.format(id_postfix=id_postfix) %}
+        {% set storage_index = 'index-{id_postfix}'.format(id_postfix=id_postfix) %}
+        <!-- controls -->
+        <div class="controls-top">
+          <a class="btn-floating" href="#{{ carousel_id }}" data-slide="prev">
+            <i class="fa fa-chevron-circle-left fa-lg"></i>
+          </a>
+          <p id='{{ counter_id }}' class='counter'>1</p>
+          <a class="btn-floating" href="#{{ carousel_id }}" data-slide="next" onclick="$('#tooltip-{{ id_postfix }}').tooltip('hide');">
+            <i class="fa fa-chevron-circle-right fa-lg"></i>
+          </a>
+        </div>
+        <!-- scroll scripts -->
+        <script>
+          // set scroll speed
+          $('#{{ carousel_id }}').carousel({
+            interval: {{ interval }}
+          })
+          // cache scroll iterator and update counter
+          $('#{{ carousel_id }}').on('slid.bs.carousel', function () {
+            var count_index = $('#{{ carousel_id }} div.active').index() + 1
+            $('#{{ counter_id }}').html(count_index);
+          });
+        </script>
+      {% endif %}
+    <!-- mobile -->
     {% else %}
       {% for elt in data %}
         {{ render_fn(elt) }}
@@ -109,6 +144,6 @@
       <div id='tooltip-{{ id_postfix }}' data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}">
       </div>
     {% endif %}
-    <!-- /BODY -->
   {% endif %}
 {% endmacro -%}
+<!-- /CAROUSEL -->
