@@ -2,6 +2,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 
 from app.database import db, CRUDMixin
+from app.project.models import Project
 
 
 class Company(CRUDMixin, db.Model):
@@ -23,6 +24,8 @@ class Company(CRUDMixin, db.Model):
     projects = relationship('Company_Project',
                             back_populates='companies',
                             order_by='desc(Company_Project.)')
+    # last active
+    last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class Company_Role(db.Model):
@@ -33,8 +36,6 @@ class Company_Role(db.Model):
     # company
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), primary_key=True)
     company = relationship('Company', back_populates='users')
-    # role
-    role = db.Column(db.Text(128), nullable=True, unique=False)
     # joined on
     joined_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
