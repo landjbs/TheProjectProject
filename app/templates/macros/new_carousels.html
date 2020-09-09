@@ -79,8 +79,6 @@
         {% endfor %}
       </div>
       <!-- controls -->
-      <button aria-label="Previous" class="glider-prev">«</button>
-      <button aria-label="Next" class="glider-next">»</button>
       <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
       <!-- initialize -->
       <script>
@@ -91,12 +89,7 @@
         // speed aggravator - higher is slower
         duration: .5,
         draggable: true,
-        dots: '#dots-{{ carousel_id }}',
-        // arrow container elements or selector
-        arrows: {
-          prev: '.glider-prev',
-          next: '.glider-next'
-        }
+        dots: '#dots-{{ carousel_id }}'
         });
       </script>
     <!-- mobile requests -->
