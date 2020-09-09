@@ -78,11 +78,12 @@
           {{ render_fn(elt) }}
         {% endfor %}
       </div>
+      <div class='dots'></div>
       <script>
-      new Glider(document.querySelector('.glider'), {
+      new Glider(document.querySelector('#{{ carousel_id }}'), {
         slidesToShow: 3,
         slidesToScroll: 3,
-        draggable: true,
+        draggable: false,
         dots: '.dots',
         arrows: {
           prev: '.glider-prev',
