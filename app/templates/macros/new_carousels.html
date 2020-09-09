@@ -73,11 +73,23 @@
     <!-- BODY -->
     <!-- desktop requests -->
     {% if not request.MOBILE %}
-      <div id='{{ carousel_id }}'>
+      <div id='{{ carousel_id }}' class='glider'>
         {% for elt in data %}
           {{ render_fn(elt) }}
         {% endfor %}
       </div>
+      <script>
+      new Glider(document.querySelector('.glider'), {
+        slidesToShow: 5,
+        slidesToScroll: 5,
+        draggable: true,
+        dots: '.dots',
+        arrows: {
+          prev: '.glider-prev',
+          next: '.glider-next'
+        }
+        });
+      </script>
     <!-- mobile requests -->
     {% else %}
       {% for elt in data %}
