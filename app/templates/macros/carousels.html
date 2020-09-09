@@ -79,7 +79,9 @@
         {% endfor %}
       </div>
       <!-- controls -->
-      <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
+      {% if n > 3 %}
+        <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
+      {% endif %}
       <!-- initialize -->
       <script>
       new Glider(document.querySelector('#{{ carousel_id }}'), {
