@@ -73,11 +73,11 @@
     <!-- BODY -->
     <!-- desktop requests -->
     {% if not request.MOBILE %}
-      {% if not override_partition %}
-        {% set tabs = partition_query(data) %}
-      {% else %}
-        {% set tabs = partition_query(data, override_partition) %}
-      {% endif %}
+      <div id='{{ carousel_id }}'>
+        {% for elt in data %}
+          {{ render_fn(elt) }}
+        {% endfor %}
+      </div>
     <!-- mobile requests -->
     {% else %}
       {% for elt in data %}
