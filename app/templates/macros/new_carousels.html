@@ -84,6 +84,17 @@
         {{ render_fn(elt) }}
       {% endfor %}
     {% endif %}
+    {% if n==0 and redirect_empty %}
+      <div style='text-align:center;'>
+        <a type="button" class='add_button' href="{{ redirect_empty }}">
+          <i class="fa fa-plus-circle fa-3x add_button" aria-hidden="true"></i>
+        </a>
+      </div>
+    {% endif %}
+    {% if tooltip %}
+      <div id='tooltip-{{ id_postfix }}' data-toggle="tooltip" data-placement="bottom" title="{{ tooltip }}">
+      </div>
+    {% endif %}
     <!-- /BODY -->
-
+  {% endif %}
 {% endmacro -%}
