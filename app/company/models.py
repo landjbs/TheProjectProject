@@ -48,5 +48,3 @@ class Company_Project(db.Model):
     # company
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), primary_key=True)
     company = relationship('Company', back_populates='users')
-    # salary
-    salary = db.Column(db.Integer, nullable=False, default=0)
