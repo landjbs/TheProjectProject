@@ -90,15 +90,6 @@
 
 <script>
   function submit() {
-    {% if not True %}
-      var selector = document.getElementById('subjects');
-      var selected_subjects = instance.value();
-      if (selected_subjects) {
-        for (i=0; i<selected_subjects.length; i++) {
-          selector.options[selected_subjects[i]-1].selected='selected';
-        }
-      }
-    {% endif %}
     document.getElementById("apply_form").submit();
   };
 

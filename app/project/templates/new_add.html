@@ -14,24 +14,10 @@
 
 {% block content %}
 <form class='big-box container justify-content-center'>
-  <div class="row input-segment">
-    <h6 style="display: inline;">
-      Boop
-    </h6>
-    <div class="input-control">
-      <input class="toggle" value="true" type="radio">
-      <label class="btn"><span>A</span> Yes</label>
-
-      <input class="toggle" value="false" type="radio">
-      <label class="btn"><span>B</span> No</label>
-
-      <input class="toggle" value="false" type="radio">
-      <label class="btn"><span>C</span>Slm</label>
-
-      <input class="toggle" value="false" type="radio">
-      <label class="btn"><span>C</span>Slm</label>
-
-    </div>
-  </div>
+  <center>
+    {% for elt in form %}
+      {{ elt }}
+    {% endfor %}
+  </center>
 </form>
 {% endblock %}
