@@ -78,7 +78,11 @@
       {% else %}
         {% set tabs = partition_query(data, override_partition) %}
       {% endif %}
+    <!-- mobile requests -->
     {% else %}
+      {% for elt in data %}
+        {{ render_fn(elt) }}
+      {% endfor %}
     {% endif %}
     <!-- /BODY -->
 
