@@ -81,7 +81,7 @@
       <!-- controls -->
       <button aria-label="Previous" class="glider-prev">«</button>
       <button aria-label="Next" class="glider-next">»</button>
-      <div role="tablist" class="dots"></div>
+      <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
       <!-- initialize -->
       <script>
       new Glider(document.querySelector('#{{ carousel_id }}'), {
@@ -91,7 +91,7 @@
         // speed aggravator - higher is slower
         duration: .5,
         draggable: true,
-        dots: '.dots',
+        dots: '#dots-{{ carousel_id }}',
         // arrow container elements or selector
         arrows: {
           prev: '.glider-prev',
