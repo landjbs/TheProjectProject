@@ -19,10 +19,11 @@ class Company(CRUDMixin, db.Model):
     # users
     users = relationship('Company_Role',
                         back_populates='companies',
+                        lazy='dynamic',
                         order_by='desc(Company_Role.joined_on)')
     # projects
-    projects = relationship('Company_Project',
-                            back_populates='companies',
+    projects = relationship('Project',
+                            back_populates='company',
                             order_by='desc(Company_Project.)')
     # last active
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

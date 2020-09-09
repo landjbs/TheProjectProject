@@ -88,7 +88,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     # buzz
     buzz = db.Column(db.Integer, nullable=False, default=0)
     # company
-    company = 
+    company = relationship('Company', secondary='company_to_project',
+                        back_populates='projects', lazy='dynamic')
     # competition
     competition = relationship('Submission',
                             uselist=False,
