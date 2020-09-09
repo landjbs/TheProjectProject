@@ -46,6 +46,40 @@
 %}
 <!-- /RENDER CARD FUNCTIONS -->
 
-{% macro render_carousel() -%}
+{%
+  macro render_carousel(id_postfix, card_type, data, label=False, interval=4000,
+                        icon_type=False, redirect_empty=False,
+                        override_partition=False, tooltip=False)
+-%}
+  <!-- CACHE -->
+  {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
+  {% set render_fn = card_renders[card_type] %}
+  {% set n = (data|length) if data else 0 %}
+  <!-- /CACHE -->
+  {% if n==0 and not redirect_empty %}
+  {% else %}
+    <!-- HEADER -->
+    {% if label %}
+      <h4 class='tabname-big'>
+        {{ label }}
+        {% if icon_type %}
+          <i class='{{ icon_types[icon_type] }}'></i>
+          {{ n }}
+        {% endif %}
+      </h4>
+      <hr class='my-1'>
+    {% endif %}
+    <!-- /HEADER -->
+    <!-- BODY -->
+    <!-- desktop requests -->
+    {% if not request.MOBILE %}
+      {% if not override_partition %}
+        {% set tabs = partition_query(data) %}
+      {% else %}
+        {% set tabs = partition_query(data, override_partition) %}
+      {% endif %}
+    {% else %}
+    {% endif %}
+    <!-- /BODY -->
 
 {% endmacro -%}
