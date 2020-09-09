@@ -18,9 +18,11 @@
   background: rgba(0, 0, 255, 0.01);
 }
 
-.card:hover {
-  background: rgba(0, 0, 255, 0.005);
-  border: 2px solid #ccc;
+@media (min-width: 996px) {
+  .card:hover {
+    background: rgba(0, 0, 255, 0.005);
+    border-color: rgba(0 ,0, 0, 0.5);
+  }
 }
 
 .card-text {
