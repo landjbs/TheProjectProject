@@ -24,7 +24,8 @@ class Company(CRUDMixin, db.Model):
     # projects
     projects = relationship('Project',
                             back_populates='company',
-                            order_by='desc(Company_Project.)')
+                            cascade='all, delete, delete-orphan',
+                            order_by='desc(Project.last_active)')
     # last active
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
