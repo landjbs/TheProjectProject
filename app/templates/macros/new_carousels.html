@@ -75,13 +75,13 @@
     {% if not request.MOBILE %}
       <div id='{{ carousel_id }}' class='glider'>
         {% for elt in data %}
-          <div>{{ render_fn(elt) }}</div>
+          {{ render_fn(elt) }}
         {% endfor %}
       </div>
       <script>
       new Glider(document.querySelector('.glider'), {
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: 3,
+        slidesToScroll: 3,
         draggable: true,
         dots: '.dots',
         arrows: {
