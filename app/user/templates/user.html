@@ -307,7 +307,9 @@
   {% endif %}
 
   <script>
-    Glider(document.querySelector('.glider')).refresh();
+    window.onload = function() {
+      Glider(document.querySelector('.glider')).refresh();
+    }
   </script>
 
   {% endblock %}
