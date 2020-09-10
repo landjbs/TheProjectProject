@@ -149,7 +149,7 @@ def register_admin_views(application, admin, db):
     from app.project.models import Project, Project_Application, Comment, Task
     from app.subject.models import Subject, User_Subjects
     from app.notification.models import Notification
-    from app.competition.models import Competition
+    from app.competition.models import Competition, Submission
     from app.analytics.models import PageView
     from app.badge.models import Badge
     # from app.company.models import Company
@@ -170,6 +170,7 @@ def register_admin_views(application, admin, db):
         admin.add_view(SafeModelView(Project_Application, db.session, endpoint='AdminApplication'))
         admin.add_view(SafeModelView(Notification, db.session, endpoint='AdminNotification'))
         admin.add_view(CompetitionModelView(Competition, db.session, endpoint='AdminCompetition'))
+        admin.add_view(SafeModelView(Submission, db.session, endpoint='AdminSubmission'))
         admin.add_view(SafeModelView(Badge, db.session, endpoint='AdminBadge'))
         admin.add_view(SafeModelView(PageView, db.session, endpoint='AdminPageView'))
         # admin.add_view(SafeModelView(Company, db.session, endpoint='AdminCompany'))
