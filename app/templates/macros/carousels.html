@@ -73,7 +73,7 @@
     <!-- BODY -->
     <!-- desktop requests -->
     {% if not request.MOBILE %}
-      <div id='{{ carousel_id }}' class='glider' style='width:90%;'>
+      <div id='{{ carousel_id }}' class='glider'>
         {% for elt in data %}
           {{ render_fn(elt) }}
         {% endfor %}

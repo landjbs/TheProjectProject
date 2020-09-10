@@ -18,6 +18,10 @@
     margin: 10px;
 }
 
+.glider-dot.active {
+  background: rgba(93, 0, 255, 0.7);
+}
+
 .card {
   background: rgba(0, 0, 255, 0.01);
 }
