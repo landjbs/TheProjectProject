@@ -86,9 +86,8 @@
       {% endif %}
       <!-- initialize -->
       <script>
-      alert(int($('#n_to_show_{{ carousel_id }}').data()['other']));
       new Glider(document.querySelector('#{{ carousel_id }}'), {
-        slidesToShow: int($('#n_to_show_{{ carousel_id }}').data()['other']),
+        slidesToShow: parseInt($('#n_to_show_{{ carousel_id }}').data()['other']),
         slidesToScroll: 1,
         // speed aggravator - higher is slower
         duration: .5,
