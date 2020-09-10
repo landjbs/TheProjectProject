@@ -73,13 +73,11 @@
     <!-- BODY -->
     <!-- desktop requests -->
     {% if not request.MOBILE %}
-      <div class="carousel-buttons carousel-button-left">l</div>
-      <div id='{{ carousel_id }}' class='glider' style='width:90%;'>
+      <div id='{{ carousel_id }}' class='glider'>
         {% for elt in data %}
           {{ render_fn(elt) }}
         {% endfor %}
       </div>
-      <div class="carousel-buttons carousel-button-right">r</div>
       <!-- controls -->
       {% if n > 3 %}
         <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
@@ -87,6 +85,7 @@
       <!-- initialize -->
       <script>
       new Glider(document.querySelector('#{{ carousel_id }}'), {
+        autoplay: 4000,
         startAt: 6,
         slidesToShow: 3,
         slidesToScroll: 1,
