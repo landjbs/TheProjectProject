@@ -87,13 +87,17 @@
               <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
                 <div class='row'>
                   {% for elt in tab %}
-                    {{ render_fn(elt) }}
+                    <div class='col-md-4'>
+                      {{ render_fn(elt) }}
+                    </div>
                   {% endfor %}
                 </div>
               </div>
             {% else %}
               <div class='carousel-item {% if loop.index==1 %}active{% endif %}'>
-                {{ render_fn(tab[0]) }}
+                <div class='col-md-4'>
+                  {{ render_fn(tab[0]) }}
+                </div>
               </div>
             {% endif %}
           {% endfor %}
