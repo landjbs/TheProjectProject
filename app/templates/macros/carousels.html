@@ -56,7 +56,7 @@
   {% set render_fn = card_renders[card_type] %}
   {% set n = (data|length) if data else 0 %}
   <!-- metas -->
-  <meta id="n_to_show_{{ carousel_id }}" data-name="n_to_show" data-other="{{ override_partition|safe }}{% if override_partition %}{% else %}3{% endif %}">
+  <meta id="n_to_show_{{ carousel_id }}" data-name="n_to_show" data-other="{% if override_partition %}{{ override_partition|safe }}{% else %}3{% endif %}">
   <!-- /CACHE -->
   {% if n==0 and not redirect_empty %}
   {% else %}
@@ -86,9 +86,9 @@
       {% endif %}
       <!-- initialize -->
       <script>
-      alert($('#n_to_show_{{ carousel_id }}').data());
+      alert(int($('#n_to_show_{{ carousel_id }}').data()['other']));
       new Glider(document.querySelector('#{{ carousel_id }}'), {
-        slidesToShow: $('#n_to_show_{{ carousel_id }}').data(),
+        slidesToShow: int($('#n_to_show_{{ carousel_id }}').data()['other']),
         slidesToScroll: 1,
         // speed aggravator - higher is slower
         duration: .5,
