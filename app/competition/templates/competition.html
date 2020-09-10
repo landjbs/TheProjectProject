@@ -18,6 +18,7 @@
 {% block content %}
 <div class='container my-1 main'>
   {{ render_competition_card(competition) }}
+  {% set redir = url_for('project.add_project', competition_id=competition.id) %}
   {{
     render_carousel(
       label='Projects',
@@ -25,7 +26,7 @@
       card_type='project-big',
       data=submissions,
       icon_type='project',
-      redirect_empty="{{ url_for('project.add_project', competition_id=competition.id) }}")
+      redirect_empty={{ redir }})
   }}
 </div>
 <script src="js/stars.js"></script>
