@@ -17,5 +17,4 @@ function openTab(evt, tabName) {
   sessionStorage.setItem(
     (window.location.href + '_opened'), (tabName + '_Button')
   );
-  Glider(document.querySelector('.glider')).refresh();
 }

@@ -1,4 +1,4 @@
-{% from 'macros/carousels.html' import render_carousel with context %}
+{% from 'macros/old_carousels.html' import render_carousel with context %}
 {% from 'macros/listbox.html' import render_listbox with context %}
 {% from 'macros/cards/badge.html' import render_badge_icon_bigger %}
 {% from 'macros/cards/user.html' import render_user_action_bar, render_edit_user_modal, render_delete_account_modal %}
@@ -306,10 +306,4 @@
   </script>
   {% endif %}
 
-  <script>
-    window.onload = function() {
-      Glider(document.querySelector('.glider')).refresh();
-    }
-  </script>
-
-  {% endblock %}
+{% endblock %}
