@@ -81,7 +81,7 @@
         {% endfor %}
       </div>
       <!-- controls -->
-      {% if ((n>3) and not override_partition) or (override_partition and n>override_partition) %}
+      {% if ((n>3) and not override_partition) or (override_partition and (n>override_partition)) %}
         <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
       {% endif %}
       <!-- initialize -->
