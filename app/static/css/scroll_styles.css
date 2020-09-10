@@ -17,8 +17,6 @@
 .card {
   background: rgba(0, 0, 255, 0.01);
   width: 90%;
-  margin-left:   5%;
-  margin-right:  5%;
 }
 
 @media (min-width: 996px) {
