@@ -1,4 +1,4 @@
-<!-- WARNING: janky imports for render carousles to change type. very bad -->
+{% from 'macros/carousels.html' import render_carousel with context %}
 {% from 'macros/tabs.html' import render_safe_tabs with context %}
 
 {% extends "home_base.html" %}
@@ -17,8 +17,6 @@
 
 {% block content %}
 <div class='container main'>
-  <!-- slide carousels -->
-  {% from 'macros/carousels.html' import render_carousel with context %}
   {% set carousels = [
       ('Competitions',
         render_carousel(
@@ -37,13 +35,7 @@
           card_type='user-badge',
           data=my_badges
         )
-      )
-    ]
-  %}
-  <!-- old carousels -->
-  {% from 'macros/old_carousels.html' import render_carousel with context %}
-  {% set carousels = carousels +
-    [
+      ),
       ('Badges',
         render_carousel(
           label='Badges',
