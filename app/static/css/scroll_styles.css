@@ -14,9 +14,12 @@
   color: #5D00FF;
 }
 
+.glider-slide {
+    margin: 10px;
+}
+
 .card {
   background: rgba(0, 0, 255, 0.01);
-  width: 90%;
 }
 
 @media (min-width: 996px) {

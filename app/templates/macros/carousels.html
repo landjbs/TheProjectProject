@@ -77,17 +77,48 @@
         {% for elt in data %}
           {{ render_fn(elt) }}
         {% endfor %}
+        <div class="carousel-buttons carousel-button-left">l</div>
+        <div class="carousel-buttons carousel-button-right">r</div>
       </div>
       <!-- controls -->
       {% if n > 3 %}
         <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
       {% endif %}
-      <!-- initialize -->
       <style>
-        .glider-persp .glider-slide {
-            margin: 10px;
-          }
+      .carousel-buttons {
+        position: absolute;
+        width: 20px;  height: 20px;
+        padding: 6px;
+        border-radius: 100%;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: hsla(0, 0%, 100%, 0);
+        color: hsla(0, 0%, 0%, 0);
+        transition: all 0.2s linear;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 10000;
+        font-variant: small-caps;
+        }
+        .carousel:hover .carousel-buttons {
+        background-color: hsla(0, 0%, 100%, 1);
+        color: hsla(0, 0%, 0%, 1);
+        }
+        .carousel-buttons:hover {
+        background-color: hsla(25, 50%, 75%, 1)!important;
+        color: hsla(0, 0%, 0%, 1)!important;
+        }
+        .carousel-button-left {
+        left: 5px;
+        }
+        .carousel-button-right {
+        right: 5px;
+        }
       </style>
+      <!-- initialize -->
       <script>
       new Glider(document.querySelector('#{{ carousel_id }}'), {
         startAt: 6,
@@ -97,30 +128,7 @@
         duration: .5,
         draggable: false,
         rewind: true,
-        dots: '#dots-{{ carousel_id }}',
-        // set responsive to scale with screen size
-        responsive: [
-          {
-            // screens greater than >= 775px
-            breakpoint: 775,
-            settings: {
-              // Set to `auto` and provide item width to adjust to viewport
-              slidesToShow: 'auto',
-              slidesToScroll: 'auto',
-              itemWidth: 150,
-              duration: 0.25
-            }
-          },{
-            // screens greater than >= 1024px
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 2,
-              slidesToScroll: 1,
-              itemWidth: 150,
-              duration: 0.25
-            }
-          }
-        ]
+        dots: '#dots-{{ carousel_id }}'
         });
       </script>
     <!-- mobile requests -->
