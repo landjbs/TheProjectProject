@@ -1,6 +1,7 @@
 /* div styles */
 body {
   font-family: 'Varela Round' !important;
+  scrollbar-width: none;
 }
 
 mark {
