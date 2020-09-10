@@ -118,6 +118,31 @@
         right: 5px;
       }
       </style>
+      <script>
+      $('.carousel-button-left').click(function() {
+        var max = $('.carousel-block').length * 50 - 100;
+        var max = '-' + max;
+        var unit = '%';
+        var getMarginLeft = parseInt($('.engine')[0].style.marginLeft);
+        var getMarginLeft = getMarginLeft + 100;
+        $('.engine').css('marginLeft', getMarginLeft + unit);
+          if (getMarginLeft == 100) {
+            $('.engine').css('marginLeft', max + unit);
+          }
+      });
+      $('.carousel-button-right').click(function() {
+      $('.carousel-buttons').css('display', 'flex');
+        var max = $('.carousel-block').length * 50;
+        var max = '-' + max;
+        var unit = '%';
+        var getMarginLeft = parseInt($('.engine')[0].style.marginLeft);
+        var getMarginLeft = getMarginLeft - 100;
+        $('.engine').css('marginLeft', getMarginLeft + unit);
+          if (getMarginLeft == max) {
+            $('.engine').css('marginLeft', '0%');
+        }
+      });
+      </script>
       <!-- initialize -->
       <script>
       new Glider(document.querySelector('#{{ carousel_id }}'), {
