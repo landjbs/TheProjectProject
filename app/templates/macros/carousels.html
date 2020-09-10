@@ -55,6 +55,10 @@
   {% set carousel_id = 'carousel-{id_postfix}'.format(id_postfix=id_postfix) %}
   {% set render_fn = card_renders[card_type] %}
   {% set n = (data|length) if data else 0 %}
+  <!-- metas -->
+
+  <meta id="n_to_show" data-name="n_to_show"
+    data-other="{{ override_partition|safe }}{% if override_partition %}{% else %}3{% endif %}">
   <!-- /CACHE -->
   {% if n==0 and not redirect_empty %}
   {% else %}
@@ -84,9 +88,10 @@
       {% endif %}
       <!-- initialize -->
       <script>
+      var n_to_show = document.getElementById('n_to_show').data();
+      alert(n_to_show);
       new Glider(document.querySelector('#{{ carousel_id }}'), {
-        startAt: 6,
-        slidesToShow: 3,
+        slidesToShow: n_to_show,
         slidesToScroll: 1,
         // speed aggravator - higher is slower
         duration: .5,
