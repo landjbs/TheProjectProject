@@ -593,5 +593,10 @@
     </script>
     {% endif %}
 
+    <script>
+      window.onload = function() {
+        Glider(document.querySelector('.glider')).refresh();
+      }
+    </script>
 
   {% endblock %}
