@@ -19,11 +19,11 @@
 }
 
 .glider-dot.active {
-  background: rgba(93, 0, 255, 0.7);
+  background: rgba(93, 0, 255, 0.5);
 }
 
 .glider-dot {
-  background: rgba(255, 93, 0, 0.2);
+  background: rgba(93, 0, 255, 0.1);
 }
 
 .card {
