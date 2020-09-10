@@ -84,65 +84,7 @@
       {% if n > 3 %}
         <div id='dots-{{ carousel_id }}' role="tablist" class="dots"></div>
       {% endif %}
-      <style>
-      .carousel-buttons {
-        position: absolute;
-        width: 20px;  height: 20px;
-        padding: 6px;
-        border-radius: 100%;
-        font-size: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: hsla(0, 0%, 100%, 0);
-        color: hsla(0, 0%, 0%, 0);
-        transition: all 0.2s linear;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        z-index: 10000;
-        font-variant: small-caps;
-      }
-      .carousel:hover .carousel-buttons {
-        background-color: hsla(0, 0%, 100%, 1);
-        color: hsla(0, 0%, 0%, 1);
-      }
-      .carousel-buttons:hover {
-        background-color: hsla(25, 50%, 75%, 1)!important;
-        color: hsla(0, 0%, 0%, 1)!important;
-        }
-      .carousel-button-left {
-        left: 5px;
-      }
-      .carousel-button-right {
-        right: 5px;
-      }
-      </style>
-      <script>
-      $('.carousel-button-left').click(function() {
-        var max = $('.carousel-block').length * 50 - 100;
-        var max = '-' + max;
-        var unit = '%';
-        var getMarginLeft = parseInt($('.engine')[0].style.marginLeft);
-        var getMarginLeft = getMarginLeft + 100;
-        $('.engine').css('marginLeft', getMarginLeft + unit);
-          if (getMarginLeft == 100) {
-            $('.engine').css('marginLeft', max + unit);
-          }
-      });
-      $('.carousel-button-right').click(function() {
-      $('.carousel-buttons').css('display', 'flex');
-        var max = $('.carousel-block').length * 50;
-        var max = '-' + max;
-        var unit = '%';
-        var getMarginLeft = parseInt($('.engine')[0].style.marginLeft);
-        var getMarginLeft = getMarginLeft - 100;
-        $('.engine').css('marginLeft', getMarginLeft + unit);
-          if (getMarginLeft == max) {
-            $('.engine').css('marginLeft', '0%');
-        }
-      });
-      </script>
+      
       <!-- initialize -->
       <script>
       new Glider(document.querySelector('#{{ carousel_id }}'), {
