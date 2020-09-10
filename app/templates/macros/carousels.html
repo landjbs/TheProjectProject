@@ -56,7 +56,7 @@
   {% set render_fn = card_renders[card_type] %}
   {% set n = (data|length) if data else 0 %}
   <!-- metas -->
-  <div style='display:hidden;' id="n_to_show_{{ carousel_id }}" data="{{ override_partition|safe }}{% if override_partition %}{% else %}3{% endif %}"/>
+  <meta id="n_to_show_{{ carousel_id }}" data-name="n_to_show" data-other="{{ override_partition|safe }}{% if override_partition %}{% else %}3{% endif %}">
   <!-- /CACHE -->
   {% if n==0 and not redirect_empty %}
   {% else %}
