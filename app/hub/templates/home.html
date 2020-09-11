@@ -58,18 +58,35 @@
       })
     </script>
   {% endif %}
-  <!-- TODO: make bio tooltip show -->
+  <!-- TODO: make bio modal show -->
   {% if current_user.about == '' %}
-    <script>
-      $(function () {
-        $('#user-drop').tooltip('show');
-      })
-    </script>
-    <style>
-      .tooltip-inner {
-          border: solid 1px white;
-      }
-    </style>
+    <div id="about_modal" class="modal fade" role="dialog" style='z-index:9999;'>
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5>Complete {{ project.name }}</h5>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <form action="{{ url_for('project.complete_project', project_id=project.id) }}" method='post'>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div class="modal-body">
+              <p>
+                Congratulations on completing {{ project.name }}! In light of your
+                amazing work, we may want to share your project on TheProjectProject's
+                social media or put you in touch with funding/award opportunities.
+                We will reach out to ask permission if this is the case. You will be
+                able to edit the completed setting should you want to work more on
+                {{ project.name }} later.
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button class='btn' id='complete-btn'>Complete</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   {% else %}
     <script>
       $(function () {

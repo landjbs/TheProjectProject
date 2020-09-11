@@ -89,6 +89,8 @@ class test_config(base_config):
 
 
 class production_config(base_config):
+    # force clear cache
+    SEND_FILE_MAX_AGE_DEFAULT = 0
     # site
     # SERVER_NAME = 'https://theprojectproject.io 52.4.87.116'
     DOMAIN = 'https://theprojectproject.io'
