@@ -59,27 +59,29 @@
     </script>
   {% endif %}
   <!-- TODO: make bio modal show -->
-  {% if False %}
+  {% if True %}
     <!-- current_user.about == '' -->
     <div id="about_modal" class="modal fade" role="dialog" style='z-index:9999;'>
       <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
-            <h5>Add </h5>
+            <h5>Add a </h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
-          <form action="{{ url_for('project.complete_project', project_id=project.id) }}" method='post'>
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+          <form action="editBio" method='post'>
+            {% set edit_form = g.edit_form %}
+            {{ edit_form.csrf_token }}
+            <div style='display: hidden;'>
+              {% for elt in edit_form %}
+                {{ elt() }}
+              {% endfor %}
+            </div>
             <div class="modal-body">
-              <p>
-                Congratulations on completing {{ project.name }}! In light of your
-                amazing work, we may want to share your project on TheProjectProject's
-                social media or put you in touch with funding/award opportunities.
-                We will reach out to ask permission if this is the case. You will be
-                able to edit the completed setting should you want to work more on
-                {{ project.name }} later.
-              </p>
+              {{ edit_form.about(class='edit-input') }}
+              {% if edit_form.about.errors %}
+                <p class='warning'>{{ edit_form.about.errors[0] }}</p>
+              {% endif %}
             </div>
             <div class="modal-footer">
               <button class='btn' id='complete-btn'>Complete</button>
