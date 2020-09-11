@@ -1,4 +1,4 @@
-{% from 'macros/old_carousels.html' import render_carousel with context %}
+{% from 'macros/carousels.html' import render_carousel with context %}
 {% from 'macros/listbox.html' import render_listbox with context %}
 
 {% from 'macros/cards/project.html' import render_project_action_bar, render_edit_project_modal, render_complete_modal, render_open_modal, render_requires_application_modal %}
@@ -593,7 +593,10 @@
     </script>
     {% endif %}
 
+    <script>
+      window.onload = function() {
+        Glider(document.querySelector('.glider')).refresh();
+      }
+    </script>
+
   {% endblock %}
-
-
-<!-- Glider(document.querySelector('.glider')).refresh(); -->
