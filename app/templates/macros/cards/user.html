@@ -12,8 +12,8 @@
     </button>
     {{ render_collaborate_modal(user) }}
   {% else %}
-    <a class="btn" href='{{ user.get_url() }}'>
-        View
+    <a class="btn" href='{{ user.get_url() }}/true'>
+        Edit
     </a>
     <script>
       $('#edit_modal').appendTo('body');

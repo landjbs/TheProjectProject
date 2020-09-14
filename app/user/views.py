@@ -13,8 +13,9 @@ from ..user import user
 
 
 @user.route('/user=<code>', methods=['GET', 'POST'])
+@user.route('/user=<code>/<show_edit_modal>', methods=['GET', 'POST'])
 @limiter.limit('60 per minute')
-def user_page(code):
+def user_page(code, show_edit_modal=False):
     user = User.query.filter_by(code=code).first_or_404()
     g.user = user
     # user data
@@ -35,7 +36,6 @@ def user_page(code):
     subject_data = user.subject_data()
     ## forms ##
     # edit user account
-    show_edit_modal = False
     edit_form = False
     if current_user==user:
         edit_form = Edit_User()
