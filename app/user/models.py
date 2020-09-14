@@ -63,6 +63,18 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                             lazy='dynamic',
                             back_populates='rejections')
     ## interactions ##
+    # channels
+    channels = relationship('Channel',
+                            secondary=user_to_channel,
+                            lazy='dynamic',
+                            cascade='delete-orphan',
+                            order_by='desc(Channel.last_active)')
+    # messages
+    messages = relationship('Message',
+                        back_populates='user',
+                        lazy='dynamic',
+                        cascade='all, delete, delete-orphan',
+                        order_by='desc(Message.timestamp)')
     # starred projects
     starred = relationship('Project',
                         secondary='user_to_project',

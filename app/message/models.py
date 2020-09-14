@@ -10,18 +10,21 @@ class Channel(CRUDMixin, db.Model):
                     secondary=user_to_channel,
                     lazy='dynamic')
     messages = relationship('Message',
-        secondary=channel_to_message,
+        back_populates='channel',
         lazy='dynamic',
         cascade='all, delete, delete-orphan',
         order_by='desc(Message.timestamp)')
+    last_active = db.Column(db.DateTime, nullable=False, default=utcnow)
 
 
 class Message(CRUDMixin, db.Model):
     __tablename__ = 'message'
-    from_id = None
-    from_user = None
-    to_id = None
-    to_user = None
+    # sender
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    sender = relationship('User', back_populates='messages')
+    # channel
+    channel_id = db.Column(db.Integer, db.ForeignKey('channel.id'))
+    channel = relationship('Channel', back_populates='messages')
     # content
     text = db.Column(db.Text(128), unique=False, nullable=False)
     # metadata
