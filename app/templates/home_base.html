@@ -75,7 +75,7 @@
           </ul>
           {% if current_user.is_authenticated %}
             <li class="nav-item" style='list-style-type:none;'>
-              <div class="dropdown" id='user-drop' data-toggle="tooltip" data-placement="right" title="Add a bio to your profile to showcase your interests and get collaborations!">
+              <div class="dropdown">
                 <button class="dropbtn" style="border:0px; display:inline;">
                   {{ current_user.name }}
                   {% set n_unseen = current_user.n_unseen() %}
