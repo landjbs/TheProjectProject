@@ -64,11 +64,11 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                             back_populates='rejections')
     ## interactions ##
     # channels
-    channels = relationship('Channel',
-                            secondary=user_to_channel,
+    channels = relationship('User_Channel',
                             lazy='dynamic',
                             cascade='delete-orphan',
-                            order_by='desc(Channel.last_active)')
+                            back_populates='user'
+                            order_by='desc(User_Channel.channel.last_active)')
     # messages
     messages = relationship('Message',
                         back_populates='user',

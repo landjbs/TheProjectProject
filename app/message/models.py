@@ -40,5 +40,10 @@ class User_Channel(db.Model):
     user = relationship('User', back_populates='channels')
     # channel
     channel_id = db.Column(db.Integer, db.ForeignKey('channel.id'), primary_key=True)
-    # last read
+    channel = relationship('Channel', back_populates='users')
+    # last read (last time user read channel)
     last_read = db.Column(db.DateTime, nullable=False, default=utcnow)
+
+    def n_new(self):
+        last_read = self.last_read
+        return self.channel.filter(last_active>last_read)
