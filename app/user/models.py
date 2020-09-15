@@ -66,8 +66,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     ## interactions ##
     # channels
     channels = relationship('User_Channel',
-                            lazy='eager',
-                            join_depth=1,
+                            lazy='dynamic',
                             cascade='all, delete, delete-orphan',
                             back_populates='user',
                             order_by='desc(User_Channel.last_read)')
@@ -273,7 +272,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         # if self in to:
             # return False
         # check if channel from user to to exists
-        channel = self.channels.filter()
+        channel = self.channels.query.join(self.channels.users).fiter(self.channels.users.has(to))
         # make channel if it doesn't exist
         if not channel:
             channel = Channel(users=(to+[self]))
