@@ -7,6 +7,7 @@ from .forms import Edit_User
 from ..message import message
 
 
-@message.route('/message_test')
-def message_test():
-    return ' |'.join(str(message) for message in current_user.messages)
+@message.route('/messages')
+def messages():
+    current_user.messages.append()
+    current_user.update()

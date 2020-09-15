@@ -16,6 +16,14 @@ class Channel(CRUDMixin, db.Model):
         order_by='desc(Message.timestamp)')
     last_active = db.Column(db.DateTime, nullable=False, default=utcnow)
 
+    def send(self, body, sender):
+        ''' Sends message of body from sender to channel '''
+        if not sender in self.users:
+            return False
+        self.messages.append(Message(body=body, sender=sender))
+        self.last_active = utcnow()
+        self.update()
+
 
 class Message(CRUDMixin, db.Model):
     __tablename__ = 'message'
@@ -25,8 +33,6 @@ class Message(CRUDMixin, db.Model):
     # channel
     channel_id = db.Column(db.Integer, db.ForeignKey('channel.id'))
     channel = relationship('Channel', back_populates='messages')
-    # seen by
-
     # content
     text = db.Column(db.Text(128), unique=False, nullable=False)
     # metadata

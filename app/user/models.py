@@ -8,6 +8,7 @@ from app.extensions import bcrypt
 
 from app.subject.models import User_Subjects
 from app.notification.models import Notification
+from app.message.models import User_Channel
 from app.badge.models import Badge, User_Badge
 from app.badge.create_badges import badge_name_list
 
@@ -264,6 +265,10 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         ''' Gets all subjects explicitly selected by user '''
         user_selected = self.subjects.filter_by(user_selected=True)
         return user_selected
+
+    ## messages ##
+    def send_message(self, body:str, to:list):
+        Message(body=body, sender=current_user)
 
     ## notifications ##
     def notify(self, text, name, important=False, redirect=None):
