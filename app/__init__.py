@@ -19,6 +19,7 @@ from app.user import user
 from app.project import project
 from app.subject import subject
 from app.notification import notification
+from app.message import message
 from app.badge import badge
 from app.question import question
 from app.link import link
@@ -136,6 +137,7 @@ def register_blueprints(app):
     app.register_blueprint(project)
     app.register_blueprint(subject)
     app.register_blueprint(notification)
+    app.register_blueprint(message)
     app.register_blueprint(badge)
     app.register_blueprint(link)
     app.register_blueprint(competition)
