@@ -25,7 +25,20 @@ class Message(CRUDMixin, db.Model):
     # channel
     channel_id = db.Column(db.Integer, db.ForeignKey('channel.id'))
     channel = relationship('Channel', back_populates='messages')
+    # seen by
+
     # content
     text = db.Column(db.Text(128), unique=False, nullable=False)
     # metadata
     timestamp = db.Column(db.DateTime, nullable=False, default=utcnow)
+
+
+class User_Channel(db.Model):
+    __tablename__ = 'user_channel'
+    # user
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    user = relationship('User', back_populates='channels')
+    # channel
+    channel_id = db.Column(db.Integer, db.ForeignKey('channel.id'), primary_key=True)
+    # last read
+    last_read = db.Column(db.DateTime, nullable=False, default=utcnow)

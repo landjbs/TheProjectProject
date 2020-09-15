@@ -12,10 +12,10 @@ db = SQLAlchemy()
 
 class CRUDMixin(object):
     __table_args__ = {'extend_existing': True}
-
-    id = db.Column(db.Integer, primary_key=True)
     __searchable__ = False
-
+    # base columns
+    id = db.Column(db.Integer, primary_key=True)
+    
     @classmethod
     def get_by_id(cls, id):
         if any((isinstance(id, str) and id.isdigit(),
