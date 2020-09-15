@@ -1,0 +1,16 @@
+{% extends 'home_base.html' %}
+
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+
+{% for channel in current_user.channels %}
+  {{ channel.name }}
+  {% for message in channel %}
+    {{ message.text }}
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}

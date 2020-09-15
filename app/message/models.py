@@ -1,4 +1,4 @@
-from datetime.datetime import utcnow
+from datetime import datetime
 from sqlalchemy.orm import relationship
 
 from app.database import db, CRUDMixin
@@ -6,22 +6,23 @@ from app.database import db, CRUDMixin
 
 class Channel(CRUDMixin, db.Model):
     __tablename__ = 'channel'
-    users = relationship('User',
-                    secondary=user_to_channel,
-                    lazy='dynamic')
+    users = relationship('User_Channel',
+                    lazy='dynamic',
+                    cascade='all, delete, delete-orphan',
+                    back_populates='channel')
     messages = relationship('Message',
         back_populates='channel',
         lazy='dynamic',
         cascade='all, delete, delete-orphan',
         order_by='desc(Message.timestamp)')
-    last_active = db.Column(db.DateTime, nullable=False, default=utcnow)
+    last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-    def send(self, body, sender):
-        ''' Sends message of body from sender to channel '''
+    def send(self, text, sender):
+        ''' Sends message of text from sender to channel '''
         if self.users.filter_by(user=sender).first() is None:
             return False
-        self.messages.append(Message(body=body, sender=sender))
-        self.last_active = utcnow()
+        self.messages.append(Message(text=text, sender=sender))
+        self.last_active = datetime.utcnow()
         self.update()
         return True
 
@@ -37,7 +38,7 @@ class Message(CRUDMixin, db.Model):
     # content
     text = db.Column(db.Text(128), unique=False, nullable=False)
     # metadata
-    timestamp = db.Column(db.DateTime, nullable=False, default=utcnow)
+    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 class User_Channel(db.Model):
@@ -49,7 +50,7 @@ class User_Channel(db.Model):
     channel_id = db.Column(db.Integer, db.ForeignKey('channel.id'), primary_key=True)
     channel = relationship('Channel', back_populates='users')
     # last read (last time user read channel)
-    last_read = db.Column(db.DateTime, nullable=False, default=utcnow)
+    last_read = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def n_new(self):
         last_read = self.last_read

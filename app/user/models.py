@@ -67,12 +67,12 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     # channels
     channels = relationship('User_Channel',
                             lazy='dynamic',
-                            cascade='delete-orphan',
-                            back_populates='user'
-                            order_by='desc(User_Channel.channel.last_active)')
+                            cascade='all, delete, delete-orphan',
+                            back_populates='user',
+                            order_by='desc(User_Channel.last_read)')
     # messages
     messages = relationship('Message',
-                        back_populates='user',
+                        back_populates='sender',
                         lazy='dynamic',
                         cascade='all, delete, delete-orphan',
                         order_by='desc(Message.timestamp)')
@@ -267,16 +267,16 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return user_selected
 
     ## messages ##
-    def send_message(self, body:str, to:list):
+    def send_message(self, text:str, to:list):
         # check if possible to send message to users
-        if self in to:
-            return False
+        # if self in to:
+            # return False
         # check if channel from user to to exists
         channel = self.channels.filter()
         # make channel if it doesn't exist
         if not channel:
             channel = Channel(users=(to+[self]))
-        channel.send(body=body, sender=self)
+        channel.send(text=text, sender=self)
         return True
 
     ## notifications ##
