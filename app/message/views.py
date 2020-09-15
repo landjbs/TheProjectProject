@@ -8,5 +8,5 @@ from ..message import message
 
 @message.route('/messages')
 def messages():
-    
-    return render_template('messages.html', messages=message)
+    current_user.send_message('Bap bop boop!!!', to=[current_user])
+    return render_template('messages.html')
