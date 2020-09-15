@@ -66,7 +66,8 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     ## interactions ##
     # channels
     channels = relationship('User_Channel',
-                            lazy='dynamic',
+                            lazy='eager',
+                            join_depth=1,
                             cascade='all, delete, delete-orphan',
                             back_populates='user',
                             order_by='desc(User_Channel.last_read)')

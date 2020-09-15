@@ -7,7 +7,8 @@ from app.database import db, CRUDMixin
 class Channel(CRUDMixin, db.Model):
     __tablename__ = 'channel'
     users = relationship('User_Channel',
-                    lazy='dynamic',
+                    lazy='eager',
+                    join_depth=1,
                     cascade='all, delete, delete-orphan',
                     back_populates='channel')
     messages = relationship('Message',
