@@ -268,7 +268,8 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     ## messages ##
     def send_message(self, body:str, to:list):
-        Message(body=body, sender=current_user)
+        # check if channel from user to to exists
+        self.channels
 
     ## notifications ##
     def notify(self, text, name, important=False, redirect=None):

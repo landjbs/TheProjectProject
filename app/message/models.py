@@ -23,6 +23,7 @@ class Channel(CRUDMixin, db.Model):
         self.messages.append(Message(body=body, sender=sender))
         self.last_active = utcnow()
         self.update()
+        return True
 
 
 class Message(CRUDMixin, db.Model):
