@@ -272,7 +272,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         # if self in to:
             # return False
         # check if channel from user to to exists
-        channel = self.channels.query.join(self.channels.users).fiter(self.channels.users.has(to))
+        channel = self.channels.join(self.channels.users).filter(self.channels.users.has(to))
         # make channel if it doesn't exist
         if not channel:
             channel = Channel(users=(to+[self]))
