@@ -18,7 +18,7 @@ class Channel(CRUDMixin, db.Model):
 
     def send(self, body, sender):
         ''' Sends message of body from sender to channel '''
-        if not sender in self.users:
+        if self.users.filter_by(user=sender).first() is None:
             return False
         self.messages.append(Message(body=body, sender=sender))
         self.last_active = utcnow()
