@@ -13,7 +13,7 @@ def messages():
     return render_template('messages.html')
 
 
-@message.route('/send_message/channel')
+@message.route('/send_message')
 @login_required
 def send_message():
-    
+    channel.send_message()
