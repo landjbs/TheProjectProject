@@ -17,5 +17,8 @@ def messages():
 @message.route('/send_message')
 @login_required
 def send_message():
-    print(request.form)
+    form = Message_Form()
+    if form.validate_on_submit():
+        print(form.message.data)
     # channel.send_message()
+    return redirect(request.referrer)
