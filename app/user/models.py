@@ -287,7 +287,6 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                 user.update()
             channel.update()
         channel.send(text=text, sender=self)
-        print([x for x in channel.messages])
         return True
 
     def message_project(self):

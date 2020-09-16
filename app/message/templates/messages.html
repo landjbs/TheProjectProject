@@ -2,19 +2,24 @@
 
 {% block head %}
   {{ super() }}
+  <meta name="description" content="See your notifications on TheProjectProject.">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Our Custom CSS -->
+  <link rel="stylesheet" href="/css/scroll_styles.css">
+  <link rel="stylesheet" href="/css/project_styles.css">
+  <link rel='stylesheet' href="/css/badge_styles.css">
 {% endblock %}
 
-{% block body %}
-
-<div class='container main'>
-  {% for channel in current_user.channels %}
-    {% for user in channel.users %}
-      {{ user.name }}
+{% block content %}
+  <div class='container my-1 main'>
+    {% for channel in current_user.channels %}
+      {% for user in channel.users %}
+        {{ user.name }}
+      {% endfor %}
+      {% for message in channel.messages %}
+        {{ message.text }}
+      {% endfor %}
     {% endfor %}
-    {% for message in channel.messages %}
-      {{ message.text }}
-    {% endfor %}
-  {% endfor %}
-</div>
-
+  </div>
 {% endblock %}
