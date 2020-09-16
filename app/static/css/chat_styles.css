@@ -28,6 +28,7 @@
 .form-container {
   display: none;
   background-color: white;
+  padding-bottom: 10px;
 }
 
 /* When the textarea gets focus, do something */
