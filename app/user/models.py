@@ -285,7 +285,9 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             for user in to:
                 user.channels.append(User_Channel(channel=channel))
                 user.update()
+            channel.update()
         channel.send(text=text, sender=self)
+        print([x for x in channel.messages])
         return True
 
     def message_project(self):

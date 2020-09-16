@@ -6,11 +6,15 @@
 
 {% block body %}
 
-{% for channel in current_user.channels %}
-  {{ channel.name }}
-  {% for message in channel %}
-    {{ message.text }}
+<div class='container main'>
+  {% for channel in current_user.channels %}
+    {% for user in channel.users %}
+      {{ user.name }}
+    {% endfor %}
+    {% for message in channel.messages %}
+      {{ message.text }}
+    {% endfor %}
   {% endfor %}
-{% endfor %}
+</div>
 
 {% endblock %}
