@@ -13,7 +13,7 @@
       {% endfor %}
 
       {{ g.message_form.csrf_token }}
-      {{ g.message_form.text() }}
+      {{ g.message_form.text(class='post-input') }}
       <!-- <textarea placeholder="Type message.." name="msg" required></textarea> -->
 
       <button type="submit" class="btn">Send</button>
