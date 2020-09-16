@@ -121,12 +121,15 @@ def register_extensions(app):
     extensions.serializer.init_app(app)
     ######### LOGIN MANAGER #########
     extensions.lm.init_app(app)
-    if not app.config['AUTOLOG']:
-        extensions.lm.login_view = 'auth.login'
-        extensions.lm.anonymous_user = Anonymous
-    else:
-        from app.user.models import User
-        extensions.lm.anonymous_user = (lambda _ : User.get_by_id(0))()
+    extensions.lm.login_view = 'auth.login'
+    extensions.lm.anonymous_user = Anonymous
+    ## autolog needs work but the goal is to not have to relogin every restart
+    # if not app.config['AUTOLOG']:
+    #     extensions.lm.login_view = 'auth.login'
+    #     extensions.lm.anonymous_user = Anonymous
+    # else:
+    #     from app.user.models import User
+    #     extensions.lm.anonymous_user = (lambda: User.get_by_id(0))()
     ################################
     db.init_app(app)
 
