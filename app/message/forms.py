@@ -1,7 +1,7 @@
 from wtforms import TextField
 
 from app.forms.base import BaseForm
-
+from wtforms.validators import DataRequired, Length
 
 class Message_Form(BaseForm):
     ''' Form to message channel '''
