@@ -162,8 +162,6 @@
       {% endfor %}
     {% endif %}
 
-    {% block content %} {% endblock %}
-
     <!-- CHAT BOX -->
     <div class="chat-popup" id="myForm">
       <form action="/action_page.php" class="form-container">
@@ -258,6 +256,9 @@
     }
     </script>
     <!-- /CHAT BOX -->
+
+
+    {% block content %} {% endblock %}
 
     <script>
       $('.toast').toast('show');
