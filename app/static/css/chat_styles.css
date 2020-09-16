@@ -75,6 +75,10 @@
   border-color: black;
 }
 
+.message:hover .time-right {
+  display: block;
+}
+
 /* Darker chat message */
 .darker {
   border-color: #ccc;
