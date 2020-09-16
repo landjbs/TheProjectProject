@@ -5,7 +5,7 @@
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ user_channel.name() }}
     </button>
-    <form action="{{ url_for('message.send_message', channel_id=channel.id) }}" method='post' class="form-container" id="myForm">
+    <form onsubmit='send_message()' class="form-container" id="myForm">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ user_channel.name() }}</button>
       <div class='messages'>
         {% for message in channel.messages|reverse %}
@@ -19,14 +19,29 @@
         {% endfor %}
       </div>
 
-      {{ g.message_form.csrf_token }}
-      <div class='post_form'>
+      <div class='post_form' id='message_form'>
         {{ g.message_form.text(class='post-input', autocomplete='off') }}
         <button type="submit">Send</button>
       </div>
     </form>
   </div>
   <script>
-    
+    $.ajaxSetup({
+      headers: {'X-CSRFToken': '{{ g.message_form.csrf_token }}'}
+    })
+    function send_message() {
+      alert('HERE');
+      var form_data = JSON.stringify({'data' : document.getElementById('message_form').value});
+      $.ajax({
+        type: 'POST',
+        url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
+        dataType: 'json',
+        contentType: 'application/json',
+        data: form_data,
+        success: function() {
+            alert('sent');
+        }
+      })
+    }
   </script>
 {% endmacro -%}
