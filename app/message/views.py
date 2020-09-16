@@ -19,6 +19,6 @@ def messages():
 def send_message():
     form = Message_Form()
     if form.validate_on_submit():
-        print(form.message.data)
+        print(form.text.data)
     # channel.send_message()
     return redirect(request.referrer)
