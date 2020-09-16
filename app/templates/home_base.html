@@ -167,7 +167,9 @@
     {% from 'macros/chat.html' import render_chat %}
     <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
 
-    {{ render_chat('') }}
+    {% for _ in range(3) %}
+      {{ render_chat('') }}
+    {% endfor %}
 
     <!-- CHAT BOX -->
     <script>
