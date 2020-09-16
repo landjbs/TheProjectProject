@@ -11,7 +11,7 @@
         {% for message in channel.messages|reverse %}
           <div class="message">
             <p>{{ message.text }}</p>
-            <span class="time-right" style='display:none;'>
+            <span class="time-right">
               {{ time_to_str(message.timestamp) }}
             </span>
           </div>
