@@ -17,6 +17,12 @@ class Channel(CRUDMixin, db.Model):
         order_by='desc(Message.timestamp)')
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    def __repr__(self):
+        return (f'<Channel '
+                f'n_user={self.users.count()} '
+                f'n_messages={self.messages.count()} '
+                f'last_active={self.last_active}>')
+
     def send(self, text, sender):
         ''' Sends message of text from sender to channel '''
         if self.users.filter_by(user=sender).first() is None:
@@ -39,6 +45,9 @@ class Message(CRUDMixin, db.Model):
     text = db.Column(db.Text(128), unique=False, nullable=False)
     # metadata
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<Message "{self.text}" by {self.sender} on {self.timestamp}>'
 
 
 class User_Channel(db.Model):

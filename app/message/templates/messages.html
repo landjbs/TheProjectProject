@@ -13,6 +13,7 @@
 
 {% block content %}
   <div class='container my-1 main'>
+    {{ current_user.name }}
     {% for channel in current_user.channels %}
       {% for user in channel.users %}
         {{ user.name }}
