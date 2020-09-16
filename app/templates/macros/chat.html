@@ -27,14 +27,13 @@
   </div>
   <script>
     $.ajaxSetup({
-      headers: {'X-CSRFToken': '{{ g.message_form.csrf_token }}'}
+      headers: {'X-CSRFToken': '{{ csrf_token() }}'}
     })
     function send_message() {
-      alert(document.getElementById('message-text').value);
       var form_data = JSON.stringify({'data' : document.getElementById('message-text').value});
       $.ajax({
-        type: 'POST',
         url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
+        type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
         data: form_data,
