@@ -126,7 +126,7 @@ def register_extensions(app):
         extensions.lm.anonymous_user = Anonymous
     else:
         from app.user.models import User
-        extensions.lm.anonymous_user = User.get_by_id(0)
+        extensions.lm.anonymous_user = (lambda _ : User.get_by_id(0))()
     ################################
     db.init_app(app)
 
