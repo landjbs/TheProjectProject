@@ -43,7 +43,7 @@
 }
 
 /* When the textarea gets focus, do something */
-.form-container textarea:focus {
+.form-container input:focus {
   background-color: #ddd;
   outline: none;
 }
