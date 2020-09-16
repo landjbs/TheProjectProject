@@ -4,7 +4,7 @@
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ user_channel.name() }}
     </button>
-    <form action="{{ url_for('message.send_message') }}" class="form-container" id="myForm">
+    <form action="{{ url_for('message.send_message') }}" method='post' class="form-container" id="myForm">
       {% for message in channel.messages %}
         <div class="message">
           <p>{{ message.text }}</p>

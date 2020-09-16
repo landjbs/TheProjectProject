@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from flask_mobility.decorators import mobilized
 # package imports
 from .models import Message, Channel
+from .forms import Message_Form
 from ..message import message
 
 
