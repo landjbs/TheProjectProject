@@ -14,7 +14,7 @@ class Channel(CRUDMixin, db.Model):
         back_populates='channel',
         lazy='dynamic',
         cascade='all, delete, delete-orphan',
-        order_by='desc(Message.timestamp)')
+        order_by='Message.timestamp')
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
