@@ -68,11 +68,12 @@ class User_Channel(db.Model):
         ''' Generates user-specific name for the channel '''
         users = set([uc.user for uc in self.channel.users]).difference({self.user})
         name = ''
-        print(users)
         for i, user in enumerate(users):
             if (i>0):
                 name += ', '
             name += user.name
+        name += f', {self.user.name}'
+        return name
 
     def n_new(self):
         last_read = self.last_read
