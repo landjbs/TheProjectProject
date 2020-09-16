@@ -29,7 +29,7 @@
       <!-- custom stylesheets -->
       <link type="text/css" href="/css/stylesheet.css" rel="stylesheet">
       <link type="text/css" href="/css/home_styles.css" rel="stylesheet">
-      <link rel='stylesheet' href="/css/badge_styles.css">
+      <link type="text/css" href="/css/badge_styles.css" rel='stylesheet'>
       <!-- favicon -->
       <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
       <link rel="icon" href="/img/logo.ico" type="image/x-icon">
@@ -163,6 +163,11 @@
     {% endif %}
 
     {% block content %} {% endblock %}
+
+    {% from 'macros/chat.html' import render_chat %}
+    <link type="text/css" href="/css/badge_styles.css" rel='stylesheet'>
+
+    {{ render_chat('') }}
 
     <!-- CHAT BOX -->
     <script>
