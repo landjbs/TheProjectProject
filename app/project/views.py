@@ -606,7 +606,6 @@ def save_instructions(project_id):
             category='error')
     else:
         instructions = request.json.get('data')
-        print(instructions)
         if instructions is not None:
             project.instructions = instructions
             project.update()

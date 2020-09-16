@@ -30,7 +30,6 @@
       headers: {'X-CSRFToken': '{{ g.message_form.csrf_token }}'}
     })
     function send_message() {
-      alert('HERE');
       var form_data = JSON.stringify({'data' : document.getElementById('message_form').value});
       $.ajax({
         type: 'POST',

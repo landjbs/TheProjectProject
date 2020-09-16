@@ -23,6 +23,12 @@ class Channel(CRUDMixin, db.Model):
                 f'n_messages={self.messages.count()} '
                 f'last_active={self.last_active}>')
 
+    # permissions
+    def is_member(self, user):
+        # WARNING: MUST BE IMPLEMENTED
+        return True
+
+    # actions
     def send(self, text, sender):
         ''' Sends message of text from sender to channel '''
         if self.users.filter_by(user=sender).first() is None:

@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render_template, flash, g
+from flask import request, redirect, url_for, render_template, flash, g, jsonify
 from flask_login import login_required, current_user
 from flask_mobility.decorators import mobilized
 # package imports
@@ -18,7 +18,12 @@ def messages():
 @message.route('/send_message/<int:channel_id>', methods=['POST'])
 @login_required
 def send_message(channel_id):
-    form = Message_Form()
-    if form.validate_on_submit():
-        Channel.get_by_id(channel_id).send(form.text.data, current_user)
-    return redirect(request.referrer)
+    channel = Channel.query.get_or_404(channel_id)
+    if not channel.is_member(current_user):
+        flash('Could not message because you are not a member of this channel.')
+    else:
+        message = str(request.json.get('data'))
+        if message is not None:
+            channel.send(message, current_user)
+    return jsonify({})
+    # return redirect(request.referrer)
