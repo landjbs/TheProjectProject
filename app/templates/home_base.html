@@ -164,7 +164,7 @@
 
     {% block content %} {% endblock %}
 
-    {% from 'macros/chat.html' import render_chat %}
+    {% from 'macros/chat.html' import render_chat with context %}
     <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
 
     {{ render_chat(current_user.channels[0]) }}
