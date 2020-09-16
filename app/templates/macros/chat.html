@@ -9,7 +9,7 @@
       <button type="button" class="btn cancel" onclick="closeForm()">{{ user_channel.name() }}</button>
       <div class='messages'>
         {% for message in channel.messages|reverse %}
-          <div class="message">
+          <div class="message darker">
             <p style='margin:0px;'>{{ message.text }}</p>
             <span class="time-right" style="display: none;">
               {{ time_to_str(message.timestamp) }}
