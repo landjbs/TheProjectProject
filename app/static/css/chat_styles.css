@@ -11,7 +11,7 @@
   position: fixed;
   bottom: 23px;
   right: 28px;
-  width: 30%;
+  width: 20%;
 }
 
 /* The popup chat - hidden by default */
@@ -21,7 +21,7 @@
   right: 15px;
   /* border: 1px solid black; */
   z-index: 9;
-  width: 30%;
+  width: 20%;
 }
 
 /* Add styles to the form message */
