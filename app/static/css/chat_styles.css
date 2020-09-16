@@ -75,7 +75,7 @@
 }
 
 .message:hover .time-right {
-  color: black;
+  color: black !important;
 }
 
 /* Darker chat message */
