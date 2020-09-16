@@ -64,6 +64,15 @@ class User_Channel(db.Model):
     def __repr__(self):
         return f'<User_Channel links {self.user} with {self.channel}>'
 
+    def name(self):
+        ''' Generates user-specific name for the channel '''
+        users = set(self.channel.users).difference({self.user})
+        name = ''
+        for i, user in enumerate(users):
+            if (i>0):
+                name += ', '
+            name += user.name
+
     def n_new(self):
         last_read = self.last_read
         return self.channel.filter(last_active>last_read)
