@@ -64,11 +64,15 @@
 }
 
 .message {
-  border: 2px solid #dedede;
+  border: 1px solid #ccc;
   background-color: #f1f1f1;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
+}
+
+.message:hover {
+  border-color: black;
 }
 
 /* Darker chat message */
