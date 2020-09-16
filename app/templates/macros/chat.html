@@ -7,6 +7,10 @@
     <form action="/action_page.php" class="form-container" id="myForm">
       {% for message in channel.messages %}
         {{ message.text }}
+        <div class="message">
+          <p>{{ message.text }}</p>
+          <span class="time-right">{{ message.timestamp }}</span>
+        </div>
       {% endfor %}
 
       <textarea placeholder="Type message.." name="msg" required></textarea>
