@@ -42,6 +42,8 @@ class base_config(object):
     FLASK_ADMIN_SWATCH = 'cyborg'
     # FORMS
     WTF_CSRF_ENABLED = True
+    # AUTOLOG
+    AUTOLOG = True
     ############################ RECOMMENDATION ################################
 
     ############################## SENTRY ######################################
@@ -99,6 +101,7 @@ class production_config(base_config):
     # enable registration mailing in production only
     REGISTER_MAIL = True
     REQUIRE_EDU = True
+    AUTOLOG = False
     # REDIS_URL = os.environ.get('REDIS_URL', 'redis://redis-theprojectproject.cqci3s.ng.0001.use1.cache.amazonaws.com:6379')
     # ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL', None)
     PREFERRED_URL_SCHEME = 'https'
