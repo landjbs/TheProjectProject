@@ -88,6 +88,10 @@
   background: rgba(93, 0, 255, 0.1);
 }
 
+.other {
+  margin-right: 30px;
+}
+
 /* Clear floats */
 .message::after {
   content: "";
