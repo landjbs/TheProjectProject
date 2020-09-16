@@ -8,7 +8,7 @@
       {% for message in channel.messages %}
         <div class="message">
           <p>{{ message.text }}</p>
-          <span class="time-right">{{ message.timestamp }}</span>
+          <span class="time-right">{{ time_to_str(message.timestamp) }}</span>
         </div>
       {% endfor %}
 
