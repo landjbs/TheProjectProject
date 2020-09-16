@@ -14,10 +14,10 @@ def messages():
     return render_template('messages.html')
 
 
-@message.route('/send_message', methods=['POST'])
+@message.route('/send_message/<int:channel_id>', methods=['POST'])
 @login_required
-def send_message():
+def send_message(channel_id):
     form = Message_Form()
     if form.validate_on_submit():
-        Channel.get_by_id(int(form.channel.data)).send(form.text.data, current_user)
+        Channel.get_by_id(channel_id).send(form.text.data, current_user)
     return redirect(request.referrer)
