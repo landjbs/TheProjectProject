@@ -21,7 +21,7 @@
 
       {{ g.message_form.csrf_token }}
       <div class='post_form'>
-        {{ g.message_form.text(class='post-input') }}
+        {{ g.message_form.text(class='post-input', autocomplete='off') }}
         <button type="submit">Send</button>
       </div>
     </form>

@@ -61,6 +61,7 @@
 /* Chat messages */
 .messages {
   max-height: 30vw;
+  min-height: 30vw;
   padding-right: 5px;
   padding-left: 5px;
   overflow-y: scroll;

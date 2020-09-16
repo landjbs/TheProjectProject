@@ -72,7 +72,7 @@ class User_Channel(db.Model):
             if (i>0):
                 name += ', '
             name += user.name
-        name += f', {self.user.name}'
+        # name += f', {self.user.name}'
         return name
 
     def n_new(self):
