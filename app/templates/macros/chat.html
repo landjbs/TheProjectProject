@@ -13,7 +13,8 @@
       {% endfor %}
 
       {{ g.message_form.csrf_token }}
-      {{ g.message_form.text }}
+      {{ g.message_channel_id(value=channel.id) }}
+      {{ g.message_form.text() }}
       <!-- <textarea placeholder="Type message.." name="msg" required></textarea> -->
 
       <button type="submit" class="btn">Send</button>
