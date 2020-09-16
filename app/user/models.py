@@ -278,6 +278,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
             users = set(user_channel.channel.users)
             if users==to:
                 channel = user_channel.channel
+                break
         # make channel if it doesn't exist
         if not channel:
             channel = Channel(users=(to+[self]))
