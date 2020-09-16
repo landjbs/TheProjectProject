@@ -6,6 +6,7 @@
       {{ user_channel.name() }}
     </button>
     <form action="{{ url_for('message.send_message', channel_id=channel.id) }}" method='post' class="form-container" id="myForm">
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
       <div class='messages'>
         {% for message in channel.messages|reverse %}
           <div class="message">
@@ -20,9 +21,6 @@
         {{ g.message_form.text(class='post-input') }}
         <button type="submit">Send</button>
       </div>
-      <!-- <textarea placeholder="Type message.." name="msg" required></textarea> -->
-
-      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
     </form>
   </div>
 {% endmacro -%}
