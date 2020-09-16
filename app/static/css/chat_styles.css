@@ -74,7 +74,7 @@
   border: 1px solid black;
 }
 
-.message:hover .time-right {
+.message:active .time-right {
   display: block !important;
 }
 
