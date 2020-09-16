@@ -2,9 +2,10 @@
   <div class="chat-popup">
     <button type="button" class="btn open-button" onclick="openForm()">Open</button>
     <form action="/action_page.php" class="form-container" id="myForm">
-      <h1>Chat</h1>
-
-      <label for="msg"><b>Message</b></label>
+      {% for message in user_channel.channel.messages %}
+        {{ message.text }}
+      {% endfor %}
+      
       <textarea placeholder="Type message.." name="msg" required></textarea>
 
       <button type="submit" class="btn">Send</button>
