@@ -13,10 +13,12 @@
       {% endfor %}
 
       {{ g.message_form.csrf_token }}
-      {{ g.message_form.text(class='post-input') }}
+      <div class='post_form'>
+        {{ g.message_form.text(class='post-input') }}
+        <button type="submit" class="btn">Send</button>
+      </div>
       <!-- <textarea placeholder="Type message.." name="msg" required></textarea> -->
-
-      <button type="submit" class="btn">Send</button>
+      
       <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
     </form>
   </div>
