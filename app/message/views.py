@@ -16,5 +16,5 @@ def messages():
 @message.route('/send_message')
 @login_required
 def send_message():
-    print(request.form.msg.data)
+    print(request.form)
     # channel.send_message()
