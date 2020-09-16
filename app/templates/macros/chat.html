@@ -24,7 +24,8 @@
     </form>
   </div>
   <script>
-    var element = document.getElementById('myForm');
-    element.scrollTop = element.scrollHeight - element.clientHeight;
+  $('#myForm').stop ().animate ({
+      scrollTop: $('#myForm')[0].scrollHeight
+  });
   </script>
 {% endmacro -%}
