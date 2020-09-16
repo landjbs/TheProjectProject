@@ -19,9 +19,10 @@
   position: fixed;
   bottom: 0;
   right: 15px;
-  border: 3px solid #f1f1f1;
+  border: 1px solid black;
   z-index: 9;
   width: 30%;
+  padding: 0px;
 }
 
 /* Add styles to the form message */
@@ -50,6 +51,7 @@
 /* Add a red background color to the cancel button */
 .form-container .cancel {
   background-color: red;
+  border-radius: 0px;
 }
 
 /* Add some hover effects to buttons */
@@ -61,7 +63,7 @@
 .messages {
   max-height: 30vw;
   border-right: 5px;
-  border-left: 5px; 
+  border-left: 5px;
   overflow-y: scroll;
 }
 
