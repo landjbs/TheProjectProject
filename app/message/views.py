@@ -10,4 +10,5 @@ from ..message import message
 @login_required
 def messages():
     current_user.send_message('Bap bop boop!!!', to=[current_user])
+    print([current_user.messages])
     return render_template('messages.html')
