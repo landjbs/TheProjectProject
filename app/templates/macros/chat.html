@@ -1,7 +1,7 @@
 {% macro render_chat(user_channel) -%}
   {% set channel = user_channel.channel %}
   <div class="chat-popup">
-    <button type="button" class="btn open-button" onclick="openForm()">
+    <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ user_channel.name() }}
     </button>
     <form action="/action_page.php" class="form-container" id="myForm">
