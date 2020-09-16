@@ -269,6 +269,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     ## messages ##
     def send_message(self, text:str, to:list):
         to = set(to)
+        to.add(self)
         # check if possible to send message to users
         # if self in to:
             # return False

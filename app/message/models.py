@@ -61,6 +61,9 @@ class User_Channel(db.Model):
     # last read (last time user read channel)
     last_read = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    def __repr__(self):
+        return f'<User_Channel links {self.user} with {self.channel}>'
+
     def n_new(self):
         last_read = self.last_read
         return self.channel.filter(last_active>last_read)
