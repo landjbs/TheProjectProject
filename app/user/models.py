@@ -287,8 +287,8 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         channel.send(text=text, sender=self)
         return True
 
-    def message_project(self):
-        raise NotImplementedError('message_project')
+    def unread_channels(self):
+        return 
 
     ## notifications ##
     def notify(self, text, name, important=False, redirect=None):
