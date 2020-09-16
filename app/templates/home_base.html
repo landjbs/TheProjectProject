@@ -165,8 +165,9 @@
     {% block content %} {% endblock %}
 
     <!-- CHAT BOX -->
-    <div class="chat-popup" id="myForm">
-      <form action="/action_page.php" class="form-container">
+    <div class="chat-popup">
+      <button type="button" class="btn open-button" onclick="openForm()">Open</button>
+      <form action="/action_page.php" class="form-container" id="myForm">
         <h1>Chat</h1>
 
         <label for="msg"><b>Message</b></label>
@@ -194,7 +195,6 @@
 
     /* The popup chat - hidden by default */
     .chat-popup {
-      display: none;
       position: fixed;
       bottom: 0;
       right: 15px;
@@ -204,6 +204,7 @@
 
     /* Add styles to the form container */
     .form-container {
+      display: none;
       max-width: 300px;
       padding: 10px;
       background-color: white;
