@@ -26,4 +26,3 @@ def send_message(channel_id):
         if message is not None:
             channel.send(message, current_user)
     return jsonify({})
-    # return redirect(request.referrer)
