@@ -84,7 +84,7 @@
 
 /* Darker chat message */
 .me {
-  padding-left: 30px;
+  margin-left: 30px;
   background: rgba(93, 0, 255, 0.1);
 }
 
