@@ -24,12 +24,6 @@
   width: 30%;
 }
 
-@media (max-width: 996px;) {
-  .chat-popup {
-    width: 100%;
-  }
-}
-
 /* Add styles to the form message */
 .form-container {
   display: none;
