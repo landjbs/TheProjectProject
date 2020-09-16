@@ -33,8 +33,6 @@
 
 /* When the textarea gets focus, do something */
 .form-container input:focus {
-  background-color: #ddd;
-  outline: none;
 }
 
 /* Set a style for the submit/login button */
