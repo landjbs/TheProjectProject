@@ -6,12 +6,14 @@
       {{ user_channel.name() }}
     </button>
     <form action="{{ url_for('message.send_message', channel_id=channel.id) }}" method='post' class="form-container" id="myForm">
-      {% for message in channel.messages %}
-        <div class="message">
-          <p>{{ message.text }}</p>
-          <span class="time-right">{{ time_to_str(message.timestamp) }}</span>
-        </div>
-      {% endfor %}
+      <div class='messages'>
+        {% for message in channel.messages %}
+          <div class="message">
+            <p>{{ message.text }}</p>
+            <span class="time-right">{{ time_to_str(message.timestamp) }}</span>
+          </div>
+        {% endfor %}
+      </div>
 
       {{ g.message_form.csrf_token }}
       <div class='post_form'>

@@ -71,6 +71,11 @@
 }
 
 /* Chat messages */
+.messages {
+  max-height: 40vw;
+  overflow-y: scroll;
+}
+
 .message {
   border: 2px solid #dedede;
   background-color: #f1f1f1;
