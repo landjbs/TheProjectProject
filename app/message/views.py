@@ -11,3 +11,9 @@ from ..message import message
 def messages():
     current_user.send_message('Bap bop boop!!!', to=[current_user])
     return render_template('messages.html')
+
+
+@message.route('/send_message/channel')
+@login_required
+def send_message():
+    
