@@ -283,8 +283,9 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         # make channel if it doesn't exist
         if not channel:
             channel = Channel()
+            print(channel)
             for user in to:
-                print(f'ITER: {user}, {user.channels}')
+                print(f'ITER: {user}, {user.channels.all()}')
                 user.channels.append(User_Channel(channel=channel))
                 user.update()
             channel.update()
