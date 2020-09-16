@@ -60,6 +60,8 @@
 /* Chat messages */
 .messages {
   max-height: 30vw;
+  border-right: 5px;
+  border-left: 5px; 
   overflow-y: scroll;
 }
 
