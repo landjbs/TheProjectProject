@@ -268,7 +268,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     ## messages ##
     def send_message(self, text:str, to:list):
-        to_check = set(to)
+        to = set(to)
         # check if possible to send message to users
         # if self in to:
             # return False
@@ -276,12 +276,15 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         channel = None
         for user_channel in self.channels:
             users = set(user_channel.channel.users)
-            if users==to_check:
+            if users==to:
                 channel = user_channel.channel
                 break
         # make channel if it doesn't exist
         if not channel:
-            channel = Channel(users=(to+[self]))
+            channel = Channel()
+            for user in to:
+                user.channels.append(User_Channel(channel=channel))
+                user.update()
         channel.send(text=text, sender=self)
         return True
 
