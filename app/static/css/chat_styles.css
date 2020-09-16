@@ -22,13 +22,11 @@
   border: 1px solid black;
   z-index: 9;
   width: 30%;
-  padding: 0px;
 }
 
 /* Add styles to the form message */
 .form-container {
   display: none;
-  padding: 10px;
   background-color: white;
 }
 
