@@ -9,7 +9,8 @@
       <button type="button" class="btn cancel" onclick="closeForm()">{{ user_channel.name() }}</button>
       <div class='messages'>
         {% for message in channel.messages|reverse %}
-          <div class="message darker">
+          {% set sent_by_me = (message.sender==current_user) %}
+          <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
             <p style='margin:0px;'>{{ message.text }}</p>
             <span class="time-right" style="display: none;">
               {{ time_to_str(message.timestamp) }}
