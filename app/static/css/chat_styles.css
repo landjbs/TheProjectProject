@@ -26,7 +26,6 @@
 /* Add styles to the form message */
 .form-container {
   display: none;
-  max-width: 300px;
   padding: 10px;
   background-color: white;
 }
@@ -72,7 +71,7 @@
 
 /* Chat messages */
 .messages {
-  max-height: 40vw;
+  max-height: 30vw;
   overflow-y: scroll;
 }
 
@@ -95,22 +94,6 @@
   content: "";
   clear: both;
   display: table;
-}
-
-/* Style images */
-.message img {
-  float: left;
-  max-width: 60px;
-  width: 100%;
-  margin-right: 20px;
-  border-radius: 50%;
-}
-
-/* Style the right image */
-.message img.right {
-  float: right;
-  margin-left: 20px;
-  margin-right:0;
 }
 
 /* Style time text */
