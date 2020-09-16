@@ -32,6 +32,7 @@ from app.user.forms import Edit_User
 # forms
 from app.hub.forms import SearchForm
 from app.project.forms import Project_Application_Form
+from app.message.forms import Message_Form
 # models
 from app.subject.models import Subject
 # extensions
@@ -71,6 +72,7 @@ def create_app(config=config.dev_config, register_admin=True):
             current_user.update_last_active()
             g.search_form = SearchForm()
             g.project_application = Project_Application_Form()
+            g.message_form = Message_Form()
             g.notifications = current_user.notifications_to_show()
         g.now = datetime.utcnow
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
