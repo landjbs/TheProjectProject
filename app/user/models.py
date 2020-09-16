@@ -8,7 +8,7 @@ from app.extensions import bcrypt
 
 from app.subject.models import User_Subjects
 from app.notification.models import Notification
-from app.message.models import User_Channel
+from app.message.models import User_Channel, Channel
 from app.badge.models import Badge, User_Badge
 from app.badge.create_badges import badge_name_list
 
@@ -267,7 +267,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return user_selected
 
     ## messages ##
-    def message(self, text:str, to:list):
+    def send_message(self, text:str, to:list):
         to = set(to)
         # check if possible to send message to users
         # if self in to:
@@ -285,7 +285,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         channel.send(text=text, sender=self)
         return True
 
-    def message_project(self, ):
+    def message_project(self):
         raise NotImplementedError('message_project')
 
     ## notifications ##
