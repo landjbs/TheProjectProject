@@ -249,9 +249,15 @@
             <p>Welcome to {{ project.name }}! Click to join.</p>
           {% endif %}
         </div>
-        <div class="modal-footer">
-          <button class='btn'>Chat</button>
-          <button class='btn'>Join</button>
+        <div class="modal-footer row mx-3">
+          <button class='btn col float-left' style='text-align:center;'>Chat</button>
+          <button class='btn col' style='text-align:center;'>
+            {% if project.requires_application %}
+              Apply
+            {% else %}
+              Join
+            {% endif %}
+          </button>
         </div>
       </form>
     {% else %}

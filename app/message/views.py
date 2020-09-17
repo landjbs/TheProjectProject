@@ -16,6 +16,12 @@ def messages():
     return render_template('messages.html')
 
 
+@message.route('/open_channel', methods=['POST'])
+@login_required
+def open_channel():
+    channel = 
+
+
 @message.route('/send_message/<int:channel_id>', methods=['POST'])
 @login_required
 def send_message(channel_id):
