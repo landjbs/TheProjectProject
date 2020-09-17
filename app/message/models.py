@@ -30,13 +30,16 @@ class Channel(CRUDMixin, db.Model):
 
     # actions
     def send(self, text, sender):
-        ''' Sends message of text from sender to channel '''
+        '''
+        Sends message of text from sender to channel. Returns message if sent
+        '''
         if self.users.filter_by(user=sender).first() is None:
             return False
-        self.messages.append(Message(text=text, sender=sender))
+        message = Message(text=text, sender=sender)
+        self.messages.append(message)
         self.last_active = datetime.utcnow()
         self.update()
-        return True
+        return message
 
 
 class Message(CRUDMixin, db.Model):

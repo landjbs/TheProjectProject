@@ -45,7 +45,7 @@
         data: form_data,
         success: function() {
           $('#messageText').value = ''
-          var message =
+          var message = '{{ render_message() }}'
         }
       })
     }

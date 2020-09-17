@@ -22,7 +22,7 @@ def send_message(channel_id):
     if not channel.is_member(current_user):
         flash('Could not message because you are not a member of this channel.')
     else:
-        message = str(request.json.get('data'))
-        if message is not None:
-            channel.send(message, current_user)
+        text = str(request.json.get('data'))
+        if text is not None:
+            channel.send(text, current_user)
     return jsonify({})
