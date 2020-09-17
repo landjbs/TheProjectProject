@@ -1,3 +1,14 @@
+{% macro render_message(message) -%}
+  {% set sent_by_me = (message.sender==current_user) %}
+  <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
+    <p style='margin:0px;'>{{ message.text }}</p>
+    <span class="time-right" style="display: none;">
+      {{ time_to_str(message.timestamp) }}
+    </span>
+  </div>
+{% endmacro -%}
+
+
 {% macro render_chat(user_channel) -%}
   {% set channel = user_channel.channel %}
   <link rel="stylesheet" href="/css/project_styles.css">
@@ -5,22 +16,16 @@
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ user_channel.name() }}
     </button>
-    <form onsubmit='send_message()' class="form-container" id="myForm">
+    <form class="form-container" id="myForm">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ user_channel.name() }}</button>
       <div class='messages'>
         {% for message in channel.messages|reverse %}
-          {% set sent_by_me = (message.sender==current_user) %}
-          <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
-            <p style='margin:0px;'>{{ message.text }}</p>
-            <span class="time-right" style="display: none;">
-              {{ time_to_str(message.timestamp) }}
-            </span>
-          </div>
+          {{ render_message(message) }}
         {% endfor %}
       </div>
 
       <div class='post_form'>
-        {{ g.message_form.text(id='message-text', class='post-input', autocomplete='off') }}
+        {{ g.message_form.text(id='messageText', class='post-input', autocomplete='off') }}
         <button type="submit">Send</button>
       </div>
     </form>
@@ -30,7 +35,8 @@
       headers: {'X-CSRFToken': '{{ csrf_token() }}'}
     })
     function send_message() {
-      var form_data = JSON.stringify({'data' : document.getElementById('message-text').value});
+      var text = document.getElementById('messageText').value;
+      var form_data = JSON.stringify({'data' : text});
       $.ajax({
         url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
         type: 'POST',
@@ -38,8 +44,14 @@
         contentType: 'application/json',
         data: form_data,
         success: function() {
+          $('#messageText').value = ''
+          var message =
         }
       })
     }
+    $('#myForm').on('submit', function(e) {
+      e.preventDefault();
+      send_message();
+    })
   </script>
 {% endmacro -%}

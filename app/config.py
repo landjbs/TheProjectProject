@@ -75,6 +75,7 @@ class dev_config(base_config):
     # FORMS
     WTF_CSRF_ENABLED = True
     # DEBUGGING
+    DEBUG = True
     ASSETS_DEBUG = True
     ENV = 'development'
 
