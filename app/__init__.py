@@ -80,7 +80,7 @@ def create_app(config=config.dev_config, register_admin=True):
 
     # jinja filters
     @application.template_filter('time_to_str_new')
-    def time_to_str_new(datetime):
+    def time_to_str_new(time):
         from_zone = tz.tzutc()
         to_zone = tz.tzlocal()
         time = time.replace(tzinfo=from_zone)

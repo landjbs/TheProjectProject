@@ -3,7 +3,7 @@
   <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
     <p style='margin:0px;'>{{ message.text }}</p>
     <span class="time-right" style="display: none;">
-      {{ time_to_str(message.timestamp) }}
+      {{ message.timestamp | time_to_str_new }}
     </span>
   </div>
 {% endmacro -%}
@@ -44,8 +44,10 @@
         contentType: 'application/json',
         data: form_data,
         success: function(data) {
-          $('#messageText').value = '';
-          $('#messages').innerHTML += data['html'];
+          var messages = document.getElementById('messages')
+          document.getElementById('messageText').value = '';
+          messages.innerHTML += data['html'];
+          messages.scrollTo(0, messages.scrollHeight);
         }
       })
     }

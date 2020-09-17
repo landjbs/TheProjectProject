@@ -176,6 +176,8 @@
     function openForm() {
       document.getElementById("myForm").style.display = "block";
       document.getElementById('openBtn').style.display = 'none';
+      // scroll to bottom of messages
+      document.getElementById('messages').scrollTo(0, messages.scrollHeight);
     }
 
     function closeForm() {

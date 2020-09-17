@@ -20,6 +20,7 @@ def messages():
 @login_required
 def send_message(channel_id):
     channel = Channel.query.get_or_404(channel_id)
+    html = ''
     if not channel.is_member(current_user):
         flash('Could not message because you are not a member of this channel.')
     else:
@@ -27,18 +28,8 @@ def send_message(channel_id):
         if text is not None:
             message = channel.send(text, current_user)
             # import macros for rendering messages
-            def time_to_str(time):
-                from_zone = tz.tzutc()
-                to_zone = tz.tzlocal()
-                time = time.replace(tzinfo=from_zone)
-                time = time.astimezone(to_zone)
-                # time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
-                time = f"{time.strftime('%B %d')}"
-                time = time.lstrip("0").replace(" 0", " ")
-                return time
             render_message = get_template_attribute(
-                                'macros/chat.html', 'render_message',
-                                time_to_str=time_to_str)
-            html = render_template(render_message(message))
-    html = None
+                                'macros/chat.html', 'render_message'
+                            )
+            html = render_message(message)
     return jsonify({'html':html})
