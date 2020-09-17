@@ -1,5 +1,7 @@
-{% macro render_message(message) -%}
-  {% set sent_by_me = (message.sender==current_user) %}
+{% macro render_message(message, sent_by_me='idk') -%}
+  {% if sent_by_me=='idk' %}
+    {% set sent_by_me = (message.sender==current_user) %}
+  {% endif %}
   <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
     <p style='margin:0px;'>{{ message.text }}</p>
     <span class="time-right" style="display: none;">

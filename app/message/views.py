@@ -31,5 +31,5 @@ def send_message(channel_id):
             render_message = get_template_attribute(
                                 'macros/chat.html', 'render_message'
                             )
-            html = render_message(message)
+            html = render_message(message, sent_by_me=True)
     return jsonify({'html':html})
