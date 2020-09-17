@@ -18,7 +18,7 @@
     </button>
     <form class="form-container" id="myForm">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ user_channel.name() }}</button>
-      <div class='messages'>
+      <div class='messages' id='messages'>
         {% for message in channel.messages|reverse %}
           {{ render_message(message) }}
         {% endfor %}
@@ -44,9 +44,8 @@
         contentType: 'application/json',
         data: form_data,
         success: function(data) {
-          var message = data['message']
-          $('#messageText').value = ''
-          var message = '{{ render_message(message) }}'
+          $('#messageText').value = '';
+          $('#messages').innerHTML += data['html'];
         }
       })
     }

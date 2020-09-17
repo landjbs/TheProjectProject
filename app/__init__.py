@@ -78,6 +78,19 @@ def create_app(config=config.dev_config, register_admin=True):
         g.request_time = lambda: '%.5fs' % (time.time() - g.request_start_time)
         g.pjax = 'X-PJAX' in request.headers
 
+    # jinja filters
+    @application.template_filter('time_to_str_new')
+    def time_to_str_new(datetime):
+        from_zone = tz.tzutc()
+        to_zone = tz.tzlocal()
+        time = time.replace(tzinfo=from_zone)
+        time = time.astimezone(to_zone)
+        # time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
+        time = f"{time.strftime('%B %d')}"
+        time = time.lstrip("0").replace(" 0", " ")
+        return time
+
+    # jinja functions
     from datetime import datetime
     @application.context_processor
     def utility_processor():
