@@ -43,9 +43,10 @@
         dataType: 'json',
         contentType: 'application/json',
         data: form_data,
-        success: function() {
+        success: function(data) {
+          var message = data['message']
           $('#messageText').value = ''
-          var message = '{{ render_message() }}'
+          var message = '{{ render_message(message) }}'
         }
       })
     }

@@ -24,5 +24,5 @@ def send_message(channel_id):
     else:
         text = str(request.json.get('data'))
         if text is not None:
-            channel.send(text, current_user)
-    return jsonify({})
+            message = channel.send(text, current_user)
+    return jsonify({'message':message})

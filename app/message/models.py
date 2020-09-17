@@ -31,7 +31,7 @@ class Channel(CRUDMixin, db.Model):
     # actions
     def send(self, text, sender):
         '''
-        Sends message of text from sender to channel. Returns message if sent
+        Sends message of text from sender to channel. Returns message if sent.
         '''
         if self.users.filter_by(user=sender).first() is None:
             return False
