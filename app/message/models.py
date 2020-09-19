@@ -40,11 +40,6 @@ class Channel(CRUDMixin, db.Model):
             channel.update()
         return channel
 
-    # users relationship
-    # def get_user_channel(self, user):
-        # ''' Gets user channel for linking channel to user '''
-        # return self.query.join(self.users).filter_by()
-
     # permissions
     def is_member(self, user):
         # WARNING: MUST BE IMPLEMENTED
@@ -62,6 +57,16 @@ class Channel(CRUDMixin, db.Model):
         self.last_active = datetime.utcnow()
         self.update()
         return message
+
+    def name(self, user):
+        ''' Generates user-specific name for the channel '''
+        users = set([uc.user for uc in self.users]).difference({self.user})
+        name = ''
+        for i, user in enumerate(users):
+            if (i>0):
+                name += ', '
+            name += user.name
+        return name
 
 
 class Message(CRUDMixin, db.Model):
@@ -94,17 +99,6 @@ class User_Channel(db.Model):
 
     def __repr__(self):
         return f'<User_Channel links {self.user} with {self.channel}>'
-
-    def name(self):
-        ''' Generates user-specific name for the channel '''
-        users = set([uc.user for uc in self.channel.users]).difference({self.user})
-        name = ''
-        for i, user in enumerate(users):
-            if (i>0):
-                name += ', '
-            name += user.name
-        # name += f', {self.user.name}'
-        return name
 
     def n_new(self):
         last_read = self.last_read
