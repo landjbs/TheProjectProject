@@ -20,11 +20,15 @@ def messages():
 
 @message.route('/open_single_channel', methods=['POST'])
 @login_required
-def open_single_channel(user_id):
-    user_id = int(request.json.get(user_id))
+def open_single_channel():
+    user_id = int(request.json.get('user_id'))
     members = [User.get_by_id(int(user_id)), current_user]
     channel = Channel.new(users=members)
-    return jsonify({'channel':channel})
+    render_channel = get_template_attribute(
+                        'macros/chat.html', 'render_channel'
+                    )
+    html = render_channel(channel)
+    return jsonify({'html':html})
 
 
 @message.route('/send_message/<int:channel_id>', methods=['POST'])

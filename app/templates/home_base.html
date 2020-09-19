@@ -166,9 +166,9 @@
 
     <!-- only desktop gets built-in chats -->
     {% if not request.MOBILE %}
-      {% from 'macros/chat.html' import render_chat with context %}
+      {% from 'macros/chat.html' import render_channel with context %}
       <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
-      {{ render_chat(current_user.channels[0]) }}
+      {{ render_channel(current_user.channels[0].channel) }}
     {% endif %}
 
     <!-- CHAT BOX -->

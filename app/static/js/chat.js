@@ -1,7 +1,9 @@
+
+
 function open_single_channel(user_id) {
   var data = JSON.stringify({'user_id' : user_id})
   $.ajax({
-    url: "{{ url_for('message.open_single_channel' }}",
+    url: '/open_single_channel',
     type: 'POST',
     dataType: 'json',
     contentType: 'application/json',

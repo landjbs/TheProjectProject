@@ -60,7 +60,7 @@ class Channel(CRUDMixin, db.Model):
 
     def name(self, user):
         ''' Generates user-specific name for the channel '''
-        users = set([uc.user for uc in self.users]).difference({self.user})
+        users = set([uc.user for uc in self.users]).difference({user})
         name = ''
         for i, user in enumerate(users):
             if (i>0):

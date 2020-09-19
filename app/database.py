@@ -15,7 +15,7 @@ class CRUDMixin(object):
     __searchable__ = False
     # base columns
     id = db.Column(db.Integer, primary_key=True)
-    
+
     @classmethod
     def get_by_id(cls, id):
         if any((isinstance(id, str) and id.isdigit(),
@@ -56,6 +56,10 @@ class CRUDMixin(object):
         #     remove_from_index(self.__tablename__, self)
         db.session.delete(self)
         return commit and db.session.commit()
+
+    # def serialize(self):
+        # NOTE: dev feature to serialize model for json. needs to address recursives
+        # return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 
 def generate_code(name, table):
