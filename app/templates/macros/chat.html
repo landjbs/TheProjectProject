@@ -36,9 +36,9 @@
       })
       function send_message() {
         var text = document.getElementById('messageText').value;
-        var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
+        var form_data = JSON.stringify({'text':text});
         $.ajax({
-          url: "{{ url_for('message.send_message') }}",
+          url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
           type: 'POST',
           dataType: 'json',
           contentType: 'application/json',
@@ -53,7 +53,7 @@
       }
       form.onsubmit = function(event) {
         event.preventDefault();
-        send_message('{{ channel.id }}');
+        send_message();
       }
     </script>
   </div>

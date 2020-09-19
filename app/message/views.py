@@ -28,7 +28,6 @@ def open_single_channel():
                         'macros/chat.html', 'render_channel'
                     )
     html = render_channel(channel)
-    print(html)
     return jsonify({'html':html})
 
 
