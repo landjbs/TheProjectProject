@@ -167,9 +167,11 @@
     <!-- only desktop gets built-in chats -->
     {% from 'macros/chat.html' import render_channel with context %}
     <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
-    {% if not request.MOBILE and current_user.channels.count()>0 %}
+    {% if not request.MOBILE %}
       <div id='messageBox'>
-        {{ render_channel(current_user.channels[0].channel) }}
+        {% if current_user.channels.count()>0 %}
+          {{ render_channel(current_user.channels[0].channel) }}
+        {% endif %}
       </div>
     {% endif %}
 

@@ -31,12 +31,13 @@ class Channel(CRUDMixin, db.Model):
             raise NotImplementedError('Support for channels w !=2 members.')
         # search for previously existing instance of channel
         channel = cls.get_by_users(users)
-        if existing is None:
-            # create channel
+        if channel is None:
+            print("HERE")
             channel = Channel()
             for user in users:
                 channel.users.append(User_Channel(user=user, channel=channel))
             channel.update()
+        print(channel)
         return channel
 
     @classmethod
@@ -46,14 +47,14 @@ class Channel(CRUDMixin, db.Model):
         # get all channels shared across all users
         shared = set()
         for i, user in enumerate(users):
-            uses_set = set(uc.channel for uc in user.channels)
+            user_set = set(uc.channel for uc in user.channels)
             if i==0:
                 shared = user_set
             else:
                 shared = shared.intersection(user_set)
         n_shared = len(shared)
         if n_shared==0:
-            raise None
+            return None
         elif n_shared==1:
             return next(iter(shared))
         else:
@@ -62,6 +63,7 @@ class Channel(CRUDMixin, db.Model):
                 if channel.users.count()==u_num:
                     return channel
             raise None
+        raise NotImplementedError('bug')
 
     # permissions
     def is_member(self, user):

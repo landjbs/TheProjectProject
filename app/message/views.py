@@ -13,8 +13,6 @@ from ..message import message
 @message.route('/messages')
 @login_required
 def messages():
-    from app.user.models import User
-    User.get_by_id(2).send_message('Bap bop boop!!!', to=[current_user])
     return render_template('messages.html')
 
 
