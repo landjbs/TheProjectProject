@@ -29,8 +29,16 @@ class Channel(CRUDMixin, db.Model):
         ''' Creates new channel with users unless already exists '''
         if len(users)!=2:
             raise NotImplementedError('Support for channels w !=2 members.')
-        if 
-        return cls.create(users=users)
+        # search for previously existing instance of channel
+        if False:
+            raise NotImplementedError('')
+        else:
+            # create channel
+            channel = Channel()
+            for user in users:
+                channel.append(User_Channel(user=user, channel=channel))
+            channel.update()
+        return channel
 
     # permissions
     def is_member(self, user):
