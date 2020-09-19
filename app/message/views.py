@@ -28,14 +28,10 @@ def open_single_channel():
     render_channel = get_template_attribute(
                         'macros/chat.html', 'render_channel'
                     )
+    print(current_user)
     html = render_channel(channel)
+    print(html)
     return jsonify({'html':html})
-
-
-@message.route('/test', methods=['POST'])
-@login_required
-def test():
-    return jsonify({'boop':boop})
 
 
 @message.route('/send_message/<int:channel_id>', methods=['POST'])
