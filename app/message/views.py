@@ -32,10 +32,12 @@ def open_single_channel():
     return jsonify({'html':html})
 
 
-@message.route('/send_message', methods=['POST'])
+@message.route('/send_message/', methods=['POST'])
+@message.route('/send_message/<int:channel_id>', methods=['POST'])
 @login_required
-def send_message():
-    channel_id = int(request.json.get('channel_id'))
+def send_message(channel_id=None):
+    if not None:
+        channel_id = int(request.json.get('channel_id'))
     channel = Channel.query.get_or_404(channel_id)
     html = ''
     if not channel.is_member(current_user):

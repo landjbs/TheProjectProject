@@ -18,11 +18,7 @@
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name }}
     </button>
-    <form class="form-container" id="myForm"
-        onsubmit="alert('here'); function(e) {
-                    e.preventDefault();
-                    send_message('{{ channel_id }}');
-                  }">
+    <form class="form-container" id="myForm">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ name }}</button>
       <div class='messages' id='messages'>
         {% for message in channel.messages|reverse %}
@@ -34,5 +30,31 @@
         <button type="submit">Send</button>
       </div>
     </form>
+    <script>
+      $.ajaxSetup({
+        headers: {'X-CSRFToken': '{{ csrf_token() }}'}
+      })
+      function send_message() {
+        var text = document.getElementById('messageText').value;
+        var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
+        $.ajax({
+          url: "{{ url_for('message.send_message') }}",
+          type: 'POST',
+          dataType: 'json',
+          contentType: 'application/json',
+          data: form_data,
+          success: function(data) {
+            var messages = document.getElementById('messages');
+            document.getElementById('messageText').value = '';
+            messages.innerHTML += data['html'];
+            messages.scrollTo(0, messages.scrollHeight);
+          }
+        })
+      }
+      form.onsubmit = function(event) {
+        event.preventDefault();
+        send_message('{{ channel.id }}');
+      }
+    </script>
   </div>
 {% endmacro -%}

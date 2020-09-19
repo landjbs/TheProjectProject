@@ -175,29 +175,6 @@
 
     <!-- CHAT BOX -->
     <script>
-      $.ajaxSetup({
-        headers: {'X-CSRFToken': '{{ csrf_token() }}'}
-      })
-      function send_message(channel_id) {
-        var text = document.getElementById('messageText').value;
-        var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
-        $.ajax({
-          alert('HERE');
-          url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
-          type: 'POST',
-          dataType: 'json',
-          contentType: 'application/json',
-          data: form_data,
-          success: function(data) {
-            var messages = document.getElementById('messages');
-            document.getElementById('messageText').value = '';
-            messages.innerHTML += data['html'];
-            messages.scrollTo(0, messages.scrollHeight);
-          }
-        })
-      }
-    </script>
-    <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
       document.getElementById('openBtn').style.display = 'none';
