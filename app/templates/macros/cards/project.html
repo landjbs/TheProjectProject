@@ -251,7 +251,7 @@
         </div>
         <div class="modal-footer row mx-3">
           <div class='btn col float-left' style='text-align:center;'
-          onclick='open_single_channel({{ project.owner.id }})'>
+          onclick='$("#{{ modal_id }}").click(); $("body").removeClass("modal-open");$(".modal-backdrop").remove(); open_single_channel({{ project.owner.id }});'>
             Chat
           </div>
           <button class='btn col' style='text-align:center;'>

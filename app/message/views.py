@@ -22,13 +22,20 @@ def messages():
 @login_required
 def open_single_channel():
     user_id = int(request.json.get('user_id'))
-    members = [User.get_by_id(int(user_id)), current_user]
+    print(user_id)
+    members = [User.get_by_id(user_id), current_user]
     channel = Channel.new(users=members)
     render_channel = get_template_attribute(
                         'macros/chat.html', 'render_channel'
                     )
     html = render_channel(channel)
     return jsonify({'html':html})
+
+
+@message.route('/test', methods=['POST'])
+@login_required
+def test():
+    return jsonify({'boop':boop})
 
 
 @message.route('/send_message/<int:channel_id>', methods=['POST'])
