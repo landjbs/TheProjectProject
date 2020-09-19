@@ -251,7 +251,7 @@
         </div>
         <div class="modal-footer row mx-3">
           <div class='btn col float-left' style='text-align:center;'
-          onclick='$("#{{ modal_id }}").click(); $("body").removeClass("modal-open");$(".modal-backdrop").remove(); bap({{ project.owner.id }}, "{{ csrf_token() }}");'>
+          onclick='$("#{{ modal_id }}").click(); $("body").removeClass("modal-open");$(".modal-backdrop").remove(); open_channel_with({{ project.owner.id }}); closeForm();'>
             Chat
           </div>
           <button class='btn col' style='text-align:center;'>
@@ -264,7 +264,7 @@
         </div>
       </form>
       <script>
-        function bap(user_id, token) {
+        function open_channel_with(user_id) {
           var user_data = JSON.stringify({'user_id' : String(user_id)});
           $.ajaxSetup({
             headers: {'X-CSRFToken': '{{ csrf_token() }}'}
@@ -276,7 +276,7 @@
             contentType: "application/json",
             data: user_data,
             success: function(data) {
-              // document.body.innerHTML += data['html'];
+              document.getElementById('messageBox').innerHTML = data['html'];
               // openForm();
             }
           })

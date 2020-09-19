@@ -46,7 +46,7 @@
         contentType: 'application/json',
         data: form_data,
         success: function(data) {
-          var messages = document.getElementById('messages')
+          var messages = document.getElementById('messages');
           document.getElementById('messageText').value = '';
           messages.innerHTML += data['html'];
           messages.scrollTo(0, messages.scrollHeight);
