@@ -250,10 +250,10 @@
           {% endif %}
         </div>
         <div class="modal-footer row mx-3">
-          <button class='btn col float-left' style='text-align:center;'
-          formaction="{{ url_for('message.open_single_channel', user_id=project.owner.id) }}">
+          <div class='btn col float-left' style='text-align:center;'
+          onclick='open_single_channel({{ project.owner.id }})'>
             Chat
-          </button>
+          </div>
           <button class='btn col' style='text-align:center;'>
             {% if project.requires_application %}
               Apply
