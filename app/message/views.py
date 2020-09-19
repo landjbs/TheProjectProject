@@ -21,8 +21,9 @@ def messages():
 @message.route('/open_single_channel/<int:user_id>', methods=['POST'])
 @login_required
 def open_single_channel(user_id):
-    user =
-    channel = Channel.new(users=[user_id])
+    members = User.get_by_id(int(user_id))
+    channel = Channel.new(users=members)
+    print(channel)
     return jsonify({'channel':channel})
 
 
