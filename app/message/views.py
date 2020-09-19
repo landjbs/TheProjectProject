@@ -18,12 +18,11 @@ def messages():
     return render_template('messages.html')
 
 
-@message.route('/open_channel', methods=['POST'])
+@message.route('/open_single_channel/<int:user_id>', methods=['POST'])
 @login_required
-def open_channel():
-    member_ids = request.json.get('data')
-    members = [User.get_id(id) for id in member_ids]
-    channel = Channel.new(users=[members])
+def open_single_channel(user_id):
+    user =
+    channel = Channel.new(users=[user_id])
     return jsonify({'channel':channel})
 
 

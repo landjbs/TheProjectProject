@@ -23,6 +23,15 @@ class Channel(CRUDMixin, db.Model):
                 f'n_messages={self.messages.count()} '
                 f'last_active={self.last_active}>')
 
+    # classmethods
+    @classmethod
+    def new(cls, users):
+        ''' Creates new channel with users unless already exists '''
+        if len(users)!=2:
+            raise NotImplementedError('Support for channels w !=2 members.')
+        # if cls.query.join(cls.users)
+        return cls.create(users)
+
     # permissions
     def is_member(self, user):
         # WARNING: MUST BE IMPLEMENTED
