@@ -1,28 +1,12 @@
-function open_single_channel(x) {
-  $.ajaxSetup({
-    headers: {'X-CSRFToken': '{{ csrf_token() }}'}
-  })
-  $.ajax({
-    url: '/test',
-    type: 'POST',
-    dataType: 'json',
-    contentType: 'application/json; charset=utf-8',
-    data: JSON.stringify({}),
-    success: function(data) {
-      alert(data['boop']);
-    }
-  })
-}
-
-function open_single_channel(user_id) {
+// TODO: fix csrf integration so this doesnt return 400 error 
+function open_single_channel(user_id, token) {
   var user_data = JSON.stringify({'user_id' : String(user_id)});
-  alert(user_data);
   $.ajax({
     url: '/open_single_channel',
     type: 'POST',
-    dataType: 'json',
-    contentType: 'application/json',
     data: user_data,
+    dataType : 'json',
+    contentType: "application/json",
     success: function(data) {
       // var modal = document.getElementById(modal_id);
       // modal.classList.remove('fade');
