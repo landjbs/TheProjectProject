@@ -165,16 +165,38 @@
     {% block content %} {% endblock %}
 
     <!-- only desktop gets built-in chats -->
-    <!-- request.MOBILE -->
     {% from 'macros/chat.html' import render_channel with context %}
     <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
-    {% if not False %}
+    {% if not request.MOBILE and current_user.channels.count()>0 %}
       <div id='messageBox'>
         {{ render_channel(current_user.channels[0].channel) }}
       </div>
     {% endif %}
 
     <!-- CHAT BOX -->
+    <script>
+      $.ajaxSetup({
+        headers: {'X-CSRFToken': '{{ csrf_token() }}'}
+      })
+      function send_message(channel_id) {
+        var text = document.getElementById('messageText').value;
+        var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
+        $.ajax({
+          alert('HERE');
+          url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
+          type: 'POST',
+          dataType: 'json',
+          contentType: 'application/json',
+          data: form_data,
+          success: function(data) {
+            var messages = document.getElementById('messages');
+            document.getElementById('messageText').value = '';
+            messages.innerHTML += data['html'];
+            messages.scrollTo(0, messages.scrollHeight);
+          }
+        })
+      }
+    </script>
     <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";

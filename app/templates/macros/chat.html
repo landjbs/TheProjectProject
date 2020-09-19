@@ -12,50 +12,27 @@
 
 
 {% macro render_channel(channel) -%}
-  {% set name = channel.name(current_user) %}
+  {% set name = channel.name(g.current_user) %}
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name }}
     </button>
-    <form class="form-container" id="myForm">
+    <form class="form-container" id="myForm"
+        onsubmit="alert('here'); function(e) {
+                    e.preventDefault();
+                    send_message('{{ channel_id }}');
+                  }">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ name }}</button>
       <div class='messages' id='messages'>
         {% for message in channel.messages|reverse %}
           {{ render_message(message) }}
         {% endfor %}
       </div>
-
       <div class='post_form'>
         {{ g.message_form.text(id='messageText', class='post-input', autocomplete='off') }}
         <button type="submit">Send</button>
       </div>
     </form>
   </div>
-  <script>
-    $.ajaxSetup({
-      headers: {'X-CSRFToken': '{{ csrf_token() }}'}
-    })
-    function send_message() {
-      var text = document.getElementById('messageText').value;
-      var form_data = JSON.stringify({'data' : text});
-      $.ajax({
-        url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: form_data,
-        success: function(data) {
-          var messages = document.getElementById('messages');
-          document.getElementById('messageText').value = '';
-          messages.innerHTML += data['html'];
-          messages.scrollTo(0, messages.scrollHeight);
-        }
-      })
-    }
-    $('#myForm').on('submit', function(e) {
-      e.preventDefault();
-      send_message();
-    })
-  </script>
 {% endmacro -%}
