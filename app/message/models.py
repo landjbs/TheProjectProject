@@ -30,7 +30,7 @@ class Channel(CRUDMixin, db.Model):
         if len(users)!=2:
             raise NotImplementedError('Support for channels w !=2 members.')
         # if cls.query.join(cls.users)
-        return cls.create(users)
+        return cls.create(users=users)
 
     # permissions
     def is_member(self, user):

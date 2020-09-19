@@ -251,7 +251,7 @@
         </div>
         <div class="modal-footer row mx-3">
           <button class='btn col float-left' style='text-align:center;'
-          formaction="{{ url_for('message.open_single_channel', project.owner.id) }}">
+          formaction="{{ url_for('message.open_single_channel', user_id=project.owner.id) }}">
             Chat
           </button>
           <button class='btn col' style='text-align:center;'>

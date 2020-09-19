@@ -8,7 +8,7 @@ from app.extensions import bcrypt
 
 from app.subject.models import User_Subjects
 from app.notification.models import Notification
-from app.message.models import User_Channel, Channel
+# from app.message.models import User_Channel, Channel
 from app.badge.models import Badge, User_Badge
 from app.badge.create_badges import badge_name_list
 
@@ -267,27 +267,27 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return user_selected
 
     ## messages ##
-    def send_message(self, text:str, to:list):
-        to = set(to)
-        to.add(self)
-        if len(to)<1:
-            return False
-        # check if channel from user to to exists
-        channel = None
-        for user_channel in self.channels:
-            users = set(uc.user for uc in user_channel.channel.users)
-            if users==to:
-                channel = user_channel.channel
-                break
-        # make channel if it doesn't exist
-        if not channel:
-            channel = Channel()
-            for user in to:
-                user.channels.append(User_Channel(channel=channel))
-                user.update()
-            channel.update()
-        channel.send(text=text, sender=self)
-        return True
+    # def send_message(self, text:str, to:list):
+    #     to = set(to)
+    #     to.add(self)
+    #     if len(to)<1:
+    #         return False
+    #     # check if channel from user to to exists
+    #     channel = None
+    #     for user_channel in self.channels:
+    #         users = set(uc.user for uc in user_channel.channel.users)
+    #         if users==to:
+    #             channel = user_channel.channel
+    #             break
+    #     # make channel if it doesn't exist
+    #     if not channel:
+    #         channel = Channel()
+    #         for user in to:
+    #             user.channels.append(User_Channel(channel=channel))
+    #             user.update()
+    #         channel.update()
+    #     channel.send(text=text, sender=self)
+    #     return True
 
     def unread_channels(self):
         return
