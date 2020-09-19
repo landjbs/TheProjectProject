@@ -36,17 +36,14 @@ class Channel(CRUDMixin, db.Model):
             # create channel
             channel = Channel()
             for user in users:
-                uc = User_Channel(user=user, channel=channel)
-                if current_user==user:
-                    user_channel = uc
-                channel.users.append(uc)
+                channel.users.append(User_Channel(user=user, channel=channel))
             channel.update()
-        return user_channel
+        return channel
 
     # users relationship
-    def get_user_channel(self, user):
-        ''' Gets user channel for linking channel to user '''
-        return self.query.join(self.users).filter_by()
+    # def get_user_channel(self, user):
+        # ''' Gets user channel for linking channel to user '''
+        # return self.query.join(self.users).filter_by()
 
     # permissions
     def is_member(self, user):
