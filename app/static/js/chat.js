@@ -7,7 +7,8 @@ function open_single_channel(user_id) {
     contentType: 'application/json',
     data: data,
     success: function(data) {
-      alert('channel openned')
+      alert(data['channel'])
+      alert('channel opened');
       // var messages = document.getElementById('messages')
       // document.getElementById('messageText').value = '';
       // messages.innerHTML += data['html'];
