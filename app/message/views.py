@@ -1,6 +1,8 @@
 from flask import request, redirect, url_for, render_template, flash, g, jsonify, get_template_attribute
 from flask_login import login_required, current_user
 from flask_mobility.decorators import mobilized
+# absolute imports
+from app.user.models import User
 # package imports
 from .models import Message, Channel
 from .forms import Message_Form
@@ -20,7 +22,9 @@ def messages():
 @login_required
 def open_channel():
     member_ids = request.json.get('data')
-    channel = Channel.new(users=[])
+    members = [User.get_id(id) for id in member_ids]
+    channel = Channel.new(users=[members])
+    return jsonify({'channel':channel})
 
 
 @message.route('/send_message/<int:channel_id>', methods=['POST'])
