@@ -36,9 +36,10 @@ class Channel(CRUDMixin, db.Model):
             # create channel
             channel = Channel()
             for user in users:
+                uc = User_Channel(user=user, channel=channel)
                 if current_user==user:
-                    user_channel = 
-                channel.users.append(User_Channel(user=user, channel=channel))
+                    user_channel = uc
+                channel.users.append(uc)
             channel.update()
         return user_channel
 
