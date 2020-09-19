@@ -30,15 +30,38 @@ class Channel(CRUDMixin, db.Model):
         if len(users)!=2:
             raise NotImplementedError('Support for channels w !=2 members.')
         # search for previously existing instance of channel
-        if False:
-            raise NotImplementedError('')
-        else:
+        channel = cls.get_by_users(users)
+        if existing is None:
             # create channel
             channel = Channel()
             for user in users:
                 channel.users.append(User_Channel(user=user, channel=channel))
             channel.update()
         return channel
+
+    @classmethod
+    def get_by_users(cls, users):
+        ''' Gets chat comprised of exactly of all users. none if none '''
+        # TODO: implement sql query to speed way up. pretty important
+        # get all channels shared across all users
+        shared = set()
+        for i, user in enumerate(users):
+            uses_set = set(uc.channel for uc in user.channels)
+            if i==0:
+                shared = user_set
+            else:
+                shared = shared.intersection(user_set)
+        n_shared = len(shared)
+        if n_shared==0:
+            raise None
+        elif n_shared==1:
+            return next(iter(shared))
+        else:
+            u_num = len(users)
+            for channel in shared:
+                if channel.users.count()==u_num:
+                    return channel
+            raise None
 
     # permissions
     def is_member(self, user):

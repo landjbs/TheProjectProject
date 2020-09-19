@@ -18,7 +18,7 @@
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name }}
     </button>
-    <form class="form-container" id="myForm">
+    <form class="form-container" id="myForm" onsubmit="send_message(); return false;">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ name }}</button>
       <div class='messages' id='messages'>
         {% for message in channel.messages|reverse %}
@@ -50,10 +50,6 @@
             messages.scrollTo(0, messages.scrollHeight);
           }
         })
-      }
-      form.onsubmit = function(event) {
-        event.preventDefault();
-        send_message();
       }
     </script>
   </div>
