@@ -19,7 +19,8 @@ def messages():
 @message.route('/open_channel', methods=['POST'])
 @login_required
 def open_channel():
-    channel = 
+    member_ids = request.json.get('data')
+    channel = Channel.new(users=[])
 
 
 @message.route('/send_message/<int:channel_id>', methods=['POST'])
