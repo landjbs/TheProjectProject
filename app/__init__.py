@@ -6,6 +6,7 @@ from flask import Flask, g, render_template, request, flash
 from flask_login import current_user
 from flask_sqlalchemy import SQLAlchemy
 from elasticsearch import Elasticsearch
+import timeago
 from dateutil import tz
 
 # config
@@ -81,14 +82,7 @@ def create_app(config=config.dev_config, register_admin=True):
     # jinja filters
     @application.template_filter('time_to_str_new')
     def time_to_str_new(time):
-        from_zone = tz.tzutc()
-        to_zone = tz.tzlocal()
-        time = time.replace(tzinfo=from_zone)
-        time = time.astimezone(to_zone)
-        # time = f"{time.strftime('%B %d, %Y')} at {time.strftime('%I:%M %p')}"
-        time = f"{time.strftime('%B %d')}"
-        time = time.lstrip("0").replace(" 0", " ")
-        return time
+        return timeago.format(time, datetime.utcnow())
 
     # jinja functions
     from datetime import datetime

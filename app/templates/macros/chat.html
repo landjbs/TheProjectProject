@@ -1,6 +1,9 @@
-{% macro render_message(message, sent_by_me='idk') -%}
+{% macro render_message(message, message_data, sent_by_me='idk') -%}
   {% if sent_by_me=='idk' %}
     {% set sent_by_me = (message.sender==g.current_user) %}
+  {% endif %}
+  {% if not message_data['last_sent'] or ((message.timestamp - message_data['last_sent']).seconds>3600) %}
+    <center>{{ message.timestamp | time_to_str_new }}</center>
   {% endif %}
   <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
     <p style='margin:0px;'>{{ message.text }}</p>
@@ -8,6 +11,8 @@
       {{ message.sender.name }} | {{ message.timestamp | time_to_str_new }}
     </span>
   </div>
+  {% if message_data.update({'last_sent':message.timestamp}) %}
+  {% endif %}
 {% endmacro -%}
 
 
@@ -21,11 +26,9 @@
     <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ name }}</button>
       <div class='messages' id='messages'>
-        {% set last_sent = False %}
+        {% set message_data = {'last_sent':False} %}
         {% for message in channel.messages|reverse %}
-          {{ last_sent }}
-          {{ render_message(message) }}
-          {% set last_sent = 5 %}
+          {{ render_message(message, message_data) }}
         {% endfor %}
       </div>
       <div class='post_form'>
