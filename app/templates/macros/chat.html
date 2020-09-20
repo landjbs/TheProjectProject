@@ -12,7 +12,7 @@
   <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
     <p style='margin:0px;'>{{ message.text }}</p>
     <span class="time-right" style="display: none;">
-      {{ message.sender.name }} | {{ message.timestamp | time_to_str_new }}
+      {{ message.sender.name }} | {{ message.timestamp | timeago }}
     </span>
   </div>
   {% if message_data.update({'last_sent':message.timestamp}) %}
@@ -44,22 +44,8 @@
         <button class='chat-action' type="submit">
           <i class="fas fa-arrow-right" style="color: white;"></i>
         </button>
-        &nbsp;
-        {% for uc in channel.users %}
-          {% if not uc.user == g.current_user %}
-            <div class='chat-action' data-toggle="modal" data-target="#modal_user_{{ uc.user.id }}"
-              style="border-radius:50%; background: #FF5D00; border:0px;">
-              <i class="fas fa-plus" style="color: white;"></i>
-            </div>
-          {% endif %}
-        {% endfor %}
       </div>
     </form>
-    {% for uc in channel.users %}
-      {% if not uc.user == g.current_user %}
-        {{ render_collaborate_modal(uc.user) }}
-      {% endif %}
-    {% endfor %}
     <script>
       $.ajaxSetup({
         headers: {'X-CSRFToken': '{{ csrf_token() }}'}

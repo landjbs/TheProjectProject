@@ -80,9 +80,18 @@ def create_app(config=config.dev_config, register_admin=True):
         g.pjax = 'X-PJAX' in request.headers
 
     # jinja filters
+    @application.template_filter('timeago')
+    def timeago(time):
+        return timeago.format(time, datetime.utcnow())
+
+    import dateutil
+
     @application.template_filter('time_to_str_new')
     def time_to_str_new(time):
-        return timeago.format(time, datetime.utcnow())
+        # date = dateutil.parser.parse(time)
+        native = time.replace(tzinfo=None)
+        format='%b %d, %Y'
+        return native.strftime(format)
 
     # jinja functions
     from datetime import datetime
