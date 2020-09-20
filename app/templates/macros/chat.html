@@ -1,9 +1,13 @@
+{% from 'macros/cards/user.html' import render_collaborate_modal with context %}
+
 {% macro render_message(message, message_data, sent_by_me='idk') -%}
   {% if sent_by_me=='idk' %}
     {% set sent_by_me = (message.sender==g.current_user) %}
   {% endif %}
   {% if not message_data['last_sent'] or ((message.timestamp - message_data['last_sent']).seconds>3600) %}
-    <center>{{ message.timestamp | time_to_str_new }}</center>
+    <p style='text-align:center; color:#ccc; margin-bottom:0px;'>
+      {{ message.timestamp | time_to_str_new }}
+    </p>
   {% endif %}
   <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
     <p style='margin:0px;'>{{ message.text }}</p>
