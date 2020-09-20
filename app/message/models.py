@@ -83,6 +83,7 @@ class Channel(CRUDMixin, db.Model):
         self.update()
         return message
 
+    # user-specific
     def name(self, me):
         ''' Generates user-specific name for the channel '''
         users = set([uc.user for uc in self.users if uc.user!=me])
@@ -92,6 +93,11 @@ class Channel(CRUDMixin, db.Model):
                 name += ', '
             name += user.name
         return name
+
+    def n_unseen(self, user):
+        # get last read from user channel
+        last_read = self.channels.filter_by(user=user).first().last_read
+        return self.messages.filter(timestamp>last_read).count()
 
 
 class Message(CRUDMixin, db.Model):
@@ -124,7 +130,3 @@ class User_Channel(db.Model):
 
     def __repr__(self):
         return f'<User_Channel links {self.user} with {self.channel}>'
-
-    def n_new(self):
-        last_read = self.last_read
-        return self.channel.filter(last_active>last_read)
