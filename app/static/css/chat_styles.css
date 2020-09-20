@@ -1,5 +1,13 @@
 {box-sizing: border-box;}
 
+#actions {
+  background: transparent;
+}
+
+#actions .col {
+  background-color: rgba(0,0,0,0);
+}
+
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
   background-color: #555;
@@ -34,6 +42,17 @@
 
 /* When the textarea gets focus, do something */
 .form-container input:focus {
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
 }
 
 /* Add a red background color to the cancel button */
