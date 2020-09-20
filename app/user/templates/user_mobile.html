@@ -48,11 +48,6 @@
               {% endif %}
             </h3>
           </a>
-          {% if current_user.is_authenticated %}
-            <a class='undername' id='hide-mail' href='mailto:{{ user.email }}'>
-              {{ user.email }}
-            </a>
-          {% endif %}
         </div>
         <div id='nav-expanded'>
           <p class='about-text'>{{ user.about }}</p>

@@ -50,11 +50,6 @@
                     {% endif %}
                   </h3>
                 </a>
-                {% if current_user.is_authenticated %}
-                  <a href='mailto:{{ user.email }}'>
-                    {{ user.email }}
-                  </a>
-                {% endif %}
             </div>
             {% if current_user.is_authenticated %}
               {{ render_user_action_bar(user) }}
