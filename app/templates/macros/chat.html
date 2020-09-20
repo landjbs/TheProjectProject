@@ -27,7 +27,7 @@
   <div class="chat-popup">
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name | safe }} | {{ channel.n_unseen(g.current_user) }}
-      <i id='x' class="fas fa-times-circle float-right" aria-hidden="true"></i>
+      <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
     </button>
     <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
       <button type="button" class="btn cancel" onclick="closeForm()">
@@ -55,12 +55,12 @@
         {% endfor %}
       </div>
     </form>
+    <script>
+      alert('HERE');
+    </script>
     {% for uc in channel.users %}
       {% if not uc.user == g.current_user %}
         {{ render_collaborate_modal(uc.user) }}
-        <script>
-          $('#modal_user_{{ uc.user.id }}').appendTo('body');
-        </script>
       {% endif %}
     {% endfor %}
     <script>

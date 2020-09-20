@@ -20,23 +20,15 @@
   opacity: 1;
 }
 
-#x {
+.chat-popup .fa-times-circle {
     position: absolute;
-    color: red;
-    top:    -7px;
-    right:  -7px;
-    background: white;
-    border-radius: 100%;
-    border: 2px solid black;
+    top:    -12px;
+    right:  -12px;
+    color: black;
 }
 
-#openBtn #x:hover {
-  color: white;
-  background: red;
-}
-
-#openBtn .fa-window-close {
-  vertical-align: middle;
+.chat-popup .fa-times-circle:hover {
+  color: red;
 }
 
 /* The popup chat - hidden by default */
