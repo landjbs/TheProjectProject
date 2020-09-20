@@ -51,6 +51,25 @@
         {{ render_share_button(user, 'user') }}
       </center>
     </div>
+    <script>
+        function open_channel_with(user_id) {
+          var user_data = JSON.stringify({'user_id' : String(user_id)});
+          $.ajaxSetup({
+            headers: {'X-CSRFToken': '{{ csrf_token() }}'}
+          })
+          $.ajax({
+            url: '{{ url_for("message.open_single_channel") }}',
+            type: 'POST',
+            dataType : 'json',
+            contentType: "application/json",
+            data: user_data,
+            success: function(data) {
+              document.getElementById('messageBox').innerHTML = data['html'];
+              openForm();
+            }
+          })
+        }
+      </script>
   {% endif %}
 {% endmacro -%}
 
