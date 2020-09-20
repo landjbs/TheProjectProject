@@ -47,6 +47,10 @@
         </button>
       </div>
     </form>
+    {% for uc in channel.users %}
+      {% if not uc.user == g.current_user %}
+        {{ render_collaborate_modal(uc.user) }}
+      {% endif %}
     <script>
       $.ajaxSetup({
         headers: {'X-CSRFToken': '{{ csrf_token() }}'}
