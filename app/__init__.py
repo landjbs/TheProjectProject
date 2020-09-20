@@ -80,18 +80,16 @@ def create_app(config=config.dev_config, register_admin=True):
         g.pjax = 'X-PJAX' in request.headers
 
     # jinja filters
-    @application.template_filter('timeago')
-    def timeago(time):
+    @application.template_filter('ago')
+    def ago(time):
         return timeago.format(time, datetime.utcnow())
-
-    import dateutil
 
     @application.template_filter('time_to_str_new')
     def time_to_str_new(time):
-        # date = dateutil.parser.parse(time)
-        native = time.replace(tzinfo=None)
-        format='%b %d, %Y'
-        return native.strftime(format)
+        from_zone = tz.tzutc()
+        to_zone = tz.tzlocal()
+        time = time.replace(tzinfo=from_zone).astimezone(to_zone)
+        return time.strftime('%I:%M %p | %b %d, %Y').lstrip("0").replace(" 0", " ")
 
     # jinja functions
     from datetime import datetime

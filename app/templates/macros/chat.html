@@ -12,7 +12,7 @@
   <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
     <p style='margin:0px;'>{{ message.text }}</p>
     <span class="time-right" style="display: none;">
-      {{ message.sender.name }} | {{ message.timestamp | timeago }}
+      {{ message.sender.name }} | {{ message.timestamp | ago }}
     </span>
   </div>
   {% if message_data.update({'last_sent':message.timestamp}) %}
@@ -38,6 +38,7 @@
         {% for message in channel.messages|reverse %}
           {{ render_message(message, message_data) }}
         {% endfor %}
+        <br><br>
       </div>
       <div class='post_form'>
         {{ g.message_form.text(id='messageText', class='post-input', autocomplete='off') }}
