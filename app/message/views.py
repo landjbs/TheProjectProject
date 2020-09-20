@@ -29,12 +29,13 @@ def open_single_channel():
     return jsonify({'html':html})
 
 
-@message.route('/send_message/<int:channel_id>', methods=['POST'])
+@message.route('/send_message', methods=['POST'])
 @login_required
-def send_message(channel_id):
+def send_message():
     # if not None:
-        # channel_id = int(request.json.get('channel_id'))
+    channel_id = int(request.json.get('channel_id'))
     channel = Channel.query.get_or_404(channel_id)
+    print(f'channel: {channel.name(current_user)}')
     html = ''
     if not channel.is_member(current_user):
         flash('Could not message because you are not a member of this channel.')

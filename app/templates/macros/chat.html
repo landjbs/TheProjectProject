@@ -1,11 +1,11 @@
 {% macro render_message(message, sent_by_me='idk') -%}
   {% if sent_by_me=='idk' %}
-    {% set sent_by_me = (message.sender==current_user) %}
+    {% set sent_by_me = (message.sender==g.current_user) %}
   {% endif %}
   <div class="message {% if sent_by_me %}me{% else %}other{% endif %}">
     <p style='margin:0px;'>{{ message.text }}</p>
     <span class="time-right" style="display: none;">
-      {{ message.timestamp | time_to_str_new }}
+      {{ message.sender.name }} | {{ message.timestamp | time_to_str_new }}
     </span>
   </div>
 {% endmacro -%}
@@ -18,7 +18,7 @@
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name }}
     </button>
-    <form class="form-container" id="myForm" onsubmit="send_message(); return false;">
+    <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ name }}</button>
       <div class='messages' id='messages'>
         {% for message in channel.messages|reverse %}
@@ -34,11 +34,11 @@
       $.ajaxSetup({
         headers: {'X-CSRFToken': '{{ csrf_token() }}'}
       })
-      function send_message() {
+      function send_message(channel_id) {
         var text = document.getElementById('messageText').value;
-        var form_data = JSON.stringify({'text':text});
+        var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
         $.ajax({
-          url: "{{ url_for('message.send_message', channel_id=channel.id) }}",
+          url: "{{ url_for('message.send_message') }}",
           type: 'POST',
           dataType: 'json',
           contentType: 'application/json',

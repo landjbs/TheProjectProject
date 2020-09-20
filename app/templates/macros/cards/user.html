@@ -7,9 +7,9 @@
 <!-- collaboration -->
 {% macro render_collaborate_button(user) -%}
   {% if g.current_user!=user %}
-    <button type="button" class="btn" data-toggle="modal" data-target="#modal_user_{{ user.id }}">
-        Collab
-    </button>
+    <div class="btn" onclick='open_channel_with({{ user.id }});'>
+        Chat
+    </div>
     {{ render_collaborate_modal(user) }}
   {% else %}
     <a class="btn" href='{{ user.get_url() }}/true'>
