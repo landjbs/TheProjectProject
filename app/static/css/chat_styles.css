@@ -1,13 +1,5 @@
 {box-sizing: border-box;}
 
-#actions {
-  background: transparent;
-}
-
-#actions .col {
-  background-color: rgba(0,0,0,0);
-}
-
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
   background-color: #555;
@@ -19,7 +11,7 @@
   position: fixed;
   bottom: 23px;
   right: 28px;
-  width: 400px;
+  width: 500px;
   border-radius: 0px;
 }
 
@@ -30,7 +22,7 @@
   right: 15px;
   /* border: 1px solid black; */
   z-index: 9;
-  width: 400px;
+  width: 500px;
 }
 
 /* Add styles to the form message */
@@ -38,6 +30,7 @@
   display: none;
   background-color: white;
   padding-bottom: 10px;
+  overflow: hidden;
 }
 
 /* When the textarea gets focus, do something */
