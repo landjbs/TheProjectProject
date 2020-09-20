@@ -21,8 +21,11 @@
     <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
       <button type="button" class="btn cancel" onclick="closeForm()">{{ name }}</button>
       <div class='messages' id='messages'>
+        {% set last_sent = False %}
         {% for message in channel.messages|reverse %}
+          {{ last_sent }}
           {{ render_message(message) }}
+          {% set last_sent = 5 %}
         {% endfor %}
       </div>
       <div class='post_form'>
@@ -31,7 +34,7 @@
           <i class="fas fa-arrow-right" style="color: white;"></i>
         </button>
         &nbsp;
-        <button data-toggle="modal" data-target="#modal_project_{{ project.id }}"
+        <button data-toggle="modal" data-target="#modal_project_"
           style="border-radius:50%; background: #FF5D00; border:0px;">
           <i class="fas fa-plus" style="color: white;"></i>
         </button>
