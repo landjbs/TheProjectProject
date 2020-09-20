@@ -1,16 +1,42 @@
 /* Button used to open the chat form - fixed at the bottom of the page */
 .open-button {
-  background-color: #555;
+  background-color: #5D00FF;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   opacity: 0.8;
   position: fixed;
-  bottom: 23px;
+  bottom: 0px;
   right: 28px;
   width: 500px;
   border-radius: 0px;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.open-button:hover {
+  background-color: #5D00FF;
+  opacity: 1;
+}
+
+#x {
+    position: absolute;
+    color: red;
+    top:    -7px;
+    right:  -7px;
+    background: white;
+    border-radius: 100%;
+    border: 2px solid black;
+}
+
+#openBtn #x:hover {
+  color: white;
+  background: red;
+}
+
+#openBtn .fa-window-close {
+  vertical-align: middle;
 }
 
 /* The popup chat - hidden by default */
@@ -111,4 +137,15 @@
 .time-left {
   float: left;
   color: #999;
+}
+
+.chat-action {
+  border-radius:50%;
+  background: #FF5D00;
+  border:0px;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
 }

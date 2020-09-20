@@ -22,13 +22,17 @@
 
 {% macro render_channel(channel) -%}
   {% set name = channel.name(g.current_user) %}
+  <!-- TODO: move project style import -->
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
-      {{ name }} | {{ channel.n_unseen(g.current_user) }}
+      {{ name | safe }} | {{ channel.n_unseen(g.current_user) }}
+      <i id='x' class="fas fa-times-circle float-right" aria-hidden="true"></i>
     </button>
     <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
-      <button type="button" class="btn cancel" onclick="closeForm()">{{ name }}</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">
+        {{ name | safe }}
+      </button>
       <div class='messages' id='messages'>
         {% set message_data = {'last_sent':False} %}
         {% for message in channel.messages|reverse %}
@@ -37,16 +41,16 @@
       </div>
       <div class='post_form'>
         {{ g.message_form.text(id='messageText', class='post-input', autocomplete='off') }}
-        <button type="submit" style="border-radius:50%; background: #FF5D00; border:0px;">
+        <button class='chat-action' type="submit">
           <i class="fas fa-arrow-right" style="color: white;"></i>
         </button>
         &nbsp;
         {% for uc in channel.users %}
-          {% if not uc.user==current_user %}
-            <button data-toggle="modal" data-target="#modal_user_{{ uc.user }}"
+          {% if not uc.user == g.current_user %}
+            <div class='chat-action' data-toggle="modal" data-target="#modal_user_{{ uc.user.id }}"
               style="border-radius:50%; background: #FF5D00; border:0px;">
               <i class="fas fa-plus" style="color: white;"></i>
-            </button>
+            </div>
           {% endif %}
         {% endfor %}
       </div>
@@ -54,7 +58,11 @@
     {% for uc in channel.users %}
       {% if not uc.user == g.current_user %}
         {{ render_collaborate_modal(uc.user) }}
+        <script>
+          $('#modal_user_{{ uc.user.id }}').appendTo('body');
+        </script>
       {% endif %}
+    {% endfor %}
     <script>
       $.ajaxSetup({
         headers: {'X-CSRFToken': '{{ csrf_token() }}'}

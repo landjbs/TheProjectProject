@@ -91,7 +91,7 @@ class Channel(CRUDMixin, db.Model):
         for i, user in enumerate(users):
             if (i>0):
                 name += ', '
-            name += user.name
+            name += f'<a class="owner" href="{user.get_url()}">{user.name}</a>'
         return name
 
     def n_unseen(self, user):

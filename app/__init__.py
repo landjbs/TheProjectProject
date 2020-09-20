@@ -111,8 +111,11 @@ def create_app(config=config.dev_config, register_admin=True):
             return time
         def now():
             return datetime.utcnow()
+        def smallest(x, y):
+            return min(x, y)
         return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
-                    elapsed_style=elapsed_style, time_to_str=time_to_str, now=now)
+                    elapsed_style=elapsed_style, time_to_str=time_to_str, now=now,
+                    smallest=smallest)
     return application
 
 

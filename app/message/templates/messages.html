@@ -23,23 +23,9 @@
         id_postfix='messages',
         icon_type='message',
         card_type='messages',
-        data=all_notes,
-        n_override=n,
+        data=messages,
         size='big'
       )
     }}
-  </div>
-
-  <div class='container my-1 main'>
-    {{ current_user.name }}
-    {% for user_channel in current_user.channels %}
-      <div class=''>
-        {% for user in user_channel.channel.users %}
-          {{ user.name }}
-          {% endfor %}
-        {% for message in user_channel.channel.messages %}
-          {{ message.text }}
-        {% endfor %}
-    {% endfor %}
   </div>
 {% endblock %}

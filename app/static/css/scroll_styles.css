@@ -127,7 +127,7 @@ a:hover {
 
 .owner:hover {
   display: inline;
-  color: black;
+  text-decoration: underline;
 }
 
 @media (max-height: 800px) {

@@ -28,7 +28,9 @@
     </div>
     <center>
       <p style="margin:0px;">
-          {{ competition.time_progressed() }} / {{ competition.total_length() }} days
+        {% set total_length = competition.total_length() %}
+        {% set time_progressed = smallest(total_length, competition.time_progressed()) %}
+        {{ time_progressed }} / {{ total_length }} days
       </p>
       <div class="progress" style='width:80%;'>
         <div class="progress-bar" role="progressbar"
