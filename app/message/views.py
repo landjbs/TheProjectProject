@@ -31,6 +31,10 @@ def check_messages():
                     )
     message_data = {'last_sent' : False}
     # html = render_message(message, message_data, sent_by_me=True)
+    print(jsonify([
+        (render_message(m, message_data), m.timestamp.timestamp())
+        for m in new_messages[::-1]
+    ]))
     return jsonify([
         (render_message(m, message_data), m.timestamp.timestamp())
         for m in new_messages[::-1]
