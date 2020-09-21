@@ -126,7 +126,7 @@ def create_app(config=config.dev_config, register_admin=True):
                     smallest=smallest)
 
     # shell
-    @app.shell_context_processor
+    @application.shell_context_processor
     def make_shell_context():
         return {'db': db, 'User': User}
 
