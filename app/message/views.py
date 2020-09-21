@@ -21,6 +21,7 @@ def messages():
 @login_required
 def check_messages():
     since = request.args.get('since', 0.0, type=float)
+    channel = request.args.get('channel')
     since = datetime.datetime.fromtimestamp(since)
     # channels = current_user.channels.query.filter
     new_messages = current_user.messages.filter(
@@ -30,11 +31,6 @@ def check_messages():
                         'macros/chat.html', 'render_message'
                     )
     message_data = {'last_sent' : False}
-    # html = render_message(message, message_data, sent_by_me=True)
-    print(jsonify([
-        (render_message(m, message_data), m.timestamp.timestamp())
-        for m in new_messages[::-1]
-    ]))
     return jsonify([
         (render_message(m, message_data), m.timestamp.timestamp())
         for m in new_messages[::-1]
