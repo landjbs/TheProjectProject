@@ -16,6 +16,18 @@ def messages():
     return render_template('messages.html')
 
 
+@message.route('/check_messages', methods=['GET'])
+@login_required
+def check_messages():
+    since = request.args.get('since', 0.0, type=float)
+    print(since)
+    return render_template('messages.html')
+    # messages = current_user.messages.filter(
+    #             Message.timestamp > since
+    #         ).order_by(Message.timestamp.asc())
+    # return messages
+
+
 @message.route('/open_single_channel', methods=['POST'])
 @login_required
 def open_single_channel():
