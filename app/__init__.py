@@ -122,8 +122,14 @@ def create_app(config=config.dev_config, register_admin=True):
         def smallest(x, y):
             return min(x, y)
         return dict(calc_days_since=calc_days_since, calc_days_left=calc_days_left,
-                    elapsed_style=elapsed_style, time_to_str=time_to_str, now=now,
+                    elapsed_style=elapsed_style, now=now,
                     smallest=smallest)
+
+    # shell
+    @app.shell_context_processor
+    def make_shell_context():
+        return {'db': db, 'User': User}
+
     return application
 
 

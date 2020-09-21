@@ -15,7 +15,7 @@
       {% if notification.name %}
         {{ notification.name }} |
       {% endif %}
-      {{ time_to_str(notification.timestamp) }}
+      {{ notification.timestamp | ago }}
     </small>
   </div>
 </a>

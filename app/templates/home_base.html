@@ -147,7 +147,7 @@
               <i class="fa fa-exclamation-circle orange" aria-hidden="true"></i>
               &nbsp;
               <strong class="mr-auto">{{ notification.name }}</strong>
-              <small>{{ time_to_str(notification.timestamp) }}</small>
+              <small>{{ notification.timestamp | ago }}</small>
               <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -202,6 +202,8 @@
     function clearChat() {
       document.getElementById('messageBox').innerHTML = '';
     }
+
+    openForm();
     </script>
     <!-- /CHAT BOX -->
 

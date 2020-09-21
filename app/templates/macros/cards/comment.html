@@ -15,7 +15,7 @@
         </div>
       {% endif %}
     </a>
-    <small>{{ comment.timestamp | time_to_str }}</small>
+    <small>{{ comment.timestamp | ago }}</small>
   </div>
   <p class="mb-1">{{ comment.text }}
     {% if g.current_user in [comment.author, comment.project.owner] %}
