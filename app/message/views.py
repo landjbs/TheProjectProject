@@ -20,12 +20,11 @@ def messages():
 @login_required
 def check_messages():
     since = request.args.get('since', 0.0, type=float)
-    print(since)
-    return render_template('messages.html')
-    # messages = current_user.messages.filter(
-    #             Message.timestamp > since
-    #         ).order_by(Message.timestamp.asc())
-    # return messages
+    messages = current_user.messages.filter(
+                Message.timestamp > since
+            ).order_by(Message.timestamp.asc())
+    print(messages)
+    return messages
 
 
 @message.route('/open_single_channel', methods=['POST'])
