@@ -20,18 +20,18 @@ def messages():
 @login_required
 def check_messages():
     since = request.args.get('since', 0.0, type=float)
+    print(since)
     # channels = current_user.channels.query.filter
     messages = current_user.messages.filter(
                 Message.timestamp > since
             ).order_by(Message.timestamp.asc())
-    print(messages.all())
     # html = render_message(message, message_data, sent_by_me=True)
     # render_message = get_template_attribute(
     #                     'macros/chat.html', 'render_message'
     #                 )
     # message_data = {'last_sent' : channel.messages[1].timestamp}
     # html = render_message(message, message_data, sent_by_me=True)
-    return jsonify()
+    return jsonify([m.timestamp for m in messages])
 
 
 @message.route('/open_single_channel', methods=['POST'])
