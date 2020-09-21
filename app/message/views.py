@@ -31,6 +31,7 @@ def check_messages():
     #                 )
     # message_data = {'last_sent' : channel.messages[1].timestamp}
     # html = render_message(message, message_data, sent_by_me=True)
+    print([m.timestamp for m in messages])
     return jsonify([m.timestamp for m in messages])
 
 
