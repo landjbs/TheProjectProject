@@ -1,3 +1,4 @@
+import datetime
 from flask import request, redirect, url_for, render_template, flash, g, jsonify, get_template_attribute
 from flask_login import login_required, current_user
 from flask_mobility.decorators import mobilized
@@ -20,19 +21,19 @@ def messages():
 @login_required
 def check_messages():
     since = request.args.get('since', 0.0, type=float)
+    since = datetime.datetime.fromtimestamp(since)
     print(since)
     # channels = current_user.channels.query.filter
-    messages = current_user.messages.filter(
+    messages_ = current_user.messages.filter(
                 Message.timestamp > since
             ).order_by(Message.timestamp.asc())
-    # html = render_message(message, message_data, sent_by_me=True)
+    print(messages_.all())
     # render_message = get_template_attribute(
     #                     'macros/chat.html', 'render_message'
     #                 )
     # message_data = {'last_sent' : channel.messages[1].timestamp}
     # html = render_message(message, message_data, sent_by_me=True)
-    print([m.timestamp for m in messages])
-    return jsonify([m.timestamp for m in messages])
+    return jsonify([m.timestamp.timestamp() for m in messages_])
 
 
 @message.route('/open_single_channel', methods=['POST'])
