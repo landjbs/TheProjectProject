@@ -22,18 +22,19 @@ def messages():
 def check_messages():
     since = request.args.get('since', 0.0, type=float)
     since = datetime.datetime.fromtimestamp(since)
-    print(since)
     # channels = current_user.channels.query.filter
-    messages_ = current_user.messages.filter(
+    new_messages = current_user.messages.filter(
                 Message.timestamp > since
             ).order_by(Message.timestamp.asc())
-    print(messages_.all())
-    # render_message = get_template_attribute(
-    #                     'macros/chat.html', 'render_message'
-    #                 )
-    # message_data = {'last_sent' : channel.messages[1].timestamp}
+    render_message = get_template_attribute(
+                        'macros/chat.html', 'render_message'
+                    )
+    message_data = {'last_sent' : False}
     # html = render_message(message, message_data, sent_by_me=True)
-    return jsonify([m.timestamp.timestamp() for m in messages_])
+    return jsonify([
+        (render_message(m, message_data), m.timestamp.timestamp())
+        for m in new_messages[::-1]
+    ])
 
 
 @message.route('/open_single_channel', methods=['POST'])
