@@ -24,7 +24,7 @@
   {% set name = channel.name(g.current_user) %}
   <!-- TODO: move project style import -->
   <link rel="stylesheet" href="/css/project_styles.css">
-  <div class="chat-popup">
+  <div class="chat-popup" onload="poll_channel({{ channel.id }})">
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name | safe }} | {{ channel.n_unseen(g.current_user) }}
       <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
@@ -47,13 +47,13 @@
       </div>
     </form>
     <script>
-      $(function() {
+      function poll_channel(channel_id) {
           var messages = document.getElementById('messages');
           var since = 0;
           setInterval(function() {
             const data = {
               'since'   :   String(since),
-              'channel' :   '{{ channel.id }}'
+              'channel' :   String(channel_id)
             };
             const searchParams = new URLSearchParams(data);
             $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
@@ -67,29 +67,7 @@
                 }
             );
           }, 1000);
-      });
-    </script>
-    <script>
-      $.ajaxSetup({
-        headers: {'X-CSRFToken': '{{ csrf_token() }}'}
-      })
-      function send_message(channel_id) {
-        var text = document.getElementById('messageText').value;
-        var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
-        $.ajax({
-          url: "{{ url_for('message.send_message') }}",
-          type: 'POST',
-          dataType: 'json',
-          contentType: 'application/json',
-          data: form_data,
-          success: function(data) {
-            var messages = document.getElementById('messages');
-            document.getElementById('messageText').value = '';
-            messages.innerHTML += data['html'];
-            messages.scrollTo(0, messages.scrollHeight);
-          }
-        })
-      }
+      };
     </script>
   </div>
 {% endmacro -%}

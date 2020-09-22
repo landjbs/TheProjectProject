@@ -177,7 +177,6 @@
       <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
       <div id='messageBox'>
         {% block messages %}
-          {{ render_channel(current_user.channels[0].channel) }}
         {% endblock %}
       </div>
     {% endif %}
@@ -192,6 +191,8 @@
         alert('toggle');
       }
     </script>
+
+    <script src="js/chat.js"></script>
 
 
     <script>
@@ -241,9 +242,6 @@
     <script>
       $('.toast').toast('show');
     </script>
-
-    <!-- allow chat ajax -->
-    <script src="js/chat.js"></script>
 
   </body>
 

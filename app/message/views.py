@@ -50,10 +50,6 @@ def check_messages():
                         'macros/chat.html', 'render_message'
                     )
     data = channel.data()
-    # print(f'{current_user.name}: {new_messages.count()}')
-    print(f'{current_user.name} at {since}')
-    for message in new_messages:
-        print(message.timestamp)
     return jsonify({
             'new_messages': [
                                 render_message(m, data, sent_by_me=False)
