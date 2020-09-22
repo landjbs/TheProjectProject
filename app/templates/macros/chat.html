@@ -25,7 +25,7 @@
   <!-- TODO: move project style import -->
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
-    <button type="button" id='openBtn' class="btn open-button" onclick="openForm('{{ channel.id }}')">
+    <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name | safe }} | {{ channel.n_unseen(g.current_user) }}
       <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
     </button>
@@ -46,5 +46,29 @@
         </button>
       </div>
     </form>
+    <script>
+    </script>
+    <script>
+      $.ajaxSetup({
+        headers: {'X-CSRFToken': '{{ csrf_token() }}'}
+      })
+      function send_message(channel_id) {
+        var text = document.getElementById('messageText').value;
+        var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
+        $.ajax({
+          url: "{{ url_for('message.send_message') }}",
+          type: 'POST',
+          dataType: 'json',
+          contentType: 'application/json',
+          data: form_data,
+          success: function(data) {
+            var messages = document.getElementById('messages');
+            document.getElementById('messageText').value = '';
+            messages.innerHTML += data['html'];
+            messages.scrollTo(0, messages.scrollHeight);
+          }
+        })
+      }
+    </script>
   </div>
 {% endmacro -%}
