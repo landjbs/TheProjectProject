@@ -48,6 +48,7 @@
     </form>
     <script>
       function poll_channel(channel_id) {
+          alert(channel_id);
           var messages = document.getElementById('messages');
           var since = 0;
           setInterval(function() {
@@ -68,7 +69,7 @@
             );
           }, 1000);
       };
-    poll_channel('{{ channel.id }}');
+      poll_channel('{{ channel.id }}');
     </script>
   </div>
 {% endmacro -%}
