@@ -20,7 +20,7 @@ def messages():
 @message.route('/check_messages', methods=['GET'])
 @login_required
 def check_messages():
-    since = request.args.get('since', type=float)
+    since = request.args.get('since', type=float) + 1
     channel_id = request.args.get('channel', type=int)
     since = datetime.datetime.fromtimestamp(since)
     channel = Channel.query.get_or_404(channel_id)
@@ -33,7 +33,7 @@ def check_messages():
                         'macros/chat.html', 'render_message'
                     )
     message_data = {'last_sent' : False}
-    print(new_messages.all())
+    print(f'{current_user.name}: {new_messages.all()}')
     return jsonify([
         (
             render_message(m, message_data, sent_by_me=False),
