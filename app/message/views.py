@@ -25,9 +25,11 @@ from termcolor import colored
 @login_required
 def check_messages():
     since = request.args.get('since', type=float)
+    if since==0:
+        return jsonify([])
+    print(datetime.datetime.fromtimestamp(since), datetime.datetime.utcnow())
     channel_id = request.args.get('channel', type=int)
     since = datetime.datetime.fromtimestamp(since)
-    print(type(since), since)
     channel = Channel.query.get_or_404(channel_id)
     user_id = current_user.id
     if not channel.is_member(current_user):
@@ -41,7 +43,7 @@ def check_messages():
                     )
     data = channel.data()
     # print(f'{current_user.name}: {new_messages.count()}')
-    print(f'\n\n{current_user.name} at {since}')
+    print(f'{current_user.name} at {since}')
     for message in new_messages:
         print(message.timestamp)
     return jsonify([
