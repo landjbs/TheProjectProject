@@ -89,6 +89,5 @@ def send_message():
             render_message = get_template_attribute(
                                 'macros/chat.html', 'render_message'
                             )
-            message_data = {'last_sent' : channel.messages[1].timestamp}
-            html = render_message(message, message_data, sent_by_me=True)
+            html = render_message(message, channel.data(), sent_by_me=True)
     return jsonify({'html':html})

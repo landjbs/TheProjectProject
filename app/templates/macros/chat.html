@@ -24,7 +24,7 @@
   {% set name = channel.name(g.current_user) %}
   <!-- TODO: move project style import -->
   <link rel="stylesheet" href="/css/project_styles.css">
-  <div class="chat-popup" onload="poll_channel({{ channel.id }})">
+  <div class="chat-popup">
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
       {{ name | safe }} | {{ channel.n_unseen(g.current_user) }}
       <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
@@ -47,27 +47,7 @@
       </div>
     </form>
     <script>
-      function poll_channel(channel_id) {
-          var messages = document.getElementById('messages');
-          var since = 0;
-          setInterval(function() {
-            const data = {
-              'since'   :   String(since),
-              'channel' :   String(channel_id)
-            };
-            const searchParams = new URLSearchParams(data);
-            $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
-                function(message_data) {
-                    since = message_data['since'];
-                    new_messages = message_data['new_messages'];
-                    for (var i = 0; i < new_messages.length; i++) {
-                        messages.innerHTML += new_messages[i];
-                        messages.scrollTo(0, messages.scrollHeight);
-                    }
-                }
-            );
-          }, 1000);
-      };
+      poll_channel({{ channel.id }})
     </script>
   </div>
 {% endmacro -%}

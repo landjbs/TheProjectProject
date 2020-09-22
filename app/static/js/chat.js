@@ -41,3 +41,26 @@ function send_message(channel_id) {
     }
   })
 }
+
+
+function poll_channel(channel_id) {
+    var messages = document.getElementById('messages');
+    var since = 0;
+    setInterval(function() {
+      const data = {
+        'since'   :   String(since),
+        'channel' :   String(channel_id)
+      };
+      const searchParams = new URLSearchParams(data);
+      $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
+          function(message_data) {
+              since = message_data['since'];
+              new_messages = message_data['new_messages'];
+              for (var i = 0; i < new_messages.length; i++) {
+                  messages.innerHTML += new_messages[i];
+                  messages.scrollTo(0, messages.scrollHeight);
+              }
+          }
+      );
+    }, 1000);
+};
