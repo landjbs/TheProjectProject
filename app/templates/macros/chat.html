@@ -49,7 +49,7 @@
     <script>
       $(function() {
           var messages = document.getElementById('messages');
-          var since = 0.001 * Date.now();
+          // var since = 0.001 * Date.now();
           setInterval(function() {
             const data = {
               'since'   :   String(since),
@@ -58,12 +58,11 @@
             const searchParams = new URLSearchParams(data);
             $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
                 function(new_messages) {
-                    messages.innerHTML += new_messages.length;
                     for (var i = 0; i < new_messages.length; i++) {
                         messages.innerHTML += new_messages[i][0];
                         messages.scrollTo(0, messages.scrollHeight);
                     }
-                    since =  new_messages[i][1];
+                    // since =  new_messages[i][1];
                 }
             );
           }, 1000);
