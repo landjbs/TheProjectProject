@@ -187,12 +187,18 @@
     </div>
 
     <!-- modals -->
+    <!-- NOTE: modals currently here -->
     {% if current_user==user %}
       <div>
         {{ render_edit_user_modal(user, edit_form) }}
         {{ render_delete_account_modal(user) }}
       </div>
     {% endif %}
+{% endblock %}
+
+
+{% block messages %}
+  {{ render_channel(g.current_user.channels[0].channel) }}
 {% endblock %}
 
 
