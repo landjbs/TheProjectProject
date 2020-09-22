@@ -218,6 +218,7 @@
     <!-- CHAT BOX -->
     <script>
     function openForm(channel_id) {
+      alert(channel_id);
       document.getElementById("myForm").style.display = "block";
       document.getElementById('openBtn').style.display = 'none';
       // scroll to bottom of messages
@@ -226,7 +227,6 @@
       // // update last read for user
       // start polling
       $(function(channel_id) {
-        alert(channel_id);
         var messages = document.getElementById('messages');
         var since = 0;
         setInterval(function() {
