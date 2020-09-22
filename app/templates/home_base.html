@@ -180,11 +180,6 @@
       </div>
     {% endif %}
 
-    <!-- modal block for all page modals -->
-    <div id='modals' style='display:hidden;'>
-      {% block modals %}{% endblock %}
-    </div>
-
 
     <!-- TODO: implement script block here -->
     {% block scripts %}
@@ -243,13 +238,16 @@
 
     <script>
       $('.toast').toast('show');
-      // var h = $('#mainNav').height();
-      // $('#nav-pad').height(h);
-      // document.body.scrollHeight = '1' + 'px';
     </script>
 
     <!-- allow chat ajax -->
     <script src="js/chat.js"></script>
 
   </body>
+
+  <!-- modal block for all page modals  -->
+  <!-- TODO: get this actually working -->
+  <div id='modals' style='display:hidden;'>
+  </div>
+
 </html>
