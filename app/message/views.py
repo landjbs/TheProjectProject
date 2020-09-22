@@ -54,14 +54,13 @@ def check_messages():
     print(f'{current_user.name} at {since}')
     for message in new_messages:
         print(message.timestamp)
-    return jsonify([
-        (
-            render_message(m, data, sent_by_me=False),
-            m.timestamp.timestamp()
-        )
-        for m in new_messages[::-1]
-        if not m.sender==current_user
-    ])
+    return jsonify({
+            'new_messages': [
+                                render_message(m, data, sent_by_me=False)
+                                for m in new_messages[::-1]
+                            ],
+            'since':        channel.messages[-1].timestamp
+        })
 
 
 @message.route('/open_single_channel', methods=['POST'])
