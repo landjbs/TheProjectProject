@@ -23,7 +23,6 @@ def check_messages():
     since = request.args.get('since', type=float)
     channel_id = request.args.get('channel', type=int)
     since = datetime.datetime.fromtimestamp(since)
-    print(since)
     channel = Channel.query.get_or_404(channel_id)
     if not channel.is_member(current_user):
         raise PermissionError('')
