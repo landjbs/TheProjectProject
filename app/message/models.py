@@ -83,6 +83,11 @@ class Channel(CRUDMixin, db.Model):
         self.update()
         return message
 
+    # data
+    def data(self):
+        ''' Gets dict of data about channel for rendering '''
+        return {'last_sent' : self.messages[-1].timestamp}
+
     # user-specific
     def name(self, me):
         ''' Generates user-specific name for the channel '''

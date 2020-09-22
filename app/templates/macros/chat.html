@@ -60,7 +60,7 @@
                 function(new_messages) {
                     messages.innerHTML += new_messages.length;
                     for (var i = 0; i < new_messages.length; i++) {
-                        messages.innerHTML += messages[i][0];
+                        messages.innerHTML += new_messages[i][0];
                         messages.scrollTo(0, messages.scrollHeight);
                     }
                     since =  new_messages[i][1];
