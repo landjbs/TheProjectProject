@@ -21,10 +21,12 @@ def messages():
 @login_required
 def check_messages():
     since = request.args.get('since', 0.0, type=float)
-    channel = request.args.get('channel')
+    channel_id = request.args.get('channel', type=int)
     since = datetime.datetime.fromtimestamp(since)
-    # channels = current_user.channels.query.filter
-    new_messages = current_user.messages.filter(
+    channel = Channel.query.get_or_404(channel_id)
+    if not channel.is_member(current_user):
+        raise PermissionError('')
+    new_messages = channel.messages.filter(
                 Message.timestamp > since
             ).order_by(Message.timestamp.asc())
     render_message = get_template_attribute(
