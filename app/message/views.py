@@ -71,7 +71,7 @@ def open_single_channel():
     html = render_channel(channel)
     return jsonify({
         'html'          : html,
-        'channel_id'    : channel.id
+        'channel_id'    : str(channel.id)
     })
 
 
