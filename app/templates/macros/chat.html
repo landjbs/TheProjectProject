@@ -61,7 +61,7 @@
                     since = message_data['since'];
                     new_messages = message_data['new_messages'];
                     for (var i = 0; i < new_messages.length; i++) {
-                        messages.innerHTML += new_messages[i][0];
+                        messages.innerHTML += new_messages[i];
                         messages.scrollTo(0, messages.scrollHeight);
                     }
                 }
