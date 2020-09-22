@@ -27,14 +27,15 @@ def check_messages():
     since = request.args.get('since', type=float) + 1
     channel_id = request.args.get('channel', type=int)
     since = datetime.datetime.fromtimestamp(since)
-    since = '2020-09-22 22:21:42.407087'
+    x = '2020-09-22 22:21:42.407087'
     channel = Channel.query.get_or_404(channel_id)
     user_id = current_user.id
     if not channel.is_member(current_user):
         raise PermissionError('')
     new_messages = channel.messages.filter(
-                Message.timestamp > since
+                Message.timestamp > x
             ).order_by(Message.timestamp.asc())
+    print("AHSDFASDFASD")
     render_message = get_template_attribute(
                         'macros/chat.html', 'render_message'
                     )
