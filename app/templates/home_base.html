@@ -1,5 +1,8 @@
 {% from 'cookie.html' import cookie %}
 
+<!-- desktop imports TODO: think abt not importing w mobile or smth -->
+{% from 'macros/chat.html' import render_channel with context %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -171,7 +174,6 @@
 
     <!-- show render empty message box for nonmobile users -->
     {% if not request.MOBILE %}
-      {% from 'macros/chat.html' import render_channel with context %}
       <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
       <div id='messageBox'>
         {% block messages %}{% endblock %}
