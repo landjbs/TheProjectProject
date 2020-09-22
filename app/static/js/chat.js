@@ -40,4 +40,4 @@ function send_message(channel_id) {
       messages.scrollTo(0, messages.scrollHeight);
     }
   })
-};
+}
