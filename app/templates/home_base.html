@@ -226,6 +226,7 @@
       // // update last read for user
       // start polling
       $(function(channel_id) {
+        alert(channel_id);
         var messages = document.getElementById('messages');
         var since = 0;
         setInterval(function() {
@@ -246,7 +247,6 @@
           );
         }, 1000);
     });
-    channel_id(channel_id);
     }
 
     function closeForm() {
@@ -257,8 +257,6 @@
     function clearChat() {
       document.getElementById('messageBox').innerHTML = '';
     }
-
-    openForm();
     </script>
     <!-- /CHAT BOX -->
 

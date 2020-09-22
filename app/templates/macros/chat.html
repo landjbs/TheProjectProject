@@ -25,7 +25,7 @@
   <!-- TODO: move project style import -->
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
-    <button type="button" id='openBtn' class="btn open-button" onclick="openForm()">
+    <button type="button" id='openBtn' class="btn open-button" onclick="openForm('{{ channel.id }}');">
       {{ name | safe }} | {{ channel.n_unseen(g.current_user) }}
       <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
     </button>

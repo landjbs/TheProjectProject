@@ -65,7 +65,7 @@
             data: user_data,
             success: function(data) {
               document.getElementById('messageBox').innerHTML = data['html'];
-              openForm();
+              openForm(data['channel_id']);
             }
           })
         }
