@@ -16,26 +16,29 @@ def messages():
     return render_template('messages.html')
 
 
+from termcolor import colored
+
 @message.route('/check_messages', methods=['GET'])
 @login_required
 def check_messages():
     since = request.args.get('since', type=float) + 1
     channel_id = request.args.get('channel', type=int)
     since = datetime.datetime.fromtimestamp(since)
-    print(since)
     channel = Channel.query.get_or_404(channel_id)
     user_id = current_user.id
     if not channel.is_member(current_user):
         raise PermissionError('')
     new_messages = channel.messages.filter(
-                Message.timestamp > since,
-                Message.sender_id != user_id
+                Message.timestamp > since
             ).order_by(Message.timestamp.asc())
     render_message = get_template_attribute(
                         'macros/chat.html', 'render_message'
                     )
     data = channel.data()
-    print(f'{current_user.name}: {new_messages.count()}')
+    # print(f'{current_user.name}: {new_messages.count()}')
+    print(f'\n\n{current_user.name} at {datetime.datetime.utcnow()}')
+    for message in new_messages:
+        print(colored(message.timestamp, color=('red' if message.timestamp>since else 'blue')))
     return jsonify([
         (
             render_message(m, data, sent_by_me=False),
