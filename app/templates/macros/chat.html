@@ -59,8 +59,8 @@
                 function(messages) {
                     for (var i = 0; i < messages.length; i++) {
                         document.getElementById('messages').innerHTML += messages[i][0];
-                        messages.scrollTo(0, messages.scrollHeight);
                         since = messages[i][1];
+                        document.getElementById('messages').scrollTo(0, messages.scrollHeight);
                     }
                 }
             );
