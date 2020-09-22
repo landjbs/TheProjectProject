@@ -9,7 +9,6 @@ from .models import Message, Channel
 from .forms import Message_Form
 from ..message import message
 
-
 # view
 @message.route('/messages')
 @login_required

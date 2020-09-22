@@ -58,13 +58,12 @@
             const searchParams = new URLSearchParams(data);
             $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
                 function(new_messages) {
-                    messages.innerHTML += since;
-                    for (var i = 0; i < messages.length; i++) {
-                      messages.innerHTML += since;
-                    //     document.getElementById('messages').innerHTML += messages[i][0];
-                      since = messages[i][1];
-                    //     document.getElementById('messages').scrollTo(0, document.getElementById('messages').scrollHeight);
+                    messages.innerHTML += new_messages.length;
+                    for (var i = 0; i < new_messages.length; i++) {
+                        messages.innerHTML += messages[i][0];
+                        messages.scrollTo(0, messages.scrollHeight);
                     }
+                    since =  new_messages[i][1];
                 }
             );
           }, 1000);
