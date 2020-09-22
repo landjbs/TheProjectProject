@@ -24,15 +24,24 @@ from termcolor import colored
 @message.route('/check_messages', methods=['GET'])
 @login_required
 def check_messages():
-    # get channel check permissions
+    ## get channel ##
     channel_id = request.args.get('channel', type=int)
     channel = Channel.query.get_or_404(channel_id)
+    # check permissions
     if not channel.is_member(current_user):
         raise PermissionError('User does not have access to this channel.')
-    # get since
+    ## get since ##
     since = request.args.get('since', type=float)
+    # check if valid since
+    if (since==0):
+        return jsonify({
+            'new_messages'  : [],
+            'since'         : channel.messages[-1].timestamp
+        })
+    # convert since to datetime for filtering
     since = datetime.datetime.fromtimestamp(since)
     user_id = current_user.id
+    # query recent messages not sent by user
     new_messages = channel.messages.filter(
                 Message.timestamp > since,
                 Message.sender_id != user_id
