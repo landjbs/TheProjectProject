@@ -86,7 +86,9 @@ class Channel(CRUDMixin, db.Model):
     # data
     def data(self):
         ''' Gets dict of data about channel for rendering '''
-        return {'last_sent' : self.messages[-1].timestamp}
+        if self.messages.count()>0:
+            return {'last_sent' : self.messages[-1].timestamp}
+        return {'last_sent' : False}
 
     # user-specific
     def name(self, me):
