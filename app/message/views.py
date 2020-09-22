@@ -31,12 +31,12 @@ def check_messages():
     if not channel.is_member(current_user):
         raise PermissionError('User does not have access to this channel.')
     ## get since ##
-    since = request.args.get('since', type=float)
+    since = request.args.get('since', 0, type=float)
     # check if valid since
     if (since==0):
         return jsonify({
             'new_messages'  : [],
-            'since'         : channel.messages[-1].timestamp
+            'since'         : channel.messages[-1].timestamp.timestamp()
         })
     # convert since to datetime for filtering
     since = datetime.datetime.fromtimestamp(since)
@@ -59,7 +59,7 @@ def check_messages():
                                 render_message(m, data, sent_by_me=False)
                                 for m in new_messages[::-1]
                             ],
-            'since':        channel.messages[-1].timestamp
+            'since':        channel.messages[-1].timestamp.timestamp()
         })
 
 
