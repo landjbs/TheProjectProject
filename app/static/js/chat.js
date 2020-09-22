@@ -24,9 +24,6 @@
 // }
 
 
-$.ajaxSetup({
-  headers: {'X-CSRFToken': '{{ csrf_token() }}'}
-})
 function send_message(channel_id) {
   var text = document.getElementById('messageText').value;
   var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});

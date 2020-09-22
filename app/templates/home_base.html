@@ -240,6 +240,12 @@
     <!-- /CHAT BOX -->
 
     <script>
+      $.ajaxSetup({
+        headers: {'X-CSRFToken': '{{ csrf_token() }}'}
+      })
+    </script>
+
+    <script>
       $('.toast').toast('show');
     </script>
 
