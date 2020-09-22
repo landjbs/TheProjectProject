@@ -26,24 +26,22 @@ from termcolor import colored
 def check_messages():
     since = request.args.get('since', type=float) + 1
     channel_id = request.args.get('channel', type=int)
-    since = datetime.datetime.fromtimestamp(since)
-    x = '2020-09-22 22:21:42.407087'
+    since = (datetime.datetime.fromtimestamp(since))
+    x = str(since)
     channel = Channel.query.get_or_404(channel_id)
     user_id = current_user.id
     if not channel.is_member(current_user):
         raise PermissionError('')
     new_messages = channel.messages.filter(
-                Message.timestamp > x
+                Message.timestamp > x,
+                Message.sender_id != user_id
             ).order_by(Message.timestamp.asc())
-    print("AHSDFASDFASD")
     render_message = get_template_attribute(
                         'macros/chat.html', 'render_message'
                     )
     data = channel.data()
     # print(f'{current_user.name}: {new_messages.count()}')
     print(f'\n\n{current_user.name} at {datetime.datetime.utcnow()}')
-    for message in new_messages:
-        print(colored(message.timestamp))
     return jsonify([
         (
             render_message(m, data, sent_by_me=False),
