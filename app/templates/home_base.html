@@ -67,6 +67,11 @@
                 perks
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('message.messages') }}">
+                messages
+              </a>
+            </li>
             {% if current_user.admin %}
             <li class="nav-item">
               <a class="nav-link" href="/admin">admin</a>
@@ -87,12 +92,6 @@
                   <a href="/user={{ current_user.code }}">Profile</a>
                   <a href="{{ url_for('notification.notifications') }}">
                     Notifications
-                    {% if n_unseen > 0 %}
-                      <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
-                    {% endif %}
-                  </a>
-                  <a href="{{ url_for('message.messages') }}">
-                    Messages
                     {% if n_unseen > 0 %}
                       <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
                     {% endif %}
@@ -170,25 +169,31 @@
 
     {% block content %} {% endblock %}
 
-    <!-- only desktop gets built-in chats -->
-    {% from 'macros/chat.html' import render_channel with context %}
-    <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
+    <!-- show render empty message box for nonmobile users -->
     {% if not request.MOBILE %}
+      {% from 'macros/chat.html' import render_channel with context %}
+      <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
       <div id='messageBox'>
-        {% if current_user.channels.count()>0 %}
-          {{ render_channel(current_user.channels[0].channel) }}
-        {% endif %}
+        {% block messages %}{% endblock %}
       </div>
     {% endif %}
 
-    <!-- TODO: implement safe, hidden modal box here -->
+    <!-- modal block for all page modals -->
+    <div id='modals' style='display:hidden;'>
+      {% block modals %}{% endblock %}
+    </div>
 
-    <!-- polling -->
-    <!-- TODO: move polling to specific js -->
 
     <!-- TODO: implement script block here -->
     {% block scripts %}
     {% endblock %}
+
+    <script>
+      function toggleMessages() {
+        alert('toggle');
+      }
+    </script>
+
 
     <script>
       // {% if current_user.is_authenticated %}
