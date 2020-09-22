@@ -20,9 +20,10 @@ def messages():
 @message.route('/check_messages', methods=['GET'])
 @login_required
 def check_messages():
-    since = request.args.get('since', 0.0, type=float)
+    since = request.args.get('since', type=float)
     channel_id = request.args.get('channel', type=int)
     since = datetime.datetime.fromtimestamp(since)
+    print(since)
     channel = Channel.query.get_or_404(channel_id)
     if not channel.is_member(current_user):
         raise PermissionError('')
@@ -35,8 +36,12 @@ def check_messages():
     message_data = {'last_sent' : False}
     print(new_messages.all())
     return jsonify([
-        (render_message(m, message_data), m.timestamp.timestamp())
+        (
+            render_message(m, message_data, sent_by_me=False),
+            m.timestamp.timestamp()
+        )
         for m in new_messages[::-1]
+        if not m.sender==current_user
     ])
 
 

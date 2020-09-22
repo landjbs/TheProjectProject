@@ -48,7 +48,7 @@
     </form>
     <script>
       $(function() {
-          var since = 0;
+          var since = 0.001 * Date.now();
           setInterval(function() {
             const data = {
               since   :   String(since),
@@ -60,7 +60,7 @@
                     for (var i = 0; i < messages.length; i++) {
                         document.getElementById('messages').innerHTML += messages[i][0];
                         since = messages[i][1];
-                        document.getElementById('messages').scrollTo(0, messages.scrollHeight);
+                        document.getElementById('messages').scrollTo(0, document.getElementById('messages').scrollHeight);
                     }
                 }
             );
