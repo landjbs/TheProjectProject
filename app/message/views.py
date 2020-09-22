@@ -33,6 +33,7 @@ def check_messages():
                         'macros/chat.html', 'render_message'
                     )
     message_data = {'last_sent' : False}
+    print(new_messages.all())
     return jsonify([
         (render_message(m, message_data), m.timestamp.timestamp())
         for m in new_messages[::-1]
@@ -58,7 +59,6 @@ def send_message():
     # if not None:
     channel_id = int(request.json.get('channel_id'))
     channel = Channel.query.get_or_404(channel_id)
-    print(f'channel: {channel.name(current_user)}')
     html = ''
     if not channel.is_member(current_user):
         flash('Could not message because you are not a member of this channel.')
