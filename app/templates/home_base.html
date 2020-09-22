@@ -176,7 +176,8 @@
     {% if not request.MOBILE %}
       <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
       <div id='messageBox'>
-        {% block messages %}{% endblock %}
+        {% block messages %}
+        {% endblock %}
       </div>
     {% endif %}
 
