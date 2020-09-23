@@ -89,7 +89,7 @@ class Channel(CRUDMixin, db.Model):
         if self.messages.count()>0
             return self.messages[0].timestamp
         else:
-            return 
+            return 0
 
     def data(self):
         ''' Gets dict of data about channel for rendering '''
