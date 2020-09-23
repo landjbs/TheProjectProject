@@ -86,10 +86,10 @@ class Channel(CRUDMixin, db.Model):
     # data
     def most_recent(self):
         ''' Get send time of most recent message '''
-        if self.messages.count()>0
+        if (self.messages.count()>0):
             return self.messages[0].timestamp
         else:
-            return 0
+            return False
 
     def data(self):
         ''' Gets dict of data about channel for rendering '''

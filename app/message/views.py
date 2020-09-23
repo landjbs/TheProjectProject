@@ -34,6 +34,9 @@ def check_messages():
     since = request.args.get('since', 0, type=float)
     # check if valid since
     if (since==0):
+        since = channel.most_recent()
+        if not since:
+            since = 0
         return jsonify({
             'new_messages'  : [],
             'since'         : channel.most_recent()
