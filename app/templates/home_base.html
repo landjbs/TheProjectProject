@@ -218,14 +218,14 @@
     <!-- CHAT BOX -->
     <script>
     function openForm(channel_id) {
+      var messages = document.getElementById('messages');
       document.getElementById("myForm").style.display = "block";
       document.getElementById('openBtn').style.display = 'none';
       // scroll to bottom of messages
-      document.getElementById('messages').scrollTo(0, messages.scrollHeight);
+      messages.scrollTo(0, messages.scrollHeight);
       // TODO:
       // // update last read for user
       // start polling
-      var messages = document.getElementById('messages');
       var since = 0;
       setInterval(function() {
         const data = {
