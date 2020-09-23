@@ -31,10 +31,8 @@ def check_messages():
     if not channel.is_member(current_user):
         raise PermissionError('User does not have access to this channel.')
     ## get since ##
-    print(f'bf: {request.args.get("since", type=float)}')
     since = request.args.get('since', 0, type=float)
     # check if valid since
-    print(f'af: {since}')
     if (since==0):
         since = channel.most_recent().timestamp()
         if since is False:
