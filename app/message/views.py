@@ -36,12 +36,12 @@ def check_messages():
     # check if valid since
     print(f'af: {since}')
     if (since==0):
-        since = channel.most_recent()
+        since = channel.most_recent().timestamp()
         if since is False:
             since = 0
         return jsonify({
             'new_messages'  : [],
-            'since'         : channel.most_recent()
+            'since'         : since
         })
     # convert since to datetime for filtering
     since = datetime.datetime.fromtimestamp(since)
@@ -60,7 +60,7 @@ def check_messages():
                                 render_message(m, data, sent_by_me=False)
                                 for m in new_messages[::-1]
                             ],
-            'since':        channel.most_recent()
+            'since':        channel.most_recent().timestamp()
         })
 
 
