@@ -70,15 +70,10 @@
                 perks
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('message.messages') }}">
-                messages
-              </a>
-            </li>
             {% if current_user.admin %}
-            <li class="nav-item">
-              <a class="nav-link" href="/admin">admin</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin">admin</a>
+              </li>
             {% endif %}
           </ul>
           {% if current_user.is_authenticated %}
