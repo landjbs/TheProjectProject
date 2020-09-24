@@ -47,9 +47,11 @@ def check_messages():
         since = channel.most_recent()
         if since is False:
             since = 0
+        else:
+            since = since.timestamp()
         return jsonify({
             'new_messages'  : [],
-            'since'         : since.timestamp()
+            'since'         : since
         })
     # convert since to datetime for filtering
     since = datetime.datetime.fromtimestamp(since)
