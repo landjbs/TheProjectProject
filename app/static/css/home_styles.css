@@ -16,12 +16,16 @@ body {
   padding: 0px;
 }
 
-.dropdown-item:hover {
-  background: rgba(255, 93, 0, 0.4);
+#mainNav .dropdown-item:hover {
+  background: rgba(255, 93, 0, 0.4) !important;
 }
 
-.dropdown-item:active {
-  background: rgba(255, 93, 0, 0.8);
+#mainNav .dropdown-item:active {
+  background: rgba(255, 93, 0, 0.8) !important;
+}
+
+#mainNav .dropdown-toggle::after {
+  display: none;
 }
 
 .main {
