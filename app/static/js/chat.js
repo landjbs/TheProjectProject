@@ -52,6 +52,9 @@ function open_channel(channel_id) {
     contentType: 'application/json',
     data: channel_data,
     success: function(payload) {
+      if (window.poller) {
+        clearInterval(window.poller);
+      }
       var messageBox = document.getElementById('messageBox');
       messageBox.innerHTML = payload['html'];
       clearInterval();

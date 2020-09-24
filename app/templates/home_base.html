@@ -236,22 +236,17 @@
         // scroll to bottom of messages
         messages.scrollTo(0, messages.scrollHeight);
         // start polling
-        var B = setInterval(
+        var poller = setInterval(
             function() { poll_channel(channel_id, 0); },
             1000
         );
-        window.B = B
+        window.poller = poller;
       }
 
       function closeForm() {
         document.getElementById("myForm").style.display = "none";
         document.getElementById('openBtn').style.display = 'block';
-        clearInterval(B);
-      }
-
-      function clearChat() {
-        // document.getElementById('messageBox').innerHTML = '';
-        clearInterval(B);
+        clearInterval(window.poller);
       }
     </script>
     <!-- /CHAT BOX -->
