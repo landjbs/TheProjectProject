@@ -86,10 +86,14 @@
                   {% endif %}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a href="/user={{ current_user.code }}">Profile</a>
+                  <a href="{{ url_for('notification.notifications') }}">
+                    {% if n_unseen > 0 %}
+                    <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+                    {% endif %}
+                  </a>
+                  <a href='/contact'>Contact</a>
+                  <a href="/logout">Log Out</a>
                 </div>
               </li>
             {% else %}
