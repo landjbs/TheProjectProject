@@ -43,6 +43,7 @@ function send_message(channel_id) {
 }
 
 
-function open_channel(channel) {
-  alert('here');
+function open_channel(payload) {
+  var messages = document.getElementById('messageBox');
+  messages.innerHTML = payload;
 }
