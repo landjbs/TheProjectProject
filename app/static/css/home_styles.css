@@ -7,13 +7,21 @@ body {
   background-color: black;
 }
 
-.search-bar {
+#mainNav .search-bar {
   color: white;
   border-color: transparent;
   border-bottom: 1px solid white;
   background-color: black;
   border-radius: 0%;
   padding: 0px;
+}
+
+#mainNav .dropdown-toggle {
+  background: black !important;
+}
+
+#mainNav .dropdown-toggle[aria-expanded="true"] {
+  text-decoration: underline; 
 }
 
 #mainNav .dropdown-item:hover {

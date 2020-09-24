@@ -1,5 +1,5 @@
 /* Button used to open the chat form - fixed at the bottom of the page */
-.open-button {
+#messageBox .open-button {
   background-color: #5D00FF;
   color: white;
   padding: 16px 20px;
@@ -15,24 +15,24 @@
   display: table-cell;
 }
 
-.open-button:hover {
+#messageBox  .open-button:hover {
   background-color: #5D00FF;
   opacity: 1;
 }
 
-.chat-popup .fa-times-circle {
+#messageBox  .chat-popup .fa-times-circle {
     position: absolute;
     top:    -12px;
     right:  -12px;
     color: black;
 }
 
-.chat-popup .fa-times-circle:hover {
+#messageBox  .chat-popup .fa-times-circle:hover {
   color: red;
 }
 
 /* The popup chat - hidden by default */
-.chat-popup {
+#messageBox  .chat-popup {
   position: fixed;
   bottom: 0;
   right: 15px;
@@ -42,7 +42,7 @@
 }
 
 /* Add styles to the form message */
-.form-container {
+#messageBox  .form-container {
   display: none;
   background-color: white;
   padding-bottom: 10px;
@@ -50,11 +50,11 @@
 }
 
 /* When the textarea gets focus, do something */
-.form-container input:focus {
+#messageBox  .form-container input:focus {
 }
 
 /* Set a style for the submit/login button */
-.form-container .btn {
+#messageBox  .form-container .btn {
   color: white;
   padding: 16px 20px;
   border: none;
@@ -65,18 +65,18 @@
 }
 
 /* Add a red background color to the cancel button */
-.form-container .cancel {
+#messageBox  .form-container .cancel {
   background-color: #5D00FF;
   border-radius: 0px;
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+#messageBox  .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
 
 /* Chat messages */
-.messages {
+#messageBox  .messages {
   max-height: 30vw;
   min-height: 30vw;
   padding-right:  10px;
@@ -84,7 +84,7 @@
   overflow-y: scroll;
 }
 
-.message {
+#messageBox  .message {
   background-color: #f1f1f1;
   border: 1px solid transparent;
   border-radius: 5px;
@@ -94,44 +94,44 @@
   height: auto;
 }
 
-.message:hover {
+#messageBox  .message:hover {
   border-color: black;
 }
 
-.message:active .time-right {
+#messageBox  .message:active .time-right {
   display: block !important;
 }
 
 /* Darker chat message */
-.me {
+#messageBox  .me {
   margin-left: 30px;
   background: rgba(93, 0, 255, 0.1);
 }
 
-.other {
+#messageBox  .other {
   margin-right: 30px;
 }
 
 /* Clear floats */
-.message::after {
+#messageBox  .message::after {
   content: "";
   clear: both;
   display: table;
 }
 
 /* Style time text */
-.time-right {
+#messageBox  .time-right {
   float: right;
   color: #aaa;
 }
 
 /* Style time text */
-.time-left {
+#messageBox  .time-left {
   float: left;
   color: #999;
 }
 
-.chat-action {
+#messageBox  .chat-action {
   border-radius:50%;
   background: #FF5D00;
   border:0px;
