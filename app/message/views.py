@@ -25,7 +25,10 @@ def get_channel():
                         'macros/chat.html', 'render_channel'
                     )
     html = render_channel(channel)
-    return jsonify({'html' : html})
+    return jsonify({
+        'html'          : html,
+        'channel_id'    : channel.id
+    })
 
 
 @message.route('/check_messages', methods=['GET'])
