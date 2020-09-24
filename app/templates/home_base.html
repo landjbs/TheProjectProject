@@ -191,7 +191,7 @@
       <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
       <div id='messageBox'>
         {% block messages %}
-          {{ render_channel(current_user.channels[0].channel) }}
+          <div style='display: hidden;'></div>
         {% endblock %}
       </div>
     {% endif %}
