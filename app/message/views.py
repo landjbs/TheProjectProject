@@ -13,13 +13,20 @@ from sqlalchemy import func
 
 
 # view
-@message.route('/messages')
+@message.route('/get_channel', methods=['POST'])
 @login_required
-def messages():
-    return render_template('messages.html')
+def get_channel():
+    channel_id = int(request.json.get('channel_id'))
+    channel = Channel.query.get_or_404(channel_id)
+    if not channel.is_member(current_user):
+        raise PermissionDenied(f'{current_user.name} does not have '
+                                'access to this channel.')
+    render_channel = get_template_attribute(
+                        'macros/chat.html', 'render_channel'
+                    )
+    html = render_channel(channel)
+    return jsonify({'html' : html})
 
-
-from termcolor import colored
 
 @message.route('/check_messages', methods=['GET'])
 @login_required
