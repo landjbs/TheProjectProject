@@ -153,7 +153,9 @@ class User_Channel(db.Model):
     def __repr__(self):
         return f'<User_Channel links {self.user} with {self.channel}>'
 
-
+    def n_unseen(self):
+        ''' Unseen messages by user in channel '''
+        return self.channel.filter(Message.timestamp > self.last_read).count()
 
 
 
