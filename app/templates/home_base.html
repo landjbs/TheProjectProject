@@ -211,7 +211,7 @@
 
     <!-- CHAT BOX -->
     <script>
-      function poll_channel(channel_id, since) {
+      function poll_channel(channel_id, since) { 
         const data = {
           'since'   :   String(since),
           'channel' :   String(channel_id)
@@ -236,8 +236,8 @@
         // scroll to bottom of messages
         messages.scrollTo(0, messages.scrollHeight);
         // start polling
-        var polling_interval = 1000;
-        var intervalFunction = setInterval(poll_channel(channel_id, since), polling_interval);
+        var poll_interval = 1000;
+        setInterval(poll_channel(channel_id, 0), poll_interval);
       }
 
       function closeForm() {
