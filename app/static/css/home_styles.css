@@ -7,11 +7,6 @@ body {
   background-color: black;
 }
 
-.main {
-  min-width: 100%;
-  padding-top: 3vh;
-}
-
 .search-bar {
   color: white;
   border-color: transparent;
@@ -19,6 +14,19 @@ body {
   background-color: black;
   border-radius: 0%;
   padding: 0px;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 93, 0, 0.4);
+}
+
+.dropdown-item:active {
+  background: rgba(255, 93, 0, 0.8);
+}
+
+.main {
+  min-width: 100%;
+  padding-top: 3vh;
 }
 
 .search-bar:focus {
