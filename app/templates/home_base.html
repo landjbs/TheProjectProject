@@ -211,8 +211,7 @@
 
     <!-- CHAT BOX -->
     <script>
-      var polling_interval = 1000;
-      var intervalFunction = setInterval(function(channel_id, since) {
+      function poll_channel(channel_id, since) {
         const data = {
           'since'   :   String(since),
           'channel' :   String(channel_id)
@@ -226,8 +225,14 @@
                     messages.innerHTML += new_messages[i];
                     messages.scrollTo(0, messages.scrollHeight);
             }
+          }
         );
-      }, 1000);
+      }
+
+      var polling_interval = 1000;
+      var intervalFunction = setInterval(function(channel_id, since) {
+
+      }, polling_interval);
 
       function openForm(channel_id) {
         var messages = document.getElementById('messages');
