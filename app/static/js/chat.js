@@ -43,7 +43,18 @@ function send_message(channel_id) {
 }
 
 
-function open_channel(payload) {
-  var messages = document.getElementById('messageBox');
-  messages.innerHTML = payload;
+function open_channel(channel_id) {
+  var channel_data = JSON.stringify({'channel_id':channel_id});
+  $.ajax({
+    url: '/get_channel',
+    type: 'POST',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: channel_data,
+    success: function(payload) {
+      var messageBox = document.getElementById('messageBox');
+      messageBox.innerHTML = payload;
+      openForm();
+    }
+  })
 }

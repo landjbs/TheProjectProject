@@ -83,7 +83,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="messageDropdownMenuLink">
                   {% for uc in current_user.channels %}
-                    <div class="dropdown-item" onclick="open_channel({{ render_channel(uc.channel) }})">
+                    <div class="dropdown-item" onclick="open_channel('{{ uc.channel.id }}');">
                       {{ uc.channel.name(current_user, html=False) }}
                       {% set n_unseen = uc.n_unseen() %}
                       {% if n_unseen > 0 %}
