@@ -211,6 +211,9 @@
 
     <!-- CHAT BOX -->
     <script>
+      // config // TODO: prob move these into some type of config file
+      var polling_interval = 1000;
+
       var since = 0;
       var intervalFunction = setInterval(function() {
         const data = {
@@ -228,7 +231,7 @@
                 }
             }
         );
-      }, 1000);
+      }, polling_interval);
 
       function openForm(channel_id) {
         var messages = document.getElementById('messages');
