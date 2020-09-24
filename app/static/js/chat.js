@@ -41,3 +41,8 @@ function send_message(channel_id) {
     }
   })
 }
+
+
+function open_channel(channel) {
+  alert('here');
+}
