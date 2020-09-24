@@ -248,6 +248,13 @@
         document.getElementById('openBtn').style.display = 'block';
         clearInterval(window.poller);
       }
+
+      function clearChat() {
+        document.getElementById('messageBox').innerHTML = '';
+        if (window.poller) {
+          clearInterval(window.poller);
+        }
+      }
     </script>
     <!-- /CHAT BOX -->
 
