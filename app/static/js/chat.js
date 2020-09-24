@@ -54,6 +54,7 @@ function open_channel(channel_id) {
     success: function(payload) {
       var messageBox = document.getElementById('messageBox');
       messageBox.innerHTML = payload['html'];
+      clearInterval();
       openForm(payload['channel_id']);
     }
   })
