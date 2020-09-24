@@ -229,12 +229,6 @@
         );
       }
 
-      
-      var polling_interval = 1000;
-      var intervalFunction = setInterval(function(channel_id, since) {
-
-      }, polling_interval);
-
       function openForm(channel_id) {
         var messages = document.getElementById('messages');
         document.getElementById("myForm").style.display = "block";
@@ -242,7 +236,8 @@
         // scroll to bottom of messages
         messages.scrollTo(0, messages.scrollHeight);
         // start polling
-        intervalFunction(channel_id, 0);
+        var polling_interval = 1000;
+        var intervalFunction = setInterval(poll_channel(channel_id, since), polling_interval);
       }
 
       function closeForm() {
