@@ -22,7 +22,6 @@
 
 {% macro render_channel(channel) -%}
   {% set name = channel.name(g.current_user) %}
-  <!-- TODO: move project style import -->
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm('{{ channel.id }}');">
