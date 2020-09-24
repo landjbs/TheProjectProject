@@ -155,7 +155,7 @@ class User_Channel(db.Model):
 
     def n_unseen(self):
         ''' Unseen messages by user in channel '''
-        return self.channel.filter(Message.timestamp > self.last_read).count()
+        return self.channel.messages.filter(Message.timestamp > self.last_read).count()
 
 
 

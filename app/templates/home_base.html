@@ -85,6 +85,10 @@
                   {% for uc in current_user.channels %}
                     <div class="dropdown-item" onclick="render_channel({{ uc.channel }})">
                       {{ uc.channel.name(current_user, html=False) }}
+                      {% set n_unseen = uc.n_unseen() %}
+                      {% if n_unseen > 0 %}
+                        <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+                      {% endif %}
                     </div>
                   {% endfor %}
                 </div>
