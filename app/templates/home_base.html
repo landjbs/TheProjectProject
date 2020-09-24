@@ -76,28 +76,21 @@
               </li>
             {% endif %}
             {% if current_user.is_authenticated %}
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="{{ current_user.get_url() }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{ current_user.name }}
-                {% set n_unseen = current_user.n_unseen() %}
-                {% if n_unseen > 0 %}
-                  <span class="badge" style='background:#FF5D00; vertical-align:top;'>
-                    {{ n_unseen }}
-                  </span>
-                {% endif %}
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{ current_user.get_url() }}">Profile</a>
-                <a class="dropdown-item" href="{{ url_for('notification.notifications') }}">
-                  Notifications
-                  {% if n_unseen > 0 %}
-                  <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
-                  {% endif %}
+              <!-- messages -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  messages
                 </a>
-                <a class="dropdown-item" href='/contact'>Contact</a>
-                <a class="dropdown-item" href="/logout">Log Out</a>
-              </div>
-            </li>
+                <div class="dropdown-menu" aria-labelledby="messageDropdownMenuLink">
+                  {% for uc in current_user.channels %}
+                    <div class="dropdown-item" onclick="render_channel({{ uc.channel }})">
+                      {{ uc.channel.name(current_user) }}
+                    </div>
+                  {% endfor %}
+                </div>
+              </li>
+
+              <!-- user/settings page -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{ current_user.get_url() }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {{ current_user.name }}

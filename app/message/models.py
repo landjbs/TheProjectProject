@@ -98,14 +98,22 @@ class Channel(CRUDMixin, db.Model):
         return {'last_sent' : False}
 
     # user-specific
-    def name(self, me):
-        ''' Generates user-specific name for the channel '''
+    def name(self, me, html=True):
+        '''
+        Generates user-specific name for the channel
+        args:
+            me:         User object of current_user
+            html:       Add html for | safe render
+        '''
         users = set([uc.user for uc in self.users if uc.user!=me])
         name = ''
         for i, user in enumerate(users):
             if (i>0):
                 name += ', '
-            name += f'<a class="owner" href="{user.get_url()}">{user.name}</a>'
+            if html:
+                name += f'<a class="owner" href="{user.get_url()}">{user.name}</a>'
+            else:
+                name += str(user.name)
         return name
 
     def n_unseen(self, user):
