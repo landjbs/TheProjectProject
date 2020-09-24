@@ -144,3 +144,30 @@ class User_Channel(db.Model):
 
     def __repr__(self):
         return f'<User_Channel links {self.user} with {self.channel}>'
+
+
+
+
+
+<li class="nav-item" style='list-style-type:none;'>
+<div class="dropdown">
+<button class="dropbtn" style="border:0px; display:inline;">
+{{ current_user.name }}
+{% set n_unseen = current_user.n_unseen() %}
+{% if n_unseen > 0 %}
+<span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+{% endif %}
+</button>
+<div class="dropdown-content">
+<a href="/user={{ current_user.code }}">Profile</a>
+<a href="{{ url_for('notification.notifications') }}">
+Notifications
+{% if n_unseen > 0 %}
+<span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+{% endif %}
+</a>
+<a href='/contact'>Contact</a>
+<a href="/logout">Log Out</a>
+</div>
+</div>
+# </li>

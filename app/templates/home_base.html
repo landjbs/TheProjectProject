@@ -75,43 +75,37 @@
                 <a class="nav-link" href="/admin">admin</a>
               </li>
             {% endif %}
-          </ul>
-          {% if current_user.is_authenticated %}
-            <li class="nav-item" style='list-style-type:none;'>
-              <div class="dropdown">
-                <button class="dropbtn" style="border:0px; display:inline;">
-                  {{ current_user.name }}
+            {% if current_user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {% set n_unseen = current_user.n_unseen() %}
                   {% if n_unseen > 0 %}
-                    <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+                    <span class="badge" style='background:#FF5D00; vertical-align:top;'>
+                      {{ n_unseen }}
+                    </span>
                   {% endif %}
-                </button>
-                <div class="dropdown-content">
-                  <a href="/user={{ current_user.code }}">Profile</a>
-                  <a href="{{ url_for('notification.notifications') }}">
-                    Notifications
-                    {% if n_unseen > 0 %}
-                      <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
-                    {% endif %}
-                  </a>
-                  <a href='/contact'>Contact</a>
-                  <a href="/logout">Log Out</a>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-              </div>
-            </li>
-          {% else %}
-            <li class="nav-item" style='list-style-type:none;'>
-              <div class="dropdown">
-                <button class="dropbtn" style="border:0px; display:inline;">
-                  sign up
-                </button>
-                <div class="dropdown-content">
-                  <a href="/apply">Apply</a>
-                  <a href="/login">Login</a>
+              </li>
+            {% else %}
+              <li class="nav-item" style='list-style-type:none;'>
+                <div class="dropdown">
+                  <button class="dropbtn" style="border:0px; display:inline;">
+                    sign up
+                  </button>
+                  <div class="dropdown-content">
+                    <a href="/apply">Apply</a>
+                    <a href="/login">Login</a>
+                  </div>
                 </div>
-              </div>
-            </li>
-          {% endif %}
+              </li>
+            {% endif %}
+          </ul>
         </div>
       </div>
     </nav>
