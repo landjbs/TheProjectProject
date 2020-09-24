@@ -236,20 +236,19 @@
         // scroll to bottom of messages
         messages.scrollTo(0, messages.scrollHeight);
         // start polling
-        var poll_interval = 1000;
-        var B = setInterval(poll_channel(channel_id, 0), poll_interval);
-        B.start();
+        var B = setInterval(poll_channel(channel_id, 0), 1000);
+        window.B = B
       }
 
       function closeForm() {
         document.getElementById("myForm").style.display = "none";
         document.getElementById('openBtn').style.display = 'block';
-        clearInterval(intervalFunction);
+        clearInterval(B);
       }
 
       function clearChat() {
         // document.getElementById('messageBox').innerHTML = '';
-        clearInterval(intervalFunction);
+        clearInterval(B);
       }
     </script>
     <!-- /CHAT BOX -->
