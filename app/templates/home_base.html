@@ -227,6 +227,7 @@
           'channel' :   String(channel_id)
         };
         const searchParams = new URLSearchParams(data);
+        alert('polling ' + channel_id);
         $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
             function(message_data) {
                 since = message_data['since'];
