@@ -236,7 +236,10 @@
         // scroll to bottom of messages
         messages.scrollTo(0, messages.scrollHeight);
         // start polling
-        var B = setInterval(poll_channel(channel_id, 0), 1000);
+        var B = setInterval(
+            function() { poll_channel(channel_id, 0); },
+            1000
+        );
         window.B = B
       }
 
