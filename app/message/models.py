@@ -32,7 +32,6 @@ class Channel(CRUDMixin, db.Model):
         # search for previously existing instance of channel
         channel = cls.get_by_users(users)
         if channel is None:
-            print("HERE")
             channel = Channel()
             for user in users:
                 channel.users.append(User_Channel(user=user, channel=channel))

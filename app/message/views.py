@@ -90,7 +90,11 @@ def check_messages():
 @message.route('/check_message_nums', methods=['GET'])
 @login_required
 def check_message_nums():
+    ## get channel ##
+    channel_id = request.args.get('channel', type=int)
     channel = Channel.get_and_validate(channel_id, current_user)
+    ## ##
+
 
 
 @message.route('/open_single_channel', methods=['POST'])
