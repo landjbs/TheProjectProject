@@ -239,7 +239,8 @@
           'channel' :   String(channel_id)
         }
         const searchParams = new URLSearchParams(data);
-        $.ajax('{{ url_for('message.update_last_read') }}?' + searchParams).done(
+        $.ajax('{{ url_for('message.update_last_read') }}?' + searchParams).success(
+          alert('done');
         )
       }
 
