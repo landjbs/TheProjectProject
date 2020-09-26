@@ -121,10 +121,14 @@ class Channel(CRUDMixin, db.Model):
                 name += str(user.name)
         return name
 
-    def n_unseen(self, user):
+    def unseen(self, user, return_messages=False):
         # get last read from user channel
         last_read = self.users.filter_by(user=user).first().last_read
-        return self.messages.filter(Message.timestamp>last_read).count()
+        # filter more recent messages
+        messages = self.messages.filter(Message.timestamp>last_read)
+        if not return_messages:
+            return messages.count()
+        return messages
 
 
 class Message(CRUDMixin, db.Model):

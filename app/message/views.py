@@ -73,8 +73,11 @@ def check_messages():
 
 @message.route('/n_new_messages', methods=['GET'])
 def n_new_messages():
-    n = current_user.n_new_messages()
-    return jsonify({'n': n})
+    n, messages = current_user.new_messages(return_messages=True)
+    return jsonify({
+        'n' : n,
+        ''  : n,
+    })
 
 
 @message.route('/n_channel_messages', methods=['GET'])
