@@ -24,11 +24,11 @@ body {
   text-decoration: underline;
 }
 
-#mainNav .select-clean:hover {
+#mainNav .searchbox:hover {
   background: transparent !important;
 }
 
-#mainNav .select-clean:active {
+#mainNav .searchbox:active {
   background: transparent !important;
 }
 

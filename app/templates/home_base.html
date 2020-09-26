@@ -82,11 +82,11 @@
                   messages
                 </a>
                 <div class="dropdown-menu" id='messagesDropdown' aria-labelledby="messageDropdownMenuLink">
-                  <div class='dropdown-item'>
-                    <input class='select-clean' type="text" placeholder="search.." id="messageSearch" onkeyup="filterFunction('messagesDropdown')">
+                  <div class='dropdown-item searchbox'>
+                    <input class='select-clean' type="text" placeholder="search.." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
                   </div>
                   {% for uc in current_user.channels %}
-                    <div class="dropdown-item hoverable" onclick="open_channel('{{ uc.channel.id }}');">
+                    <div class="dropdown-item searchable" onclick="open_channel('{{ uc.channel.id }}');">
                       {{ uc.channel.name(current_user, html=False) }}
                       {% set n_unseen = uc.n_unseen() %}
                       {% if n_unseen > 0 %}
@@ -219,7 +219,7 @@
         input = document.getElementById(searchId);
         filter = input.value.toUpperCase();
         div = document.getElementById(dropdownId);
-        a = div.getElementsByClassName("a");
+        a = div.getElementsByClassName('searchable');
         for (i = 0; i < a.length; i++) {
           txtValue = a[i].textContent || a[i].innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
