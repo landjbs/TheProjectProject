@@ -87,13 +87,9 @@
                   <div class='dropdown-item searchbox'>
                     <input class='select-clean' type="text" placeholder="search.." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
                   </div>
-                  {% for uc in current_user.channels %}
+                  {% for channel in current_user.ordered_channels() %}
                     <div class="dropdown-item searchable" onclick="open_channel('{{ uc.channel.id }}');">
-                      {{ uc.channel.name(current_user, html=False) }}
-                      {% set n_unseen = uc.unseen(return_messages=False) %}
-                      {% if n_unseen > 0 %}
-                        <span class="badge" style='background:#FF5D00; vertical-align:top;'>{{ n_unseen }}</span>
-                      {% endif %}
+                      {{ channel.name(current_user, html=False) }}
                     </div>
                   {% endfor %}
                 </div>
@@ -246,7 +242,7 @@
           }
         );
       }
-      
+
       var new_message_poller = setInterval(poll_new_messages ,1000);
       window.new_message_poller = new_message_poller;
     </script>
