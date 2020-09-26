@@ -71,16 +71,18 @@ def check_messages():
         })
 
 
-@message.route('/check_message_nums', methods=['GET'])
+@message.route('/n_new_messages', methods=['GET'])
+
+
+@message.route('/n_channel_messages', methods=['GET'])
 @login_required
-def check_message_nums():
+def n_channel_messages():
     ## get channel ##
     channel_id = request.args.get('channel', type=int)
     channel = Channel.get_and_validate(channel_id, current_user)
     ## return number sent in channel since last read ##
     n = channel.n_unseen(current_user)
     return n
-
 
 
 @message.route('/open_single_channel', methods=['POST'])

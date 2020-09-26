@@ -267,6 +267,10 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return user_selected
 
     ## messages ##
+    def n_new_messages(self):
+        ''' Count all new messages for user across channels '''
+        return sum(uc.channel.messages.count() for uc in self.channels)
+
     # def send_message(self, text:str, to:list):
     #     to = set(to)
     #     to.add(self)
@@ -288,9 +292,6 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     #         channel.update()
     #     channel.send(text=text, sender=self)
     #     return True
-
-    def unread_channels(self):
-        return
 
     ## notifications ##
     def notify(self, text, name, important=False, redirect=None):
