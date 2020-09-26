@@ -76,8 +76,7 @@ def new_messages():
     new = current_user.new_messages(return_messages=True)
     print(new)
     return jsonify({
-        'n'         : new.count(),
-        'messages'  : new
+        'n'         : new.count()
     })
 
 

@@ -272,7 +272,7 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         # data can either be list of messages or inc of message num
         data = ([] if return_messages else 0)
         for uc in self.channels:
-            data = uc.channel.n_unseen(self, return_messages=return_messages)
+            data = uc.channel.unseen(self, return_messages=return_messages)
         return data
 
     # def send_message(self, text:str, to:list):
