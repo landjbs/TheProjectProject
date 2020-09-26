@@ -21,20 +21,30 @@ body {
 }
 
 #mainNav .dropdown-toggle[aria-expanded="true"] {
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 
-#mainNav .dropdown-item:hover {
+#mainNav .select-clean:hover {
+  background: transparent !important;
+}
+
+#mainNav .select-clean:active {
+  background: transparent !important;
+}
+
+#mainNav .searchable:hover {
   background: rgba(255, 93, 0, 0.4) !important;
 }
 
-#mainNav .dropdown-item:active {
+#mainNav .searchable:active {
   background: rgba(255, 93, 0, 0.8) !important;
 }
 
 #mainNav .dropdown-toggle::after {
   display: none;
 }
+
+
 
 .main {
   min-width: 100%;

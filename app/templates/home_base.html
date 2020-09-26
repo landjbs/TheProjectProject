@@ -37,15 +37,6 @@
       <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
       <link rel="icon" href="/img/logo.ico" type="image/x-icon">
       {{ cookie() }}
-
-      <!-- experimental cdn for boostrap searchable -->
-      <!-- Latest compiled and minified CSS -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-      <!-- Latest compiled and minified JavaScript -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-      <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-
     {% endblock %}
   </head>
 
@@ -87,22 +78,23 @@
             {% if current_user.is_authenticated %}
               <!-- messages -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   messages
                 </a>
-                <select class="dropdown-menu selectpicker" data-live-search="true" aria-labelledby="messageDropdownMenuLink">
+                <div class="dropdown-menu" id='messagesDropdown' aria-labelledby="messageDropdownMenuLink">
+                  <div class='dropdown-item'>
+                    <input class='select-clean' type="text" placeholder="search.." id="messageSearch" onkeyup="filterFunction('messagesDropdown')">
+                  </div>
                   {% for uc in current_user.channels %}
-                    <div class="dropdown-item">
-                      <option onclick="open_channel('{{ uc.channel.id }}');" data-tokens="{{ uc.channel.name(current_user, html=False) }}">
-                        {{ uc.channel.name(current_user, html=False) }}
-                      </option>
+                    <div class="dropdown-item hoverable" onclick="open_channel('{{ uc.channel.id }}');">
+                      {{ uc.channel.name(current_user, html=False) }}
                       {% set n_unseen = uc.n_unseen() %}
                       {% if n_unseen > 0 %}
                         <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
                       {% endif %}
                     </div>
                   {% endfor %}
-                </select>
+                </div>
               </li>
 
               <!-- user/settings page -->
@@ -219,6 +211,26 @@
     </script>
 
     <script src="js/chat.js"></script>
+
+    <!-- SCRIPT NAVBAR searching -->
+    <script>
+      function filterFunction(searchId, dropdownId) {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById(searchId);
+        filter = input.value.toUpperCase();
+        div = document.getElementById(dropdownId);
+        a = div.getElementsByClassName("a");
+        for (i = 0; i < a.length; i++) {
+          txtValue = a[i].textContent || a[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+          } else {
+            a[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+
 
     <!-- CHAT BOX -->
     <script>
