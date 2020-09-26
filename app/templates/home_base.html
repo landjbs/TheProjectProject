@@ -204,15 +204,12 @@
     {% block scripts %}
     {% endblock %}
 
-    <script>
-      function toggleMessages() {
-        alert('toggle');
-      }
-    </script>
 
     <script src="js/chat.js"></script>
 
-    <!-- SCRIPT NAVBAR searching -->
+
+    <!-- WARNING: only some scripts should be run if user is Anonymous -->
+    <!-- NAVBAR SEARCH -->
     <script>
       function filterFunction(searchId, dropdownId) {
         var input, filter, ul, li, a, i;
@@ -231,6 +228,15 @@
       }
     </script>
 
+    <!-- NAVBAR MESSAGES -->
+    <script>
+      function poll_n_new_messages() {
+        $.ajax('{{ url_for('message.n_new_messages') }}?' + searchParams).done(
+          function() {
+          }
+        );
+      }
+    </script>
 
     <!-- CHAT BOX -->
     <script>
