@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
     <button type="button" id='openBtn' class="btn open-button" onclick="openForm('{{ channel.id }}');">
-      {{ name | safe }} | {{ channel.n_unseen(g.current_user) }}
+      {{ name | safe }}
       <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
     </button>
     <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
