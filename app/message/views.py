@@ -78,6 +78,8 @@ def check_messages():
                         'macros/chat.html', 'render_message'
                     )
     data = channel.data()
+    # update last read in user channel
+    channel.users.query.filter_by(user=current_user).first().last_read = datetime.datetime.utcnow()
     return jsonify({
             'new_messages': [
                                 render_message(m, data, sent_by_me=False)
