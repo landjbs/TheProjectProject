@@ -74,7 +74,7 @@ def check_messages():
 @message.route('/new_messages', methods=['GET'])
 def new_messages():
     new = current_user.new_messages(return_messages=True)
-    print(new.count())
+    print(current_user.name, new.count())
     return jsonify({
         'n'         : new.count()
     })
