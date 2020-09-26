@@ -93,7 +93,9 @@ def check_message_nums():
     ## get channel ##
     channel_id = request.args.get('channel', type=int)
     channel = Channel.get_and_validate(channel_id, current_user)
-    ## ##
+    ## return number sent in channel since last read ##
+    n = channel.n_unseen(current_user)
+    return n
 
 
 
