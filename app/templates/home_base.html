@@ -231,8 +231,9 @@
     <!-- NAVBAR MESSAGES -->
     <script>
       function poll_n_new_messages() {
-        $.ajax('{{ url_for('message.n_new_messages') }}?' + searchParams).done(
-          function() {
+        $.ajax('{{ url_for('message.new_messages') }}?' + searchParams).done(
+          function(payload) {
+            alert(payload['n']);
           }
         );
       }
