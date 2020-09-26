@@ -238,10 +238,9 @@
           }
         );
       }
-      var new_message_poller = setInterval(
-          function() { poll_new_messages(); },
-          1000
-      );
+
+      var new_message_poller = setInterval(poll_new_messages ,1000);
+      alert('dfa');
       window.new_message_poller = new_message_poller;
     </script>
 
