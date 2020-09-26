@@ -141,7 +141,6 @@ def update_last_read():
     channel_id = int(request.json.get('channel_id'))
     channel = Channel.get_and_validate(channel_id, current_user)
     ## get user channel ##
-    # NOTE: if first() throws error, get_and_validate is broken
     uc = channel.users.filter_by(user=current_user).first()
     uc.last_active = datetime.datetime.utcnow()
     uc.update()

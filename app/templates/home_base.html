@@ -211,6 +211,16 @@
 
     <!-- CHAT BOX -->
     <script>
+      function update_last_read(channel_id) {
+        const data = {
+          'channel' :   String(channel_id)
+        }
+        const searchParams = new URLSearchParams(data);
+        $.ajax('{{ url_for('message.update_last_read') }}?' + searchParams).done(
+          
+        )
+      }
+
       function poll_channel(channel_id, since) {
         const data = {
           'since'   :   String(since),
