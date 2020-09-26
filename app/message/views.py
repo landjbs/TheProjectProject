@@ -34,10 +34,7 @@ def get_channel():
 def update_last_read():
     # get channel and check permissions
     channel_id = int(request.json.get('channel_id'))
-    channel = Channel.query.get_or_404(channel_id)
-    if not channel.is_member(current_user):
-        raise PermissionDenied(f'{current_user.name} does not have '
-                                'access to this channel.')
+    channel = Channel.get_and_validate(channel_id, current_user)
     # get current time stamp
 
     render_channel = get_template_attribute(
@@ -55,10 +52,7 @@ def update_last_read():
 def check_messages():
     ## get channel ##
     channel_id = request.args.get('channel', type=int)
-    channel = Channel.query.get_or_404(channel_id)
-    # check permissions
-    if not channel.is_member(current_user):
-        raise PermissionError('User does not have access to this channel.')
+    channel = Channel.get_and_validate(channel_id, current_user)
     ## get since ##
     since = request.args.get('since', 0, type=float)
     # check if valid since
@@ -96,6 +90,7 @@ def check_messages():
 @message.route('/check_message_nums', methods=['GET'])
 @login_required
 def check_message_nums():
+    channel = Channel.get_and_validate(channel_id, current_user)
 
 
 @message.route('/open_single_channel', methods=['POST'])
@@ -119,17 +114,14 @@ def open_single_channel():
 def send_message():
     # if not None:
     channel_id = int(request.json.get('channel_id'))
-    channel = Channel.query.get_or_404(channel_id)
+    channel = Channel.get_and_validate(channel_id, current_user)
     html = ''
-    if not channel.is_member(current_user):
-        flash('Could not message because you are not a member of this channel.')
-    else:
-        text = str(request.json.get('text'))
-        if text is not None:
-            message = channel.send(text, current_user)
-            # import macros for rendering messages
-            render_message = get_template_attribute(
-                                'macros/chat.html', 'render_message'
-                            )
-            html = render_message(message, channel.data(), sent_by_me=True)
+    text = str(request.json.get('text'))
+    if text is not None:
+        message = channel.send(text, current_user)
+        # import macros for rendering messages
+        render_message = get_template_attribute(
+                            'macros/chat.html', 'render_message'
+                        )
+        html = render_message(message, channel.data(), sent_by_me=True)
     return jsonify({'html':html})
