@@ -120,7 +120,6 @@ def open_single_channel():
 @message.route('/send_message', methods=['POST'])
 @login_required
 def send_message():
-    # if not None:
     channel_id = int(request.json.get('channel_id'))
     channel = Channel.get_and_validate(channel_id, current_user)
     html = ''
@@ -133,3 +132,17 @@ def send_message():
                         )
         html = render_message(message, channel.data(), sent_by_me=True)
     return jsonify({'html':html})
+
+
+@message.route('/update_last_read', methods=['POST'])
+@login_required
+def update_last_read():
+    ## get channel ##
+    channel_id = int(request.json.get('channel_id'))
+    channel = Channel.get_and_validate(channel_id, current_user)
+    ## get user channel ##
+    # NOTE: if first() throws error, get_and_validate is broken
+    uc = channel.users.filter_by(user=current_user).first()
+    uc.last_active = datetime.datetime.utcnow()
+    uc.update()
+    return True
