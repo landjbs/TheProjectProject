@@ -161,21 +161,3 @@ class User_Channel(db.Model):
     def n_unseen(self):
         ''' Unseen messages by user in channel '''
         return self.channel.messages.filter(Message.timestamp > self.last_read).count()
-
-
-
-# <li class="nav-item" style='list-style-type:none;'>
-# <div class="dropdown">
-# <button class="dropbtn" style="border:0px; display:inline;">
-# {{ current_user.name }}
-#
-# </button>
-# <div class="dropdown-content">
-#
-# Notifications
-#
-# </a>
-#
-# </div>
-# </div>
-# # </li>
