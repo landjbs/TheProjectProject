@@ -161,3 +161,9 @@ class User_Channel(db.Model):
     def n_unseen(self):
         ''' Unseen messages by user in channel '''
         return self.channel.messages.filter(Message.timestamp > self.last_read).count()
+
+    def update_last_read(self):
+        timestamp = datetime.utcnow()
+        self.last_read = timestamp
+        db.session.commit()
+        return timestamp

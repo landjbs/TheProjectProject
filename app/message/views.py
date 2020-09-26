@@ -116,17 +116,15 @@ def send_message():
     return jsonify({'html':html})
 
 
-@message.route('/update_last_read', methods=['POST'])
+@message.route('/update_last_read', methods=['GET'])
 @login_required
 def update_last_read():
     ## get channel ##
-    channel_id = int(request.json.get('channel_id'))
+    channel_id = int(request.args.get('channel_id'))
     channel = Channel.get_and_validate(channel_id, current_user)
     ## get user channel ##
-    timestamp = datetime.datetime.utcnow()
     uc = channel.users.filter_by(user=current_user).first()
-    uc.last_active = timestamp
-    uc.update()
+    timestamp = uc.update_last_read()
     return jsonify({
         'success' :     True,
         'timestamp' :   timestamp
