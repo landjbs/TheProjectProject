@@ -245,6 +245,8 @@
         document.getElementById('openBtn').style.display = 'none';
         // scroll to bottom of messages
         messages.scrollTo(0, messages.scrollHeight);
+        // update last read for channel
+        update_last_read(channel_id);
         // start polling
         var poller = setInterval(
             function() { poll_channel(channel_id, 0); },
