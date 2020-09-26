@@ -145,4 +145,4 @@ def update_last_read():
     uc = channel.users.filter_by(user=current_user).first()
     uc.last_active = datetime.datetime.utcnow()
     uc.update()
-    return True
+    return jsonify({'success' : True})
