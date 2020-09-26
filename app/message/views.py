@@ -12,15 +12,13 @@ from ..message import message
 from sqlalchemy import func
 
 
+
 # view
 @message.route('/get_channel', methods=['POST'])
 @login_required
 def get_channel():
     channel_id = int(request.json.get('channel_id'))
-    channel = Channel.query.get_or_404(channel_id)
-    if not channel.is_member(current_user):
-        raise PermissionDenied(f'{current_user.name} does not have '
-                                'access to this channel.')
+    channel = Channel.get_and_validate(channel_id, current_user)
     render_channel = get_template_attribute(
                         'macros/chat.html', 'render_channel'
                     )
@@ -41,6 +39,7 @@ def update_last_read():
         raise PermissionDenied(f'{current_user.name} does not have '
                                 'access to this channel.')
     # get current time stamp
+
     render_channel = get_template_attribute(
                         'macros/chat.html', 'render_channel'
                     )
@@ -92,6 +91,11 @@ def check_messages():
                             ],
             'since':        channel.most_recent().timestamp()
         })
+
+
+@message.route('/check_message_nums', methods=['GET'])
+@login_required
+def check_message_nums():
 
 
 @message.route('/open_single_channel', methods=['POST'])

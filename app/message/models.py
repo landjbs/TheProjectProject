@@ -37,8 +37,14 @@ class Channel(CRUDMixin, db.Model):
             for user in users:
                 channel.users.append(User_Channel(user=user, channel=channel))
             channel.update()
-        print(channel)
         return channel
+
+    @classmethod
+    def get_and_validate(cls, id, user):
+        instance = cls.query.get_or_404(int(id))
+        if not instance.is_member(user):
+            raise PermissionDenied(f'{user.name} does not have access to this channel.')
+        return instance
 
     @classmethod
     def get_by_users(cls, users):
