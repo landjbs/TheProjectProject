@@ -92,7 +92,7 @@
                       {{ uc.channel.name(current_user, html=False) }}
                       {% set n_unseen = uc.unseen(return_messages=False) %}
                       {% if n_unseen > 0 %}
-                        <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+                        <span class="badge" style='background:#FF5D00; vertical-align:top;'>{{ n_unseen }}</span>
                       {% endif %}
                     </div>
                   {% endfor %}
@@ -232,6 +232,8 @@
 
     <!-- NAVBAR MESSAGES -->
     <script>
+
+      // poll big message badge
       var n_message_badge = document.getElementById('nMessageBadge');
       function poll_new_messages() {
         $.ajax('{{ url_for('message.new_messages') }}').done(
@@ -244,7 +246,7 @@
           }
         );
       }
-
+      
       var new_message_poller = setInterval(poll_new_messages ,1000);
       window.new_message_poller = new_message_poller;
     </script>
