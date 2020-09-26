@@ -78,7 +78,7 @@
             {% if current_user.is_authenticated %}
               <!-- messages -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="update_channel_counts();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   messages
                   <span id='nMessageBadge' class='badge' style='background:#FF5D00; vertical-align:top; display:none;'>
                   </span>
@@ -115,7 +115,7 @@
                   <a class="dropdown-item" href="{{ url_for('notification.notifications') }}">
                     Notifications
                     {% if n_unseen > 0 %}
-                      <span class="badge" style='background:#FF5D00;; vertical-align:top;'>{{ n_unseen }}</span>
+                      <span class="badge" style='background:#FF5D00; display: inline; vertical-align:top;'>{{ n_unseen }}</span>
                     {% endif %}
                   </a>
                   <a class="dropdown-item" href='/contact'>Contact</a>
