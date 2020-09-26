@@ -29,24 +29,6 @@ def get_channel():
     })
 
 
-@message.route('/update_last_read', methods=['POST'])
-@login_required
-def update_last_read():
-    # get channel and check permissions
-    channel_id = int(request.json.get('channel_id'))
-    channel = Channel.get_and_validate(channel_id, current_user)
-    # get current time stamp
-
-    render_channel = get_template_attribute(
-                        'macros/chat.html', 'render_channel'
-                    )
-    html = render_channel(channel)
-    return jsonify({
-        'html'          : html,
-        'channel_id'    : channel.id
-    })
-
-
 @message.route('/check_messages', methods=['GET'])
 @login_required
 def check_messages():
