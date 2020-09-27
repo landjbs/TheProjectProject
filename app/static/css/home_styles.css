@@ -60,6 +60,18 @@ body {
   display: initial !important;
 }
 
+
+/* mobile navbar dropdowns */
+@media (max-width: 996px) {
+  #mainNav .dropdown-menu {
+    background: black;
+    border: 1px solid white;
+  }
+  #mainNav .dropdown-item {
+    color: white;
+  }
+}
+
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 7px;
