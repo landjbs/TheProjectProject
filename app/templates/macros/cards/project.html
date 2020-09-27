@@ -89,8 +89,8 @@
 
 
 {% macro render_big_project_card(project, render_action_bar_fn=render_project_action_bar) -%}
-  {% set border_color = 'gold' if project.competition.winner else 'red' %}
-  <div class="card mb-2" style='border-color: {{ border_color | safe }};'>
+  {% set border_color = project.border_color() %}
+  <div class="card mb-2" {% if border_color %}style='border-color: {{ border_color | safe }}{% endif %}'>
     <div class="card-body">
       <div class='float-right info-nums'>
         {{ project.members.all()|length }} / {{ project.team_size }}
@@ -148,7 +148,8 @@
 
 
 {% macro render_mid_project_card(project) -%}
-  <div class="card mb-2">
+  {% set border_color = project.border_color() %}
+  <div class="card mb-2" {% if border_color %}style='border-color: {{ border_color | safe }}{% endif %}'>
     <div class="card-body">
       <p class="float-right info-nums">
         {{ project.members.all()|length  }}
@@ -178,7 +179,8 @@
 
 
 {% macro render_small_project_card(project) -%}
-  <div class="card mb-2">
+  {% set border_color = project.border_color() %}
+  <div class="card mb-2" {% if border_color %}style='border-color: {{ border_color | safe }}{% endif %}'>
     <div class="card-body">
       <div class='float-right'>
         {% if g.current_user==project.owner %}

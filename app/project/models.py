@@ -150,7 +150,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     ## styling ##
     def border_color(self):
         ''' Sets border color for project card. Is this inefficient? Maybe move to jinja or css? '''
-        
+        if self.competition and self.competition.winner:
+            return 'gold'
+        # false uses css default
+        return False
 
     ## activity ##
     def recently_active(self, second_window=302400):
