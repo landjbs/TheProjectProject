@@ -42,6 +42,9 @@ class Competition(CRUDMixin, db.Model):
     def get_active_competitions(cls):
         return cls.query.filter_by(active=True)
 
+    ## recommendations ##
+    def re
+
     def total_length(self):
         return (self.ends_on - self.starts_on).days
 
