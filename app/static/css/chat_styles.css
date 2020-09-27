@@ -75,6 +75,14 @@
   opacity: 1;
 }
 
+#messageBox .chatname {
+  vertical-align: middle;
+}
+
+#messageBox .chatname:hover {
+  text-decoration: underline;
+}
+
 /* Chat messages */
 #messageBox  .messages {
   max-height: 30vw;
