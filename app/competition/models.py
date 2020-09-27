@@ -68,8 +68,6 @@ class Competition(CRUDMixin, db.Model):
         winners = self.submissions.filter_by(winner=True)
         winner_ids = [s.project.id for s in winners]
         others = self.submissions.filter(~Submission.project_id.in_(winner_ids))
-        print(f'winners: {winners}')
-        print(f'others: {others}')
         return (winners.all() + others.all())
 
     ## admin ##

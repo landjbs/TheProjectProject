@@ -147,6 +147,11 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def get_url(self):
         return f'/project={self.code}'
 
+    ## styling ##
+    def border_color(self):
+        ''' Sets border color for project card. Is this inefficient? Maybe move to jinja or css? '''
+        
+
     ## activity ##
     def recently_active(self, second_window=302400):
         ''' second_window: number of seconds to count as recent.
