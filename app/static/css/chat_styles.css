@@ -141,3 +141,8 @@
   text-align: center;
   display: table-cell;
 }
+
+.message-btn {
+  text-align: center;
+  font-size: 20px;
+}

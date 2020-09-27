@@ -24,12 +24,12 @@
   {% set name = channel.name(g.current_user) %}
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
-    <button type="button" id='openBtn' class="btn open-button" onclick="openForm('{{ channel.id }}');">
+    <button type="button" id='openBtn' class="btn open-button message-btn" onclick="openForm('{{ channel.id }}');">
       {{ name | safe }}
       <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
     </button>
     <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
-      <button type="button" class="btn cancel" onclick="closeForm()">
+      <button type="button" class="btn cancel message-btn" onclick="closeForm()">
         {{ name | safe }}
       </button>
       <div class='messages' id='messages'>
