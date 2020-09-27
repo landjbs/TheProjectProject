@@ -137,6 +137,12 @@ class Submission(CRUDMixin, db.Model):
         return True
 
     def mark_loser(self):
+        competition = self.competition
+        # validate that competition meets criteria for new winner
+        assert not competition.active, 'Cannot select winners for active competition.'
+        assert competition.complete, 'Cannot select winners for incomplete competition.'
+        # mark submission as loser
+        self.winner = False
         project = submission.project
         if not project in self.winners:
             project.notify_members(text=(f'The competition {self.name}'
