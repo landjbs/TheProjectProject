@@ -90,11 +90,13 @@
                   <div class='dropdown-item searchbox'>
                     <input class='select-clean' type="text" placeholder="search.." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
                   </div>
-                  {% for channel in current_user.ordered_channels() %}
-                    <div class="dropdown-item searchable" onclick="open_channel('{{ channel.id }}');">
-                      {{ channel.name(current_user, html=False) }}
-                    </div>
-                  {% endfor %}
+                  <div id='channelList'>
+                    {% for channel in current_user.ordered_channels() %}
+                      <div class="dropdown-item searchable" onclick="open_channel('{{ channel.id }}');">
+                        {{ channel.name(current_user, html=False) }}
+                      </div>
+                    {% endfor %}
+                  </div>
                 </div>
               </li>
 
@@ -252,7 +254,7 @@
 
       function update_channel_counts() {
         $.ajax('{{ url_for('message.new_messages') }}').done(
-          
+
         )
       }
 
