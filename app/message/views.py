@@ -144,4 +144,12 @@ def update_last_read():
 def get_message_list():
     # get channels of user
     channels = current_user.ordered_channels()
+    # import macros for rendering channel list
+    render_channel_list = get_template_attribute(
+                        'macros/chat.html', 'render_channel_list'
+                    )
     # render channels of user
+    html = render_channel_list(channels)
+    return jsonify({
+        'html'  :   html
+    })
