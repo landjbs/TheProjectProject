@@ -76,10 +76,12 @@
 {% macro render_channel_tag(channel) -%}
   <div class='dropdown-item searchable'  onclick="open_channel('{{ channel.id }}');">
     {{ channel.name(g.current_user, html=False) }}
-    {% set n_unseen = 0 %}
-    <span class='badge'>
-      {{ n_unseen }}
-    </span>
+    {% set n_unseen = channel.unseen(g.current_user, return_messages=False) %}
+    {% if n_unseen > 0 %}
+      <span class='badge'>
+        {{ n_unseen }}
+      </span>
+    {% endif %}
   </div>
 {% endmacro -%}
 
