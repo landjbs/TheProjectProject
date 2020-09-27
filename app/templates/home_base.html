@@ -88,7 +88,7 @@
                     <input class='select-clean' type="text" placeholder="search.." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
                   </div>
                   {% for channel in current_user.ordered_channels() %}
-                    <div class="dropdown-item searchable" onclick="open_channel('{{ uc.channel.id }}');">
+                    <div class="dropdown-item searchable" onclick="open_channel('{{ channel.id }}');">
                       {{ channel.name(current_user, html=False) }}
                     </div>
                   {% endfor %}
