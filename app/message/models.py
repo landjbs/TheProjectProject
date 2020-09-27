@@ -116,7 +116,7 @@ class Channel(CRUDMixin, db.Model):
             if (i>0):
                 name += ', '
             if html:
-                name += f'<a class="owner" href="{user.get_url()}">{user.name}</a>'
+                name += f'<a href="{user.get_url()}">{user.name}</a>'
             else:
                 name += str(user.name)
         return name

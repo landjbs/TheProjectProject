@@ -25,12 +25,16 @@
   <link rel="stylesheet" href="/css/project_styles.css">
   <div class="chat-popup">
     <button type="button" id='openBtn' class="btn open-button message-btn" onclick="openForm('{{ channel.id }}');">
-      {{ name | safe }}
+      <span class='chat-name'>
+        {{ name | safe }}
+      </span>
       <i class="fa fa-times-circle float-right" onclick='clearChat();' aria-hidden="true"></i>
     </button>
     <form class="form-container" id="myForm" onsubmit="send_message({{ channel.id }}); return false;">
       <button type="button" class="btn cancel message-btn" onclick="closeForm()">
-        {{ name | safe }}
+        <span class='chat-name'>
+          {{ name | safe }}
+        </span>
       </button>
       <div class='messages' id='messages'>
         {% set message_data = {'last_sent':False} %}
