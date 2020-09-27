@@ -167,9 +167,13 @@
 
   #messageBox .chat-popup .fa-times-circle {
       position: absolute;
-      top:    5px;
+      top:   5px;
       right:  5px;
       color: red;
+  }
+
+  #messageBox .message-btn {
+    height: 50px;
   }
 
   .owner {
