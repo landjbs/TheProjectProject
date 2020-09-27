@@ -88,7 +88,12 @@ class Competition(CRUDMixin, db.Model):
         self.active = False
         self.complete = True
         for submission in self.submissions:
-            submission.project.notifications\
+            submission.project.notify_members(
+                text=(
+                f'The competition {self.name} has come to an end and the '
+                'judging process has begun.'
+                )
+            )
         self.update()
 
 
