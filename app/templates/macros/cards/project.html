@@ -16,7 +16,9 @@
         <i class="fa fa-circle" aria-hidden="true" style='color:#00FF5D;'></i>
       {% endif %}
       {% if project.competition %}
-        <i class="fa fa-trophy" aria-hidden="true" style='color:gold;'></i>
+        <a href='{{ project.competition.competition.get_url() }}'>
+          <i class="fa fa-trophy" aria-hidden="true" style='color:gold;'></i>
+        </a>
       {% endif %}
     </h5>
   </a>
@@ -87,7 +89,8 @@
 
 
 {% macro render_big_project_card(project, render_action_bar_fn=render_project_action_bar) -%}
-  <div class="card mb-2">
+  {% set border_color = 'gold' if project.competition.winner else 'red' %}
+  <div class="card mb-2" style='border-color: {{ border_color | safe }};'>
     <div class="card-body">
       <div class='float-right info-nums'>
         {{ project.members.all()|length }} / {{ project.team_size }}

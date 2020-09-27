@@ -82,10 +82,13 @@ class Competition(CRUDMixin, db.Model):
         )
         return True
 
+    def deactivate(self):
+        assert self.active, 'Cannot deactivate inactive competition.'
+
     def select_winners(self, winner_ids):
         ''' Selects winners for competition using project id '''
         assert self.active, 'Cannot select winners for inactive competition.'
-        assert not self.complete, 'Cannot select winners for compelte competition.'
+        assert not self.complete, 'Cannot select winners for complete competition.'
         n_selected = len(winner_ids)
         assert (n_selected==self.n_winners), (f'Invalid winner number '
                                             f'{n_selected}/{self.n_winners}.')
@@ -141,3 +144,12 @@ class Submission(CRUDMixin, db.Model):
     def __repr__(self):
         return (f'<Submission competition={self.competition.name} '
                 f'project={self.project.name}>')
+
+    def mark_winner(self):
+        competition = self.competition
+        # validate that competition meets criteria for new winner
+        assert not competition.active, 'Cannot select winners for active competition.'
+        assert competition.complete, 'Cannot select winners for incomplete competition.'
+        # get number of prev winners in competition
+        n_prev = competition.submissions.filter_by(winner=True).count()
+        assert n_prev<=competition.n_winners, f'Cannot have more than n_winners'

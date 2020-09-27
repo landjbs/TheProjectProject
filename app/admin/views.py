@@ -19,7 +19,7 @@ from app.project.models import Project, Project_Application, Task, Comment
 from app.subject.models import Subject
 from app.notification.models import Notification
 from app.badge.models import Badge, User_Badge
-from app.competition.models import Competition
+from app.competition.models import Competition, Submission
 from app.analytics.models import PageView
 
 
@@ -168,14 +168,97 @@ class ReportModelView(SafeModelView):
         return redirect(request.referrer)
 
 
+from random import randint
+from flask import Flask, url_for
+from flask_admin.contrib import sqla
+from flask_admin import Admin
+from flask_admin.form.rules import BaseRule
+from faker import Faker
+from flask_sqlalchemy import SQLAlchemy
+from markupsafe import Markup
+from sqlalchemy import func, select
+from sqlalchemy.ext.hybrid import hybrid_property
+
+class Link(BaseRule):
+    def __init__(self, endpoint, attribute, text):
+        super(Link, self).__init__()
+        self.endpoint = endpoint
+        self.text = text
+        self.attribute = attribute
+
+    def __call__(self, form, form_opts=None, field_args=None):
+        if not field_args:
+            field_args = {}
+
+        _id = getattr(form._obj, self.attribute, None)
+
+        if _id:
+            return Markup('<a href="{url}">{text}</a>'.format(url=url_for(self.endpoint, id=_id), text=self.text))
+
+
+class MultiLink(BaseRule):
+    def __init__(self, endpoint, relation, attribute):
+        super(MultiLink, self).__init__()
+        self.endpoint = endpoint
+        self.relation = relation
+        self.attribute = attribute
+
+    def __call__(self, form, form_opts=None, field_args=None):
+        if not field_args:
+            field_args = {}
+        _hrefs = []
+        _objects = getattr(form._obj, self.relation)
+        for _obj in _objects:
+            _id = getattr(_obj, self.attribute, None)
+            _link = '<a href="{url}">Edit {text}</a>'.format(url=url_for(self.endpoint, id=_id), text=str(_obj))
+            _hrefs.append(_link)
+
+        return Markup('<br>'.join(_hrefs))
+
+
 class CompetitionModelView(SafeModelView):
     ''' admin view for competitions '''
     column_extra_row_actions = [
         EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminCompetition.activate')
     ]
 
+    form_edit_rules = (
+        'name',
+        'code',
+        'sponsor',
+        'oneliner',
+        'description',
+        'starts_on',
+        'ends_on',
+        'n_winners'
+        MultiLink(endpoint='AdminSubmission.edit_view', relation='submissions', attribute='id')
+    )
+
     @expose('/action/activate', methods=('GET',))
     def activate(self):
         competition = Competition.query.get_or_404(int(request.args.get('id')))
         competition.activate()
+        return redirect(request.referrer)
+
+    # @action('select_winners', 'Select Winners', 'Are you sure you want to mark these projects as winners?')
+    # def select_winners(self, winner_ids):
+    #     try:
+    #         competition = Competition.query.get_or_404(int(request.args.get('id')))
+    #         competition.select_winners(winner_ids)
+    #
+    #     except Exception as e:
+    #         if not self.handle_view_exception(e):
+    #             raise
+    #         flash(gettext('Failed to select projects as winners. %(error)s', error=str(ex)), 'error')
+
+
+class SubmissionModelView(SafeModelView):
+    column_extra_row_actions = [
+        EndpointLinkRowAction('fa fa-trophy', 'AdminSubmission.mark_winner')
+    ]
+
+    @expose('/action/mark_winner', methods=('GET',))
+    def activate(self):
+        submission = Submission.query.get_or_404(int(request.args.get('id')))
+        submission.mark_winner()
         return redirect(request.referrer)
