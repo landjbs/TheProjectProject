@@ -153,9 +153,9 @@
   }
 
   #messageBox .chat-popup {
-    width: 99%;
-    left: 0.5%;
-    right: 0.5%;
+    width: 99.8%;
+    left: 0.1%;
+    right: 0.1%;
   }
 
   #messageBox .messages {
