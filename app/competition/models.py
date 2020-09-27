@@ -143,14 +143,16 @@ class Submission(CRUDMixin, db.Model):
         assert competition.complete, 'Cannot select winners for incomplete competition.'
         # mark submission as loser
         self.winner = False
+        # notify project members
         project = submission.project
         if not project in self.winners:
-            project.notify_members(text=(f'The competition {self.name}'
-                'has come to an end! We had some awesome submissions—'
-                f'{project.name} included. While we were really impressed '
+            project.notify_members(text=(f'We have finished judging '
+                f'{competition.name}. While we were really impressed '
                 'with your work, we have not selected you as a winner this '
                 'time around. This if far from the end of the world—'
-                f'you can certainly keep working on {project.name}, and we '
+                f'you should certainly keep working on {project.name}, and we '
                 'may still be able to connect you with resources and '
                 'publicity on our social media accounts!')
             )
+        self.update()
+        return True
