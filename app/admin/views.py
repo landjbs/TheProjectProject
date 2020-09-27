@@ -240,6 +240,12 @@ class CompetitionModelView(SafeModelView):
         competition.activate()
         return redirect(request.referrer)
 
+    @expose('/action/complete', methods=('GET',))
+    def complete(self):
+        competition = Competition.query.get_or_404(int(request.args.get('id')))
+        competition.complete()
+        return redirect(request.referrer)
+
     # @action('select_winners', 'Select Winners', 'Are you sure you want to mark these projects as winners?')
     # def select_winners(self, winner_ids):
     #     try:
