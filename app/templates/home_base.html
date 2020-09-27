@@ -194,14 +194,12 @@
     {% block content %} {% endblock %}
 
     <!-- show render empty message box for nonmobile users -->
-    {% if not request.MOBILE %}
-      <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
-      <div id='messageBox'>
-        {% block messages %}
-          <div style='display: hidden;'></div>
-        {% endblock %}
-      </div>
-    {% endif %}
+    <link type="text/css" href="/css/chat_styles.css" rel='stylesheet'>
+    <div id='messageBox'>
+      {% block messages %}
+        <div style='display: hidden;'></div>
+      {% endblock %}
+    </div>
 
 
     <!-- TODO: implement script block here -->
@@ -337,10 +335,4 @@
     </script>
 
   </body>
-
-  <!-- modal block for all page modals  -->
-  <!-- TODO: get this actually working -->
-  <div id='modals' style='display:hidden;'>
-  </div>
-
 </html>
