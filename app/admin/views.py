@@ -222,18 +222,6 @@ class CompetitionModelView(SafeModelView):
         EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminCompetition.activate')
     ]
 
-    form_edit_rules = (
-        'name',
-        'code',
-        'sponsor',
-        'oneliner',
-        'description',
-        'starts_on',
-        'ends_on',
-        'n_winners'
-        MultiLink(endpoint='AdminSubmission.edit_view', relation='submissions', attribute='id')
-    )
-
     @expose('/action/activate', methods=('GET',))
     def activate(self):
         competition = Competition.query.get_or_404(int(request.args.get('id')))
@@ -246,17 +234,6 @@ class CompetitionModelView(SafeModelView):
         competition.complete()
         return redirect(request.referrer)
 
-    # @action('select_winners', 'Select Winners', 'Are you sure you want to mark these projects as winners?')
-    # def select_winners(self, winner_ids):
-    #     try:
-    #         competition = Competition.query.get_or_404(int(request.args.get('id')))
-    #         competition.select_winners(winner_ids)
-    #
-    #     except Exception as e:
-    #         if not self.handle_view_exception(e):
-    #             raise
-    #         flash(gettext('Failed to select projects as winners. %(error)s', error=str(ex)), 'error')
-
 
 class SubmissionModelView(SafeModelView):
     column_extra_row_actions = [
@@ -264,7 +241,13 @@ class SubmissionModelView(SafeModelView):
     ]
 
     @expose('/action/mark_winner', methods=('GET',))
-    def activate(self):
+    def mark_winner(self):
         submission = Submission.query.get_or_404(int(request.args.get('id')))
         submission.mark_winner()
+        return redirect(request.referrer)
+
+    @expose('/action/mark_loser', methods=('GET',))
+    def mark_loser(self):
+        submission = Submission.query.get_or_404(int(request.args.get('id')))
+        submission.mark_loser()
         return redirect(request.referrer)
