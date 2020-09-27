@@ -28,20 +28,20 @@ body {
   text-decoration: none !important;
 }
 
-#mainNav .searchbox:hover {
-  background: transparent !important;
-}
-
 #mainNav .searchbox:active {
   background: transparent !important;
 }
 
-#mainNav .searchable:hover {
+#mainNav .dropdown-item:hover {
   background: rgba(255, 93, 0, 0.4) !important;
 }
 
-#mainNav .searchable:active {
+#mainNav .dropdown-item:active {
   background: rgba(255, 93, 0, 0.8) !important;
+}
+
+#mainNav .searchbox:hover {
+  background: transparent !important;
 }
 
 #mainNav .dropdown-toggle::after {
@@ -67,8 +67,15 @@ body {
     background: black;
     border: 1px solid white;
   }
+
+  /* dropdown items */
   #mainNav .dropdown-item {
     color: white;
+  }
+
+  /* search bars */
+  #mainNav .select-clean {
+    border-color: white;
   }
 }
 
