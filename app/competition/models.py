@@ -85,7 +85,8 @@ class Competition(CRUDMixin, db.Model):
         assert not (datetime.utcnow() > self.ends_on), 'Invalid end date.'
         # make active
         self.active = True
-        # notify relevant users # # NOTE: potentially only recommend to certain users in future
+        # notify relevant users
+        # NOTE: potentially only recommend to certain users in future
         from app.user.models import User
         User.notify_all(
             text=(f'{self.name}, a new competition you might like, just went '
@@ -98,7 +99,8 @@ class Competition(CRUDMixin, db.Model):
 
     def start_judging(self):
         assert self.active, 'Cannot complete inactive competition.'
-        assert not self.complete, 'Cannot complete competition that is already completed'
+        assert not self.complete, 'Cannot judge competition that is already completed'
+        assert not (self.ends_on > datetime.utcnow()), 'Cannot judge competition with future end date.'
         self.active = False
         self.complete = True
         for submission in self.submissions:
