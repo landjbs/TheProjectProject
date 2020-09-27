@@ -71,3 +71,17 @@
     </script>
   </div>
 {% endmacro -%}
+
+
+{% macro render_channel_tag(channel) -%}
+  <div class='dropdown-item searchable'  onclick="open_channel('{{ channel.id }}');">
+    {{ channel.name(g.current_user, html=False) }}
+  </div>
+{% endmacro -%}
+
+
+{% macro render_channel_list(channels) -%}
+  {% for channel in channels %}
+    {{ render_channel_tag(channel) }}
+  {% endfor %}
+{% endmacro -%}

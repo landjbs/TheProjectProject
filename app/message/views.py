@@ -137,3 +137,11 @@ def update_last_read():
         'success' :     True,
         'timestamp' :   timestamp
     })
+
+
+@message.route('/get_channel_list', methods=['GET'])
+@login_required
+def get_message_list():
+    # get channels of user
+    channels = current_user.ordered_channels()
+    # render channels of user
