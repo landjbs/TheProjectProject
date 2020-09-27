@@ -24,7 +24,7 @@ from ..project import project
 def new_add(competition_id=None):
     form = Add_Project(competition=competition_id)
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
-    form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
+    form.competition.choices = Competition.recommend()
     return render_template('new_add.html', form=form)
 
 
@@ -37,8 +37,7 @@ def add_project(competition_id=None):
     # form preprocessing
     form = Add_Project(competition=competition_id)
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
-    form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()
-                                if competition.active and not competition.closed]
+    form.competition.choices = Competition.recommend()
     # form validation
     if form.validate_on_submit():
         subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
@@ -153,7 +152,7 @@ def project_page(project_code, open_tab=None):
         ## edit project form ##
         edit_form = Edit_Project()
         edit_application_form = Edit_Project_Application()
-        edit_form.competition.choices = [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in Competition.query.all()]
+        edit_form.competition.choices = Competition.recommend()
         edit_form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
         if request.method=='POST':
             if edit_form.validate_on_submit():

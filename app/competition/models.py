@@ -43,9 +43,9 @@ class Competition(CRUDMixin, db.Model):
         return cls.query.filter_by(active=True)
 
     @classmethod
-    def recommend_competitions(cls, project):
+    def recommend(cls):
         # TODO: move this to recommendation engine
-        competitions = cls.query.filter_by(active=True, closed=False)
+        competitions = cls.query.filter_by(active=True, complete=False)
         return [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in competitions]
 
     def total_length(self):
