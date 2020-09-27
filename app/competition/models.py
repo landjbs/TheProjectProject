@@ -70,7 +70,7 @@ class Competition(CRUDMixin, db.Model):
         others = self.submissions.filter(~Submission.project_id.in_(winner_ids))
         print(f'winners: {winners}')
         print(f'others: {others}')
-        return (list(winners.all() + list(others.all())))
+        return (winners.all() + others.all())
 
     ## admin ##
     def activate(self):
