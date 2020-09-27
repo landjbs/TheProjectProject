@@ -146,8 +146,8 @@ class Submission(CRUDMixin, db.Model):
         # notify project members
         project = submission.project
         if not project in self.winners:
-            project.notify_members(text=(f'We have finished judging '
-                f'{competition.name}. While we were really impressed '
+            project.notify_members(text=(f'We have finished judging submissions '
+                f'to {competition.name}. While we were really impressed '
                 'with your work, we have not selected you as a winner this '
                 'time around. This if far from the end of the world—'
                 f'you should certainly keep working on {project.name}, and we '
