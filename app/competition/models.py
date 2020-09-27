@@ -46,7 +46,14 @@ class Competition(CRUDMixin, db.Model):
         return (self.ends_on - self.starts_on).days
 
     def time_progressed(self):
-        return (datetime.utcnow() - self.starts_on).days
+        now = datetime.utcnow()
+        starts_on = self.starts_on
+        ends_on = self.ends_on
+        if starts_on > now:
+            return 0
+        elif now > ends_on:
+            return int((ends_on - starts_on).days)
+        return int((datetime.utcnow() - self.starts_on).days)
 
     def time_remaining(self):
         return (self.ends_on - datetime.utcnow()).days
