@@ -156,9 +156,9 @@
   }
 
   #messageBox .chat-popup {
-    width: 99.8%;
-    left: 0.1%;
-    right: 0.1%;
+    width: 100%;
+    left:  0;
+    right: 0;
   }
 
   #messageBox .messages {
@@ -168,8 +168,8 @@
 
   #messageBox .chat-popup .fa-times-circle {
       position: absolute;
-      top:    0px;
-      right:  0px;
+      top:    5px;
+      right:  5px;
       color: red;
   }
 }
