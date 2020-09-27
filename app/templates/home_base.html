@@ -247,9 +247,15 @@
           }
         );
       }
-
       var new_message_poller = setInterval(poll_new_messages ,1000);
       window.new_message_poller = new_message_poller;
+
+      function update_channel_counts() {
+        $.ajax('{{ url_for('message.new_messages') }}').done(
+          
+        )
+      }
+
     </script>
 
     <!-- CHAT BOX -->
