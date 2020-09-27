@@ -78,7 +78,7 @@
             {% if current_user.is_authenticated %}
               <!-- messages -->
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="update_channel_counts();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="open_message_dropdown();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   messages
                   {% set n_unseen = current_user.new_messages(return_messages=False) %}
                   {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
@@ -91,11 +91,6 @@
                     <input class='select-clean' type="text" placeholder="search.." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
                   </div>
                   <div id='channelList'>
-                    {% for channel in current_user.ordered_channels() %}
-                      <div class="dropdown-item searchable" onclick="open_channel('{{ channel.id }}');">
-                        {{ channel.name(current_user, html=False) }}
-                      </div>
-                    {% endfor %}
                   </div>
                 </div>
               </li>
@@ -252,9 +247,12 @@
       var new_message_poller = setInterval(poll_new_messages ,1000);
       window.new_message_poller = new_message_poller;
 
-      function update_channel_counts() {
-        $.ajax('{{ url_for('message.new_messages') }}').done(
-
+      var channel_list = document.getElementById('channelList');
+      function open_message_dropdown() {
+        $.ajax('{{ url_for('message.get_channel_list') }}').done(
+          function(payload) {
+            channel_list.innerHTML = payload['html'];
+          }
         )
       }
 

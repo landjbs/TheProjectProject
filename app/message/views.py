@@ -141,7 +141,7 @@ def update_last_read():
 
 @message.route('/get_channel_list', methods=['GET'])
 @login_required
-def get_message_list():
+def get_channel_list():
     # get channels of user
     channels = current_user.ordered_channels()
     # import macros for rendering channel list
