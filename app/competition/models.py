@@ -89,7 +89,7 @@ class Competition(CRUDMixin, db.Model):
         self.complete = True
         for submission in self.submissions:
             submission.project.notify_members(
-                text=(f'The competition {self.name} has come to an end and the '
+                text=(f'The competition "{self.name}" has come to an end and the '
                 'judging process has begun. We will release the results soon— '
                 'stay tuned!'
                 )
@@ -129,7 +129,7 @@ class Submission(CRUDMixin, db.Model):
         self.project.buzz += 10
         # notify project members
         self.project.notify_members(text=('Congratulations—your project '
-                f'{self.project.name} has won the competition {competition.name}! '
+                f'"{self.project.name}" has won the competition "{competition.name}"! '
                 'We were really impressed by your work and will follow up '
                 'soon with instructions for claiming your reward!'),
                 important=True)
@@ -144,15 +144,14 @@ class Submission(CRUDMixin, db.Model):
         # mark submission as loser
         self.winner = False
         # notify project members
-        project = submission.project
-        if not project in self.winners:
-            project.notify_members(text=(f'We have finished judging submissions '
-                f'to {competition.name}. While we were really impressed '
-                'with your work, we have not selected you as a winner this '
-                'time around. This if far from the end of the world—'
-                f'you should certainly keep working on {project.name}, and we '
-                'may still be able to connect you with resources and '
-                'publicity on our social media accounts!')
-            )
+        project = self.project
+        project.notify_members(text=(f'We have finished judging submissions '
+            f'for the competition "{competition.name}". While we were really impressed '
+            'with your work, we have not selected you as a winner this '
+            'time around. This if far from the end of the world—'
+            f'you should certainly keep working on {project.name}, and we '
+            'may still be able to connect you with resources and '
+            'publicity on our social media accounts!')
+        )
         self.update()
         return True
