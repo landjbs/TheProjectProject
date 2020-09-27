@@ -15,19 +15,19 @@
   display: table-cell;
 }
 
-#messageBox  .open-button:hover {
+#messageBox .open-button:hover {
   background-color: #5D00FF;
   opacity: 1;
 }
 
-#messageBox  .chat-popup .fa-times-circle {
+#messageBox .chat-popup .fa-times-circle {
     position: absolute;
     top:    -12px;
     right:  -12px;
     color: black;
 }
 
-#messageBox  .chat-popup .fa-times-circle:hover {
+#messageBox .chat-popup .fa-times-circle:hover {
   color: red;
 }
 
@@ -42,7 +42,7 @@
 }
 
 /* Add styles to the form message */
-#messageBox  .form-container {
+#messageBox .form-container {
   display: none;
   background-color: white;
   padding-bottom: 10px;
@@ -50,11 +50,11 @@
 }
 
 /* When the textarea gets focus, do something */
-#messageBox  .form-container input:focus {
+#messageBox .form-container input:focus {
 }
 
 /* Set a style for the submit/login button */
-#messageBox  .form-container .btn {
+#messageBox .form-container .btn {
   color: white;
   padding: 16px 20px;
   border: none;
@@ -65,7 +65,7 @@
 }
 
 /* Add a red background color to the cancel button */
-#messageBox  .form-container .cancel {
+#messageBox .form-container .cancel {
   background-color: #5D00FF;
   border-radius: 0px;
 }
@@ -94,44 +94,44 @@
   height: auto;
 }
 
-#messageBox  .message:hover {
+#messageBox .message:hover {
   border-color: black;
 }
 
-#messageBox  .message:active .time-right {
+#messageBox .message:active .time-right {
   display: block !important;
 }
 
 /* Darker chat message */
-#messageBox  .me {
+#messageBox .me {
   margin-left: 30px;
   background: rgba(93, 0, 255, 0.1);
 }
 
-#messageBox  .other {
+#messageBox .other {
   margin-right: 30px;
 }
 
 /* Clear floats */
-#messageBox  .message::after {
+#messageBox .message::after {
   content: "";
   clear: both;
   display: table;
 }
 
 /* Style time text */
-#messageBox  .time-right {
+#messageBox .time-right {
   float: right;
   color: #aaa;
 }
 
 /* Style time text */
-#messageBox  .time-left {
+#messageBox .time-left {
   float: left;
   color: #999;
 }
 
-#messageBox  .chat-action {
+#messageBox .chat-action {
   border-radius:50%;
   background: #FF5D00;
   border:0px;
@@ -147,9 +147,12 @@
   font-size: 20px;
 }
 
+
+/* mobile queries */
 @media (max-width: 996px) {
   #messageBox .open-button {
     width: 100%;
+    right: 0px;
   }
 
   #messageBox .chat-popup {
@@ -161,5 +164,12 @@
   #messageBox .messages {
     max-height: 100vw;
     min-height: 100vw;
+  }
+
+  #messageBox .chat-popup .fa-times-circle {
+      position: absolute;
+      top:    0px;
+      right:  0px;
+      color: red;
   }
 }
