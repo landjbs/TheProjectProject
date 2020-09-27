@@ -29,7 +29,7 @@ class Competition(CRUDMixin, db.Model):
                             cascade='all, delete, delete-orphan',
                             order_by='desc(Submission.timestamp)')
     ## administrative ##
-    active = db.Column(db.Boolean, nullable=False, default=True)
+    active = db.Column(db.Boolean, nullable=False, default=False)
     complete = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):

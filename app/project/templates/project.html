@@ -79,7 +79,9 @@
                       {{ competition.name }}
                       &nbsp;
                       <i class='fa fa-clock-o'></i>
-                      {{ competition.time_progressed() }} / {{ competition.total_length() }}
+                      {% set total_length = competition.total_length() %}
+                      {% set time_progressed = smallest(total_length, competition.time_progressed()) %}
+                      {{ time_progressed }} / {{ total_length }} days
                     </a>
                   {% endif %}
                 </p>

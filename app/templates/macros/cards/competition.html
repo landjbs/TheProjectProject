@@ -37,14 +37,22 @@
             style='{{ competition.progressbar_width() }}'></div>
       </div>
     </center>
-    {% if competition.active %}
-      <hr class="my-2">
-      <div class='action-bar'>
+    <hr class="my-2">
+    <div class='action-bar'>
+      {% if competition.active %}
         <a class="btn" href="{{ url_for('project.add_project', competition_id=competition.id) }}">
             Enter
         </a>
-      </div>
-    {% endif %}
+      {% elif competition.complete %}
+        <button type="button" class="btn" disabled>
+            Complete
+        </button>
+      {% else %}
+        <button type="button" class="btn" disabled>
+            Starts {{ competition.starts_on | ago }}
+        </button>
+      {% endif %}
+    </div>
   </div>
 </div>
 </center>
