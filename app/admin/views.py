@@ -174,7 +174,7 @@ class CompetitionModelView(SafeModelView):
     ''' admin view for competitions '''
     column_extra_row_actions = [
         EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminCompetition.activate'),
-        EndpointLinkRowAction('glyphicon glyphicon-education', 'AdminCompetition.complete')
+        EndpointLinkRowAction('glyphicon glyphicon-education', 'AdminCompetition.start_judging')
     ]
 
     @expose('/action/activate', methods=('GET',))
@@ -183,10 +183,10 @@ class CompetitionModelView(SafeModelView):
         competition.activate()
         return redirect(request.referrer)
 
-    @expose('/action/complete', methods=('GET',))
-    def complete(self):
+    @expose('/action/start_judging', methods=('GET',))
+    def start_judging(self):
         competition = Competition.query.get_or_404(int(request.args.get('id')))
-        competition.complete()
+        competition.start_judging()
         return redirect(request.referrer)
 
 

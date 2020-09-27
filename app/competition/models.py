@@ -82,7 +82,7 @@ class Competition(CRUDMixin, db.Model):
         )
         return True
 
-    def complete(self):
+    def start_judging(self):
         assert self.active, 'Cannot complete inactive competition.'
         assert not self.complete, 'Cannot complete competition that is already completed'
         self.active = False
