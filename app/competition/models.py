@@ -87,48 +87,9 @@ class Competition(CRUDMixin, db.Model):
         assert not self.complete, 'Cannot complete competition that is already completed'
         self.active = False
         self.complete = True
-        self.update()
-
-    def select_winners(self, winner_ids):
-        ''' Selects winners for competition using project id '''
-        assert self.active, 'Cannot select winners for inactive competition.'
-        assert not self.complete, 'Cannot select winners for complete competition.'
-        n_selected = len(winner_ids)
-        assert (n_selected==self.n_winners), (f'Invalid winner number '
-                                            f'{n_selected}/{self.n_winners}.')
-        winning_projects = []
-        # first loop to make sure no errors before starting actions
-        for id in winner_ids:
-            winner = self.submissions.filter_by(project_id=id).first()
-            if not winner:
-                raise ValueError(f'Project with id {id} has not submitted.')
-            winning_projects.append(winner)
-        # notify winning project members
-        for winner in winning_projects:
-            winner.winner = True
-            winner.project.buzz += 10
-            winner.project.notify_members(text=('Congratulations—your project '
-                    f'{winner.name} has won the competition {self.name}! '
-                    'We were really impressed by your work and will follow up '
-                    'soon with instructions for claiming your reward!'),
-                    important=True)
-        # notify other members
         for submission in self.submissions:
-            project = submission.project
-            if not project in self.winners:
-                project.notify_members(text=(f'The competition {self.name}'
-                    'has come to an end! We had some awesome submissions—'
-                    f'{project.name} included. While we were really impressed '
-                    'with your work, we have not selected you as a winner this '
-                    'time around. This if far from the end of the world—'
-                    f'you can certainly keep working on {project.name}, and we '
-                    'may still be able to connect you with resources and '
-                    'publicity on our social media accounts!')
-                )
-        self.active = False
-        self.complete = True
+            submission.project.notifications\
         self.update()
-        return True
 
 
 class Submission(CRUDMixin, db.Model):
@@ -169,3 +130,16 @@ class Submission(CRUDMixin, db.Model):
                 important=True)
         self.update()
         return True
+
+    def mark_loser(self):
+        project = submission.project
+        if not project in self.winners:
+            project.notify_members(text=(f'The competition {self.name}'
+                'has come to an end! We had some awesome submissions—'
+                f'{project.name} included. While we were really impressed '
+                'with your work, we have not selected you as a winner this '
+                'time around. This if far from the end of the world—'
+                f'you can certainly keep working on {project.name}, and we '
+                'may still be able to connect you with resources and '
+                'publicity on our social media accounts!')
+            )
