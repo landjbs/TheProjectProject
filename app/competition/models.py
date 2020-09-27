@@ -84,7 +84,7 @@ class Competition(CRUDMixin, db.Model):
 
     def deactivate(self):
         assert self.active, 'Cannot deactivate inactive competition.'
-
+        self.active = False
 
     def select_winners(self, winner_ids):
         ''' Selects winners for competition using project id '''
