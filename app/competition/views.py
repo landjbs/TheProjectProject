@@ -12,7 +12,7 @@ from ..competition import competition
 @login_required
 def competition_page(code):
     competition = Competition.query.filter_by(code=code).first_or_404()
-    submissions = [s.project for s in competition.submissions]
+    submissions = [s.project for s in competition.ordered_submissions()]
     return render_template('competition.html',
                         competition=competition,
                         submissions=submissions)

@@ -63,6 +63,17 @@ class Competition(CRUDMixin, db.Model):
             return None
         return self.submissions.filter_by(winner=True)
 
+    def ordered_submissions(self):
+        ''' Returns projects submitted with winners first and then chronological '''
+        winners = self.submissions.filter_by(winner=True)
+        winner_ids = [s.project.id for s in winners]
+        print(f'winner_ids: {winner_ids}')
+        others = self.submissions.filter(~Submission.project_id.in_(winners))
+        # print(f'winners: {winners}')
+        # print(f'others: {others}')
+        return []
+        # return (list(winners.all() + list(others.all()))
+
     ## admin ##
     def activate(self):
         # assertions
