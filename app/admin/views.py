@@ -52,6 +52,8 @@ class SafeBaseView(BaseView):
 
 
 class SafeModelView(ModelView):
+    edit_modal = True
+
     def __init__(self, *args, **kwargs):
         super(SafeModelView, self).__init__(*args, **kwargs)
 
@@ -168,58 +170,11 @@ class ReportModelView(SafeModelView):
         return redirect(request.referrer)
 
 
-from random import randint
-from flask import Flask, url_for
-from flask_admin.contrib import sqla
-from flask_admin import Admin
-from flask_admin.form.rules import BaseRule
-from faker import Faker
-from flask_sqlalchemy import SQLAlchemy
-from markupsafe import Markup
-from sqlalchemy import func, select
-from sqlalchemy.ext.hybrid import hybrid_property
-
-class Link(BaseRule):
-    def __init__(self, endpoint, attribute, text):
-        super(Link, self).__init__()
-        self.endpoint = endpoint
-        self.text = text
-        self.attribute = attribute
-
-    def __call__(self, form, form_opts=None, field_args=None):
-        if not field_args:
-            field_args = {}
-
-        _id = getattr(form._obj, self.attribute, None)
-
-        if _id:
-            return Markup('<a href="{url}">{text}</a>'.format(url=url_for(self.endpoint, id=_id), text=self.text))
-
-
-class MultiLink(BaseRule):
-    def __init__(self, endpoint, relation, attribute):
-        super(MultiLink, self).__init__()
-        self.endpoint = endpoint
-        self.relation = relation
-        self.attribute = attribute
-
-    def __call__(self, form, form_opts=None, field_args=None):
-        if not field_args:
-            field_args = {}
-        _hrefs = []
-        _objects = getattr(form._obj, self.relation)
-        for _obj in _objects:
-            _id = getattr(_obj, self.attribute, None)
-            _link = '<a href="{url}">Edit {text}</a>'.format(url=url_for(self.endpoint, id=_id), text=str(_obj))
-            _hrefs.append(_link)
-
-        return Markup('<br>'.join(_hrefs))
-
-
 class CompetitionModelView(SafeModelView):
     ''' admin view for competitions '''
     column_extra_row_actions = [
-        EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminCompetition.activate')
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminCompetition.activate'),
+        EndpointLinkRowAction('glyphicon glyphicon-education', 'AdminCompetition.complete')
     ]
 
     @expose('/action/activate', methods=('GET',))
@@ -236,8 +191,14 @@ class CompetitionModelView(SafeModelView):
 
 
 class SubmissionModelView(SafeModelView):
+    column_searchable_list = ['project.name', 'competition.name']
+    column_filters = ['competition', 'project.complete']
+
+    column_list = ['project.name', 'project.oneliner', 'project.owner.name', 'competition.name']
+
     column_extra_row_actions = [
-        EndpointLinkRowAction('fa fa-trophy', 'AdminSubmission.mark_winner')
+        EndpointLinkRowAction('glyphicon glyphicon-ok', 'AdminSubmission.mark_winner'),
+        EndpointLinkRowAction('glyphicon glyphicon-remove', 'AdminSubmission.mark_loser')
     ]
 
     @expose('/action/mark_winner', methods=('GET',))
