@@ -85,6 +85,7 @@ class Competition(CRUDMixin, db.Model):
     def deactivate(self):
         assert self.active, 'Cannot deactivate inactive competition.'
 
+
     def select_winners(self, winner_ids):
         ''' Selects winners for competition using project id '''
         assert self.active, 'Cannot select winners for inactive competition.'
@@ -153,3 +154,15 @@ class Submission(CRUDMixin, db.Model):
         # get number of prev winners in competition
         n_prev = competition.submissions.filter_by(winner=True).count()
         assert n_prev<=competition.n_winners, f'Cannot have more than n_winners'
+        # mark submission as winner
+        self.winner = True
+        # update project buzz
+        self.project.buzz += 10
+        # notify project members
+        self.project.notify_members(text=('Congratulations—your project '
+                f'{self.project.name} has won the competition {competition.name}! '
+                'We were really impressed by your work and will follow up '
+                'soon with instructions for claiming your reward!'),
+                important=True)
+        self.update()
+        return True
