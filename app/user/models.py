@@ -276,8 +276,10 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
         return data
 
     def ordered_channels(self):
-        ''' Returns CHANNEL (!!) obs user ordered by last active '''
-        channels = [uc.channel for uc in self.channels]
+        ''' Returns all channels of user with messages ordered by last active '''
+        channels = [
+            uc.channel for uc in self.channels if uc.channel.messages.count()>0
+        ]
         return sorted(channels, key=(lambda c : c.last_active), reverse=True)
 
     ## notifications ##

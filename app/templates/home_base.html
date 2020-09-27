@@ -80,7 +80,10 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="update_channel_counts();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   messages
-                  <span id='nMessageBadge' class='badge' style='background:#FF5D00; vertical-align:top; display:none;'>
+                  {% set n_unseen = current_user.new_messages(return_messages=False) %}
+                  {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
+                  <span id='nMessageBadge' class='badge' style='display:{{ display | safe }} ;'>
+                      {{ n_unseen }}
                   </span>
                 </a>
                 <div class="dropdown-menu" id='messagesDropdown' aria-labelledby="messageDropdownMenuLink">
@@ -101,7 +104,7 @@
                   {{ current_user.name }}
                   {% set n_unseen = current_user.n_unseen() %}
                   {% if n_unseen > 0 %}
-                    <span class="badge" style='background:#FF5D00; vertical-align:top;'>
+                    <span class="badge">
                       {{ n_unseen }}
                     </span>
                   {% endif %}
@@ -236,8 +239,10 @@
           function(payload) {
             var n = payload['n'];
             if (n>0) {
-              n_message_badge.style.display = 'block';
+              n_message_badge.style.display = 'inline-block';
               n_message_badge.innerHTML = n;
+            } else {
+              n_message_badge.style.display = 'none';
             }
           }
         );

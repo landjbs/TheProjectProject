@@ -24,6 +24,10 @@ body {
   text-decoration: underline;
 }
 
+#mainNav .badge {
+  text-decoration: none !important;
+}
+
 #mainNav .searchbox:hover {
   background: transparent !important;
 }
@@ -44,6 +48,11 @@ body {
   display: none;
 }
 
+
+.badge {
+  background:#FF5D00;
+  vertical-align: top;
+}
 
 
 .main {
