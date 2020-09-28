@@ -104,8 +104,7 @@
           // prevent default submission
           e.preventDefault();
         });
-      });
-      // Inject our CSRF token into our AJAX request.
+        // Inject our CSRF token into our AJAX request.
         $.ajaxSetup({
             beforeSend: function(xhr, settings) {
                 if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
@@ -113,6 +112,7 @@
                 }
             }
         });
+      });
     </script>
   {% endif %}
 {% endmacro -%}
