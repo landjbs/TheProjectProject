@@ -90,8 +90,8 @@
           data        :   form_data
         }).done(
           function(payload) {
-            document.getElementById('listbox' + id_postfix);
-
+            var listbox = document.getElementById('listbox' + id_postfix);
+            listbox.innerHTML += payload['html'];
           }
         )
       }
