@@ -138,6 +138,7 @@ def update_last_read():
     ## get user channel ##
     uc = channel.users.filter_by(user=current_user).first()
     timestamp = uc.update_last_read()
+    print(timestamp)
     return jsonify({
         'success' :     True,
         'timestamp' :   timestamp
