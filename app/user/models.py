@@ -277,6 +277,8 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
 
     def ordered_channels(self):
         ''' Returns all channels of user with messages ordered by last active '''
+        if (self.channels.count() == 0):
+            return []
         channels = [
             uc.channel for uc in self.channels if uc.channel.messages.count()>0
         ]

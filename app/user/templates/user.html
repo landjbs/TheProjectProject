@@ -197,11 +197,6 @@
 {% endblock %}
 
 
-{% block messages %}
-  {{ render_channel(g.current_user.channels[0].channel) }}
-{% endblock %}
-
-
 {% block scripts %}
   {{ super() }}
 
