@@ -20,7 +20,7 @@
   <p class="mb-1">{{ comment.text }}
     {% if g.current_user in [comment.author, comment.project.owner] %}
       <div class='hoverable'>
-        <a class='delete-btn task-btn float-right' href="{{ url_for('project.delete_comment', project_id=comment.project.id, comment_id=comment.id) }}">
+        <a class='delete-btn task-btn float-right' onclick="">
           <i class="fa fa-times-circle" aria-hidden="true"></i>
         </a>
         <span class='tooltiptext'>Delete Comment</span>
@@ -28,4 +28,11 @@
     {% endif %}
   </p>
 </div>
+<!-- TEMP: move somewhere else soon -->
+<script>
+  
+</script>
 {% endmacro -%}
+
+
+ <!-- href="{{ url_for('project.delete_comment', project_id=comment.project.id, comment_id=comment.id) }}" -->
