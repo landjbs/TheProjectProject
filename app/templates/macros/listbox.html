@@ -77,5 +77,43 @@
       }}
       <button>Add</button>
     </form>
+    <!-- script for adding form results to listbox -->
+    <script>
+      $(document).ready(function() {
+        alert('submitting');
+        // form for adding to listbox
+        var form = document.getElementById('form-' + '{{ id_postfix }}');
+        // when form is submitted...
+        form.submit(function (e) {
+          // submit serialized data via ajax to route from form metadata
+          $.ajax({
+            type  :   'POST',
+            url   :   Flask.url_for("{{ form.text.render_kw['action'] }}"),
+            data  :   form.serialize(),
+            success:  function(payload) {
+              console.log( payload );
+              // clear form text
+              text_form.value = '';
+              // get listbox content
+              var listbox = document.getElementById('listbox' + '{{ id_postfix }}');
+              // add html to listbox content
+              listbox.innerHTML += payload['html'];
+              // scroll to bottom of listbox
+              listbox.scrollTo(0, listbox.scrollHeight);
+            }
+          });
+          // prevent default submission
+          e.preventDefault();
+        });
+      });
+      // Inject our CSRF token into our AJAX request.
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+                }
+            }
+        });
+    </script>
   {% endif %}
 {% endmacro -%}
