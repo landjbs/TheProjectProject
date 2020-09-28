@@ -48,7 +48,7 @@ class Channel(CRUDMixin, db.Model):
     @classmethod
     def get_by_users(cls, users):
         ''' Gets chat comprised of exactly of all users. none if none '''
-        # TODO: implement sql query to speed way up. pretty important
+        # # OPTIMIZE: implement sql query to speed way up. pretty important
         # get all channels shared across all users
         shared = set()
         for i, user in enumerate(users):
