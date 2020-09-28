@@ -315,15 +315,13 @@ def add_task(project_id):
     ''' Add task to project '''
     project = Project.query.get_or_404(project_id)
     form = Task_Form()
+    success = False
     if form.validate_on_submit():
         if not project.add_task(text=form.text.data, author=current_user):
-            flash('Could not add task.', 'error')
         else:
-            flash('Task added!', 'success')
             current_user.action_xp('add_task')
-        
-    else:
-        success = False
+            success = True
+            
     return redirect(request.referrer)
 
 
