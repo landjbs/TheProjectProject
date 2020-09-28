@@ -16,9 +16,10 @@
 {% endblock %}
 
 {% block content %}
-  <div class='container my-1 main'>
-    <h4>Messages</h4>
-    <input class='select-clean' type="text" placeholder="Search messages..." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
+  <div class='container my-1 main' style='padding:0px; margin:0px;'>
+    <div style='padding-top: 15px; padding-bottom: 15px; margin-left:5px; margin-right:15px;'>
+      <input class='select-clean' type="text" placeholder="Search messages..." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
+    </div>
     {{
       render_listbox(
         id_postfix='messages',

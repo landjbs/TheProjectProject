@@ -91,7 +91,7 @@
 
 
 {% macro render_channel_card(channel) -%}
-  <div style='border: 1px solid grey; padding:10px; border-radius:10px;' onclick="open_channel('{{ channel.id }}');">
+  <div style='border: 1px solid grey; border-left: 0px; border-right: 0px; padding:10px;' onclick="open_channel('{{ channel.id }}');">
     <div class='channel_meta'>
       <div class='float-left'>
         {{ channel.name(g.current_user, html=False) }}
