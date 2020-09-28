@@ -80,7 +80,7 @@
     <!-- script for adding form results to listbox -->
     <script>
       function add_to_listbox(id_postfix) {
-        var text = document.getElementById('form-{{ id_postfix }}');
+        var text = document.getElementById('form' + id_postfix);
         var form_data = JSON.stringify({'text' : text});
         $.ajax({
           url         :   Flask.url_for("{{ form.text.render_kw['action'] }}");
@@ -90,7 +90,8 @@
           data        :   form_data
         }).done(
           function(payload) {
-            document.getElementById('listbox-{{ id_postfix }}');
+            document.getElementById('listbox' + id_postfix);
+
           }
         )
       }
