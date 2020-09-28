@@ -342,14 +342,15 @@ def add_task(project_id):
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
-    comment = project.add_comment()
     success, html = False, ''
-    if comment:
-        render_comment = get_template_attribute(
-                            'macros/cards/comment.html', 'render_comment'
-                        )
-        success = True
-        project.add_comment(text=text, author=current_user):
+    text = str(request.json.get('text'))
+    if text is not None:
+        comment = project.add_comment()
+        if comment:
+            render_comment = get_template_attribute(
+                                'macros/cards/comment.html', 'render_comment'
+                            )
+            success = True
     return jsonify({
         'success'   :   success,
         'html'      :   html
