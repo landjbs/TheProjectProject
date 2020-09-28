@@ -91,10 +91,12 @@
 
 
 {% macro render_channel_card(channel) -%}
-  <div style='border: 1px solid grey; border-left: 0px; border-right: 0px; padding:10px;' onclick="open_channel('{{ channel.id }}');">
+  <div class='channel_card' onclick="open_channel('{{ channel.id }}');">
     <div class='channel_meta'>
       <div class='float-left'>
-        {{ channel.name(g.current_user, html=False) }}
+        <span class='chatname'>
+          {{ channel.name(g.current_user, html=False) }}
+        </span>
         {% set n_unseen = channel.unseen(g.current_user, return_messages=False) %}
         {% if n_unseen > 0 %}
           <span class='badge'>
@@ -102,12 +104,12 @@
           </span>
         {% endif %}
       </div>
-      <div class='float-right' style='color:grey;'>
+      <div class='float-right last_active'>
         {{ channel.last_active | ago }}
       </div>
     </div>
     <br>
-    <p style='color: grey;'>
+    <p class='last_message'>
       {{ channel.messages[-1].text }}
     </p>
   </div>
