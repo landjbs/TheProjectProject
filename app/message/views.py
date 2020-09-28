@@ -43,6 +43,7 @@ def check_messages():
     channel = Channel.get_and_validate(channel_id, current_user)
     ## get since ##
     since = request.args.get('since', 0, type=float)
+    print(since)
     # check if valid since
     if (since==0):
         since = channel.most_recent()
@@ -62,13 +63,12 @@ def check_messages():
                 Message.timestamp > since,
                 Message.sender_id != user_id
             ).order_by(Message.timestamp.asc())
-    print(f'{current_user.name}: {new_messages.all()}')
     render_message = get_template_attribute(
                         'macros/chat.html', 'render_message'
                     )
     data = channel.data()
     # update last read in user channel
-    channel.users.query.filter_by(user=current_user).first().last_read = datetime.datetime.utcnow()
+    channel.users.filter_by(user=current_user).first().last_read = datetime.datetime.utcnow()
     return jsonify({
             'new_messages': [
                                 render_message(m, data, sent_by_me=False)

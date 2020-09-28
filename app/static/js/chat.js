@@ -58,8 +58,11 @@ function openForm(channel_id) {
   // update last read for channel
   update_last_read(channel_id);
   // start polling
+  var since = 0;
   var poller = setInterval(
-      function() { poll_channel(channel_id, 0); },
+      function() {
+        since = poll_channel(channel_id);
+      },
       1000
   );
   window.poller = poller;
@@ -84,26 +87,6 @@ function clearChat() {
   }
 }
 
-
-// POLLING
-// poll channel of channel_id for new messages. since is start time
-function poll_channel(channel_id, since) {
-  const data = {
-    'since'   :   String(since),
-    'channel' :   String(channel_id)
-  };
-  const searchParams = new URLSearchParams(data);
-  $.ajax(Flask.url_for('message.check_messages') + '?' + searchParams).done(
-      function(message_data) {
-          since = message_data['since'];
-          var new_messages = message_data['new_messages'];
-          for (var i = 0; i < new_messages.length; i++) {
-              messages.innerHTML += new_messages[i];
-              messages.scrollTo(0, messages.scrollHeight);
-      }
-    }
-  );
-}
 
 // poll big message badge
 var n_message_badge = document.getElementById('nMessageBadge');
