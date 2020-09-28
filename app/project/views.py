@@ -321,6 +321,9 @@ def add_task(project_id):
         else:
             flash('Task added!', 'success')
             current_user.action_xp('add_task')
+        
+    else:
+        success = False
     return redirect(request.referrer)
 
 
