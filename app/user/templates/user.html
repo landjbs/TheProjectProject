@@ -311,7 +311,11 @@
 
   <script>
     window.onload = function() {
-      Glider(document.querySelector('.glider')).refresh();
+      gliders = document.getElementsByClassName('glider');
+      console.log( gliders );
+      for (i=0; i<gliders.length; i++) {
+        Glider(gliders[i]).refresh();
+      }
     }
   </script>
 
