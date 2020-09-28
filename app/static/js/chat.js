@@ -41,9 +41,9 @@ function open_channel(channel_id) {
 
 // update channel last_read for current_user to now
 function update_last_read(channel_id) {
-  const data = {'channel_id' :   String(channel_id)}
+  const data = {'channel_id' :   String(channel_id)};
   const searchParams = new URLSearchParams(data);
-  $.ajax('{{ url_for('message.update_last_read') }}?' + searchParams);
+  $.ajax(Flask.url_for('message.update_last_read') + '?' + searchParams);
 }
 
 
@@ -54,7 +54,7 @@ function poll_channel(channel_id, since) {
     'channel' :   String(channel_id)
   };
   const searchParams = new URLSearchParams(data);
-  $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
+  $.ajax(Flask.url_for('message.check_messages') + '?' + searchParams).done(
       function(message_data) {
           since = message_data['since'];
           new_messages = message_data['new_messages'];
@@ -67,6 +67,8 @@ function poll_channel(channel_id, since) {
 }
 
 
+// open form for message
+// // TODO: fix terrible name and ids. maybe make channel specific so multiple can render
 function openForm(channel_id) {
   var messages = document.getElementById('messages');
   document.getElementById("myForm").style.display = "block";
@@ -83,12 +85,18 @@ function openForm(channel_id) {
   window.poller = poller;
 }
 
+
+// closes message form
+// // TODO: fix terrible name and ids. maybe make channel specific so multiple can render
 function closeForm() {
   document.getElementById("myForm").style.display = "none";
   document.getElementById('openBtn').style.display = 'block';
+  // clear channel poller running in window
   clearInterval(window.poller);
 }
 
+
+// 
 function clearChat() {
   document.getElementById('messageBox').innerHTML = '';
   if (window.poller) {

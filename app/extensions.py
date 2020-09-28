@@ -11,6 +11,7 @@ from flask_rq2 import RQ
 from flask_travis import Travis
 from flask_mobility import Mobility
 from itsdangerous import URLSafeTimedSerializer
+from flask_jsglue import JSGlue
 # from werkzeug.contrib.cache import SimpleCache
 
 
@@ -38,3 +39,4 @@ mobility = Mobility()
 rq = RQ()
 travis = Travis()
 serializer = FlaskSerializer()
+jsglue = JSGlue()

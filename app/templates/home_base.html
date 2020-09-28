@@ -41,7 +41,10 @@
       <!-- favicon -->
       <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
       <link rel="icon" href="/img/logo.ico" type="image/x-icon">
+      <!-- cookie for analytics -->
       {{ cookie() }}
+      <!-- js glue for building endpoints -->
+      {{ JSGlue.include() }}
     {% endblock %}
   </head>
 

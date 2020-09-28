@@ -145,6 +145,7 @@ def register_extensions(app):
     extensions.mobility.init_app(app)
     extensions.limiter.init_app(app)
     extensions.serializer.init_app(app)
+    extensions.jsglue.init_app(app)
     ######### LOGIN MANAGER #########
     extensions.lm.init_app(app)
     extensions.lm.login_view = 'auth.login'
