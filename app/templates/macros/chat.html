@@ -81,11 +81,13 @@
   <div class='dropdown-item searchable' onclick="open_channel('{{ channel.id }}');">
     {{ channel.name(g.current_user, html=False) }}
     {% set n_unseen = channel.unseen(g.current_user, return_messages=False) %}
-    {% if n_unseen > 0 %}
-      <span id='badge-{{ channel_id }}' class='badge'>
+    {% set show = (n_unseen > 0) %}
+    <span id='badge-{{ channel.id }}' class='badge'
+    {% if not show %}style='display: none;'{% endif %}>
+      {% if show %}
         {{ n_unseen }}
-      </span>
-    {% endif %}
+      {% endif %}
+    </span>
   </div>
 {% endmacro -%}
 
@@ -98,8 +100,10 @@
           {{ channel.name(g.current_user, html=False) }}
         </span>
         {% set n_unseen = channel.unseen(g.current_user, return_messages=False) %}
-        <span class='badge' id='badge-{{ channel_id }}'>
-          {% if n_unseen > 0 %}
+        {% set show = (n_unseen > 0) %}
+        <span class='badge' id='badge-{{ channel.id }}'
+        {% if not show %}style='display: none;'{% endif %}>
+          {% if show %}
             {{ n_unseen }}
           {% endif %}
         </span>
