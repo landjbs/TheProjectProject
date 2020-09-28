@@ -77,5 +77,20 @@
       }}
       <button>Add</button>
     </form>
+    <!-- script for adding form results to listbox -->
+    <script>
+      function add_to_listbox(id_postfix) {
+        var text = document.getElementById('form-{{ id_postfix }}');
+        var form_data = JSON.stringify({'text' : text});
+        $.ajax({
+          url         :   Flask.url_for("{{ form.text.render_kw['action'] }}");
+          type        :   'POST',
+          dataType    :   'json',
+          contentType :   'application/json',
+          data        :   form_data,
+          success: funciton()
+        })
+      }
+    </script>
   {% endif %}
 {% endmacro -%}
