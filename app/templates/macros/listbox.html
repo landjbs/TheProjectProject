@@ -69,9 +69,10 @@
   {% if form %}
     <form class='post_form' id='form-{{ id_postfix }}'>
       {{ form.hidden_tag() }}
+      {% set input_id = 'input-{id_postfix}'.format(id_postfix=id_postfix) %}
       {{
         form.text(
-          class='post-input', placeholder=form.text.render_kw['placeholder'],
+          id=input_id, class='post-input', placeholder=form.text.render_kw['placeholder'],
           max=form.text.render_kw['max'], autocomplete='off'
         )
       }}
@@ -82,14 +83,17 @@
       document.getElementById('form-' + '{{ id_postfix }}').addEventListener('submit', function (e) {
         // submit serialized data via ajax to route from form metadata
         // document.getElementById('form-' + '{{ id_postfix }}').serialize()
-        document.getElementById('form-' + '{{ id_postfix }}').value);
+        form_text = document.getElementById('input-' + '{{ id_postfix }}');
+        data = JSON.stringify({'text' : form_text.value})
         $.ajax({
           type  :   'POST',
           url   :   "{{ form.text.render_kw['action'] }}",
-          data  :   $('form-' + '{{ id_postfix }}').serialize(),
+          dataType: 'json',
+          contentType: 'application/json',
+          data  :   data,
           success:  function(payload) {
             // clear form text
-            $('form-' + '{{ id_postfix }}').value = '';
+            form_text.value = '';
             // get listbox content
             var listbox = document.getElementById('listbox-' + '{{ id_postfix }}');
             // add html to listbox content
