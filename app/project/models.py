@@ -170,6 +170,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
 
     def update_last_active(self):
         self.last_active = datetime.utcnow()
+        self.update()
 
     ## members ##
     def is_owner(self, user):
@@ -396,16 +397,19 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         ''' Adds task to project from author, checks permissions '''
         if not self.is_member(author):
             return False
+        # build task object
         task = Task(text=text, author=author)
-        self.tasks.append(taks)
+        # add task to project tasks
+        self.tasks.append(task)
+        # update project last active (which autocommits task changes)
         self.update_last_active()
-        self.update()
+        # notify members if prompted
         if notify:
             self.notify_members(
                 text=f'{author.name} added the task "{text}" to {self.name}.'
             )
+        # return task object for json rendering
         return task
-        return True
 
     def change_task_status(self, task_id, user, action):
         ''' Changes status of task in project '''
