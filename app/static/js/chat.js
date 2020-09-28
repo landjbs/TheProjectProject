@@ -120,8 +120,6 @@ function poll_new_messages() {
     }
   );
 }
-var new_message_poller = setInterval(poll_new_messages ,1000);
-window.new_message_poller = new_message_poller;
 
 
 // render html for messages in message dropdown

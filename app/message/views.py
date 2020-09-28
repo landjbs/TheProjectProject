@@ -62,6 +62,7 @@ def check_messages():
                 Message.timestamp > since,
                 Message.sender_id != user_id
             ).order_by(Message.timestamp.asc())
+    print(f'{current_user.name}: {new_messages.all()}')
     render_message = get_template_attribute(
                         'macros/chat.html', 'render_message'
                     )

@@ -212,6 +212,7 @@
 
     {% block content %} {% endblock %}
 
+    <!-- block for fully-realized channels -->
     <div id='messageBox'>
       {% block messages %}
         <div style='display: hidden;'></div>
@@ -226,6 +227,11 @@
 
     <script src="js/chat.js"></script>
 
+    <script>
+      // start polling for new messages
+      var new_message_poller = setInterval(poll_new_messages, 1000);
+      window.new_message_poller = new_message_poller;
+    </script>
 
     <!-- WARNING: only some scripts should be run if user is Anonymous -->
     <!-- NAVBAR SEARCH -->
