@@ -95,7 +95,7 @@ function poll_channel(channel_id, since) {
   const searchParams = new URLSearchParams(data);
   $.ajax(Flask.url_for('message.check_messages') + '?' + searchParams).done(
       function(message_data) {
-          var since = message_data['since'];
+          since = message_data['since'];
           var new_messages = message_data['new_messages'];
           for (var i = 0; i < new_messages.length; i++) {
               messages.innerHTML += new_messages[i];
