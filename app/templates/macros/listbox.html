@@ -90,8 +90,13 @@
           data        :   form_data
         }).done(
           function(payload) {
+            // clear form text
+            // get listbox content
             var listbox = document.getElementById('listbox' + id_postfix);
+            // add html to listbox content
             listbox.innerHTML += payload['html'];
+            // scroll to bottom of listbox
+            listbox.scrollTo(0, listbox.scrollHeight);
           }
         )
       }

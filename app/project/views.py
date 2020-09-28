@@ -318,7 +318,7 @@ def add_task(project_id):
     form = Task_Form()
     success, html = False, ''
     if form.validate_on_submit():
-        task = project.add_task(text=form.text.data, author=current_user):
+        task = project.add_task(text=form.text.data, author=current_user)
         if task:
             current_user.action_xp('add_task')
             success = True
