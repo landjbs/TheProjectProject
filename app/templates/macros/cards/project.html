@@ -120,7 +120,7 @@
         <p style="padding-bottom:0px; margin-bottom:0px;">
           <i class="fa fa-clock-o"></i>
           {% if project.estimated_time %}
-            {{ project.elasped }} / {{ project.estimated_time }}
+            {{ project.elasped() }} / {{ project.estimated_time_safe() }}
             days
           {% else %}
             NA
@@ -426,7 +426,7 @@
                   {{ project.elasped() }} /
                   <input type='number' step=1 min='{{ project.elasped() }}'
                       max='{{ project.elasped() + edit_form.estimated_time.render_kw["max"] }}'
-                      value="{{ project.estimated_time }}"
+                      value="{{ project.estimated_time_safe() }}"
                       name='{{ edit_form.estimated_time.name }}'></input>
                 </span>
               </div>
