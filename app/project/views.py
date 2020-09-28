@@ -346,7 +346,6 @@ def add_comment(project_id):
     text = str(request.json.get('text'))
     if text is not None:
         comment = project.add_comment(text=text, author=current_user)
-        print(commment)
         if comment:
             success = True
             render_comment = get_template_attribute(
