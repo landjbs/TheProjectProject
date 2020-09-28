@@ -20,7 +20,7 @@
   <p class="mb-1">{{ comment.text }}
     {% if g.current_user in [comment.author, comment.project.owner] %}
       <div class='hoverable'>
-        <a class='delete-btn task-btn float-right' onclick="delete_self()">
+        <a class='delete-btn task-btn float-right' onclick="delete_self({{project.id}}, {{ comment_id }})">
           <i class="fa fa-times-circle" aria-hidden="true"></i>
         </a>
         <span class='tooltiptext'>Delete Comment</span>
@@ -31,12 +31,7 @@
 <!-- TEMP: move somewhere else soon -->
 <script>
   function delete_self(project_id, comment_id) {
-    const data = {
-      'project_id'  : String(project_id),
-      'comment_id'  : String(comment_id)
-    }
-    const searchParams = new URLSearchParams(data);
-    $.ajax(Flask.url_for('project.delete') + '/' + String(project_id) + '/' + String(comment_id)).done(
+    $.ajax(Flask.url_for('project.delete_comment') + '/' + String(project_id) + '/' + String(comment_id)).done(
       function () {
         $('#comment-{{ comment.id }}').style.display = 'none';
       }

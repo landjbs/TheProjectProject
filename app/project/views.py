@@ -363,9 +363,9 @@ def add_comment(project_id):
 def delete_comment(project_id, comment_id):
     ''' Delete comment from project '''
     project = Project.query.get_or_404(project_id)
-    if not project.delete_comment(comment_id=comment_id, user=current_user):
-        flash('Cannot delete comment.')
-    return redirect(request.referrer)
+    return jsonify({
+        'success': project.delete_comment(comment_id=comment_id, user=current_user)
+    })
 
 
 @project.route('/mark_complete/<int:project_id>/<int:task_id>/<action>')
