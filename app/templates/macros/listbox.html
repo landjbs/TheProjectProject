@@ -6,6 +6,8 @@
 {% from 'macros/cards/comment.html' import render_comment with context %}
 {% from 'macros/cards/notification.html' import render_notification with context %}
 
+{% from 'macros/chat.html' import render_channel_tag %}
+
 {% from 'macros/icon.html' import icon_types %}
 
 
@@ -15,7 +17,8 @@
     ('complete-task',         render_complete_task),
     ('complete-task-sparse',  render_complete_task_sparse),
     ('comment',               render_comment),
-    ('notification',          render_notification)
+    ('notification',          render_notification),
+    ('channel',               render_channel)
   ])
 %}
 
