@@ -79,11 +79,11 @@
     </form>
     <!-- script for adding form results to listbox -->
     <script>
-      function add_to_listbox(id_postfix) {
+      function add_to_listbox(id_postfix, action) {
         var text = document.getElementById('form' + id_postfix);
         var form_data = JSON.stringify({'text' : text});
         $.ajax({
-          url         :   Flask.url_for("{{ form.text.render_kw['action'] }}");
+          url         :   Flask.url_for(action);
           type        :   'POST',
           dataType    :   'json',
           contentType :   'application/json',
