@@ -67,7 +67,7 @@
     {% endif %}
   </div>
   {% if form %}
-    <form class='post_form' id='form-{{ id_postfix }}' method='post'>
+    <form class='post_form' id='form-{{ id_postfix }}'>
       {{ form.hidden_tag() }}
       {{
         form.text(
