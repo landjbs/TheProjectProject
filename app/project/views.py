@@ -313,9 +313,9 @@ def like_action(project_id):
 @limiter.limit('10 per minute')
 def add_task(project_id):
     ''' Add task to project '''
-    # NOTE: CURRENTLY ASSUMES TASK IS A TODO TASK. IF WANT TO ADD COMPLETED, NEEDS CHANGE
+    # NOTE: CURRENTLY ASSUMES TASK IS A TO-DO TASK. IF WANT TO ADD COMPLETED, NEEDS CHANGE
     project = Project.query.get_or_404(project_id)
-    form = Task_Form()
+    text = str(request.json.get('text'))
     success, html = False, ''
     if form.validate_on_submit():
         task = project.add_task(text=form.text.data, author=current_user)
