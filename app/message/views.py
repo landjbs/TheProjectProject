@@ -16,7 +16,7 @@ from sqlalchemy import func
 @login_required
 def messages():
     ''' Currently mobile–only route for viewing messages '''
-    messages = [uc.channel for uc in current_user.channels]
+    messages = current_user.ordered_channels()
     return render_template('messages.html', messages=messages)
 
 
