@@ -47,26 +47,6 @@ function update_last_read(channel_id) {
 }
 
 
-// poll channel of channel_id for new messages. since is start time
-function poll_channel(channel_id, since) {
-  const data = {
-    'since'   :   String(since),
-    'channel' :   String(channel_id)
-  };
-  const searchParams = new URLSearchParams(data);
-  $.ajax(Flask.url_for('message.check_messages') + '?' + searchParams).done(
-      function(message_data) {
-          since = message_data['since'];
-          new_messages = message_data['new_messages'];
-          for (var i = 0; i < new_messages.length; i++) {
-              messages.innerHTML += new_messages[i];
-              messages.scrollTo(0, messages.scrollHeight);
-      }
-    }
-  );
-}
-
-
 // open form for message
 // // TODO: fix terrible name and ids. maybe make channel specific so multiple can render
 function openForm(channel_id) {
@@ -96,10 +76,60 @@ function closeForm() {
 }
 
 
-// 
+// completely clears messageBox and stops poller if running
 function clearChat() {
   document.getElementById('messageBox').innerHTML = '';
   if (window.poller) {
     clearInterval(window.poller);
   }
+}
+
+
+// POLLING
+// poll channel of channel_id for new messages. since is start time
+function poll_channel(channel_id, since) {
+  const data = {
+    'since'   :   String(since),
+    'channel' :   String(channel_id)
+  };
+  const searchParams = new URLSearchParams(data);
+  $.ajax(Flask.url_for('message.check_messages') + '?' + searchParams).done(
+      function(message_data) {
+          since = message_data['since'];
+          new_messages = message_data['new_messages'];
+          for (var i = 0; i < new_messages.length; i++) {
+              messages.innerHTML += new_messages[i];
+              messages.scrollTo(0, messages.scrollHeight);
+      }
+    }
+  );
+}
+
+// poll big message badge
+var n_message_badge = document.getElementById('nMessageBadge');
+function poll_new_messages() {
+  $.ajax(Flask.url_for('message.new_messages')).done(
+    function(payload) {
+      var n = payload['n'];
+      if (n>0) {
+        n_message_badge.style.display = 'inline-block';
+        n_message_badge.innerHTML = n;
+      } else {
+        n_message_badge.style.display = 'none';
+      }
+    }
+  );
+}
+var new_message_poller = setInterval(poll_new_messages ,1000);
+window.new_message_poller = new_message_poller;
+
+
+// render html for messages in message dropdown
+var channel_list = document.getElementById('channelList');
+function open_message_dropdown() {
+  $.ajax('{{ url_for('message.get_channel_list') }}').done(
+    function(payload) {
+      channel_list.innerHTML = payload['html'];
+    }
+  )
 }
