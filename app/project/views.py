@@ -319,6 +319,7 @@ def add_task(project_id):
     # form = Task_Form()
     success, html = False, ''
     # if form.validate_on_submit():
+    # TODO: validate current user is member
     text = str(request.json.get('text'))
     if text is not None:
         task = project.add_task(text=text, author=current_user)
@@ -341,11 +342,18 @@ def add_task(project_id):
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
-    # form = Comment_Form(request.form)
-    # if form.validate_on_submit():
-        if not project.add_comment(text=form.text.data, author=current_user):
-            flash('Could not add comment.', 'error')
-    return redirect(request.referrer)
+    comment = project.add_comment()
+    success, html = False, ''
+    if comment:
+        render_comment = get_template_attribute(
+                            'macros/cards/comment.html', 'render_comment'
+                        )
+        success = True
+        project.add_comment(text=text, author=current_user):
+    return jsonify({
+        'success'   :   success,
+        'html'      :   html
+    })
 
 
 @project.route('/project/<int:project_id>/<int:comment_id>')
