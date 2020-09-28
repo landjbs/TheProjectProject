@@ -95,8 +95,8 @@ function poll_channel(channel_id, since) {
   const searchParams = new URLSearchParams(data);
   $.ajax(Flask.url_for('message.check_messages') + '?' + searchParams).done(
       function(message_data) {
-          since = message_data['since'];
-          new_messages = message_data['new_messages'];
+          var since = message_data['since'];
+          var new_messages = message_data['new_messages'];
           for (var i = 0; i < new_messages.length; i++) {
               messages.innerHTML += new_messages[i];
               messages.scrollTo(0, messages.scrollHeight);
@@ -127,9 +127,9 @@ window.new_message_poller = new_message_poller;
 // render html for messages in message dropdown
 var channel_list = document.getElementById('channelList');
 function open_message_dropdown() {
-  $.ajax('{{ url_for('message.get_channel_list') }}').done(
+  $.ajax(Flask.url_for('message.get_channel_list')).done(
     function(payload) {
       channel_list.innerHTML = payload['html'];
     }
-  )
+  );
 }
