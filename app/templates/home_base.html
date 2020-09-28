@@ -105,7 +105,7 @@
                 {% else %}
                   <!-- mobile redirects to other page -->
                   <li class="nav-item">
-                    <a class="nav-link" href="/messages" id="messagesBtn" >
+                    <a class="nav-link" href="{{ url_for('message.messages') }}" id="messagesBtn" >
                       messages
                       {% set n_unseen = current_user.new_messages(return_messages=False) %}
                       {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}

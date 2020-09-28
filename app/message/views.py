@@ -12,8 +12,14 @@ from ..message import message
 from sqlalchemy import func
 
 
+@message.route('/messages', methods=['GET'])
+@login_required
+def messages():
+    ''' Currently mobile–only route for viewing messages '''
+    messages = current_user.messages.all()
+    return render_template('messages.html', messages=messages)
 
-# view
+
 @message.route('/get_channel', methods=['POST'])
 @login_required
 def get_channel():
