@@ -608,7 +608,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         # get elasped time of project
         elasped = self.elasped()
         # return larger of the two
-        return max(estimated, elasped)
+        return int(max(estimated, elasped))
 
 
     def subject_data(self, n=10):
