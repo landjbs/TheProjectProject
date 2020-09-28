@@ -323,10 +323,13 @@ def add_task(project_id):
             current_user.action_xp('add_task')
             success = True
             render_task = get_template_attribute(
-                                '', ''
+                                'macros/cards/task.html', 'render_todo_task'
                             )
-            html =
-    return redirect(request.referrer)
+            html = render_task(task)
+    return jsonify({
+        'success'   :   success,
+        'html'      :   html
+    })
 
 
 @project.route('/project/<int:project_id>/comment', methods=['POST'])
