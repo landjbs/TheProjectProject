@@ -67,7 +67,7 @@
     {% endif %}
   </div>
   {% if form %}
-    <form class='post_form form-{{ id_postfix }}' method='post' action="{{ form.text.render_kw['action'] }}">
+    <form class='post_form' id='form-{{ id_postfix }}' method='post'>
       {{ form.hidden_tag() }}
       {{
         form.text(
@@ -80,7 +80,7 @@
     <!-- script for adding form results to listbox -->
     <script>
       // form for adding to listbox
-      var form = document.getElementById('form' + id_postfix);
+      var form = document.getElementById('form-' + id_postfix);
       // when form is submitted...
       form.submit(function (e) {
         // submit serialized data via ajax to route from form metadata
