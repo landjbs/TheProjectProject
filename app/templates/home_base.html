@@ -85,39 +85,37 @@
             {% endif %}
             {% if current_user.is_authenticated %}
               <!-- messages -->
-              {% if not is_add %}
-                <!-- desktop has message dropdown -->
-                {% if not request.MOBILE %}
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="open_message_dropdown();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      messages
-                      {% set n_unseen = current_user.new_messages(return_messages=False) %}
-                      {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
-                      <span id='nMessageBadge' class='badge' style='display: {{ display | safe }} ;'>
-                          {{ n_unseen }}
-                      </span>
-                    </a>
-                    <div class="dropdown-menu" id='messagesDropdown' aria-labelledby="messageDropdownMenuLink">
-                      <div class='dropdown-item searchbox'>
-                        <input class='select-clean' type="text" placeholder="search..." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
-                      </div>
-                      <div id='channelList'>
-                      </div>
+              <!-- desktop has message dropdown -->
+              {% if not request.MOBILE and not is_add %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="open_message_dropdown();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    messages
+                    {% set n_unseen = current_user.new_messages(return_messages=False) %}
+                    {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
+                    <span id='nMessageBadge' class='badge' style='display: {{ display | safe }} ;'>
+                        {{ n_unseen }}
+                    </span>
+                  </a>
+                  <div class="dropdown-menu" id='messagesDropdown' aria-labelledby="messageDropdownMenuLink">
+                    <div class='dropdown-item searchbox'>
+                      <input class='select-clean' type="text" placeholder="search..." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
                     </div>
-                  </li>
-                {% else %}
-                  <!-- mobile redirects to other page -->
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('message.messages') }}" id="messagesBtn" >
-                      messages
-                      {% set n_unseen = current_user.new_messages(return_messages=False) %}
-                      {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
-                      <span id='nMessageBadge' class='badge' style='display: {{ display | safe }} ;'>
-                          {{ n_unseen }}
-                      </span>
-                    </a>
-                  </li>
-                {% endif %}
+                    <div id='channelList'>
+                    </div>
+                  </div>
+                </li>
+              {% else %}
+                <!-- mobile redirects to other page -->
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ url_for('message.messages') }}" id="messagesBtn" >
+                    messages
+                    {% set n_unseen = current_user.new_messages(return_messages=False) %}
+                    {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
+                    <span id='nMessageBadge' class='badge' style='display: {{ display | safe }} ;'>
+                        {{ n_unseen }}
+                    </span>
+                  </a>
+                </li>
               {% endif %}
 
               <!-- user/settings page -->
