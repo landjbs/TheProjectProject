@@ -313,15 +313,19 @@ def like_action(project_id):
 @limiter.limit('10 per minute')
 def add_task(project_id):
     ''' Add task to project '''
+    # NOTE: CURRENTLY ASSUMES TASK IS A TODO TASK. IF WANT TO ADD COMPLETED, NEEDS CHANGE
     project = Project.query.get_or_404(project_id)
     form = Task_Form()
-    success = False
+    success, html = False, ''
     if form.validate_on_submit():
-        if not project.add_task(text=form.text.data, author=current_user):
-        else:
+        task = project.add_task(text=form.text.data, author=current_user):
+        if task:
             current_user.action_xp('add_task')
             success = True
-            
+            render_task = get_template_attribute(
+                                '', ''
+                            )
+            html =
     return redirect(request.referrer)
 
 
