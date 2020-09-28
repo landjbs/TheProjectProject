@@ -313,12 +313,13 @@ def like_action(project_id):
 @limiter.limit('10 per minute')
 def add_task(project_id):
     ''' Add task to project '''
-    print("HERE")
     # NOTE: CURRENTLY ASSUMES TASK IS A TO-DO TASK. IF WANT TO ADD COMPLETED, NEEDS CHANGE
     project = Project.query.get_or_404(project_id)
     form = Task_Form()
+    print(f'data: {form.data}')
     success, html = False, ''
     if form.validate_on_submit():
+        print('HERE')
         task = project.add_task(text=form.text.data, author=current_user)
         if task:
             current_user.action_xp('add_task')
@@ -327,6 +328,8 @@ def add_task(project_id):
                                 'macros/cards/task.html', 'render_todo_task'
                             )
             html = render_task(task)
+    else:
+        print('tgher')
     return jsonify({
         'success'   :   success,
         'html'      :   html

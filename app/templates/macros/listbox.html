@@ -79,19 +79,18 @@
     </form>
     <!-- script for adding form results to listbox -->
     <script>
-      var form = document.getElementById('form-' + '{{ id_postfix }}');
-      form.addEventListener('submit', function (e) {
-        alert(form.serialize());
+      document.getElementById('form-' + '{{ id_postfix }}').addEventListener('submit', function (e) {
         // submit serialized data via ajax to route from form metadata
+        // document.getElementById('form-' + '{{ id_postfix }}').serialize()
         $.ajax({
           type  :   'POST',
-          url   :   Flask.url_for("{{ form.text.render_kw['action'] }}"),
-          data  :   form.serialize(),
+          url   :   "{{ form.text.render_kw['action'] }}",
+          data  :   $('form-' + '{{ id_postfix }}').serialize(),
           success:  function(payload) {
             // clear form text
-            text_form.value = '';
+            $('form-' + '{{ id_postfix }}').value = '';
             // get listbox content
-            var listbox = document.getElementById('listbox' + '{{ id_postfix }}');
+            var listbox = document.getElementById('listbox-' + '{{ id_postfix }}');
             // add html to listbox content
             listbox.innerHTML += payload['html'];
             // scroll to bottom of listbox
