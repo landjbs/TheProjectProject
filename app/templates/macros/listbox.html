@@ -82,6 +82,7 @@
       document.getElementById('form-' + '{{ id_postfix }}').addEventListener('submit', function (e) {
         // submit serialized data via ajax to route from form metadata
         // document.getElementById('form-' + '{{ id_postfix }}').serialize()
+        alert($('form-' + '{{ id_postfix }}').value);
         $.ajax({
           type  :   'POST',
           url   :   "{{ form.text.render_kw['action'] }}",
