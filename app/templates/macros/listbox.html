@@ -81,8 +81,6 @@
     <!-- script for adding form results to listbox -->
     <script>
       document.getElementById('form-' + '{{ id_postfix }}').addEventListener('submit', function (e) {
-        // submit serialized data via ajax to route from form metadata
-        // document.getElementById('form-' + '{{ id_postfix }}').serialize()
         form_text = document.getElementById('input-' + '{{ id_postfix }}');
         data = JSON.stringify({'text' : form_text.value})
         $.ajax({

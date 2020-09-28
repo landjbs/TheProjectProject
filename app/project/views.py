@@ -308,7 +308,7 @@ def like_action(project_id):
     return jsonify({'stars':project.stars.count(), 'is_starred':is_starred})
 
 
-@project.route('/project/<int:project_id>', methods=['POST'])
+@project.route('/add_task/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('10 per minute')
 def add_task(project_id):
@@ -336,7 +336,7 @@ def add_task(project_id):
     })
 
 
-@project.route('/project/<int:project_id>', methods=['POST'])
+@project.route('/add_comment/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('30 per minute')
 def add_comment(project_id):
@@ -346,6 +346,7 @@ def add_comment(project_id):
     text = str(request.json.get('text'))
     if text is not None:
         comment = project.add_comment(text=text, author=current_user)
+        print(commment)
         if comment:
             success = True
             render_comment = get_template_attribute(
@@ -358,7 +359,7 @@ def add_comment(project_id):
     })
 
 
-@project.route('/project/<int:project_id>/<int:comment_id>')
+@project.route('/delete_comment/<int:project_id>/<int:comment_id>')
 @login_required
 def delete_comment(project_id, comment_id):
     ''' Delete comment from project '''
