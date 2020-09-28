@@ -236,6 +236,7 @@ a:hover {
 
 .select-clean {
   border:0px;
+  border-radius: 0px;
   border-bottom: 1px solid black;
   width:100%;
   background: transparent;

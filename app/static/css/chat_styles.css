@@ -149,7 +149,12 @@
 }
 
 #messageBox .chat-action {
-  border:0px;
+  border: 0px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+#messageBox .chat-action i {
   width: 25px;
   height: 25px;
   vertical-align: middle;
