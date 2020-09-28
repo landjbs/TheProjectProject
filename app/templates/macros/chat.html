@@ -82,7 +82,7 @@
     {{ channel.name(g.current_user, html=False) }}
     {% set n_unseen = channel.unseen(g.current_user, return_messages=False) %}
     {% if n_unseen > 0 %}
-      <span class='badge'>
+      <span id='badge-{{ channel_id }}' class='badge'>
         {{ n_unseen }}
       </span>
     {% endif %}
@@ -98,11 +98,11 @@
           {{ channel.name(g.current_user, html=False) }}
         </span>
         {% set n_unseen = channel.unseen(g.current_user, return_messages=False) %}
-        {% if n_unseen > 0 %}
-          <span class='badge'>
+        <span class='badge' id='badge-{{ channel_id }}'>
+          {% if n_unseen > 0 %}
             {{ n_unseen }}
-          </span>
-        {% endif %}
+          {% endif %}
+        </span>
       </div>
       <div class='float-right last_active'>
         {{ channel.last_active | ago }}
