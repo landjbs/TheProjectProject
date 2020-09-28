@@ -95,7 +95,7 @@ class AnalyticsView(SafeBaseView):
 class UserModelView(SafeModelView):
     ''' admin view for user model '''
     column_searchable_list = ['name', 'email']
-    column_filters = ['accepted', 'confirmed']
+    column_filters = ['accepted', 'confirmed', 'subjects.subject.name']
     column_exclude_list = ['password']
     can_export = True
     column_extra_row_actions = [
