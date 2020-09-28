@@ -178,8 +178,8 @@
   }
 
   #messageBox .messages {
-    max-height: 100vw;
-    min-height: 100vw;
+    max-height: 90vw;
+    min-height: 90vw;
   }
 
   #messageBox .chat-popup .fa-times-circle {
