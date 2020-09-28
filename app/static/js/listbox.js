@@ -7,6 +7,13 @@ function change_task_status(project_id, task_id, action) {
           'task_id'   : task_id
           'action'    : action
   );
+  $.ajax(url).done(
+    function (payload) {
+      if (action=='delete') {
+        document.getElementById
+      }
+    }
+  )
 }
 
 
