@@ -89,6 +89,7 @@
           url   :   Flask.url_for("{{ form.text.render_kw['action'] }}"),
           data  :   form.serialize();
           success:  function(payload) {
+            console.log( payload );
             // clear form text
             text_form.value = '';
             // get listbox content
@@ -101,24 +102,16 @@
         });
         // prevent default submission
         e.preventDefault();
-      })
+      });
 
-
-      function add_to_listbox(id_postfix, action) {
-        var text_form = document.getElementById('form' + id_postfix);
-        var form_data = JSON.stringify({'text' : text_form.value});
-        $.ajax({
-          url         :   Flask.url_for(action);
-          type        :   'POST',
-          dataType    :   'json',
-          contentType :   'application/json',
-          data        :   form_data
-        }).done(
-          function(payload) {
-
-          }
-        );
-      }
+      // Inject our CSRF token into our AJAX request.
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+                }
+            }
+        });
     </script>
   {% endif %}
 {% endmacro -%}
