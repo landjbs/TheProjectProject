@@ -87,9 +87,12 @@
           type        :   'POST',
           dataType    :   'json',
           contentType :   'application/json',
-          data        :   form_data,
-          success: funciton()
-        })
+          data        :   form_data
+        }).done(
+          function(payload) {
+            document.getElementById('listbox-{{ id_postfix }}');
+          }
+        )
       }
     </script>
   {% endif %}
