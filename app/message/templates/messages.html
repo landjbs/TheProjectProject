@@ -16,6 +16,8 @@
 {% endblock %}
 
 {% block content %}
+  <h4>Messages</h4>
+  <input class='select-clean' type="text" placeholder="search.." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
   <div class='container my-1 main'>
     {{
       render_listbox(

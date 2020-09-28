@@ -77,7 +77,7 @@
 {% endmacro -%}
 
 
-{% macro render_small_channel_tag(channel) -%}
+{% macro render_channel_tag(channel) -%}
   <div class='dropdown-item searchable' onclick="open_channel('{{ channel.id }}');">
     {{ channel.name(g.current_user, html=False) }}
     {% set n_unseen = channel.unseen(g.current_user, return_messages=False) %}
@@ -90,9 +90,8 @@
 {% endmacro -%}
 
 
-
-{% macro render_channel_tag(channel) -%}
-  <div class='dropdown-item searchable' onclick="open_channel('{{ channel.id }}');">
+{% macro render_channel_card(channel) -%}
+  <div style='border: 1px solid grey; padding:10px; border-radius:10px;' onclick="open_channel('{{ channel.id }}');">
     <div class='channel_meta'>
       <div class='float-left'>
         {{ channel.name(g.current_user, html=False) }}
@@ -103,7 +102,7 @@
           </span>
         {% endif %}
       </div>
-      <div class='float-right'>
+      <div class='float-right' style='color:grey;'>
         {{ channel.last_active | ago }}
       </div>
     </div>
