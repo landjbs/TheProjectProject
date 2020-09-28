@@ -43,7 +43,13 @@ function open_channel(channel_id) {
 function update_last_read(channel_id) {
   const data = {'channel_id' :   String(channel_id)};
   const searchParams = new URLSearchParams(data);
-  $.ajax(Flask.url_for('message.update_last_read') + '?' + searchParams);
+  // update and hide unread badge if it exists
+  $.ajax(Flask.url_for('message.update_last_read') + '?' + searchParams).done(
+    function() {
+      var badge = document.getElementById('badge-' + String(channel_id));
+      badge.style.display = 'none';
+    }
+  );
 }
 
 
