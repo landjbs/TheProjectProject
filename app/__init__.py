@@ -193,12 +193,13 @@ def register_admin_views(application, admin, db):
     # import view
     from app.admin.views import (
         SafeBaseView, SafeModelView, AnalyticsView, UserModelView,
-        ReportModelView, CompetitionModelView, SubmissionModelView
+        ReportModelView, CompetitionModelView, SubmissionModelView,
+        ProjectModelView
     )
     with application.test_request_context('theprojectproject.io'):
         admin.add_view(AnalyticsView('Analytics', endpoint='AdminAnalytics'))
         admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
-        admin.add_view(SafeModelView(Project, db.session, endpoint='AdminProject'))
+        admin.add_view(ProjectModelView(Project, db.session, endpoint='AdminProject'))
         admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))
         admin.add_view(SafeModelView(Task, db.session, endpoint='AdminTask'))
         admin.add_view(SafeModelView(Subject, db.session, endpoint='AdminSubject'))

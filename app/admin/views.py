@@ -158,6 +158,12 @@ class UserModelView(SafeModelView):
             flash(gettext('Failed to reject users. %(error)s', error=str(ex)), 'error')
 
 
+class ProjectModelView(SafeModelView):
+    ''' admin view for projects '''
+    column_searchable_list = ['name', 'oneliner', 'owner.name']
+    column_filters = ['subjects.name', 'open', 'team_size', 'complete']
+
+
 class ReportModelView(SafeModelView):
     ''' admin view for user reports '''
     column_extra_row_actions = [
