@@ -30,8 +30,13 @@
 </div>
 <!-- TEMP: move somewhere else soon -->
 <script>
-  function delete_self() {
-    $.ajax().done(
+  function delete_self(project_id, comment_id) {
+    const data = {
+      'project_id'  : String(project_id),
+      'comment_id'  : String(comment_id)
+    }
+    const searchParams = new URLSearchParams(data);
+    $.ajax(Flask.url_for('project.delete') + '?' + searchParams).done(
       function () {
         $('#comment-{{ comment.id }}').style.display = 'none';
       }
