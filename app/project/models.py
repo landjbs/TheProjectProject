@@ -603,7 +603,13 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
 
     def estimated_time_safe(self):
         ''' Max of estimated time and elasped time '''
-        return elasped.
+        # get estimated time of project
+        estimated = self.estimated_time
+        # get elasped time of project
+        elasped = self.elasped()
+        # return larger of the two
+        return max(estimated, elasped)
+
 
     def subject_data(self, n=10):
         ''' Get dict mapping project subject names to member skill levels '''
