@@ -43,7 +43,6 @@ def check_messages():
     channel = Channel.get_and_validate(channel_id, current_user)
     ## get since ##
     since = request.args.get('since', 0, type=float)
-    print(since)
     # check if valid since
     if (since==0):
         since = channel.most_recent()
