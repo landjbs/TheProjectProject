@@ -345,12 +345,13 @@ def add_comment(project_id):
     success, html = False, ''
     text = str(request.json.get('text'))
     if text is not None:
-        comment = project.add_comment()
+        comment = project.add_comment(text=text, author=current_user)
         if comment:
+            success = True
             render_comment = get_template_attribute(
                                 'macros/cards/comment.html', 'render_comment'
                             )
-            success = True
+            html = render_comment(comment)
     return jsonify({
         'success'   :   success,
         'html'      :   html
