@@ -336,7 +336,7 @@ def add_task(project_id):
     })
 
 
-@project.route('/project/<int:project_id>/comment', methods=['POST'])
+@project.route('/project/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('30 per minute')
 def add_comment(project_id):

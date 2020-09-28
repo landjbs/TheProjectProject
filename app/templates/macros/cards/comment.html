@@ -36,7 +36,7 @@
       'comment_id'  : String(comment_id)
     }
     const searchParams = new URLSearchParams(data);
-    $.ajax(Flask.url_for('project.delete') + '?' + searchParams).done(
+    $.ajax(Flask.url_for('project.delete') + '/' + String(project_id) + '/' + String(comment_id)).done(
       function () {
         $('#comment-{{ comment.id }}').style.display = 'none';
       }
