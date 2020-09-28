@@ -91,7 +91,6 @@
             url   :   Flask.url_for("{{ form.text.render_kw['action'] }}"),
             data  :   form.serialize(),
             success:  function(payload) {
-              console.log( payload );
               // clear form text
               text_form.value = '';
               // get listbox content
