@@ -392,16 +392,19 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         ''' Returns active tasks on project that have been completed '''
         return self.tasks.filter_by(complete=True)
 
-    def add_task(self, text, author):
+    def add_task(self, text, author, notify=True):
         ''' Adds task to project from author, checks permissions '''
         if not self.is_member(author):
             return False
-        self.tasks.append(Task(text=text, author=author))
+        task = Task(text=text, author=author)
+        self.tasks.append(taks)
         self.update_last_active()
         self.update()
-        self.notify_members(
-            text=f'{author.name} added the task "{text}" to {self.name}.'
-        )
+        if notify:
+            self.notify_members(
+                text=f'{author.name} added the task "{text}" to {self.name}.'
+            )
+        return task
         return True
 
     def change_task_status(self, task_id, user, action):
