@@ -202,9 +202,6 @@
 /* channel cards */
 /* WARNING: currently only styled for mobile */
 .channel_card {
-  /* border-bottom: 1px solid grey; */
-  /* border-left:      0px; */
-  /* border-right:     0px; */
   padding-left:     15px;
   padding-right:    15px;
   padding-top:      15px;
