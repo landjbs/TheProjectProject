@@ -20,7 +20,7 @@
     <p class="mb-1">{{ comment.text }}
       {% if g.current_user in [comment.author, comment.project.owner] %}
         <div class='hoverable'>
-          <div class='delete-btn task-btn float-right' onclick="delete_self({{comment.project.id}}, {{ comment.id }});">
+          <div class='delete-btn task-btn float-right' onclick="delete_comment({{comment.project.id}}, {{ comment.id }});">
             <i class="fa fa-times-circle" aria-hidden="true"></i>
           </div>
           <span class='tooltiptext'>Delete Comment</span>
@@ -28,15 +28,4 @@
       {% endif %}
     </p>
   </div>
-  <!-- TEMP: move somewhere else soon -->
-  <script>
-    function delete_self(project_id, comment_id) {
-      url = Flask.url_for('project.delete_comment', {'project_id':String(project_id), 'comment_id':String(comment_id)});
-      $.ajax(url).done(
-        function (payload) {
-          document.getElementById('comment-' + comment_id).style.display = 'none';
-        }
-      );
-    }
-  </script>
 {% endmacro -%}
