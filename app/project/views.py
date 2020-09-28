@@ -351,7 +351,7 @@ def add_comment(project_id):
             render_comment = get_template_attribute(
                                 'macros/cards/comment.html', 'render_comment'
                             )
-            html = 'boop~!' #/render_comment(comment)
+            html = render_comment(comment)
     return jsonify({
         'success'   :   success,
         'html'      :   html

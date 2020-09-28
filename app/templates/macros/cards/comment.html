@@ -20,7 +20,7 @@
     <p class="mb-1">{{ comment.text }}
       {% if g.current_user in [comment.author, comment.project.owner] %}
         <div class='hoverable'>
-          <div class='delete-btn task-btn float-right' onclick="delete_self({{project.id}}, {{ comment.id }});">
+          <div class='delete-btn task-btn float-right' onclick="delete_self({{comment.project.id}}, {{ comment.id }});">
             <i class="fa fa-times-circle" aria-hidden="true"></i>
           </div>
           <span class='tooltiptext'>Delete Comment</span>
