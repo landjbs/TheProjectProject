@@ -314,6 +314,7 @@ def like_action(project_id):
 def add_task(project_id):
     ''' Add task to project '''
     # NOTE: CURRENTLY ASSUMES TASK IS A TO-DO TASK. IF WANT TO ADD COMPLETED, NEEDS CHANGE
+    # TODO: make this use form for validation rather than just json
     project = Project.query.get_or_404(project_id)
     # form = Task_Form()
     success, html = False, ''
