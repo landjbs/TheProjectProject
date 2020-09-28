@@ -1,29 +1,3 @@
-// TODO: fix csrf integration so this doesnt return 400 error
-// function open_single_channel(user_id, token) {
-//   var user_data = JSON.stringify({'user_id' : String(user_id)});
-//   $.ajax({
-//     url: '/open_single_channel',
-//     type: 'POST',
-//     data: user_data,
-//     dataType : 'json',
-//     contentType: "application/json",
-//     success: function(data) {
-//       // var modal = document.getElementById(modal_id);
-//       // modal.classList.remove('fade');
-//       // modal.hide();
-//       // add chat to document html
-//       document.body.innerHTML += data['html'];
-//       // TODO: open chat
-//       openForm();
-//       // var messages = document.getElementById('messages')
-//       // document.getElementById('messageText').value = '';
-//       // messages.innerHTML += data['html'];
-//       // messages.scrollTo(0, messages.scrollHeight);
-//     }
-//   })
-// }
-
-
 function send_message(channel_id) {
   var text = document.getElementById('messageText').value;
   var form_data = JSON.stringify({'channel_id':channel_id, 'text':text});
@@ -43,6 +17,7 @@ function send_message(channel_id) {
 }
 
 
+// open up channel of channel_id
 function open_channel(channel_id) {
   var channel_data = JSON.stringify({'channel_id':channel_id});
   $.ajax({
@@ -61,4 +36,67 @@ function open_channel(channel_id) {
       openForm(payload['channel_id']);
     }
   })
+}
+
+
+// update channel last_read for current_user to now
+function update_last_read(channel_id) {
+  const data = {
+    'channel_id' :   String(channel_id)
+  }
+  const searchParams = new URLSearchParams(data);
+  $.ajax('{{ url_for('message.update_last_read') }}?' + searchParams).done(
+    function() {
+    }
+  );
+}
+
+
+// poll channel of channel_id for new messages. since is start time
+function poll_channel(channel_id, since) {
+  const data = {
+    'since'   :   String(since),
+    'channel' :   String(channel_id)
+  };
+  const searchParams = new URLSearchParams(data);
+  $.ajax('{{ url_for('message.check_messages') }}?' + searchParams).done(
+      function(message_data) {
+          since = message_data['since'];
+          new_messages = message_data['new_messages'];
+          for (var i = 0; i < new_messages.length; i++) {
+              messages.innerHTML += new_messages[i];
+              messages.scrollTo(0, messages.scrollHeight);
+      }
+    }
+  );
+}
+
+
+function openForm(channel_id) {
+  var messages = document.getElementById('messages');
+  document.getElementById("myForm").style.display = "block";
+  document.getElementById('openBtn').style.display = 'none';
+  // scroll to bottom of messages
+  messages.scrollTo(0, messages.scrollHeight);
+  // update last read for channel
+  update_last_read(channel_id);
+  // start polling
+  var poller = setInterval(
+      function() { poll_channel(channel_id, 0); },
+      1000
+  );
+  window.poller = poller;
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+  document.getElementById('openBtn').style.display = 'block';
+  clearInterval(window.poller);
+}
+
+function clearChat() {
+  document.getElementById('messageBox').innerHTML = '';
+  if (window.poller) {
+    clearInterval(window.poller);
+  }
 }
