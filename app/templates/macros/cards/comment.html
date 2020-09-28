@@ -1,45 +1,42 @@
 {% macro render_comment(comment) -%}
-<div id='comment-{{ comment.id }}' class="list-group-item list-group-item-action flex-column align-items-start">
-  <div class="d-flex w-100 justify-content-between">
-    <a href='user={{ comment.author.code }}' class="mb-1">
-      <u>{{ comment.author.name }}</u>
-      {% if (comment.author == comment.project.owner) %}
+  <div id='comment-{{ comment.id }}' class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <a href='user={{ comment.author.code }}' class="mb-1">
+        <u>{{ comment.author.name }}</u>
+        {% if (comment.author == comment.project.owner) %}
+          <div class='hoverable'>
+            <i class="fa fa-circle" style='color:#FF5D00;'></i>
+            <span class='tooltiptext'>Owner</span>
+          </div>
+        {% elif project.is_member(comment.author) %}
+          <div class='hoverable'>
+            <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
+            <span class='tooltiptext'>Member</span>
+          </div>
+        {% endif %}
+      </a>
+      <small>{{ comment.timestamp | ago }}</small>
+    </div>
+    <p class="mb-1">{{ comment.text }}
+      {% if g.current_user in [comment.author, comment.project.owner] %}
         <div class='hoverable'>
-          <i class="fa fa-circle" style='color:#FF5D00;'></i>
-          <span class='tooltiptext'>Owner</span>
-        </div>
-      {% elif project.is_member(comment.author) %}
-        <div class='hoverable'>
-          <i class="fa fa-circle-thin" style='color:#FF5D00;'></i>
-          <span class='tooltiptext'>Member</span>
+          <div class='delete-btn task-btn float-right' onclick="delete_self({{project.id}}, {{ comment.id }});">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+          </div>
+          <span class='tooltiptext'>Delete Comment</span>
         </div>
       {% endif %}
-    </a>
-    <small>{{ comment.timestamp | ago }}</small>
+    </p>
   </div>
-  <p class="mb-1">{{ comment.text }}
-    {% if g.current_user in [comment.author, comment.project.owner] %}
-      <div class='hoverable'>
-        <div class='delete-btn task-btn float-right' onclick="delete_self({{project.id}}, {{ comment.id }});">
-          <i class="fa fa-times-circle" aria-hidden="true"></i>
-        </div>
-        <span class='tooltiptext'>Delete Comment</span>
-      </div>
-    {% endif %}
-  </p>
-</div>
-<!-- TEMP: move somewhere else soon -->
-<script>
-  function delete_self(project_id, comment_id) {
-    url = Flask.url_for('project.delete_comment', {'project_id':String(project_id), 'comment_id':String(comment_id)});
-    $.ajax(url).done(
-      function (payload) {
-        document.getElementById('comment-{{ comment_id }}').style.display = 'none';
-      }
-    );
-  }
-</script>
+  <!-- TEMP: move somewhere else soon -->
+  <script>
+    function delete_self(project_id, comment_id) {
+      url = Flask.url_for('project.delete_comment', {'project_id':String(project_id), 'comment_id':String(comment_id)});
+      $.ajax(url).done(
+        function (payload) {
+          document.getElementById('comment-{{ comment_id }}').style.display = 'none';
+        }
+      );
+    }
+  </script>
 {% endmacro -%}
-
-
- <!-- -->
