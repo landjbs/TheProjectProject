@@ -601,6 +601,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def elasped(self):
         return int((datetime.utcnow() - self.posted_on).days)
 
+    def estimated_time_safe(self):
+        ''' Estimated time but boosted by '''
+
     def subject_data(self, n=10):
         ''' Get dict mapping project subject names to member skill levels '''
         project_subjects = {s.name:0 for s in self.subjects}
