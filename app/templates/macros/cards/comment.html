@@ -1,5 +1,5 @@
 {% macro render_comment(comment) -%}
-<div class="list-group-item list-group-item-action flex-column align-items-start">
+<div id='comment-{{ comment.id }}' class="list-group-item list-group-item-action flex-column align-items-start">
   <div class="d-flex w-100 justify-content-between">
     <a href='user={{ comment.author.code }}' class="mb-1">
       <u>{{ comment.author.name }}</u>
@@ -20,7 +20,7 @@
   <p class="mb-1">{{ comment.text }}
     {% if g.current_user in [comment.author, comment.project.owner] %}
       <div class='hoverable'>
-        <a class='delete-btn task-btn float-right' onclick="">
+        <a class='delete-btn task-btn float-right' onclick="delete_self()">
           <i class="fa fa-times-circle" aria-hidden="true"></i>
         </a>
         <span class='tooltiptext'>Delete Comment</span>
@@ -30,9 +30,15 @@
 </div>
 <!-- TEMP: move somewhere else soon -->
 <script>
-  
+  function delete_self() {
+    $.ajax().done(
+      function () {
+        $('#comment-{{ comment.id }}').style.display = 'none';
+      }
+    );
+  }
 </script>
 {% endmacro -%}
 
 
- <!-- href="{{ url_for('project.delete_comment', project_id=comment.project.id, comment_id=comment.id) }}" -->
+ <!-- -->
