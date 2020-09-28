@@ -103,7 +103,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                             back_populates='project',
                             lazy='dynamic',
                             cascade='all, delete, delete-orphan',
-                            order_by='desc(Comment.timestamp)')
+                            order_by='Comment.timestamp')
     # tasks
     tasks = relationship('Task',
                         back_populates='project',
