@@ -41,14 +41,9 @@ function open_channel(channel_id) {
 
 // update channel last_read for current_user to now
 function update_last_read(channel_id) {
-  const data = {
-    'channel_id' :   String(channel_id)
-  }
+  const data = {'channel_id' :   String(channel_id)}
   const searchParams = new URLSearchParams(data);
-  $.ajax('{{ url_for('message.update_last_read') }}?' + searchParams).done(
-    function() {
-    }
-  );
+  $.ajax('{{ url_for('message.update_last_read') }}?' + searchParams);
 }
 
 
