@@ -308,7 +308,7 @@ def like_action(project_id):
     return jsonify({'stars':project.stars.count(), 'is_starred':is_starred})
 
 
-@project.route('/project/<int:project_id>/task', methods=['POST'])
+@project.route('/project/<int:project_id>', methods=['POST'])
 @login_required
 @limiter.limit('10 per minute')
 def add_task(project_id):
