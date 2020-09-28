@@ -341,8 +341,8 @@ def add_task(project_id):
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
-    form = Comment_Form(request.form)
-    if form.validate_on_submit():
+    # form = Comment_Form(request.form)
+    # if form.validate_on_submit():
         if not project.add_comment(text=form.text.data, author=current_user):
             flash('Could not add comment.', 'error')
     return redirect(request.referrer)

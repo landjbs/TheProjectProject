@@ -439,12 +439,13 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     ## comments ##
     def add_comment(self, text, author):
         ''' Adds comment to project '''
-        self.comments.append(Comment(text=text, author=author))
+        comment = Comment(text=text, author=author)
+        self.comments.append(comment)
         self.update()
         self.notify_members(
             text=f'{author.name} commented "{text}" on {self.name}.'
         )
-        return True
+        return comment
 
     def delete_comment(self, comment_id, user):
         ''' Deletes comment from project '''
