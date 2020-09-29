@@ -80,8 +80,8 @@
                       'question_id'   :   String('{{ question.id }}')
                     }
             );
-            answer_text = document.getElementById('answerform-{{ question.id }}').getElementsByTagName('input')[0].value;
-            data = JSON.stringify({'answer':answer_text});
+            answer = document.getElementById('answerform-{{ question.id }}').getElementsByTagName('input')[0];
+            data = JSON.stringify({'answer' : answer.value});
             $.ajax({
               type        :     'POST',
               url         :     url,
