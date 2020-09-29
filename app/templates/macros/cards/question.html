@@ -42,7 +42,7 @@
       question = document.getElementById('ask-question-form-question');
       answer = document.getElementById('ask-question-form-answer');
       // json question only if no answer else both
-      if (answer!==null) {
+      if (answer==null) {
         data = JSON.stringify({'question' : question.value});
       }
       else {
@@ -51,7 +51,6 @@
           'answer'    :   answer.value
         });
       }
-      alert('here');
       // submit ajax
       $.ajax({
         type        :     'POST',
@@ -65,6 +64,8 @@
             // WARNING: relies on questions in cardbox with postfix=questions
             question_list = document.getElementById('cardbox-list-questions');
             question_list.innerHTML += payload['html'];
+            question.value = '';
+            answer.value = '';
           } else {
             document.getElementById('ask-question-card').style['border-color'] = 'red';
           }
@@ -86,7 +87,7 @@
           {{ question.question }}
         </p>
       </div>
-      {% if not g.project.is_member(g.current_user) %}
+      {% if not question.project.is_member(g.current_user) %}
         <p style='margin-bottom:0px;'>
           {% if question.answer %}
             {{ question.answer }}
@@ -105,7 +106,7 @@
           <div class='float-right'>
             <div class='delete-btn task-btn'
                 style='background: transparent; display: inline-block;'
-                onclick="delete_question('{{ g.project.id }}', '{{ question.id }}')">
+                onclick="delete_question('{{ question.project.id }}', '{{ question.id }}')">
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
             <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>

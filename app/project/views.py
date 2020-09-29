@@ -550,7 +550,7 @@ def add_question(project_id):
     project = Project.query.get_or_404(project_id)
     question = filter_string(request.json.get('question'))
     success, html = False, ''
-    print(request.json.get('question')), request.json.get('answer'))
+    print(request.json.get('question'), request.json.get('answer'))
     if question:
         if project.is_member(current_user):
             answer = filter_string(request.json.get('answer'))
@@ -561,9 +561,9 @@ def add_question(project_id):
         if question:
             success = True
             render_question = get_template_attribute(
-                'macros/cards/question.html', render_question_card
+                'macros/cards/question.html', 'render_question_card'
             )
-            html = render_question_card(question)
+            html = render_question(question)
     return jsonify({
         'success'   :   success,
         'html'      :   html
