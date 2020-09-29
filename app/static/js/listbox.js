@@ -20,14 +20,15 @@ function change_task_status(project_id, task_id, action) {
         // on back, hide taskbox and render in todo listbox
         } else if (action=='back') {
           taskbox.style.display = 'none';
-          // render html in todo listbox
           // WARNING: this isnt optimized if ids change etc
-          todolistbox = document.getElementById('');
+          todolistbox = document.getElementById('listbox-todo');
+          todolistbox += payload['html'];
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
           taskbox.style.display = 'none';
           // WARNING: this isnt optimized if ids change etc
-
+          completelistbox = document.getElementById('listbox-complete');
+          completelistbox += payload['html'];
         } else {
           alert('Invalid action: ' + action);
         }
