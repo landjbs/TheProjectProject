@@ -39,8 +39,18 @@
               'project.add_question',
               {'project_id'    :   String('{{ question.project.id }}')}
       );
-      question = document.getElementById('askform-{{ question.id }}').getElementsByTagName('input')[0];
-      data = JSON.stringify({'question' : answer.value});
+      ask_form = document.getElementById('askform-{{ question.id }}')
+      question = ask_form.getElementById('question');
+      answer = ask_form.getElementById('answer');
+      // json question only if no answer else both
+      if answer!==null {
+        data = JSON.stringify({'question' : question.value});
+      } else {
+        data = JSON.stringify({
+          'question'  :   question.value,
+          'answer'    :   answer.value
+        });
+      }
       $.ajax({
         type        :     'POST',
         url         :     url,
