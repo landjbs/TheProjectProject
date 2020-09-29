@@ -553,9 +553,10 @@ def add_question(project_id):
     if question:
         if project.is_member(current_user):
             answer = filter_string(request.json.get('answer'))
-            project.add_question(question, answer)
+            question = project.add_question(question, answer)
         else:
-            project.add_question(question)
+            question = project.add_question(question)
+        success = True if question else False
     return jsonify({
         'success'   :   success,
         'html'      :   html
