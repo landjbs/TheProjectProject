@@ -60,11 +60,11 @@
             {% endif %}
           </input>
           <div class='float-right'>
-            <a class='delete-btn task-btn'
-                style='background: transparent;'
-                href="{{ url_for('project.delete_question', project_id=g.project.id, question_id=question.id) }}">
+            <div class='delete-btn task-btn'
+                style='background: transparent; display: inline-block;'
+                onclick="delete_question('{{ g.project.id }}', '{{ question.id }}')">
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
-            </a>
+            </div>
             <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
                 <i class="fa fa-check-circle" aria-hidden="true"></i>
             </button>
