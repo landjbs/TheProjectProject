@@ -374,7 +374,14 @@ def delete_comment(project_id, comment_id):
 def change_task_status(project_id, task_id, action):
     ''' Mark task as complete, delete task, or remove help '''
     project = Project.query.get_or_404(project_id)
-    success = project.change_task_status(task_id, current_user, action)
+
+    task = project.change_task_status(task_id, current_user, action)
+    # these always require rerendering task (even if already complete)
+    if (action=='complete') or (action=='back'):
+        render_task = get_template_attribute(
+                            'macros/cards/task.html', 'render_task'
+                        )
+        html = render_task(task)
     return jsonify({
         'success' : success
     })
