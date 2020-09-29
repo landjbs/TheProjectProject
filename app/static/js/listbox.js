@@ -69,10 +69,13 @@ function edit_answer(project_id, question_id) {
             'question_id'   :   String(question_id)
           }
   );
+  question = document.getElementById('question-' + question_id);
+  answer = question.getElementsByName('answer')[0].value;
+  console.log(answer);
   $.ajax(url).done(
     function (payload) {
       if payload['success'] {
-        document.getElementById('question-' + question_id).style.border_color = 'green';  
+        question.style.border_color = 'green';
       }
     }
   );
