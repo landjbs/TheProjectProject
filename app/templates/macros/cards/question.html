@@ -75,6 +75,7 @@
         <script>
           answer_form = document.getElementById('answerform-{{ question.id }}');
           answer_form.addEventListener('submit', function (e) {
+            alert('THIS')
             url = Flask.url_for(
                     'project.edit_answer',
                     {
