@@ -434,7 +434,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         else:
             raise ValueError(f'Invalid action {action} for change_task_status.')
         self.update_last_active()
-        return True
+        return task
 
     ## comments ##
     def add_comment(self, text, author):
