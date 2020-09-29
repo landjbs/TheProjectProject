@@ -22,7 +22,7 @@ function change_task_status(project_id, task_id, action) {
         } else if (action=='complete') {
           taskbox.style.background = 'green';
         } else {
-          alert('invalid action ' + action);
+          alert('Invalid action: ' + action);
         }
       } else {
         alert('Could not modify task.');
