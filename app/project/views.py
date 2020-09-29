@@ -374,9 +374,10 @@ def delete_comment(project_id, comment_id):
 def change_task_status(project_id, task_id, action):
     ''' Mark task as complete, delete task, or remove help '''
     project = Project.query.get_or_404(project_id)
-    if not project.change_task_status(task_id, current_user, action):
-        flash('Could not update task.')
-    return redirect(request.referrer)
+    success = project.change_task_status(task_id, current_user, action)
+    return jsonify({
+        'success' : success
+    })
 
 
 @project.route('/remove_member/<int:project_id>/<int:user_id>')
