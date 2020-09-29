@@ -75,8 +75,6 @@
         <script>
           answer_form = document.getElementById('answerform-{{ question.id }}');
           answer_form.addEventListener('submit', function (e) {
-            answer_text = answer_form.getElementsByName('answer')[0].value;
-            data = JSON.stringify({'answer':answer_text});
             url = Flask.url_for(
                     'project.edit_answer',
                     {
@@ -84,6 +82,15 @@
                       'question_id'   :   String(question_id)
                     }
             );
+            answer_text = answer_form.getElementsByName('answer')[0].value;
+            data = JSON.stringify({'answer':answer_text});
+            $.ajax({
+              type        :     'POST',
+              url         :     url,
+              dataType    :     'json',
+              contentType :     'application/json',
+              data        :     data,
+            })
           })
         </script>
       {% endif %}
