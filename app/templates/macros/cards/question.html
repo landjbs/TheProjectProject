@@ -36,7 +36,7 @@
 
 {% macro render_question_card(question) -%}
   {% set border_style = 'red' if not question.answer else 'green' %}
-  <div class='card mb-2' style='border-color: {{ border_style }};'>
+  <div id='question-{{ question.id }}' class='card mb-2' style='border-color: {{ border_style }};'>
     <div class='card-body'>
       <div class='card-head'>
         <p style='padding-bottom:1px;'>
