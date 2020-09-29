@@ -226,6 +226,7 @@
     <script src="js/chat.js"></script>
     <script src="js/listbox.js"></script>
     <script src="js/cardbox.js"></script>
+    <script src="js/search.js"></script>
 
     {% if user.is_authenticated %}
       <script>
@@ -235,14 +236,14 @@
       </script>
     {% endif %}
 
-    <!-- WARNING: only some scripts should be run if user is Anonymous -->
-    <!-- NAVBAR SEARCH -->
-    <script src="js/search.js"></script>
-
     <script>
       $.ajaxSetup({
-        headers: {'X-CSRFToken': '{{ csrf_token() }}'}
-      })
+          beforeSend: function(xhr, settings) {
+              if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                  xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+              }
+          }
+      });
     </script>
 
     <script>
