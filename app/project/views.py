@@ -572,9 +572,11 @@ def edit_answer(project_id, question_id):
     elif not project.is_member(current_user):
         flash('Only project members can answer questions.', category='error')
     else:
-        question.add_answer(answer=request.form.get('answer'))
+        question.add_answer(answer=request.json.get('answer'))
         flash('Question answered.', category='success')
-    return redirect(request.referrer)
+    return jsonify({
+        'success'   :   True
+    })
 
 
 @project.route('/delete_question/<int:project_id>/<int:question_id>')
