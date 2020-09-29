@@ -91,7 +91,12 @@
               contentType :     'application/json',
               data        :     data
             }).done(
-
+              function (payload) {
+                if payload['success'] {
+                  question = document.getElementById('question-' + question_id);
+                  question.style.border_color = 'green';
+                }
+              }
             );
             // prevent default submission
             e.preventDefault();
