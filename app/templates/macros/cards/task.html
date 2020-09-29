@@ -25,9 +25,9 @@
           <span class='tooltiptext'>Delete Task</span>
         </div>
       {% endif %}
-      <a class='complete-btn task-btn float-right' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='complete') }}">
+      <div class='complete-btn task-btn float-right' onclick="change_task_status('{{ task.project.id }}', '{{ task.id }}', action='complete')">
         <i class="fa fa-check-circle" aria-hidden="true"></i>
-      </a>
+      </div>
     </div>
   {% endif %}
 </div>

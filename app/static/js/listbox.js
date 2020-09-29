@@ -19,7 +19,7 @@ function change_task_status(project_id, task_id, action) {
       } else if (action='complete') {
         taskbox.style.background = 'green';
       } else {
-        alert('invalid action' + action);
+        alert('invalid action ' + action);
       }
     }
   )
