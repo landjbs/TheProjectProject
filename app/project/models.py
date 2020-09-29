@@ -463,7 +463,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         return suggest_questions(self)
 
     def add_question(self, question, answer=None, notify=True):
-        self.questions.append(Question(question=question, answer=answer))
+        question = Question(question=question, answer=answer)
+        self.questions.append(question)
         if notify:
             self.notify_members(
                 text=f'Someone asked a new question on {self.name}!'
