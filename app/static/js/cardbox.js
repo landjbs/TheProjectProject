@@ -1,5 +1,6 @@
 // QUESTIONS
-// ask question
+
+// TODO: move ask listener here from macros/cards/question.html
 
 // TODO: move edit_answer listener here from macros/cards/question.html
 
