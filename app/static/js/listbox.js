@@ -22,13 +22,13 @@ function change_task_status(project_id, task_id, action) {
           taskbox.style.display = 'none';
           // WARNING: this isnt optimized if ids change etc
           todolistbox = document.getElementById('listbox-todo');
-          todolistbox += payload['html'];
+          todolistbox.innerHTML += payload['html'];
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
           taskbox.style.display = 'none';
           // WARNING: this isnt optimized if ids change etc
-          completelistbox = document.getElementById('listbox-complete');
-          completelistbox += payload['html'];
+          completelistbox = document.getElementById('listbox-completed');
+          completelistbox.innerHTML += payload['html'];
         } else {
           alert('Invalid action: ' + action);
         }

@@ -380,9 +380,14 @@ def change_task_status(project_id, task_id, action):
     if task:
         success = True
         # these always require rerendering task (even if already complete)
-        if (action=='complete') or (action=='back'):
+        if (action=='complete'):
             render_task = get_template_attribute(
-                                'macros/cards/task.html', 'render_task'
+                                'macros/cards/task.html', 'render_complete_task'
+                            )
+            html = render_task(task)
+        elif (action=='back'):
+            render_task = get_template_attribute(
+                                'macros/cards/task.html', 'render_todo_task'
                             )
             html = render_task(task)
     return jsonify({
