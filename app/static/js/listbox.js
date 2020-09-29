@@ -14,9 +14,9 @@ function change_task_status(project_id, task_id, action) {
       taskbox = document.getElementById('task-' + task_id);
       if (action=='delete') {
         taskbox.style.display = 'none';
-      } else if (action='back') {
+      } else if (action=='back') {
         taskbox.style.background = 'blue';
-      } else if (action='complete') {
+      } else if (action=='complete') {
         taskbox.style.background = 'green';
       } else {
         alert('invalid action ' + action);
