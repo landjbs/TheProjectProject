@@ -549,7 +549,7 @@ def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     question = filter_string(request.json.get('question'))
-    success, html = False, ''
+    success, first, html = False, False, ''
     print(request.json.get('question'), request.json.get('answer'))
     if question:
         if project.is_member(current_user):
@@ -566,7 +566,8 @@ def add_question(project_id):
             html = render_question(question, project=project)
     return jsonify({
         'success'   :   success,
-        'html'      :   html
+        'html'      :   html,
+        'first'     :   first
     })
 
 

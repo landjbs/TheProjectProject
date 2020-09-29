@@ -95,7 +95,12 @@
             // get listbox content
             var listbox = document.getElementById('listbox-' + '{{ id_postfix }}');
             // add html to listbox content
-            listbox.innerHTML += payload['html'];
+            if (payload['first']==true) {
+              listbox.innerHTML = payload['html'];
+            }
+            else {
+              listbox.innerHTML += payload['html'];
+            }
             // scroll to bottom of listbox
             listbox.scrollTo(0, listbox.scrollHeight);
           }
