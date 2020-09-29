@@ -62,7 +62,6 @@ function delete_comment(project_id, comment_id) {
 // QUESTIONS (technically not in a listbox but it hasn't come up yet)
 // TODO: move edit_answer listener here from macros/cards/question.html
 
-
 // delete question
 // TODO: consolidate into single delete function
 function delete_question(project_id, question_id) {

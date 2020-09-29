@@ -310,7 +310,13 @@
             <!-- QUESTIONS -->
             <div class='col'>
               {{ render_add_question_card() }}
-              <div id='questions-box' class='about-col'>
+              <div id='listbox-questions' class='about-col'>
+                {{
+                  render_listbox(
+                    label=False,
+                    id_postfix='questions'
+                  )
+                }}
                 {% for question in project.questions %}
                   {{ render_question_card(question) }}
                 {% endfor %}
