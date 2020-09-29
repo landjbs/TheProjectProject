@@ -286,7 +286,7 @@
           <hr class='my-2'><br>
           <!-- about -->
           {{ edit_form.about.label }}:<br>
-          {{ edit_form.about(class='edit-input', value=user.about) }}
+          {{ edit_form.about(class='edit-input', value=user.about, autocomplete='off') }}
           {% if edit_form.about.errors %}
             <p class='warning'>{{ edit_form.about.errors[0] }}</p>
           {% endif %}

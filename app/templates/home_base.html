@@ -227,11 +227,13 @@
     <script src="js/listbox.js"></script>
     <script src="js/cardbox.js"></script>
 
-    <script>
-      // start polling for new messages
-      var new_message_poller = setInterval(poll_new_messages, 1000);
-      window.new_message_poller = new_message_poller;
-    </script>
+    {% if user.is_authenticated %}
+      <script>
+        // start polling for new messages
+        var new_message_poller = setInterval(poll_new_messages, 1000);
+        window.new_message_poller = new_message_poller;
+      </script>
+    {% endif %}
 
     <!-- WARNING: only some scripts should be run if user is Anonymous -->
     <!-- NAVBAR SEARCH -->
