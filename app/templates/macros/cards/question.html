@@ -92,9 +92,9 @@
               function (payload) {
                 question = document.getElementById('question-' + '{{ question.id }}');
                 if (payload['success']==true) {
-                  question.style.border_color = 'green';
+                  question.style['border-color'] = 'green';
                 } else {
-                  question.style.border_color = 'yellow';
+                  question.style['border-color'] = 'red';
                 }
               }
             );
