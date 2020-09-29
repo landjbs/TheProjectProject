@@ -1,5 +1,5 @@
 {% macro render_todo_task(task) -%}
-<div class="list-group-item list-group-item-action flex-column align-items-start">
+<div id='task-{{ task.id }}' class="list-group-item list-group-item-action flex-column align-items-start">
   <h6 class="mb-1">{{ task.text }}</h6>
   <div class="d-flex w-100 justify-content-between">
     <small>
