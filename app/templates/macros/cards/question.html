@@ -52,7 +52,7 @@
           {% endif %}
         </p>
       {% else %}
-        <form action="{{ url_for('project.edit_answer', project_id=g.project.id, question_id=question.id) }}"
+        <form action="edit_answer('{{ g.project.id }}', '{{ question.id }}')"
           method='post' style='margin-bottom:0px;'>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {% if question.answer %}
