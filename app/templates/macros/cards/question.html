@@ -80,7 +80,7 @@
                       'question_id'   :   String('{{ question.id }}')
                     }
             );
-            answer_text = answer_form.getElementsByTagName('input')[0].value;
+            answer_text = document.getElementById('answerform-{{ question.id }}').getElementsByTagName('input')[0].value;
             data = JSON.stringify({'answer':answer_text});
             $.ajax({
               type        :     'POST',
@@ -91,7 +91,7 @@
             }).done(
               function (payload) {
                 if (payload['success']==true) {
-                  question = document.getElementById('question-' + '{{ question_id }}');
+                  question = document.getElementById('question-' + '{{ question.id }}');
                   question.style.border_color = 'green';
                 }
               }
