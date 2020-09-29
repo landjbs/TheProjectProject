@@ -75,7 +75,11 @@ function delete_question(project_id, question_id) {
   );
   $.ajax(url).done(
     function (payload) {
-      document.getElementById('question-' + question_id).remove()
+      if (payload['success']==true) {
+        document.getElementById('question-' + question_id).remove();
+      } else {
+        alert('Could not delete.')
+      }
     }
   );
 }

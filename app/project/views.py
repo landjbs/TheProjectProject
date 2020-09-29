@@ -582,11 +582,12 @@ def edit_answer(project_id, question_id):
 def delete_question(project_id, question_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
+    success = False
     if project.is_member(current_user):
         if project.remove_question(question_id):
             success = True
     return jsonify({
-        'success' : True
+        'success' : success
     })
 
 
