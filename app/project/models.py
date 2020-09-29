@@ -469,7 +469,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                 text=f'Someone asked a new question on {self.name}!'
             )
         self.update()
-        return True
+        return question
 
     def remove_question(self, question_id):
         question = self.questions.filter_by(id=question_id).first()
