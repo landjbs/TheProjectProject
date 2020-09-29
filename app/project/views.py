@@ -549,14 +549,20 @@ def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     question = filter_string(request.json.get('question'))
-    success = False
+    success, html = False, ''
     if question:
         if project.is_member(current_user):
             answer = filter_string(request.json.get('answer'))
             question = project.add_question(question, answer)
         else:
             question = project.add_question(question)
-        success = True if question else False
+        # render question
+        if question:
+            success = True
+            render_question = get_template_attribute(
+                'macros/cards/question.html', render_question_card
+            )
+            html = render_question_card(question)
     return jsonify({
         'success'   :   success,
         'html'      :   html
