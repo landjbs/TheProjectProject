@@ -11,15 +11,21 @@ function change_task_status(project_id, task_id, action) {
   );
   $.ajax(url).done(
     function (payload) {
-      taskbox = document.getElementById('task-' + task_id);
-      if (action=='delete') {
-        taskbox.style.display = 'none';
-      } else if (action=='back') {
-        taskbox.style.background = 'blue';
-      } else if (action=='complete') {
-        taskbox.style.background = 'green';
+      if (payload['success']) {
+        taskbox = document.getElementById('task-' + task_id);
+        // on delete, simply remove taskbox
+        if (action=='delete') {
+          taskbox.style.display = 'none';
+        // on delete, simply remove taskbox
+        } else if (action=='back') {
+          taskbox.style.background = 'blue';
+        } else if (action=='complete') {
+          taskbox.style.background = 'green';
+        } else {
+          alert('invalid action ' + action);
+        }
       } else {
-        alert('invalid action ' + action);
+        alert('Could not modify task.');
       }
     }
   )
