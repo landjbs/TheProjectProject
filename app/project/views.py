@@ -568,10 +568,10 @@ def edit_answer(project_id, question_id):
     project = Project.query.get_or_404(project_id)
     question = project.questions.filter_by(id=question_id).first()
     success = False
+    print("HERE")
     if question and project.is_member(current_user):
         success = True
         question.add_answer(answer=request.json.get('answer'))
-        flash('Question answered.', category='success')
     return jsonify({
         'success'   :   success
     })

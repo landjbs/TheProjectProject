@@ -53,7 +53,6 @@
         </p>
       {% else %}
         <form id='answerform-{{ question.id }}' style='margin-bottom:0px;'>
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {% if question.answer %}
               <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}'>
             {% else %}
@@ -71,19 +70,17 @@
             </button>
           </div>
         </form>
-        <!-- TODO: move this script to external js maybe -->
         <script>
           answer_form = document.getElementById('answerform-{{ question.id }}');
           answer_form.addEventListener('submit', function (e) {
-            alert('THIS')
             url = Flask.url_for(
                     'project.edit_answer',
                     {
-                      'project_id'    :   String(project_id),
-                      'question_id'   :   String(question_id)
+                      'project_id'    :   String('{{ question.project.id }}'),
+                      'question_id'   :   String('{{ question.id }}')
                     }
             );
-            answer_text = answer_form.getElementsByName('answer')[0].value;
+            answer_text = answer_form.getElementsByTagName('input')[0].value;
             data = JSON.stringify({'answer':answer_text});
             $.ajax({
               type        :     'POST',
@@ -94,22 +91,13 @@
             }).done(
               function (payload) {
                 if (payload['success']==true) {
-                  question = document.getElementById('question-' + question_id);
+                  question = document.getElementById('question-' + '{{ question_id }}');
                   question.style.border_color = 'green';
                 }
               }
             );
             // prevent default submission
             e.preventDefault();
-          });
-          // inject our CSRF token into AJAX request
-          var csrf_token = "{{ csrf_token() }}";
-          $.ajaxSetup({
-              beforeSend: function(xhr, settings) {
-                  if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-                      xhr.setRequestHeader("X-CSRFToken", csrf_token);
-                  }
-              }
           });
         </script>
       {% endif %}
