@@ -316,14 +316,14 @@ def add_task(project_id):
     # NOTE: CURRENTLY ASSUMES TASK IS A TO-DO TASK. IF WANT TO ADD COMPLETED, NEEDS CHANGE
     # TODO: make this use form for validation rather than just json
     project = Project.query.get_or_404(project_id)
-    success, first, html = False, False, ''
+    # form = Task_Form()
+    success, html = False, ''
     # if form.validate_on_submit():
     # TODO: validate current user is member
     text = str(request.json.get('text'))
     if text is not None:
         task = project.add_task(text=text, author=current_user)
         if task:
-            first = (project.n_todo() == 0)
             current_user.action_xp('add_task')
             success = True
             render_task = get_template_attribute(
@@ -332,7 +332,6 @@ def add_task(project_id):
             html = render_task(task)
     return jsonify({
         'success'   :   success,
-        'first'     :   first,
         'html'      :   html
     })
 
@@ -343,7 +342,7 @@ def add_task(project_id):
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
-    success, first, html = False, False, ''
+    success, html = False, ''
     text = str(request.json.get('text'))
     if text is not None:
         comment = project.add_comment(text=text, author=current_user)
@@ -355,7 +354,6 @@ def add_comment(project_id):
             html = render_comment(comment)
     return jsonify({
         'success'   :   success,
-        'first'     :   first,
         'html'      :   html
     })
 
