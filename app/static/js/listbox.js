@@ -23,7 +23,6 @@ function change_task_status(project_id, task_id, action) {
           // WARNING: this isnt optimized if ids change etc
           todolistbox = document.getElementById('listbox-todo');
           todolistbox.innerHTML += payload['html'];
-          // scroll to bottom to show task
           todolistbox.scrollTo(0, todolistbox.scrollHeight);
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
@@ -31,6 +30,7 @@ function change_task_status(project_id, task_id, action) {
           // WARNING: this isnt optimized if ids change etc
           completelistbox = document.getElementById('listbox-completed');
           completelistbox.innerHTML += payload['html'];
+          completelistbox.scrollTo(0, completelistbox.scrollHeight);
         } else {
           alert('Invalid action: ' + action);
         }
