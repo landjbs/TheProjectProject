@@ -8,10 +8,9 @@
     </div>
     <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
       <center><i class="fas fa-question-circle" style='display:inline;'></i></center>
-      <form id='ask-question-form' method='post'>
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <form id='ask-question-form'>
         <label for="question">Question:</label>
-        <input id='question-input' type="text" name="question" list="question_suggestions" class='select-clean'
+        <input id='ask-question-form-question' type="text" name="question" list="question_suggestions" class='select-clean'
           required>
         <datalist id="question_suggestions">
           {% for question in g.project.suggest_questions() %}
@@ -21,7 +20,7 @@
         <br><br>
         {% if g.project.is_member(g.current_user) %}
           <label for="answer">Answer:</label>
-          <input id='question-answer' type='text' name='answer' class='select-clean'></input>
+          <input id='ask-question-form-answer' type='text' name='answer' class='select-clean'></input>
         {% endif %}
         <div class='float-right'>
           <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px; display:inline-block;'>
@@ -39,9 +38,9 @@
               'project.add_question',
               {'project_id'    :   String('{{ project.id }}')}
       );
-      ask_form = document.getElementById('ask-question-form')
-      question = ask_form.getElementById('question');
-      answer = ask_form.getElementById('answer');
+      ask_form = document.getElementById('ask-question-form');
+      question = document.getElementById('ask-question-form-question');
+      answer = document.getElementById('ask-question-form-answer');
       // json question only if no answer else both
       if (answer!==null) {
         data = JSON.stringify({'question' : question.value});
@@ -52,6 +51,7 @@
           'answer'    :   answer.value
         });
       }
+      alert('here');
       // submit ajax
       $.ajax({
         type        :     'POST',
