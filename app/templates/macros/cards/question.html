@@ -52,8 +52,7 @@
           {% endif %}
         </p>
       {% else %}
-        <form action="edit_answer('{{ g.project.id }}', '{{ question.id }}');"
-          method='post' style='margin-bottom:0px;'>
+        <form id='answerform-{{ question.id }}' style='margin-bottom:0px;'>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             {% if question.answer %}
               <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}'>
@@ -72,6 +71,21 @@
             </button>
           </div>
         </form>
+        <!-- TODO: move this script to external js maybe -->
+        <script>
+          answer_form = document.getElementById('answerform-{{ question.id }}');
+          answer_form.addEventListener('submit', function (e) {
+            answer_text = answer_form.getElementsByName('answer')[0].value;
+            data = JSON.stringify({'answer':answer_text});
+            url = Flask.url_for(
+                    'project.edit_answer',
+                    {
+                      'project_id'    :   String(project_id),
+                      'question_id'   :   String(question_id)
+                    }
+            );
+          })
+        </script>
       {% endif %}
     </div>
   </div>

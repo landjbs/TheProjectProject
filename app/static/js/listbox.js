@@ -61,29 +61,29 @@ function delete_comment(project_id, comment_id) {
 
 // QUESTIONS (technically not in a listbox but it hasn't come up yet)
 // edit answer to question already in question box (doesn't have to be answered)
-function edit_answer(project_id, question_id) {
-  url = Flask.url_for(
-          'project.edit_answer',
-          {
-            'project_id'    :   String(project_id),
-            'question_id'   :   String(question_id)
-          }
-  );
-  question = document.getElementById('question-' + question_id);
-  answer = question.getElementsByName('answer')[0].value;
-  console.log(answer);
-  data = JSON.stringify({'answer':answer});
-  $.ajax(
-    url: url,
-    type: 'POST',
-    dataType: 'json',
-    contentType: 'application/json',
-    data: data,
-  ).done(
-    function (payload) {
-      if payload['success'] {
-        question.style.border_color = 'green';
-      }
-    }
-  );
-}
+// function edit_answer(project_id, question_id) {
+//   url = Flask.url_for(
+//           'project.edit_answer',
+//           {
+//             'project_id'    :   String(project_id),
+//             'question_id'   :   String(question_id)
+//           }
+//   );
+//   question = document.getElementById('question-' + question_id);
+//   answer = question.getElementsByName('answer')[0].value;
+//   console.log(answer);
+//   data = JSON.stringify({'answer':answer});
+//   $.ajax(
+//     url: url,
+//     type: 'POST',
+//     dataType: 'json',
+//     contentType: 'application/json',
+//     data: data,
+//   ).done(
+//     function (payload) {
+//       if payload['success'] {
+//         question.style.border_color = 'green';
+//       }
+//     }
+//   );
+// }
