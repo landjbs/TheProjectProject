@@ -4,6 +4,7 @@
 {% from 'macros/cards/project.html' import render_project_action_bar, render_edit_project_modal, render_complete_modal, render_open_modal, render_requires_application_modal %}
 {% from 'macros/cards/question.html' import render_question_card, render_add_question_card %}
 {% from 'macros/cards/link.html' import render_add_link_card, render_project_link_card, render_private_link %}
+{% from 'macros/cardbox.html' import render_cardbox with context %}
 
 {% extends "home_base.html" %}
 
@@ -309,18 +310,14 @@
           <div class='row'>
             <!-- QUESTIONS -->
             <div class='col'>
-              {{ render_add_question_card() }}
-              <div id='listbox-questions' class='about-col'>
-                {{
-                  render_listbox(
-                    label=False,
-                    id_postfix='questions'
-                  )
-                }}
-                {% for question in project.questions %}
-                  {{ render_question_card(question) }}
-                {% endfor %}
-              </div>
+              {{
+                render_cardbox(
+                  id_postfix='questions',
+                  card_type='question',
+                  data=project.questions,
+                  add_card=True
+                )
+              }}
             </div>
             <!-- LINKS -->
             <div class='col'>
