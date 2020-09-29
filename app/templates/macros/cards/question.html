@@ -78,7 +78,14 @@
 {% endmacro -%}
 
 
-{% macro render_question_card(question) -%}
+{% macro render_question_card(question, project='detect') -%}
+  {% if project=='detect' %}
+    <script>
+      alert('{{ project }}');
+    </script>
+    {% set project = question.project %}
+  {% endif %}
+  {% set project = question.project %}
   {% set border_style = 'red' if not question.answer else 'green' %}
   <div id='question-{{ question.id }}' class='card mb-2' style='border-color: {{ border_style }};'>
     <div class='card-body'>
@@ -87,7 +94,7 @@
           {{ question.question }}
         </p>
       </div>
-      {% if not question.project.is_member(g.current_user) %}
+      {% if not project.is_member(g.current_user) %}
         <p style='margin-bottom:0px;'>
           {% if question.answer %}
             {{ question.answer }}
@@ -106,7 +113,7 @@
           <div class='float-right'>
             <div class='delete-btn task-btn'
                 style='background: transparent; display: inline-block;'
-                onclick="delete_question('{{ question.project.id }}', '{{ question.id }}')">
+                onclick="delete_question('{{ project.id }}', '{{ question.id }}')">
                 <i class="fa fa-times-circle" aria-hidden="true"></i>
             </div>
             <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
@@ -120,7 +127,7 @@
             url = Flask.url_for(
                     'project.edit_answer',
                     {
-                      'project_id'    :   String('{{ question.project.id }}'),
+                      'project_id'    :   String('{{ project.id }}'),
                       'question_id'   :   String('{{ question.id }}')
                     }
             );

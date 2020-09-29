@@ -556,7 +556,7 @@ def add_question(project_id):
             answer = filter_string(request.json.get('answer'))
             question = project.add_question(question, answer)
         else:
-            question = project.add_question(question)
+            question = project.add_question(question, project=project)
         # render question
         if question:
             success = True
