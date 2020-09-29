@@ -54,7 +54,7 @@
       {% else %}
         <form id='answerform-{{ question.id }}' style='margin-bottom:0px;'>
             {% if question.answer %}
-              <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}'>
+              <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}' onfocus="document.getElementById('question-{{ question.id }}').style['border-color'] = 'blue';">
             {% else %}
               <input style='margin-bottom:0px;' name='answer' class='select-clean' placeholder='Write your answer here...'>
             {% endif %}

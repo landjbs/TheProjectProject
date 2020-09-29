@@ -562,7 +562,7 @@ def add_question(project_id):
 
 
 @project.route('/edit_answer/<int:project_id>/<int:question_id>', methods=['POST'])
-@limiter.limit('30/min')
+@limiter.limit('60/min')
 @login_required
 def edit_answer(project_id, question_id):
     project = Project.query.get_or_404(project_id)
