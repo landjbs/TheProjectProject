@@ -72,7 +72,13 @@ function edit_answer(project_id, question_id) {
   question = document.getElementById('question-' + question_id);
   answer = question.getElementsByName('answer')[0].value;
   console.log(answer);
-  $.ajax(url).done(
+  $.ajax(
+    url: url,
+    type: 'POST',
+    dataType: 'json',
+    contentType: 'application/json',
+    data: channel_data,
+  ).done(
     function (payload) {
       if payload['success'] {
         question.style.border_color = 'green';
