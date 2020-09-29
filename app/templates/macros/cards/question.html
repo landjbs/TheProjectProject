@@ -1,14 +1,14 @@
-{% macro render_add_question_card() -%}
+{% macro render_add_question_card(project_id) -%}
   {% set cover_id = 'Question_Cover'.format(fname=name) %}
   {% set input_id = 'Question_Input'.format(fname=name) %}
-  <div class='card mb-2'>
+  <div id='ask-question-card' class='card mb-2'>
     <div class='card-body card-cover' id='{{ cover_id }}' onclick="toggleInput('{{ cover_id }}','{{ input_id }}')" style='color:black; text-align:center;'>
       <i class="fas fa-question-circle fa-2x"></i>
       <h5>Add A Question</h5>
     </div>
     <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
       <center><i class="fas fa-question-circle" style='display:inline;'></i></center>
-      <form id='askform-{{ question.id }}' method='post'>
+      <form id='ask-question-form' method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="question">Question:</label>
         <input id='question-input' type="text" name="question" list="question_suggestions" class='select-clean'
@@ -33,24 +33,26 @@
   </div>
   <!-- listener for form submit todo: move to cardbox.js -->
   <script>
-    ask_form = document.getElementById('answerform-{{ question.id }}');
+    ask_form = document.getElementById('ask-question-form');
     ask_form.addEventListener('submit', function (e) {
       url = Flask.url_for(
               'project.add_question',
-              {'project_id'    :   String('{{ question.project.id }}')}
+              {'project_id'    :   String('{{ project.id }}')}
       );
-      ask_form = document.getElementById('askform-{{ question.id }}')
+      ask_form = document.getElementById('ask-question-form')
       question = ask_form.getElementById('question');
       answer = ask_form.getElementById('answer');
       // json question only if no answer else both
-      if answer!==null {
+      if (answer!==null) {
         data = JSON.stringify({'question' : question.value});
-      } else {
+      }
+      else {
         data = JSON.stringify({
           'question'  :   question.value,
           'answer'    :   answer.value
         });
       }
+      // submit ajax
       $.ajax({
         type        :     'POST',
         url         :     url,
@@ -59,11 +61,12 @@
         data        :     data
       }).done(
         function (payload) {
-          question = document.getElementById('question-' + '{{ question.id }}');
           if (payload['success']==true) {
-            question.style['border-color'] = 'green';
+            // WARNING: relies on questions in cardbox with postfix=questions
+            question_list = document.getElementById('cardbox-list-questions');
+            question_list.innerHTML += payload['html'];
           } else {
-            question.style['border-color'] = 'red';
+            document.getElementById('ask-question-card').style['border-color'] = 'red';
           }
         }
       );
