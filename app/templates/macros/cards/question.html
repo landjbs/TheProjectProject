@@ -11,7 +11,7 @@
       <form id='askform-{{ question.id }}' method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="question">Question:</label>
-        <input type="text" name="question" list="question_suggestions" class='select-clean'
+        <input id='question-input' type="text" name="question" list="question_suggestions" class='select-clean'
           required>
         <datalist id="question_suggestions">
           {% for question in g.project.suggest_questions() %}
@@ -21,7 +21,7 @@
         <br><br>
         {% if g.project.is_member(g.current_user) %}
           <label for="answer">Answer:</label>
-          <input type='text' name='answer' class='select-clean'></input>
+          <input id='question-answer' type='text' name='answer' class='select-clean'></input>
         {% endif %}
         <div class='float-right'>
           <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px; display:inline-block;'>
