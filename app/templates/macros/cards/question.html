@@ -89,9 +89,21 @@
               url         :     url,
               dataType    :     'json',
               contentType :     'application/json',
-              data        :     data,
-            })
-          })
+              data        :     data
+            }).done(
+
+            );
+            // prevent default submission
+            e.preventDefault();
+          });
+          // inject our CSRF token into AJAX request
+          $.ajaxSetup({
+              beforeSend: function(xhr, settings) {
+                  if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+                      xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+                  }
+              }
+          });
         </script>
       {% endif %}
     </div>
