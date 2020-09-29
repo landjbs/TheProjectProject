@@ -16,16 +16,18 @@ function change_task_status(project_id, task_id, action) {
         // on delete, simply remove taskbox
         if (action=='delete') {
           // hide taskbox
-          taskbox.style.display = 'none';
+          taskbox.remove();
         // on back, hide taskbox and render in todo listbox
         } else if (action=='back') {
-          taskbox.style.display = 'none';
+          taskbox.remove();
           // WARNING: this isnt optimized if ids change etc
           todolistbox = document.getElementById('listbox-todo');
           todolistbox.innerHTML += payload['html'];
+          // scroll to bottom to show task
+          todolistbox.scrollTo(0, todolistbox.scrollHeight);
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
-          taskbox.style.display = 'none';
+          taskbox.remove();
           // WARNING: this isnt optimized if ids change etc
           completelistbox = document.getElementById('listbox-completed');
           completelistbox.innerHTML += payload['html'];
