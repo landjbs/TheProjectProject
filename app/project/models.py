@@ -385,6 +385,9 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def n_todo(self):
         return self.todo_tasks().count()
 
+    def n_complete(self):
+        return self.completed_tasks().count()
+
     def todo_tasks(self):
         ''' Returns active tasks on project that haven't been completed '''
         return self.tasks.filter_by(complete=False)

@@ -323,6 +323,7 @@ def add_task(project_id):
     if text is not None:
         task = project.add_task(text=text, author=current_user)
         if task:
+            first = (project.n_todo() == 0)
             current_user.action_xp('add_task')
             success = True
             render_task = get_template_attribute(
