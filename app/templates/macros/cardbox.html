@@ -31,7 +31,7 @@
     {% if add_card %}
       {{ add_cards[card_type]() }}
     {% endif %}
-    <div class='about-col'>
+    <div id='cardbox-list-{{ id_postfix }}' class='about-col'>
       {% for elt in data %}
         {{ render_fn(elt) }}
       {% endfor %}
