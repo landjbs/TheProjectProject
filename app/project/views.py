@@ -556,7 +556,10 @@ def add_question(project_id):
             project.add_question(question, answer)
         else:
             project.add_question(question)
-    return redirect(request.referrer)
+    return jsonify({
+        'success'   :   success,
+        'html'      :   html
+    })
 
 
 @project.route('/edit_answer/<int:project_id>/<int:question_id>', methods=['POST'])
