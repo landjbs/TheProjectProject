@@ -63,7 +63,7 @@
           if (payload['success']==true) {
             // WARNING: relies on questions in cardbox with postfix=questions
             question_list = document.getElementById('cardbox-list-questions');
-            question_list.innerHTML += payload['html'];
+            question_list.innerHTML = payload['html'] + question_list.innerHTML;
             question.value = '';
             answer.value = '';
           } else {
