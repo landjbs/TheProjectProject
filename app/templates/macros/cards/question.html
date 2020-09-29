@@ -39,7 +39,7 @@
               'project.add_question',
               {'project_id'    :   String('{{ question.project.id }}')}
       );
-      askform = document.getElementById('askform-{{ question.id }}').getElementsByTagName('input')[0];
+      question = document.getElementById('askform-{{ question.id }}').getElementsByTagName('input')[0];
       data = JSON.stringify({'question' : answer.value});
       $.ajax({
         type        :     'POST',
