@@ -79,5 +79,74 @@
 
 
 {% macro render_question_card(question) -%}
-  {{ question.project.name }}
+  {% set border_style = 'red' if not question.answer else 'green' %}
+  <div id='question-{{ question.id }}' class='card mb-2' style='border-color: {{ border_style }};'>
+    <div class='card-body'>
+      <div class='card-head'>
+        <p style='padding-bottom:1px;'>
+          {{ question.question }}
+        </p>
+      </div>
+      {% if not question.project.is_member(g.current_user) %}
+        <p style='margin-bottom:0px;'>
+          {% if question.answer %}
+            {{ question.answer }}
+          {% else %}
+            Project members haven't answered this yet.
+          {% endif %}
+        </p>
+      {% else %}
+        <form id='answerform-{{ question.id }}' style='margin-bottom:0px;'>
+            {% if question.answer %}
+              <input style='margin-bottom:0px;' name='answer' class='select-clean' value='{{ question.answer }}' onfocus="document.getElementById('question-{{ question.id }}').style['border-color'] = 'blue';">
+            {% else %}
+              <input style='margin-bottom:0px;' name='answer' class='select-clean' placeholder='Write your answer here...'>
+            {% endif %}
+          </input>
+          <div class='float-right'>
+            <div class='delete-btn task-btn'
+                style='background: transparent; display: inline-block;'
+                onclick="delete_question('{{ question.project.id }}', '{{ question.id }}')">
+                <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </div>
+            <button class='complete-btn task-btn float-right' type='submit' style='background:transparent;border:0px;margin-bottom:0px;'>
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+        <script>
+          answer_form = document.getElementById('answerform-{{ question.id }}');
+          answer_form.addEventListener('submit', function (e) {
+            url = Flask.url_for(
+                    'project.edit_answer',
+                    {
+                      'project_id'    :   String('{{ question.project.id }}'),
+                      'question_id'   :   String('{{ question.id }}')
+                    }
+            );
+            answer = document.getElementById('answerform-{{ question.id }}').getElementsByTagName('input')[0];
+            data = JSON.stringify({'answer' : answer.value});
+            $.ajax({
+              type        :     'POST',
+              url         :     url,
+              dataType    :     'json',
+              contentType :     'application/json',
+              data        :     data
+            }).done(
+              function (payload) {
+                question = document.getElementById('question-' + '{{ question.id }}');
+                if (payload['success']==true) {
+                  question.style['border-color'] = 'green';
+                } else {
+                  question.style['border-color'] = 'red';
+                }
+              }
+            );
+            // prevent default submission
+            e.preventDefault();
+          });
+        </script>
+      {% endif %}
+    </div>
+  </div>
 {% endmacro -%}
