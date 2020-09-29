@@ -59,7 +59,7 @@
   <div class='{{ boxclass }}' id='listbox-{{ id_postfix }}'
     {% if background!='default' %}style='background: {{ background }};'{% endif %}>
     {% if n==0 and empty_message %}
-      <p class='empty-text'>{{ empty_message }}</p>
+      <p id='empty-message-{{ id_postfix }}' class='empty-text'>{{ empty_message }}</p>
     {% else %}
       {% for elt in data %}
         {{ render_fn(elt) }}
@@ -94,13 +94,13 @@
             form_text.value = '';
             // get listbox content
             var listbox = document.getElementById('listbox-' + '{{ id_postfix }}');
+            // hide empty message if there is one
+            empty_message = document.getElementById('empty-message-{{ postfix_id }}');
+            if (empty_message!==null) {
+              empty_message.remove();
+            }
             // add html to listbox content
-            if (payload['first']==true) {
-              listbox.innerHTML = payload['html'];
-            }
-            else {
-              listbox.innerHTML += payload['html'];
-            }
+            listbox.innerHTML += payload['html'];
             // scroll to bottom of listbox
             listbox.scrollTo(0, listbox.scrollHeight);
           }
