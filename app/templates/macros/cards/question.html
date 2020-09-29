@@ -90,9 +90,11 @@
               data        :     data
             }).done(
               function (payload) {
+                question = document.getElementById('question-' + '{{ question.id }}');
                 if (payload['success']==true) {
-                  question = document.getElementById('question-' + '{{ question.id }}');
                   question.style.border_color = 'green';
+                } else {
+                  question.style.border_color = 'yellow';
                 }
               }
             );
