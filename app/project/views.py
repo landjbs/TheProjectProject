@@ -316,8 +316,7 @@ def add_task(project_id):
     # NOTE: CURRENTLY ASSUMES TASK IS A TO-DO TASK. IF WANT TO ADD COMPLETED, NEEDS CHANGE
     # TODO: make this use form for validation rather than just json
     project = Project.query.get_or_404(project_id)
-    # form = Task_Form()
-    success, html = False, ''
+    success, first, html = False, False, ''
     # if form.validate_on_submit():
     # TODO: validate current user is member
     text = str(request.json.get('text'))
@@ -332,6 +331,7 @@ def add_task(project_id):
             html = render_task(task)
     return jsonify({
         'success'   :   success,
+        'first'     :   first,
         'html'      :   html
     })
 
@@ -342,7 +342,7 @@ def add_task(project_id):
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
-    success, html = False, ''
+    success, first, html = False, False, ''
     text = str(request.json.get('text'))
     if text is not None:
         comment = project.add_comment(text=text, author=current_user)
@@ -354,6 +354,7 @@ def add_comment(project_id):
             html = render_comment(comment)
     return jsonify({
         'success'   :   success,
+        'first'     :   first,
         'html'      :   html
     })
 
@@ -549,7 +550,7 @@ def add_question(project_id):
     ''' Adds question (and maybe answer) to project '''
     project = Project.query.get_or_404(project_id)
     question = filter_string(request.json.get('question'))
-    success, first, html = False, False, ''
+    success, html = False, ''
     print(request.json.get('question'), request.json.get('answer'))
     if question:
         if project.is_member(current_user):
@@ -566,8 +567,7 @@ def add_question(project_id):
             html = render_question(question, project=project)
     return jsonify({
         'success'   :   success,
-        'html'      :   html,
-        'first'     :   first
+        'html'      :   html
     })
 
 
