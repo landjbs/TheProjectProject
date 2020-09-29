@@ -60,6 +60,7 @@ function delete_comment(project_id, comment_id) {
 
 
 // QUESTIONS (technically not in a listbox but it hasn't come up yet)
+// edit answer to question already in question box (doesn't have to be answered)
 function edit_answer(project_id, question_id) {
   url = Flask.url_for(
           'project.edit_answer',
@@ -69,6 +70,10 @@ function edit_answer(project_id, question_id) {
           }
   );
   $.ajax(url).done(
-
+    function (payload) {
+      if payload['success'] {
+        document.getElementById('question-' + question_id).style.border_color = 'green';  
+      }
+    }
   );
 }
