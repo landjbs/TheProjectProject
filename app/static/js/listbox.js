@@ -47,13 +47,28 @@ function delete_comment(project_id, comment_id) {
   url = Flask.url_for(
           'project.delete_comment',
           {
-            'project_id':String(project_id),
-            'comment_id':String(comment_id)
+            'project_id'  :   String(project_id),
+            'comment_id'  :   String(comment_id)
           }
   );
   $.ajax(url).done(
     function (payload) {
       document.getElementById('comment-' + comment_id).style.display = 'none';
     }
+  );
+}
+
+
+// QUESTIONS (technically not in a listbox but it hasn't come up yet)
+function edit_answer(project_id, question_id) {
+  url = Flask.url_for(
+          'project.edit_answer',
+          {
+            'project_id'    :   String(project_id),
+            'question_id'   :   String(question_id)
+          }
+  );
+  $.ajax(url).done(
+
   );
 }
