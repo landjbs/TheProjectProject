@@ -8,7 +8,7 @@
     </div>
     <div class='card-body' id='{{ input_id }}' style='color:black; text-align:center; display:none;'>
       <center><i class="fas fa-question-circle" style='display:inline;'></i></center>
-      <form action="{{ url_for('project.add_question', project_id=g.project.id) }}" method='post'>
+      <form id='askform-{{ question.id }}' method='post'>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <label for="question">Question:</label>
         <input type="text" name="question" list="question_suggestions" class='select-clean'
@@ -33,7 +33,33 @@
   </div>
   <!-- listener for form submit todo: move to cardbox.js -->
   <script>
-    
+    ask_form = document.getElementById('answerform-{{ question.id }}');
+    ask_form.addEventListener('submit', function (e) {
+      url = Flask.url_for(
+              'project.add_question',
+              {'project_id'    :   String('{{ question.project.id }}')}
+      );
+      answer = document.getElementById('answerform-{{ question.id }}').getElementsByTagName('input')[0];
+      data = JSON.stringify({'answer' : answer.value});
+      $.ajax({
+        type        :     'POST',
+        url         :     url,
+        dataType    :     'json',
+        contentType :     'application/json',
+        data        :     data
+      }).done(
+        function (payload) {
+          question = document.getElementById('question-' + '{{ question.id }}');
+          if (payload['success']==true) {
+            question.style['border-color'] = 'green';
+          } else {
+            question.style['border-color'] = 'red';
+          }
+        }
+      );
+      // prevent default submission
+      e.preventDefault();
+    });
   </script>
 {% endmacro -%}
 
