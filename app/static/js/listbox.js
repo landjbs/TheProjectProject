@@ -15,10 +15,15 @@ function change_task_status(project_id, task_id, action) {
         taskbox = document.getElementById('task-' + task_id);
         // on delete, simply remove taskbox
         if (action=='delete') {
+          // hide taskbox
           taskbox.style.display = 'none';
-        // on delete, simply remove taskbox
+        // on back, hide taskbox and render in todo listbox
         } else if (action=='back') {
+          // hide taskbox
+          taskbox.style.display = 'none';
+          // show
           taskbox.style.background = 'blue';
+        // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
           taskbox.style.background = 'green';
         } else {
