@@ -19,9 +19,9 @@
     <div class='action-bar'>
       {% if g.current_user==task.author %}
         <div class='hoverable'>
-          <a class='delete-btn task-btn float-left' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='delete') }}">
+          <div class='delete-btn task-btn float-left' onclick="change_task_status('{{ task.project.id }}', '{{ task.id }}', action='delete')">
             <i class="fa fa-times-circle" aria-hidden="true"></i>
-          </a>
+          </div>
           <span class='tooltiptext'>Delete Task</span>
         </div>
       {% endif %}

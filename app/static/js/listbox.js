@@ -11,12 +11,13 @@ function change_task_status(project_id, task_id, action) {
   );
   $.ajax(url).done(
     function (payload) {
+      taskbox = document.getElementById('task' + task_id);
       if (action=='delete') {
-        document.getElementById.style.display = 'none';
+        taskbox.style.display = 'none';
       } else if (action='back') {
-        document.getElementById.style.background = 'blue';
+        taskbox.style.background = 'blue';
       } else if (action='complete') {
-        document.getElementById.style.background = 'green';
+        taskbox.style.background = 'green';
       } else {
         alert('invalid action' + action);
       }
