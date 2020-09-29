@@ -552,7 +552,7 @@ def add_question(project_id):
     success = False
     if question:
         if project.is_member(current_user):
-            answer = filter_string(request.form.get('answer'))
+            answer = filter_string(request.json.get('answer'))
             project.add_question(question, answer)
         else:
             project.add_question(question)
