@@ -556,14 +556,14 @@ def add_question(project_id):
             answer = filter_string(request.json.get('answer'))
             question = project.add_question(question, answer)
         else:
-            question = project.add_question(question, project=project)
+            question = project.add_question(question)
         # render question
         if question:
             success = True
             render_question = get_template_attribute(
                 'macros/cards/question.html', 'render_question_card'
             )
-            html = render_question(question)
+            html = render_question(question, project=project)
     return jsonify({
         'success'   :   success,
         'html'      :   html

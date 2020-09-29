@@ -80,12 +80,8 @@
 
 {% macro render_question_card(question, project='detect') -%}
   {% if project=='detect' %}
-    <script>
-      alert('{{ project }}');
-    </script>
     {% set project = question.project %}
   {% endif %}
-  {% set project = question.project %}
   {% set border_style = 'red' if not question.answer else 'green' %}
   <div id='question-{{ question.id }}' class='card mb-2' style='border-color: {{ border_style }};'>
     <div class='card-body'>
