@@ -310,7 +310,7 @@
             <!-- QUESTIONS -->
             <div class='col'>
               {{ render_add_question_card() }}
-              <div class='about-col'>
+              <div id='questions-box' class='about-col'>
                 {% for question in project.questions %}
                   {{ render_question_card(question) }}
                 {% endfor %}
@@ -321,7 +321,7 @@
               {% if project.is_member(current_user) %}
                 {{ render_add_link_card(link_form, 'Link', "fas fa-link", 'https://developmentwebsite.com', project, 1, 0) }}
               {% endif %}
-              <div class='about-col'>
+              <div id='public-links-box' class='about-col'>
                 {% for link in project.public_links() %}
                   {{ render_project_link_card(link, project, is_owner) }}
                   <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
