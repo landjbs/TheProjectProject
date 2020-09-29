@@ -27,7 +27,12 @@ function change_task_status(project_id, task_id, action) {
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
           taskbox.remove();
-          // WARNING: this isnt optimized if ids change etc
+          // WARNING: this whole thing isnt optimized if ids change etc
+          // hide empty message if there is one
+            empty_message = document.getElementById('empty-message-completed');
+            if (empty_message!==null) {
+              empty_message.remove();
+            }
           completelistbox = document.getElementById('listbox-completed');
           completelistbox.innerHTML += payload['html'];
           completelistbox.scrollTo(0, completelistbox.scrollHeight);
