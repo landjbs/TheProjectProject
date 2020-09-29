@@ -35,7 +35,7 @@
 
 
 {% macro render_complete_task(task) -%}
-<div class="list-group-item list-group-item-action flex-column align-items-start">
+<div id='task-{{ task.id }}' class="list-group-item list-group-item-action flex-column align-items-start">
   <h6 class="mb-1">{{ task.text }}</h6>
   <div class="d-flex w-100 justify-content-between">
     <small>Completed
@@ -66,15 +66,15 @@
     <div class='action-bar'>
       {% if g.current_user in task.workers %}
         <div class='hoverable'>
-          <a class='back-btn task-btn float-left' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='back') }}">
+          <div class='back-btn task-btn float-left' onclick="change_task_status('{{ task.project.id }}', '{{ task.id }}', action='back')">
             <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-          </a>
+          </div>
           <span class='tooltiptext'>Actually, I Didn't Help</span>
         </div>
       {% else %}
-        <a class='complete-btn task-btn float-right' href="{{ url_for('project.change_task_status', project_id=task.project.id, task_id=task.id, action='complete') }}">
+        <div class='complete-btn task-btn float-right' onclick="change_task_status('{{ task.project.id }}', '{{ task.id }}', action='complete')">
           <i class="fa fa-check-circle" aria-hidden="true"></i>
-        </a>
+        </div>
       {% endif %}
     </div>
   {% endif %}
