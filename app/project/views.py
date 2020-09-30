@@ -359,6 +359,17 @@ def add_comment(project_id):
     })
 
 
+@project.route('/pin_comment/<int:project_id>/<int:comment_id>')
+@login_required
+def pin_comment(project_id, comment_id):
+    ''' Pin comment to top of project comment box '''
+    project = Project.query.get_or_404(project_id)
+    success, html = False, ''
+    if project.is_owner(current_user):
+        
+    return jsonify({})
+
+
 @project.route('/delete_comment/<int:project_id>/<int:comment_id>')
 @login_required
 def delete_comment(project_id, comment_id):

@@ -15,7 +15,7 @@
           </div>
         {% endif %}
         {% if project.is_owner(current_user) %}
-          <div class='pin {% if comment.pinned %}pinned{% endif %}' onclick='pin("{{ comment.id }}");'>
+          <div class='pin {% if comment.pinned %}pinned{% endif %}' onclick='pin({{comment.project.id}}, {{ comment.id }});'>
             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
           </div>
         {% endif %}

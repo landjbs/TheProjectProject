@@ -450,6 +450,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         )
         return comment
 
+    def pin_comment(self, comment_id):
+        ''' Pins comment to top of project box '''
+        
+
     def delete_comment(self, comment_id, user):
         ''' Deletes comment from project '''
         comment = self.comments.filter_by(id=comment_id).first()
