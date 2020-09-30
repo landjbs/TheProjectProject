@@ -469,6 +469,12 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.update()
         return True
 
+    def ordered_comments(self):
+        ''' Comments in chronological order with pinned at top '''
+        pinned = self.comments.filter_by(pinned=True).all()
+        unpinned = self.comments.filter_by(pinned=False).all()
+        return (pinned + unpinned)
+
     ## questions ##
     def suggest_questions(self):
         ''' Generates list of suggested questions based on project stats '''

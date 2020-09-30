@@ -232,7 +232,7 @@
                         label='Comments',
                         id_postfix='comments',
                         card_type='comment',
-                        data=project.comments.all(),
+                        data=project.ordered_comments(),
                         empty_message='No commments yet.',
                         form=comment_form
                       )
