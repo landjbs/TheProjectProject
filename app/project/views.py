@@ -317,7 +317,7 @@ def add_task(project_id):
     # TODO: make this use form for validation rather than just json
     project = Project.query.get_or_404(project_id)
     # form = Task_Form()
-    success, html, count = False, '', 0
+    success, html = False, ''
     if project.is_member(current_user):
         text = str(request.json.get('text'))
         if text is not None:
@@ -332,7 +332,7 @@ def add_task(project_id):
     return jsonify({
         'success'   :   success,
         'html'      :   html,
-        'count'     :   count
+        'count'     :   project.n_todo()
     })
 
 
@@ -352,11 +352,10 @@ def add_comment(project_id):
                                 'macros/cards/comment.html', 'render_comment'
                             )
             html = render_comment(comment)
-            count = project.comments.count()
     return jsonify({
         'success'   :   success,
         'html'      :   html,
-        'count'     :   count
+        'count'     :   project.comments.count()
     })
 
 
