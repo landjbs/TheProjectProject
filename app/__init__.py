@@ -232,10 +232,10 @@ def register_errorhandlers(app):
         app.errorhandler(e)(render_error)
 
     # register handler for bad token
-    from flask_wtf.csrf import CSRFError
-    @app.errorhandler(CSRFError)
-    def handle_csrf_error(e):
-        return render_template('csrf_error.html', reason=e.description), 400
+    # from flask_wtf.csrf import CSRFError
+    # @app.errorhandler(CSRFError)
+    # def handle_csrf_error(e):
+    #     return render_template('csrf_error.html', reason=e.description), 400
 
 
 def register_jinja_env(app):
