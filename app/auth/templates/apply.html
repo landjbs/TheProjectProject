@@ -29,7 +29,10 @@
         <div class="input-control">
           <input id="toggle-off-q1" class="toggle toggle-left"
                 name='{{ elt.name }}' value="true" type="radio">
-          <label for="toggle-off-q1" class="btn"><span>Y</span> Yes</label>
+          <label for="toggle-off-q1" class="btn">
+            <span class='presskey'>Y</span>
+            Yes
+          </label>
         </div>
         {% if elt.errors %}
           <div class="warning">You must accept the terms to apply.</div>

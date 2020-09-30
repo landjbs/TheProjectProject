@@ -214,6 +214,17 @@ form {
   transition: background 600ms ease, color 600ms ease;
 }
 
+.btn .presskey {
+  border: 1px solid #808080;
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 12px;
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  margin-top: -5px;
+}
+
 input[type="radio"] {
   border: 1px solid white;
 }
