@@ -130,6 +130,7 @@ function unpin(project_id, comment_id) {
         // rerender comment at bottom of commentbox and scroll to bottom
         commentbox = document.getElementById('listbox-comments');
         commentbox.innerHTML += payload['html'];
+        commentbox.scrollTo(0, commentbox.scrollHeight);
       } else {
         alert('Could not pin comment.')
       }
