@@ -408,7 +408,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         # notify members if prompted
         if notify:
             self.notify_members(
-                text=f'{author.name} added the task "{text}" to {self.name}.'
+                text=f'{author.name} added the task "{text}" to {self.name}.',
+                exlcude=set(author)
             )
         # return task object for json rendering
         return task
