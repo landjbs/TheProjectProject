@@ -102,6 +102,7 @@ function pin(comment_id) {
     function (payload) {
       if (payload['success']==true) {
         // remove comment from page (don't worry it'll be rerendered soon)
+        document.getElementById('comment-' + comment_id).remove();
         // rerender comment at top of commentbox and scroll to top
         commentbox = document.getElementById('listbox-comment');
         commentbox.innerHTML = payload['html'] + comment.innerHTML;
