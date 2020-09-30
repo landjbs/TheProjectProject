@@ -258,13 +258,13 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.update()
         return True
 
-    def notify_members(self, text, important=False, exlcude=[], include_owner=True):
+    def notify_members(self, text, important=False, exclude=[], include_owner=True):
         ''' Notify project members with text and category '''
-        exlude = set(exlude)
+        exclude = set(exlude)
         if not include_owner:
             exclude.add(self.owner)
         for member in self.members:
-            if not member in exlude:
+            if not member in exclude:
                 member.notify(
                     text=text,
                     name=self.name,
@@ -409,7 +409,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         if notify:
             self.notify_members(
                 text=f'{author.name} added the task "{text}" to {self.name}.',
-                exlcude=set(author)
+                exclude=set(author)
             )
         # return task object for json rendering
         return task
@@ -423,7 +423,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             if not task.complete:
                 task.mark_complete(user)
                 self.notify_members(
-                    text=f'{user.name} completed the task, "{task.text}" for {self.name}.'
+                    text=f'{user.name} completed the task, "{task.text}" for {self.name}.',
+                    exclude={user}
                 )
             else:
                 task.add_worker(user)
