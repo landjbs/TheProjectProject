@@ -317,22 +317,22 @@ def add_task(project_id):
     # TODO: make this use form for validation rather than just json
     project = Project.query.get_or_404(project_id)
     # form = Task_Form()
-    success, html = False, ''
-    # if form.validate_on_submit():
-    # TODO: validate current user is member
-    text = str(request.json.get('text'))
-    if text is not None:
-        task = project.add_task(text=text, author=current_user)
-        if task:
-            current_user.action_xp('add_task')
-            success = True
-            render_task = get_template_attribute(
-                                'macros/cards/task.html', 'render_todo_task'
-                            )
-            html = render_task(task)
+    success, html, count = False, '', 0
+    if project.is_member(current_user):
+        text = str(request.json.get('text'))
+        if text is not None:
+            task = project.add_task(text=text, author=current_user)
+            if task:
+                current_user.action_xp('add_task')
+                success = True
+                render_task = get_template_attribute(
+                                    'macros/cards/task.html', 'render_todo_task'
+                                )
+                html = render_task(task)
     return jsonify({
         'success'   :   success,
-        'html'      :   html
+        'html'      :   html,
+        'count'     :   count
     })
 
 
