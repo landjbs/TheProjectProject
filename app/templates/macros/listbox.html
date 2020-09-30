@@ -101,6 +101,11 @@
             if (empty_message!==null) {
               empty_message.remove();
             }
+            // update count if there is one
+            n_count = document.getElementById('n-{{ id_postfix }}');
+            if (n_count!==null) {
+              
+            }
             // add html to listbox content
             listbox.innerHTML += payload['html'];
             // scroll to bottom of listbox
