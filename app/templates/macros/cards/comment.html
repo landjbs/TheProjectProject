@@ -1,8 +1,11 @@
 {% macro render_comment(comment) -%}
+  {% set project = comment.project %}
   <div id='comment-{{ comment.id }}' class="list-group-item list-group-item-action flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
-      <a href='user={{ comment.author.code }}' class="mb-1">
-        <u>{{ comment.author.name }}</u>
+      <div class="mb-1">
+        <a href='user={{ comment.author.code }}' style='text-decoration: underline;'>
+          {{ comment.author.name }}
+        </a>
         {% if (comment.author == comment.project.owner) %}
           <div class='hoverable'>
             <i class="fa fa-circle" style='color:#FF5D00;'></i>
@@ -19,7 +22,7 @@
             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
           </div>
         {% endif %}
-      </a>
+      </div>
       <small>{{ comment.timestamp | ago }}</small>
     </div>
     <p class="mb-1">{{ comment.text }}

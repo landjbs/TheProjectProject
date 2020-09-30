@@ -90,7 +90,7 @@ function delete_comment(project_id, comment_id) {
   );
 }
 
-function pin(comment_id) {
+function pin(project_id, comment_id) {
   url = Flask.url_for(
           'project.pin_comment',
           {
@@ -104,8 +104,10 @@ function pin(comment_id) {
         // remove comment from page (don't worry it'll be rerendered soon)
         document.getElementById('comment-' + comment_id).remove();
         // rerender comment at top of commentbox and scroll to top
-        commentbox = document.getElementById('listbox-comment');
-        commentbox.innerHTML = payload['html'] + comment.innerHTML;
+        commentbox = document.getElementById('listbox-comments');
+        commentbox.innerHTML = payload['html'] + commentbox.innerHTML;
+      } else {
+        alert('Could not pin comment.')
       }
     }
   );
