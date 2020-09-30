@@ -17,11 +17,16 @@
             <span class='tooltiptext'>Member</span>
           </div>
         {% endif %}
-        {% if project.is_owner(g.current_user) %}
-          <div class='pin {% if comment.pinned %}pinned{% endif %}' onclick='pin({{comment.project.id}}, {{ comment.id }});'>
+        {% if comment.pinned %}
+          <div class='pin pinned' onclick='unpin({{comment.project.id}}, {{ comment.id }});'>
+            <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+          </div>
+        {% elif project.is_owner(g.current_user) %}
+          <div class='pin' onclick='unpin({{comment.project.id}}, {{ comment.id }});'>
             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
           </div>
         {% endif %}
+
       </div>
       <small>{{ comment.timestamp | ago }}</small>
     </div>
