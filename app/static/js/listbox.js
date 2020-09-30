@@ -127,9 +127,9 @@ function unpin(project_id, comment_id) {
       if (payload['success']==true) {
         // remove comment from page (don't worry it'll be rerendered soon)
         document.getElementById('comment-' + comment_id).remove();
-        // rerender comment at top of commentbox and scroll to top
+        // rerender comment at bottom of commentbox and scroll to bottom
         commentbox = document.getElementById('listbox-comments');
-        commentbox.innerHTML = payload['html'] + commentbox.innerHTML;
+        commentbox.innerHTML += payload['html'];
       } else {
         alert('Could not pin comment.')
       }
