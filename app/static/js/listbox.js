@@ -19,12 +19,12 @@ function change_task_status(project_id, task_id, action) {
           taskbox.remove();
           // edit number of tasks todo
           todo_count = document.getElementById('n-todo');
-          todo_count.innerHTML = payload['todo_count'];
+          if (todo_count!==null) {
+            todo_count.innerHTML = payload['todo_count'];
+          }
         // on back, hide taskbox and render in todo listbox
         } else if (action=='back') {
           taskbox.remove();
-          // WARNING: BACK WILL TEMP MOVE IF ONE PERSON UNCOMPLETES AND OTHERS DONT. SHOULD PROB FIX
-          // WARNING: this isnt optimized if ids change etc
           todolistbox = document.getElementById('listbox-todo');
           empty_message = document.getElementById('empty-message-todo');
           if (empty_message!==null) {
