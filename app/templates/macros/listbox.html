@@ -44,11 +44,13 @@
       {{ label }}
       {% if icon_type %}
         <i class='{{ icon_types[icon_type] }}'></i>
-        {% if n_override is sameas false %}
-          {{ n }}
-        {% else %}
-          {{ n_override }}
-        {% endif %}
+        <span id='n-{{ id_postfix }}'>
+          {% if n_override is sameas false %}
+            {{ n }}
+          {% else %}
+            {{ n_override }}
+          {% endif %}
+        </span>
       {% endif %}
     {% if size != 'small' %}
       </h4>
