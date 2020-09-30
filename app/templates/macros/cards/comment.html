@@ -22,7 +22,7 @@
             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
           </div>
         {% elif project.is_owner(g.current_user) %}
-          <div class='pin' onclick='unpin({{comment.project.id}}, {{ comment.id }});'>
+          <div class='pin' onclick='pin({{comment.project.id}}, {{ comment.id }});'>
             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
           </div>
         {% endif %}
