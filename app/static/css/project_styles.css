@@ -365,3 +365,17 @@ td {
 .card-cover:hover {
   background: rgba(0,0,255,0.07)
 }
+
+
+/* comment pinning */
+.pin {
+  color: blue;
+}
+
+.pin:hover {
+  color: red;
+}
+
+.pin:active {
+  color: red;
+}

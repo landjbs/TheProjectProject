@@ -14,6 +14,11 @@
             <span class='tooltiptext'>Member</span>
           </div>
         {% endif %}
+        {% if project.is_owner(current_user) %}
+          <div class='pin'>
+            <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+          </div>
+        {% endif %}
       </a>
       <small>{{ comment.timestamp | ago }}</small>
     </div>
