@@ -112,3 +112,26 @@ function pin(project_id, comment_id) {
     }
   );
 }
+
+function unpin(project_id, comment_id) {
+  url = Flask.url_for(
+          'project.unpin_comment',
+          {
+            'project_id'  :   String(project_id),
+            'comment_id'  :   String(comment_id)
+          }
+  );
+  $.ajax(url).done(
+    function (payload) {
+      if (payload['success']==true) {
+        // remove comment from page (don't worry it'll be rerendered soon)
+        document.getElementById('comment-' + comment_id).remove();
+        // rerender comment at top of commentbox and scroll to top
+        commentbox = document.getElementById('listbox-comments');
+        commentbox.innerHTML = payload['html'] + commentbox.innerHTML;
+      } else {
+        alert('Could not pin comment.')
+      }
+    }
+  );
+}
