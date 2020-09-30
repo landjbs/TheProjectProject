@@ -35,10 +35,10 @@ function change_task_status(project_id, task_id, action) {
           // edit number of tasks todo
           todo_count = document.getElementById('n-todo');
           if (todo_count!==null) {
-            todo_count.innerHTML = payload['count'];
+            todo_count.innerHTML = payload['todo_count'];
           }
           // edit number of tasks completed
-          complete_count = document.getElementById('n-complete');
+          complete_count = document.getElementById('n-completed');
           if (complete_count!==null) {
             complete_count.innerHTML = payload['complete_count'];
           }
@@ -56,10 +56,10 @@ function change_task_status(project_id, task_id, action) {
           // edit number of tasks todo
           todo_count = document.getElementById('n-todo');
           if (todo_count!==null) {
-            todo_count.innerHTML = payload['count'];
+            todo_count.innerHTML = payload['todo_count'];
           }
           // edit number of tasks completed
-          complete_count = document.getElementById('n-complete');
+          complete_count = document.getElementById('n-completed');
           if (complete_count!==null) {
             complete_count.innerHTML = payload['complete_count'];
           }
