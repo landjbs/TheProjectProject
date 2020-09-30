@@ -384,3 +384,11 @@ td {
 .pinned {
   color: red;
 }
+
+.pinned:hover {
+  color: #ccc;
+}
+
+.pinned:active {
+  color: #ccc;
+}
