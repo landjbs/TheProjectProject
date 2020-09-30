@@ -258,11 +258,15 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.update()
         return True
 
-    def notify_members(self, text, important=False, include_owner=True):
+    def notify_members(self, text, important=False, exlcude=[], include_owner=True):
         ''' Notify project members with text and category '''
+        exlude = set(exlude)
+        if not include_owner:
+            exclude.add(self.owner)
         if include_owner:
             owner = self.owner
         for member in self.members:
+            if not member in exlude
             if not include_owner:
                 if member==self.owner:
                     continue
