@@ -50,8 +50,8 @@ body {
 
 #mainNav #channelList {
   max-height: 600px;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 400px;
+  max-width: 400px;
   overflow: scroll;
   margin: 0px;
   padding: 0px;
@@ -66,16 +66,21 @@ body {
 @media (max-width: 996px) {
   #mainNav .dropdown-menu {
     background: black;
-    color: white;
     border: 1px solid white;
-    min-width: 100%;
-    max-width: 100%;
+  }
+
+  #mainNav #channelList {
+    color: white;
+    max-width: none !important;
+  }
+
+  #messagesSearch {
+    color: white;
   }
 
   /* dropdown items */
   #mainNav .dropdown-item {
     color: white;
-    
   }
 
   /* search bars */

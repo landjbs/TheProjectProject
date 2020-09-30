@@ -1,53 +1,51 @@
 {% macro render_application_card(application) -%}
 {% set user = application.user %}
-<div class="col-md-4">
-  <div class="card mb-2">
-    <div class="card-body">
-      <div class='card-head tiny'>
-        <a class='project-name' href='user={{ user.code }}'>
-          <h5>
-            {{ user.name }}
-            {% set badge = user.choose_badge('member') %}
-            {% if badge %}
-              {{ render_badge_icon(badge) }}
-            {% elif user.recently_active() %}
-              <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
-            {% endif %}
-          </h5>
-        </a>
-      </div>
-      <div class='card-oneline' style=''>
-        <p class='oneliner'>
-          Question: {{ g.project.application_question }}
-          <br>
-          Response: {{ application.text }}
-        </p>
-      </div>
-      <div class='card-foot float-left'>
-        {% for s in user.subjects[:5] %}
-          <a href='/subject={{ s.subject.code }}'>
-            {% if loop.index>1 %}
-            ,
-            {% endif %}
-            <p class='subject-tag' style='background:{{ s.subject.color }};'>
-              {{ s.subject.name }}
-            </p>
-          </a>
-        {% endfor %}
-      </div>
-      <br>
-      <hr class="my-2">
-      <a class='float-left'
-      style='background: transparent;'
-        href="{{ url_for('project.reject_application', project_id=g.project.id, user_id=application.user.id) }}">
-        <button class='btn'>Reject</button>
-      </a>
-      <a class='complete-btn task-btn float-right'
-          style='background: transparent;'
-          href="{{ url_for('project.accept_application', project_id=g.project.id, user_id=application.user.id) }}">
-        <button class='btn'>Accept</button>
+<div class="card mb-2">
+  <div class="card-body">
+    <div class='card-head tiny'>
+      <a class='project-name' href='user={{ user.code }}'>
+        <h5>
+          {{ user.name }}
+          {% set badge = user.choose_badge('member') %}
+          {% if badge %}
+            {{ render_badge_icon(badge) }}
+          {% elif user.recently_active() %}
+            <i class="fa fa-circle fa-sm" style='color:#00FF5D;'></i>
+          {% endif %}
+        </h5>
       </a>
     </div>
+    <div class='card-oneline' style=''>
+      <p class='oneliner'>
+        Question: {{ g.project.application_question }}
+        <br>
+        Response: {{ application.text }}
+      </p>
+    </div>
+    <div class='card-foot float-left'>
+      {% for s in user.subjects[:5] %}
+        <a href='/subject={{ s.subject.code }}'>
+          {% if loop.index>1 %}
+          ,
+          {% endif %}
+          <p class='subject-tag' style='background:{{ s.subject.color }};'>
+            {{ s.subject.name }}
+          </p>
+        </a>
+      {% endfor %}
+    </div>
+    <br>
+    <hr class="my-2">
+    <a class='float-left'
+    style='background: transparent;'
+      href="{{ url_for('project.reject_application', project_id=g.project.id, user_id=application.user.id) }}">
+      <button class='btn'>Reject</button>
+    </a>
+    <a class='complete-btn task-btn float-right'
+        style='background: transparent;'
+        href="{{ url_for('project.accept_application', project_id=g.project.id, user_id=application.user.id) }}">
+      <button class='btn'>Accept</button>
+    </a>
   </div>
 </div>
 {% endmacro -%}
@@ -55,20 +53,18 @@
 
 {% macro render_project_application_card(application) -%}
   {% set project = application.project %}
-  <div class="col-md-4">
-    <div class="card mb-2">
-      <div class="card-body">
-        <div class='card-head tiny'>
-          <a class='project-name' href="{{ url_for('project.project_page', project_code=project.code) }}">
-            {{ project.name }}
-          </a>
-        </div>
-        <center>
-          <a class='task-btn' href="{{ url_for('project.withdraw_application', project_id=project.id) }}">
-            <button class='btn'>Withdraw</button>
-          </a>
-        </center>
+  <div class="card mb-2">
+    <div class="card-body">
+      <div class='card-head tiny'>
+        <a class='project-name' href="{{ url_for('project.project_page', project_code=project.code) }}">
+          {{ project.name }}
+        </a>
       </div>
+      <center>
+        <a class='task-btn' href="{{ url_for('project.withdraw_application', project_id=project.id) }}">
+          <button class='btn'>Withdraw</button>
+        </a>
+      </center>
     </div>
   </div>
 {% endmacro -%}
