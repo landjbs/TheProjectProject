@@ -17,6 +17,9 @@ function change_task_status(project_id, task_id, action) {
         if (action=='delete') {
           // hide taskbox
           taskbox.remove();
+          // edit number of tasks todo
+          todo_count = document.getElementById('n-todo');
+          todo_count.innerHTML = payload['count'];
         // on back, hide taskbox and render in todo listbox
         } else if (action=='back') {
           taskbox.remove();
@@ -29,6 +32,9 @@ function change_task_status(project_id, task_id, action) {
           }
           todolistbox.innerHTML += payload['html'];
           todolistbox.scrollTo(0, todolistbox.scrollHeight);
+          // edit number of tasks todo
+          todo_count = document.getElementById('n-todo');
+          todo_count.innerHTML = payload['count'];
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
           taskbox.remove();

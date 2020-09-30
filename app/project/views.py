@@ -393,7 +393,7 @@ def change_task_status(project_id, task_id, action):
             html = render_task(task)
     return jsonify({
         'success'   : success,
-        'html'      : html
+        'html'      : html,
     })
 
 
