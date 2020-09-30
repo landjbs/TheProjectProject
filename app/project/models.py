@@ -752,7 +752,7 @@ class Comment(CRUDMixin, db.Model):
     # time
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
     # pinned
-    pinned = db.Column(db.Boolean, nullable=False, default=False)
+    pinned = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return f'<Comment {self.author.name} on {self.project.name} at {self.timestamp}; TEXT={self.text}>'

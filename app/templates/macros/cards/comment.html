@@ -15,7 +15,7 @@
           </div>
         {% endif %}
         {% if project.is_owner(current_user) %}
-          <div class='pin'>
+          <div class='pin {% if comment.pinned %}pinned{% endif %}'>
             <i class="fa fa-thumb-tack" aria-hidden="true"></i>
           </div>
         {% endif %}
