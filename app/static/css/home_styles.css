@@ -50,6 +50,7 @@ body {
 
 #mainNav #channelList {
   max-height: 600px;
+  min-width: 300px;
   max-width: 300px;
   overflow: scroll;
   margin: 0px;

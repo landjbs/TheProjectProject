@@ -77,6 +77,7 @@
 {% endmacro -%}
 
 
+<!-- WARNING: deprecated -->
 {% macro render_channel_tag(channel) -%}
   <div class='dropdown-item searchable' onclick="open_channel('{{ channel.id }}');">
     {{ channel.name(g.current_user, html=False) }}
@@ -114,7 +115,7 @@
     </div>
     <br>
     <p class='last_message'>
-      {{ channel.messages[-1].text }}
+      {{ channel.messages[0].text }}
     </p>
   </div>
 {% endmacro -%}
@@ -122,6 +123,6 @@
 
 {% macro render_channel_list(channels) -%}
   {% for channel in channels %}
-    {{ render_channel_tag(channel) }}
+    {{ render_channel_card(channel) }}
   {% endfor %}
 {% endmacro -%}
