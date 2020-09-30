@@ -366,8 +366,17 @@ def pin_comment(project_id, comment_id):
     project = Project.query.get_or_404(project_id)
     success, html = False, ''
     if project.is_owner(current_user):
-        
-    return jsonify({})
+        comment = project.pin_comment(comment_id)
+        if comment:
+            success = True
+            render_comment = get_template_attribute(
+                                'macros/cards/comment.html', 'render_comment'
+                            )
+            html = render_comment(comment)
+    return jsonify({
+        'success'   :   success,
+        'html'      :   html
+    })
 
 
 @project.route('/delete_comment/<int:project_id>/<int:comment_id>')
