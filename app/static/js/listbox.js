@@ -89,3 +89,7 @@ function delete_comment(project_id, comment_id) {
     }
   );
 }
+
+function pin(comment_id) {
+  
+}
