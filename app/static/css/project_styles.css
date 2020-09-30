@@ -102,7 +102,8 @@ ul ul a {
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-    width: 100%;
+    /* content shrunk by sidebar width */
+    width: calc(100% - 40vh);
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
