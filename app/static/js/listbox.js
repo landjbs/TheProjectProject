@@ -100,7 +100,12 @@ function pin(comment_id) {
   );
   $.ajax(url).done(
     function (payload) {
-
+      if (payload['success']==true) {
+        // remove comment from page (don't worry it'll be rerendered soon)
+        // rerender comment at top of commentbox and scroll to top
+        commentbox = document.getElementById('listbox-comment');
+        commentbox.innerHTML = payload['html'] + comment.innerHTML;
+      }
     }
   );
 }
