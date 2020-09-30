@@ -643,9 +643,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         estimated = self.estimated_time
         # get elasped time of project
         elasped = self.elasped()
-        # return larger of the two
-        return int(max(estimated, elasped))
-
+        if estimated > elasped:
+            self.estimated_time = elasped
+            self.update()
+        return self.estimated_time
 
     def subject_data(self, n=10):
         ''' Get dict mapping project subject names to member skill levels '''
