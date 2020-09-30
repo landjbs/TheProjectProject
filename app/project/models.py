@@ -263,19 +263,14 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         exlude = set(exlude)
         if not include_owner:
             exclude.add(self.owner)
-        if include_owner:
-            owner = self.owner
         for member in self.members:
-            if not member in exlude
-            if not include_owner:
-                if member==self.owner:
-                    continue
-            member.notify(
-                text=text,
-                name=self.name,
-                important=important,
-                redirect=self.get_url()
-            )
+            if not member in exlude:
+                member.notify(
+                    text=text,
+                    name=self.name,
+                    important=important,
+                    redirect=self.get_url()
+                )
         return True
 
     def add_member(self, user, notify_owner):
