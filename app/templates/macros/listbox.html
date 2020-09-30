@@ -104,7 +104,7 @@
             // update count if there is one
             n_count = document.getElementById('n-{{ id_postfix }}');
             if (n_count!==null) {
-              
+              n_count.innerHTML = payload['count'];
             }
             // add html to listbox content
             listbox.innerHTML += payload['html'];
