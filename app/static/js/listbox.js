@@ -36,8 +36,8 @@ function change_task_status(project_id, task_id, action) {
           todo_count = document.getElementById('n-todo');
           todo_count.innerHTML = payload['count'];
           // edit number of tasks completed
-          todo_count = document.getElementById('n-complete');
-          todo_count.innerHTML = payload['complete_count'];
+          complete_count = document.getElementById('n-complete');
+          complete_count.innerHTML = payload['complete_count'];
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
           taskbox.remove();
@@ -50,6 +50,12 @@ function change_task_status(project_id, task_id, action) {
           completelistbox = document.getElementById('listbox-completed');
           completelistbox.innerHTML += payload['html'];
           completelistbox.scrollTo(0, completelistbox.scrollHeight);
+          // edit number of tasks todo
+          todo_count = document.getElementById('n-todo');
+          todo_count.innerHTML = payload['count'];
+          // edit number of tasks completed
+          complete_count = document.getElementById('n-complete');
+          complete_count.innerHTML = payload['complete_count'];
         } else {
           alert('Invalid action: ' + action);
         }
