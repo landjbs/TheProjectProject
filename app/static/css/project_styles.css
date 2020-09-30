@@ -380,3 +380,7 @@ td {
 .pin:active {
   color: red;
 }
+
+.pin .pinned {
+  color: red;
+}
