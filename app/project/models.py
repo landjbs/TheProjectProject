@@ -482,9 +482,10 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
 
     def ordered_comments(self):
         ''' Comments in chronological order with pinned at top '''
-        pinned = self.comments.filter_by(pinned=True).all()
-        unpinned = self.comments.filter_by(pinned=False).all()
-        return (pinned + unpinned)
+        # pinned  = self.comments.filter_by(pinned=True).all()
+        # unpinned = self.comments.filter_by(pinned=False).all()
+        # return (pinned + unpinned)
+        return self.comments
 
     ## questions ##
     def suggest_questions(self):
