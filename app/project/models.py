@@ -643,7 +643,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         estimated = self.estimated_time
         # get elasped time of project
         elasped = self.elasped()
-        if estimated > elasped:
+        # update estimated time if elaspsed is greater
+        if elasped > estimated:
             self.estimated_time = elasped
             self.update()
         return self.estimated_time
