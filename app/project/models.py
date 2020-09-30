@@ -409,7 +409,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         if notify:
             self.notify_members(
                 text=f'{author.name} added the task "{text}" to {self.name}.',
-                exclude=set(author)
+                exclude={author}
             )
         # return task object for json rendering
         return task
@@ -447,7 +447,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.comments.append(comment)
         self.update()
         self.notify_members(
-            text=f'{author.name} commented "{text}" on {self.name}.'
+            text=f'{author.name} commented "{text}" on {self.name}.',
+            exclude={author}
         )
         return comment
 
