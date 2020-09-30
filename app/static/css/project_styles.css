@@ -369,7 +369,8 @@ td {
 
 /* comment pinning */
 .pin {
-  color: blue;
+  color: #ccc;
+  display: inline;
 }
 
 .pin:hover {
