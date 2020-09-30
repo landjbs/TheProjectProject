@@ -80,12 +80,15 @@ class Channel(CRUDMixin, db.Model):
         '''
         Sends message of text from sender to channel. Returns message if sent.
         '''
-        if self.users.filter_by(user=sender).first() is None:
+        uc = self.users.filter_by(user=sender).first()
+        if uc is None:
             return False
         message = Message(text=text, sender=sender)
         self.messages.append(message)
         self.last_active = datetime.utcnow()
         self.update()
+        # update user channel last_read
+        uc.update_last_read()
         return message
 
     # data
