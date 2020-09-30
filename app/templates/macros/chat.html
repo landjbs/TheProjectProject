@@ -123,6 +123,8 @@
 
 {% macro render_channel_list(channels) -%}
   {% for channel in channels %}
-    {{ render_channel_card(channel) }}
+    <div class='dropdown-item'>
+      {{ render_channel_card(channel) }}
+    </div>
   {% endfor %}
 {% endmacro -%}

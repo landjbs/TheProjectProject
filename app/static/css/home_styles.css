@@ -66,12 +66,16 @@ body {
 @media (max-width: 996px) {
   #mainNav .dropdown-menu {
     background: black;
+    color: white;
     border: 1px solid white;
+    min-width: 100%;
+    max-width: 100%;
   }
 
   /* dropdown items */
   #mainNav .dropdown-item {
     color: white;
+    
   }
 
   /* search bars */
