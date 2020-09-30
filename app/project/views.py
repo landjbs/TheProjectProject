@@ -342,7 +342,7 @@ def add_task(project_id):
 def add_comment(project_id):
     ''' Add comment to project '''
     project = Project.query.get_or_404(project_id)
-    success, html = False, ''
+    success, html, count = False, '', 0
     text = str(request.json.get('text'))
     if text is not None:
         comment = project.add_comment(text=text, author=current_user)
@@ -352,9 +352,11 @@ def add_comment(project_id):
                                 'macros/cards/comment.html', 'render_comment'
                             )
             html = render_comment(comment)
+            count = project.comments.count()
     return jsonify({
         'success'   :   success,
-        'html'      :   html
+        'html'      :   html,
+        'count'     :   count
     })
 
 
