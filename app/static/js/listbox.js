@@ -106,6 +106,7 @@ function pin(project_id, comment_id) {
         // rerender comment at top of commentbox and scroll to top
         commentbox = document.getElementById('listbox-comments');
         commentbox.innerHTML = payload['html'] + commentbox.innerHTML;
+        commentbox.scrollTo(0, 0);
       } else {
         alert('Could not pin comment.')
       }
