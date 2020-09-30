@@ -386,7 +386,7 @@ def unpin_comment(project_id, comment_id):
     project = Project.query.get_or_404(project_id)
     success, html = False, ''
     if project.is_owner(current_user):
-        comment = project.pin_comment(comment_id)
+        comment = project.unpin_comment(comment_id)
         if comment:
             success = True
             render_comment = get_template_attribute(

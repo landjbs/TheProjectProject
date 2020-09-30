@@ -459,6 +459,15 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         comment.update()
         return comment
 
+    def unpin_comment(self, comment_id):
+        ''' Unpins comment '''
+        comment = self.comments.filter_by(id=comment_id).first()
+        if comment is None or (comment.pinned==False):
+            return False
+        comment.pinned = False
+        comment.update()
+        return comment
+
     def delete_comment(self, comment_id, user):
         ''' Deletes comment from project '''
         comment = self.comments.filter_by(id=comment_id).first()
