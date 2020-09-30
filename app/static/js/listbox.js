@@ -34,14 +34,17 @@ function change_task_status(project_id, task_id, action) {
           todolistbox.scrollTo(0, todolistbox.scrollHeight);
           // edit number of tasks todo
           todo_count = document.getElementById('n-todo');
-          todo_count.innerHTML = payload['count'];
+          if (todo_count!==null) {
+            todo_count.innerHTML = payload['count'];
+          }
           // edit number of tasks completed
           complete_count = document.getElementById('n-complete');
-          complete_count.innerHTML = payload['complete_count'];
+          if (complete_count!==null) {
+            complete_count.innerHTML = payload['complete_count'];
+          }
         // on complete, hide taskbox and render in complete listbox
         } else if (action=='complete') {
           taskbox.remove();
-          // WARNING: this whole thing isnt optimized if ids change etc
           // hide empty message if there is one
           empty_message = document.getElementById('empty-message-completed');
           if (empty_message!==null) {
@@ -52,10 +55,14 @@ function change_task_status(project_id, task_id, action) {
           completelistbox.scrollTo(0, completelistbox.scrollHeight);
           // edit number of tasks todo
           todo_count = document.getElementById('n-todo');
-          todo_count.innerHTML = payload['count'];
+          if (todo_count!==null) {
+            todo_count.innerHTML = payload['count'];
+          }
           // edit number of tasks completed
           complete_count = document.getElementById('n-complete');
-          complete_count.innerHTML = payload['complete_count'];
+          if (complete_count!==null) {
+            complete_count.innerHTML = payload['complete_count'];
+          }
         } else {
           alert('Invalid action: ' + action);
         }
