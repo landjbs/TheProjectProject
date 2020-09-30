@@ -17,9 +17,19 @@
 {% block content %}
 <form class='big-box container justify-content-center'>
   <center>
-    {% for elt in form %}
-      {{ elt }}
-    {% endfor %}
+    <div class="row input-segment">
+      <h6 style="display: inline;">
+        I have read and accept the <a href='terms' target="_blank">terms</a>.
+      </h6>
+      <div class="input-control">
+        <input id="toggle-off-q1" class="toggle toggle-left"
+              name='a' value="true" type="radio">
+        <label for="toggle-off-q1" class="btn">
+          <span class='presskey'>Y</span>
+          Yes
+        </label>
+      </div>
+    </div>
   </center>
 </form>
 {% endblock %}
