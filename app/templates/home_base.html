@@ -89,7 +89,7 @@
                 <a class="nav-link" href="/admin">
                   <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                    <i class="fas fa-trophy fa-stack-1x icon-top"></i>
+                    <i class="fa fa-user-plus fa-stack-1x icon-top"></i>
                   </span>
                 </a>
               </li>
@@ -118,6 +118,7 @@
                       <input class='select-clean' type="text" placeholder="search..." id="messagesSearch" onkeyup="filterFunction('messagesSearch', 'messagesDropdown')">
                     </div>
                     <div id='channelList'>
+                      Loading messages...
                     </div>
                   </div>
                 </li>
@@ -138,7 +139,10 @@
               <!-- user/settings page -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="{{ current_user.get_url() }}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  {{ current_user.name }}
+                  <span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                    <i class="fa fa-user fa-stack-1x icon-top"></i>
+                  </span>
                   {% set n_unseen = current_user.n_unseen() %}
                   {% if n_unseen > 0 %}
                     <span class="badge">

@@ -27,10 +27,10 @@ body {
 
 
 #mainNav .fa-stack:hover .icon-background {
-  color: black;
+  color: rgba(255, 255, 255, 0.2);
 }
 
-#mainNav .icon-top:hover {
+#mainNav .fa-stack:hover .icon-top {
   color: white;
 }
 
@@ -40,7 +40,7 @@ body {
 }
 
 #mainNav .dropdown-toggle[aria-expanded="true"] {
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 #mainNav .badge {
