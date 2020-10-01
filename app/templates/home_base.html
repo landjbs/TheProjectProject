@@ -104,9 +104,6 @@
                       <i class="fa fa-circle fa-stack-2x icon-background"></i>
                       <i class="fas fa-comment-alt fa-stack-1x icon-top"></i>
                     </span>
-                    <span class='badge' style='display: inline-block;'>
-                      4
-                    </span>
                     {% set n_unseen = current_user.new_messages(return_messages=False) %}
                     {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
                     <span id='nMessageBadge' class='badge' style='display: {{ display | safe }} ;'>
