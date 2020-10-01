@@ -70,17 +70,28 @@
             {% endif %}
             <li class="nav-item">
               <a class="nav-link" id='add-project' href="/add_project" data-toggle="tooltip" data-placement="bottom" title="Try adding a project you've already worked on to showcase your skills or an idea you have to start building!">
-                add project
+                <span class="fa-stack">
+                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                  <i class="fas fa-plus fa-stack-1x icon-top"></i>
+                </span>
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('badge.perk_page') }}">
-                perks
+                <span class="fa-stack">
+                  <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                  <i class="fas fa-trophy fa-stack-1x icon-top"></i>
+                </span>
               </a>
             </li>
             {% if current_user.admin %}
               <li class="nav-item">
-                <a class="nav-link" href="/admin">admin</a>
+                <a class="nav-link" href="/admin">
+                  <span class="fa-stack">
+                    <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                    <i class="fas fa-trophy fa-stack-1x icon-top"></i>
+                  </span>
+                </a>
               </li>
             {% endif %}
             {% if current_user.is_authenticated %}
@@ -89,7 +100,13 @@
               {% if not request.MOBILE and not is_add %}
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="open_message_dropdown();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    messages
+                    <span class="fa-stack">
+                      <i class="fa fa-circle fa-stack-2x icon-background"></i>
+                      <i class="fas fa-comment-alt fa-stack-1x icon-top"></i>
+                    </span>
+                    <span class='badge' style='display: inline-block;'>
+                      4
+                    </span>
                     {% set n_unseen = current_user.new_messages(return_messages=False) %}
                     {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
                     <span id='nMessageBadge' class='badge' style='display: {{ display | safe }} ;'>

@@ -16,6 +16,25 @@ body {
   padding: 0px;
 }
 
+/* icons */
+#mainNav .icon-background {
+  color: white;
+}
+
+#mainNav .icon-top {
+  color: black;
+}
+
+
+#mainNav .fa-stack:hover .icon-background {
+  color: black;
+}
+
+#mainNav .icon-top:hover {
+  color: white;
+}
+
+
 #mainNav .dropdown-toggle {
   background: black !important;
 }
