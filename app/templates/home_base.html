@@ -69,7 +69,8 @@
               </form>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link" id='add-project' href="/add_project" data-toggle="tooltip" data-placement="bottom" title="Try adding a project you've already worked on to showcase your skills or an idea you have to start building!">
+              <!-- WARNING: FIX ROUTE FROM NEW_ADD -->
+              <a class="nav-link" id='add-project' href="/new_add" data-toggle="tooltip" data-placement="bottom" title="Try adding a project you've already worked on to showcase your skills or an idea you have to start building!">
                 <span class="fa-stack">
                   <i class="fa fa-circle fa-stack-2x icon-background"></i>
                   <i class="fas fa-plus fa-stack-1x icon-top"></i>
@@ -102,7 +103,7 @@
                   <a class="nav-link dropdown-toggle" href="#" id="messagesBtn" onclick="open_message_dropdown();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="fa-stack">
                       <i class="fa fa-circle fa-stack-2x icon-background"></i>
-                      <i class="fas fa-comment-alt fa-stack-1x icon-top"></i>
+                      <i class="fas fa-comment fa-stack-1x icon-top"></i>
                     </span>
                     {% set n_unseen = current_user.new_messages(return_messages=False) %}
                     {% set display = 'none' if (n_unseen == 0) else 'inline-block' %}
