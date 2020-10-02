@@ -90,7 +90,15 @@ class Add_Company(BaseForm):
                             }
                         )
     # application question
-    application_question = StringField()
+    application_question = StringField(
+                            label='Ask a question to applicants who want to join the team.',
+                            validators=[DataRequired()],
+                            description='',
+                            render_kw={
+                                'optional': False
+                            }
+
+    )
 
 
 
