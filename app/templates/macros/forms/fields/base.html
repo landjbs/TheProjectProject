@@ -3,13 +3,14 @@
 {% from 'macros/forms/fields/string_field.html' import render_string_field %}
 {% from 'macros/forms/fields/slide_field.html' import render_slide_field %}
 {% from 'macros/forms/field/select_field.html' import render_select_field %}
+{% from 'components/csrf_field.html' import render_csrf_field %}
 <!-- TODO: import render_multiselect into fields from components -->
 {% from 'components/form_macros.html' import render_multiselect %}
 
 
 <!-- render name+description as provided -->
 {% macro render_field_header(field) -%}
-  
+
 {% endmacro -%}
 
 <!-- render errors for field if they exist -->
