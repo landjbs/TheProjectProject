@@ -1,0 +1,5 @@
+{% macro render_field_error(field) -%}
+  {% if field.errors %}
+    <p class='warning'>{{ field.errors[0] }}</p>
+  {% endif %}
+{% endmacro -%}
