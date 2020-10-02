@@ -25,33 +25,6 @@
   {% else %}
     {% set prev_data = defaults %}
   {% endif %}
-  {% if show_labels==1 %}
-    <style>
-      .selected-subjects {
-        border-right: 1px solid white;
-      }
-    </style>
-    <div class='row'>
-      <div class='col selected-subjects'>
-        {% if show_labels==1 %}
-          <h4 class='passion-column-header'>Your Passions</h4>
-        {% endif %}
-        {% for id in prev_data %}
-          {{ render_subject_tag(field.choices[id][1]) }}
-        {% endfor %}
-      </div>
-      <div class='col unselected-subjects'>
-        {% if show_labels==1 %}
-          <h4 class='passion-column-header'>Options</h4>
-        {% endif %}
-        {% for id, subject in field.choices %}
-          {% if not id in prev_data %}
-            {{ render_subject_tag(subject) }}
-          {% endif %}
-        {% endfor %}
-      </div>
-    </div>
-  {% else %}
   <style>
     .selected-subjects {
       max-height: 10vh;
@@ -130,5 +103,5 @@
         }
     }
   </script>
-</div>  
+</div>
 {% endmacro -%}
