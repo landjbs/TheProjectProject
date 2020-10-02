@@ -21,6 +21,7 @@ class Company(CRUDMixin, db.Model):
     amount_raised = db.Column(db.Integer, nullable=True)
     looking_to_raise = db.Column(db.Boolean, nullable=False)
     ## team building
+    looking_for_members = db.Column(db.Boolean, nullable=False)
     # application question
     application_question = db.Column(db.String(128), nullable=False)
 
