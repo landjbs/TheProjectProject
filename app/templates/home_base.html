@@ -95,10 +95,12 @@
                 </a>
               </li>
             {% endif %}
+            <!-- mobile redirects to other page -->
             {% if current_user.is_authenticated %}
               {% set message_dropdown = (not request.MOBILE and not is_add) %}
               <li class="nav-item dropdown">
-                <a id="messagesBtn" class="nav-link dropdown-toggle" href="#" onclick="open_message_dropdown();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a id="messagesBtn" class="nav-link dropdown-toggle"
+                  {% if not message_dropdown %}href="{{ url_for('message.messages') }}"{% else %}onclick="open_message_dropdown();" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}>
                   <!-- messages -->
                   <span class="fa-stack">
                     <i class="fa fa-circle fa-stack-2x icon-background"></i>
