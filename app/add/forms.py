@@ -60,7 +60,10 @@ class Add_Company(BaseForm):
                         label='Roughly how much have you raised?',
                         validators=[DataRequired()],
                         description='',
-                        render_kw={''}
+                        render_kw={
+                            'max':      100000000 # current max $100 mil
+                            'optional': True
+                        }
                     )
     looking_to_raise = BooleanField(
                         label='Roughly how much have you raised?',
