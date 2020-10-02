@@ -13,21 +13,24 @@ from app.project.models import Project
 from app.company.models import Company
 
 
-class Add(BaseForm):
+
+class Add_Shared(BaseForm):
     '''
-    Dynamic add form. Currently supports Project and Company
+    Fields of Add form that are shared between all types
     '''
-    ## SHARED FIELDS ##
+    # name
     name = StringField(label='Project Name',
                        validators=[DataRequired(), Length(1, 40)],
                        description='Give your project a name!',
                        render_kw={'placeholder':'TheProjectProject',
                                   'max': 30})
+    # oneliner
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 100)],
                            description='One line description of your project.',
                            render_kw={'placeholder':'The platform for sharing, collaborating on, and publicizing independent projects.',
                                       'max': 40})
+    # summary
     summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         description='Describe your project in more detail.',
@@ -35,10 +38,41 @@ class Add(BaseForm):
                                                 'I need a team of web developers, database experts, and creative minds to help me build this platform. We will tackle interesting problems '
                                                 'such as matching users with projects they will like and designing an interface that helps people communicate their ideas...'),
                                   'max':400})
+    # subjects
     subjects = SelectMultipleField('Subjects',
                                     description=('What subjects might this '
                                                 'project involve?'),
                                     validators=[], choices=[], coerce=int)
+
+
+class Add_Company(BaseForm):
+    '''
+    Fields of add form used to build Company objects
+    '''
+    has_raised = BooleanField(
+                    label='',
+                    validators=[DataRequired()],
+                    description='',
+                    render_kw={''}
+                )
+    amount_raised = IntegerField(
+                        label='',
+                        validators=[DataRequired()],
+                        description='',
+                        render_kw={''}
+                    )
+    looking_to_raise = BooleanField()
+    # team building
+    looking_for_members = BooleanField()
+    application_question = StringField()
+
+
+
+class Add_Comp(BaseForm):
+    '''
+    Dynamic add form. Currently supports Project and Company
+    '''
+    ## SHARED FIELDS ##
     ## PROJECT FIELDS
     complete = BooleanField('Completed',
                             description=('Whether the project has been '
@@ -59,19 +93,3 @@ class Add(BaseForm):
                                            'max':128})
     ## COMPANY FIELDS
     # funding
-    has_raised = BooleanField(
-                    label='',
-                    validators=[DataRequired()],
-                    description='',
-                    render_kw={''}
-                )
-    amount_raised = IntegerField(
-                        label='',
-                        validators=[DataRequired()],
-                        description='',
-                        render_kw={''}
-                    )
-    looking_to_raise = BooleanField()
-    # team building
-    looking_for_members = BooleanField()
-    application_question = StringField()
