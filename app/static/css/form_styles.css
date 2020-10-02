@@ -1,5 +1,33 @@
 /* tab stuff */
+.tab {
+  display: none;
+}
 
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+.step.invalid {
+  background-color: red;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: white;
+}
 
 
 
@@ -29,10 +57,10 @@
   color: white;
 }
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
+.form input:focus,
+.form select:focus,
+.form textarea:focus,
+.form button:focus {
     outline: none;
 }
 
@@ -40,41 +68,10 @@ button:focus {
   color: rgba(255, 255, 255, 0.4);
 }
 
-button {
+.form button {
   background-color: transparent;
   border-color: transparent;
   color: white;
-}
-
-/* Hide all steps by default: */
-.tab {
-  display: none;
-}
-
-/* Make circles that indicate the steps of the form: */
-.step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
-}
-
-/* Mark the active step: */
-.step.active {
-  opacity: 1;
-}
-
-.step.invalid {
-  background-color: red;
-}
-
-/* Mark the steps that are finished and valid: */
-.step.finish {
-  background-color: white;
 }
 
 select option::selection {
