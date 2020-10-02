@@ -40,16 +40,37 @@ class Add(BaseForm):
                                                 'project involve?'),
                                     validators=[], choices=[], coerce=int)
     ## PROJECT FIELDS
-
+    complete = BooleanField('Completed',
+                            description=('Whether the project has been '
+                            'completed.'))
+    open = BooleanField('Team Project',
+            validators=[],
+            description=('Whether you want to work with others on this project.')
+    )
+    requires_application = BooleanField('Requires Application',
+                            validators=[],
+                            description=('Applications allow you to choose '
+                                         'who joins the project.'))
+    application_question = TextField('Application Question',
+                                validators=[Length(0, 128)],
+                                description=('Add a question to screen '
+                                            'applicants.'),
+                                render_kw={'placeholder':'What do you look for in a team?',
+                                           'max':128})
     ## COMPANY FIELDS
     # funding
     has_raised = BooleanField(
                     label='',
-                    validators=[DataRequired(), Length()],
+                    validators=[DataRequired()],
                     description='',
                     render_kw={''}
                 )
-    amount_raised = IntegerField()
+    amount_raised = IntegerField(
+                        label='',
+                        validators=[DataRequired()],
+                        description='',
+                        render_kw={''}
+                    )
     looking_to_raise = BooleanField()
     # team building
     looking_for_members = BooleanField()
