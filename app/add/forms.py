@@ -49,19 +49,26 @@ class Add_Company(BaseForm):
     '''
     Fields of add form used to build Company objects
     '''
+    ## raising ##
     has_raised = BooleanField(
-                    label='',
+                    label='Have you raised any funding so far?',
                     validators=[DataRequired()],
                     description='',
                     render_kw={''}
                 )
     amount_raised = IntegerField(
-                        label='',
+                        label='Roughly how much have you raised?',
                         validators=[DataRequired()],
                         description='',
                         render_kw={''}
                     )
-    looking_to_raise = BooleanField()
+    looking_to_raise = BooleanField(
+                        label='Roughly how much have you raised?',
+                        validators=[DataRequired()],
+                        description='',
+                        render_kw={''}
+                    )
+    ## raising ##
     # team building
     looking_for_members = BooleanField()
     application_question = StringField()
