@@ -1,6 +1,7 @@
 {% extends "home_base.html" %}
 {% from 'components/form_macros.html' import render_multiselect %}
-{% from 'macros/forms/field.html' import render_field, render_field_header %}
+{% from 'macros/forms/field.html' import render_field %}
+{% from 'macros/forms/fields/base.html' import render_field_header %}
 
 {% block title %}Add Project{% endblock %}
 {% set is_add = true %}
