@@ -1,13 +1,9 @@
 {% from 'macros/cards/subject.html' import render_subject_tag %}
 
-{% macro render_multiselect(field, tags=0, defaults=None) -%}
+{% macro render_multiselect(field, tags=0) -%}
 <div id='select-box'>
   {{ field(id='hidden-select', style='display:none;') }}
-  {% if not defaults %}
-    {% set prev_data = field.data if field.data else [] %}
-  {% else %}
-    {% set prev_data = defaults %}
-  {% endif %}
+  {% set prev_data = field.data if field.data else [] %}
   <div class='col'>
     <div class='row'>
       <p class='passion-column-header'>Selected</p>
