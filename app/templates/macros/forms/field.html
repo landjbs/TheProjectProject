@@ -5,7 +5,9 @@
 
 
 {% macro render_field(field) -%}
-  {{ render_field_header(field) }}
-  {{ render_fn[field.type](field) }}
-  {{ render_field_errors(field) }}
+  <div class="row input-segment" id='{{ field.name }}_segment'>
+    {{ render_field_header(field) }}
+    {{ render_fn[field.type](field) }}
+    {{ render_field_errors(field) }}
+  </div>
 {% endmacro -%}
