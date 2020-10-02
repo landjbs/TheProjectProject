@@ -14,8 +14,8 @@ from app.link.forms import Add_Link
 from ..add import add
 
 
-@project.route('/new_add', methods=['GET','POST'])
-@project.route('/new_add/<int:competition_id>', methods=['GET','POST'])
+@add.route('/new_add', methods=['GET','POST'])
+@add.route('/new_add/<int:competition_id>', methods=['GET','POST'])
 # @login_required
 def new_add(competition_id=None):
     form = Add_Project(competition=competition_id)
