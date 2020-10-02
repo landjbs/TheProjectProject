@@ -39,4 +39,18 @@ class Add(BaseForm):
                                     description=('What subjects might this '
                                                 'project involve?'),
                                     validators=[], choices=[], coerce=int)
-    
+    ## PROJECT FIELDS
+
+    ## COMPANY FIELDS
+    # funding
+    has_raised = BooleanField(
+                    label='',
+                    validators=[DataRequired(), Length()],
+                    description='',
+                    render_kw={''}
+                )
+    amount_raised = IntegerField()
+    looking_to_raise = BooleanField()
+    # team building
+    looking_for_members = BooleanField()
+    application_question = StringField()
