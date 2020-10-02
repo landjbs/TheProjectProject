@@ -24,7 +24,6 @@ class Company(CRUDMixin, db.Model):
     looking_for_members = db.Column(db.Boolean, nullable=False)
     # application question
     application_question = db.Column(db.String(128), nullable=False)
-
     ## RELATIONSHIPS
     # users
     users = relationship('Company_Role',
@@ -36,6 +35,8 @@ class Company(CRUDMixin, db.Model):
                             back_populates='company',
                             cascade='all, delete, delete-orphan',
                             order_by='desc(Project.last_active)')
+    # competition
+    # TODO: implement competiton submission for company maybe
     # last active
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
