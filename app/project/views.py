@@ -18,17 +18,6 @@ from .forms import (Add_Project, Comment_Form, Task_Form,
 from ..project import project
 
 
-@project.route('/new_add', methods=['GET','POST'])
-@project.route('/new_add/<int:competition_id>', methods=['GET','POST'])
-# @login_required
-def new_add(competition_id=None):
-    form = Add_Project(competition=competition_id)
-    form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
-    form.competition.choices = Competition.recommend()
-    return render_template('new_add.html', form=form)
-
-
-
 @project.route('/add_project/', methods=['GET','POST'])
 @project.route('/add_project/<int:competition_id>/', methods=['GET','POST'])
 @login_required
