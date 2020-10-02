@@ -72,10 +72,6 @@
               {% endif %}
             </div>
             <div class='input-box'>
-              {% set c = 'input valid' if not elt.errors else 'input invalid'%}
-              {% set max = elt.render_kw.get('max') %}
-              {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
-                     maxlength=max) }}
               <p class='warning'>{{ elt.errors[0] }}</p>
             </div>
           </div>
