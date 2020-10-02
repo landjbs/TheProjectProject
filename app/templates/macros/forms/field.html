@@ -1,0 +1,11 @@
+<!-- imports -->
+{% from
+  'macros/forms/fields/base.html' import (render_fn, render_field_header, render_field_errors)
+%}
+
+
+{% macro render_field(field) -%}
+  {{ render_field_header(field) }}
+  {{ render_fn[field.type](field) }}
+  {{ render_field_errors(field) }}
+{% endmacro -%}
