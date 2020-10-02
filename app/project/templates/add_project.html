@@ -1,6 +1,6 @@
 {% extends "home_base.html" %}
 {% from 'components/form_macros.html' import render_multiselect %}
-{% from 'macros/forms/boolean_field.html' import render_boolean_field %}
+{% from 'macros/forms/field.html' import render_field %}
 
 {% block title %}Add Project{% endblock %}
 {% set is_add = true %}
@@ -60,47 +60,13 @@
     </div>
     <div class='row top'>
       <div class='col left top'>
-        {% for elt in [form.name, form.oneliner, form.summary]%}
-          <div class="row input-segment" style='text-align:left;'>
-            <div class='input-title'>
-              <h6 style="display: inline;">{{ elt.label }}</h6>
-              {% if elt.description %}
-                <div class='boop'>
-                  <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-                  <span class="tooltiptext">{{ elt.description}}</span>
-                </div>
-              {% endif %}
-            </div>
-            <div class='input-box'>
-              <p class='warning'>{{ elt.errors[0] }}</p>
-            </div>
-          </div>
+        {% for field in [form.name, form.oneliner, form.summary]%}
+          {{ render_field(field) }}
         {% endfor %}
       </div>
       <div class='col left right'>
-        {% for elt in [form.complete, form.open, form.requires_application, form.application_question] %}
-          <div class="row input-segment" id='{{ elt.name }}_segment'>
-            <div class='input-title' id='{{ elt.name }}_label'>
-              <h6 style="display: inline;">{{ elt.label }}</h6>
-              {% if elt.description %}
-                <div class='boop'>
-                  <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-                  <span class="tooltiptext">{{ elt.description }}</span>
-                </div>
-              {% endif %}
-            </div>
-            {% if elt.type=='BooleanField' %}
-              {{ render_boolean_field(elt) }}
-            {% else %}
-              <div class='input-box'>
-                {% set c = 'input valid' if not elt.errors else 'input invalid'%}
-                {% set max = elt.render_kw.get('max') %}
-                {{ elt(class=c, placeholder=elt.render_kw['placeholder'],
-                       maxlength=max) }}
-                <p class='warning'>{{ elt.errors[0] }}</p>
-              </div>
-            {% endif %}
-          </div>
+        {% for field in [form.complete, form.open, form.requires_application, form.application_question] %}
+          {{ render_field(field) }}
         {% endfor %}
       </div>
       <div class='col right'>

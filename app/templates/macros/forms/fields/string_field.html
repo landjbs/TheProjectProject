@@ -1,4 +1,4 @@
-{% macros render_string_field(field) -%}
+{% macro render_string_field(field) -%}
   {% set c = 'input valid' if not field.errors else 'input invalid'%}
   {% set max = field.render_kw.get('max') %}
   {{ field(class=c, placeholder=field.render_kw['placeholder'], maxlength=max) }}
