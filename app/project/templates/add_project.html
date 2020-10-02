@@ -98,21 +98,9 @@
             {% elif elt.type=='SelectMultipleField' %}
               {{ render_multiselect(elt, 1) }}
             {% elif elt.type=='SelectField' %}
-              {% if not elt.errors %}
-                {{ elt(class='input valid add-select') }}
-              {% else %}
-                {{ elt(class='input add-select') }}
-                <p class='warning'>{{ elt.errors[0] }}</p>
-              {% endif %}
+              {{ render_field(elt) }}
             {% else %}
-              <div class='input-box'>
-                {% if not elt.errors %}
-                  {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
-                {% else %}
-                  {{ elt(class='input invalid') }}
-                  <p class='warning'>{{ elt.errors[0] }}</p>
-                {% endif %}
-              </div>
+              {{ render_field(elt) }}
             {% endif %}
           </div>
         {% endfor %}
