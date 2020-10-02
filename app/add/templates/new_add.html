@@ -14,10 +14,13 @@
 
 {% block content %}
 <form class='big-box container justify-content-center' id='add_form'>
+  {{ form.csrf_token() }}
   {% for field in form %}
-    <div class='formtab'>
-      {{ render_field(field) }}
-    </div>
+    {% if not field.type=='CSRFTokenField' %}
+      <div class='formtab'>
+        {{ render_field(field) }}
+      </div>
+    {% endif %}
   {% endfor %}
 
   <!-- temp navigator -->
@@ -27,22 +30,11 @@
         <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
       </div>
   </div>
-  <div style="text-align:center;margin-top:40px;">
-    {% for elt in form %}
-      {% if not elt.name in ["csrf_token"] %}
-        {% if elt.errors in [[], ()] %}
-          <span class="step"></span>
-        {% else %}
-          <span class="step invalid"></span>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </div>
 </form>
 
 <script>
   function submit() {
-    document.getElementById("apply_form").submit();
+    document.getElementById("add_form").submit();
   };
 
   var currentTab = 0; // Current tab is set to be the first tab (0)
@@ -64,8 +56,6 @@
     } else {
       document.getElementById("nextBtn").innerHTML = "Next";
     }
-    // ... and run a function that displays the correct step indicator:
-    fixStepIndicator(n)
   }
 
   function nextPrev(n) {
@@ -132,21 +122,7 @@
         }
       }
     }
-    // If the valid status is true, mark the step as finished and valid:
-    if (valid) {
-      document.getElementsByClassName("step")[currentTab].className += " finish";
-    }
-    else {
-      document.getElementsByClassName("step")[currentTab].className += " invalid";
-    }
     return true; // return the valid status
-  }
-
-  function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
-    var i, x = document.getElementsByClassName("step");
-    //... and adds the "active" class to the current step:
-    x[n].className = "step active";
   }
 </script>
 {% endblock %}
