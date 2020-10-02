@@ -1,0 +1,9 @@
+{% macro render_slide_field(field) -%}
+  <div class="slidecontainer">
+    <input type="range" min="{{ field.render_kw['min'] }}"
+      max="{{ field.render_kw['max'] }}"
+      value="{{ field.render_kw['start'] }}" class="slider"
+          name='{{ field.name }}' id="team_slider">
+  </div>
+  <p id='team-out' style='display: inline;'></p>
+{% endmacro -%}
