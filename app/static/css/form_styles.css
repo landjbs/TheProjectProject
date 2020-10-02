@@ -1,5 +1,5 @@
-/* tab stuff */
-.tab {
+/* formtab stuff */
+.formtab {
   display: none;
 }
 
@@ -67,17 +67,6 @@
   color: white;
 }
 
-select option::selection {
-  background-color: red;
-}
-
-@media (min-width: 996px) {
-  select {
-    width:90%;
-    height:40vh;
-    font-size:150%;
-  }
-}
 
 /* subject select stuff */
 .selected-subjects {
