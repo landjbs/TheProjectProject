@@ -1,6 +1,6 @@
 {% extends "home_base.html" %}
 {% from 'components/form_macros.html' import render_multiselect %}
-{% from 'macros/forms/field.html' import render_field %}
+{% from 'macros/forms/field.html' import render_field, render_field_header %}
 
 {% block title %}Add Project{% endblock %}
 {% set is_add = true %}
@@ -71,33 +71,28 @@
       </div>
       <div class='col right'>
         {% for elt in [form.estimated_time, form.team_size, form.subjects, form.competition] %}
-          <div class="row input-segment" id='{{ elt.name }}_segment'>
-            <div class='input-title'>
-              <h6 style="display: inline;">{{ elt.label }}</h6>
-              {% if elt.description %}
-                <div class='boop'>
-                  <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-                  <span class="tooltiptext">{{ elt.description }}</span>
-                </div>
-              {% endif %}
-            </div>
-            {% if elt.name=='estimated_time' %}
+          {% if elt.name=='estimated_time' %}
+            <div class="row input-segment" id='{{ elt.name }}_segment'>
+              {{ render_field_header(elt) }}
               <div class="slidecontainer">
                 <input type="range" min="1" max="30" value="7" class="slider"
                       name='{{ elt.name }}' id="time_slider">
               </div>
               <p id='time-out' style='display: inline;'></p>
-            {% elif elt.name=='team_size' %}
+            </div>
+          {% elif elt.name=='team_size' %}
+            <div class="row input-segment" id='{{ elt.name }}_segment'>
               <div class="slidecontainer">
                 <input type="range" min="{{ elt.render_kw['min'] }}"
                   max="{{ elt.render_kw['max'] }}"
                   value="{{ elt.render_kw['start'] }}" class="slider"
                       name='{{ elt.name }}' id="team_slider">
               </div>
-              <p id='team-out' style='display: inline;'></p>
-            {% else %}
-              {{ render_field(elt) }}
-            {% endif %}
+            </div>
+            <p id='team-out' style='display: inline;'></p>
+          {% else %}
+            {{ render_field(elt) }}
+          {% endif %}
           </div>
         {% endfor %}
       </div>
