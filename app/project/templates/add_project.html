@@ -95,10 +95,6 @@
                       name='{{ elt.name }}' id="team_slider">
               </div>
               <p id='team-out' style='display: inline;'></p>
-            {% elif elt.type=='SelectMultipleField' %}
-              {{ render_field(elt) }}
-            {% elif elt.type=='SelectField' %}
-              {{ render_field(elt) }}
             {% else %}
               {{ render_field(elt) }}
             {% endif %}
