@@ -1,5 +1,5 @@
 {% extends "home_base.html" %}
-{% from 'components/form_macros.html' import render_multiselect %}
+{% from 'macros/forms/field.html' import render_field %}
 
 {% block title %}Add Project{% endblock %}
 
@@ -14,40 +14,8 @@
 
 {% block content %}
 <form class='big-box container justify-content-center' id='add_form'>
-  <center>
-    <div class="row input-segment">
-      <h6 style="display: inline;">
-        What are you working on?
-      </h6>
-      <br>
-      <br>
-      <div class="input-control" onclick='toggle_a()' id='a'>
-        <input id="on-a" class="toggle toggle-left" name="a" value="true" type="radio">
-        <label for="on-a" class="btn">
-          <center>
-            <i class="fa fa-briefcase fa-2x" aria-hidden="true"></i>
-          </center>
-          <span class='presskey'>A</span>
-          Company
-        </label>
-        <input id="on-b" class="toggle toggle-right" name="b" value="false" type="radio">
-        <label for="on-b" class="btn">
-          <center>
-            <i class="fa fa-flask fa-2x" aria-hidden="true"></i>
-          </center>
-          <span class='presskey'>B</span>
-          Academic
-        </label>
-        <input id="on-c" class="toggle toggle-right" name="c" value="false" type="radio">
-        <label for="on-c" class="btn">
-          <center>
-            <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
-          </center>
-          <span class='presskey'>C</span>
-          Quick n Fun
-        </label>
-      </div>
-    </div>
-  </center>
+  {% for field in form %}
+    {{ render_field(field) }}
+  {% endfor %}
 </form>
 {% endblock %}
