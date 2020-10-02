@@ -15,7 +15,9 @@
 {% block content %}
 <form class='big-box container justify-content-center' id='add_form'>
   {% for field in form %}
-    {{ render_field(field) }}
+    <div class='formtab'>
+      {{ render_field(field) }}
+    </div>
   {% endfor %}
 
   <!-- temp navigator -->
@@ -50,7 +52,7 @@
 
   function showTab(n) {
     // This function will display the specified tab of the form ...
-    var x = document.getElementsByClassName("tab");
+    var x = document.getElementsByClassName("formtab");
     x[n].style.display = "block";
     x[n].getElementsByTagName('input')[0].focus();
     // ... and fix the Previous/Next buttons:
@@ -70,7 +72,7 @@
 
   function nextPrev(n) {
     // This function will figure out which tab to display
-    var x = document.getElementsByClassName("tab");
+    var x = document.getElementsByClassName("formtab");
     // Exit the function if any field in the current tab is invalid:
     if (n == 1 && !validateForm()) return false;
     // Can't go backwards on first tab
@@ -117,7 +119,7 @@
   function validateForm() {
     // This function deals with validation of the form fields
     var x, y, i, valid = true;
-    x = document.getElementsByClassName("tab");
+    x = document.getElementsByClassName("formtab");
     y = x[currentTab].getElementsByTagName("input");
     // A loop that checks every input field in the current tab:
     for (i = 0; i < y.length; i++) {
