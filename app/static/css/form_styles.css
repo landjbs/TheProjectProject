@@ -1,0 +1,32 @@
+.selected-subjects {
+    max-height: 10vh;
+    overflow-y: scroll;
+  }
+  
+  .unselected-subjects {
+    max-height: 10vh;
+    overflow-y: scroll;
+  }
+  
+  .passion-column-header {
+    text-align: center;
+  }
+
+.subject-tag:hover {
+    border: 1px solid white;
+    cursor: pointer;
+  }
+
+.selected-subjects .subject-tag {
+  margin-left:  2px;
+  margin-right: 2px;
+}
+
+.unselected-subjects .subject-tag {
+  margin-left:  2px;
+  margin-right: 2px;
+}
+
+.passion-column-header {
+  text-decoration: underline;
+}
