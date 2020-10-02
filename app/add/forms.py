@@ -55,7 +55,10 @@ class Add_Company(BaseForm):
                     label='Have you raised any funding so far?',
                     validators=[DataRequired()],
                     description='',
-                    render_kw={''}
+                    render_kw={
+                        'optional': False,
+                        'default':  False
+                    }
                 )
     # amount_raised
     amount_raised = IntegerField(
@@ -68,14 +71,25 @@ class Add_Company(BaseForm):
                         }
                     )
     # looking_to_raise
-    looking_to_raise = SelectField(
-                        label='Are you currently ?',
+    looking_to_raise = BooleanField(
+                        label='Are you currently looking for funding?',
                         validators=[DataRequired()],
                         description='',
-                        render_kw={''}
+                        render_kw={
+                            'optional': True
+                        }
                     )
     ## team building ##
-    looking_for_members = BooleanField()
+    # looking_for_members
+    looking_for_members = BooleanField(
+                            label='Are you currently looking for team members?',
+                            validators=[DataRequired()],
+                            description='',
+                            render_kw={
+                                'optional': False
+                            }
+                        )
+    # application question
     application_question = StringField()
 
 
