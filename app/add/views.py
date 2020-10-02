@@ -18,8 +18,8 @@ from app.project.forms import Add_Project
 from ..add import add
 
 
-@add.route('/new_add', methods=['GET','POST'])
-@add.route('/new_add/<int:competition_id>', methods=['GET','POST'])
+@add.route('/add', methods=['GET','POST'])
+@add.route('/add/<int:competition_id>', methods=['GET','POST'])
 # @login_required
 def new_add(competition_id=None):
     form = Add_Project(competition=competition_id)

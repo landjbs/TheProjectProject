@@ -40,6 +40,11 @@ class Company(CRUDMixin, db.Model):
     # last active
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
+    @classmethod
+    def build_from_form(cls, form):
+        pass
+
+
 
 class Company_Role(db.Model):
     __tablename__ = 'company_role'
