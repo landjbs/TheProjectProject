@@ -94,7 +94,7 @@
 
 
 {% macro render_channel_card(channel) -%}
-  <div class='channel_card searchable' onclick="open_channel('{{ channel.id }}');">
+  <div class='channel_card searchable dropdown-item' onclick="open_channel('{{ channel.id }}');">
     <div class='channel_meta'>
       <div class='float-left'>
         <span class='chatname'>
@@ -123,8 +123,6 @@
 
 {% macro render_channel_list(channels) -%}
   {% for channel in channels %}
-    <div class='dropdown-item'>
-      {{ render_channel_card(channel) }}
-    </div>
+    {{ render_channel_card(channel) }}
   {% endfor %}
 {% endmacro -%}

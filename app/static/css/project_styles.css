@@ -225,7 +225,7 @@ ul ul a {
 }
 
 button {
-  border:1px solid grey;
+  border: 0px;
   background: white;
   color:black;
 }
