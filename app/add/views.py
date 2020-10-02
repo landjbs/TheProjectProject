@@ -14,14 +14,13 @@ from app.link.forms import Add_Link
 from app.project.forms import Add_Project
 
 # package imports
-
 from ..add import add
 
 
 @add.route('/add', methods=['GET','POST'])
 @add.route('/add/<int:competition_id>', methods=['GET','POST'])
 # @login_required
-def new_add(competition_id=None):
+def add(competition_id=None):
     form = Add_Project(competition=competition_id)
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     form.competition.choices = Competition.recommend()
