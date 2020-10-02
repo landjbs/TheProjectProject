@@ -8,6 +8,7 @@ from app.project.models import Project
 class Company(CRUDMixin, db.Model):
     __tablename__ = 'company'
     # __searchable__ = ['name']
+    ##### DATA #####
     # name
     name = db.Column(db.String(128), nullable=False, unique=True)
     # code for url
@@ -16,6 +17,14 @@ class Company(CRUDMixin, db.Model):
     oneliner = db.Column(db.String(40), nullable=False)
     # summary
     summary = db.Column(db.String(400), nullable=False)
+    ## funding
+    amount_raised = db.Column(db.Integer, nullable=True)
+    looking_to_raise = db.Column(db.Boolean, nullable=False)
+    ## team building
+    # application question
+    application_question = db.Column(db.String(128), nullable=False)
+
+    ## RELATIONSHIPS
     # users
     users = relationship('Company_Role',
                         back_populates='companies',
