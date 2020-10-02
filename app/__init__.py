@@ -12,6 +12,7 @@ from dateutil import tz
 # config
 from app import config
 # blueprints
+from app.add import add
 from app.auth import auth
 from app.base import base
 from app.competition import competition
@@ -169,6 +170,7 @@ def register_blueprints(app):
     app.register_blueprint(hub)
     app.register_blueprint(user)
     app.register_blueprint(project)
+    app.register_blueprint(add)
     app.register_blueprint(subject)
     app.register_blueprint(notification)
     app.register_blueprint(message)
