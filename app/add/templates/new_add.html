@@ -17,5 +17,26 @@
   {% for field in form %}
     {{ render_field(field) }}
   {% endfor %}
+
+  <!-- temp navigator -->
+  <div style="overflow:auto; width:95%;">
+      <div style="float:right;">
+        <button type="button" id="prevBtn"
+                onclick="nextPrev(-1)">Back</button>
+        <button type="button" id="nextBtn"
+                onclick="nextPrev(1)">Next</button>
+      </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    {% for elt in form %}
+      {% if not elt.name in ["csrf_token"] %}
+        {% if elt.errors in [[], ()] %}
+          <span class="step"></span>
+        {% else %}
+          <span class="step invalid"></span>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
 </form>
 {% endblock %}
