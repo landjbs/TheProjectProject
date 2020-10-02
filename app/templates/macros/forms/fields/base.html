@@ -2,6 +2,7 @@
 {% from 'macros/forms/fields/boolean_field.html' import render_boolean_field %}
 {% from 'macros/forms/fields/string_field.html' import render_string_field %}
 {% from 'macros/forms/fields/slide_field.html' import render_slide_field %}
+{% from 'macros/forms/field/select_field.html' import render_select_field %}
 <!-- TODO: import render_multiselect into fields from components -->
 {% from 'components/form_macros.html' import render_multiselect %}
 
@@ -26,7 +27,7 @@
     ('StringField',                 render_string_field),
     ('TextAreaField',               render_string_field),
     ('IntegerField',                render_slide_field),
-    <!-- ('SelectField',                 render_select_field), -->
+    ('SelectField',                 render_select_field),
     ('SelectMultipleField',         render_multiselect),
 
   ])
