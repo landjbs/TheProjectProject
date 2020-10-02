@@ -1,6 +1,6 @@
 {% from 'macros/cards/subject.html' import render_subject_tag %}
 
-{% macro render_multiselect(field, tags=0, show_labels=0, defaults=None) -%}
+{% macro render_multiselect(field, tags=0, defaults=None) -%}
 <div id='select-box'>
   {{ field(id='hidden-select', style='display:none;') }}
   {% if not defaults %}
