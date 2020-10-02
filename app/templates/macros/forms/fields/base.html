@@ -1,0 +1,24 @@
+<!-- import field rendering functions -->
+{% from 'macros/forms/fields/boolean_field.html' import render_boolean_field %}
+
+
+<!-- render name+description as provided -->
+{% macro render_field_header(field) -%}
+
+{% endmacro -%}
+
+<!-- render errors for field if they exist -->
+{% macro render_field_errors(field) -%}
+  {% if field.errors %}
+    <p class='warning'>{{ field.errors[0] }}</p>
+  {% endif %}
+{% endmacro -%}
+
+
+<!-- dict mapping field type to correct render function -->
+{%
+  set render_fn = dict([
+    ('BooleanField',                render_boolean_field),
+    ('TextField',                   render_text_field)
+  ])
+%}
