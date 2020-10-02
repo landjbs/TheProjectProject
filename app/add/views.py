@@ -9,6 +9,9 @@ from app.competition.models import Competition
 from app.user.models import User
 from app.link.forms import Add_Link
 
+# # TODO: build custom package form with javascript tagging mechanism
+from app.project.forms import Add_Project
+
 # package imports
 
 from ..add import add
