@@ -3,14 +3,9 @@
 
 
 {% macro render_field(field) -%}
-  {% if not field.type=='TextField' %}
-    <div class="row input-segment" id='{{ field.name }}_segment'>
-      {{ render_field_header(field) }}
-      {{ render_fn[field.type](field) }}
-      {{ render_field_errors(field) }}
-    </div>
-  {% else %}
+  <div class="row input-segment" id='{{ field.name }}_segment'>
     {{ render_field_header(field) }}
+    {{ render_fn[field.type](field) }}
     {{ render_field_errors(field) }}
-  {% endif %}
+  </div>
 {% endmacro -%}
