@@ -1,5 +1,6 @@
 {% extends "home_base.html" %}
 {% from 'components/form_macros.html' import render_multiselect %}
+{% from 'macros/forms/boolean_field.html' import render_boolean_field %}
 
 {% block title %}Add Project{% endblock %}
 {% set is_add = true %}
@@ -93,12 +94,7 @@
               {% endif %}
             </div>
             {% if elt.type=='BooleanField' %}
-              <div class="input-control" onclick='toggle_{{ elt.name }}()' id='{{ elt.name }}'>
-                <input id="on-{{ elt.name }}" class="toggle toggle-left" name="{{ elt.name }}" value="true" type="radio">
-                <label for="on-{{ elt.name }}" class="btn"><span>A</span> Yes</label>
-                <input id="off-{{ elt.name }}" class="toggle toggle-right" name="{{ elt.name }}" value="false" type="radio">
-                <label for="off-{{ elt.name }}" class="btn"><span>B</span> No</label>
-              </div>
+              {{ render_boolean_field(elt) }}
             {% else %}
               <div class='input-box'>
                 {% set c = 'input valid' if not elt.errors else 'input invalid'%}
