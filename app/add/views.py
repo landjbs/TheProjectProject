@@ -6,6 +6,7 @@ from collections import Counter # # TEMP: COUNTER SHOULD BE MOVED OR REPLACED
 from app.extensions import limiter
 from app.utils import tasks_to_daily_activity, partition_query, filter_string
 from app.competition.models import Competition
+from app.subject.models import Subject
 from app.user.models import User
 from app.link.forms import Add_Link
 
