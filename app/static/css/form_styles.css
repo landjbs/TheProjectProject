@@ -1,6 +1,10 @@
 /* tab stuff */
+
+
+
+
 /* Style the input fields */
-input {
+.form input {
   width: 90%;
   background-color: transparent;
   border: 0px solid;
@@ -12,15 +16,15 @@ input {
 }
 
 @media (max-width: 991px) {
-  input {
+  .form.input {
     font-size: 130%;
   }
-  .input-segment {
+  .form.input-segment {
     max-width: 95%;
   }
 }
 
-input:focus {
+.form.input:focus {
   background-color: transparent;
   color: white;
 }
