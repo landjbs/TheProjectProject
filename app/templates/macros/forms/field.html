@@ -1,5 +1,32 @@
-<!-- imports -->
-{% from 'macros/forms/fields/base.html' import render_fn, render_field_header, render_field_errors %}
+<!-- import field rendering functions -->
+{% from 'macros/forms/fields/boolean_field.html' import render_boolean_field %}
+{% from 'macros/forms/fields/string_field.html' import render_string_field %}
+{% from 'macros/forms/fields/slide_field.html' import render_slide_field %}
+{% from 'macros/forms/fields/select_field.html' import render_select_field %}
+{% from 'macros/forms/fields/csrf_field.html' import render_csrf_field %}
+{% from 'macros/forms/fields/multiselect_field.html' import render_multiselect %}
+
+
+<!-- render name+description as provided -->
+{% macro render_field_header(field) -%}
+  <div class='input-title' id='{{ field.name }}_label'>
+    <h6 style="display: inline;">{{ field.label }}</h6>
+    {% if field.description %}
+      <div class='boop'>
+        <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+        <span class="tooltiptext">{{ field.description }}</span>
+      </div>
+    {% endif %}
+  </div>
+{% endmacro -%}
+
+
+<!-- render errors for field if they exist -->
+{% macro render_field_errors(field) -%}
+  {% if field.errors %}
+    <p class='warning'>{{ field.errors[0] }}</p>
+  {% endif %}
+{% endmacro -%}
 
 
 <!-- dict mapping field type to correct render function -->
