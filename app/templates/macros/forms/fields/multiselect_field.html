@@ -1,0 +1,134 @@
+{% from 'macros/cards/subject.html' import render_subject_tag %}
+
+{% macro render_multiselect(field, tags=0, show_labels=0, defaults=None) -%}
+<div id='select-box'>
+  <style>
+    .subject-tag:hover {
+      border: 1px solid white;
+      cursor: pointer;
+    }
+    .selected-subjects .subject-tag {
+      margin-left:  2px;
+      margin-right: 2px;
+    }
+    .unselected-subjects .subject-tag {
+      margin-left:  2px;
+      margin-right: 2px;
+    }
+    .passion-column-header {
+      text-decoration: underline;
+    }
+  </style>
+  {{ field(id='hidden-select', style='display:none;') }}
+  {% if not defaults %}
+    {% set prev_data = field.data if field.data else [] %}
+  {% else %}
+    {% set prev_data = defaults %}
+  {% endif %}
+  {% if show_labels==1 %}
+    <style>
+      .selected-subjects {
+        border-right: 1px solid white;
+      }
+    </style>
+    <div class='row'>
+      <div class='col selected-subjects'>
+        {% if show_labels==1 %}
+          <h4 class='passion-column-header'>Your Passions</h4>
+        {% endif %}
+        {% for id in prev_data %}
+          {{ render_subject_tag(field.choices[id][1]) }}
+        {% endfor %}
+      </div>
+      <div class='col unselected-subjects'>
+        {% if show_labels==1 %}
+          <h4 class='passion-column-header'>Options</h4>
+        {% endif %}
+        {% for id, subject in field.choices %}
+          {% if not id in prev_data %}
+            {{ render_subject_tag(subject) }}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% else %}
+  <style>
+    .selected-subjects {
+      max-height: 10vh;
+      overflow-y: scroll;
+    }
+    .unselected-subjects {
+      max-height: 10vh;
+      overflow-y: scroll;
+    }
+    .passion-column-header {
+      text-align: center;
+    }
+  </style>
+  <div class='col'>
+    {% if field.errors %}
+      <div class='row'>
+        <p class='warning'>{{ field.errors[0] }}</p>
+      </div>
+    {% endif %}
+    <div class='row'>
+      <p class='passion-column-header'>Selected</p>
+    </div>
+    <div class='row selected-subjects'>
+      {% for id in prev_data %}
+        {{ render_subject_tag(field.choices[id-1][1]) }}
+      {% endfor %}
+    </div>
+    <br>
+    <div class='row'>
+      <p class='passion-column-header'>Unselected (scroll for more)</p>
+    </div>
+    <div class='row unselected-subjects'>
+      {% for id, subject in field.choices %}
+        {% if not id in prev_data %}
+          {{ render_subject_tag(subject) }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <script>
+    // sessionStorage.setItem('n', 0);
+    var select_box = document.getElementById('select-box');
+    var subject_tags = select_box.getElementsByClassName('subject-tag');
+    var select = document.getElementById('hidden-select');
+    // start selected subjects as selected
+    var prev_selected = select_box.getElementsByClassName('selected-subjects')[0];
+    for(var i=0; i<prev_selected.lenght; i++) {
+      var id = prev_selected[i].getAttribute("data");
+      select.getElementsByTagName('option')[id-1].selected = true;
+    }
+    var subject_click = function () {
+      var subject_id = this.getAttribute("data");
+      var selected = this.getAttribute('selected');
+      this.remove();
+      if (selected=='false') {
+        $('.selected-subjects').append(this);
+        this.setAttribute('selected', 'true');
+        select.getElementsByTagName('option')[subject_id-1].selected = true;
+        // sessionStorage.setItem('n', sessionStorage.getItem('n')+1);
+      } else {
+        $('.unselected-subjects').append(this);
+        this.setAttribute('selected', 'false');
+        select.getElementsByTagName('option')[subject_id-1].selected = false;
+        // sessionStorage.setItem('n', sessionStorage.getItem('n')-1);
+      }
+    }
+    for(var i=0;i<subject_tags.length;i++){
+        var tag = subject_tags[i];
+        tag.addEventListener('click', subject_click, false);
+        var prev_selected = tag.parentElement.classList.contains('selected-subjects');
+        if (prev_selected) {
+          var subject_id = tag.getAttribute("data");
+          tag.setAttribute('selected', 'true');
+          select.getElementsByTagName('option')[subject_id-1].selected = true;
+        }
+    }
+  </script>
+</div>  
+{% endmacro -%}
