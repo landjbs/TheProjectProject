@@ -70,7 +70,7 @@
               </form>
             {% endif %}
             <li class="nav-item">
-              <a class="nav-link" id='add-project' href="{{ url_for('project.add_project') }}" data-toggle="tooltip" data-placement="bottom" title="Try adding a project you've already worked on to showcase your skills or an idea you have to start building!">
+              <a class="nav-link" id='add-project' href="{{ url_for('add.add') }}" data-toggle="tooltip" data-placement="bottom" title="Try adding a project you've already worked on to showcase your skills or an idea you have to start building!">
                 <span class="fa-stack">
                   <i class="fa fa-circle fa-stack-2x icon-background"></i>
                   <i class="fas fa-plus fa-stack-1x icon-top"></i>
@@ -144,8 +144,12 @@
                       <span class="badge">{{ n_unseen }}</span>
                     {% endif %}
                   </a>
-                  <a class="dropdown-item" href='/contact'>Contact</a>
-                  <a class="dropdown-item" href="/logout">Log Out</a>
+                  <a class="dropdown-item" href="{{ url_for('base.contact') }}">
+                    Contact
+                  </a>
+                  <a class="dropdown-item" href="{{ url_for('auth.logout') }}">
+                    Log Out
+                  </a>
                 </div>
               </li>
             {% else %}
