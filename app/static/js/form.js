@@ -30,6 +30,9 @@ function showTab(n) {
   if (field) {
     field.focus();
   }
+  else {
+    x[n].focus();
+  }
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
