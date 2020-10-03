@@ -13,6 +13,32 @@ from app.project.models import Project
 # from app.company.models import Company
 
 
+
+shared_fragment = [
+    StringField(
+        label='Project Name',
+        validators=[DataRequired(), Length(1, 40)],
+        description='Give your project a name!',
+        render_kw={
+            'placeholder':  'TheProjectProject',
+            'max':          30,
+            'seconds':      5
+        }
+    ),
+    StringField(
+        label='One-Liner',
+        validators=[DataRequired(), Length(1, 100)],
+        description='One line description of your project.',
+        render_kw={
+            'placeholder':'The platform for sharing, collaborating on, and publicizing independent projects.',
+            'max': 40,
+            'seconds':  20
+        }
+    )
+]
+
+
+
 class Add_Shared(BaseForm):
     '''
     Fields of Add form that are shared between all types
