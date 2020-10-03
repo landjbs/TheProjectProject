@@ -1,0 +1,9 @@
+{% macro render_fragement(fragement) -%}
+  {% for field in fragement %}
+    {% if not field.type=='CSRFTokenField' %}
+      <div class='formtab' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
+        {{ render_field(field) }}
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endmacro -%}
