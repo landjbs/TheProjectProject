@@ -190,6 +190,13 @@ function field_keydown(e, field) {
 }
 
 
+// FIELD SUBMIT
+function submit_field(field_id) {
+  var url = Flask.url_for('add.next_field');
+  
+}
+
+
 // FRAGMENT SUBMIT
 function submit_fragement(form_id) {
   var url = Flask.url_for('add.next_fragement');
