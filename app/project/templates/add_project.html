@@ -101,6 +101,28 @@
 </form>
 
 <script>
+  // query sliders
+  var time_slider = document.getElementById("time_slider");
+  var team_slider = document.getElementById("team_slider");
+  // query outputs
+  var time_out = document.getElementById("time-out");
+  var team_out = document.getElementById("team-out");
+  // defaults
+  time_out.innerHTML = time_slider.value + ' days';
+  team_out.innerHTML = team_slider.value + ' people';
+  // time sliding
+  time_slider.oninput = function() {
+    if (this.value==1) {
+      time_out.innerHTML = 'n.a.';
+    }
+    else {
+      time_out.innerHTML = this.value + ' days';
+    }
+  };
+  team_slider.oninput = function() {
+    team_out.innerHTML = (this.value) + ' people';
+  };
+
   function submit() {
     document.getElementById("project_form").submit();
   };
