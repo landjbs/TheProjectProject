@@ -109,44 +109,43 @@ class Add_Company(BaseForm):
                     }
                 )
     # amount_raised
-    amount_raised = IntegerField(
-                        label='Roughly how much have you raised?',
-                        validators=[DataRequired()],
-                        description='',
-                        render_kw={
-                            'max':      100000000, # current max $100 mil
-                            'optional': True
-                        }
-                    )
-    # looking_to_raise
-    looking_to_raise = BooleanField(
-                        label='Are you currently looking for funding?',
-                        validators=[DataRequired()],
-                        description='',
-                        render_kw={
-                            'optional': True
-                        }
-                    )
-    ## team building ##
-    # looking_for_members
-    looking_for_members = BooleanField(
-                            label='Are you currently looking for team members?',
-                            validators=[DataRequired()],
-                            description='',
-                            render_kw={
-                                'optional': False
-                            }
-                        )
-    # application question
-    application_question = StringField(
-                            label='Ask a question to applicants who want to join the team.',
-                            validators=[DataRequired()],
-                            description='',
-                            render_kw={
-                                'optional': False
-                            }
-
-    )
+    # amount_raised = IntegerField(
+    #                     label='Roughly how much have you raised?',
+    #                     validators=[DataRequired()],
+    #                     description='',
+    #                     render_kw={
+    #                         'max':      100000000, # current max $100 mil
+    #                         'optional': True
+    #                     }
+    #                 )
+    # # looking_to_raise
+    # looking_to_raise = BooleanField(
+    #                     label='Are you currently looking for funding?',
+    #                     validators=[DataRequired()],
+    #                     description='',
+    #                     render_kw={
+    #                         'optional': True
+    #                     }
+    #                 )
+    # ## team building ##
+    # # looking_for_members
+    # looking_for_members = BooleanField(
+    #                         label='Are you currently looking for team members?',
+    #                         validators=[DataRequired()],
+    #                         description='',
+    #                         render_kw={
+    #                             'optional': False
+    #                         }
+    #                     )
+    # # application question
+    # application_question = StringField(
+    #                         label='Ask a question to applicants who want to join the team.',
+    #                         validators=[DataRequired()],
+    #                         description='',
+    #                         render_kw={
+    #                             'optional': False
+    #                         }
+    # )
 
 
 
