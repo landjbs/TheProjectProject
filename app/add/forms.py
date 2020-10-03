@@ -62,11 +62,15 @@ class Add_Shared(BaseForm):
                 }
             )
 
-
     def total_time(self):
         time = 0
         for field in self:
-            
+            try:
+                time += field.render_kw['seconds']
+            except:
+                print(f'WARNING: {field.name} has no render_kw')
+        return time
+
 
 class Add_Company(BaseForm):
     '''
