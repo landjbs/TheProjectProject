@@ -1,11 +1,13 @@
 {% from 'macros/forms/field.html' import render_field %}
 
 {% macro render_fragment(fragment) -%}
-  {% for field in fragment %}
-    {% if not field.type=='CSRFTokenField' %}
-      <div class='formtab' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
-        {{ render_field(field) }}
-      </div>
-    {% endif %}
-  {% endfor %}
+  <form>
+    {% for field in fragment %}
+      {% if not field.type=='CSRFTokenField' %}
+        <div class='formtab' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
+          {{ render_field(field) }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </form>
 {% endmacro -%}

@@ -38,6 +38,6 @@ def next_fragement():
             'macros/forms/fragement.html', 'render_fragment'
         )
         return jsonify({
-            ''
+            'html': render_fragment(Add_Company())
         })
     return jsonify('false')
