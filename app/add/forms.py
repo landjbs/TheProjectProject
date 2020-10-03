@@ -22,8 +22,12 @@ class Add_Shared(BaseForm):
     name = StringField(label='Project Name',
                        validators=[DataRequired(), Length(1, 40)],
                        description='Give your project a name!',
-                       render_kw={'placeholder':'TheProjectProject',
-                                  'max': 30})
+                       render_kw={
+                        'placeholder':  'TheProjectProject',
+                        'max':          30,
+                        'seconds':         
+                    }
+                )
     # oneliner
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 100)],
