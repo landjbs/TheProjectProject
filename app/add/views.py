@@ -14,6 +14,8 @@ from app.link.forms import Add_Link
 from app.project.forms import Add_Project
 
 # package imports
+from .forms import Add_Shared
+
 from ..add import add
 
 
@@ -21,7 +23,7 @@ from ..add import add
 @add.route('/add/<int:competition_id>', methods=['GET','POST'])
 # @login_required
 def add(competition_id=None):
-    form = Add_Project(competition=competition_id)
+    form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
-    form.competition.choices = Competition.recommend()
+    # form.competition.choices = Competition.recommend()
     return render_template('new_add.html', form=form)

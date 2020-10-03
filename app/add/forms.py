@@ -10,7 +10,7 @@ from app.forms.validators import Select_Limit_Validator
 from app.link.utils import fix_url
 # package imports
 from app.project.models import Project
-from app.company.models import Company
+# from app.company.models import Company
 
 
 
@@ -57,10 +57,16 @@ class Add_Shared(BaseForm):
                 validators=[],
                 choices=[],
                 coerce=int,
-                redner_kw={
-                    'seconds':  10
+                render_kw={
+                    'seconds':  8
                 }
             )
+
+
+    def total_time(self):
+        time = 0
+        for field in self:
+            
 
 
 class Add_Company(BaseForm):
@@ -84,7 +90,7 @@ class Add_Company(BaseForm):
                         validators=[DataRequired()],
                         description='',
                         render_kw={
-                            'max':      100000000 # current max $100 mil
+                            'max':      100000000, # current max $100 mil
                             'optional': True
                         }
                     )
