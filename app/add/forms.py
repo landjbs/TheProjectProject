@@ -25,15 +25,19 @@ class Add_Shared(BaseForm):
                        render_kw={
                         'placeholder':  'TheProjectProject',
                         'max':          30,
-                        'seconds':         
+                        'seconds':      5
                     }
                 )
     # oneliner
     oneliner = StringField(label='One-Liner',
                            validators=[DataRequired(), Length(1, 100)],
                            description='One line description of your project.',
-                           render_kw={'placeholder':'The platform for sharing, collaborating on, and publicizing independent projects.',
-                                      'max': 40})
+                           render_kw={
+                            'placeholder':'The platform for sharing, collaborating on, and publicizing independent projects.',
+                            'max': 40,
+                            'seconds':  20
+                          }
+                    )
     # summary
     summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
