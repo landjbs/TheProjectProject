@@ -44,3 +44,5 @@ def next_fragement():
 
 
 @add.route('/next_field', methods=['POST'])
+def next_field():
+    
