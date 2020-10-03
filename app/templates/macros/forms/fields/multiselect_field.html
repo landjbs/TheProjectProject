@@ -15,12 +15,20 @@
     </div>
     <br>
     <div class='row'>
-      <p class='passion-column-header'>Unselected (scroll for more)</p>
+      <span style='display:inline-block;'>
+        <p>
+          <u>Unselected (scroll for more)</u>
+          <i class="fas fa-search"></i>
+          <input class='select-clean' style='font-size:100%; width:30%;' type="text" placeholder="search..." id="subjectSearch" onkeyup="filterFunction('subjectSearch', 'unselectedSubjects')">
+        </p>
+      </span>
     </div>
-    <div class='row unselected-subjects'>
+    <div class='row unselected-subjects' id='unselectedSubjects'>
       {% for id, subject in field.choices %}
         {% if not id in prev_data %}
-          {{ render_subject_tag(subject) }}
+          <div class='searchable'>
+            {{ render_subject_tag(subject) }}
+          </div>
         {% endif %}
       {% endfor %}
     </div>
