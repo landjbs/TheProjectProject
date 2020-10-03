@@ -61,6 +61,15 @@ class Add_Shared(BaseForm):
                     'seconds':  8
                 }
             )
+    # project type
+    looking_for_members = BooleanField(
+                            label='Are you currently looking for team members?',
+                            validators=[DataRequired()],
+                            description='',
+                            render_kw={
+                                'optional': False
+                            }
+                        )
 
     def total_time(self):
         time = 0
