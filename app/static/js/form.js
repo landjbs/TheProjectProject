@@ -86,6 +86,8 @@ function validateForm() {
   }
 
 
-function field_keydown(e) {
-  alert(e.keyCode);
+function field_keydown(field_type, e) {
+  if (field_type=='BooleanField') {
+    alert('here');
+  }
 }
