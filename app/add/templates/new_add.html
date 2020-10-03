@@ -19,7 +19,7 @@
     {{ form.csrf_token() }}
     {% for field in form %}
       {% if not field.type=='CSRFTokenField' %}
-        <div class='formtab' onkeydown="field_keydown('{{ field.type }}', event);">
+        <div class='formtab' data-field-type='{{ field.type }}'>
           {{ render_field(field) }}
         </div>
       {% endif %}
@@ -47,7 +47,7 @@
   showTab(currentTab); // Display the current tab
 
   $(document).keydown(function(e) {
-    var field_type 
+    var field_type = getCurrentTab().data;
     field_keydown(field_type, e)
   })
 

@@ -21,7 +21,9 @@ function update_slider(field) {
 function getCurrentTab() {
   x = document.getElementsByClassName("formtab");
   for (i = 0; i < x.length; i++) {
-    if (x[i].classList.contains('active'))
+    if (x[i].style.display=='block') {
+      return x[i]
+    }
   }
   return false
 }
