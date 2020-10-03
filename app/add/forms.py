@@ -87,7 +87,7 @@ class Add_Shared(BaseForm):
     )
 
     def get_next_fragment(self):
-        return Add_Company
+        return Add_Company()
 
     def total_time(self):
         time = 0
