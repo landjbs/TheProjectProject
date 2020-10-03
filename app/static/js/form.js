@@ -20,7 +20,14 @@ function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("formtab");
   x[n].style.display = "block";
-  x[n].getElementsByTagName('input')[0].focus();
+  // get element to focus on
+  var field = x[n].getElementsByTagName('input')[0];
+  if (field==null) {
+    var field = x[n].getElementsByTagName('textarea')[0];
+  }
+  if (field!==null) {
+    field.focus();
+  }
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
