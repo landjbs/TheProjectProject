@@ -55,36 +55,36 @@ class Add_Shared(BaseForm):
     )
     # subjects
     subjects = SelectMultipleField(
-                label='Subjects',
-                description='What subjects might this project involve?',
-                validators=[],
-                choices=[],
-                coerce=int,
-                render_kw={
-                    'seconds':  8
-                }
-            )
+        label='Subjects',
+        description='What subjects might this project involve?',
+        validators=[],
+        choices=[],
+        coerce=int,
+        render_kw={
+            'seconds':  8
+        }
+    )
     # project type
     project_type = SelectField(
-                    label='What are you working on?',
-                    validators=[DataRequired()],
-                    description='',
-                    choices=[(1, 'Project'), (2, 'Company')],
-                    render_kw={
-                        'optional': False,
-                        'datamap': {
-                            1:  {
-                                'key'   :   'A',
-                                'icon'  :   'fa fa-circle'
-                            },
-                            2:  {
-                                'key'   :   'B',
-                                'icon'  :   'fa fa-briefcase'
-                            }
-                        },
-                        'seconds':  3
-                    }
-                )
+        label='What are you working on?',
+        validators=[DataRequired()],
+        description='',
+        choices=[(1, 'Project'), (2, 'Company')],
+        render_kw={
+            'optional': False,
+            'datamap': {
+                1:  {
+                    'key'   :   'A',
+                    'icon'  :   'fa fa-circle'
+                },
+                2:  {
+                    'key'   :   'B',
+                    'icon'  :   'fa fa-briefcase'
+                }
+            },
+            'seconds':  3
+        }
+    )
 
     def total_time(self):
         time = 0
