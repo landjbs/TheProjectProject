@@ -153,7 +153,7 @@ function boolean_keypress(e, field) {
 }
 
 function select_keypress(e, field) {
-  alert(e);
+  var options = field.getElementsByTagName('input');
 }
 
 
