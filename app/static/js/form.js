@@ -13,7 +13,6 @@ function update_slider(field) {
   document.getElementById('slider_inc_' + field.id).innerHTML = val;
 }
 
-
 // FORMTABBING
 function getCurrentTab() {
   x = document.getElementsByClassName("formtab");
