@@ -1,15 +1,15 @@
 {% macro render_slide_field(field) -%}
-  <div class="slidecontainer">
-    <input type="range" min="{{ field.render_kw['min'] }}"
-      max="{{ field.render_kw['max'] }}"
-      value="{{ field.render_kw['start'] }}"
-      class="slider"
-      name='{{ field.name }}'
-      id="{{ field.id }}"
-      oninput="update_slider(this);">
-  </div>
+  <input type="range" min="{{ field.render_kw['min'] }}"
+    max="{{ field.render_kw['max'] }}"
+    value="{{ field.render_kw['start'] }}"
+    class="slider"
+    name='{{ field.name }}'
+    id="{{ field.id }}"
+    oninput="update_slider(this);"></input>
   <span id='slider_{{ field.id }}' style='display: inline;'>
-    <span id='slider_inc_{{ field.id }}'>{{ field.render_kw['start'] }}</span>
+    <span id='slider_inc_{{ field.id }}'>
+      {{ field.render_kw['start'] }}
+    </span>
     {{ field.render_kw['units'] }}
   </span>
 {% endmacro -%}

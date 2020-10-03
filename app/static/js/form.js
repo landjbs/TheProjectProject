@@ -9,5 +9,6 @@ function field_char_counter(field) {
 
 // SLIDE FIELDS
 function update_slider(field) {
-
+  var val = field.value;
+  document.getElementById('slider_inc_' + field.id).innerHTML = val;
 }
