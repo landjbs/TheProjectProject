@@ -88,7 +88,7 @@
   }
 
   .unselected-subjects {
-    max-height: 10vh;
+    max-height: 20vw;
     overflow-y: scroll;
   }
 
