@@ -17,6 +17,7 @@ class Add_Shared(BaseForm):
     '''
     Fields of Add form that are shared between all types
     '''
+    identifier = 'Add_Shared'
     # name
     name = StringField(label='Project Name',
                        validators=[DataRequired(), Length(1, 40)],
