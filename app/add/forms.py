@@ -62,14 +62,16 @@ class Add_Shared(BaseForm):
                 }
             )
     # project type
-    looking_for_members = SelectField(
-                            label='Are you currently looking for team members?',
-                            validators=[DataRequired()],
-                            description='',
-                            render_kw={
-                                'optional': False
-                            }
-                        )
+    project_type = SelectField(
+                    label='What are you working on?',
+                    validators=[DataRequired()],
+                    description='',
+                    choices=[('1', 'Project'), ('2', 'Company')],
+                    render_kw={
+                        'optional': False,
+                        'keys':  ['a', 'b']
+                    }
+                )
 
     def total_time(self):
         time = 0
