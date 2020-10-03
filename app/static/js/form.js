@@ -18,6 +18,13 @@ function update_slider(field) {
 
 
 // FORMTABBING
+function getCurrentTab() {
+  x = document.getElementsByClassName("formtab");
+  for (i = 0; i < x.length; i++) {
+
+  }
+}
+
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("formtab");
