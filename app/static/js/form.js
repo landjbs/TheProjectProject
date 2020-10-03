@@ -111,13 +111,29 @@ function default_keypress(e) {
   return false
 }
 
+
+function boolean_keypress(e) {
+  if (e.keyCode==65) {
+    alert('yes');
+    return true
+  }
+  else if (e.keyCode==66) {
+    alert('no');
+    return true
+  }
+  else {
+    return false
+  }
+}
+
+
 // keypress movement
 function field_keydown(field_type, e) {
   // run through suite before specialty stuff
   var done = default_keypress(e);
   if (done==false) {
     if (field_type=='BooleanField') {
-      alert('here');
+      boolean_keypress(e);
     }
   }
 }
