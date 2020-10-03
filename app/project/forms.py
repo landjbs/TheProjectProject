@@ -56,10 +56,10 @@ class Add_Project(BaseForm):
                                   description=('We are all about fast, impactful '
                                             'projects. You will be able to extend this '
                                             'time later if you need.'),
-                                  render_kw={'min':0, 'max':30, 'start':7})
+                                  render_kw={'min':0, 'max':30, 'start':7, 'units':'days'})
     team_size = IntegerField('Target Team Size',
                             description=('What size do you want your team to be?'),
-                            render_kw={'min':2, 'max':40, 'start':5})
+                            render_kw={'min':2, 'max':40, 'start':5, 'units':'people'})
     complete = BooleanField('Completed',
                             description=('Whether the project has been '
                             'completed.'))
