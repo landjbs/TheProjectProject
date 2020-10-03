@@ -86,6 +86,8 @@ class Add_Shared(BaseForm):
         }
     )
 
+    def get_next_fragment(self)
+
     def total_time(self):
         time = 0
         for field in self:

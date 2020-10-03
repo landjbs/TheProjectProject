@@ -71,7 +71,7 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
-    submit_fragement('Add_Shared');
+    submit_fragment('Add_Shared');
     return false;
   }
   // Otherwise, display the correct tab:
@@ -193,20 +193,20 @@ function field_keydown(e, field) {
 // FIELD SUBMIT
 function submit_field(field_id) {
   var url = Flask.url_for('add.next_field');
-  
+
 }
 
 
 // FRAGMENT SUBMIT
-function submit_fragement(form_id) {
-  var url = Flask.url_for('add.next_fragement');
+function submit_fragment(form_id) {
+  var url = Flask.url_for('add.next_fragment');
   $.ajax({
     type: "POST",
     url: url,
     data: $('#' + form_id).serialize(), // serializes the form's elements.
     success: function (data) {
         // console.log(data)  // display the returned data in the console.
-        document.getElementById('fragements').innerHTML += data['html'];
+        document.getElementById('fragments').innerHTML += data['html'];
     }
   });
   // Inject our CSRF token into our AJAX request.

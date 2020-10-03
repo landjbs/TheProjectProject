@@ -29,8 +29,8 @@ def add_page(competition_id=None):
     return render_template('new_add.html', form=form)
 
 
-@add.route('/next_fragement', methods=['POST'])
-def next_fragement():
+@add.route('/next_fragment', methods=['POST'])
+def next_fragment():
     form = Add_Shared()
     print(f'DATA: {form.data}')
     if form.validate_on_submit():
@@ -45,4 +45,4 @@ def next_fragement():
 
 @add.route('/next_field', methods=['POST'])
 def next_field():
-    current_field = 
+    current_field = fields
