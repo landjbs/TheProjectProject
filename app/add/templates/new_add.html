@@ -46,30 +46,5 @@
   var currentTab = 0; // Current tab is set to be the first tab (0)
   showTab(currentTab); // Display the current tab
 
-
-  $(document).keydown(function(e) {
-    // tab is clicked
-    if (e.keyCode==9) {
-      // shift is also down = backward
-      if (e.shiftKey) {
-        e.preventDefault();
-        nextPrev(-1);
-      }
-      // just tab = forward
-      else {
-        e.preventDefault();
-        nextPrev(1);
-      }
-    }
-    else if (e.keyCode==13) {
-      nextPrev(1);
-    }
-    else if (e.keyCode==89) {
-      // WARNING: CHANGE TO BE ON BOOLEAN FIELD TAB IF NUM FIELDS CHANGES
-      if (currentTab==4) {
-        $('input[type="radio"]').not(':checked').prop("checked", true);
-      }
-    }
-  });
 </script>
 {% endblock %}

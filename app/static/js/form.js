@@ -94,23 +94,30 @@ function default_keypress(e) {
     if (e.shiftKey) {
       e.preventDefault();
       nextPrev(-1);
+      return true
     }
     // tab by itself go forward
     else {
       e.preventDefault();
       nextPrev(-1);
+      return true
     }
   }
   // enter go forward
   else if (e.keyCode==13) {
     nextPrev(1);
+    return true
   }
+  return false
 }
 
 // keypress movement
 function field_keydown(field_type, e) {
-
-  if (field_type=='BooleanField') {
-    alert('here');
+  // run through suite before specialty stuff
+  var done = default_keypress(e);
+  if (done==false) {
+    if (field_type=='BooleanField') {
+      alert('here');
+    }
   }
 }
