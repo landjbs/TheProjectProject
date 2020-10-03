@@ -34,5 +34,7 @@ def next_fragement():
     form = Add_Shared()
     print(f'DATA: {form.data}')
     if form.validate_on_submit():
-        return jsonify('true')
+        return jsonify({
+            ''
+        })
     return jsonify('false')
