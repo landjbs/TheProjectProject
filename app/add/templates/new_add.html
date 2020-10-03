@@ -15,14 +15,16 @@
 
 {% block content %}
 <form class='big-box container justify-content-center' id='add_form'>
-  {{ form.csrf_token() }}
-  {% for field in form %}
-    {% if not field.type=='CSRFTokenField' %}
-      <div class='formtab'>
-        {{ render_field(field) }}
-      </div>
-    {% endif %}
-  {% endfor %}
+  <div class='formelts' style='min-height: 20vw; max-height: 20vw;'>
+    {{ form.csrf_token() }}
+    {% for field in form %}
+      {% if not field.type=='CSRFTokenField' %}
+        <div class='formtab'>
+          {{ render_field(field) }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
 
   <!-- temp navigator -->
   <div style="overflow:auto; width:95%;">
