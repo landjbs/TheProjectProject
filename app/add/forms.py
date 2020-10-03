@@ -13,16 +13,6 @@ from app.project.models import Project
 # from app.company.models import Company
 
 
-class Fragement(BaseForm):
-    children = {}
-
-
-class FragementedForm(BaseForm):
-
-
-
-
-
 class Add_Shared(BaseForm):
     '''
     Fields of Add form that are shared between all types
