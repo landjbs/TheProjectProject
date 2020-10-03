@@ -153,7 +153,14 @@ function boolean_keypress(e, field) {
 }
 
 function select_keypress(e, field) {
+  var code = e.keyCode;
   var options = field.getElementsByTagName('input');
+  for (i=0; i < options.length; i++) {
+    var key = options[i].getAttribute('data-key').toUpperCase().charCodeAt();
+    if (key==code) {
+      alert(options[i].id);
+    }
+  }
 }
 
 
