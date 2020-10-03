@@ -192,5 +192,13 @@ function field_keydown(e, field) {
 
 // FRAGMENT SUBMIT
 function submit_fragement(fragment) {
-  
+  var url = Flask.url_for('add.next_fragement');
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: $('form').serialize(), // serializes the form's elements.
+    success: function (data) {
+        console.log(data)  // display the returned data in the console.
+    }
+  })
 }
