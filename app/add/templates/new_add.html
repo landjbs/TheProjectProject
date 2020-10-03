@@ -15,8 +15,8 @@
 {% endblock %}
 
 {% block content %}
-<form class='big-box container justify-content-center' id='add_form'>
-  <div class='formelts'>
+<div class='big-box container justify-content-center'>
+  <div id='fragements'>
     {{ form.csrf_token() }}
     {{ render_fragment(form) }}
   </div>
@@ -32,7 +32,7 @@
       <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
     </div>
   </div>
-</form>
+</div>
 
 <script src='js/form.js'></script>
 

@@ -198,7 +198,9 @@ function submit_fragement(form_id) {
     url: url,
     data: $('#' + form_id).serialize(), // serializes the form's elements.
     success: function (data) {
-        console.log(data)  // display the returned data in the console.
+        // console.log(data)  // display the returned data in the console.
+        document.getElementById('fragements').innerHTML += data['html'];
+        nextPrev(1);
     }
   });
   // Inject our CSRF token into our AJAX request.

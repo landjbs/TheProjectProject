@@ -35,7 +35,7 @@ def next_fragement():
     print(f'DATA: {form.data}')
     if form.validate_on_submit():
         render_fragment = get_template_attribute(
-            'macros/forms/fragement.html', 'render_fragment'
+            'macros/forms/fragment.html', 'render_fragment'
         )
         return jsonify({
             'html': render_fragment(Add_Company())
