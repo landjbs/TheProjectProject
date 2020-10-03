@@ -87,7 +87,10 @@ class Add_Shared(BaseForm):
     )
 
     def get_next_fragment(self):
-        return Add_Company()
+        if self.project_type = 2:
+            return Add_Company()
+        else:
+            raise ValueError('')
 
     def total_time(self):
         time = 0
