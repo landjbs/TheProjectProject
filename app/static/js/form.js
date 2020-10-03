@@ -127,7 +127,7 @@ function default_keypress(e) {
 }
 
 
-function boolean_keypress(e) {
+function boolean_keypress(e, field) {
   if (e.keyCode==65) {
     alert('yes');
     return true
@@ -144,12 +144,14 @@ function boolean_keypress(e) {
 
 // keypress movement
 function field_keydown(e, field) {
-  // run through suite before specialty stuff
+  // run through default suite before specialty stuff
   var done = default_keypress(e);
-  var field_type = field.getAttribute('data-field-type');
   if (done==false) {
+    // determine type of field
+    var field_type = field.getAttribute('data-field-type');
+    // if boolean field
     if (field_type=='BooleanField') {
-      boolean_keypress(e);
+      done = boolean_keypress(e, field);
     }
   }
 }
