@@ -41,7 +41,7 @@
 
 
 {% macro render_subject_tag(subject) -%}
-  <p class='subject-tag' id='subject-tag-{{ subject.id }}'
+  <p class='subject-tag searchable' id='subject-tag-{{ subject.id }}'
     data='{{ subject.id }}' selected='false' style='background:{{ subject.color }};'>
     {{ subject.name }}
   </p>

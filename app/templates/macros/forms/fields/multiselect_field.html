@@ -23,9 +23,7 @@
       </span>
       {% for id, subject in field.choices %}
         {% if not id in prev_data %}
-          <div class='searchable'>
-            {{ render_subject_tag(subject) }}
-          </div>
+          {{ render_subject_tag(subject) }}
         {% endif %}
       {% endfor %}
     </div>
