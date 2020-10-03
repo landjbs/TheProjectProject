@@ -87,7 +87,8 @@ class Add_Shared(BaseForm):
     )
 
     def get_next_fragment(self):
-        if self.project_type = 2:
+        print(self.project_type)
+        if (self.project_type=='2'):
             return Add_Company()
         else:
             raise ValueError('')
