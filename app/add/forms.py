@@ -110,15 +110,18 @@ class Add_Company(BaseForm):
                     }
                 )
     # amount_raised
-    # amount_raised = IntegerField(
-    #                     label='Roughly how much have you raised?',
-    #                     validators=[DataRequired()],
-    #                     description='',
-    #                     render_kw={
-    #                         'max':      100000000, # current max $100 mil
-    #                         'optional': True
-    #                     }
-    #                 )
+    amount_raised = IntegerField(
+                        label='Roughly how much have you raised?',
+                        validators=[DataRequired()],
+                        description='',
+                        render_kw={
+                            'min':      1,
+                            'start':    5000,
+                            'max':      1000000, # current max $100 mil
+                            'optional': True,
+                            'seconds':  5
+                        }
+                    )
     # # looking_to_raise
     # looking_to_raise = BooleanField(
     #                     label='Are you currently looking for funding?',
