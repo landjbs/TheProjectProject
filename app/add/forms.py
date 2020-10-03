@@ -66,10 +66,11 @@ class Add_Shared(BaseForm):
                     label='What are you working on?',
                     validators=[DataRequired()],
                     description='',
-                    choices=[('1', 'Project'), ('2', 'Company')],
+                    choices=[(1, 'Project'), (2, 'Company')],
                     render_kw={
                         'optional': False,
-                        'keys':  ['a', 'b']
+                        'keys':  ['A', 'B', 'C'],
+                        'icons'
                     }
                 )
 
