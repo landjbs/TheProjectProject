@@ -52,7 +52,7 @@
   $(document).keydown(function(e) {
     var field = getCurrentTab();
     var field_type = field.getAttribute('data-field-type');
-    field_keydown(field_type, e);
+    field_keydown(e, field);
   })
 
 </script>
