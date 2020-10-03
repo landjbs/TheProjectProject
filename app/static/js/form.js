@@ -7,4 +7,4 @@ function field_char_counter(field) {
 }
 
 
-// INT FIELDS
+// SLIDE FIELDS

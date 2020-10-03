@@ -3,7 +3,7 @@
     <input type="range" min="{{ field.render_kw['min'] }}"
       max="{{ field.render_kw['max'] }}"
       value="{{ field.render_kw['start'] }}" class="slider"
-          name='{{ field.name }}' id="team_slider">
+      name='{{ field.name }}' id="{{ field.id }}">
   </div>
   <p id='slider-{{ field.id }}' style='display: inline;'></p>
 {% endmacro -%}
