@@ -105,7 +105,8 @@ class Add_Company(BaseForm):
                     description='',
                     render_kw={
                         'optional': False,
-                        'default':  False
+                        'default':  False,
+                        'seconds':  5
                     }
                 )
     # amount_raised
