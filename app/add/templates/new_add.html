@@ -27,7 +27,10 @@
   </div>
 
   <!-- temp navigator -->
-  <p class='float-left'>{{ form.total_time() }} seconds remaining</p>
+  <p class='float-left'>
+    <span id='form_time_inc'>{{ form.total_time() }}</span> 
+    seconds remaining
+  </p>
   <div style="overflow:auto; width:95%;">
     <div style="float:right;">
       <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">Back</button>
