@@ -99,7 +99,7 @@ function default_keypress(e) {
     // tab by itself go forward
     else {
       e.preventDefault();
-      nextPrev(-1);
+      nextPrev(1);
       return true
     }
   }
