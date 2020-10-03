@@ -14,7 +14,7 @@ from app.link.forms import Add_Link
 from app.project.forms import Add_Project
 
 # package imports
-from .forms import Add_Shared
+from .forms import Add_Shared, Add_Company
 
 from ..add import add
 
@@ -26,4 +26,4 @@ def add(competition_id=None):
     form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     # form.competition.choices = Competition.recommend()
-    return render_template('new_add.html', form=form)
+    return render_template('new_add.html', form=form, company=Add_Company())
