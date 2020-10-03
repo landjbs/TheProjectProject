@@ -188,3 +188,9 @@ function field_keydown(e, field) {
   }
   }
 }
+
+
+// FRAGMENT SUBMIT
+function submit_fragement(fragment) {
+  
+}

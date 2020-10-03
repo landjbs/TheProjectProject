@@ -27,3 +27,8 @@ def add(competition_id=None):
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     # form.competition.choices = Competition.recommend()
     return render_template('new_add.html', form=form, company=Add_Company())
+
+
+@add.route('/next_fragement', methods=['POST'])
+def next_fragement():
+    
