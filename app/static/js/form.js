@@ -196,9 +196,9 @@ function submit_fragement(fragment) {
   $.ajax({
     type: "POST",
     url: url,
-    data: $('form').serialize(), // serializes the form's elements.
+    data: form.serialize(), // serializes the form's elements.
     success: function (data) {
         console.log(data)  // display the returned data in the console.
     }
-  })
+  });
 }
