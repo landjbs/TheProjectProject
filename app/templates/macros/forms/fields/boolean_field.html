@@ -1,5 +1,5 @@
 {% macro render_boolean_field(field) -%}
-  <div onkeydown='function(e) { alert(e) };' class="input-control" onclick='toggle_{{ field.name }}()' id='{{ field.name }}'>
+  <div onkeydown='alert("here");' class="input-control" onclick='toggle_{{ field.name }}()' id='{{ field.name }}'>
     <input id="on-{{ field.name }}" class="toggle toggle-left" name="{{ field.name }}" value="true" type="radio">
     <label for="on-{{ field.name }}" class="btn">
       <span class='presskey'>A</span>
