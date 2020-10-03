@@ -19,7 +19,7 @@
     {{ form.csrf_token() }}
     {% for field in form %}
       {% if not field.type=='CSRFTokenField' %}
-        <div class='formtab' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}'>
+        <div class='formtab' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
           {{ render_field(field) }}
         </div>
       {% endif %}

@@ -128,9 +128,7 @@ function default_keypress(e) {
 
 
 function switch_boolean(field, switch_prefix) {
-  alert(field);
-  var id = field.id;
-  console.log(id);
+  var id = field.getAttribute('data-field-id');
   var switch_obj = document.getElementById(switch_prefix + '-' + id);
   if (switch_obj.checked!=true) {
     switch_obj.checked = true;
@@ -166,5 +164,9 @@ function field_keydown(e, field) {
     if (field_type=='BooleanField') {
       done = boolean_keypress(e, field);
     }
+  // if successfully done, move to the next tab
+  if (done==true) {
+    nextPrev(1);
+  }
   }
 }
