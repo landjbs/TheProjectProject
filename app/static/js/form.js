@@ -90,7 +90,20 @@ function validateForm() {
 function default_keypress(e) {
   // tab is clicked
   if (e.keyCode==9) {
-    
+    // if shift is also down go backward
+    if (e.shiftKey) {
+      e.preventDefault();
+      nextPrev(-1);
+    }
+    // tab by itself go forward
+    else {
+      e.preventDefault();
+      nextPrev(-1);
+    }
+  }
+  // enter go forward
+  else if (e.keyCode==13) {
+    nextPrev(1);
   }
 }
 
