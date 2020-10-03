@@ -48,9 +48,7 @@
 
   $(document).keydown(function(e) {
     var field = getCurrentTab();
-    alert(field);
-    var field_type = field.data('field-type');
-    alerTt(field_type);
+    var field_type = field.getAttribute('data-field-type');
     field_keydown(field_type, e);
   })
 

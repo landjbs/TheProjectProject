@@ -14,9 +14,6 @@ function update_slider(field) {
 }
 
 
-// keydown listeners
-
-
 // FORMTABBING
 function getCurrentTab() {
   x = document.getElementsByClassName("formtab");
@@ -99,7 +96,7 @@ function validateForm() {
   }
 
 
-
+// KEYDOWNS
 function default_keypress(e) {
   // tab is clicked
   if (e.keyCode==9) {
