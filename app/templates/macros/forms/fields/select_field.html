@@ -7,12 +7,14 @@
 {% macro render_select_field(field) -%}
   <div class='input-control select_field' id='{{ field.id }}'>
     {% for i, name in field.choices %}
+      {% set data = field.render_kw['datamap'][i] %}
       <input id="on-{{ field.id }}" class="toggle toggle-left" name="{{ field.name }}" value="true" type="radio">
       <label for="on-{{ field.id }}" class="btn">
-        <i class="{{ field.render_kw['icons'][i-1] }} fa-2x"></i>
-        <br>
+        <center>
+          <i class="{{ data['icon'] }} fa-2x"></i>
+        </center>
         <span class='presskey'>
-          {{ field.render_kw['keys'][i-1] }}
+          {{ data['key'] }}
         </span>
         {{ name }}
       </label>

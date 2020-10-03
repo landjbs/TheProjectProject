@@ -69,8 +69,16 @@ class Add_Shared(BaseForm):
                     choices=[(1, 'Project'), (2, 'Company')],
                     render_kw={
                         'optional': False,
-                        'keys':  ['A', 'B', 'C'],
-                        'icons': ['fa fa-user-circle', 'fa fa-trophy'],
+                        'datamap': {
+                            1:  {
+                                'key'   :   'A',
+                                'icon'  :   'fa fa-user-circle'
+                            }
+                            2:  {
+                                'key'   :   'B',
+                                'icon'  :   'fa fa-trophy'
+                            }
+                        }
                         'seconds':  3
                     }
                 )
