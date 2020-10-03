@@ -22,7 +22,7 @@ from ..add import add
 @add.route('/add', methods=['GET','POST'])
 @add.route('/add/<int:competition_id>', methods=['GET','POST'])
 # @login_required
-def add(competition_id=None):
+def add_page(competition_id=None):
     form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     # form.competition.choices = Competition.recommend()
