@@ -14,7 +14,7 @@ from app.link.forms import Add_Link
 from app.project.forms import Add_Project
 
 # package imports
-from .forms import Add_Shared, Add_Company, fields
+from .forms import Add_Shared, Add_Company
 
 from ..add import add
 
@@ -38,11 +38,11 @@ def next_fragment():
             'macros/forms/fragment.html', 'render_fragment'
         )
         return jsonify({
-            'html': render_fragment(Add_Company())
+            'html': render_fragment(form.get_next_fragment())
         })
     return jsonify('false')
 
 
-@add.route('/next_field', methods=['POST'])
-def next_field():
-    current_field = fields
+# @add.route('/next_field', methods=['POST'])
+# def next_field():
+#     current_field = fields
