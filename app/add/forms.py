@@ -73,12 +73,12 @@ class Add_Shared(BaseForm):
                             1:  {
                                 'key'   :   'A',
                                 'icon'  :   'fa fa-user-circle'
-                            }
+                            },
                             2:  {
                                 'key'   :   'B',
                                 'icon'  :   'fa fa-trophy'
                             }
-                        }
+                        },
                         'seconds':  3
                     }
                 )
