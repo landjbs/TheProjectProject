@@ -1,5 +1,6 @@
 {% extends "home_base.html" %}
 {% from 'macros/forms/field.html' import render_field %}
+{% from 'macros/forms/fragment.html' import render_fragment %}
 
 {% block title %}Add Project{% endblock %}
 
@@ -17,13 +18,7 @@
 <form class='big-box container justify-content-center' id='add_form'>
   <div class='formelts' style='min-height: 20vw; max-height: 20vw;'>
     {{ form.csrf_token() }}
-    {% for field in form %}
-      {% if not field.type=='CSRFTokenField' %}
-        <div class='formtab' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
-          {{ render_field(field) }}
-        </div>
-      {% endif %}
-    {% endfor %}
+    {{ render_fragment(form) }}
   </div>
 
   <!-- temp navigator -->
