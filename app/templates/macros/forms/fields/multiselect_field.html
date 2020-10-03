@@ -6,8 +6,10 @@
   {% set prev_data = field.data if field.data else [] %}
   <div class='row'>
     <!-- selected -->
-    <div class='col selected-subjects'>
-        <p class='passion-column-header'>Selected</p>
+    <div class='col selected-subjects' id='selectedSubjects'>
+        <p class='passion-column-header'>
+          Selected
+        </p>
         {% for id in prev_data %}
           {{ render_subject_tag(field.choices[id-1][1]) }}
         {% endfor %}
@@ -18,7 +20,7 @@
         <p>
           <u>Unselected (scroll for more)</u>
           <i class="fas fa-search"></i>
-          <input class='select-clean' style='font-size:100%; width:30%;' type="text" placeholder="search..." id="subjectSearch" onkeyup="filterFunction('subjectSearch', 'unselectedSubjects')">
+          <input class='select-clean' style='font-size:100%; width:30%;' type="text" placeholder="search..." id="unselectedSearch" onkeyup="filterFunction('unselectedSearch', 'unselectedSubjects')">
         </p>
       </span>
       {% for id, subject in field.choices %}
