@@ -5,5 +5,13 @@
 
 
 {% macro render_select_field(field) -%}
-  {{ field(class='input valid add-select') }}
+  <div class='input-control select_field' id='{{ field.id }}'>
+    {% for choice in field.choices %}
+      <input id="on-{{ field.id }}" class="toggle toggle-left" name="{{ field.name }}" value="true" type="radio">
+      <label for="on-{{ field.id }}" class="btn">
+        <span class='presskey'>A</span>
+        {{ choice }}
+      </label>
+    {% endfor %}
+  </div>
 {% endmacro -%}
