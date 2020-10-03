@@ -1,7 +1,7 @@
 from flask import url_for
 from wtforms import (TextField, StringField, BooleanField, SelectField,
                     SelectMultipleField, FloatField, IntegerField,
-                    TextAreaField, validators)
+                    TextAreaField, validators, Field, )
 from wtforms.validators import (DataRequired, Length, EqualTo, Email,
                                 InputRequired, ValidationError, NumberRange)
 # absolute imports
@@ -11,6 +11,15 @@ from app.link.utils import fix_url
 # package imports
 from app.project.models import Project
 # from app.company.models import Company
+
+
+class Fragement(BaseForm):
+    children = {}
+
+
+class FragementedForm(BaseForm):
+
+
 
 
 
