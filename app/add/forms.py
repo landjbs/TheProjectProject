@@ -76,7 +76,7 @@ class Add_Shared(BaseForm):
                             },
                             2:  {
                                 'key'   :   'B',
-                                'icon'  :   'fa fa-trophy'
+                                'icon'  :   'fa fa-briefcase'
                             },
                             3:  {
                                 'key'   :   'C',

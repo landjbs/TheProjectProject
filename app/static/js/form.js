@@ -185,7 +185,7 @@ function field_keydown(e, field) {
     }
   // if successfully done, move to the next tab
   if (done==true) {
-    nextPrev(1);
+    // nextPrev(1);
   }
   }
 }
