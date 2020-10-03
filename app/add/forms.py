@@ -66,7 +66,7 @@ class Add_Shared(BaseForm):
                     label='What are you working on?',
                     validators=[DataRequired()],
                     description='',
-                    choices=[(1, 'Project'), (2, 'Company')],
+                    choices=[(1, 'Project'), (2, 'Company'), (3, 'Other')],
                     render_kw={
                         'optional': False,
                         'datamap': {
@@ -77,6 +77,10 @@ class Add_Shared(BaseForm):
                             2:  {
                                 'key'   :   'B',
                                 'icon'  :   'fa fa-trophy'
+                            },
+                            3:  {
+                                'key'   :   'C',
+                                'icon'  :   'fa fa-smile'
                             }
                         },
                         'seconds':  3
