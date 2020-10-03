@@ -16,7 +16,7 @@
 
 {% block content %}
 <form class='big-box container justify-content-center' id='add_form'>
-  <div class='formelts' style='min-height: 20vw; max-height: 20vw;'>
+  <div class='formelts'>
     {{ form.csrf_token() }}
     {{ render_fragment(form) }}
   </div>

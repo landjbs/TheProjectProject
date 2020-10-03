@@ -71,7 +71,7 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
-    submit();
+    alert('here');
     return false;
   }
   // Otherwise, display the correct tab:
