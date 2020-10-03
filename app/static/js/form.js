@@ -25,7 +25,7 @@ function showTab(n) {
   if (field==null) {
     var field = x[n].getElementsByTagName('textarea')[0];
   }
-  if (field!==null) {
+  if (field) {
     field.focus();
   }
   // ... and fix the Previous/Next buttons:
