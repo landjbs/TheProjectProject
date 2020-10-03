@@ -1,5 +1,18 @@
 {% macro render_string_field(field) -%}
   {% set c = 'input valid' if not field.errors else 'input invalid'%}
   {% set max = field.render_kw.get('max') %}
-  {{ field(class=c, placeholder=field.render_kw['placeholder'], maxlength=max) }}
+  {{
+    field(class=c, placeholder=field.render_kw['placeholder'], maxlength=max,
+          onkeyup='alert("keyup");')
+  }}
+  <span>
+    <span class='char_inc'>0</span> / {{ max }} characters
+  </span>
+  <!-- bind keyup event to field for char counting -->
+  <script>
+    alert('here');
+    document.getElementById('#{{ field.id }}').keyup(function() {
+      alert('last');
+    })
+  </script>
 {% endmacro -%}
