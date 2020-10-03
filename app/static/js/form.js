@@ -86,7 +86,17 @@ function validateForm() {
   }
 
 
+
+function default_keypress(e) {
+  // tab is clicked
+  if (e.keyCode==9) {
+    
+  }
+}
+
+// keypress movement
 function field_keydown(field_type, e) {
+
   if (field_type=='BooleanField') {
     alert('here');
   }
