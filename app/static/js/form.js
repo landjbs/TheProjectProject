@@ -8,3 +8,6 @@ function field_char_counter(field) {
 
 
 // SLIDE FIELDS
+function update_slider(field) {
+
+}

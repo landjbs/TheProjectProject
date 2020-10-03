@@ -6,7 +6,7 @@
       class="slider"
       name='{{ field.name }}'
       id="{{ field.id }}"
-      oninput="update_slider();">
+      oninput="update_slider(this);">
   </div>
   <span id='slider_{{ field.id }}' style='display: inline;'>
     <span id='slider_inc_{{ field.id }}'>{{ field.render_kw['start'] }}</span>
