@@ -62,9 +62,12 @@ function nextPrev(n) {
   if (n == -1 && currentTab==0) return false;
   // Modify remaining time
   var field_seconds = Number(x[currentTab].getAttribute('data-seconds'));
+  console.log('field_seconds ' + field_seconds);
   var time_inc = document.getElementById('form_time_inc').innerHTML;
+  console.log('time_inc ' + time_inc);
   var time_rem = Number(time_inc) - field_seconds;
-  time_inc.innerHTML = String(time_rem);
+  console.log('time_rem ' + time_rem);
+  document.getElementById('form_time_inc').innerHTML = String(time_rem);
   // Hide the current tab:
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
