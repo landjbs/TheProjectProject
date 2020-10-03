@@ -14,7 +14,7 @@ from app.link.forms import Add_Link
 from app.project.forms import Add_Project
 
 # package imports
-from .forms import Add_Shared, Add_Company
+from .forms import Add_Shared, Add_Company, fields
 
 from ..add import add
 
@@ -45,4 +45,4 @@ def next_fragement():
 
 @add.route('/next_field', methods=['POST'])
 def next_field():
-    
+    current_field = 
