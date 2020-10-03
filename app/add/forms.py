@@ -62,7 +62,7 @@ class Add_Shared(BaseForm):
                 }
             )
     # project type
-    looking_for_members = BooleanField(
+    looking_for_members = SelectField(
                             label='Are you currently looking for team members?',
                             validators=[DataRequired()],
                             description='',
