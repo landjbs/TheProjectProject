@@ -51,22 +51,6 @@
     field_keydown(e, field);
   })
 
-  $(document).ready(function() {
-    $('add_form').submit(function (e) {
-        var url = Flask.url_for('add.next_fragement');
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $('add_form').serialize(), // serializes the form's elements.
-            success: function (data) {
-                console.log(data)  // display the returned data in the console.
-            }
-        });
-        e.preventDefault(); // block the traditional submission of the form.
-    });
-
-  });
-
 </script>
 {% endblock %}
 
