@@ -127,6 +127,17 @@ function default_keypress(e) {
 }
 
 
+function boolean_true(field) {
+  var id = field.id;
+  var on_switch = document.getElementById('on-' + id);
+  if (on_switch.checked!=true) {
+    on_switch.checked = true;
+    return true
+  }
+  return false
+}
+
+
 function boolean_keypress(e, field) {
   if (e.keyCode==65) {
     alert('yes');
