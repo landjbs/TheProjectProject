@@ -10,9 +10,8 @@
       {% set data = field.render_kw['datamap'][i] %}
       <input id="{{ name }}-{{ field.id }}" class="toggle" name="{{ field.name }}" value='{{ i }}' type="radio" data-key="{{ data['key'] }}">
       <label for="{{ name }}-{{ field.id }}" class="btn">
-        <center>
-          <i class="{{ data['icon'] }} fa-2x"></i>
-        </center>
+        <i class="{{ data['icon'] }} fa-2x"></i>
+        <br>
         <span class='presskey'>
           {{ data['key'] }}
         </span>
