@@ -161,9 +161,11 @@ function select_keypress(e, field) {
     if (key==code) {
       if (option.checked==false) {
         option.checked = true;
+        return true
       }
     }
   }
+  return false
 }
 
 
