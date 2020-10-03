@@ -152,6 +152,10 @@ function boolean_keypress(e, field) {
   }
 }
 
+function select_keypress(e, field) {
+  alert(e);
+}
+
 
 // keypress movement
 function field_keydown(e, field) {
