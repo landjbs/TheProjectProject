@@ -160,7 +160,7 @@ function select_keypress(e, field) {
     var key = option.getAttribute('data-key').toUpperCase().charCodeAt();
     if (key==code) {
       if (option.checked==false) {
-        
+        option.checked = true;
       }
     }
   }
