@@ -3,16 +3,9 @@
   {% set max = field.render_kw.get('max') %}
   {{
     field(class=c, placeholder=field.render_kw['placeholder'], maxlength=max,
-          onkeyup='alert("keyup");')
+          onkeyup='field_char_counter(this);')
   }}
   <span>
-    <span class='char_inc'>0</span> / {{ max }} characters
+    <span id='char_inc_{{ field.id }}'>0</span> / {{ max }} characters {{ field.id }}
   </span>
-  <!-- bind keyup event to field for char counting -->
-  <script>
-    alert('here');
-    document.getElementById('#{{ field.id }}').keyup(function() {
-      alert('last');
-    })
-  </script>
 {% endmacro -%}
