@@ -32,7 +32,7 @@ def add_page(competition_id=None):
 @add.route('/next_fragement', methods=['POST'])
 def next_fragement():
     form = Add_Shared()
-    print(form.data)
+    print(f'DATA: {form.data}')
     if form.validate_on_submit():
         return jsonify('true')
     return jsonify('false')

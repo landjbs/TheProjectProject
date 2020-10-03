@@ -52,12 +52,12 @@
   })
 
   $(document).ready(function() {
-    $('form').submit(function (e) {
+    $('add_form').submit(function (e) {
         var url = Flask.url_for('add.next_fragement');
         $.ajax({
             type: "POST",
             url: url,
-            data: $('form').serialize(), // serializes the form's elements.
+            data: $('add_form').serialize(), // serializes the form's elements.
             success: function (data) {
                 console.log(data)  // display the returned data in the console.
             }
