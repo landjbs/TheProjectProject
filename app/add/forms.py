@@ -68,7 +68,6 @@ class Add_Shared(BaseForm):
         for field in self:
             
 
-
 class Add_Company(BaseForm):
     '''
     Fields of add form used to build Company objects
