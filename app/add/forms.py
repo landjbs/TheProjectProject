@@ -13,6 +13,9 @@ from app.project.models import Project
 # from app.company.models import Company
 
 
+### FIELDS ##
+
+
 
 shared_fragment = [
     StringField(

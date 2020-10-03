@@ -41,3 +41,6 @@ def next_fragement():
             'html': render_fragment(Add_Company())
         })
     return jsonify('false')
+
+
+@add.route('/next_field', methods=['POST'])
