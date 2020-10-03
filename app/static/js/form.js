@@ -127,11 +127,13 @@ function default_keypress(e) {
 }
 
 
-function boolean_true(field) {
+function switch_boolean(field, switch_prefix) {
+  alert(field);
   var id = field.id;
-  var on_switch = document.getElementById('on-' + id);
-  if (on_switch.checked!=true) {
-    on_switch.checked = true;
+  console.log(id);
+  var switch_obj = document.getElementById(switch_prefix + '-' + id);
+  if (switch_obj.checked!=true) {
+    switch_obj.checked = true;
     return true
   }
   return false
@@ -140,11 +142,11 @@ function boolean_true(field) {
 
 function boolean_keypress(e, field) {
   if (e.keyCode==65) {
-    alert('yes');
+    switch_boolean(field, 'on');
     return true
   }
   else if (e.keyCode==66) {
-    alert('no');
+    switch_boolean(field, 'off');
     return true
   }
   else {
