@@ -42,15 +42,25 @@ class Add_Shared(BaseForm):
     summary = TextAreaField(label='Summary',
                         validators=[DataRequired(), Length(1, 400)],
                         description='Describe your project in more detail.',
-                        render_kw={'placeholder': ('TheProjectProject is a virtual community of innovators, who collaborate on projects across a wide range of fields and time windows. '
-                                                'I need a team of web developers, database experts, and creative minds to help me build this platform. We will tackle interesting problems '
-                                                'such as matching users with projects they will like and designing an interface that helps people communicate their ideas...'),
-                                  'max':400})
+                        render_kw={
+                            'placeholder': ('TheProjectProject is a virtual community of innovators, who collaborate on projects across a wide range of fields and time windows. '
+                                            'I need a team of web developers, database experts, and creative minds to help me build this platform. We will tackle interesting problems '
+                                            'such as matching users with projects they will like and designing an interface that helps people communicate their ideas...'),
+                            'max':400,
+                            'seconds':  90
+                        }
+                    )
     # subjects
-    subjects = SelectMultipleField('Subjects',
-                                    description=('What subjects might this '
-                                                'project involve?'),
-                                    validators=[], choices=[], coerce=int)
+    subjects = SelectMultipleField(
+                label='Subjects',
+                description='What subjects might this project involve?',
+                validators=[],
+                choices=[],
+                coerce=int,
+                redner_kw={
+                    'seconds':  10
+                }
+            )
 
 
 class Add_Company(BaseForm):
