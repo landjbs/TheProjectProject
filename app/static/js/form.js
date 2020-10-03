@@ -200,4 +200,12 @@ function submit_fragement(fragment) {
         console.log(data)  // display the returned data in the console.
     }
   });
+  // Inject our CSRF token into our AJAX request.
+  $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+          }
+      }
+  });
 }
