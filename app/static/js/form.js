@@ -60,6 +60,11 @@ function nextPrev(n) {
   if (n == 1 && !validateForm()) return false;
   // Can't go backwards on first tab
   if (n == -1 && currentTab==0) return false;
+  // Modify remaining time
+  var field_seconds = Number(x[currentTab].getAttribute('seconds'));
+  var time_inc = document.getElementById('form_time_inc');
+  var time_rem = Number(time_inc) - field_seconds;
+  time_inc.innerHTML = String(time_rem);
   // Hide the current tab:
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
