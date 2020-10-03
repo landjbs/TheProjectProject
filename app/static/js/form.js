@@ -207,6 +207,8 @@ function submit_fragment(form_id) {
     success: function (data) {
         // console.log(data)  // display the returned data in the console.
         document.getElementById('fragments').innerHTML += data['html'];
+        nextPrev(1);
+        nextPrev(-1);
     }
   });
   // Inject our CSRF token into our AJAX request.
