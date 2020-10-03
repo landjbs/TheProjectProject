@@ -71,7 +71,7 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
-    submit_fragement('add_form');
+    submit_fragement('Add_Shared');
     return false;
   }
   // Otherwise, display the correct tab:
