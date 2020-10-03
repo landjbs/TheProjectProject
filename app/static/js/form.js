@@ -61,8 +61,8 @@ function nextPrev(n) {
   // Can't go backwards on first tab
   if (n == -1 && currentTab==0) return false;
   // Modify remaining time
-  var field_seconds = Number(x[currentTab].getAttribute('seconds'));
-  var time_inc = document.getElementById('form_time_inc');
+  var field_seconds = Number(x[currentTab].getAttribute('data-seconds'));
+  var time_inc = document.getElementById('form_time_inc').innerHTML;
   var time_rem = Number(time_inc) - field_seconds;
   time_inc.innerHTML = String(time_rem);
   // Hide the current tab:
