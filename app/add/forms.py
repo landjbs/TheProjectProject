@@ -70,7 +70,8 @@ class Add_Shared(BaseForm):
                     render_kw={
                         'optional': False,
                         'keys':  ['A', 'B', 'C'],
-                        'icons': ['fa fa-user-circle fa-2x', 'fa fa-trophy fa-2x']
+                        'icons': ['fa fa-user-circle', 'fa fa-trophy'],
+                        'seconds':  3
                     }
                 )
 
