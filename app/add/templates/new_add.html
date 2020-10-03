@@ -19,7 +19,7 @@
     {{ form.csrf_token() }}
     {% for field in form %}
       {% if not field.type=='CSRFTokenField' %}
-        <div class='formtab' onkeydown="alert('here');">
+        <div class='formtab' onkeydown="function(e) { field_keydown(e);">
           {{ render_field(field) }}
         </div>
       {% endif %}
