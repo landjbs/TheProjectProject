@@ -14,7 +14,7 @@ from app.link.forms import Add_Link
 from app.project.forms import Add_Project
 
 # package imports
-from .forms import Add_Shared, Add_Company
+from .forms import Add_Shared
 
 from ..add import add
 

@@ -14,17 +14,6 @@ from markupsafe import Markup
 # from app.company.models import Company
 
 
-class Fragment(BaseForm):
-    ''' Fragment of form that points to next based on data '''
-    def get_next_fragment(self):
-        return None
-
-# class Add_Shared(Fragment):
-    # def __init__(self):
-
-
-
-
 class Add_Shared(BaseForm):
     ''' Fields of Add form that are shared between all types '''
     identifier = 'Add_Shared'
@@ -64,7 +53,7 @@ class Add_Shared(BaseForm):
     )
     # oneliner
     oneliner = StringField(
-        label='One-Liner',
+        label='One Line',
         validators=[DataRequired(), Length(1, 100)],
         description=Markup('One line description of your <span class="project_type lowercase"></span>.'),
         render_kw={
@@ -97,13 +86,8 @@ class Add_Shared(BaseForm):
             'seconds':  8
         }
     )
+    
 
-    def get_next_fragment(self):
-        print(self.project_type.data)
-        if (self.project_type.data=='2'):
-            return Add_Company()
-        else:
-            raise ValueError('')
 
     def total_time(self):
         time = 0
