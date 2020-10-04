@@ -23,6 +23,7 @@ class Fragment(BaseForm):
 
 
 
+
 class Add_Shared(BaseForm):
     ''' Fields of Add form that are shared between all types '''
     identifier = 'Add_Shared'
@@ -37,8 +38,7 @@ class Add_Shared(BaseForm):
             'datamap': {
                 1:  {
                     'key'   :   'A',
-                    'icon'  :   'fa fa-circle',
-                    'action':
+                    'icon'  :   'fa fa-circle'
                 },
                 2:  {
                     'key'   :   'B',
@@ -50,10 +50,10 @@ class Add_Shared(BaseForm):
     )
     # name
     name = StringField(
-        label="<span id='type'><span> Name",
-           validators=[DataRequired(), Length(1, 40)],
-           description='Give your project a name!',
-           render_kw={
+        label="<span class='project_type'><span> Name",
+        validators=[DataRequired(), Length(1, 40)],
+        description='Give your project a name!',
+        render_kw={
             'placeholder':  'TheProjectProject',
             'max':          30,
             'seconds':      5

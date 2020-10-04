@@ -71,7 +71,7 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
-    submit_fragment('Add_Type');
+    // submit_fragment('Add_Type');
     return false;
   }
   // Otherwise, display the correct tab:

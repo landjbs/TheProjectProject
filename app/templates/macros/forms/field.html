@@ -10,7 +10,9 @@
 <!-- render name+description as provided -->
 {% macro render_field_header(field) -%}
   <div class='input-title' id='{{ field.name }}_label'>
-    <h6 style="display: inline;">{{ field.label }}</h6>
+    <h6 style="display: inline;">
+      {{ field.label | safe }}
+    </h6>
     {% if field.description %}
       <div class='boop'>
         <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>

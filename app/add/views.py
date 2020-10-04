@@ -14,7 +14,7 @@ from app.link.forms import Add_Link
 from app.project.forms import Add_Project
 
 # package imports
-from .forms import Add_Shared, Add_Company, Add_Type
+from .forms import Add_Shared, Add_Company
 
 from ..add import add
 
@@ -26,21 +26,21 @@ def add_page(competition_id=None):
     form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     # form.competition.choices = Competition.recommend()
-    return render_template('new_add.html', form=Add_Type())
+    return render_template('new_add.html', form=form)
 
 
-@add.route('/next_fragment', methods=['POST'])
-def next_fragment():
-    form = Add_Type()
-    print(f'DATA: {form.data}')
-    if form.validate_on_submit():
-        render_fragment = get_template_attribute(
-            'macros/forms/fragment.html', 'render_fragment'
-        )
-        return jsonify({
-            'html': render_fragment(form.get_next_fragment())
-        })
-    return jsonify('false')
+# @add.route('/next_fragment', methods=['POST'])
+# def next_fragment():
+#     form = Add_Type()
+#     print(f'DATA: {form.data}')
+#     if form.validate_on_submit():
+#         render_fragment = get_template_attribute(
+#             'macros/forms/fragment.html', 'render_fragment'
+#         )
+#         return jsonify({
+#             'html': render_fragment(form.get_next_fragment())
+#         })
+#     return jsonify('false')
 
 
 # @add.route('/next_field', methods=['POST'])
