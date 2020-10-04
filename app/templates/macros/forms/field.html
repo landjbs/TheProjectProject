@@ -47,9 +47,11 @@
 
 
 {% macro render_field(field) -%}
-  <div class="row input-segment" id='{{ field.name }}_segment'>
-    {{ render_field_header(field) }}
-    {{ render_fn[field.type](field) }}
-    {{ render_field_errors(field) }}
+  <div class='formtab {{ field.render_kw.get("tabclass") }}' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
+    <div class="row input-segment" id='{{ field.name }}_segment'>
+      {{ render_field_header(field) }}
+      {{ render_fn[field.type](field) }}
+      {{ render_field_errors(field) }}
+    </div>
   </div>
 {% endmacro -%}

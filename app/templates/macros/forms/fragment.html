@@ -4,9 +4,7 @@
   <form id='{{ fragment.identifier }}'>
     {% for field in fragment %}
       {% if not field.type=='CSRFTokenField' %}
-        <div class='formtab' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
-          {{ render_field(field) }}
-        </div>
+        {{ render_field(field) }}
       {% endif %}
     {% endfor %}
   </form>

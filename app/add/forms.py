@@ -92,7 +92,8 @@ class Add_Shared(BaseForm):
                     label='Have you raised any funding so far?',
                     description='',
                     render_kw={
-                        'seconds':  5
+                        'seconds':  5,
+                        'tabclass': 'company'
                     }
                 )
     # amount_raised
@@ -105,7 +106,8 @@ class Add_Shared(BaseForm):
                             'start':    5000,
                             'max':      1000000, # current max $100 mil
                             'optional': True,
-                            'seconds':  5
+                            'seconds':  5,
+                            'tabclass': 'company'
                         }
                     )
     ### PROJECT ###
@@ -115,6 +117,7 @@ class Add_Shared(BaseForm):
                 description='',
                 render_kw={
                     'seconds':  5
+                    'tabclass': 'project'
                 }
     )
     ### COMPLETED PROJECT ###
@@ -128,6 +131,7 @@ class Add_Shared(BaseForm):
                         'max':      360,
                         'unit':     'days',
                         'seconds':  5
+                        'tabclass': 'project'
                     }
     )
     # working with
