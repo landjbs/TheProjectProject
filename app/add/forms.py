@@ -246,8 +246,10 @@ class Add_Shared(BaseForm):
     application_question = StringField(
         label=Markup('Ask applicants to your <span class="project_type lowercase"></span> a question.'),
         description=Markup('Members who want to join your <span class="project_type lowercase"></span> will have to answer this question. You will be able to see what they say when evaluating their application.'),
-        validators=[],
+        validators=[Length(0, 128)],
         render_kw={
+            'placeholder':  '',
+            'max': 128,
             'tabclass': 'looking_for_team application'
         }
     )
