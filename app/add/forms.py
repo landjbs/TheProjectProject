@@ -66,7 +66,7 @@ class Add_Shared(BaseForm):
     oneliner = StringField(
         label='One-Liner',
         validators=[DataRequired(), Length(1, 100)],
-        description=Markup('One line description of your <span class="project_type"></span>.'),
+        description=Markup('One line description of your <span class="project_type lowercase"></span>.'),
         render_kw={
             'placeholder':'The platform for sharing, collaborating on, and publicizing independent projects.',
             'max': 40,
@@ -77,7 +77,7 @@ class Add_Shared(BaseForm):
     summary = TextAreaField(
         label='Summary',
         validators=[DataRequired(), Length(1, 400)],
-        description='Describe your project in more detail.',
+        description=Markup('Describe your <span class="project_type lowercase"></span> in more detail.'),
         render_kw={
             'placeholder': ('TheProjectProject is a virtual community of innovators, who collaborate on projects across a wide range of fields and time windows. '
                             'I need a team of web developers, database experts, and creative minds to help me build this platform. We will tackle interesting problems '
@@ -89,7 +89,7 @@ class Add_Shared(BaseForm):
     # subjects
     subjects = SelectMultipleField(
         label='Subjects',
-        description='What subjects might this project involve?',
+        description=Markup('What subjects might this <span class="project_type lowercase"></span> involve?'),
         validators=[],
         choices=[],
         coerce=int,

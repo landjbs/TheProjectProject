@@ -162,3 +162,7 @@ input[type="radio"].toggle:checked + label {
 input[type="radio"].toggle:checked + label:after {
   left: 0;
 }
+
+.lowercase {
+  text-transform: lowercase;
+}
