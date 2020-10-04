@@ -232,8 +232,7 @@ function set_type(type) {
 }
 
 function hide_class(cls) {
-  var elts = document.getElementsByClassName(cls);
-  for (i=0; i<elts.length; i++) {
-    elts[i].innerHTML = type;
-  }
+  document.querySelectorAll('.' + cls).forEach(function(el) {
+    el.remove();
+  });
 }

@@ -116,7 +116,7 @@ class Add_Shared(BaseForm):
                 validators=[],
                 description='',
                 render_kw={
-                    'seconds':  5
+                    'seconds':  5,
                     'tabclass': 'project'
                 }
     )
@@ -130,7 +130,7 @@ class Add_Shared(BaseForm):
                         'start':    30,
                         'max':      360,
                         'unit':     'days',
-                        'seconds':  5
+                        'seconds':  5,
                         'tabclass': 'project'
                     }
     )
