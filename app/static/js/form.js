@@ -233,6 +233,7 @@ function set_type(type) {
 
 function hide_class(cls) {
   document.querySelectorAll('.' + cls).forEach(function(el) {
+    // // TODO: used clone to save classes so can go back
     el.remove();
   });
 }

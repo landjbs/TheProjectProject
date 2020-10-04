@@ -166,3 +166,7 @@ input[type="radio"].toggle:checked + label:after {
 .lowercase {
   text-transform: lowercase;
 }
+
+.hidden {
+  display: none !important;
+}
