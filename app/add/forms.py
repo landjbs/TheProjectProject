@@ -96,7 +96,10 @@ class Add_Shared(BaseForm):
                         'tabclass': 'company',
                         'datamap': {
                             'true': {
-                                'key':  'Y'
+                                'action':   ''
+                            },
+                            'false': {
+                                'action':   "hide_class('has_raised');"
                             }
                         }
                     }
