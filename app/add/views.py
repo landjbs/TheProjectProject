@@ -31,7 +31,7 @@ def add_page(competition_id=None):
 
 @add.route('/next_fragment', methods=['POST'])
 def next_fragment():
-    form = Add_Shared()
+    form = Add_Type()
     print(f'DATA: {form.data}')
     if form.validate_on_submit():
         render_fragment = get_template_attribute(

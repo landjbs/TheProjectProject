@@ -21,6 +21,8 @@ class Fragment(BaseForm):
 
 
 class Add_Type(Fragment):
+    identifier = 'Add_Type'
+    
     type = SelectField(
         label='What are you working on?',
         validators=[DataRequired()],
