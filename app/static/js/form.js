@@ -35,7 +35,10 @@ function showTab(n) {
   var x = document.getElementsByClassName("formtab");
   x[n].style.display = "block";
   // get element to focus on
-  var field = x[n].getElementsByTagName('input')[0];
+  var field = x[n].querySelector("input[type='text']");
+  if (field==null) {
+    var field = x[n].querySelector("input[type='number']");
+  }
   if (field==null) {
     var field = x[n].getElementsByTagName('textarea')[0];
   }
