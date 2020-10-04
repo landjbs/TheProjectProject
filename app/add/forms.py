@@ -228,7 +228,20 @@ class Add_Shared(BaseForm):
         }
     )
     requires_application = BooleanField(
-        label=''
+        label='Would you like to create an application to join your project?',
+        description='WARNING blah blah blha______',
+        validators=[],
+        render_kw={
+            'tabclass': 'project looking_for_team',
+            'datamap': {
+                'true': {
+                    'action':   ''
+                },
+                'false': {
+                    'action':   'hide_class("application")'
+                }
+            }
+        }
     )
 
 
