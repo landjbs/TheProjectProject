@@ -186,6 +186,14 @@ class Add_Shared(BaseForm):
         description='',
         render_kw={
             'tabclass': '',
+            'datamap': {
+                'true': {
+                    'action':   ''
+                },
+                'false': {
+                    'action':   "hide_class('other_members');"
+                }
+            }
         }
     )
 
