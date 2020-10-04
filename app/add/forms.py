@@ -128,10 +128,10 @@ class Add_Shared(BaseForm):
                     'tabclass': 'project',
                     'datamap': {
                         'true':  {
-                            'action':   ""
+                            'action':   "hide_class('incomplete');"
                         },
                         'false':  {
-                            'action':   "hide_class('completed');"
+                            'action':   "hide_class('complete');"
                         }
                     }
                 }
@@ -145,12 +145,26 @@ class Add_Shared(BaseForm):
                         'min':      1,
                         'start':    30,
                         'max':      360,
-                        'unit':     'days',
+                        'units':     'days',
                         'seconds':  5,
-                        'tabclass': 'project completed'
+                        'tabclass': 'project complete'
                     }
     )
-    # working with
+    ### INCOMPLETED PROJECT ###
+    estimated_time = IntegerField(
+                        label='Roughly how many days do you expect it to take?',
+                        validators=[],
+                        description='TheProjectProject is all about short, impactful projects. You will be able to extend this time later, if you wish.',
+                        render_kw={
+                            'min':      1,
+                            'start':    7,
+                            'max':      60,
+                            'units':    'days',
+                            'tabclass': 'project incomplete'
+                        }
+    )
+
+    ### SHARED TEAM BUILDING ###
 
 
 
