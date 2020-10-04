@@ -107,7 +107,7 @@ class Add_Shared(BaseForm):
     # amount_raised
     amount_raised = IntegerField(
                         label='Roughly how much have you raised?',
-                        validators=[DataRequired()],
+                        validators=[],
                         description='',
                         render_kw={
                             'min':      1,
@@ -118,6 +118,22 @@ class Add_Shared(BaseForm):
                             'tabclass': 'company has_raised'
                         }
                     )
+    # looking for funding
+    looking_for_funding = BooleanField(
+                            label='Are you currently looking for funding?',
+                            validators=[],
+                            render_kw={
+                                'tabclass': 'company',
+                                'datamap': {
+                                    'true': {
+                                        'action':   ''
+                                    }
+                                    'false': {
+                                        'action':   ''
+                                    }
+                                }
+                            }
+    )
     ### PROJECT ###
     complete = BooleanField(
                 label='Have you already completed this project?',
