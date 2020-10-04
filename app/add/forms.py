@@ -144,10 +144,10 @@ class Add_Shared(BaseForm):
                     'tabclass': 'project',
                     'datamap': {
                         'true':  {
-                            'action':   "hide_class('incomplete');"
+                            'action':   "hide_class('incomplete'); hide_class('looking_for_team');"
                         },
                         'false':  {
-                            'action':   "hide_class('complete'); hide_class('looking_for_team');"
+                            'action':   "hide_class('complete');"
                         }
                     }
                 }
@@ -253,7 +253,6 @@ class Add_Shared(BaseForm):
             'tabclass': 'looking_for_team application'
         }
     )
-
 
 
     def total_time(self):
