@@ -160,7 +160,8 @@ function select_keypress(e, field) {
     if (key==code) {
       if (option.checked==false) {
         // run option code
-        
+        var action = option.getAttribute('data-action');
+        action();
         // set option to checked
         option.checked = true;
         return true
