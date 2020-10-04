@@ -159,6 +159,9 @@ function select_keypress(e, field) {
     var key = option.getAttribute('data-key').toUpperCase().charCodeAt();
     if (key==code) {
       if (option.checked==false) {
+        // run option code
+        
+        // set option to checked
         option.checked = true;
         return true
       }
