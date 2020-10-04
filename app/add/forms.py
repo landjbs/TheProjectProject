@@ -125,7 +125,9 @@ class Add_Shared(BaseForm):
                     render_kw={
                         'min':      1,
                         'start':    30,
-                        'max':      360
+                        'max':      360,
+                        'unit':     'days',
+                        'seconds':  5
                     }
     )
     # working with
