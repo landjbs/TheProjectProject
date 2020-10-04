@@ -207,10 +207,16 @@ class Add_Shared(BaseForm):
             'tabclass': 'incomplete',
             'datamap': {
                 'true': {
-                    'action'
+                    'action':   ''
+                },
+                'false': {
+                    'action':   "hide_class('looking_for_team')"
                 }
             }
         }
+    )
+    target_team_size = IntegerField(
+        label=''
     )
 
 
