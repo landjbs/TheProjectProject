@@ -216,7 +216,15 @@ class Add_Shared(BaseForm):
         }
     )
     target_team_size = IntegerField(
-        label=''
+        label='Roughly how many team members are you looking for?',
+        description='',
+        validators=[],
+        render_kw={
+            'tabclass': 'looking_for_team',
+            'min':      1,
+            'start':    7,
+            'max':      20
+        }
     )
 
 
