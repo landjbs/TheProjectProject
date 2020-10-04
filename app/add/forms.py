@@ -123,8 +123,9 @@ class Add_Shared(BaseForm):
                     validators=[],
                     description='',
                     render_kw={
-                        'min':  1,
-                        'max':  100,
+                        'min':      1,
+                        'start':    30,
+                        'max':      360
                     }
     )
     # working with
