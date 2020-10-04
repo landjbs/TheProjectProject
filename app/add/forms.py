@@ -15,37 +15,35 @@ from app.project.models import Project
 
 class Fragment(BaseForm):
     ''' Fragment of form that points to next based on data '''
-    def __init__(self, *args):
-        super(self, Fragment).__init__(*args)
-
     def get_next_fragment(self):
         return None
 
 
 
 class Add_Type(Fragment):
-    def __init__(self, *args):
-        super(self, Fragment).__init__(*args)
-        self.type = SelectField(
-            label='What are you working on?',
-            validators=[DataRequired()],
-            description='',
-            choices=[(1, 'Project'), (2, 'Company')],
-            render_kw={
-                'optional': False,
-                'datamap': {
-                    1:  {
-                        'key'   :   'A',
-                        'icon'  :   'fa fa-circle'
-                    },
-                    2:  {
-                        'key'   :   'B',
-                        'icon'  :   'fa fa-briefcase'
-                    }
+    type = SelectField(
+        label='What are you working on?',
+        validators=[DataRequired()],
+        description='',
+        choices=[(1, 'Project'), (2, 'Company')],
+        render_kw={
+            'optional': False,
+            'datamap': {
+                1:  {
+                    'key'   :   'A',
+                    'icon'  :   'fa fa-circle'
                 },
-                'seconds':  3
-            }
-        )
+                2:  {
+                    'key'   :   'B',
+                    'icon'  :   'fa fa-briefcase'
+                }
+            },
+            'seconds':  3
+        }
+    )
+
+    def get_next_fragment(self):
+        return Add_Shared
 
 
 
@@ -103,7 +101,6 @@ class Add_Shared(BaseForm):
             'seconds':  8
         }
     )
-    # project type
 
     def get_next_fragment(self):
         print(self.project_type.data)

@@ -26,7 +26,7 @@ def add_page(competition_id=None):
     form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     # form.competition.choices = Competition.recommend()
-    return render_template('new_add.html', form=form)
+    return render_template('new_add.html', form=Add_Type())
 
 
 @add.route('/next_fragment', methods=['POST'])
