@@ -22,10 +22,14 @@ class Fragment(BaseForm):
         return None
 
 
+
+class Add_Shared(Fragment):
+    def __init__(self):
+
+
+
 class Add_Shared(BaseForm):
-    '''
-    Fields of Add form that are shared between all types
-    '''
+    ''' Fields of Add form that are shared between all types'''
     identifier = 'Add_Shared'
     # name
     name = StringField(
