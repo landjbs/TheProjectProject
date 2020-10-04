@@ -92,8 +92,6 @@ class Add_Shared(BaseForm):
                     label='Have you raised any funding so far?',
                     description='',
                     render_kw={
-                        'optional': False,
-                        'default':  False,
                         'seconds':  5
                     }
                 )
@@ -111,8 +109,14 @@ class Add_Shared(BaseForm):
                         }
                     )
     ### PROJECT ###
-    complete = BooleanField('Have you already completed this project?',
-                            description=(''))
+    complete = BooleanField(
+                'Have you already completed this project?',
+                validators=[],
+                description='',
+                render_kw={
+                    'seconds':  5
+                }
+    )
     # working with
 
 
