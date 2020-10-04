@@ -13,6 +13,10 @@ function update_slider(field) {
   document.getElementById('slider_inc_' + field.id).innerHTML = val;
 }
 
+function set_slider(field, n) {
+
+}
+
 // FORMTABBING
 function getCurrentTab() {
   x = document.getElementsByClassName("formtab");
@@ -166,6 +170,10 @@ function select_keypress(e, field) {
     }
   }
   return false
+}
+
+function int_keypress(e, field) {
+  
 }
 
 
