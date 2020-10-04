@@ -10,11 +10,7 @@ function field_char_counter(field) {
 // SLIDE FIELDS
 function update_slider(field) {
   var val = field.value;
-  document.getElementById('slider_inc_' + field.id).innerHTML = val;
-}
-
-function set_slider(field, n) {
-
+  document.getElementById('slider_inc_' + field.id).value = val;
 }
 
 // FORMTABBING
@@ -173,7 +169,7 @@ function select_keypress(e, field) {
 }
 
 function int_keypress(e, field) {
-  
+
 }
 
 

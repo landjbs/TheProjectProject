@@ -8,7 +8,8 @@
     oninput="update_slider(this);"></input>
   <span id='slider_{{ field.id }}' style='display: inline;'>
     <input id='slider_inc_{{ field.id }}' class='select-clean' type='number' placeholder="{{ field.render_kw['start'] }}"
-    step="{{ field.render_kw['step']}}"/>
+      step="{{ field.render_kw['step']}}">
+    </input>
     {{ field.render_kw['units'] }}
   </span>
 {% endmacro -%}
