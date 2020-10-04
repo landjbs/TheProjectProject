@@ -13,6 +13,15 @@ from app.project.models import Project
 # from app.company.models import Company
 
 
+class Fragment(BaseForm):
+    ''' Fragment of form that points to next based on data '''
+    def __init__(self, *args):
+        super(self, Fragment).__init__(*args)
+
+    def get_next_fragment(self):
+        return None
+
+
 class Add_Shared(BaseForm):
     '''
     Fields of Add form that are shared between all types
