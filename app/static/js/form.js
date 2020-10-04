@@ -13,6 +13,12 @@ function update_slider(field) {
   document.getElementById('slider_inc_' + field.id).value = val;
 }
 
+function set_slider(id, num_id, min, max) {
+  var slider = document.getElementById(id);
+  var input = Number(document.getElementById(num_id).value);
+  slider.value = input;
+}
+
 // FORMTABBING
 function getCurrentTab() {
   x = document.getElementsByClassName("formtab");

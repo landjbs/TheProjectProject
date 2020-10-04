@@ -1,14 +1,27 @@
 {% macro render_slide_field(field) -%}
-  <input type="range" min="{{ field.render_kw['min'] }}"
-    max="{{ field.render_kw['max'] }}"
-    value="{{ field.render_kw['start'] }}"
+  {% set nmin = field.render_kw['min'] %}
+  {% set nmax = field.render_kw['max'] %}
+  {% set nstart = field.render_kw['start'] %}
+  <input
+    type="range"
+    min="{{ nmin }}"
+    max="{{ nmax }}"
+    value="{{ nstart }}"
     class="slider"
     name='{{ field.name }}'
     id="{{ field.id }}"
-    oninput="update_slider(this);"></input>
+    oninput="update_slider(this);">
+  </input>
   <span id='slider_{{ field.id }}' style='display: inline;'>
-    <input id='slider_inc_{{ field.id }}' class='select-clean' type='number' placeholder="{{ field.render_kw['start'] }}"
-      step="{{ field.render_kw['step']}}">
+    <input
+      id='slider_inc_{{ field.id }}'
+      class='select-clean'
+      type='number'
+      placeholder="{{ nstart }}"
+      step="{{ field.render_kw['step']}}"
+      onkeyup="set_slider('{{ field.id }}', 'slider_inc_{{ field.id }}', '{{ nmin }}', '{{ nmax }}')"
+      min="{{ nmin }}"
+      max="{{ nmax }}">
     </input>
     {{ field.render_kw['units'] }}
   </span>
