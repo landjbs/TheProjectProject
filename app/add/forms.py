@@ -55,7 +55,7 @@ class Add_Shared(BaseForm):
     name = StringField(
         label=Markup("<span class='project_type'></span> Name"),
         validators=[DataRequired(), Length(1, 40)],
-        description='Give your project a name!',
+        description='Give your idea a name!',
         render_kw={
             'placeholder':  'TheProjectProject',
             'max':          30,
@@ -66,7 +66,7 @@ class Add_Shared(BaseForm):
     oneliner = StringField(
         label='One-Liner',
         validators=[DataRequired(), Length(1, 100)],
-        description='One line description of your project.',
+        description=Markup('One line description of your <span class="project_type"></span>.'),
         render_kw={
             'placeholder':'The platform for sharing, collaborating on, and publicizing independent projects.',
             'max': 40,
