@@ -22,7 +22,7 @@ class Fragment(BaseForm):
 
 class Add_Type(Fragment):
     identifier = 'Add_Type'
-    
+
     type = SelectField(
         label='What are you working on?',
         validators=[DataRequired()],
@@ -59,7 +59,7 @@ class Add_Shared(BaseForm):
     identifier = 'Add_Shared'
     # name
     name = StringField(
-        label='Project Name',
+        label="<span id='type'><span> Name",
            validators=[DataRequired(), Length(1, 40)],
            description='Give your project a name!',
            render_kw={
