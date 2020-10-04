@@ -130,7 +130,7 @@ function switch_boolean(field, switch_prefix) {
   var id = field.getAttribute('data-field-id');
   var switch_obj = document.getElementById(switch_prefix + '-' + id);
   if (switch_obj.checked!=true) {
-    switch_obj.checked = true;
+    switch_obj.click();
     return true
   }
   return false

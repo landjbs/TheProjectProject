@@ -34,7 +34,7 @@ class Add_Shared(BaseForm):
                 2:  {
                     'key'   :   'B',
                     'icon'  :   'fa fa-briefcase',
-                    'action':   "set_type('Company'); hide_class('company');"
+                    'action':   "set_type('Company'); hide_class('project');"
                 }
             },
             'seconds':  3
