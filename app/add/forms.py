@@ -110,9 +110,11 @@ class Add_Shared(BaseForm):
                         validators=[],
                         description='',
                         render_kw={
-                            'min':      1,
+                            'min':      100,
                             'start':    5000,
-                            'max':      1000000, # current max $100 mil
+                            'max':      1000000, # current max 1 mil
+                            'units':    'dollars',
+                            'step':     100,
                             'optional': True,
                             'seconds':  5,
                             'tabclass': 'company has_raised'
