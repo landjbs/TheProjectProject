@@ -179,8 +179,15 @@ class Add_Shared(BaseForm):
                             'tabclass': 'project incomplete'
                         }
     )
-
     ### SHARED TEAM BUILDING ###
+    working_with_others = BooleanField(
+        label='Have you been working with anyone else?',
+        validators=[],
+        description='',
+        render_kw={
+            'tabclass': '',
+        }
+    )
 
 
 
