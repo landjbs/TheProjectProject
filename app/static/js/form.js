@@ -159,9 +159,6 @@ function select_keypress(e, field) {
     var key = option.getAttribute('data-key').toUpperCase().charCodeAt();
     if (key==code) {
       if (option.checked==false) {
-        // run option code
-        var action = option.getAttribute('data-action');
-        action();
         // set option to checked
         option.checked = true;
         return true
@@ -223,4 +220,13 @@ function submit_fragment(form_id) {
           }
       }
   });
+}
+
+
+// // TEMP:
+function set_type(type) {
+  var elts = document.getElementsByClassName('project_type');
+  for (i=0; i<elts.length; i++) {
+    elts[i].innerHTML = type;
+  }
 }
