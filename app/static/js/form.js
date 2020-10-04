@@ -160,7 +160,7 @@ function select_keypress(e, field) {
     if (key==code) {
       if (option.checked==false) {
         // set option to checked
-        option.checked = true;
+        option.click();
         return true
       }
     }
