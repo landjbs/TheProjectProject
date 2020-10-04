@@ -10,6 +10,7 @@ from app.forms.validators import Select_Limit_Validator
 from app.link.utils import fix_url
 # package imports
 from app.project.models import Project
+from markupsafe import Markup
 # from app.company.models import Company
 
 
@@ -50,7 +51,7 @@ class Add_Shared(BaseForm):
     )
     # name
     name = StringField(
-        label="<span class='project_type'><span> Name",
+        label=Markup("<span class='project_type'></span> Name"),
         validators=[DataRequired(), Length(1, 40)],
         description='Give your project a name!',
         render_kw={
