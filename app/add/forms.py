@@ -49,8 +49,8 @@ class Add_Type(Fragment):
 
 
 
-class Add_Shared(Fragment):
-    def __init__(self):
+# class Add_Shared(Fragment):
+    # def __init__(self):
 
 
 
