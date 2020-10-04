@@ -23,13 +23,39 @@ class Fragment(BaseForm):
 
 
 
+class Add_Type(Fragment):
+    def __init__(self, *args):
+        super(self, Fragment).__init__(*args)
+        self.type = SelectField(
+            label='What are you working on?',
+            validators=[DataRequired()],
+            description='',
+            choices=[(1, 'Project'), (2, 'Company')],
+            render_kw={
+                'optional': False,
+                'datamap': {
+                    1:  {
+                        'key'   :   'A',
+                        'icon'  :   'fa fa-circle'
+                    },
+                    2:  {
+                        'key'   :   'B',
+                        'icon'  :   'fa fa-briefcase'
+                    }
+                },
+                'seconds':  3
+            }
+        )
+
+
+
 class Add_Shared(Fragment):
     def __init__(self):
 
 
 
 class Add_Shared(BaseForm):
-    ''' Fields of Add form that are shared between all types'''
+    ''' Fields of Add form that are shared between all types '''
     identifier = 'Add_Shared'
     # name
     name = StringField(
@@ -78,26 +104,6 @@ class Add_Shared(BaseForm):
         }
     )
     # project type
-    project_type = SelectField(
-        label='What are you working on?',
-        validators=[DataRequired()],
-        description='',
-        choices=[(1, 'Project'), (2, 'Company')],
-        render_kw={
-            'optional': False,
-            'datamap': {
-                1:  {
-                    'key'   :   'A',
-                    'icon'  :   'fa fa-circle'
-                },
-                2:  {
-                    'key'   :   'B',
-                    'icon'  :   'fa fa-briefcase'
-                }
-            },
-            'seconds':  3
-        }
-    )
 
     def get_next_fragment(self):
         print(self.project_type.data)
