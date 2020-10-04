@@ -39,11 +39,13 @@ class Add_Shared(BaseForm):
             'datamap': {
                 1:  {
                     'key'   :   'A',
-                    'icon'  :   'fa fa-circle'
+                    'icon'  :   'fa fa-circle',
+                    'action':   "set_name();"
                 },
                 2:  {
                     'key'   :   'B',
                     'icon'  :   'fa fa-briefcase'
+                    'action':   ''
                 }
             },
             'seconds':  3
