@@ -128,14 +128,10 @@ class Add_Shared(BaseForm):
                     'tabclass': 'project',
                     'datamap': {
                         'true':  {
-                            'key'   :   'A',
-                            'icon'  :   'fa fa-circle',
-                            'action':   "set_type('Project'); hide_class('company');"
+                            'action':   ""
                         },
-                        2:  {
-                            'key'   :   'B',
-                            'icon'  :   'fa fa-briefcase',
-                            'action':   "set_type('Company'); hide_class('company');"
+                        'false':  {
+                            'action':   "hide_class('completed');"
                         }
                     }
                 }
