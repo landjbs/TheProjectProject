@@ -8,7 +8,7 @@
   <div class='input-control select_field' id='{{ field.id }}'>
     {% for i, name in field.choices %}
       {% set data = field.render_kw['datamap'][i] %}
-      <input id="{{ name }}-{{ field.id }}" class="toggle" name="{{ field.name }}" value='{{ i }}' type="radio" data-key="{{ data['key'] }}">
+      <input id="{{ name }}-{{ field.id }}" class="toggle" name="{{ field.name }}" value='{{ i }}' type="radio" data-key="{{ data['key'] }}" data-action="{{ data['action'] }}">
       <label for="{{ name }}-{{ field.id }}" class="btn">
         <i class="{{ data['icon'] }} fa-2x"></i>
         <br>
