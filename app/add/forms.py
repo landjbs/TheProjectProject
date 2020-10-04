@@ -248,7 +248,7 @@ class Add_Shared(BaseForm):
         description=Markup('Members who want to join your <span class="project_type lowercase"></span> will have to answer this question. You will be able to see what they say when evaluating their application.'),
         validators=[],
         render_kw={
-            'tabclass': 'project looking_for_team'
+            'tabclass': 'looking_for_team application'
         }
     )
 
