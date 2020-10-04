@@ -40,12 +40,12 @@ class Add_Shared(BaseForm):
                 1:  {
                     'key'   :   'A',
                     'icon'  :   'fa fa-circle',
-                    'action':   "set_name();"
+                    'action':   "set_type('project');"
                 },
                 2:  {
                     'key'   :   'B',
                     'icon'  :   'fa fa-briefcase'
-                    'action':   ''
+                    'action':   "set_type('company');"
                 }
             },
             'seconds':  3
