@@ -7,8 +7,7 @@
     id="{{ field.id }}"
     oninput="update_slider(this);"></input>
   <span id='slider_{{ field.id }}' style='display: inline;'>
-    <input id='slider_inc_{{ field.id }}' class='select-clean' type='number' placeholder='{{ field.render_kw['start'] }}'>
-    </input>
+    <input id='slider_inc_{{ field.id }}' class='select-clean' type='number' placeholder='{{ field.render_kw['start'] }}'/>
     {{ field.render_kw['units'] }}
   </span>
 {% endmacro -%}
