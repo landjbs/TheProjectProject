@@ -86,24 +86,6 @@ class Add_Shared(BaseForm):
             'seconds':  8
         }
     )
-    
-
-
-    def total_time(self):
-        time = 0
-        for field in self:
-            try:
-                time += field.render_kw['seconds']
-            except:
-                print(f'WARNING: {field.name} has no render_kw')
-        return time
-
-
-class Add_Company(BaseForm):
-    '''
-    Fields of add form used to build Company objects
-    '''
-    ## raising ##
     # has_raised
     has_raised = BooleanField(
                     label='Have you raised any funding so far?',
@@ -128,6 +110,24 @@ class Add_Company(BaseForm):
                             'seconds':  5
                         }
                     )
+
+
+
+    def total_time(self):
+        time = 0
+        for field in self:
+            try:
+                time += field.render_kw['seconds']
+            except:
+                print(f'WARNING: {field.name} has no render_kw')
+        return time
+
+
+class Add_Company(BaseForm):
+    '''
+    Fields of add form used to build Company objects
+    '''
+    ## raising ##
     # # looking_to_raise
     # looking_to_raise = BooleanField(
     #                     label='Are you currently looking for funding?',
