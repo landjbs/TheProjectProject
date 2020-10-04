@@ -110,12 +110,22 @@ class Add_Shared(BaseForm):
                     )
     ### PROJECT ###
     complete = BooleanField(
-                'Have you already completed this project?',
+                label='Have you already completed this project?',
                 validators=[],
                 description='',
                 render_kw={
                     'seconds':  5
                 }
+    )
+    ### COMPLETED PROJECT ###
+    time_it_took = IntegerField(
+                    label='Roughly how many days did it take?',
+                    validators=[],
+                    description='',
+                    render_kw={
+                        'min':  1,
+                        'max':  100,
+                    }
     )
     # working with
 
