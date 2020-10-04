@@ -18,11 +18,15 @@ class Fragment(BaseForm):
     def get_next_fragment(self):
         return None
 
+# class Add_Shared(Fragment):
+    # def __init__(self):
 
 
-class Add_Type(Fragment):
-    identifier = 'Add_Type'
 
+class Add_Shared(BaseForm):
+    ''' Fields of Add form that are shared between all types '''
+    identifier = 'Add_Shared'
+    # type
     type = SelectField(
         label='What are you working on?',
         validators=[DataRequired()],
@@ -33,7 +37,8 @@ class Add_Type(Fragment):
             'datamap': {
                 1:  {
                     'key'   :   'A',
-                    'icon'  :   'fa fa-circle'
+                    'icon'  :   'fa fa-circle',
+                    'action':
                 },
                 2:  {
                     'key'   :   'B',
@@ -43,20 +48,6 @@ class Add_Type(Fragment):
             'seconds':  3
         }
     )
-
-    def get_next_fragment(self):
-        return Add_Shared
-
-
-
-# class Add_Shared(Fragment):
-    # def __init__(self):
-
-
-
-class Add_Shared(BaseForm):
-    ''' Fields of Add form that are shared between all types '''
-    identifier = 'Add_Shared'
     # name
     name = StringField(
         label="<span id='type'><span> Name",
