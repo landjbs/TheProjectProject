@@ -166,7 +166,7 @@ class Add_Shared(BaseForm):
                         'tabclass': 'project complete'
                     }
     )
-    ### INCOMPLETED PROJECT ###
+    ### INCOMPLETE PROJECT ###
     estimated_time = IntegerField(
                         label='Roughly how many days do you expect it to take?',
                         validators=[],
@@ -195,6 +195,12 @@ class Add_Shared(BaseForm):
                 }
             }
         }
+    )
+    # TODO: add querying for others
+    # others =
+    ### INCOMPLETE PROJECT AND COMPANY TEAM BUILDING ###
+    looking_for_team = BooleanField(
+        label='Are you looking for new team members?',
     )
 
 
