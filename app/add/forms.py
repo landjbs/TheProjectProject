@@ -182,8 +182,8 @@ class Add_Shared(BaseForm):
     ### SHARED TEAM BUILDING ###
     working_with_others = BooleanField(
         label='Have you been working with anyone else?',
-        validators=[],
         description='',
+        validators=[],
         render_kw={
             'tabclass': '',
             'datamap': {
@@ -201,6 +201,16 @@ class Add_Shared(BaseForm):
     ### INCOMPLETE PROJECT AND COMPANY TEAM BUILDING ###
     looking_for_team = BooleanField(
         label='Are you looking for new team members?',
+        description='',
+        validators=[],
+        render_kw={
+            'tabclass': 'incomplete',
+            'datamap': {
+                'true': {
+                    'action'
+                }
+            }
+        }
     )
 
 
