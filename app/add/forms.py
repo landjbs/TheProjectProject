@@ -86,10 +86,10 @@ class Add_Shared(BaseForm):
             'seconds':  8
         }
     )
+    ### COMPANY ###
     # has_raised
     has_raised = BooleanField(
                     label='Have you raised any funding so far?',
-                    validators=[DataRequired()],
                     description='',
                     render_kw={
                         'optional': False,
@@ -110,6 +110,10 @@ class Add_Shared(BaseForm):
                             'seconds':  5
                         }
                     )
+    ### PROJECT ###
+    complete = BooleanField('Have you already completed this project?',
+                            description=(''))
+    # working with
 
 
 
