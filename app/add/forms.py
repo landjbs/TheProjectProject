@@ -220,11 +220,15 @@ class Add_Shared(BaseForm):
         description='',
         validators=[],
         render_kw={
-            'tabclass': 'looking_for_team',
             'min':      1,
             'start':    7,
-            'max':      20
+            'max':      20,
+            'units':    'people',
+            'tabclass': 'looking_for_team'
         }
+    )
+    requires_application = BooleanField(
+        label=''
     )
 
 
