@@ -1,4 +1,5 @@
 {% macro render_boolean_field(field) -%}
+  {% set datamap = field.rendeR_kw['datamap'] %}
   <div class="input-control boolean_field" id='{{ field.id }}'>
     <input id="on-{{ field.id }}" class="toggle toggle-left" name="{{ field.name }}" value="true" type="radio">
     <label for="on-{{ field.id }}" class="btn">

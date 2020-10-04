@@ -93,7 +93,12 @@ class Add_Shared(BaseForm):
                     description='',
                     render_kw={
                         'seconds':  5,
-                        'tabclass': 'company'
+                        'tabclass': 'company',
+                        'datamap': {
+                            'true': {
+                                'key':  'Y'
+                            }
+                        }
                     }
                 )
     # amount_raised
@@ -107,7 +112,7 @@ class Add_Shared(BaseForm):
                             'max':      1000000, # current max $100 mil
                             'optional': True,
                             'seconds':  5,
-                            'tabclass': 'company'
+                            'tabclass': 'company has_raised'
                         }
                     )
     ### PROJECT ###
@@ -117,7 +122,19 @@ class Add_Shared(BaseForm):
                 description='',
                 render_kw={
                     'seconds':  5,
-                    'tabclass': 'project'
+                    'tabclass': 'project',
+                    'datamap': {
+                        'true':  {
+                            'key'   :   'A',
+                            'icon'  :   'fa fa-circle',
+                            'action':   "set_type('Project'); hide_class('company');"
+                        },
+                        2:  {
+                            'key'   :   'B',
+                            'icon'  :   'fa fa-briefcase',
+                            'action':   "set_type('Company'); hide_class('company');"
+                        }
+                    }
                 }
     )
     ### COMPLETED PROJECT ###
@@ -131,7 +148,7 @@ class Add_Shared(BaseForm):
                         'max':      360,
                         'unit':     'days',
                         'seconds':  5,
-                        'tabclass': 'project'
+                        'tabclass': 'project completed'
                     }
     )
     # working with
