@@ -147,7 +147,7 @@ class Add_Shared(BaseForm):
                             'action':   "hide_class('incomplete');"
                         },
                         'false':  {
-                            'action':   "hide_class('complete');"
+                            'action':   "hide_class('complete'); hide_class('looking_for_team');"
                         }
                     }
                 }
@@ -245,7 +245,11 @@ class Add_Shared(BaseForm):
     )
     application_question = StringField(
         label=Markup('Ask applicants to your <span class="project_type lowercase"></span> a question.'),
-        description=Markup('Members who want to join your <span class="project_type lowercase"></span> will have to answer this question. You will be able to see how they respond'),
+        description=Markup('Members who want to join your <span class="project_type lowercase"></span> will have to answer this question. You will be able to see what they say when evaluating their application.'),
+        validators=[],
+        render_kw={
+            'tabclass': 'project looking_for_team'
+        }
     )
 
 
