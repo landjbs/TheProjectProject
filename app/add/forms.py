@@ -127,7 +127,7 @@ class Add_Shared(BaseForm):
                                 'datamap': {
                                     'true': {
                                         'action':   ''
-                                    }
+                                    },
                                     'false': {
                                         'action':   ''
                                     }
