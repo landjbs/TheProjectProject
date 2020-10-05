@@ -163,8 +163,8 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         # TODO: get team size to increment by number of current members
         self.open = form.looking_for_team.data
         self.team_size = int(form.target_team_size.data) if self.open else 1
+        self.requires_application = bool(form.requires_application.data) if self.open else False
         if not self.complete:
-            self.requires_application = bool(form.requires_application.data)
             self.application_question = str(form.application_question.data) if form.requires_application.data else None
         self.add_member(owner, notify_owner=False)
         # competition
