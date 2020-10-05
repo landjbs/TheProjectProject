@@ -95,10 +95,15 @@ function validateForm() {
     for (i=0; i<y.length; i++) {
         elt = y[i];
         if (elt.type=='text') {
+          console.log('here');
+          console.log(elt.value.length);
           if (elt.value.length<1) {
+            error = 'Cannot be empty.';
+            alert(error);
             return false;
           }
         }
+        console.log(elt.type);
         // else if (elt.type=='radio') {
         //   is_checked = false;
         //   options = elt.value;
