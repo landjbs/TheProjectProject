@@ -31,8 +31,8 @@ function getCurrentTab() {
 }
 
 function getTabById(id) {
+  // TODO: actually move to tab using showTab()
   formtab = document.getElementById(id + '_segment');
-  console.log(formtab);
   return formtab
 }
 
