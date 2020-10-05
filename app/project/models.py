@@ -149,7 +149,13 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.summary = str(form.summary.data)
         # members
         self.owner = owner
-        if 
+        if form.working_with_others.data:
+            # todo: get these others and add to project
+            pass
+        # timing and completion
+        self.complete = (not form.looking_for_team.data)
+        self.team_size = (form.team_size.data)
+
 
     def __repr__(self):
         return f'<Project {self.name}>'

@@ -35,7 +35,7 @@ def add_page(competition_id=None):
             competition = None
         # determine type of object to build
         if form.type.data=='1':
-            obj = Project.build_from_form(form)
+            obj = Project.build_from_form(form, owner=current_user)
         elif form.type.data=='2':
             obj = Company.build_from_form(form)
         else:
