@@ -190,11 +190,6 @@ function select_keypress(e, field) {
   return false
 }
 
-function int_keypress(e, field) {
-
-}
-
-
 // keypress movement
 function field_keydown(e, field) {
   // run through default suite before specialty stuff
@@ -216,15 +211,7 @@ function field_keydown(e, field) {
   }
 }
 
-
-// FIELD SUBMIT
-function submit_field(field_id) {
-  var url = Flask.url_for('add.next_field');
-
-}
-
-
-// FRAGMENT SUBMIT
+// FORM SUBMIT
 function submit_form() {
   var url = Flask.url_for('add.add_page');
   $.ajax({
