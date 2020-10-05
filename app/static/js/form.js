@@ -115,20 +115,25 @@ function default_keypress(e) {
   if (e.keyCode==9) {
     // if shift is also down go backward
     if (e.shiftKey) {
+      // click prev button
+      document.getElementById('prevBtn').click();
       e.preventDefault();
-      nextPrev(-1);
+      // nextPrev(-1);
       return true
     }
     // tab by itself go forward
     else {
+      // click next button
+      document.getElementById('nextBtn').click();
       e.preventDefault();
-      nextPrev(1);
       return true
     }
   }
   // enter go forward
   else if (e.keyCode==13) {
-    nextPrev(1);
+    // click next button
+    document.getElementById('nextBtn').click();
+    e.preventDefault();
     return true
   }
   return false
