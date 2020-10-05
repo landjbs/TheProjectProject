@@ -140,6 +140,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     #     for question in choose_init_questions(self):
     #         self.add_question(question=question, notify=False)
 
+    # # TEMP: this should NOT BE INIT IN LONG RUN
     def __init__(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
         self.name = str(form.name.data)
