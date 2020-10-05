@@ -35,7 +35,10 @@ def add_page(competition_id=None):
             competition = None
         # determine type of object to build
         if form.type.data=='1':
-            obj = Project.build_from_form(form, owner=current_user)
+            project = Project.build_from_form(form, owner=current_user)
+            return jsonify({
+                'html': url_for('project.project_page', project_code=project.code)
+            })
         elif form.type.data=='2':
             obj = Company.build_from_form(form)
         else:
