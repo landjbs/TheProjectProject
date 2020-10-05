@@ -280,7 +280,7 @@ function hide_class(cls) {
 }
 
 
-function validate_input(field) {
+function validate_length(field) {
   if (field.type=='text') {
     if (field.value.length<1) {
       alert('bad');
