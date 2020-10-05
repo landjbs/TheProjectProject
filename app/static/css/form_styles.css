@@ -91,6 +91,11 @@
   color: black;
 }
 
+.formtab_button:focus {
+  background-color: white;
+  color: black;
+}
+
 
 /* subject select stuff */
 .selected-subjects {
@@ -131,19 +136,23 @@
 input[type="radio"] {
   border: 1px solid white;
 }
+
 input[type="radio"].toggle {
   display: none;
 }
+
 input[type="radio"].toggle + label {
   cursor: pointer;
   min-width: 200px;
   max-width: 200px;
   text-align: center;
 }
+
 input[type="radio"].toggle + label:hover {
   background: none;
   color: #FFF;
 }
+
 input[type="radio"].toggle + label:after {
   content: "";
   height: 100%;
@@ -154,22 +163,28 @@ input[type="radio"].toggle + label:after {
   width: 100%;
   z-index: -1;
 }
+
 input[type="radio"].toggle.toggle-left + label {
 }
+
 input[type="radio"].toggle.toggle-left + label:after {
   left: 100%;
 }
+
 input[type="radio"].toggle.toggle-right + label {
   margin-left: 10px;
 }
+
 input[type="radio"].toggle.toggle-right + label:after {
   left: -100%;
 }
+
 input[type="radio"].toggle:checked + label {
   background: #FFF;
   cursor: default;
   color: #000;
 }
+
 input[type="radio"].toggle:checked + label:after {
   left: 0;
 }

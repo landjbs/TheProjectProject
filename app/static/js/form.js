@@ -203,7 +203,7 @@ function field_keydown(e, field) {
     }
   // if successfully done, move to the next tab
   if (done==true) {
-    setTimeout(function(){ nextPrev(1); }, 400);
+    setTimeout(function(){ nextPrev(1); }, 300);
   }
   }
 }
