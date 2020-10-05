@@ -79,7 +79,6 @@ function nextPrev(n) {
   currentTab = currentTab + n;
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
-    alert('Submitting');
     submit_form();
     //...the form gets submitted:
     // submit_fragment('Add_Type');
@@ -233,7 +232,10 @@ function submit_form() {
     url: url,
     data: $('#add_form').serialize(), // serializes the form's elements.
     success: function(data) {
-      window.location.href = data['path'];
+      console.log(data['path']);
+      if (data['path']!==null) {
+        window.location.href = data['path'];
+      }
     }
   });
   // Inject our CSRF token into our AJAX request.
