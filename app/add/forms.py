@@ -265,7 +265,9 @@ class Add_Shared(BaseForm):
         description=Markup('If any of these interest you, select them from the list below and your <span class="project_type lowercase"></span> will automatically be submitted.'),
         validators=[],
         choices=[],
-        render_kw={}
+        render_kw={
+            'datamap' : {}
+        }
     )
 
     def total_time(self):
