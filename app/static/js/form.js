@@ -92,19 +92,27 @@ function validateForm() {
     var x, y, i, valid = true;
     x = document.getElementsByClassName("formtab");
     y = x[currentTab].getElementsByTagName("input");
-    // A loop that checks every input field in the current tab:
-    for (i = 0; i < y.length; i++) {
-      // If field has input tag
-      if (y[i].id!="") {
-        // If a field is empty...
-        if (y[i].value == "") {
-          // add an "invalid" class to the field if not interests
-          y[i].className += " invalid";
-          // and set the current valid status to false:
-          valid = false;
+    for (i=0; i<y.length; i++) {
+        elt = y[i];
+        if (elt.type=='text') {
+          if (elt.value.length<1) {
+            return false;
+          }
         }
-      }
     }
+    // A loop that checks every input field in the current tab:
+    // for (i = 0; i < y.length; i++) {
+    //   // If field has input tag
+    //   if (y[i].id!="") {
+    //     // If a field is empty...
+    //     if (y[i].value == "") {
+    //       // add an "invalid" class to the field if not interests
+    //       y[i].className += " invalid";
+    //       // and set the current valid status to false:
+    //       valid = false;
+    //     }
+    //   }
+    // }
     return true; // return the valid status
   }
 
@@ -254,4 +262,13 @@ function hide_class(cls) {
     // // TODO: used clone to save classes so can go back
     el.remove();
   });
+}
+
+
+function validate_input(field) {
+  if (field.type=='text') {
+    if (field.value.length<1) {
+      alert('bad');
+    }
+  }
 }
