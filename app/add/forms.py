@@ -93,84 +93,84 @@ class Add_Shared(BaseForm):
     ### COMPANY ###
     # has_raised
     has_raised = BooleanField(
-                    label='Have you raised any funding so far?',
-                    description='',
-                    render_kw={
-                        'seconds':  5,
-                        'tabclass': 'company',
-                        'datamap': {
-                            'true': {
-                                'action':   ''
-                            },
-                            'false': {
-                                'action':   "hide_class('has_raised');"
-                            }
-                        }
-                    }
-                )
+        label='Have you raised any funding so far?',
+        description='',
+        render_kw={
+            'seconds':  5,
+            'tabclass': 'company',
+            'datamap': {
+                'true': {
+                    'action':   ''
+                },
+                'false': {
+                    'action':   "hide_class('has_raised');"
+                }
+            }
+        }
+    )
     # amount_raised
     amount_raised = IntegerField(
-                        label='Roughly how much have you raised?',
-                        validators=[],
-                        description='',
-                        render_kw={
-                            'min':      100,
-                            'start':    5000,
-                            'max':      1000000, # current max 1 mil
-                            'units':    'dollars',
-                            'step':     100,
-                            'optional': True,
-                            'seconds':  5,
-                            'tabclass': 'company has_raised'
-                        }
-                    )
+        label='Roughly how much have you raised?',
+        validators=[],
+        description='',
+        render_kw={
+            'min':      100,
+            'start':    5000,
+            'max':      1000000, # current max 1 mil
+            'units':    'dollars',
+            'step':     100,
+            'optional': True,
+            'seconds':  5,
+            'tabclass': 'company has_raised'
+        }
+    )
     # looking for funding
     looking_for_funding = BooleanField(
-                            label='Are you currently looking for funding?',
-                            validators=[],
-                            render_kw={
-                                'tabclass': 'company',
-                                'datamap': {
-                                    'true': {
-                                        'action':   ''
-                                    },
-                                    'false': {
-                                        'action':   ''
-                                    }
-                                }
-                            }
+        label='Are you currently looking for funding?',
+        validators=[],
+        render_kw={
+            'tabclass': 'company',
+            'datamap': {
+                'true': {
+                    'action':   ''
+                },
+                'false': {
+                    'action':   ''
+                }
+            }
+        }
     )
     ### PROJECT ###
     complete = BooleanField(
-                label='Have you already completed this project?',
-                validators=[],
-                description='',
-                render_kw={
-                    'seconds':  5,
-                    'tabclass': 'project',
-                    'datamap': {
-                        'true':  {
-                            'action':   "hide_class('incomplete'); hide_class('looking_for_team');"
-                        },
-                        'false':  {
-                            'action':   "hide_class('complete');"
-                        }
-                    }
+        label='Have you already completed this project?',
+        validators=[],
+        description='',
+        render_kw={
+            'seconds':  5,
+            'tabclass': 'project',
+            'datamap': {
+                'true':  {
+                    'action':   "hide_class('incomplete'); hide_class('looking_for_team');"
+                },
+                'false':  {
+                    'action':   "hide_class('complete');"
                 }
+            }
+        }
     )
     ### COMPLETED PROJECT ###
     time_it_took = IntegerField(
-                    label='Roughly how many days did it take?',
-                    validators=[],
-                    description='',
-                    render_kw={
-                        'min':      1,
-                        'start':    30,
-                        'max':      360,
-                        'units':     'days',
-                        'seconds':  5,
-                        'tabclass': 'project complete'
-                    }
+        label='Roughly how many days did it take?',
+        validators=[],
+        description='',
+        render_kw={
+            'min':      1,
+            'start':    30,
+            'max':      360,
+            'units':     'days',
+            'seconds':  5,
+            'tabclass': 'project complete'
+        }
     )
     ### INCOMPLETE PROJECT ###
     estimated_time = IntegerField(

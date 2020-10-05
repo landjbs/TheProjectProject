@@ -26,6 +26,10 @@ def add_page(competition_id=None):
     form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     form.competition.choices = Competition.recommend()
+    if form.validate_on_submit():
+        print('HERE')
+    else:
+        print(f'{form.errors}');
     return render_template('new_add.html', form=form)
 
 
