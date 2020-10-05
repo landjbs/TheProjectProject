@@ -140,13 +140,14 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         for question in choose_init_questions(self):
             self.add_question(question=question, notify=False)
 
-    def build_from_form(self, form, owner):
+    def build_from_form(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
         self.name = str(form.name.data)
         self.code = generate_code(form.name.data, Project)
         # descriptions
         self.oneliner = str(form.oneliner.data)
         self.summary = str(form.summary.data)
+        self.subjects = subjects
         # members
         self.owner = owner
         if form.working_with_others.data:
@@ -159,7 +160,11 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         if not self.complete:
             self.requires_application = bool(form.requires_application.data)
             self.application_question = str(form.application_question.data) if form.requires_application.data else None
-        
+        self.add_member(owner, notify_owner=False)
+        # competition
+        ### choose questions and add them to project ###
+        for question in choose_init_questions(self):
+            self.add_question(question=question, notify=False)
 
 
     def __repr__(self):
