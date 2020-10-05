@@ -20,16 +20,17 @@
     {{ form.csrf_token() }}
     {{ render_fragment(form) }}
   </div>
-
   <!-- temp navigator -->
-  <p class='float-left'>
-    <span id='form_time_inc'>todo</span>
-    seconds remaining
-  </p>
-  <div style="overflow:auto; width:95%;">
-    <div style="float:right;">
-      <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">Back</button>
-      <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+  <div style="display:none;">
+    <p class='float-left'>
+      <span id='form_time_inc'>200</span>
+      seconds remaining
+    </p>
+    <div style="overflow:auto; width:95%;">
+      <div style="float:right;">
+        <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">Back</button>
+        <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+      </div>
     </div>
   </div>
 </div>

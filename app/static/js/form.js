@@ -69,10 +69,10 @@ function nextPrev(n) {
   // Can't go backwards on first tab
   if (n == -1 && currentTab==0) return false;
   // Modify remaining time
-  var field_seconds = Number(x[currentTab].getAttribute('data-seconds'));
-  var time_inc = document.getElementById('form_time_inc').innerHTML;
-  var time_rem = Number(time_inc) - field_seconds;
-  document.getElementById('form_time_inc').innerHTML = String(time_rem);
+  // var field_seconds = Number(x[currentTab].getAttribute('data-seconds'));
+  // var time_inc = document.getElementById('form_time_inc').innerHTML;
+  // var time_rem = Number(time_inc) - field_seconds;
+  // document.getElementById('form_time_inc').innerHTML = String(time_rem);
   // Hide the current tab:
   x[currentTab].style.display = "none";
   // Increase or decrease the current tab by 1:
@@ -198,7 +198,7 @@ function field_keydown(e, field) {
     }
   // if successfully done, move to the next tab
   if (done==true) {
-    // nextPrev(1);
+    setTimeout(function(){ nextPrev(1); }, 400);
   }
   }
 }
