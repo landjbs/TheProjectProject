@@ -266,7 +266,7 @@ class Add_Shared(BaseForm):
         validators=[],
         choices=[],
         render_kw={
-            'datamap' : {}
+            'searchable':   True
         }
     )
 
