@@ -1,10 +1,10 @@
 <!-- this maybe should still be preserved for competitions -->
-{% macro DEP_render_select_field(field) -%}
+{% macro render_select_field(field) -%}
   {{ field(class='input valid add-select') }}
 {% endmacro -%}
 
 
-{% macro render_select_field(field) -%}
+{% macro DEP_render_select_field(field) -%}
   <div class='input-control select_field' id='{{ field.id }}'>
     {% for i, name in field.choices %}
       {% set data = field.render_kw['datamap'][i] %}
