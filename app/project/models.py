@@ -140,6 +140,16 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         for question in choose_init_questions(self):
             self.add_question(question=question, notify=False)
 
+    def build_from_form(self, form, owner):
+        ''' Builds Project instance from Add_Form '''
+        self.name = str(form.name.data)
+        self.code = generate_code(form.name.data, Project)
+        # descriptions
+        self.oneliner = str(form.oneliner.data)
+        self.summary = str(form.summary.data)
+        # members
+        self.owner = owner
+        if 
 
     def __repr__(self):
         return f'<Project {self.name}>'
