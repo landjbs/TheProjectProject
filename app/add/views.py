@@ -33,9 +33,7 @@ def add_page(competition_id=None):
         # else:
         #     competition = None
         print('done');
-        return jsonify({
-            'result':   'true'
-        })
+        return redirect(url_for('hub.home'))
     else:
         for field in form:
             print(field.name, field.errors)
