@@ -31,6 +31,7 @@ function getCurrentTab() {
 }
 
 function getTabById(id) {
+  formtab = document.getElementById(id + '_segment');
   
 }
 
