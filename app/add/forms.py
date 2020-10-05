@@ -261,7 +261,7 @@ class Add_Shared(BaseForm):
     )
     ### SHARED COMPETITION ###
     competition = SelectField(
-        label=Markup('We found some competitions to which you might want to submit your <span class="project_type lowercase"></span>!'),
+        label=Markup('We found some competitions that might be a good fit for your <span class="project_type lowercase"></span>!'),
         description=Markup('If any of these interest you, select them from the list below and your <span class="project_type lowercase"></span> will automatically be submitted.'),
         validators=[],
         choices=[],
