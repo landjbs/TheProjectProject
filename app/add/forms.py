@@ -15,7 +15,6 @@ from markupsafe import Markup
 
 
 ### javascript validators ###
-not_empty = ''
 
 
 
@@ -259,6 +258,10 @@ class Add_Shared(BaseForm):
             'max': 128,
             'tabclass': 'looking_for_team application'
         }
+    )
+    ### SHARED COMPETITION ###
+    competition = SelectField(
+        label=Markup('')
     )
 
     def total_time(self):
