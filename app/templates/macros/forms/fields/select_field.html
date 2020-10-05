@@ -18,7 +18,7 @@
 
 {% macro render_select_field(field) -%}
   {% if field.render_kw.get('searchable')==true %}
-  
+    {{ render_searchable_select_field(field) }}
   {% else %}
     <div class='input-control select_field' id='{{ field.id }}'>
       {% for i, name in field.choices %}
