@@ -32,7 +32,7 @@ def add_page(competition_id=None):
         #     competition = Competition.query.get(int(form.competition.data))
         # else:
         #     competition = None
-        print('done');
+        print('done')
         return jsonify({
             'path': url_for('hub.home')
         })

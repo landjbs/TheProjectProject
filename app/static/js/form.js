@@ -232,8 +232,9 @@ function submit_form() {
     type: "POST",
     url: url,
     data: $('#add_form').serialize(), // serializes the form's elements.
-    success: function (data) {
+    success: function(data) {
       window.location.href = data['path'];
+    }
   });
   // Inject our CSRF token into our AJAX request.
   $.ajaxSetup({
