@@ -266,7 +266,8 @@ class Add_Shared(BaseForm):
         validators=[],
         choices=[],
         render_kw={
-            'searchable':   True
+            'searchable':   True,
+            'tabclass':     ''
         }
     )
 

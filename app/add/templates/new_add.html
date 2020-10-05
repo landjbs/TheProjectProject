@@ -18,8 +18,10 @@
   <form id='add_form'>
     {{ form.csrf_token() }}
     {% for field in form %}
-      {{ render_field(field) }}
-    {% endfor %}
+      {% if not field.type=='CSRFTokenField' %}
+        {{ render_field(field) }}
+      {% endif %}
+  {% endfor %}
   </form>
   <!-- temp navigator -->
   <div>
