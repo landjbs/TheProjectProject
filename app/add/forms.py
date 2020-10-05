@@ -261,7 +261,11 @@ class Add_Shared(BaseForm):
     )
     ### SHARED COMPETITION ###
     competition = SelectField(
-        label=Markup('')
+        label=Markup('We found some competitions to which you might want to submit your <span class="project_type lowercase"></span>!'),
+        description=Markup('If any of these interest you, select them from the list below and your <span class="project_type lowercase"></span> will automatically be submitted.'),
+        validators=[],
+        choices=[],
+        render_kw={}
     )
 
     def total_time(self):

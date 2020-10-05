@@ -25,7 +25,7 @@ from ..add import add
 def add_page(competition_id=None):
     form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
-    # form.competition.choices = Competition.recommend()
+    form.competition.choices = Competition.recommend()
     return render_template('new_add.html', form=form)
 
 
