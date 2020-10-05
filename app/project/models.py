@@ -156,6 +156,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             pass
         # timing and completion
         self.posted_on = datetime.utcnow()
+        self.estimated_time = form.estimated_time.data
         self.complete = (not form.looking_for_team.data)
         # TODO: get team size to increment by number of current members
         self.open = form.looking_for_team.data
