@@ -94,16 +94,13 @@ function validateForm() {
     y = x[currentTab].getElementsByTagName("input");
     for (i=0; i<y.length; i++) {
         elt = y[i];
-        if (elt.type=='text') {
-          console.log('here');
-          console.log(elt.value.length);
-          if (elt.value.length<1) {
-            error = 'Cannot be empty.';
-            alert(error);
-            return false;
-          }
-        }
-        console.log(elt.type);
+        // if (elt.type=='text') {
+        //   if (elt.value.length<1) {
+        //     error = 'Cannot be empty.';
+        //     alert(error);
+        //     return false;
+        //   }
+        // }
         // else if (elt.type=='radio') {
         //   is_checked = false;
         //   options = elt.value;
@@ -115,19 +112,6 @@ function validateForm() {
         //   }
         //   return is_checked
     }
-    // A loop that checks every input field in the current tab:
-    // for (i = 0; i < y.length; i++) {
-    //   // If field has input tag
-    //   if (y[i].id!="") {
-    //     // If a field is empty...
-    //     if (y[i].value == "") {
-    //       // add an "invalid" class to the field if not interests
-    //       y[i].className += " invalid";
-    //       // and set the current valid status to false:
-    //       valid = false;
-    //     }
-    //   }
-    // }
     return true; // return the valid status
   }
 
