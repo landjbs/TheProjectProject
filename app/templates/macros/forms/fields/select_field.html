@@ -1,6 +1,18 @@
 <!-- this maybe should still be preserved for competitions -->
 {% macro render_select_field(field) -%}
   {{ field(class='input valid add-select') }}
+  <div class='col' id='searchableOptions-{{ field.id }}'>
+    <span style='display:inline-block;'>
+      <p>
+        <u>Options (scroll for more)</u>
+        <i class="fas fa-search"></i>
+        <input class='select-clean' style='font-size:100%; width:30%;' type="text" placeholder="search..." id="optionSearch-{{ field.id }}" onkeyup="filterFunction('optionSearch-{{ field.id }}', 'searchableOptions-{{ field.id }}')">
+      </p>
+    </span>
+  </div>
+  {% for id, option in field.choices %}
+    <p class='searchable'>{{ option }}</p>
+  {% endfor %}
 {% endmacro -%}
 
 
