@@ -174,16 +174,16 @@ class Add_Shared(BaseForm):
     )
     ### INCOMPLETE PROJECT ###
     estimated_time = IntegerField(
-                        label='Roughly how many days do you expect it to take?',
-                        validators=[],
-                        description='TheProjectProject is all about short, impactful projects. You will be able to extend this time later, if you wish.',
-                        render_kw={
-                            'min':      1,
-                            'start':    7,
-                            'max':      60,
-                            'units':    'days',
-                            'tabclass': 'project incomplete'
-                        }
+        label='Roughly how many days do you expect it to take?',
+        validators=[],
+        description='TheProjectProject is all about short, impactful projects. You will be able to extend this time later, if you wish.',
+        render_kw={
+            'min':      1,
+            'start':    7,
+            'max':      60,
+            'units':    'days',
+            'tabclass': 'project incomplete'
+        }
     )
     ### SHARED TEAM BUILDING ###
     working_with_others = BooleanField(
@@ -278,66 +278,3 @@ class Add_Shared(BaseForm):
             except:
                 print(f'WARNING: {field.name} has no render_kw')
         return time
-
-
-class Add_Company(BaseForm):
-    '''
-    Fields of add form used to build Company objects
-    '''
-    ## raising ##
-    # # looking_to_raise
-    # looking_to_raise = BooleanField(
-    #                     label='Are you currently looking for funding?',
-    #                     validators=[DataRequired()],
-    #                     description='',
-    #                     render_kw={
-    #                         'optional': True
-    #                     }
-    #                 )
-    # ## team building ##
-    # # looking_for_members
-    # looking_for_members = BooleanField(
-    #                         label='Are you currently looking for team members?',
-    #                         validators=[DataRequired()],
-    #                         description='',
-    #                         render_kw={
-    #                             'optional': False
-    #                         }
-    #                     )
-    # # application question
-    # application_question = StringField(
-    #                         label='Ask a question to applicants who want to join the team.',
-    #                         validators=[DataRequired()],
-    #                         description='',
-    #                         render_kw={
-    #                             'optional': False
-    #                         }
-    # )
-
-
-
-class Add_Comp(BaseForm):
-    '''
-    Dynamic add form. Currently supports Project and Company
-    '''
-    ## SHARED FIELDS ##
-    ## PROJECT FIELDS
-    complete = BooleanField('Completed',
-                            description=('Whether the project has been '
-                            'completed.'))
-    open = BooleanField('Team Project',
-            validators=[],
-            description=('Whether you want to work with others on this project.')
-    )
-    requires_application = BooleanField('Requires Application',
-                            validators=[],
-                            description=('Applications allow you to choose '
-                                         'who joins the project.'))
-    application_question = TextField('Application Question',
-                                validators=[Length(0, 128)],
-                                description=('Add a question to screen '
-                                            'applicants.'),
-                                render_kw={'placeholder':'What do you look for in a team?',
-                                           'max':128})
-    ## COMPANY FIELDS
-    # funding
