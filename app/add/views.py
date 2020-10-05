@@ -36,7 +36,7 @@ def add_page(competition_id=None):
         return jsonify({
             'path': url_for('hub.home')
         })
-    else:
+    elif form.errors:
         for field in form:
             print(field.name, field.errors)
     return render_template('new_add.html', form=form)
