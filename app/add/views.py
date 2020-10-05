@@ -11,7 +11,8 @@ from app.user.models import User
 from app.link.forms import Add_Link
 
 # # TODO: build custom package form with javascript tagging mechanism
-from app.project.forms import Add_Project
+from app.project.models import Project
+from app.company.models import Company
 
 # package imports
 from .forms import Add_Shared
@@ -34,9 +35,9 @@ def add_page(competition_id=None):
             competition = None
         # determine type of object to build
         if form.type.data=='1':
-            print('project')
+            obj = Project.build_from_form(form)
         elif form.type.data=='2':
-            print('company')
+            obj = Company.build_from_form(form)
         else:
             raise ValueError('Invalid type.')
         return jsonify({
