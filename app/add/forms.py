@@ -15,7 +15,7 @@ from markupsafe import Markup
 
 
 ### javascript validators ###
-
+not_empty = ''
 
 
 
