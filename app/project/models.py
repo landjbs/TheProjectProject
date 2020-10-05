@@ -154,10 +154,13 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             pass
         # timing and completion
         self.complete = (not form.looking_for_team.data)
-        self.team_size = int(form.team_size.data)
-        self.requires_application = bool(form.requires_application.data)
-        self.application_question = str(form.application_question.data) if form.requires_application.data else None
+        # TODO: get team size to increment by number of current members
+        self.team_size = int(form.team_size.data) if not self.complete else 1
+        if not self.complete:
+            self.requires_application = bool(form.requires_application.data)
+            self.application_question = str(form.application_question.data) if form.requires_application.data else None
         
+
 
     def __repr__(self):
         return f'<Project {self.name}>'
