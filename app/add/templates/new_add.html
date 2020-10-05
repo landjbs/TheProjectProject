@@ -1,6 +1,5 @@
 {% extends "home_base.html" %}
 {% from 'macros/forms/field.html' import render_field %}
-{% from 'macros/forms/fragment.html' import render_fragment %}
 
 {% block title %}Add Project{% endblock %}
 
@@ -16,10 +15,12 @@
 
 {% block content %}
 <div class='big-box container justify-content-center'>
-  <div id='fragments'>
+  <form id='add_form'>
     {{ form.csrf_token() }}
-    {{ render_fragment(form) }}
-  </div>
+    {% for field in form %}
+      {{ render_field(field) }}
+    {% endfor %}
+  </form>
   <!-- temp navigator -->
   <div>
     <p class='float-left' style="display:none;">
