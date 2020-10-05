@@ -99,6 +99,13 @@ function validateForm() {
             return false;
           }
         }
+        else if (elt.type=='radio') {
+          is_checked = false;
+          options = elt.value;
+          for (j=0; j<options.length; j++) {
+            
+          }
+        }
     }
     // A loop that checks every input field in the current tab:
     // for (i = 0; i < y.length; i++) {
