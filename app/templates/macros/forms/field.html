@@ -47,7 +47,7 @@
 
 
 {% macro render_field(field) -%}
-  <div class='formtab {{ field.render_kw.get("tabclass") }}' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}'>
+  <div class='formtab {{ field.render_kw.get("tabclass") }}' data-field-type='{{ field.type }}' data-seconds='{{ field.render_kw["seconds"] }}' data-field-id='{{ field.id }}' data-field-validators='validate_not_empty();'>
     <div class="row input-segment" id='{{ field.name }}_segment'>
       {{ render_field_header(field) }}
       {{ render_fn[field.type](field) }}
