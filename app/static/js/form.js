@@ -220,7 +220,7 @@ function submit_form() {
     data: $('#add_form').serialize(), // serializes the form's elements.
     success: function(data) {
       console.log(data['path']);
-      if (data['path']!==null) {
+      if (data['path']!=undefined) {
         window.location.href = data['path'];
       }
     }
