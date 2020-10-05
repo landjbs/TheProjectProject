@@ -1,4 +1,5 @@
 <!-- this maybe should still be preserved for competitions -->
+<!-- warning not implemented yet -->
 {% macro render_searchable_select_field(field) -%}
   {{ field(class='input add-select', style='display: none;') }}
   <div class='col' id='searchableOptions-{{ field.id }}'>
@@ -20,7 +21,7 @@
 
 {% macro render_select_field(field) -%}
   {% if field.render_kw.get('searchable')==true %}
-    {{ render_searchable_select_field(field) }}
+    {{ field(class='input add-select') }}
   {% else %}
     <div class='input-control select_field' id='{{ field.id }}'>
       {% for i, name in field.choices %}

@@ -46,7 +46,7 @@ class Competition(CRUDMixin, db.Model):
     def recommend(cls):
         # TODO: move this to recommendation engine
         competitions = cls.query.filter_by(active=True, complete=False)
-        return [('', '')] + [(c.id, f'<u>{c.name}</u><br>{c.oneliner}') for c in competitions]
+        return [('', '')] + [(c.id, f'{c.name} - {c.oneliner}') for c in competitions]
 
     def total_length(self):
         return (self.ends_on - self.starts_on).days
