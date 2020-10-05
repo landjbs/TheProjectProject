@@ -33,8 +33,12 @@ def add_page(competition_id=None):
         else:
             competition = None
         # determine type of object to build
-        
-
+        if form.type.data=='1':
+            print('project')
+        elif form.type.data=='2':
+            print('company')
+        else:
+            raise ValueError('Invalid type.')
         return jsonify({
             'path': url_for('hub.home')
         })
