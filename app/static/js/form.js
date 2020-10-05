@@ -80,7 +80,7 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     alert('Submitting');
-    document.getElementById('add_form').submit();
+    submit_form();
     //...the form gets submitted:
     // submit_fragment('Add_Type');
     return false;
@@ -226,28 +226,22 @@ function submit_field(field_id) {
 
 
 // FRAGMENT SUBMIT
-// function submit_fragment(form_id) {
-//   var url = Flask.url_for('add.next_fragment');
-//   $.ajax({
-//     type: "POST",
-//     url: url,
-//     data: $('#' + form_id).serialize(), // serializes the form's elements.
-//     success: function (data) {
-//         // console.log(data)  // display the returned data in the console.
-//         document.getElementById('fragments').innerHTML += data['html'];
-//         nextPrev(1);
-//         nextPrev(-1);
-//     }
-//   });
-//   // Inject our CSRF token into our AJAX request.
-//   $.ajaxSetup({
-//       beforeSend: function(xhr, settings) {
-//           if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-//               xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
-//           }
-//       }
-//   });
-// }
+function submit_form() {
+  var url = Flask.url_for('add.add_page');
+  $.ajax({
+    type: "POST",
+    url: url,
+    data: $('#add_form').serialize() // serializes the form's elements.
+  });
+  // Inject our CSRF token into our AJAX request.
+  $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+          if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", "{{ form.csrf_token._value() }}")
+          }
+      }
+  });
+}
 
 
 // // TEMP:
