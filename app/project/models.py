@@ -111,37 +111,36 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                         cascade='all, delete, delete-orphan',
                         order_by='desc(Task.complete_stamp)')
 
-    def __init__(self, name, oneliner, summary, open, subjects,
-                requires_application, application_question, estimated_time,
-                team_size, complete, owner, competition=None):
-        self.name = str(name)
-        self.code = generate_code(name, Project)
-        self.oneliner = str(oneliner)
-        self.summary = str(summary)
-        self.subjects = subjects
-        # members
-        self.owner = owner
-        self.team_size = team_size
-        # application
-        self.open = bool(open)
-        self.requires_application = bool(requires_application)
-        self.application_question = str(application_question) if requires_application else None
-        # timing and completion
-        cur_time = datetime.utcnow()
-        self.posted_on = cur_time
-        self.completed_on = cur_time if complete else None
-        self.estimated_time = estimated_time if not complete else None
-        self.complete = bool(complete)
-        self.add_member(owner, notify_owner=False)
-        ### if competition, add it to project ##
-        if competition:
-            self.submit_to_competition(competition)
-        ### choose questions and add them to project ###
-        for question in choose_init_questions(self):
-            self.add_question(question=question, notify=False)
+    # def __init__(self, name, oneliner, summary, open, subjects,
+    #             requires_application, application_question, estimated_time,
+    #             team_size, complete, owner, competition=None):
+    #     self.name = str(name)
+    #     self.code = generate_code(name, Project)
+    #     self.oneliner = str(oneliner)
+    #     self.summary = str(summary)
+    #     self.subjects = subjects
+    #     # members
+    #     self.owner = owner
+    #     self.team_size = team_size
+    #     # application
+    #     self.open = bool(open)
+    #     self.requires_application = bool(requires_application)
+    #     self.application_question = str(application_question) if requires_application else None
+    #     # timing and completion
+    #     cur_time = datetime.utcnow()
+    #     self.posted_on = cur_time
+    #     self.completed_on = cur_time if complete else None
+    #     self.estimated_time = estimated_time if not complete else None
+    #     self.complete = bool(complete)
+    #     self.add_member(owner, notify_owner=False)
+    #     ### if competition, add it to project ##
+    #     if competition:
+    #         self.submit_to_competition(competition)
+    #     ### choose questions and add them to project ###
+    #     for question in choose_init_questions(self):
+    #         self.add_question(question=question, notify=False)
 
-
-    def build_from_form(self, form, owner, subjects, competition):
+    def __init__(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
         self.name = str(form.name.data)
         self.code = generate_code(form.name.data, Project)
