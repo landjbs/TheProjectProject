@@ -205,9 +205,9 @@ function field_keydown(e, field) {
     if (field_type=='BooleanField') {
       done = boolean_keypress(e, field);
     }
-    else if (field_type=='SelectField') {
-      done = select_keypress(e, field);
-    }
+    // else if (field_type=='SelectField') {
+    //   done = select_keypress(e, field);
+    // }
   // if successfully done, move to the next tab
   if (done==true) {
     setTimeout(function(){ nextPrev(1); }, 300);
