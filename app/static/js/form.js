@@ -223,7 +223,7 @@ function submit_form() {
       if (data['path']!=undefined) {
         window.location.href = data['path'];
       } else {
-        
+        alert(data['errors']);
       }
     }
   });

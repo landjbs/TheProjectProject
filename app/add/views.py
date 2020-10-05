@@ -39,6 +39,9 @@ def add_page(competition_id=None):
     elif form.errors:
         for field in form:
             print(field.name, field.errors)
+        return jsonify({
+            'errors':   form.errors
+        })
     return render_template('new_add.html', form=form)
 
 
