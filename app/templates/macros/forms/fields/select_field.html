@@ -1,5 +1,5 @@
 <!-- this maybe should still be preserved for competitions -->
-{% macro render_select_field(field) -%}
+{% macro render_searchable_select_field(field) -%}
   {{ field(class='input valid add-select') }}
   <div class='col' id='searchableOptions-{{ field.id }}'>
     <span style='display:inline-block;'>
@@ -16,19 +16,23 @@
 {% endmacro -%}
 
 
-{% macro DEP_render_select_field(field) -%}
-  <div class='input-control select_field' id='{{ field.id }}'>
-    {% for i, name in field.choices %}
-      {% set data = field.render_kw['datamap'][i] %}
-      <input id="{{ name }}-{{ field.id }}" class="toggle" name="{{ field.name }}" value='{{ i }}' type="radio" data-key="{{ data['key'] }}" onclick="{{ data['action'] }}">
-      <label for="{{ name }}-{{ field.id }}" class="btn">
-        <i class="{{ data['icon'] }} fa-2x"></i>
-        <br>
-        <span class='presskey'>
-          {{ data['key'] }}
-        </span>
-        {{ name }}
-      </label>
-    {% endfor %}
-  </div>
+{% macro render_select_field(field) -%}
+  {% if field.render_kw.get('searchable')==true %}
+  
+  {% else %}
+    <div class='input-control select_field' id='{{ field.id }}'>
+      {% for i, name in field.choices %}
+        {% set data = field.render_kw['datamap'][i] %}
+        <input id="{{ name }}-{{ field.id }}" class="toggle" name="{{ field.name }}" value='{{ i }}' type="radio" data-key="{{ data['key'] }}" onclick="{{ data['action'] }}">
+        <label for="{{ name }}-{{ field.id }}" class="btn">
+          <i class="{{ data['icon'] }} fa-2x"></i>
+          <br>
+          <span class='presskey'>
+            {{ data['key'] }}
+          </span>
+          {{ name }}
+        </label>
+      {% endfor %}
+    </div>
+  {% endif -%}
 {% endmacro -%}
