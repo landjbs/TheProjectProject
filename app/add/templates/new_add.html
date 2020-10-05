@@ -16,7 +16,7 @@
 {% block content %}
 <div class='big-box container justify-content-center'>
   <form id='add_form'>
-    {{ form.csrf_token() }}
+    {{ form.csrf_token }}
     {% for field in form %}
       {% if not field.type=='CSRFTokenField' %}
         {{ render_field(field) }}

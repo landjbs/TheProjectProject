@@ -19,17 +19,23 @@ from .forms import Add_Shared
 from ..add import add
 
 
-@add.route('/add', methods=['GET','POST'])
-@add.route('/add/<int:competition_id>', methods=['GET','POST'])
+@add.route('/add', methods=['GET', 'POST'])
+@add.route('/add/<int:competition_id>', methods=['GET', 'POST'])
 # @login_required
 def add_page(competition_id=None):
     form = Add_Shared()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     form.competition.choices = Competition.recommend()
     if form.validate_on_submit():
-        print('HERE')
+        subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
+        if form.competition.data:
+            competition = Competition.query.get(int(form.competition.data))
+        else:
+            competition = None
+        return redirect(url_for('hub.home'))
     else:
-        print(f'{form.errors}');
+        for field in form:
+            print(field.name, field.errors)
     return render_template('new_add.html', form=form)
 
 
