@@ -12,9 +12,7 @@
   </div>
   {% for id, option in field.choices %}
     <div class='searchable' style='border: 1px solid white; border-radius: 5px;'>
-      <u>{{ option.name }}</u>
-      <br>
-      {{ option.oneliner }}
+      {{ option | safe }}
     </div>
   {% endfor %}
 {% endmacro -%}
