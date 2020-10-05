@@ -79,6 +79,7 @@ function nextPrev(n) {
   currentTab = currentTab + n;
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
+    document.getElementById('add_form').submit();
     //...the form gets submitted:
     // submit_fragment('Add_Type');
     return false;
