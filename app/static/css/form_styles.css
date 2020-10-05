@@ -81,8 +81,14 @@
 
 .formtab_button {
   background-color: transparent;
-  border-color: transparent;
   color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.formtab_button:hover {
+  background-color: white;
+  color: black;
 }
 
 

@@ -219,7 +219,7 @@ form {
   transition: background 600ms ease, color 600ms ease;
 }
 
-.btn .presskey {
+.presskey {
   border: 1px solid #808080;
   display: inline-block;
   padding: 1px 6px;
