@@ -30,6 +30,10 @@ function getCurrentTab() {
   return false
 }
 
+function getTabById(id) {
+  
+}
+
 function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("formtab");
@@ -219,7 +223,6 @@ function submit_form() {
     url: url,
     data: $('#add_form').serialize(), // serializes the form's elements.
     success: function(data) {
-      console.log(data['path']);
       if (data['path']!=undefined) {
         window.location.href = data['path'];
       } else {
