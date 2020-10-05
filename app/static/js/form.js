@@ -222,6 +222,8 @@ function submit_form() {
       console.log(data['path']);
       if (data['path']!=undefined) {
         window.location.href = data['path'];
+      } else {
+        
       }
     }
   });
