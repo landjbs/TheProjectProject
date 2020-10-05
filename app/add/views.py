@@ -27,11 +27,11 @@ def add_page(competition_id=None):
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     form.competition.choices = Competition.recommend()
     if form.validate_on_submit():
-        # subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
-        # if form.competition.data:
-        #     competition = Competition.query.get(int(form.competition.data))
-        # else:
-        #     competition = None
+        subjects = [Subject.query.get(int(id)) for id in form.subjects.data]
+        if form.competition.data:
+            competition = Competition.query.get(int(form.competition.data))
+        else:
+            competition = None
         print('done')
         return jsonify({
             'path': url_for('hub.home')

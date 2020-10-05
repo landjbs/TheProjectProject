@@ -111,7 +111,7 @@ class Add_Shared(BaseForm):
     # amount_raised
     amount_raised = IntegerField(
         label='Roughly how much have you raised?',
-        validators=[DataRequired()],
+        validators=[],
         description='',
         render_kw={
             'min':      100,
