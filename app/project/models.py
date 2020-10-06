@@ -143,6 +143,11 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     # # TEMP: this should NOT BE INIT IN LONG RUN
     def build_from_form(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
+        name = str(form.name.data)
+        oneliner = str(form.oneliner.data)
+        summary = str(form.summary.data)
+        
+
         self.name = str(form.name.data)
         self.code = generate_code(form.name.data, Project)
         # descriptions
