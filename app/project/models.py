@@ -153,17 +153,14 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     # # TEMP: this should NOT BE INIT IN LONG RUN
     def build_from_form(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
-        name = str(form.name.data)
-        oneliner = str(form.oneliner.data)
-        summary = str(form.summary.data)
-        subjects = subjects
-        owner = owner
+        data = form.data
+        name        = data.get('name')
+        oneliner    = data.get('oneliner')
+        summary     = data.get('summary')
+        subjects    = subjects
+        owner       = owner
+        
 
-
-
-        self.subjects = subjects
-        # members
-        self.owner = owner
         if form.working_with_others.data:
             # todo: get these others and add to project
             pass
