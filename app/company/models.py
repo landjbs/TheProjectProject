@@ -1,7 +1,7 @@
 from sqlalchemy.orm import relationship
 from datetime import datetime
 
-from app.database import db, CRUDMixin
+from app.database import db, CRUDMixin, generate_code
 from app.project.models import Project
 
 
@@ -39,6 +39,21 @@ class Company(CRUDMixin, db.Model):
     # TODO: implement competiton submission for company maybe
     # last active
     last_active = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __init__(
+        self,
+        name,
+        code,
+        oneliner,
+        summary,
+        amount_raised,
+        looking_to_raise,
+        looking_for_members,
+        application_question
+    ):
+        self.name = str(name)
+        self.code = generate_code(name, Company)
+
 
     @classmethod
     def build_from_form(cls, form):
