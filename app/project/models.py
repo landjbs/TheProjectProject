@@ -154,11 +154,15 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     def build_from_form(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
         data = form.data
-        name        = data.get('name')
-        oneliner    = data.get('oneliner')
-        summary     = data.get('summary')
-        subjects    = subjects
-        owner       = owner
+        name            =   data.get('name')
+        oneliner        =   data.get('oneliner')
+        summary         =   data.get('summary')
+        subjects        =   subjects
+        owner           =   owner
+        # TODO: others
+        # others = get_members()
+        estimated_time  =   data.get('estimated_time')
+        complete        =   data.get('complete')
         
 
         if form.working_with_others.data:
