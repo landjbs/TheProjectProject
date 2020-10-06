@@ -59,7 +59,7 @@ class Company(CRUDMixin, db.Model):
         self.code                   =   generate_code(name, Company)
         self.oneliner               =   str(oneliner)
         self.summary                =   str(summary)
-        self.amount_raised          =   amount_raised
+        self.amount_raised          =   int(amount_raised)
         self.looking_to_raise       =   bool(looking_to_raise)
         self.looking_for_members    =   bool(looking_for_members)
         self.application_question   =   application_question
@@ -73,7 +73,7 @@ class Company(CRUDMixin, db.Model):
         name                    = data.get('name')
         oneliner                = data.get('oneliner')
         summary                 = data.get('summary')
-        amount_raised           = data.get('amount_raised')
+        amount_raised           = data.get('amount_raised', 0)
         looking_to_raise        = data.get('looking_to_raise')
         looking_for_members     = data.get('looking_for_members')
         application_question    = data.get('application_question')
