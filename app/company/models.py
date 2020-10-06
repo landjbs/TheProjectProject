@@ -31,6 +31,11 @@ class Company(CRUDMixin, db.Model):
                         # back_populates='company',
                         # lazy='dynamic',
                         # order_by='desc(Company_Role.joined_on)')
+    members = relationship(
+        'User',
+        secondary='user_to_company',
+        back_populates='comapnies'
+    )
     # projects
     projects = relationship(
         'Project',
