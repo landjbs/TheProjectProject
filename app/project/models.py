@@ -131,7 +131,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         self.subjects = subjects
         # members
         self.owner = owner
-        self.team_size = team_size
+        self.team_size = team_size if team_size else 1 # TODO: team size should be equal to current team_size
         # application
         self.open = bool(open)
         self.requires_application = bool(requires_application)
