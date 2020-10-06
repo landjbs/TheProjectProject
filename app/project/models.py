@@ -150,41 +150,36 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         for question in choose_init_questions(self):
             self.add_question(question=question, notify=False)
 
-    # # TEMP: this should NOT BE INIT IN LONG RUN
     def build_from_form(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
         data = form.data
-        name            =   data.get('name')
-        oneliner        =   data.get('oneliner')
-        summary         =   data.get('summary')
-        subjects        =   subjects
-        owner           =   owner
+        name                    =       data.get('name')
+        oneliner                =       data.get('oneliner')
+        summary                 =       data.get('summary')
+        subjects                =       subjects
+        owner                   =       owner
         # TODO: others
         # others = get_members()
-        estimated_time  =   data.get('estimated_time')
-        complete        =   data.get('complete')
-        
-
-        if form.working_with_others.data:
-            # todo: get these others and add to project
-            pass
-        # timing and completion
-        self.posted_on = datetime.utcnow()
-        self.estimated_time = form.estimated_time.data if form.estimated_time.data else form.time_it_took.data
-        self.complete = (not form.complete.data)
-        if self.complete:
-            self.completed_on = datetime.utcnow()
-        # TODO: get team size to increment by number of current members
-        self.open = form.looking_for_team.data
-        self.team_size = int(form.target_team_size.data) if self.open else 1
-        self.requires_application = bool(form.requires_application.data) if self.open else False
-        if not self.complete:
-            self.application_question = str(form.application_question.data) if form.requires_application.data else None
-        self.add_member(owner, notify_owner=False)
-        # competition
-        ### choose questions and add them to project ###
-        for question in choose_init_questions(self):
-            self.add_question(question=question, notify=False)
+        estimated_time          =       data.get('estimated_time')
+        complete                =       data.get('complete')
+        open                    =       data.get('looking_for_team')
+        team_size               =       data.get('target_team_size')
+        requires_application    =       data.get('requires_application')
+        application_question    =       data.get('application_question')
+        return Project(
+            name=name,
+            oneliner=oneliner,
+            summary=summary,
+            subjects=subjects,
+            owner=owner,
+            requires_application=requires_application,
+            application_question=application_question,
+            estimated_time=estimated_time,
+            team_size=team_size,
+            complete=complete,
+            owner=owner,
+            competition=competition
+        )
 
 
     def __repr__(self):
