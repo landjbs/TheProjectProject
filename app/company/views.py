@@ -10,4 +10,5 @@ from ..company import company
 @company.route('/company=<code>', methods=['GET', 'POST'])
 @limiter.limit('')
 def company_page(code):
-    pass
+    company = Company.query.filter_by(cod=code).first_or_404()
+    return render_template('company.html', company=company)

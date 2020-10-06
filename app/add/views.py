@@ -40,7 +40,7 @@ def add_page(competition_id=None):
                 'path': url_for('project.project_page', project_code=project.code)
             })
         elif form.type.data=='2':
-            obj = Company.build_from_form(form)
+            obj = Company.build_from_form(form, owner=current_user)
         else:
             raise ValueError('Invalid type.')
         return jsonify({
