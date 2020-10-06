@@ -150,6 +150,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
         for question in choose_init_questions(self):
             self.add_question(question=question, notify=False)
 
+    @classmethod
     def build_from_form(self, form, owner, subjects, competition):
         ''' Builds Project instance from Add_Form '''
         data = form.data
@@ -171,7 +172,7 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
             oneliner=oneliner,
             summary=summary,
             subjects=subjects,
-            owner=owner,
+            open=open,
             requires_application=requires_application,
             application_question=application_question,
             estimated_time=estimated_time,
