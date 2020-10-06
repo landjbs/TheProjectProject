@@ -63,7 +63,8 @@ class Company(CRUDMixin, db.Model):
         self.looking_to_raise       =   bool(looking_to_raise)
         self.looking_for_members    =   bool(looking_for_members)
         self.application_question   =   application_question
-        self.members
+        for member in members:
+            self.members.append(member)
 
 
     @classmethod
