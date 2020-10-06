@@ -26,10 +26,11 @@ class Company(CRUDMixin, db.Model):
     application_question = db.Column(db.String(128), nullable=False)
     ## RELATIONSHIPS
     # users
-    users = relationship('Company_Role',
-                        back_populates='company',
-                        lazy='dynamic',
-                        order_by='desc(Company_Role.joined_on)')
+    # NOTE: currently doesnt use Company_Role
+    # users = relationship('Company_Role',
+                        # back_populates='company',
+                        # lazy='dynamic',
+                        # order_by='desc(Company_Role.joined_on)')
     # projects
     projects = relationship('Project',
                             back_populates='company',
