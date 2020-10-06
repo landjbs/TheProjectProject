@@ -62,6 +62,6 @@ badge_to_perk = db.Table('badge_to_perk', db.Model.metadata,
 #
 #
 # # company to user
-# company_to_user = db.Table('company_to_user', db.Model.metadata,
-#             db.Column('company_id', db.Integer, db.ForeignKey('company.id')),
-#             db.Column('project_id', db.Integer, db.ForeignKey('project.id')))
+user_to_company = db.Table('user_to_company', db.Model.metadata,
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('company_id', db.Integer, db.ForeignKey('company.id')))

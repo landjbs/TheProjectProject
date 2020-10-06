@@ -110,6 +110,12 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
                             order_by='desc(User_Subjects.number)')
     # xp
     xp = db.Column(db.Integer, nullable=False, default=0)
+    ## company ##
+    companies = relationship(
+        'Company',
+        secondary='user_to_company',
+        back_populates='members'
+    )
     ## reporting ##
     # reports targeting user
     reports = relationship('User_Report',
