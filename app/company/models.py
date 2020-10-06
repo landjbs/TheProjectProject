@@ -56,13 +56,13 @@ class Company(CRUDMixin, db.Model):
         members # TODO: replace owner with member list
     ):
         self.name                   =   str(name)
-        self.code                   =   generate_code(name, Company)
+        self.code                   =   str(generate_code(name, Company))
         self.oneliner               =   str(oneliner)
         self.summary                =   str(summary)
         self.amount_raised          =   int(amount_raised)
         self.looking_to_raise       =   bool(looking_to_raise)
         self.looking_for_members    =   bool(looking_for_members)
-        self.application_question   =   application_question
+        self.application_question   =   str(application_question)
         for member in members:
             self.members.append(member)
 
