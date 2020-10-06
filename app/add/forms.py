@@ -20,7 +20,7 @@ from markupsafe import Markup
 
 class Add(BaseForm):
     ''' Fields of Add form that are shared between all types '''
-    identifier = 'Add_Shared'
+    identifier = 'Add'
     # type
     type = SelectField(
         label='What are you working on?',
