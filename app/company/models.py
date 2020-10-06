@@ -26,16 +26,18 @@ class Company(CRUDMixin, db.Model):
     application_question = db.Column(db.String(128), nullable=False)
     ## RELATIONSHIPS
     # users
-    # NOTE: currently doesnt use Company_Role
+    # NOTE: currently doesnt use Company_Role but maybe should in future
     # users = relationship('Company_Role',
                         # back_populates='company',
                         # lazy='dynamic',
                         # order_by='desc(Company_Role.joined_on)')
     # projects
-    projects = relationship('Project',
-                            back_populates='company',
-                            cascade='all, delete, delete-orphan',
-                            order_by='desc(Project.last_active)')
+    projects = relationship(
+        'Project',
+        back_populates='company',
+        cascade='all, delete, delete-orphan',
+        order_by='desc(Project.last_active)'
+    )
     # competition
     # TODO: implement competiton submission for company maybe
     # last active
