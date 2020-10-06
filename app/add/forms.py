@@ -18,7 +18,7 @@ from markupsafe import Markup
 
 
 
-class Add_Shared(BaseForm):
+class Add(BaseForm):
     ''' Fields of Add form that are shared between all types '''
     identifier = 'Add_Shared'
     # type

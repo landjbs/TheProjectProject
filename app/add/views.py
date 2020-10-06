@@ -15,7 +15,7 @@ from app.project.models import Project
 # from app.company.models import Company
 
 # package imports
-from .forms import Add_Shared
+from .forms import Add
 
 from ..add import add
 
@@ -24,7 +24,7 @@ from ..add import add
 @add.route('/add/<int:competition_id>', methods=['GET', 'POST'])
 # @login_required
 def add_page(competition_id=None):
-    form = Add_Shared(request.form)
+    form = Add()
     form.subjects.choices = [(s.id, s) for s in Subject.query.all()]
     form.competition.choices = Competition.recommend()
     if form.validate_on_submit():
