@@ -52,7 +52,8 @@ class Company(CRUDMixin, db.Model):
         amount_raised,
         looking_to_raise,
         looking_for_members,
-        application_question
+        application_question,
+        owner # TODO: replace owner with member list
     ):
         self.name                   =   str(name)
         self.code                   =   generate_code(name, Company)
@@ -62,6 +63,7 @@ class Company(CRUDMixin, db.Model):
         self.looking_to_raise       =   bool(looking_to_raise)
         self.looking_for_members    =   bool(looking_for_members)
         self.application_question   =   application_question
+        self.members
 
 
     @classmethod
