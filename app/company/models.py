@@ -53,7 +53,7 @@ class Company(CRUDMixin, db.Model):
         looking_to_raise,
         looking_for_members,
         application_question,
-        owner # TODO: replace owner with member list
+        members # TODO: replace owner with member list
     ):
         self.name                   =   str(name)
         self.code                   =   generate_code(name, Company)
@@ -68,8 +68,16 @@ class Company(CRUDMixin, db.Model):
 
 
     @classmethod
-    def build_from_form(cls, form):
-        pass
+    def build_from_form(cls, form, owner):
+        data = form.data
+        name                    = data.get('name')
+        oneliner                = data.get('oneliner')
+        summary                 = data.get('summary')
+        amount_raised           = data.get('amount_raised')
+        looking_to_raise        = data.get('looking_to_raise')
+        looking_for_members     = data.get('looking_for_members')
+        application_question    = data.get('application_question')
+        members = [owner]
 
 
 
