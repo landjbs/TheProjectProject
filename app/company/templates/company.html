@@ -20,12 +20,9 @@
   <link rel='stylesheet' href="/css/badge_styles.css">
 {% endblock %}
 
-
-<div class='container'>
-  {{ company.name }}
-  {{ company.oneliner }}
-</div>
-
-
 {% block content %}
+  <div class='container main'>
+    <h1>{{ company.name }}</h1>
+    {{ company.oneliner }}
+  </div>
 {% endblock %}

@@ -9,8 +9,9 @@ from ..company import company
 
 # WARNING: uninitalized init module
 
-@company.route('/company=<code>', methods=['GET', 'POST'])
+@company.route('/company=<company_code>', methods=['GET', 'POST'])
 @limiter.limit('')
-def company_page(code):
-    company = Company.query.filter_by(code=code).first_or_404()
+def company_page(company_code):
+    print(company_code)
+    company = Company.query.filter_by(code=company_code).first_or_404()
     return render_template('company.html', company=company)

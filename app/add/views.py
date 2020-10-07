@@ -41,7 +41,7 @@ def add_page(competition_id=None):
         elif form.type.data=='2':
             company = Company.build_from_form(form, owner=current_user)
             return jsonify({
-                'path': url_for('company.company_page', code=company.code)
+                'path': url_for('company.company_page', company_code=company.code)
             })
         else:
             raise ValueError('Invalid type.')
