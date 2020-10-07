@@ -6,6 +6,7 @@ from tqdm import trange, tqdm
 
 from app import db
 from app.user.models import User
+from app.company.models import Company
 from app.project.models import Project
 from app.subject.models import Subject
 from app.badge.models import Badge, User_Badge
