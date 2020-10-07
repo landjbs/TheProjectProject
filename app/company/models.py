@@ -34,13 +34,15 @@ class Company(CRUDMixin, db.Model):
     members = relationship(
         'User',
         secondary='user_to_company',
-        back_populates='companies'
+        back_populates='companies',
+        lazy='dynamic'
     )
     # projects
     projects = relationship(
         'Project',
         back_populates='company',
         cascade='all, delete, delete-orphan',
+        lazy='dynamic',
         order_by='desc(Project.last_active)'
     )
     # competition

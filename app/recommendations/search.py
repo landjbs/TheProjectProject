@@ -1,6 +1,7 @@
 from app.user.models import User
 from app.project.models import Project
 from app.subject.models import Subject
+from app.company.models import Company
 
 from app.utils import partition_query
 

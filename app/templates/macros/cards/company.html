@@ -1,17 +1,23 @@
+{% from 'macros/icon.html' import icon_types %}
+
 {% macro render_big_company_card(company) -%}
-  <div class="card mb-2" style='border-color: orange;'>
+  <div class="card mb-2">
     <div class="card-body">
       <div class='float-right info-nums'>
         {{ company.members.count() }}
         <i class='far fa-user-circle'></i>
         <br>
-        <p id='starcount_{{ project.id }}'>
+        <p>
           {{ company.projects.count() }}
-          <i class="fa fa-star"></i>
+          <i class="{{ icon_types['project'] }}" style='color:#FF5D00;'></i>
         </p>
       </div>
       <div class='card-head'>
-        {{ company.name }}
+        <a class='project-name' href='{{ company.get_url() }}'>
+          <h5>
+            {{ company.name }}
+          </h5>
+        </a>
       </div>
       <hr class="my-2">
       <!-- summary -->

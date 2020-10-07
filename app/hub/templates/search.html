@@ -37,6 +37,24 @@
       ]
     %}
   {% endif %}
+  
+  {% if results['company'][1] > 0 %}
+    {%
+      set carousels = carousels + [
+        (
+          'Companies',
+          render_carousel(
+            label='Companies',
+            id_postfix='companies',
+            card_type='company',
+            data=results['company'][0],
+            icon_type='company'
+          )
+        )
+      ]
+    %}
+  {% endif %}
+
   {% if results['user'][1] > 0 %}
     {%
       set carousels = carousels + [
@@ -64,22 +82,6 @@
             card_type='subject',
             data=results['subject'][0],
             icon_type='subject'
-          )
-        )
-      ]
-    %}
-  {% endif %}
-  {% if results['company'][1] > 0 %}
-    {%
-      set carousels = carousels + [
-        (
-          'Companies',
-          render_carousel(
-            label='Companies',
-            id_postfix='companies',
-            card_type='company',
-            data=results['company'][0],
-            icon_type='company'
           )
         )
       ]
