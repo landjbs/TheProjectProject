@@ -14,4 +14,5 @@ from ..company import company
 def company_page(company_code):
     print(company_code)
     company = Company.query.filter_by(code=company_code).first_or_404()
+    print(company)
     return render_template('company.html', company=company)

@@ -60,7 +60,7 @@ class Company(CRUDMixin, db.Model):
         members # TODO: replace owner with member list
     ):
         self.name                   =   str(name)
-        self.code                   =   str(generate_code(name, Company))
+        self.code                   =   generate_code(name, Company)
         self.oneliner               =   str(oneliner)
         self.summary                =   str(summary)
         self.amount_raised          =   int(amount_raised)
@@ -84,7 +84,7 @@ class Company(CRUDMixin, db.Model):
         looking_for_members     = data.get('looking_for_members')
         application_question    = data.get('application_question')
         members = [owner]
-        return Company(
+        return cls.create(
             name=name,
             oneliner=oneliner,
             summary=summary,

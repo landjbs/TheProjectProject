@@ -111,19 +111,21 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
                         cascade='all, delete, delete-orphan',
                         order_by='desc(Task.complete_stamp)')
 
-    def __init__(self,
-                name,
-                oneliner,
-                summary,
-                open,
-                subjects,
-                requires_application,
-                application_question,
-                estimated_time,
-                team_size,
-                complete,
-                owner,
-                competition=None):
+    def __init__(
+        self,
+        name,
+        oneliner,
+        summary,
+        open,
+        subjects,
+        requires_application,
+        application_question,
+        estimated_time,
+        team_size,
+        complete,
+        owner,
+        competition=None
+    ):
         self.name = str(name)
         self.code = generate_code(name, Project)
         self.oneliner = str(oneliner)
