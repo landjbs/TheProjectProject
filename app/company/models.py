@@ -37,12 +37,12 @@ class Company(CRUDMixin, db.Model):
         back_populates='companies'
     )
     # projects
-    projects = relationship(
-        'Project',
-        back_populates='company',
-        cascade='all, delete, delete-orphan',
-        order_by='desc(Project.last_active)'
-    )
+    # projects = relationship(
+        # 'Project',
+        # back_populates='company',
+        # cascade='all, delete, delete-orphan',
+        # order_by='desc(Project.last_active)'
+    # )
     # competition
     # TODO: implement competiton submission for company maybe
     # last active

@@ -50,6 +50,36 @@
     </nav>
   </div>
   <div id='content'>
-    
+    <div class="tab" style='margin-bottom:10px;'>
+      <button type="button" id="sidebarCollapse" style='background:transparent;'>
+        <i class="fa fa-crosshairs" style='color:black; vertical-align: middle;'></i>
+      </button>
+      <button class="tablinks" onclick="openTab(event, 'Activity')" id="Activity_Button">
+        Activity
+        {% if is_member %}
+          {% set n_todo = project.n_todo() %}
+          {% if n_todo > 0 %}
+            <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
+              {{ n_todo }}
+            </span>
+          {% endif %}
+        {% endif %}
+      </button>
+      <!-- about -->
+      <button class="tablinks" onclick="openTab(event, 'About')" id='About_Button'>
+        About
+        {% if is_member %}
+          {% set n_unanswered = project.n_unanswered() %}
+          {% if n_unanswered > 0 %}
+            <span class="badge" style='background:#FF5D00;; vertical-align:top;'>
+              {{ n_unanswered }}
+            </span>
+          {% endif %}
+        {% endif %}
+      </button>
+      {% if project.is_member(current_user) %}
+        <button class="tablinks" onclick="openTab(event, 'Private')" id='Private_Button'>Private</button>
+      {% endif %}
+    </div>
   </div>
 {% endblock %}
