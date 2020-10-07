@@ -37,4 +37,5 @@ def text_search(search_text):
         'project'       :   (project_results.all(),     project_count),
         'user'          :   (user_results.all(),        user_count),
         'subject'       :   (subject_results.all(),     subject_count),
+        'company'       :   (company_results.all(),     company_count)
     }
