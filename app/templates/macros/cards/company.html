@@ -1,0 +1,52 @@
+{% macro render_big_company_card(company) -%}
+  <div class="card mb-2" style='border-color: orange;'>
+    <div class="card-body">
+      <div class='float-right info-nums'>
+        {{ company.members.count() }}
+        <i class='far fa-user-circle'></i>
+        <br>
+        <p id='starcount_{{ project.id }}'>
+          {{ company.projects.count() }}
+          <i class="fa fa-star"></i>
+        </p>
+      </div>
+      <div class='card-head'>
+        {{ company.name }}
+      </div>
+      <hr class="my-2">
+      <!-- summary -->
+      <div class='card-text'>
+        <p style='color:#FF5D00; margin-bottom:0px;'>
+          {{ project.oneliner }}
+        </p>
+        <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
+      </div>
+      <div class='card-foot float-left'>
+        <p style="padding-bottom:0px; margin-bottom:0px;">
+          <i class="fa fa-clock-o"></i>
+          {% if project.estimated_time %}
+            {{ project.elasped() }} / {{ project.estimated_time_safe() }}
+            days
+          {% else %}
+            NA
+          {% endif %}
+        </p>
+        <div>
+          {% for subject in project.subjects|reverse %}
+            <a href='/subject={{ subject.code }}'>
+              {% if loop.index>1 %}
+              ,
+              {% endif %}
+              {{ render_subject_tag(subject) }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% if g.current_user.is_authenticated %}
+        <br><br>
+        <hr class="my-2">
+        {{ render_action_bar_fn(project) }}
+      {% endif %}
+    </div>
+  </div>
+{% endmacro -%}
