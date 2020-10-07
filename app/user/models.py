@@ -41,73 +41,102 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     last_active = db.Column(db.DateTime, nullable=True)
     available = db.Column(db.Boolean, nullable=True, default=True)
     ## projects ##
-    owned = relationship('Project',
-                        back_populates='owner',
-                        lazy='dynamic',
-                        order_by='desc(Project.last_active)')
-    projects = relationship('Project',
-                            secondary='user_to_project_2',
-                            back_populates='members',
-                            lazy='dynamic',
-                            order_by='desc(Project.last_active)')
-    pending = relationship('Project_Application',
-                            back_populates='user',
-                            lazy='dynamic',
-                            order_by='desc(Project_Application.apply_stamp)')
-    invitations = relationship('Project',
-                            secondary='project_invitation',
-                            back_populates='invitations',
-                            lazy='dynamic',
-                            order_by='desc(Project.last_active)')
-    rejections = relationship('Project',
-                            secondary='project_rejections',
-                            lazy='dynamic',
-                            back_populates='rejections')
+    owned = relationship(
+        'Project',
+        back_populates='owner',
+        lazy='dynamic',
+        order_by='desc(Project.last_active)'
+    )
+    projects = relationship(
+        'Project',
+        secondary='user_to_project_2',
+        back_populates='members',
+        lazy='dynamic',
+        order_by='desc(Project.last_active)'
+    )
+    pending = relationship(
+        'Project_Application',
+        back_populates='user',
+        lazy='dynamic',
+        order_by='desc(Project_Application.apply_stamp)'
+    )
+    invitations = relationship(
+        'Project',
+        secondary='project_invitation',
+        back_populates='invitations',
+        lazy='dynamic',
+        order_by='desc(Project.last_active)'
+    )
+    rejections = relationship(
+        'Project',
+        secondary='project_rejections',
+        lazy='dynamic',
+        back_populates='rejections'
+    )
     ## interactions ##
     # channels
-    channels = relationship('User_Channel',
-                            lazy='dynamic',
-                            cascade='all, delete, delete-orphan',
-                            back_populates='user',
-                            order_by='desc(User_Channel.last_read)')
+    channels = relationship(
+        'User_Channel',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan',
+        back_populates='user',
+        order_by='desc(User_Channel.last_read)'
+    )
     # messages
-    messages = relationship('Message',
-                        back_populates='sender',
-                        lazy='dynamic',
-                        cascade='all, delete, delete-orphan',
-                        order_by='desc(Message.timestamp)')
+    messages = relationship(
+        'Message',
+        back_populates='sender',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan',
+        order_by='desc(Message.timestamp)'
+    )
     # starred projects
-    starred = relationship('Project',
-                        secondary='user_to_project',
-                        back_populates='stars')
+    starred = relationship(
+        'Project',
+        secondary='user_to_project',
+        back_populates='stars'
+    )
     # comments
-    comments = relationship('Comment',
-                            back_populates='author',
-                            cascade='all, delete, delete-orphan')
-    tasks_authored = relationship('Task', back_populates='author')
-    tasks_worked = relationship('Task',
-                                secondary='user_to_task',
-                                back_populates='workers',
-                                order_by='desc(Task.complete_stamp)')
+    comments = relationship(
+        'Comment',
+        back_populates='author',
+        cascade='all, delete, delete-orphan'
+    )
+    tasks_authored = relationship(
+        'Task',
+        back_populates='author'
+    )
+    tasks_worked = relationship(
+        'Task',
+        secondary='user_to_task',
+        back_populates='workers',
+        order_by='desc(Task.complete_stamp)'
+    )
     # notifications
-    notifications = relationship('Notification',
-                                 back_populates='user',
-                                 lazy='dynamic',
-                                 cascade='all, delete, delete-orphan',
-                                 order_by='desc(Notification.timestamp)')
+    notifications = relationship(
+        'Notification',
+        back_populates='user',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan',
+        order_by='desc(Notification.timestamp)'
+    )
     ## honors ##
     # badges
-    badges = relationship('User_Badge',
-                          back_populates='user',
-                          lazy='dynamic',
-                          cascade='all, delete, delete-orphan',
-                          order_by='desc(User_Badge.last_active)')
+    badges = relationship(
+        'User_Badge',
+        back_populates='user',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan',
+        order_by='desc(User_Badge.last_active)'
+    )
     # subjects
-    subjects = relationship('User_Subjects',
-                            back_populates='user',
-                            lazy='dynamic',
-                            cascade='all, delete, delete-orphan',
-                            order_by='desc(User_Subjects.number)')
+    subjects = relationship(
+        'User_Subjects',
+        back_populates='user',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan',
+        order_by='desc(User_Subjects.number)'
+    )
     # xp
     xp = db.Column(db.Integer, nullable=False, default=0)
     ## company ##
@@ -118,11 +147,13 @@ class User(CRUDMixin, UserMixin, db.Model): # SearchableMixin
     )
     ## reporting ##
     # reports targeting user
-    reports = relationship('User_Report',
-                           back_populates='reported',
-                           primaryjoin='User.id==User_Report.reported_id',
-                           lazy='dynamic',
-                           cascade='all, delete, delete-orphan')
+    reports = relationship(
+        'User_Report',
+        back_populates='reported',
+        primaryjoin='User.id==User_Report.reported_id',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan'
+    )
 
     def __init__(self, name, email, password, about, accepted=False, admin=False):
         self.name = str(name)

@@ -26,6 +26,7 @@ from app.badge import badge
 from app.question import question
 from app.link import link
 from app.analytics import analytics
+from app.company import company
 # database
 from app.database import db
 # login
@@ -177,6 +178,7 @@ def register_blueprints(app):
     app.register_blueprint(badge)
     app.register_blueprint(link)
     app.register_blueprint(competition)
+    app.register_blueprint(company)
 
 
 def register_admin_views(application, admin, db):

@@ -34,15 +34,15 @@ class Company(CRUDMixin, db.Model):
     members = relationship(
         'User',
         secondary='user_to_company',
-        back_populates='comapnies'
+        back_populates='companies'
     )
     # projects
-    projects = relationship(
-        'Project',
-        back_populates='company',
-        cascade='all, delete, delete-orphan',
-        order_by='desc(Project.last_active)'
-    )
+    # projects = relationship(
+    #     'Project',
+    #     back_populates='company',
+    #     cascade='all, delete, delete-orphan',
+    #     order_by='desc(Project.last_active)'
+    # )
     # competition
     # TODO: implement competiton submission for company maybe
     # last active
@@ -86,16 +86,16 @@ class Company(CRUDMixin, db.Model):
 
 
 
-class Company_Role(db.Model):
-    __tablename__ = 'company_role'
-    # users
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    user = relationship('User', back_populates='companies')
-    # company
-    company_id = db.Column(db.Integer, db.ForeignKey('company.id'), primary_key=True)
-    company = relationship('Company', back_populates='users')
-    # joined on
-    joined_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+# class Company_Role(db.Model):
+#     __tablename__ = 'company_role'
+#     # users
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+#     user = relationship('User', back_populates='companies')
+#     # company
+#     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), primary_key=True)
+#     company = relationship('Company', back_populates='users')
+#     # joined on
+#     joined_on = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 
 # class Company_Project(db.Model):
