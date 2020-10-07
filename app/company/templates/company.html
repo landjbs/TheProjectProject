@@ -48,7 +48,6 @@
           </div>
         </ul>
     </nav>
-  </div>
 
   <!-- content -->
   <div id='content'>
@@ -69,8 +68,18 @@
       </button>
       <!-- about -->
     </div>
-
     <div id='Activity' class='tabcontent'>
+      {{
+        render_carousel(
+          label='Members',
+          id_postfix='members',
+          card_type='user',
+          icon_type='user',
+          data=company.members
+        )
+      }}
+    </div>
+
     </div>
 
   </div>
