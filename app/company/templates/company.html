@@ -21,8 +21,86 @@
 {% endblock %}
 
 {% block content %}
-  <div class='container main'>
-    <h1>{{ company.name }}</h1>
-    {{ company.oneliner }}
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <p class='float-right' style='text-align: right;'>
+              <span id='starcount_{{ project.id }}'>
+                {{ project.stars.all()|length }}
+                <i class="fa fa-star"></i>
+              </span>
+              <!-- edit button -->
+              {% if is_owner %}
+              <br>
+              <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
+                Edit
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </button>
+              {% endif %}
+            </p>
+            <a href='/project={{ project.code }}'>
+              <h3>
+                {{ project.name }}
+                {% if project.complete %}
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                {% elif not project.open %}
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                {% endif %}
+              </h3>
+            </a>
+            <p>
+              by
+              <a class='user-name' href='user={{ project.owner.code }}'>
+                {{ project.owner.name }}
+              </a>
+            </p>
+        </div>
+        {{ render_project_action_bar(project) }}
+        <br>
+        <ul class="list-unstyled components">
+          <div class='bio'>
+            <p>
+              {{ project.oneliner }}
+            </p>
+            <p>{{ project.summary }}</p>
+            <p>
+              {% if project.competition %}
+                {% set competition = project.competition.competition %}
+                <i class='fa fa-trophy' style='color: gold;'></i>
+                <a class='user-name' href='{{ competition.get_url() }}'>
+                  {{ competition.name }}
+                  &nbsp;
+                  <i class='fa fa-clock-o'></i>
+                  {% set total_length = competition.total_length() %}
+                  {% set time_progressed = smallest(total_length, competition.time_progressed()) %}
+                  {{ time_progressed }} / {{ total_length }} days
+                </a>
+              {% endif %}
+            </p>
+            <center>
+              {% if not project.complete %}
+                {% set elapsed = project.elasped() %}
+                {% set est = project.estimated_time_safe() %}
+                {% set elapsed_style = elapsed_style(elapsed, est) %}
+                <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
+                <div class="progress" style='width:80%;'>
+                  <div class="progress-bar" role="progressbar"
+                      style='{{ elapsed_style }}'
+                      aria-valuenow="{{ elapsed }}" aria-valuemin="0"
+                      aria-valuemax="{{ est }}"></div>
+                </div>
+              {% else %}
+                <p style="margin:0px;">Project Complete!</p>
+                <div class="progress" style='width:80%;'>
+                  <div class="progress-bar" role="progressbar"
+                      style='width: 100%;'/>
+                </div>
+              {% endif %}
+            </center>
+            <br>
+          </div>
+        </ul>
+    </nav>
   </div>
 {% endblock %}
