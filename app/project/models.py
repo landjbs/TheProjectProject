@@ -35,32 +35,52 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     # type {0:indep, 1:startup}
     # type = db.Column(db.Integer, nullable=False, default=0)
     # links
-    links = relationship('Link',
-                         back_populates='project',
-                         lazy='dynamic',
-                         cascade='all, delete, delete-orphan')
+    links = relationship(
+        'Link',
+        back_populates='project',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan'
+    )
     # subject
-    subjects = relationship('Subject',
-                            secondary='project_to_subject',
-                            back_populates='projects',
-                            lazy='dynamic')
+    subjects = relationship(
+        'Subject',
+        secondary='project_to_subject',
+        back_populates='projects',
+        lazy='dynamic'
+    )
     # question
-    questions = relationship('Question',
-                             back_populates='project',
-                             cascade='all, delete, delete-orphan',
-                             lazy='dynamic',
-                             order_by='desc(Question.asked_on)')
+    questions = relationship(
+        'Question',
+        back_populates='project',
+        cascade='all, delete, delete-orphan',
+        lazy='dynamic',
+        order_by='desc(Question.asked_on)'
+    )
     ## people ##
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     owner = relationship('User', back_populates='owned')
-    members = relationship('User', secondary='user_to_project_2',
-                           back_populates='projects', lazy='dynamic')
-    pending = relationship('Project_Application',
-                            back_populates='project', lazy='dynamic')
-    invitations = relationship('User', secondary='project_invitation',
-                               back_populates='invitations', lazy='dynamic')
-    rejections = relationship('User', secondary='project_rejections',
-                              back_populates='rejections')
+    members = relationship(
+        'User',
+        secondary='user_to_project_2',
+        back_populates='projects',
+        lazy='dynamic'
+    )
+    pending = relationship(
+        'Project_Application',
+        back_populates='project',
+        lazy='dynamic'
+    )
+    invitations = relationship(
+        'User',
+        secondary='project_invitation',
+        back_populates='invitations',
+        lazy='dynamic'
+    )
+    rejections = relationship(
+        'User',
+        secondary='project_rejections',
+        back_populates='rejections'
+    )
     ## join process ##
     # open (allows others to join)
     open = db.Column(db.Boolean, nullable=False)
@@ -83,33 +103,45 @@ class Project(CRUDMixin, db.Model): # SearchableMixin
     complete = db.Column(db.Boolean, nullable=False)
     ## popularity ##
     # stars
-    stars = relationship('User', secondary='user_to_project',
-                         back_populates='starred', lazy='dynamic')
+    stars = relationship(
+        'User',
+        secondary='user_to_project',
+        back_populates='starred',
+        lazy='dynamic'
+    )
     # buzz
     buzz = db.Column(db.Integer, nullable=False, default=0)
     # company
     company_id = db.Column(db.Integer, db.ForeignKey('company.id'), nullable=True)
-    company = relationship('Company',
-                        secondary='company_to_project',
-                        back_populates='projects',
-                        lazy='dynamic')
+    company = relationship(
+        'Company',
+        secondary='company_to_project',
+        back_populates='projects',
+        lazy='dynamic'
+    )
     # competition
-    competition = relationship('Submission',
-                            uselist=False,
-                            back_populates='project',
-                            cascade='all, delete, delete-orphan')
+    competition = relationship(
+        'Submission',
+        uselist=False,
+        back_populates='project',
+        cascade='all, delete, delete-orphan'
+    )
     # comments
-    comments = relationship('Comment',
-                            back_populates='project',
-                            lazy='dynamic',
-                            cascade='all, delete, delete-orphan',
-                            order_by='Comment.timestamp')
+    comments = relationship(
+        'Comment',
+        back_populates='project',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan',
+        order_by='Comment.timestamp'
+    )
     # tasks
-    tasks = relationship('Task',
-                        back_populates='project',
-                        lazy='dynamic',
-                        cascade='all, delete, delete-orphan',
-                        order_by='desc(Task.complete_stamp)')
+    tasks = relationship(
+        'Task',
+        back_populates='project',
+        lazy='dynamic',
+        cascade='all, delete, delete-orphan',
+        order_by='desc(Task.complete_stamp)'
+    )
 
     def __init__(
         self,

@@ -7,8 +7,6 @@ from .models import Company
 from ..company import company
 
 
-# WARNING: uninitalized init module
-
 @company.route('/company=<company_code>', methods=['GET', 'POST'])
 @limiter.limit('')
 def company_page(company_code):
