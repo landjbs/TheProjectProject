@@ -51,7 +51,6 @@ class Company(CRUDMixin, db.Model):
     def __init__(
         self,
         name,
-        code,
         oneliner,
         summary,
         amount_raised,
@@ -71,6 +70,8 @@ class Company(CRUDMixin, db.Model):
         for member in members:
             self.members.append(member)
 
+    def __repr__(self):
+        return f'<Comapny {self.name}>'
 
     @classmethod
     def build_from_form(cls, form, owner):
@@ -78,7 +79,7 @@ class Company(CRUDMixin, db.Model):
         name                    = data.get('name')
         oneliner                = data.get('oneliner')
         summary                 = data.get('summary')
-        amount_raised           = data.get('amount_raised', 0)
+        amount_raised           = data.get('amount_raised') if data.get('has_raised') else 0
         looking_to_raise        = data.get('looking_to_raise')
         looking_for_members     = data.get('looking_for_members')
         application_question    = data.get('application_question')

@@ -187,6 +187,7 @@ def register_admin_views(application, admin, db):
     # import models
     from app.user.models import User, User_Report
     from app.project.models import Project, Project_Application, Comment, Task
+    from app.company.models import Company
     from app.subject.models import Subject, User_Subjects
     from app.notification.models import Notification
     from app.competition.models import Competition, Submission
@@ -204,6 +205,7 @@ def register_admin_views(application, admin, db):
         admin.add_view(AnalyticsView('Analytics', endpoint='AdminAnalytics'))
         admin.add_view(UserModelView(User, db.session, endpoint='AdminUser'))
         admin.add_view(ProjectModelView(Project, db.session, endpoint='AdminProject'))
+        admin.add_view(SafeModelView(Company, db.session, endpoint='AdminCompany'))
         admin.add_view(SafeModelView(Comment, db.session, endpoint='AdminComment'))
         admin.add_view(SafeModelView(Task, db.session, endpoint='AdminTask'))
         admin.add_view(SafeModelView(Subject, db.session, endpoint='AdminSubject'))
