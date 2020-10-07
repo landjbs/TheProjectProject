@@ -26,47 +26,27 @@
     <nav id="sidebar">
         <div class="sidebar-header">
             <p class='float-right' style='text-align: right;'>
-              <span id='starcount_{{ project.id }}'>
-                {{ project.stars.all()|length }}
-                <i class="fa fa-star"></i>
+              <span id='projectcount_{{ company.id }}'>
+                <i class="fa fa-circle"></i>
               </span>
-              <!-- edit button -->
-              {% if is_owner %}
-              <br>
-              <button type='button' data-toggle='modal' data-target='#edit_modal' class='edit-button'>
-                Edit
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-              </button>
-              {% endif %}
             </p>
-            <a href='/project={{ project.code }}'>
+            <a href="{{ url_for('company.company_page', company_code=company.code) }}">
               <h3>
-                {{ project.name }}
-                {% if project.complete %}
-                  <i class="fa fa-check-circle" aria-hidden="true"></i>
-                {% elif not project.open %}
-                  <i class="fa fa-lock" aria-hidden="true"></i>
-                {% endif %}
+                {{ company.name }}
               </h3>
             </a>
-            <p>
-              by
-              <a class='user-name' href='user={{ project.owner.code }}'>
-                {{ project.owner.name }}
-              </a>
-            </p>
         </div>
-        {{ render_project_action_bar(project) }}
+        <!-- TODO: actionbar -->
         <br>
         <ul class="list-unstyled components">
           <div class='bio'>
             <p>
-              {{ project.oneliner }}
+              {{ company.oneliner }}
             </p>
-            <p>{{ project.summary }}</p>
+            <p>{{ company.summary }}</p>
             <p>
-              {% if project.competition %}
-                {% set competition = project.competition.competition %}
+              {% if company.competition %}
+                {% set competition = company.competition.competition %}
                 <i class='fa fa-trophy' style='color: gold;'></i>
                 <a class='user-name' href='{{ competition.get_url() }}'>
                   {{ competition.name }}

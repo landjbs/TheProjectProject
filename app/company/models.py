@@ -95,6 +95,9 @@ class Company(CRUDMixin, db.Model):
             members=members
         )
 
+    def get_url(self):
+        return f'/company={self.code}'
+
 
 
 # class Company_Role(db.Model):
