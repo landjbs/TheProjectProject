@@ -69,6 +69,22 @@
       ]
     %}
   {% endif %}
+  {% if results['company'][1] > 0 %}
+    {%
+      set carousels = carousels + [
+        (
+          'Companies',
+          render_carousel(
+            label='Companies',
+            id_postfix='companies',
+            card_type='company',
+            data=results['company'][0],
+            icon_type='company'
+          )
+        )
+      ]
+    %}
+  {% endif %}
 
   {{ render_safe_tabs(carousels) }}
 </div>
