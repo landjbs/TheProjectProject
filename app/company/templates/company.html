@@ -44,40 +44,6 @@
               {{ company.oneliner }}
             </p>
             <p>{{ company.summary }}</p>
-            <p>
-              {% if company.competition %}
-                {% set competition = company.competition.competition %}
-                <i class='fa fa-trophy' style='color: gold;'></i>
-                <a class='user-name' href='{{ competition.get_url() }}'>
-                  {{ competition.name }}
-                  &nbsp;
-                  <i class='fa fa-clock-o'></i>
-                  {% set total_length = competition.total_length() %}
-                  {% set time_progressed = smallest(total_length, competition.time_progressed()) %}
-                  {{ time_progressed }} / {{ total_length }} days
-                </a>
-              {% endif %}
-            </p>
-            <center>
-              {% if not project.complete %}
-                {% set elapsed = project.elasped() %}
-                {% set est = project.estimated_time_safe() %}
-                {% set elapsed_style = elapsed_style(elapsed, est) %}
-                <p style="margin:0px;">Progress: {{ elapsed }}/{{ est }} days</p>
-                <div class="progress" style='width:80%;'>
-                  <div class="progress-bar" role="progressbar"
-                      style='{{ elapsed_style }}'
-                      aria-valuenow="{{ elapsed }}" aria-valuemin="0"
-                      aria-valuemax="{{ est }}"></div>
-                </div>
-              {% else %}
-                <p style="margin:0px;">Project Complete!</p>
-                <div class="progress" style='width:80%;'>
-                  <div class="progress-bar" role="progressbar"
-                      style='width: 100%;'/>
-                </div>
-              {% endif %}
-            </center>
             <br>
           </div>
         </ul>
