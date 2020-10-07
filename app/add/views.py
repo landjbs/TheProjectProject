@@ -10,9 +10,8 @@ from app.subject.models import Subject
 from app.user.models import User
 from app.link.forms import Add_Link
 
-# # TODO: build custom package form with javascript tagging mechanism
 from app.project.models import Project
-# from app.company.models import Company
+from app.company.models import Company
 
 # package imports
 from .forms import Add

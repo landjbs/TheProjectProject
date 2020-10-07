@@ -83,6 +83,16 @@ class Company(CRUDMixin, db.Model):
         looking_for_members     = data.get('looking_for_members')
         application_question    = data.get('application_question')
         members = [owner]
+        return Company(
+            name=name,
+            oneliner=oneliner,
+            summary=summary,
+            amount_raised=amount_raised,
+            looking_to_raise=looking_to_raise,
+            looking_for_members=looking_for_members,
+            application_question=application_question,
+            members=members
+        )
 
 
 
