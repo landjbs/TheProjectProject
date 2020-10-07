@@ -17,22 +17,15 @@
       <!-- summary -->
       <div class='card-text'>
         <p style='color:#FF5D00; margin-bottom:0px;'>
-          {{ project.oneliner }}
+          {{ company.oneliner }}
         </p>
-        <p style='color:rgba(0,0,0,0.7);'>{{ project.summary }}</p>
+        <p style='color:rgba(0,0,0,0.7);'>
+          {{ company.summary }}
+        </p>
       </div>
       <div class='card-foot float-left'>
-        <p style="padding-bottom:0px; margin-bottom:0px;">
-          <i class="fa fa-clock-o"></i>
-          {% if project.estimated_time %}
-            {{ project.elasped() }} / {{ project.estimated_time_safe() }}
-            days
-          {% else %}
-            NA
-          {% endif %}
-        </p>
         <div>
-          {% for subject in project.subjects|reverse %}
+          {% for subject in company.subjects|reverse %}
             <a href='/subject={{ subject.code }}'>
               {% if loop.index>1 %}
               ,
@@ -42,11 +35,6 @@
           {% endfor %}
         </div>
       </div>
-      {% if g.current_user.is_authenticated %}
-        <br><br>
-        <hr class="my-2">
-        {{ render_action_bar_fn(project) }}
-      {% endif %}
     </div>
   </div>
 {% endmacro -%}
