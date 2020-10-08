@@ -43,12 +43,12 @@ class Add(BaseForm):
                 1:  {
                     'key'   :   'A',
                     'icon'  :   'fa fa-circle',
-                    'action':   "set_type('Project'); hide_class('company'); show_class('project')"
+                    'action':   "set_type('Project'); hide_class('company'); show_class('project');"
                 },
                 2:  {
                     'key'   :   'B',
                     'icon'  :   'fa fa-briefcase',
-                    'action':   "set_type('Company'); hide_class('project'); show_class('company')"
+                    'action':   "set_type('Company'); hide_class('project'); show_class('company');"
                 }
             },
             'seconds':  3
@@ -125,7 +125,7 @@ class Add(BaseForm):
             'tabclass': 'company',
             'datamap': {
                 'true': {
-                    'action':   ''
+                    'action':   "show_class('has_raised');"
                 },
                 'false': {
                     'action':   "hide_class('has_raised');"
@@ -193,10 +193,10 @@ class Add(BaseForm):
             'tabclass': 'project',
             'datamap': {
                 'true':  {
-                    'action':   "hide_class('incomplete'); hide_class('looking_for_team');"
+                    'action':   "hide_class('incomplete'); hide_class('looking_for_team'); show_class('complete');"
                 },
                 'false':  {
-                    'action':   "hide_class('complete');"
+                    'action':   "hide_class('complete'); show_class('incomplete'); show_class('looking_for_team');"
                 }
             }
         }
@@ -245,7 +245,7 @@ class Add(BaseForm):
             'tabclass': '',
             'datamap': {
                 'true': {
-                    'action':   ''
+                    'action':   "show_class('other_members');"
                 },
                 'false': {
                     'action':   "hide_class('other_members');"
@@ -268,7 +268,7 @@ class Add(BaseForm):
             'tabclass': 'incomplete',
             'datamap': {
                 'true': {
-                    'action':   ''
+                    'action':   "show_class('looking_for_team');"
                 },
                 'false': {
                     'action':   "hide_class('looking_for_team')"
@@ -304,7 +304,7 @@ class Add(BaseForm):
             'tabclass': 'project looking_for_team',
             'datamap': {
                 'true': {
-                    'action':   ''
+                    'action':   "show_class('application')"
                 },
                 'false': {
                     'action':   'hide_class("application")'
