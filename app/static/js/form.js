@@ -279,10 +279,10 @@ function hide_class(cls) {
 
 function show_class(cls) {
   document.querySelectorAll('.' + cls).forEach(function(el) {
-    if (el.classList.contains(cls)) {
-      console.log(el.classList);
-      el.classList.remove(cls);
-    }
+    el.classList.remove('hidden');
+    console.log(el.classList);
+    // if (el.classList.contains(cls)) {
+    // }
   });
 }
 
