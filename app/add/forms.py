@@ -116,7 +116,9 @@ class Add(BaseForm):
     has_raised = BooleanField(
         label='Have you raised any funding so far?',
         description=(
-            "This question helps us better understand "
+            "This question helps us better understand your progress and needs "
+            'as a company. If you have won any grants or raised any funding, '
+            'please let us know.'
         ),
         render_kw={
             'seconds':  5,
