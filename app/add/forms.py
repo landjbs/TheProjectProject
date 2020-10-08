@@ -26,7 +26,9 @@ class Add(BaseForm):
         label='What are you working on?',
         validators=[DataRequired()],
         description=(
-            'TheProjectProject supports innovation at all stages, whether'
+            'TheProjectProject supports innovation at all stages, whether '
+            "it's connnecting your independent project with resources, helping "
+            'your early-stage startup build a team, or '
         ),
         choices=[(1, 'Project'), (2, 'Company')],
         render_kw={
