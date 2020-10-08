@@ -258,7 +258,6 @@ function submit_form() {
 }
 
 
-// // TEMP:
 function set_type(type) {
   var elts = document.getElementsByClassName('project_type');
   for (i=0; i<elts.length; i++) {
