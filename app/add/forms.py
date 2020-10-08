@@ -102,7 +102,7 @@ class Add(BaseForm):
         label='Subjects',
         description=Markup(
             'What subjects might this <span class="project_type lowercase"></span> involve? '
-            ''
+            "If you're interested, we can connect you to people with the skillset you're looking for."
         ),
         validators=[],
         choices=[],
