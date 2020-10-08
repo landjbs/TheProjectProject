@@ -115,7 +115,9 @@ class Add(BaseForm):
     # has_raised
     has_raised = BooleanField(
         label='Have you raised any funding so far?',
-        description='',
+        description=(
+            "This question helps us better understand "
+        ),
         render_kw={
             'seconds':  5,
             'tabclass': 'company',
@@ -133,7 +135,9 @@ class Add(BaseForm):
     amount_raised = IntegerField(
         label='Roughly how much have you raised?',
         validators=[],
-        description='',
+        description=(
+            ''
+        ),
         render_kw={
             'min':      100,
             'start':    5000,
