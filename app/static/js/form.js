@@ -94,11 +94,11 @@ function nextPrev(n) {
   if (x[currentTab].classList.contains('hidden')==true) {
     if (n<0) {
       console.log(n);
-      nextPrev(n-1);
+      nextPrev(-1);
     }
     else if (n>0) {
       console.log(n);
-      nextPrev(n+1);
+      nextPrev(1);
     }
     else {
       showTab(currentTab);
