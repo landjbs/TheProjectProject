@@ -25,7 +25,9 @@ class Add(BaseForm):
     type = SelectField(
         label='What are you working on?',
         validators=[DataRequired()],
-        description='',
+        description=(
+            'TheProjectProject supports innovation at all stages, whether'
+        ),
         choices=[(1, 'Project'), (2, 'Company')],
         render_kw={
             'optional': False,
