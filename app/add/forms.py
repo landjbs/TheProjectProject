@@ -161,9 +161,10 @@ class Add(BaseForm):
         validators=[],
         description=(
             'Funding and mentorship are crucial to early-stage companies, '
-            'One of the ways we support our startups is connecting them with '
-            'these opportunities. Let us know if this '
-        )
+            "yet these opportunities are hard to come by in the wild. "
+            "We are here to help. Select Yes if you'd like to be connected with "
+            'funding opportunities.'
+        ),
         render_kw={
             'tabclass': 'company',
             'datamap': {
@@ -180,7 +181,13 @@ class Add(BaseForm):
     complete = BooleanField(
         label='Have you already completed this project?',
         validators=[],
-        description='',
+        description=(
+            "TheProjectProject is a great place to show off work you've already "
+            "done. Whether it's a final project for a class, an independent project "
+            'you built over the summer, or work you did for an internshp, add it '
+            "to show off your skills to the world. If this is an idea you want to work on "
+            'or are building right now, select No.'
+        ),
         render_kw={
             'seconds':  5,
             'tabclass': 'project',
@@ -198,7 +205,10 @@ class Add(BaseForm):
     time_it_took = IntegerField(
         label='Roughly how many days did it take?',
         validators=[],
-        description='',
+        description=(
+            'No need to be too accurate, just a rough estimate of how long this '
+            'project took to help us better understand the scope.'
+        ),
         render_kw={
             'min':      1,
             'start':    30,
@@ -212,7 +222,10 @@ class Add(BaseForm):
     estimated_time = IntegerField(
         label='Roughly how many days do you expect it to take?',
         validators=[],
-        description='TheProjectProject is all about short, impactful projects. You will be able to extend this time later, if you wish.',
+        description=(
+            'TheProjectProject is all about short, impactful projects.'
+            'You will be able to extend this time later, if you wish.'
+        ),
         render_kw={
             'min':      1,
             'start':    7,
@@ -224,7 +237,9 @@ class Add(BaseForm):
     ### SHARED TEAM BUILDING ###
     working_with_others = BooleanField(
         label='Have you been working with anyone else?',
-        description='',
+        description=(
+            "Is there anyone else with whom you have been/will be building this?"
+        ),
         validators=[],
         render_kw={
             'tabclass': '',
@@ -243,7 +258,11 @@ class Add(BaseForm):
     ### INCOMPLETE PROJECT AND COMPANY TEAM BUILDING ###
     looking_for_team = BooleanField(
         label='Are you looking for new team members?',
-        description='',
+        description=(
+            'TheProjectProject community boasts a diversity of skillsets and '
+            'perspectives. Let us know if you might be interested in working '
+            'with others and we will connect you with passionate new team-members.'
+        ),
         validators=[],
         render_kw={
             'tabclass': 'incomplete',
@@ -259,7 +278,10 @@ class Add(BaseForm):
     )
     target_team_size = IntegerField(
         label='Roughly how many team members are you looking for?',
-        description='',
+        description=(
+            'This helps us understand the '
+            'You will be able to change this number at any point.'
+            ),
         validators=[],
         render_kw={
             'min':      1,
@@ -271,7 +293,11 @@ class Add(BaseForm):
     )
     requires_application = BooleanField(
         label='Would you like to create an application to join your project?',
-        description='WARNING blah blah blha______',
+        description=(
+            'Applications allow you to ask questions of those seeking to '
+            "join your team. We recommended creating one: they're quick and allow "
+            'you to control who joins your project.'
+        ),
         validators=[],
         render_kw={
             'tabclass': 'project looking_for_team',
@@ -287,7 +313,11 @@ class Add(BaseForm):
     )
     application_question = StringField(
         label=Markup('Ask applicants to your <span class="project_type lowercase"></span> a question.'),
-        description=Markup('Members who want to join your <span class="project_type lowercase"></span> will have to answer this question. You will be able to see what they say when evaluating their application.'),
+        description=Markup(
+            'Members who want to join your <span class="project_type lowercase"></span> '
+            'will have to answer this question. You will be able to see what '
+            'they say when evaluating their application.'
+        ),
         validators=[Length(0, 128)],
         render_kw={
             'placeholder':  '',
@@ -298,7 +328,11 @@ class Add(BaseForm):
     ### SHARED COMPETITION ###
     competition = SelectField(
         label=Markup('We found some competitions that might be a good fit for your <span class="project_type lowercase"></span>!'),
-        description=Markup('If any of these interest you, select them from the list below and your <span class="project_type lowercase"></span> will automatically be submitted.'),
+        description=Markup(
+            'If any of these interest you, select them from the list below '
+            'and your <span class="project_type lowercase"></span> will '
+            'automatically be submitted.'
+        ),
         validators=[],
         choices=[],
         render_kw={
