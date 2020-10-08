@@ -91,7 +91,11 @@ function nextPrev(n) {
     return false;
   }
   // Otherwise, display the correct tab:
-  showTab(currentTab);
+  if (x[currentTab].classList.contains('hidden')==true) {
+    nextPrev(n+1);
+  } else {
+    showTab(currentTab);
+  }
 }
 
 function validateForm() {
@@ -253,8 +257,9 @@ function set_type(type) {
 
 function hide_class(cls) {
   document.querySelectorAll('.' + cls).forEach(function(el) {
+    el.classList.add('hidden');
     // // TODO: used clone to save classes so can go back
-    el.remove();
+    // el.remove();
   });
 }
 
