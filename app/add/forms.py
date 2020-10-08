@@ -83,11 +83,16 @@ class Add(BaseForm):
     summary = TextAreaField(
         label='Summary',
         validators=[DataRequired(), Length(1, 400)],
-        description=Markup('Describe your <span class="project_type lowercase"></span> in more detail.'),
+        description=Markup(
+            'Describe your <span class="project_type lowercase"></span> in more detail. '
+            'If you had 60 seconds to tell your friend about this idea, what would you say?'
+        ),
         render_kw={
-            'placeholder': ('TheProjectProject is a virtual community of innovators, who collaborate on projects across a wide range of fields and time windows. '
-                            'I need a team of web developers, database experts, and creative minds to help me build this platform. We will tackle interesting problems '
-                            'such as matching users with projects they will like and designing an interface that helps people communicate their ideas...'),
+            'placeholder': (
+                'TheProjectProject is a virtual community of innovators, who collaborate on projects across a wide range of fields and time windows. '
+                'I need a team of web developers, database experts, and creative minds to help me build this platform. We will tackle interesting problems '
+                'such as matching users with projects they will like and designing an interface that helps people communicate their ideas...'
+            ),
             'max':400,
             'seconds':  90
         }
