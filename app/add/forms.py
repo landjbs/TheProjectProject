@@ -279,8 +279,9 @@ class Add(BaseForm):
     target_team_size = IntegerField(
         label='Roughly how many team members are you looking for?',
         description=(
-            'This helps us understand the '
-            'You will be able to change this number at any point.'
+            'This lets prospective members understand the scope of your project '
+            'and helps us match you with new team members. You will be able '
+            'to change this number at any point.'
             ),
         validators=[],
         render_kw={
