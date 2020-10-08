@@ -54,7 +54,7 @@ def add_page(competition_id=None):
         return jsonify({
             'errors':   form.errors
         })
-    return render_template('new_add.html', form=form)
+    return render_template('add.html', form=form)
 
 
 # @add.route('/next_fragment', methods=['POST'])
