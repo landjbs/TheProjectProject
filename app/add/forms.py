@@ -159,7 +159,11 @@ class Add(BaseForm):
     looking_for_funding = BooleanField(
         label='Are you currently looking for funding?',
         validators=[],
-        description=('')
+        description=(
+            'Funding and mentorship are crucial to early-stage companies, '
+            'One of the ways we support our startups is connecting them with '
+            'these opportunities. Let us know if this '
+        )
         render_kw={
             'tabclass': 'company',
             'datamap': {
