@@ -20,7 +20,7 @@
       {% if not field.type=='CSRFTokenField' %}
         {{ render_field(field) }}
       {% endif %}
-  {% endfor %}
+    {% endfor %}
   </form>
   <!-- temp navigator -->
   <div>
@@ -52,10 +52,6 @@
 <script src='js/form.js'></script>
 
 <script>
-  function submit() {
-    document.getElementById("add_form").submit();
-  };
-
   var currentTab = 0; // Current tab is set to be the first tab (0)
   showTab(currentTab); // Display the current tab
 
