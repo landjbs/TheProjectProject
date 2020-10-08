@@ -269,6 +269,7 @@ function set_type(type) {
 
 function hide_class(cls) {
   document.querySelectorAll('.' + cls).forEach(function(el) {
+    console.log(el.classList);
     el.classList.add('hidden');
     // // TODO: used clone to save classes so can go back
     // el.remove();
@@ -277,8 +278,9 @@ function hide_class(cls) {
 
 
 function show_class(cls) {
-  document.querySelector('.' + cls).forEach(function(el) {
+  document.querySelectorAll('.' + cls).forEach(function(el) {
     if (el.classList.contains(cls)) {
+      console.log(el.classList);
       el.classList.remove(cls);
     }
   });
