@@ -43,12 +43,12 @@ class Add(BaseForm):
                 1:  {
                     'key'   :   'A',
                     'icon'  :   'fa fa-circle',
-                    'action':   "set_type('Project'); hide_class('company');"
+                    'action':   "set_type('Project'); hide_class('company'); show_class('project')"
                 },
                 2:  {
                     'key'   :   'B',
                     'icon'  :   'fa fa-briefcase',
-                    'action':   "set_type('Company'); hide_class('project');"
+                    'action':   "set_type('Company'); hide_class('project'); show_class('company')"
                 }
             },
             'seconds':  3
