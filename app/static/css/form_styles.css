@@ -98,15 +98,10 @@
 
 
 /* subject select stuff */
-.selected-subjects {
-    max-height: 10vh;
-    overflow-y: scroll;
-  }
-
-  .unselected-subjects {
-    max-height: 20vw;
-    overflow-y: scroll;
-  }
+.multiselect-options {
+  max-height: 20vw;
+  overflow-y: scroll;
+}
 
   .passion-column-header {
     text-align: center;
