@@ -28,7 +28,13 @@ class Add(BaseForm):
         description=(
             'TheProjectProject supports innovation at all stages, whether '
             "it's connnecting your independent project with resources, helping "
-            'your early-stage startup build a team, or '
+            'your early-stage startup build a team, or packaging the projects '
+            'your company needs done into microinternship opportunities. '
+            "If you are looking to share something you've already worked on "
+            'or to put a team together to build a quick idea, select Project. '
+            'If you are working on something longer-term, want to connect with '
+            'VC firms, or are building something comprised of multiple sub-projects, '
+            'select Company.'
         ),
         choices=[(1, 'Project'), (2, 'Company')],
         render_kw={
@@ -63,7 +69,10 @@ class Add(BaseForm):
     oneliner = StringField(
         label='One Line',
         validators=[DataRequired(), Length(1, 100)],
-        description=Markup('One line description of your <span class="project_type lowercase"></span>.'),
+        description=Markup(
+            'One line description of your <span class="project_type lowercase"></span>. '
+            'No need to overthink this: the One Line should be punchy and succinct.'
+        ),
         render_kw={
             'placeholder':'The platform for sharing, collaborating on, and publicizing independent projects.',
             'max': 40,
