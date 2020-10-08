@@ -75,7 +75,7 @@
           id_postfix='members',
           card_type='user',
           icon_type='user',
-          data=company.members
+          data=company.members.all()
         )
       }}
 
@@ -85,7 +85,7 @@
           id_postfix='projects',
           card_type='project',
           icon_type='project',
-          data=company.projects
+          data=company.projects.all()
         )
       }}
     </div>
