@@ -138,7 +138,8 @@ class Add(BaseForm):
         label='Roughly how much have you raised?',
         validators=[],
         description=(
-            ''
+            'This helps us understand your '
+            ' will never share this number without your permission.'
         ),
         render_kw={
             'min':      100,
