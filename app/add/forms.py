@@ -100,7 +100,10 @@ class Add(BaseForm):
     # subjects
     subjects = SelectMultipleField(
         label='Subjects',
-        description=Markup('What subjects might this <span class="project_type lowercase"></span> involve?'),
+        description=Markup(
+            'What subjects might this <span class="project_type lowercase"></span> involve? '
+            ''
+        ),
         validators=[],
         choices=[],
         coerce=int,
