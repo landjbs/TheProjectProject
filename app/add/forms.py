@@ -138,8 +138,11 @@ class Add(BaseForm):
         label='Roughly how much have you raised?',
         validators=[],
         description=(
-            'This helps us understand your '
-            ' will never share this number without your permission.'
+            "This helps us understand the scale of your company and "
+            "(if you're interested) connect you with appropriate "
+            'funding opportunities. We will never share this number without '
+            'your consent. It does not need to be extremely accurate—just estimate '
+            'how much you have raised from VCs, grants, competitions, etc.'
         ),
         render_kw={
             'min':      100,
@@ -156,6 +159,7 @@ class Add(BaseForm):
     looking_for_funding = BooleanField(
         label='Are you currently looking for funding?',
         validators=[],
+        description=('')
         render_kw={
             'tabclass': 'company',
             'datamap': {
