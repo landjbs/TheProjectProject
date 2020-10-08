@@ -92,12 +92,19 @@ function nextPrev(n) {
   }
   // Otherwise, display the correct tab:
   if (x[currentTab].classList.contains('hidden')==true) {
-    if (n==-1) {
-      nextPrev(-2);
-    } else {
-      nextPrev(2);
+    if (n<0) {
+      console.log(n);
+      nextPrev(n-1);
     }
-  } else {
+    else if (n>0) {
+      console.log(n);
+      nextPrev(n+1);
+    }
+    else {
+      showTab(currentTab);
+    }
+  }
+  else {
     showTab(currentTab);
   }
 }
