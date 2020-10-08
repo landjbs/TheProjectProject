@@ -6,18 +6,18 @@
   {% set prev_data = field.data if field.data else [] %}
   <div class='row'>
     <!-- selected -->
-    <div class='col selected-subjects' id='selectedSubjects'>
+    <div class='col' id='selectedSubjects'>
         <p class='passion-column-header'>
           Selected
         </p>
-        <div class='multiselect-option'>
+        <div class='selected-subjects multiselect-options'>
           {% for id in prev_data %}
             {{ render_subject_tag(field.choices[id-1][1]) }}
           {% endfor %}
         </div>
     </div>
     <!-- unselected -->
-    <div class='col unselected-subjects' id='unselectedSubjects'>
+    <div class='col' id='unselectedSubjects'>
       <span style='display:inline-block;'>
         <p>
           <u>Unselected (scroll for more)</u>
@@ -25,7 +25,7 @@
           <input class='select-clean' style='font-size:100%; width:30%;' type="text" placeholder="search..." id="unselectedSearch" onkeyup="filterFunction('unselectedSearch', 'unselectedSubjects')">
         </p>
       </span>
-      <div class='multiselect-option'>
+      <div class='unselected-subjects multiselect-options'>
         {% for id, subject in field.choices %}
           {% if not id in prev_data %}
             {{ render_subject_tag(subject) }}

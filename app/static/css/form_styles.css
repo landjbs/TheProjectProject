@@ -96,21 +96,20 @@
   color: black;
 }
 
-
 /* subject select stuff */
 .multiselect-options {
-  max-height: 20vw;
+  max-height: 15vw;
   overflow-y: scroll;
 }
 
-  .passion-column-header {
-    text-align: center;
-  }
+.passion-column-header {
+  text-align: center;
+}
 
 .subject-tag:hover {
     border: 1px solid white;
     cursor: pointer;
-  }
+}
 
 .selected-subjects .subject-tag {
   margin-left:  2px;
