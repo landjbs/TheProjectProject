@@ -113,9 +113,27 @@ function validateForm() {
     // This function deals with validation of the form fields
     var x, y, i, valid = true;
     x = document.getElementsByClassName("formtab");
-    y = x[currentTab].getElementsByTagName("input");
-    for (i=0; i<y.length; i++) {
-        elt = y[i];
+    type = x[currentTab].getAttribute('data-field-type');
+    optional = x[currentTab].getAttribute('data-field-optional');
+    console.log('type: ' + type);
+    console.log('optional: ' + optional);
+    if (optional==true) {
+      return true;
+    }
+    else if (type=='SelectField') {
+      return validate_breakpoint(x[currentTab]);
+    }
+    else if (type=='StringField') {
+      var min =
+      var max = 
+      return validate_string();
+    }
+    else {
+      return true;
+    }
+    // y = x[currentTab].getElementsByTagName("input");
+    // for (i=0; i<y.length; i++) {
+        // elt = y[i];
         // if (elt.type=='text') {
         //   if (elt.value.length<1) {
         //     error = 'Cannot be empty.';
@@ -133,8 +151,8 @@ function validateForm() {
         //     }
         //   }
         //   return is_checked
-    }
-    return validate_breakpoint(x[currentTab]);
+    // }
+    // return
   }
 
 
