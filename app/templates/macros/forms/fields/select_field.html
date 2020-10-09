@@ -16,19 +16,20 @@
   </div>
   <div id='competitions' class='glider'>
     {% for id, option in field.choices %}
-      <div class="card mb-2" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
-        <div class="card-body">
-            {{ option }}
+      {% if not option=='' %}
+        <div class="card mb-2" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
+          <div class="card-body">
+              {{ option }}
+          </div>
+          <div class='card-foot' style='padding-bottom: 10px;'>
+            <button class='formtab_button' type="button" onclick="select_option('{{ id }}')">
+              <span id='check-{{ id }}' class='presskey' style='margin-bottom:1px;'>
+              </span>
+              <span id='text-{{ id }}'>Join</span>
+            </button>
+          </div>
         </div>
-        <div class='card-foot' style='padding-bottom: 10px;'>
-          <button class='formtab_button' type="button" onclick="nextPrev(1);">
-            <span class='presskey' style='margin-bottom:1px;'>
-              :)
-            </span>
-            Join
-          </button>
-        </div>
-      </div>
+      {% endif %}
     {% endfor %}
   </div>
   <div id='dots' role="tablist" class="dots"></div>
@@ -43,6 +44,12 @@
     rewind: true,
     dots: '#dots'
     });
+  </script>
+  <script>
+    function select_option(id) {
+      document.getElementById('check-' + id).innerHTML = '<i class="fas fa-check"></i>';
+      document.getElementById('text-' + id).innerHTML = 'Withdraw';
+    }
   </script>
 {% endmacro -%}
 
