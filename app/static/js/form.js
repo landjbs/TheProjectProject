@@ -40,6 +40,11 @@ function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("formtab");
   x[n].style.display = "block";
+  // refresh gliders if relevant
+  var gliders = x[n].getElementsByClassName('glider');
+  for (i=0; i<gliders.length; i++) {
+    Glider(gliders[i]).refresh();
+  }
   // get element to focus on
   var field = x[n].querySelector("input[type='text']");
   if (field==null) {

@@ -18,12 +18,9 @@
         {% if not name=='' %}
           <div class="card mb-2 searchable" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
             <div class="card-body float-left">
-                <h6><u>{{ name }}</u></h6>
+                <h6><u>{{ name }} ({{ time }})</u></h6>
                 <p>
                   {{ oneliner }}
-                </p>
-                <p class='float-left'>
-                  {{ time }}
                 </p>
             </div>
             <div class='card-foot' style='padding-bottom: 10px;'>
@@ -35,14 +32,14 @@
         {% endif %}
       {% endfor %}
     </div>
-    {% if n > 3 %}
+    {% if n > 2 %}
       <div id='dots' role="tablist" class="dots"></div>
     {% endif %}
   </div>
   <script>
   new Glider(document.querySelector('#competitions'), {
     // slidesToShow: parseInt($('#n_to_show_{').data()['other']),
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     // speed aggravator - higher is slower
     duration: .5,
