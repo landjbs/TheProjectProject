@@ -122,7 +122,7 @@ function validateForm() {
     else if (type=='SelectField' || type=='BooleanField') {
       if (!validate_breakpoint(x[currentTab])) {
         errorbox = tab.getElementsByClassName('errorbox')[0];
-        errorbox.innerHTML += 'Please select one.';
+        errorbox.innerHTML = 'Please select one.';
         return false
       }
       return true
@@ -134,7 +134,7 @@ function validateForm() {
       var max = Number(input['max']);
       if (validate_string_field(val, min, max)==false) {
         errorbox = tab.getElementsByClassName('errorbox')[0];
-        errorbox.innerHTML += 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        errorbox.innerHTML = 'Response must be between ' + min + ' and ' + max + ' characters long.';
         return false
       }
       return true
@@ -146,7 +146,7 @@ function validateForm() {
       var max = Number(input.maxLength);
       if (!validate_string_field(val, min, max)) {
         errorbox = tab.getElementsByClassName('errorbox')[0];
-        errorbox.innerHTML += 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        errorbox.innerHTML = 'Response must be between ' + min + ' and ' + max + ' characters long.';
         return false
       }
       return true
@@ -158,7 +158,7 @@ function validateForm() {
       var max = Number(input['max']);
       if (!validate_slide_field(val, min, max)) {
         errorbox = tab.getElementsByClassName('errorbox')[0];
-        errorbox.innerHTML += 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        errorbox.innerHTML = 'Please select a number between ' + min + ' and ' + max + '.';
         return false
       }
       return true

@@ -16,6 +16,27 @@
 {% block content %}
 <div class='big-box container justify-content-center'>
   <form id='add_form'>
+    <div class='formtab' id='start_segment'>
+      <div class="row input-segment">
+        <h4>Describe your idea...</h4>
+        <p>
+          ...and let's make it happen! Whether you have a fully developed
+          startup or just an idea of what you want to work on, TheProjectProject
+          is here to help you bring it to reality and showcase the results.
+          Projects you post here will be added to your page. If you need a
+          team, we will recommend your project to other members and help
+          you manage development. If we like your project, we will publicize
+          it on our social media and help connect you to funding and resources.
+          You're going to build incredible things and it all starts right here!
+        </p>
+        <button class='formtab_button' type="button" onclick="nextPrev(1);">
+          <span class='presskey' style='margin-bottom:1px;'>
+            Enter
+          </span>
+          Get Started!
+        </button>
+      </div>
+    </div>
     {% for field in form %}
       {% if not field.type=='CSRFTokenField' %}
         {{ render_field(field) }}
