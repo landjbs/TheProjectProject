@@ -14,7 +14,7 @@
 {% block content %}
 <div class='container my-1 main'>
   <!-- recommendations -->
-  {% set rec_label = 'Recommended Projects' if not request.MOBILE else False %}
+  {% set rec_label = 'Recommended' if not request.MOBILE else False %}
   {{
     render_carousel(
       label=rec_label,
@@ -28,7 +28,7 @@
   {% if trending %}
     {{
       render_carousel(
-        label='Trending Projects',
+        label='Trending',
         id_postfix='trending',
         card_type='project-mid',
         data=trending)
@@ -38,7 +38,7 @@
   {% if my!=False %}
     {{
       render_carousel(
-        label='My Projects',
+        label='My',
         id_postfix='my',
         card_type='project-small',
         data=my,
