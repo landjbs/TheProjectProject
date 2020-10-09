@@ -14,13 +14,13 @@
       </p>
     </span>
   </div>
-  {{
-    render_carousel(
-      id_postfix='competitions',
-      card_type='project-big',
-      data=g.current_user.projects.all()
-    )
-  }}
+  <div id='competitions' class='glider'>
+    {% for id, option in field.choices %}
+      <div>
+        
+      </div>
+    {% endfor %}
+  </div>
 {% endmacro -%}
 
 
