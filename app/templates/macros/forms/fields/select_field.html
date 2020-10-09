@@ -13,27 +13,27 @@
         <input class='select-clean' style='font-size:100%; width:30%;' type="text" placeholder="search..." id="optionSearch-{{ field.id }}" onkeyup="filterFunction('optionSearch-{{ field.id }}', 'searchableOptions-{{ field.id }}')">
       </p>
     </span>
-  </div>
-  <div id='competitions' class='glider'>
-    {% for id, option in field.choices %}
-      {% if not option=='' %}
-        <div class="card mb-2" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
-          <div class="card-body">
-              {{ option }}
+    <div id='competitions' class='glider'>
+      {% for id, option in field.choices %}
+        {% if not option=='' %}
+          <div class="card mb-2 searchable" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
+            <div class="card-body">
+                {{ option }}
+            </div>
+            <div class='card-foot' style='padding-bottom: 10px;'>
+              <button class='formtab_button' type="button" onclick="toggle_option('{{ id }}')">
+                <span id='check-{{ id }}' class='presskey' style='margin-bottom:1px;'>
+                  {{ id }}
+                </span>
+                <span id='text-{{ id }}'>Join</span>
+              </button>
+            </div>
           </div>
-          <div class='card-foot' style='padding-bottom: 10px;'>
-            <button class='formtab_button' type="button" onclick="toggle_option('{{ id }}')">
-              <span id='check-{{ id }}' class='presskey' style='margin-bottom:1px;'>
-                {{ id }}
-              </span>
-              <span id='text-{{ id }}'>Join</span>
-            </button>
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div id='dots' role="tablist" class="dots"></div>
   </div>
-  <div id='dots' role="tablist" class="dots"></div>
   <script>
   new Glider(document.querySelector('#competitions'), {
     // slidesToShow: parseInt($('#n_to_show_{').data()['other']),
