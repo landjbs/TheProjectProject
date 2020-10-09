@@ -8,12 +8,12 @@
   <div class='col' id='searchableOptions-{{ field.id }}'>
     <span style='display:inline-block;'>
       <p>
-        <u>Options (scroll for more)</u>
         <i class="fas fa-search"></i>
-        <input class='select-clean' style='font-size:100%; width:30%;' type="text" placeholder="search..." id="optionSearch-{{ field.id }}" onkeyup="filterFunction('optionSearch-{{ field.id }}', 'searchableOptions-{{ field.id }}')">
+        <input class='select-clean' style='font-size:100%; width:90%;' type="text" placeholder="search..." id="optionSearch-{{ field.id }}" onkeyup="filterFunction('optionSearch-{{ field.id }}', 'searchableOptions-{{ field.id }}')">
       </p>
     </span>
     <div id='competitions' class='glider'>
+      {% set n = (field.choices | length) - 1 %}
       {% for id, (name, oneliner, time) in field.choices %}
         {% if not name=='' %}
           <div class="card mb-2 searchable" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
@@ -27,18 +27,17 @@
                 </p>
             </div>
             <div class='card-foot' style='padding-bottom: 10px;'>
-              <button class='formtab_button' type="button" onclick="toggle_option('{{ id }}')">
-                <span id='check-{{ id }}' class='presskey' style='margin-bottom:1px;'>
-                  {{ id }}
-                </span>
-                <span id='text-{{ id }}'>Join</span>
+              <button id='button-{{ id }}' class='formtab_button' type="button" onclick="toggle_option('{{ id }}')">
+                Join
               </button>
             </div>
           </div>
         {% endif %}
       {% endfor %}
     </div>
-    <div id='dots' role="tablist" class="dots"></div>
+    {% if n > 3 %}
+      <div id='dots' role="tablist" class="dots"></div>
+    {% endif %}
   </div>
   <script>
   new Glider(document.querySelector('#competitions'), {
@@ -70,13 +69,11 @@
     }
 
     function select_option(id) {
-      document.getElementById('check-' + id).innerHTML = '<i class="fas fa-check"></i>';
-      document.getElementById('text-' + id).innerHTML = 'Withdraw';
+      document.getElementById('button-' + id).innerHTML = "<span class='presskey'><i class='fas fa-check'></i></span> Withdraw";
     }
 
     function unselect_option(id) {
-      document.getElementById('check-' + id).innerHTML = id;
-      document.getElementById('text-' + id).innerHTML = 'Join';
+      document.getElementById('button-' + id).innerHTML = 'Join';
     }
   </script>
 {% endmacro -%}
