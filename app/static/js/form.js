@@ -296,3 +296,7 @@ function validate_string_field(val, min, max) {
   len = val.length;
   return (len>min && len<=max)
 }
+
+function validate_slide_field(val, min, max) {
+  
+}
