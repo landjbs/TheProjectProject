@@ -113,7 +113,7 @@ function validateForm() {
     x = document.getElementsByClassName("formtab");
     tab = x[currentTab];
     type = tab.getAttribute('data-field-type');
-    optional = Boolean(tab.getAttribute('data-field-optional'));
+    optional = Boolean(tab.getAttribute('data-field-optional')=='true');
     console.log('type: ' + type);
     console.log('optional: ' + optional + ' true: ' + (true==optional));
     if (optional==true) {
@@ -127,7 +127,13 @@ function validateForm() {
       var val = input.value;
       var min = Number(input['min']);
       var max = Number(input['max']);
-      return validate_string_field(val, min, max);
+      console.log(validate_string_field(val, min, max));
+      if (validate_string_field(val, min, max)==false) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        console.log(errorbox);
+        errorbox.innerHTML += 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        return false
+      }
     }
     else if (type=='TextAreaField') {
       input = tab.getElementsByTagName('textarea')[0];

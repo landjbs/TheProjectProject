@@ -25,9 +25,11 @@
 
 <!-- render errors for field if they exist -->
 {% macro render_field_errors(field) -%}
-  {% if field.errors %}
-    <p class='warning'>{{ field.errors[0] }}</p>
-  {% endif %}
+  <div class='errorbox' style='color: red;'>
+    {% if field.errors %}
+      <p class='warning'>{{ field.errors[0] }}</p>
+    {% endif %}
+  </div>
 {% endmacro -%}
 
 

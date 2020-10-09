@@ -38,7 +38,7 @@ class Add(BaseForm):
         ),
         choices=[(1, 'Project'), (2, 'Company')],
         render_kw={
-            'optional': False,
+            'optional': 'false',
             'datamap': {
                 1:  {
                     'key'   :   'A',
@@ -60,7 +60,7 @@ class Add(BaseForm):
         validators=[DataRequired(), Length(1, 40)],
         description='Give your idea a name!',
         render_kw={
-            'optional':     False,
+            'optional':     'false',
             'placeholder':  'TheProjectProject',
             'max':          30,
             'seconds':      5
@@ -90,7 +90,7 @@ class Add(BaseForm):
             'If you had 60 seconds to tell your friend about this idea, what would you say?'
         ),
         render_kw={
-            'optional':     False,
+            'optional':     'false',
             'placeholder': (
                 'TheProjectProject is a virtual community of innovators, who collaborate on projects across a wide range of fields and time windows. '
                 'I need a team of web developers, database experts, and creative minds to help me build this platform. We will tackle interesting problems '
@@ -340,7 +340,7 @@ class Add(BaseForm):
         validators=[],
         choices=[],
         render_kw={
-            'optional':     True,
+            'optional':     'true',
             'searchable':   True,
             'tabclass':     ''
         }
