@@ -257,7 +257,6 @@ function submit_form() {
   });
 }
 
-
 function set_type(type) {
   var elts = document.getElementsByClassName('project_type');
   for (i=0; i<elts.length; i++) {
@@ -265,13 +264,11 @@ function set_type(type) {
   }
 }
 
-
 function hide_class(cls) {
   document.querySelectorAll('.' + cls).forEach(function(el) {
     el.classList.add('hidden');
   });
 }
-
 
 function show_class(cls) {
   document.querySelectorAll('.' + cls).forEach(function(el) {
@@ -280,16 +277,16 @@ function show_class(cls) {
 }
 
 
-
 // field validators
 function validate_breakpoint(field) {
   var box = field.getElementsByClassName('input-control')[0];
   any_checked = false;
-  box.querySelectorAll('input').forEach(function(elt) {
-    if (elt.checked) {
+  box.querySelectorAll('input').forEach(function(el) {
+    if (el.checked) {
       any_checked = true;
     }
   });
+  return any_checked
 }
 
 function validate_length(field) {
