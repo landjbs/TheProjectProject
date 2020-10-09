@@ -256,6 +256,7 @@ class Add(BaseForm):
             }
         }
     )
+    other_members = SelectMultipleField()
     # TODO: add querying for others
     # others =
     ### INCOMPLETE PROJECT AND COMPANY TEAM BUILDING ###
