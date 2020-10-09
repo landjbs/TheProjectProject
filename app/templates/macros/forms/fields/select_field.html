@@ -16,11 +16,26 @@
   </div>
   <div id='competitions' class='glider'>
     {% for id, option in field.choices %}
-      <div>
-        
+      <div class="card mb-2">
+        <div class="card-body">
+            option
+        </div>
       </div>
     {% endfor %}
   </div>
+  <div id='dots' role="tablist" class="dots"></div>
+  <script>
+  new Glider(document.querySelector('#competitions'), {
+    // slidesToShow: parseInt($('#n_to_show_{').data()['other']),
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    // speed aggravator - higher is slower
+    duration: .5,
+    draggable: false,
+    rewind: true,
+    dots: '#dots'
+    });
+  </script>
 {% endmacro -%}
 
 
