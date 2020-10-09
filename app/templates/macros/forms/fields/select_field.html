@@ -1,4 +1,4 @@
-{% from 'macros/carousel.html' import render_carousel with context -%}
+{% from 'macros/carousels.html' import render_carousel with context -%}
 
 
 <!-- this maybe should still be preserved for competitions -->
@@ -17,14 +17,10 @@
   {{
     render_carousel(
       id_postfix='competitions',
-      card_type='competition',
+      card_type='project-big',
+      data=g.current_user.projects.all()
     )
   }}
-  {% for id, option in field.choices %}
-    <div class='searchable' style='border: 1px solid white; border-radius: 5px;'>
-      {{ option | safe }}
-    </div>
-  {% endfor %}
 {% endmacro -%}
 
 
