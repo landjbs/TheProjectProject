@@ -14,11 +14,17 @@
       </p>
     </span>
     <div id='competitions' class='glider'>
-      {% for id, option in field.choices %}
-        {% if not option=='' %}
+      {% for id, (name, oneliner, time) in field.choices %}
+        {% if not name=='' %}
           <div class="card mb-2 searchable" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
-            <div class="card-body">
-                {{ option }}
+            <div class="card-body float-left">
+                <h6><u>{{ name }}</u></h6>
+                <p>
+                  {{ oneliner }}
+                </p>
+                <p class='float-left'>
+                  {{ time }}
+                </p>
             </div>
             <div class='card-foot' style='padding-bottom: 10px;'>
               <button class='formtab_button' type="button" onclick="toggle_option('{{ id }}')">
