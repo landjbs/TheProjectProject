@@ -114,6 +114,7 @@ function validateForm() {
     var x, y, i, valid = true;
     x = document.getElementsByClassName("formtab");
     y = x[currentTab].getElementsByTagName("input");
+    validate_breakpoint(x[currentTab]);
     for (i=0; i<y.length; i++) {
         elt = y[i];
         // if (elt.type=='text') {
@@ -283,10 +284,13 @@ function show_class(cls) {
 
 // field validators
 function validate_breakpoint(field) {
-  box = field.getElementsByClassName('input-control');
+  var box = field.getElementsByClassName('input-control');
+  console.log(box);
   any_checked = false;
   box.querySelectorAll('input').forEach(function(elt) {
-    
+    if (elt.checked) {
+      any_checked = true;
+    }
   });
 }
 
