@@ -256,7 +256,16 @@ class Add(BaseForm):
             }
         }
     )
-    other_members = SelectMultipleField()
+    other_members = SelectMultipleField(
+        label='Please write the email addresses of your teammates.',
+        description=Markup(
+            'If they are already members of TheProjectProject, we will add them '
+            "to your team. If they aren't we will reach out to them, and help "
+            'them get setup on the site.'
+        ),
+        validators=[],
+        render_kw={}
+    )
     # TODO: add querying for others
     # others =
     ### INCOMPLETE PROJECT AND COMPANY TEAM BUILDING ###
