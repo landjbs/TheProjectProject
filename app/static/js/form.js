@@ -114,7 +114,6 @@ function validateForm() {
     var x, y, i, valid = true;
     x = document.getElementsByClassName("formtab");
     y = x[currentTab].getElementsByTagName("input");
-    validate_breakpoint(x[currentTab]);
     for (i=0; i<y.length; i++) {
         elt = y[i];
         // if (elt.type=='text') {
@@ -135,7 +134,7 @@ function validateForm() {
         //   }
         //   return is_checked
     }
-    return true; // return the valid status
+    return validate_breakpoint(x[currentTab]);
   }
 
 
@@ -284,8 +283,7 @@ function show_class(cls) {
 
 // field validators
 function validate_breakpoint(field) {
-  var box = field.getElementsByClassName('input-control');
-  console.log(box);
+  var box = field.getElementsByClassName('input-control')[0];
   any_checked = false;
   box.querySelectorAll('input').forEach(function(elt) {
     if (elt.checked) {
