@@ -113,8 +113,9 @@ function validateForm() {
     // This function deals with validation of the form fields
     var x, y, i, valid = true;
     x = document.getElementsByClassName("formtab");
-    type = x[currentTab].getAttribute('data-field-type');
-    optional = x[currentTab].getAttribute('data-field-optional');
+    tab = x[currentTab];
+    type = tab.getAttribute('data-field-type');
+    optional = tab.getAttribute('data-field-optional');
     console.log('type: ' + type);
     console.log('optional: ' + optional);
     if (optional==true) {
@@ -124,36 +125,15 @@ function validateForm() {
       return validate_breakpoint(x[currentTab]);
     }
     else if (type=='StringField') {
-      input = x.querySelector
-      var min = x.
-      var max = x.
-      return validate_string();
+      input = tab.getElementsByTagName('input')[0];
+      var min = input['min'];
+      var max = input['max'];
+      console.log(input, min, max);
+      // return validate_string_field();
     }
     else {
       return true;
     }
-    // y = x[currentTab].getElementsByTagName("input");
-    // for (i=0; i<y.length; i++) {
-        // elt = y[i];
-        // if (elt.type=='text') {
-        //   if (elt.value.length<1) {
-        //     error = 'Cannot be empty.';
-        //     alert(error);
-        //     return false;
-        //   }
-        // }
-        // else if (elt.type=='radio') {
-        //   is_checked = false;
-        //   options = elt.value;
-        //   for (j=0; j<options.length; j++) {
-        //     console.log(options[j].checked);
-        //     if (options[j].checked==true) {
-        //       is_checked = true;
-        //     }
-        //   }
-        //   return is_checked
-    // }
-    // return
   }
 
 
