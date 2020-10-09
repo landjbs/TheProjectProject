@@ -35,6 +35,11 @@ body {
 }
 
 
+#mainNav .nav-link {
+  padding-left:  10px;
+  padding-right: 10px;
+}
+
 #mainNav .dropdown-toggle {
   background: black !important;
 }

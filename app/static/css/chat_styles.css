@@ -245,4 +245,6 @@
   padding-bottom: 0px;
   margin-bottom: 0px;
   text-overflow: ellipsis;
+  width:98%;
+  overflow:hidden;
 }
