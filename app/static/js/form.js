@@ -57,8 +57,10 @@ function showTab(n) {
   // ... and fix the Previous/Next buttons:
   if (n == 0) {
     document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("nextBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
+    document.getElementById("nextBtn").style.display = "inline";
   }
   // if (n == (x.length - 1)) {
   //   document.getElementById("nextBtn").innerHTML = "Submit";
