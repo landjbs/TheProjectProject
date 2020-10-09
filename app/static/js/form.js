@@ -126,10 +126,10 @@ function validateForm() {
     }
     else if (type=='StringField') {
       input = tab.getElementsByTagName('input')[0];
-      var min = input['min'];
-      var max = input['max'];
-      console.log(input, min, max);
-      // return validate_string_field();
+      var val = input.value;
+      var min = Number(input['min']);
+      var max = Number(input['max']);
+      return validate_string_field(val, min, max);
     }
     else {
       return true;
@@ -287,10 +287,7 @@ function validate_breakpoint(field) {
   return any_checked
 }
 
-function validate_length(field) {
-  if (field.type=='text') {
-    if (field.value.length<1) {
-      alert('bad');
-    }
-  }
+function validate_length(val, min, max) {
+  len = val.length;
+  return ((len>min) and (len<max))
 }
