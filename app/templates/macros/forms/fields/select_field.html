@@ -24,6 +24,7 @@
           <div class='card-foot' style='padding-bottom: 10px;'>
             <button class='formtab_button' type="button" onclick="toggle_option('{{ id }}')">
               <span id='check-{{ id }}' class='presskey' style='margin-bottom:1px;'>
+                {{ id }}
               </span>
               <span id='text-{{ id }}'>Join</span>
             </button>
@@ -68,7 +69,7 @@
     }
 
     function unselect_option(id) {
-      document.getElementById('check-' + id).innerHTML = '';
+      document.getElementById('check-' + id).innerHTML = id;
       document.getElementById('text-' + id).innerHTML = 'Join';
     }
   </script>
