@@ -69,7 +69,7 @@ function showTab(n) {
   // }
 }
 
-function nextPrev(n, validate=true) {
+function nextPrev(n, validate=false) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("formtab");
   // Exit the function if any field in the current tab is invalid:

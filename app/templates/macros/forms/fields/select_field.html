@@ -22,7 +22,7 @@
               {{ option }}
           </div>
           <div class='card-foot' style='padding-bottom: 10px;'>
-            <button class='formtab_button' type="button" onclick="select_option('{{ id }}')">
+            <button class='formtab_button' type="button" onclick="toggle_option('{{ id }}')">
               <span id='check-{{ id }}' class='presskey' style='margin-bottom:1px;'>
               </span>
               <span id='text-{{ id }}'>Join</span>
@@ -47,14 +47,17 @@
   </script>
   <script>
     function toggle_option(id) {
+      select = getCurrentTab().getElementsByTagName('select')[0];
       selected_value = select.options[select.selectedIndex].value;
       if (selected_value!=id) {
-        unselected_option(selected_value);
+        if (selected_value!='') {
+          unselect_option(selected_value);
+        }
         select_option(id);
         select.value = id;
       }
       else {
-        unselected_option(selected_value);
+        unselect_option(selected_value);
         select.value = '';
       }
     }
