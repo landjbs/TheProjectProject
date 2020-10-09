@@ -124,8 +124,9 @@ function validateForm() {
       return validate_breakpoint(x[currentTab]);
     }
     else if (type=='StringField') {
-      var min =
-      var max = 
+      input = x.querySelector
+      var min = x.
+      var max = x.
       return validate_string();
     }
     else {
