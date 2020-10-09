@@ -46,9 +46,18 @@
     });
   </script>
   <script>
+    function toggle_option(id) {
+      alert('to imp');
+    }
+
     function select_option(id) {
       document.getElementById('check-' + id).innerHTML = '<i class="fas fa-check"></i>';
       document.getElementById('text-' + id).innerHTML = 'Withdraw';
+    }
+
+    function unselect_option(id) {
+      document.getElementById('check-' + id).innerHTML = '';
+      document.getElementById('text-' + id).innerHTML = 'Join';
     }
   </script>
 {% endmacro -%}
