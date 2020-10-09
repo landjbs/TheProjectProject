@@ -16,9 +16,17 @@
   </div>
   <div id='competitions' class='glider'>
     {% for id, option in field.choices %}
-      <div class="card mb-2" style='color: #ccc; border: 1px solid white;'>
+      <div class="card mb-2" style='color: white; background: black; margin-left: 10px; margin-right: 10px; border: 1px solid white;'>
         <div class="card-body">
             {{ option }}
+        </div>
+        <div class='card-foot'>
+          <button class='formtab_button' type="button" onclick="nextPrev(1);">
+            <span class='presskey' style='margin-bottom:1px;'>
+              :)
+            </span>
+            Join
+          </button>
         </div>
       </div>
     {% endfor %}
