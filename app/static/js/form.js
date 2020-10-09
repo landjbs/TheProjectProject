@@ -120,37 +120,48 @@ function validateForm() {
       return true;
     }
     else if (type=='SelectField' || type=='BooleanField') {
-      return validate_breakpoint(x[currentTab]);
+      if (!validate_breakpoint(x[currentTab])) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML += 'Please select one.';
+        return false
+      }
+      return true
     }
     else if (type=='StringField') {
       input = tab.getElementsByTagName('input')[0];
       var val = input.value;
       var min = Number(input['min']);
       var max = Number(input['max']);
-      console.log(validate_string_field(val, min, max));
       if (validate_string_field(val, min, max)==false) {
         errorbox = tab.getElementsByClassName('errorbox')[0];
-        console.log(errorbox);
         errorbox.innerHTML += 'Response must be between ' + min + ' and ' + max + ' characters long.';
         return false
       }
+      return true
     }
     else if (type=='TextAreaField') {
       input = tab.getElementsByTagName('textarea')[0];
       var val = input.value;
       var min = 0; // NOTE: Number(input.minLength) defaults to -1 but if you want a minlength in future implement some logic to avoid this
       var max = Number(input.maxLength);
-      return validate_string_field(val, min, max);
+      if (!validate_string_field(val, min, max)) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML += 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        return false
+      }
+      return true
     }
     else if (type=='IntegerField') {
       input = tab.querySelector('input.select-clean');
       var val = Number(input.value);
       var min = Number(input['min']);
       var max = Number(input['max']);
-      console.log('val: ' + val);
-      console.log('min: ' + min);
-      console.log('max: ' + max);
-      return validate_slide_field(val, min, max)
+      if (!validate_slide_field(val, min, max)) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML += 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        return false
+      }
+      return true
     }
     else {
       return true;
