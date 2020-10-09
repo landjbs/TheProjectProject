@@ -67,11 +67,11 @@ function showTab(n) {
   // }
 }
 
-function nextPrev(n) {
+function nextPrev(n, validate=true) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("formtab");
   // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
+  if (n == 1 && validate && !validateForm()) return false;
   // Can't go backwards on first tab
   if (n == -1 && currentTab==0) return false;
   // Modify remaining time
@@ -93,12 +93,10 @@ function nextPrev(n) {
   // Otherwise, display the correct tab:
   if (x[currentTab].classList.contains('hidden')==true) {
     if (n<0) {
-      console.log(n);
       nextPrev(-1);
     }
     else if (n>0) {
-      console.log(n);
-      nextPrev(1);
+      nextPrev(1, validate=false);
     }
     else {
       showTab(currentTab);
@@ -121,7 +119,7 @@ function validateForm() {
     if (optional==true) {
       return true;
     }
-    else if (type=='SelectField') {
+    else if (type=='SelectField' || type=='BooleanField') {
       return validate_breakpoint(x[currentTab]);
     }
     else if (type=='StringField') {
