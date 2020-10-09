@@ -47,7 +47,16 @@
   </script>
   <script>
     function toggle_option(id) {
-      alert('to imp');
+      selected_value = select.options[select.selectedIndex].value;
+      if (selected_value!=id) {
+        unselected_option(selected_value);
+        select_option(id);
+        select.value = id;
+      }
+      else {
+        unselected_option(selected_value);
+        select.value = '';
+      }
     }
 
     function select_option(id) {
