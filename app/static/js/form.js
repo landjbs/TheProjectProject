@@ -55,7 +55,7 @@ function showTab(n) {
     x[n].focus();
   }
   // ... and fix the Previous/Next buttons:
-  if (n == 0) {
+  if (n==0 || x[n].id=='end_segment') {
     document.getElementById("prevBtn").style.display = "none";
     document.getElementById("nextBtn").style.display = "none";
   } else {

@@ -42,6 +42,21 @@
         {{ render_field(field) }}
       {% endif %}
     {% endfor %}
+    <div class='formtab' id='end_segment'>
+      <div class="row input-segment">
+        <h4>Congratulations!</h4>
+        <p>
+          You have created a <span class="project_type lowercase"></span> on
+          TheProjectProject! Submit 
+        </p>
+        <button class='formtab_button' type="button" onclick="nextPrev(1);">
+          <span class='presskey' style='margin-bottom:1px;'>
+            Enter
+          </span>
+          Submit
+        </button>
+      </div>
+    </div>
   </form>
   <!-- temp navigator -->
   <div>
