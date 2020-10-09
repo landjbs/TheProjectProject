@@ -131,6 +131,13 @@ function validateForm() {
       var max = Number(input['max']);
       return validate_string_field(val, min, max);
     }
+    else if (type=='TextAreaField') {
+      input = tab.getElementsByTagName('textarea')[0];
+      var val = input.value;
+      var min = 0; // NOTE: Number(input.minLength) defaults to -1 but if you want a minlength in future implement some logic to avoid this
+      var max = Number(input.maxLength);
+      return validate_string_field(val, min, max);
+    }
     else {
       return true;
     }
@@ -287,7 +294,7 @@ function validate_breakpoint(field) {
   return any_checked
 }
 
-function validate_length(val, min, max) {
+function validate_string_field(val, min, max) {
   len = val.length;
-  return ((len>min) and (len<max))
+  return (len>min && len<=max)
 }

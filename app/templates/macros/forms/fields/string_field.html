@@ -1,9 +1,15 @@
 {% macro render_string_field(field) -%}
   {% set c = 'input valid' if not field.errors else 'input invalid'%}
+  {% set min = field.render_kw.get('min') %}
   {% set max = field.render_kw.get('max') %}
   {{
-    field(class=c, placeholder=field.render_kw['placeholder'], maxlength=max,
-          onkeyup='field_char_counter(this);')
+    field(
+      class=c,
+      placeholder=field.render_kw['placeholder'],
+      minlength=min,
+      maxlength=max,
+      onkeyup='field_char_counter(this);'
+    )
   }}
   <span style='display: inline-block;'>
     <span id='char_inc_{{ field.id }}'>
