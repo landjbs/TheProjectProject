@@ -113,9 +113,9 @@ function validateForm() {
     x = document.getElementsByClassName("formtab");
     tab = x[currentTab];
     type = tab.getAttribute('data-field-type');
-    optional = tab.getAttribute('data-field-optional');
+    optional = Boolean(tab.getAttribute('data-field-optional'));
     console.log('type: ' + type);
-    console.log('optional: ' + optional);
+    console.log('optional: ' + optional + ' true: ' + (true==optional));
     if (optional==true) {
       return true;
     }
@@ -135,6 +135,16 @@ function validateForm() {
       var min = 0; // NOTE: Number(input.minLength) defaults to -1 but if you want a minlength in future implement some logic to avoid this
       var max = Number(input.maxLength);
       return validate_string_field(val, min, max);
+    }
+    else if (type=='IntegerField') {
+      input = tab.querySelector('input.select-clean');
+      var val = Number(input.value);
+      var min = Number(input['min']);
+      var max = Number(input['max']);
+      console.log('val: ' + val);
+      console.log('min: ' + min);
+      console.log('max: ' + max);
+      return validate_slide_field(val, min, max)
     }
     else {
       return true;
@@ -298,5 +308,5 @@ function validate_string_field(val, min, max) {
 }
 
 function validate_slide_field(val, min, max) {
-  
+  return (val>=min && val<=max)
 }
