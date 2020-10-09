@@ -295,7 +295,6 @@ function show_class(cls) {
   });
 }
 
-
 // field validators
 function validate_breakpoint(field) {
   var box = field.getElementsByClassName('input-control')[0];
