@@ -280,6 +280,16 @@ function show_class(cls) {
 }
 
 
+
+// field validators
+function validate_breakpoint(field) {
+  box = field.getElementsByClassName('input-control');
+  any_checked = false;
+  box.querySelectorAll('input').forEach(function(elt) {
+    
+  });
+}
+
 function validate_length(field) {
   if (field.type=='text') {
     if (field.value.length<1) {
