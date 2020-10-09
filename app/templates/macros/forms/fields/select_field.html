@@ -1,3 +1,6 @@
+{% from 'macros/carousel.html' import render_carousel with context -%}
+
+
 <!-- this maybe should still be preserved for competitions -->
 <!-- warning not implemented yet -->
 {% macro render_searchable_select_field(field) -%}
@@ -11,6 +14,12 @@
       </p>
     </span>
   </div>
+  {{
+    render_carousel(
+      id_postfix='competitions',
+      card_type='competition',
+    )
+  }}
   {% for id, option in field.choices %}
     <div class='searchable' style='border: 1px solid white; border-radius: 5px;'>
       {{ option | safe }}
