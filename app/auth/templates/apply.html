@@ -24,7 +24,7 @@
       <div class="row input-segment">
         <h4>Welcome to TheProjectProject!</h4>
         <p>
-          We are a community of innovators where 
+          We are a community of innovators where
         </p>
         <button class='formtab_button' type="button" onclick="nextPrev(1);">
           <span class='presskey' style='margin-bottom:1px;'>
@@ -36,6 +36,20 @@
     </div>
     {{ render_fields(form) }}
     {{ render_form_control() }}
+    <div class='formtab' id='end_segment'>
+      <div class="row input-segment">
+        <h4>Congratulations!</h4>
+        <p>
+          You have completed the application to TheProjectProject! 
+        </p>
+        <button class='formtab_button' type="button" onclick="nextPrev(1);">
+          <span class='presskey' style='margin-bottom:1px;'>
+            Enter
+          </span>
+          Submit
+        </button>
+      </div>
+    </div>
   </form>
 </div>
 
