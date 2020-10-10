@@ -17,6 +17,7 @@ class Apply(BaseForm):
         validators=[DataRequired(), Length(1, 254)],
         render_kw={
             'placeholder': 'John Harvard'
+            'tabclass':     ''
         }
     )
     email = StringField(
@@ -24,6 +25,7 @@ class Apply(BaseForm):
         validators=[DataRequired(), Length(1, 254), Email()],
         render_kw={
             'placeholder': 'example@college.harvard.edu'
+            'tabclass':     ''
         }
     )
     subjects = SelectMultipleField(
@@ -34,6 +36,7 @@ class Apply(BaseForm):
         coerce=int,
         render_kw={
             'max':5
+            'tabclass':     ''
         }
     )
     password = PasswordField(
@@ -41,7 +44,7 @@ class Apply(BaseForm):
         validators=[DataRequired(), Length(1, 254)],
         description='Create a password!',
         render_kw={
-
+            'tabclass':     ''
         }
     )
     accept_terms = BooleanField(
@@ -49,6 +52,7 @@ class Apply(BaseForm):
         validators=[DataRequired()],
         render_kw={
             'placeholder': 'Yes'
+            'tabclass':     ''
         }
     )
 
