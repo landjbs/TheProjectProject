@@ -100,8 +100,6 @@ function nextPrev(n, validate=true) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     submit_form();
-    //...the form gets submitted:
-    // submit_fragment('Add_Type');
     return false;
   }
   // Otherwise, display the correct tab:
@@ -128,8 +126,6 @@ function validateForm() {
     tab = x[currentTab];
     type = tab.getAttribute('data-field-type');
     optional = Boolean(tab.getAttribute('data-field-optional')=='true');
-    console.log('type: ' + type);
-    console.log('optional: ' + optional + ' true: ' + (true==optional));
     if (optional==true) {
       return true;
     }
