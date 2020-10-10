@@ -58,3 +58,14 @@
     </div>
   </div>
 {% endmacro -%}
+
+
+{% macro render_fields(form) -%}
+  {% for field in form %}
+    {% if field.type=='CSRFTokenField' %}
+      {{ field }}
+    {% else %}
+      {{ render_field(field) }}
+    {% endif %}
+  {% endfor %}
+{% endmacro -%}

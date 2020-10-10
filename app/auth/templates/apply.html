@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from 'components/form_macros.html' import render_multiselect %}
+{% from 'macros/forms/field.html' import render_fields %}
 {% from 'macros/forms/form.html' import render_form, render_form_control %}
 
 {% block title %}Apply{% endblock %}
@@ -18,7 +19,7 @@
 {% block content %}
 
 <div class='big-box container justify-content-center'>
-  {{ render_form(form) }}
+  {{ render_fields(form) }}
   {{ render_form_control() }}
 </div>
 

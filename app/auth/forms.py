@@ -17,7 +17,8 @@ class Apply(BaseForm):
         validators=[DataRequired(), Length(1, 254)],
         render_kw={
             'placeholder': 'John Harvard',
-            'tabclass':     ''
+            'tabclass':     '',
+            'max':          254
         }
     )
     email = StringField(
@@ -25,7 +26,8 @@ class Apply(BaseForm):
         validators=[DataRequired(), Length(1, 254), Email()],
         render_kw={
             'placeholder': 'example@college.harvard.edu',
-            'tabclass':     ''
+            'tabclass':     '',
+            'max':          254
         }
     )
     subjects = SelectMultipleField(
@@ -35,7 +37,6 @@ class Apply(BaseForm):
         choices=[],
         coerce=int,
         render_kw={
-            'max':5,
             'tabclass':     ''
         }
     )
