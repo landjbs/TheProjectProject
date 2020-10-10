@@ -11,10 +11,12 @@
       onkeyup='field_char_counter(this);'
     )
   }}
-  <span style='display: inline-block;'>
-    <span id='char_inc_{{ field.id }}'>
-      0
+  {% if field.render_kw.get('show_count')!=False %}
+    <span style='display: inline-block;'>
+      <span id='char_inc_{{ field.id }}'>
+        0
+      </span>
+      / {{ max }} characters
     </span>
-    / {{ max }} characters
-  </span>
+  {% endif -%}
 {% endmacro -%}

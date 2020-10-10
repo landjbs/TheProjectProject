@@ -95,13 +95,20 @@ class Login(BaseForm):
         label='Email',
         validators=[DataRequired(), Length(1, 254), Email()],
         render_kw={
+            'show_count': False,
+            'min':        1,
+            'max':        254,
         }
     )
     password = PasswordField(
         label='Password',
         description=Markup("<a href='/reset'>Reset Password</a>"),
-        validators=[Length(0, 254)],
-        render_kw={}
+        validators=[DataRequired(), Length(1, 254)],
+        render_kw={
+            'show_count': False,
+            'min':        1,
+            'max':        254,
+        }
     )
 
     def validate(self):
