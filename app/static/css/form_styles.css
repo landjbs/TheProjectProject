@@ -41,6 +41,16 @@
 }
 
 
+.formtab input[type='password'] {
+  width: 90%;
+  background-color: transparent;
+  border: 0px solid;
+  border-radius: 0px;
+  color: white;
+  font-size: 300%;
+  border-bottom: 1px solid white;
+}
+
 .formtab input[type='number'] {
   border: 0px solid;
   border-radius: 0px;

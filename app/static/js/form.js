@@ -53,6 +53,9 @@ function showTab(n) {
   if (field==null) {
     var field = x[n].getElementsByTagName('textarea')[0];
   }
+  if (field==null) {
+    var field = x[n].getElementsByTagName('password')[0];
+  }
   if (field) {
     field.focus();
   }
