@@ -93,6 +93,7 @@ class Apply(BaseForm):
 class Login(BaseForm):
     email = StringField(
         label='Email',
+        description=Markup("<a href='/reset'>Reset Password</a>"),
         validators=[DataRequired(), Length(1, 254), Email()]
     )
     password = PasswordField(
