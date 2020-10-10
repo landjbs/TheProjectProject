@@ -171,6 +171,17 @@ function validateForm() {
         errorbox.innerHTML = 'Please select a number between ' + min + ' and ' + max + '.';
         return false
       }
+    }
+    else if (type=='PasswordField') {
+      input = tab.getElementsByTagName('input')[0];
+      var val = input.value;
+      var min = Number(input['min']);
+      var max = Number(input['max']);
+      if (validate_string_field(val, min, max)==false) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML = 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        return false
+      }
       return true
     }
     else {

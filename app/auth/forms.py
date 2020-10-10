@@ -32,7 +32,7 @@ class Apply(BaseForm):
         }
     )
     subjects = SelectMultipleField(
-        label='Passions',
+        label='What fields are you interested in?',
         description=('What fields are you interested in?'),
         validators=[],
         choices=[],
@@ -44,7 +44,6 @@ class Apply(BaseForm):
     password = PasswordField(
         label='Create Password',
         validators=[DataRequired(), Length(8, 60)],
-        description='Create a password!',
         render_kw={
             'tabclass':     '',
             'min':          8,
