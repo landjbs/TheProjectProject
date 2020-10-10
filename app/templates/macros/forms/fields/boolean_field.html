@@ -6,10 +6,12 @@
       <span class='presskey'>A</span>
       Yes
     </label>
-    <input id="off-{{ field.id }}" class="toggle toggle-right" name="{{ field.name }}" value="false" type="radio" onclick="{{ data['false']['action'] }}">
-    <label for="off-{{ field.id }}" class="btn">
-      <span class='presskey'>B</span>
-      No
-    </label>
+    {% if field.render_kw.get('show_no')!=False %}
+      <input id="off-{{ field.id }}" class="toggle toggle-right" name="{{ field.name }}" value="false" type="radio" onclick="{{ data['false']['action'] }}">
+      <label for="off-{{ field.id }}" class="btn">
+        <span class='presskey'>B</span>
+        No
+      </label>
+    {% endif %}
   </div>
 {% endmacro -%}

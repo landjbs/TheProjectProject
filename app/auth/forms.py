@@ -57,6 +57,7 @@ class Apply(BaseForm):
         render_kw={
             'placeholder': 'Yes',
             'tabclass':     '',
+            'show_false':   False,
             'datamap': {
                 'true': {
                     'action':   ''
