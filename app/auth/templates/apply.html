@@ -6,6 +6,11 @@
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- custom stylesheets -->
+  <link type="text/css" href="/css/add_styles.css" rel="stylesheet">
+  <link type="text/css" href="/css/form_styles.css" rel="stylesheet">
+  <link type='text/css' href='/css/select_styles.css' rel='stylesheet'>
+  <link type='text/css' href='/css/slider_styles.css' rel='stylesheet'>
 {% endblock %}
 
 
@@ -22,7 +27,7 @@
       {% endif %}
     <!-- boolean field -->
     {% elif elt.type=='BooleanField' %}
-      <div class="row input-segment tab">
+      <div class="row input-segment formtab">
         <h6 style="display: inline;">
           I have read and accept the <a href='terms' target="_blank">terms</a>.
         </h6>
@@ -40,7 +45,7 @@
       </div>
     <!-- select multiple field -->
     {% elif elt.type=='SelectMultipleField' %}
-      <div class="row input-segment tab">
+      <div class="row input-segment formtab">
         <h4 style="display: inline;">{{ elt.label }}</h4>
         <div class='boop'>
           <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
@@ -51,7 +56,7 @@
         {{ render_multiselect(elt, tags, 1) }}
       </div>
     {% else %}
-      <div class="row input-segment tab">
+      <div class="row input-segment formtab">
         <h4 style="display: inline;">{{ elt.label }}</h4>
         {% if elt.description %}
           <div class='boop'>
@@ -70,12 +75,22 @@
     {% endif %}
   {% endfor %}
   <div style="overflow:auto; width:95%;">
-      <div style="float:right;">
-        <button type="button" id="prevBtn"
-                onclick="nextPrev(-1)">Back</button>
-        <button type="button" id="nextBtn"
-                onclick="nextPrev(1)">Next</button>
-      </div>
+    <div class='float-left'>
+      <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">
+        <span class='presskey' style='margin-bottom:1px;'>
+          Shift + Tab
+        </span>
+        Back
+      </button>
+    </div>
+    <div class='float-right'>
+      <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">
+        <span class='presskey' style='margin-bottom:1px;'>
+          Enter
+        </span>
+        Next
+      </button>
+    </div>
   </div>
   <div style="text-align:center;margin-top:40px;">
     {% for elt in form %}
@@ -96,12 +111,12 @@
     document.getElementById("apply_form").submit();
   };
 
-  var currentTab = {{ start_on }}; // Current tab is set to be the first tab (0)
-  showTab(currentTab); // Display the current tab
+  var currentformtab = {{ start_on }}; // Current formtab is set to be the first formtab (0)
+  showformtab(currentformtab); // Display the current formtab
 
-  function showTab(n) {
-    // This function will display the specified tab of the form ...
-    var x = document.getElementsByClassName("tab");
+  function showformtab(n) {
+    // This function will display the specified formtab of the form ...
+    var x = document.getElementsByClassName("formtab");
     x[n].style.display = "block";
     x[n].getElementsByTagName('input')[0].focus();
     // ... and fix the Previous/Next buttons:
@@ -120,35 +135,35 @@
   }
 
   function nextPrev(n) {
-    // This function will figure out which tab to display
-    var x = document.getElementsByClassName("tab");
-    // Exit the function if any field in the current tab is invalid:
+    // This function will figure out which formtab to display
+    var x = document.getElementsByClassName("formtab");
+    // Exit the function if any field in the current formtab is invalid:
     if (n == 1 && !validateForm()) return false;
-    // Can't go backwards on first tab
-    if (n == -1 && currentTab==0) return false;
-    // Hide the current tab:
-    x[currentTab].style.display = "none";
-    // Increase or decrease the current tab by 1:
-    currentTab = currentTab + n;
+    // Can't go backwards on first formtab
+    if (n == -1 && currentformtab==0) return false;
+    // Hide the current formtab:
+    x[currentformtab].style.display = "none";
+    // Increase or decrease the current formtab by 1:
+    currentformtab = currentformtab + n;
     // if you have reached the end of the form... :
-    if (currentTab >= x.length) {
+    if (currentformtab >= x.length) {
       //...the form gets submitted:
       submit();
       return false;
     }
-    // Otherwise, display the correct tab:
-    showTab(currentTab);
+    // Otherwise, display the correct formtab:
+    showformtab(currentformtab);
   }
 
   $(document).keydown(function(e) {
-    // tab is clicked
+    // formtab is clicked
     if (e.keyCode==9) {
       // shift is also down = backward
       if (e.shiftKey) {
         e.preventDefault();
         nextPrev(-1);
       }
-      // just tab = forward
+      // just formtab = forward
       else {
         e.preventDefault();
         nextPrev(1);
@@ -158,8 +173,8 @@
       nextPrev(1);
     }
     else if (e.keyCode==89) {
-      // WARNING: CHANGE TO BE ON BOOLEAN FIELD TAB IF NUM FIELDS CHANGES
-      if (currentTab==4) {
+      // WARNING: CHANGE TO BE ON BOOLEAN FIELD formtab IF NUM FIELDS CHANGES
+      if (currentformtab==4) {
         $('input[type="radio"]').not(':checked').prop("checked", true);
       }
     }
@@ -168,9 +183,9 @@
   function validateForm() {
     // This function deals with validation of the form fields
     var x, y, i, valid = true;
-    x = document.getElementsByClassName("tab");
-    y = x[currentTab].getElementsByTagName("input");
-    // A loop that checks every input field in the current tab:
+    x = document.getElementsByClassName("formtab");
+    y = x[currentformtab].getElementsByTagName("input");
+    // A loop that checks every input field in the current formtab:
     for (i = 0; i < y.length; i++) {
       // If field has input tag
       if (y[i].id!="") {
@@ -185,10 +200,10 @@
     }
     // If the valid status is true, mark the step as finished and valid:
     if (valid) {
-      document.getElementsByClassName("step")[currentTab].className += " finish";
+      document.getElementsByClassName("step")[currentformtab].className += " finish";
     }
     else {
-      document.getElementsByClassName("step")[currentTab].className += " invalid";
+      document.getElementsByClassName("step")[currentformtab].className += " invalid";
     }
     return true; // return the valid status
   }
