@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% from 'components/form_macros.html' import render_multiselect %}
+{% from 'macros/forms/form.html' import render_form %}
 
 {% block title %}Apply{% endblock %}
 
@@ -16,8 +17,11 @@
 
 {% block content %}
 
-<form class='big-box container justify-content-center' id='apply_form' method='post'>
-  <center>
+<div class='big-box container justify-content-center'>
+  {{ render_form(form) }}
+</div>
+
+<div style='display:hidden'>
   {% for elt in form %}
     <!-- csrf token -->
     {% if elt.type == 'CSRFTokenField' %}

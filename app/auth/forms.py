@@ -12,30 +12,45 @@ from app.user.models import User
 
 ## FORMS ##
 class Apply(BaseForm):
-    name = StringField('Name',
-                    validators=[DataRequired(), Length(1, 254)],
-                    render_kw={'placeholder': 'John Harvard'})
-    email = StringField('College Email',
-                    validators=[DataRequired(), Length(1, 254), Email()],
-                    render_kw={'placeholder': 'example@college.harvard.edu'})
-    # about = TextField('About You',
-    #                 validators=[DataRequired(), Length(1, 500)],
-    #                 description=('Describe yourself! This might include '
-    #                            'projects you have worked on, passions you '
-    #                            'have, or reasons you want to join the '
-    #                            'community.'))
-    subjects = SelectMultipleField('Passions',
-                                    description=('What fields are you '
-                                                'interested in?'),
-                                    validators=[],
-                                    choices=[], coerce=int,
-                                    render_kw={'max':5})
-    password = PasswordField('Create Password',
-                             validators=[DataRequired(), Length(1, 254)],
-                             description=('Create a password!'))
-    accept_terms = BooleanField('I have read and accept the terms.',
-                                validators=[DataRequired()],
-                            render_kw={'placeholder': 'Yes'})
+    name = StringField(
+        label='Name',
+        validators=[DataRequired(), Length(1, 254)],
+        render_kw={
+            'placeholder': 'John Harvard'
+        }
+    )
+    email = StringField(
+        label='College Email',
+        validators=[DataRequired(), Length(1, 254), Email()],
+        render_kw={
+            'placeholder': 'example@college.harvard.edu'
+        }
+    )
+    subjects = SelectMultipleField(
+        labeel='Passions',
+        description=('What fields are you interested in?'),
+        validators=[],
+        choices=[],
+        coerce=int,
+        render_kw={
+            'max':5
+        }
+    )
+    password = PasswordField(
+        label='Create Password',
+        validators=[DataRequired(), Length(1, 254)],
+        description='Create a password!',
+        render_kw={
+
+        }
+    )
+    accept_terms = BooleanField(
+        label='I have read and accept the terms.',
+        validators=[DataRequired()],
+        render_kw={
+            'placeholder': 'Yes'
+        }
+    )
 
     def validate(self):
         ''' Validates application '''

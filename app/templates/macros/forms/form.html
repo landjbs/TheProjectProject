@@ -1,11 +1,9 @@
 {% from 'macros/forms/field.html' import render_field %}
 
-{% macro render_form(fragment) -%}
-  <form id='{{ fragment.identifier }}'>
-    {% for field in fragment %}
-      {% if not field.type=='CSRFTokenField' %}
-        {{ render_field(field) }}
-      {% endif %}
+{% macro render_form(form) -%}
+  <form id='{{ form.identifier }}'>
+    {% for field in form %}
+      {{ render_field(field) }}
     {% endfor %}
   </form>
 {% endmacro -%}
