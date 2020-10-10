@@ -5,7 +5,7 @@
 {% from 'macros/forms/fields/select_field.html' import render_select_field %}
 {% from 'macros/forms/fields/csrf_field.html' import render_csrf_field %}
 {% from 'macros/forms/fields/multiselect_field.html' import render_multiselect %}
-
+{% from 'macros/forms/fields/password_field.html' import render_password_field %}
 
 <!-- render name+description as provided -->
 {% macro render_field_header(field) -%}
@@ -43,6 +43,7 @@
     ('IntegerField',                render_slide_field),
     ('SelectField',                 render_select_field),
     ('SelectMultipleField',         render_multiselect),
+    ('PasswordField',               render_password_field),
     ('CSRFTokenField',              render_csrf_field)
   ])
 %}

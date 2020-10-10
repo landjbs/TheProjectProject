@@ -16,7 +16,7 @@ class Apply(BaseForm):
         label='Name',
         validators=[DataRequired(), Length(1, 254)],
         render_kw={
-            'placeholder': 'John Harvard'
+            'placeholder': 'John Harvard',
             'tabclass':     ''
         }
     )
@@ -24,18 +24,18 @@ class Apply(BaseForm):
         label='College Email',
         validators=[DataRequired(), Length(1, 254), Email()],
         render_kw={
-            'placeholder': 'example@college.harvard.edu'
+            'placeholder': 'example@college.harvard.edu',
             'tabclass':     ''
         }
     )
     subjects = SelectMultipleField(
-        labeel='Passions',
+        label='Passions',
         description=('What fields are you interested in?'),
         validators=[],
         choices=[],
         coerce=int,
         render_kw={
-            'max':5
+            'max':5,
             'tabclass':     ''
         }
     )
@@ -51,8 +51,16 @@ class Apply(BaseForm):
         label='I have read and accept the terms.',
         validators=[DataRequired()],
         render_kw={
-            'placeholder': 'Yes'
-            'tabclass':     ''
+            'placeholder': 'Yes',
+            'tabclass':     '',
+            'datamap': {
+                'true': {
+                    'action':   ''
+                },
+                'false': {
+                    'action':   ''
+                }
+            }
         }
     )
 

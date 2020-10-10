@@ -3,7 +3,11 @@
 {% macro render_form(form) -%}
   <form id='{{ form.identifier }}'>
     {% for field in form %}
-      {{ render_field(field) }}
+      {% if field.type=='CSRFTokenField' %}
+        {{ field }}
+      {% else %}
+        {{ render_field(field) }}
+      {% endif %}
     {% endfor %}
   </form>
 {% endmacro -%}
