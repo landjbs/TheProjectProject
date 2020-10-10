@@ -94,11 +94,14 @@ class Login(BaseForm):
     email = StringField(
         label='Email',
         description=Markup("<a href='/reset'>Reset Password</a>"),
-        validators=[DataRequired(), Length(1, 254), Email()]
+        validators=[DataRequired(), Length(1, 254), Email()],
+        render_kw={
+        }
     )
     password = PasswordField(
         label='Password',
-        validators=[Length(0, 254)]
+        validators=[Length(0, 254)],
+        render_kw={}
     )
 
     def validate(self):

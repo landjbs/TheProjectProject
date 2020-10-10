@@ -19,61 +19,12 @@
 
 <div class='big-box container justify-content-center'>
   <form id='login_form'>
-    {{ render_field(form) }}
-    {{ render_form_control }}
+    {{ render_fields(form) }}
+    {{ render_form_control() }}
   </form>
 </div>
 
-
-  {% for elt in form %}
-    <!-- csrf token -->
-    {% if elt.type == 'CSRFTokenField' %}
-      {{ elt }}
-      {% if elt.errors %}
-        <div class="warning">You have submitted an invalid CSRF token.</div>
-      {% endif %}
-    {% else %}
-      <div class="row input-segment tab">
-        <h4 style="display: inline;">{{ elt.label }}</h4>
-        {% if elt.name=='password' %}
-          <div class='boop'>
-            <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-            <span class="tooltiptext">
-              <a href="{{ url_for('auth.reset') }}">Reset Password</a>
-            </span>
-          </div>
-        {% endif %}
-        <br>
-        {% if not elt.errors %}
-          {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
-        {% else %}
-          {{ elt(class='input invalid') }}
-          <p class='warning'>{{ elt.errors[0] }}</p>
-        {% endif %}
-      </div>
-    {% endif %}
-  {% endfor %}
-  <div style="overflow:auto; width:95%;">
-      <div style="float:right;">
-        <button type="button" id="prevBtn"
-                onclick="nextPrev(-1)">Back</button>
-        <button type="button" id="nextBtn"
-                onclick="nextPrev(1)">Next</button>
-      </div>
-  </div>
-  <div style="text-align:center;margin-top:40px;">
-    {% for elt in form %}
-      {% if not elt.name in ["csrf_token"] %}
-        {% if elt.errors in [[], ()] %}
-          <span class="step"></span>
-        {% else %}
-          <span class="step invalid"></span>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </div>
-</center>
-</form>
+<script src='js/form/js'></script>
 
 <script>
   var currentTab = {{ start_on }};
@@ -85,6 +36,5 @@
     field_keydown(e, field);
   })
 </script>
-
 
 {% endblock %}
