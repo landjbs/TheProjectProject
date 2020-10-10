@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from 'components/form_macros.html' import render_multiselect %}
-{% from 'macros/forms/form.html' import render_form %}
+{% from 'macros/forms/form.html' import render_form, render_form_control %}
 
 {% block title %}Apply{% endblock %}
 
@@ -19,96 +19,11 @@
 
 <div class='big-box container justify-content-center'>
   {{ render_form(form) }}
+  {{ render_form_control() }}
 </div>
 
-<div style='display:hidden'>
-  {% for elt in form %}
-    <!-- csrf token -->
-    {% if elt.type == 'CSRFTokenField' %}
-      {{ elt }}
-      {% if elt.errors %}
-        <div class="warning">You have submitted an invalid CSRF token.</div>
-      {% endif %}
-    <!-- boolean field -->
-    {% elif elt.type=='BooleanField' %}
-      <div class="row input-segment formtab">
-        <h6 style="display: inline;">
-          I have read and accept the <a href='terms' target="_blank">terms</a>.
-        </h6>
-        <div class="input-control">
-          <input id="toggle-off-q1" class="toggle toggle-left"
-                name='{{ elt.name }}' value="true" type="radio">
-          <label for="toggle-off-q1" class="btn">
-            <span class='presskey'>Y</span>
-            Yes
-          </label>
-        </div>
-        {% if elt.errors %}
-          <div class="warning">You must accept the terms to apply.</div>
-        {% endif %}
-      </div>
-    <!-- select multiple field -->
-    {% elif elt.type=='SelectMultipleField' %}
-      <div class="row input-segment formtab">
-        <h4 style="display: inline;">{{ elt.label }}</h4>
-        <div class='boop'>
-          <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-          <span class="tooltiptext">{{ elt.description }}</span>
-        </div>
-        <br>
-        {% set tags = 1 if not request.MOBILE else 0 %}
-        {{ render_multiselect(elt, tags, 1) }}
-      </div>
-    {% else %}
-      <div class="row input-segment formtab">
-        <h4 style="display: inline;">{{ elt.label }}</h4>
-        {% if elt.description %}
-          <div class='boop'>
-            <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
-            <span class="tooltiptext">{{ elt.description}}</span>
-          </div>
-        {% endif %}
-        <br>
-        {% if not elt.errors %}
-          {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
-        {% else %}
-          {{ elt(class='input invalid') }}
-          <p class='warning'>{{ elt.errors[0] }}</p>
-        {% endif %}
-      </div>
-    {% endif %}
-  {% endfor %}
-  <div style="overflow:auto; width:95%;">
-    <div class='float-left'>
-      <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">
-        <span class='presskey' style='margin-bottom:1px;'>
-          Shift + Tab
-        </span>
-        Back
-      </button>
-    </div>
-    <div class='float-right'>
-      <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">
-        <span class='presskey' style='margin-bottom:1px;'>
-          Enter
-        </span>
-        Next
-      </button>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:40px;">
-    {% for elt in form %}
-      {% if not elt.name in ["csrf_token"] %}
-        {% if elt.errors in [[], ()] %}
-          <span class="step"></span>
-        {% else %}
-          <span class="step invalid"></span>
-        {% endif %}
-      {% endif %}
-    {% endfor %}
-  </div>
-</center>
-</form>
+
+
 
 <script>
   function submit() {
@@ -217,3 +132,95 @@
 
 
 {% endblock %}
+
+
+
+
+<div style='display:hidden'>
+  {% for elt in form %}
+    <!-- csrf token -->
+    {% if elt.type == 'CSRFTokenField' %}
+      {{ elt }}
+      {% if elt.errors %}
+        <div class="warning">You have submitted an invalid CSRF token.</div>
+      {% endif %}
+    <!-- boolean field -->
+    {% elif elt.type=='BooleanField' %}
+      <div class="row input-segment formtab">
+        <h6 style="display: inline;">
+          I have read and accept the <a href='terms' target="_blank">terms</a>.
+        </h6>
+        <div class="input-control">
+          <input id="toggle-off-q1" class="toggle toggle-left"
+                name='{{ elt.name }}' value="true" type="radio">
+          <label for="toggle-off-q1" class="btn">
+            <span class='presskey'>Y</span>
+            Yes
+          </label>
+        </div>
+        {% if elt.errors %}
+          <div class="warning">You must accept the terms to apply.</div>
+        {% endif %}
+      </div>
+    <!-- select multiple field -->
+    {% elif elt.type=='SelectMultipleField' %}
+      <div class="row input-segment formtab">
+        <h4 style="display: inline;">{{ elt.label }}</h4>
+        <div class='boop'>
+          <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+          <span class="tooltiptext">{{ elt.description }}</span>
+        </div>
+        <br>
+        {% set tags = 1 if not request.MOBILE else 0 %}
+        {{ render_multiselect(elt, tags, 1) }}
+      </div>
+    {% else %}
+      <div class="row input-segment formtab">
+        <h4 style="display: inline;">{{ elt.label }}</h4>
+        {% if elt.description %}
+          <div class='boop'>
+            <i style="font-size:24px; color:white;" class="fa">&#xf059;</i>
+            <span class="tooltiptext">{{ elt.description}}</span>
+          </div>
+        {% endif %}
+        <br>
+        {% if not elt.errors %}
+          {{ elt(class='input valid', placeholder=elt.render_kw['placeholder']) }}
+        {% else %}
+          {{ elt(class='input invalid') }}
+          <p class='warning'>{{ elt.errors[0] }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+  <div style="overflow:auto; width:95%;">
+    <div class='float-left'>
+      <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">
+        <span class='presskey' style='margin-bottom:1px;'>
+          Shift + Tab
+        </span>
+        Back
+      </button>
+    </div>
+    <div class='float-right'>
+      <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">
+        <span class='presskey' style='margin-bottom:1px;'>
+          Enter
+        </span>
+        Next
+      </button>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px;">
+    {% for elt in form %}
+      {% if not elt.name in ["csrf_token"] %}
+        {% if elt.errors in [[], ()] %}
+          <span class="step"></span>
+        {% else %}
+          <span class="step invalid"></span>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</center>
+</form>

@@ -257,7 +257,7 @@ function submit_form() {
   });
 }
 
-vfunction set_type(type) {
+function set_type(type) {
   var elts = document.getElementsByClassName('project_type');
   for (i=0; i<elts.length; i++) {
     elts[i].innerHTML = type;

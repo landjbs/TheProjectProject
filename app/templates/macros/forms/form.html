@@ -11,3 +11,25 @@
     {% endfor %}
   </form>
 {% endmacro -%}
+
+
+{% macro render_form_control() %}
+  <div style="overflow:auto; width:95%;">
+    <div class='float-left'>
+      <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">
+        <span class='presskey' style='margin-bottom:1px;'>
+          Shift + Tab
+        </span>
+        Back
+      </button>
+    </div>
+    <div class='float-right'>
+      <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">
+        <span class='presskey' style='margin-bottom:1px;'>
+          Enter
+        </span>
+        Next
+      </button>
+    </div>
+  </div>
+{% endmacro -%}
