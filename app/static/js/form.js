@@ -63,10 +63,14 @@ function showTab(n) {
     x[n].focus();
   }
   // ... and fix the Previous/Next buttons:
-  if (n==0 || x[n].id=='end_segment') {
+  if (x[n].id=='start_segment' || x[n].id=='end_segment') {
     document.getElementById("prevBtn").style.display = "none";
     document.getElementById("nextBtn").style.display = "none";
-  } else {
+  }
+  else if (n==0) {
+    document.getElementById("prevBtn").style.display = "none";
+  }
+  else {
     document.getElementById("prevBtn").style.display = "inline";
     document.getElementById("nextBtn").style.display = "inline";
   }
