@@ -1,5 +1,6 @@
 {% extends "home_base.html" %}
 {% from 'macros/forms/field.html' import render_field %}
+{% from 'macros/forms/form.html' import render_form_control %}
 
 {% block title %}Add Project{% endblock %}
 
@@ -66,23 +67,7 @@
       <span id='form_time_inc'>200</span>
       seconds remaining
     </p>
-    <div style="overflow:auto; width:95%;">
-      <div class='float-left'>
-        <button class='formtab_button' type="button" id="prevBtn" onclick="nextPrev(-1)">
-          <span class='presskey' style='margin-bottom:1px;'>
-            Shift + Tab
-          </span>
-          Back
-        </button>
-      </div>
-      <div class='float-right'>
-        <button class='formtab_button' type="button" id="nextBtn" onclick="nextPrev(1)">
-          <span class='presskey' style='margin-bottom:1px;'>
-            Enter
-          </span>
-          Next
-        </button>
-      </div>
+    {{ render_form_control() }}
     </div>
   </div>
 </div>

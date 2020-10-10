@@ -23,111 +23,121 @@
 </div>
 
 
+<script src='js/form.js'></script>
 
 
 <script>
-  function submit() {
-    document.getElementById("apply_form").submit();
-  };
-
-  var currentformtab = {{ start_on }}; // Current formtab is set to be the first formtab (0)
-  showformtab(currentformtab); // Display the current formtab
-
-  function showformtab(n) {
-    // This function will display the specified formtab of the form ...
-    var x = document.getElementsByClassName("formtab");
-    x[n].style.display = "block";
-    x[n].getElementsByTagName('input')[0].focus();
-    // ... and fix the Previous/Next buttons:
-    if (n == 0) {
-      document.getElementById("prevBtn").style.display = "none";
-    } else {
-      document.getElementById("prevBtn").style.display = "inline";
-    }
-    // ... and run a function that displays the correct step indicator:
-    fixStepIndicator(n)
-  }
-
-  function nextPrev(n) {
-    // This function will figure out which formtab to display
-    var x = document.getElementsByClassName("formtab");
-    // Exit the function if any field in the current formtab is invalid:
-    if (n == 1 && !validateForm()) return false;
-    // Can't go backwards on first formtab
-    if (n == -1 && currentformtab==0) return false;
-    // Hide the current formtab:
-    x[currentformtab].style.display = "none";
-    // Increase or decrease the current formtab by 1:
-    currentformtab = currentformtab + n;
-    // if you have reached the end of the form... :
-    if (currentformtab >= x.length) {
-      //...the form gets submitted:
-      submit();
-      return false;
-    }
-    // Otherwise, display the correct formtab:
-    showformtab(currentformtab);
-  }
+  var currentTab = 0; // Current tab is set to be the first tab (0)
+  showTab(currentTab); // Display the current tab
 
   $(document).keydown(function(e) {
-    // formtab is clicked
-    if (e.keyCode==9) {
-      // shift is also down = backward
-      if (e.shiftKey) {
-        e.preventDefault();
-        nextPrev(-1);
-      }
-      // just formtab = forward
-      else {
-        e.preventDefault();
-        nextPrev(1);
-      }
-    }
-    else if (e.keyCode==13) {
-      nextPrev(1);
-    }
-    else if (e.keyCode==89) {
-      // WARNING: CHANGE TO BE ON BOOLEAN FIELD formtab IF NUM FIELDS CHANGES
-      if (currentformtab==4) {
-        $('input[type="radio"]').not(':checked').prop("checked", true);
-      }
-    }
-  });
+    var field = getCurrentTab();
+    var field_type = field.getAttribute('data-field-type');
+    field_keydown(e, field);
+  })
 
-  function validateForm() {
-    // This function deals with validation of the form fields
-    var x, y, i, valid = true;
-    x = document.getElementsByClassName("formtab");
-    y = x[currentformtab].getElementsByTagName("input");
-    // A loop that checks every input field in the current formtab:
-    for (i = 0; i < y.length; i++) {
-      // If field has input tag
-      if (y[i].id!="") {
-        // If a field is empty...
-        if (y[i].value == "") {
-          // add an "invalid" class to the field if not interests
-          y[i].className += " invalid";
-          // and set the current valid status to false:
-          valid = false;
-        }
-      }
-    }
-    // If the valid status is true, mark the step as finished and valid:
-    if (valid) {
-      document.getElementsByClassName("step")[currentformtab].className += " finish";
-    }
-    else {
-      document.getElementsByClassName("step")[currentformtab].className += " invalid";
-    }
-    return true; // return the valid status
-  }
-
-  function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
-    var i, x = document.getElementsByClassName("step");
-    //... and adds the "active" class to the current step:
-    x[n].className = "step active";
-  }
+  // function submit() {
+  //   document.getElementById("apply_form").submit();
+  // };
+  //
+  // var currentformtab = {{ start_on }}; // Current formtab is set to be the first formtab (0)
+  // showformtab(currentformtab); // Display the current formtab
+  //
+  // function showformtab(n) {
+  //   // This function will display the specified formtab of the form ...
+  //   var x = document.getElementsByClassName("formtab");
+  //   x[n].style.display = "block";
+  //   x[n].getElementsByTagName('input')[0].focus();
+  //   // ... and fix the Previous/Next buttons:
+  //   if (n == 0) {
+  //     document.getElementById("prevBtn").style.display = "none";
+  //   } else {
+  //     document.getElementById("prevBtn").style.display = "inline";
+  //   }
+  //   // ... and run a function that displays the correct step indicator:
+  //   fixStepIndicator(n)
+  // }
+  //
+  // function nextPrev(n) {
+  //   // This function will figure out which formtab to display
+  //   var x = document.getElementsByClassName("formtab");
+  //   // Exit the function if any field in the current formtab is invalid:
+  //   if (n == 1 && !validateForm()) return false;
+  //   // Can't go backwards on first formtab
+  //   if (n == -1 && currentformtab==0) return false;
+  //   // Hide the current formtab:
+  //   x[currentformtab].style.display = "none";
+  //   // Increase or decrease the current formtab by 1:
+  //   currentformtab = currentformtab + n;
+  //   // if you have reached the end of the form... :
+  //   if (currentformtab >= x.length) {
+  //     //...the form gets submitted:
+  //     submit();
+  //     return false;
+  //   }
+  //   // Otherwise, display the correct formtab:
+  //   showformtab(currentformtab);
+  // }
+  //
+  // $(document).keydown(function(e) {
+  //   // formtab is clicked
+  //   if (e.keyCode==9) {
+  //     // shift is also down = backward
+  //     if (e.shiftKey) {
+  //       e.preventDefault();
+  //       nextPrev(-1);
+  //     }
+  //     // just formtab = forward
+  //     else {
+  //       e.preventDefault();
+  //       nextPrev(1);
+  //     }
+  //   }
+  //   else if (e.keyCode==13) {
+  //     nextPrev(1);
+  //   }
+  //   else if (e.keyCode==89) {
+  //     // WARNING: CHANGE TO BE ON BOOLEAN FIELD formtab IF NUM FIELDS CHANGES
+  //     if (currentformtab==4) {
+  //       $('input[type="radio"]').not(':checked').prop("checked", true);
+  //     }
+  //   }
+  // });
+  //
+  // function validateForm() {
+  //   // This function deals with validation of the form fields
+  //   var x, y, i, valid = true;
+  //   x = document.getElementsByClassName("formtab");
+  //   y = x[currentformtab].getElementsByTagName("input");
+  //   // A loop that checks every input field in the current formtab:
+  //   for (i = 0; i < y.length; i++) {
+  //     // If field has input tag
+  //     if (y[i].id!="") {
+  //       // If a field is empty...
+  //       if (y[i].value == "") {
+  //         // add an "invalid" class to the field if not interests
+  //         y[i].className += " invalid";
+  //         // and set the current valid status to false:
+  //         valid = false;
+  //       }
+  //     }
+  //   }
+  //   // If the valid status is true, mark the step as finished and valid:
+  //   if (valid) {
+  //     document.getElementsByClassName("step")[currentformtab].className += " finish";
+  //   }
+  //   else {
+  //     document.getElementsByClassName("step")[currentformtab].className += " invalid";
+  //   }
+  //   return true; // return the valid status
+  // }
+  //
+  // function fixStepIndicator(n) {
+  //   // This function removes the "active" class of all steps...
+  //   var i, x = document.getElementsByClassName("step");
+  //   //... and adds the "active" class to the current step:
+  //   x[n].className = "step active";
+  // }
 </script>
 
 

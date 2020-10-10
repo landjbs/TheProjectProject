@@ -40,6 +40,11 @@ function showTab(n) {
   // This function will display the specified tab of the form ...
   var x = document.getElementsByClassName("formtab");
   x[n].style.display = "block";
+  // refresh gliders if relevant
+  var gliders = x[n].getElementsByClassName('glider');
+  for (i=0; i<gliders.length; i++) {
+    Glider(gliders[i]).refresh();
+  }
   // get element to focus on
   var field = x[n].querySelector("input[type='text']");
   if (field==null) {
@@ -55,10 +60,12 @@ function showTab(n) {
     x[n].focus();
   }
   // ... and fix the Previous/Next buttons:
-  if (n == 0) {
+  if (n==0 || x[n].id=='end_segment') {
     document.getElementById("prevBtn").style.display = "none";
+    document.getElementById("nextBtn").style.display = "none";
   } else {
     document.getElementById("prevBtn").style.display = "inline";
+    document.getElementById("nextBtn").style.display = "inline";
   }
   // if (n == (x.length - 1)) {
   //   document.getElementById("nextBtn").innerHTML = "Submit";
@@ -67,11 +74,11 @@ function showTab(n) {
   // }
 }
 
-function nextPrev(n) {
+function nextPrev(n, validate=true) {
   // This function will figure out which tab to display
   var x = document.getElementsByClassName("formtab");
   // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) return false;
+  if (n == 1 && validate && !validateForm()) return false;
   // Can't go backwards on first tab
   if (n == -1 && currentTab==0) return false;
   // Modify remaining time
@@ -93,12 +100,10 @@ function nextPrev(n) {
   // Otherwise, display the correct tab:
   if (x[currentTab].classList.contains('hidden')==true) {
     if (n<0) {
-      console.log(n);
       nextPrev(-1);
     }
     else if (n>0) {
-      console.log(n);
-      nextPrev(1);
+      nextPrev(1, validate=false);
     }
     else {
       showTab(currentTab);
@@ -113,28 +118,61 @@ function validateForm() {
     // This function deals with validation of the form fields
     var x, y, i, valid = true;
     x = document.getElementsByClassName("formtab");
-    y = x[currentTab].getElementsByTagName("input");
-    // for (i=0; i<y.length; i++) {
-        // elt = y[i];
-        // if (elt.type=='text') {
-        //   if (elt.value.length<1) {
-        //     error = 'Cannot be empty.';
-        //     alert(error);
-        //     return false;
-        //   }
-        // }
-        // else if (elt.type=='radio') {
-        //   is_checked = false;
-        //   options = elt.value;
-        //   for (j=0; j<options.length; j++) {
-        //     console.log(options[j].checked);
-        //     if (options[j].checked==true) {
-        //       is_checked = true;
-        //     }
-        //   }
-        //   return is_checked
-    // }
-    return validate_breakpoint(x[currentTab]);
+    tab = x[currentTab];
+    type = tab.getAttribute('data-field-type');
+    optional = Boolean(tab.getAttribute('data-field-optional')=='true');
+    console.log('type: ' + type);
+    console.log('optional: ' + optional + ' true: ' + (true==optional));
+    if (optional==true) {
+      return true;
+    }
+    else if (type=='SelectField' || type=='BooleanField') {
+      if (!validate_breakpoint(x[currentTab])) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML = 'Please select one.';
+        return false
+      }
+      return true
+    }
+    else if (type=='StringField') {
+      input = tab.getElementsByTagName('input')[0];
+      var val = input.value;
+      var min = Number(input['min']);
+      var max = Number(input['max']);
+      if (validate_string_field(val, min, max)==false) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML = 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        return false
+      }
+      return true
+    }
+    else if (type=='TextAreaField') {
+      input = tab.getElementsByTagName('textarea')[0];
+      var val = input.value;
+      var min = 0; // NOTE: Number(input.minLength) defaults to -1 but if you want a minlength in future implement some logic to avoid this
+      var max = Number(input.maxLength);
+      if (!validate_string_field(val, min, max)) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML = 'Response must be between ' + min + ' and ' + max + ' characters long.';
+        return false
+      }
+      return true
+    }
+    else if (type=='IntegerField') {
+      input = tab.querySelector('input.select-clean');
+      var val = Number(input.value);
+      var min = Number(input['min']);
+      var max = Number(input['max']);
+      if (!validate_slide_field(val, min, max)) {
+        errorbox = tab.getElementsByClassName('errorbox')[0];
+        errorbox.innerHTML = 'Please select a number between ' + min + ' and ' + max + '.';
+        return false
+      }
+      return true
+    }
+    else {
+      return true;
+    }
   }
 
 
@@ -276,7 +314,6 @@ function show_class(cls) {
   });
 }
 
-
 // field validators
 function validate_breakpoint(field) {
   var box = field.getElementsByClassName('input-control')[0];
@@ -289,10 +326,11 @@ function validate_breakpoint(field) {
   return any_checked
 }
 
-function validate_length(field) {
-  if (field.type=='text') {
-    if (field.value.length<1) {
-      alert('bad');
-    }
-  }
+function validate_string_field(val, min, max) {
+  len = val.length;
+  return (len>min && len<=max)
+}
+
+function validate_slide_field(val, min, max) {
+  return (val>=min && val<=max)
 }
