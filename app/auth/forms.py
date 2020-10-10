@@ -42,10 +42,12 @@ class Apply(BaseForm):
     )
     password = PasswordField(
         label='Create Password',
-        validators=[DataRequired(), Length(1, 254)],
+        validators=[DataRequired(), Length(8, 60)],
         description='Create a password!',
         render_kw={
-            'tabclass':     ''
+            'tabclass':     '',
+            'min':          8
+            'max':          60
         }
     )
     accept_terms = BooleanField(
