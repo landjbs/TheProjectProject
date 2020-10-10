@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% from 'components/form_macros.html' import render_multiselect %}
 {% from 'macros/forms/field.html' import render_fields %}
 {% from 'macros/forms/form.html' import render_form, render_form_control %}
 
@@ -35,7 +34,6 @@
       </div>
     </div>
     {{ render_fields(form) }}
-    {{ render_form_control() }}
     <div class='formtab' id='end_segment'>
       <div class="row input-segment">
         <h4>Congratulations!</h4>
@@ -51,6 +49,7 @@
         </button>
       </div>
     </div>
+    {{ render_form_control() }}
   </form>
 </div>
 
