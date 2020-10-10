@@ -1,3 +1,4 @@
+from markupsafe import Markup
 from wtforms import (TextField, StringField, PasswordField, BooleanField,
                     SelectMultipleField, SelectField, FloatField, IntegerField,
                     TextAreaField, validators)
@@ -51,7 +52,7 @@ class Apply(BaseForm):
         }
     )
     accept_terms = BooleanField(
-        label='I have read and accept the terms.',
+        label=Markup('I have read and accept the <a href="/terms" target="_blank">terms</a>.'),
         validators=[DataRequired()],
         render_kw={
             'placeholder': 'Yes',

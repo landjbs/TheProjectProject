@@ -1,4 +1,5 @@
 from flask import url_for
+from markupsafe import Markup
 from wtforms import (TextField, StringField, BooleanField, SelectField,
                     SelectMultipleField, FloatField, IntegerField,
                     TextAreaField, validators, Field, )
@@ -10,7 +11,6 @@ from app.forms.validators import Select_Limit_Validator
 from app.link.utils import fix_url
 # package imports
 from app.project.models import Project
-from markupsafe import Markup
 # from app.company.models import Company
 
 
