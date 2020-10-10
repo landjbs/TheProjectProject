@@ -48,7 +48,12 @@ class Apply(BaseForm):
         render_kw={
             'tabclass':     '',
             'min':          8,
-            'max':          60
+            'max':          60,
+            'conditions':   [
+                'Between 8 and 60 characters long.',
+                'At least one lowercase letter.',
+                'At least one capital letter.',
+            ]
         }
     )
     accept_terms = BooleanField(
