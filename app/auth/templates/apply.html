@@ -19,8 +19,24 @@
 {% block content %}
 
 <div class='big-box container justify-content-center'>
-  {{ render_fields(form) }}
-  {{ render_form_control() }}
+  <form id='apply_form'>
+    <div class='formtab' id='start_segment'>
+      <div class="row input-segment">
+        <h4>Welcome to TheProjectProject!</h4>
+        <p>
+          We are a community of innovators where 
+        </p>
+        <button class='formtab_button' type="button" onclick="nextPrev(1);">
+          <span class='presskey' style='margin-bottom:1px;'>
+            Enter
+          </span>
+          Get Started!
+        </button>
+      </div>
+    </div>
+    {{ render_fields(form) }}
+    {{ render_form_control() }}
+  </form>
 </div>
 
 
