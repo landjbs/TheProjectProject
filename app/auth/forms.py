@@ -46,7 +46,7 @@ class Apply(BaseForm):
         description='Create a password!',
         render_kw={
             'tabclass':     '',
-            'min':          8
+            'min':          8,
             'max':          60
         }
     )
