@@ -91,10 +91,14 @@ class Apply(BaseForm):
 
 
 class Login(BaseForm):
-    email = StringField('Email', validators=[DataRequired(), Length(1, 254),
-                                             Email()])
-    password = PasswordField('Password',
-                             validators=[Length(0, 254)])
+    email = StringField(
+        label='Email',
+        validators=[DataRequired(), Length(1, 254), Email()]
+    )
+    password = PasswordField(
+        label='Password',
+        validators=[Length(0, 254)]
+    )
 
     def validate(self):
         ''' Validates login '''
