@@ -99,7 +99,7 @@ function nextPrev(n, validate=true) {
   currentTab = currentTab + n;
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
-    submit_form();
+
     return false;
   }
   // Otherwise, display the correct tab:
@@ -285,12 +285,11 @@ function field_keydown(e, field) {
 }
 
 // FORM SUBMIT
-function submit_form() {
-  var url = Flask.url_for('add.add_page');
+function submit_form(id, url) {
   $.ajax({
     type: "POST",
     url: url,
-    data: $('#add_form').serialize(), // serializes the form's elements.
+    data: $('#' + id).serialize(), // serializes the form's elements.
     success: function(data) {
       if (data['path']!=undefined) {
         window.location.href = data['path'];

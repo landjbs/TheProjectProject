@@ -35,6 +35,14 @@
     var field_type = field.getAttribute('data-field-type');
     field_keydown(e, field);
   })
+
+  document.getElementById('login_form').addEventListener(
+    'submit',
+    function(e) {
+      submit_form('login_form', Flask.url_for('auth.login'));
+      e.preventDefault();
+    }
+  )
 </script>
 
 {% endblock %}
