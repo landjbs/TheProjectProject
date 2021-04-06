@@ -8,6 +8,7 @@ from flask_sqlalchemy import SQLAlchemy
 from elasticsearch import Elasticsearch
 import timeago
 from dateutil import tz
+from datetime import datetime
 
 # config
 from app import config
@@ -97,7 +98,6 @@ def create_app(config=config.dev_config, register_admin=True):
         return time.strftime('%I:%M %p | %b %d, %Y').lstrip("0").replace(" 0", " ")
 
     # jinja functions
-    from datetime import datetime
     @application.context_processor
     def utility_processor():
         def calc_days_since(now, start):
