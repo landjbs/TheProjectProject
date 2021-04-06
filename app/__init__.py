@@ -52,7 +52,10 @@ from app.commands import command_list
 
 def create_app(config=config.dev_config, register_admin=True):
     ''' Create app and register all extensions and blueprints '''
-    application = Flask(__name__, static_folder='static', static_url_path='/', instance_relative_config=True)
+    application = Flask(
+        __name__, static_folder='static', static_url_path='/',
+        instance_relative_config=True
+    )
     application.config.from_object(config())
     application.url_map.strict_slashes = False
     register_extensions(application)
@@ -250,7 +253,7 @@ def register_jinja_env(app):
     app.jinja_env.globals.update({
         'timeago': lambda x: arrow.get(x).humanize(),
         'url_for_other_page': url_for_other_page,
-        'partition_query': partition_query
+        'partition_query': partition_querycool
     })
 
 
